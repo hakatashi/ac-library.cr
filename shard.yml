@@ -1,0 +1,18 @@
+name: atcoder
+version: 0.1.0
+
+authors:
+  - Koki Takahashi <hakatasiloving@gmail.com>
+
+description: |
+  Implementation of ac-library in Crystal language
+
+crystal: 0.33.0
+
+repository: https://github.com/hakatashi/ac-library.cr.git
+
+homepage: https://github.com/hakatashi/ac-library.cr
+
+documentation: https://github.com/hakatashi/ac-library.cr#readme
+
+license: MIT
