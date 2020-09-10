@@ -15,10 +15,10 @@ The aim of this library is to provide the same (and additional) functianality wi
   Mint.new(30_i64) // Mint.new(7_i64) #=> 285714292
   ```
 
-* `static_modint` => `static_modint`
+* `static_modint` => `AtCoder.static_modint`
 
   ```cr
-  static_modint(ModInt101, 101_i64)
+  AtCoder.static_modint(ModInt101, 101_i64)
   alias Mint = AtCoder::ModInt101
   Mint.new(80_i64) + Mint.new(90_i64) #=> 89
   ```
