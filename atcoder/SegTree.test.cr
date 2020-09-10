@@ -1,7 +1,10 @@
 require "./SegTree.cr"
+require "./ModInt.cr"
 require "spec"
 
 include AtCoder
+
+alias Mint = ModInt1000000007
 
 describe "SegTree" do
   describe "with default comparison" do
@@ -58,5 +61,11 @@ describe "SegTree" do
         segtree[88..88].should eq 89
       end
     end
+  end
+
+  it "can be used with ModInt" do
+    values = 100.times.map {|i| Mint.new(1_i64) << i}.to_a
+    segtree = SegTree.new(values) {|a, b| a + b}
+    segtree[0...32].should eq 0xFFFFFFFF % Mint::MOD
   end
 end
