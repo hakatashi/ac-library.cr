@@ -4,6 +4,8 @@ Implementation of [ac-library](https://codeforces.com/blog/entry/82400) in Cryst
 
 The aim of this library is to provide the same (and additional) functianality with ac-library, but in the manner of Crystal.
 
+For the convinience of usage in programming contest, each class in the library does not depend on the other files and can be independently used.
+
 ## modint
 
 * `modint` => Unimplemented
