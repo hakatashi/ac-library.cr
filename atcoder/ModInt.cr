@@ -150,7 +150,17 @@ module AtCoder
       self
     end
 
+    # ac-library compatibility
+
+    def pow(value)
+      self.**(value)
+    end
+    def val
+      self.to_i64
+    end
+
     # ModInt shouldn't be compared
+
     def <(value)
       raise NotImplementedError.new("<")
     end
