@@ -27,9 +27,14 @@ The aim of this library is to provide the same (and additional) functianality wi
 
 ## segtree
 
-* `segtree<S, op, e> seg(v)` => `AtCoder::SegTree<S>.new(v, op?)`
+* `segtree<S, op, e> seg(v)` => `AtCoder::SegTree<S>.new(v, &op?)`
 
   単位元は暗黙的にnilで定義されるため使用する際に定義する必要はありません。逆に言えばモノイドの (単位元以外の) 元にnilを含めることはできません。
+
+  ```cr
+  tree = AtCoder::SegTree.new((0...100).to_a) {|a, b| [a, b].min}
+  tree[10...50] #=> 10
+  ```
 
   * `.set(p, x)` => `#[]=(p, x)`
   * `.get(p)` => `#[](p)`
