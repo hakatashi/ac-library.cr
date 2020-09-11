@@ -1,6 +1,8 @@
 # ac-library.cr
 
-Crystal port of [ac-library](https://github.com/atcoder/ac-library)
+This is not an officially supported Google product.
+
+ac-library.cr is a Crystal port of [ac-library](https://github.com/atcoder/ac-library).
 
 This library aims to provide the almost-equivalent (and additional) functionality with ac-library but in the manner of Crystal.
 
