@@ -16,15 +16,17 @@
 
 # verify-helper: PROBLEM https://judge.yosupo.jp/problem/unionfind
 
-require "./UnionFindTree.cr"
+require "./DSU.cr"
+
+include AtCoder
 
 n, q = read_line.split.map(&.to_i64)
-tree = UnionFindTree.new(n)
+tree = DSU.new(n)
 
 q.times do
   t, u, v = read_line.split.map(&.to_i64)
   if t == 0
-    tree.unite(u, v)
+    tree.merge(u, v)
   else
     if tree.same(u, v)
       p 1

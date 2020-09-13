@@ -46,3 +46,23 @@ For the convinience of usage in programming contest, each class in the library d
   * `.all_prod()` => `#all_prod`
   * `.max_right<f>(l)` => Unimplemented
   * `.max_left<f>(r)` => Unimplemented
+
+## [<atcoder/dsu>](https://atcoder.github.io/ac-library/document_en/dsu.html)
+
+* `dsu(n)` => `AtCoder::DSU.new(n)`
+
+  ```cr
+  dsu = AtCoder::DSU.new(10)
+  dsu.unite(0, 2)
+  dsu.unite(4, 2)
+  dsu.same(0, 4) #=> true
+  dsu.size(4) #=> 3
+  ```
+
+  * `.merge(a, b)` => `#merge(a, b)`
+  * `.same(a, b)` => `#same(a, b)`
+  * `.leader(a)` => `#leader(a)`
+  * `.size()` => `#size`
+  * `.groups()` => `#groups`
+
+    * This method returns set instead of list.

@@ -14,21 +14,23 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require "./UnionFindTree.cr"
+require "./DSU.cr"
 require "spec"
 
-describe "UnionFindTree" do
-  describe "#unite" do
+include AtCoder
+
+describe "DSU" do
+  describe "#merge" do
     it "unifies group of trees into unions" do
-      tree = UnionFindTree.new(9)
+      tree = DSU.new(9_i64)
 
-      tree.unite(0, 2)
-      tree.unite(2, 4)
-      tree.unite(4, 6)
+      tree.merge(0, 2)
+      tree.merge(2, 4)
+      tree.merge(4, 6)
 
-      tree.unite(7, 1)
-      tree.unite(7, 3)
-      tree.unite(7, 5)
+      tree.merge(7, 1)
+      tree.merge(7, 3)
+      tree.merge(7, 5)
 
       tree.same(2, 6).should eq true
       tree.same(4, 2).should eq true
@@ -43,6 +45,12 @@ describe "UnionFindTree" do
       tree.size(4).should eq 4
       tree.size(1).should eq 4
       tree.size(8).should eq 1
+
+      tree.groups.should eq Set{
+        Set{0, 2, 4, 6},
+        Set{1, 3, 5, 7},
+        Set{8},
+      }
     end
   end
 end

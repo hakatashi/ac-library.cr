@@ -17,5 +17,5 @@
 require "./atcoder/PriorityQueue.cr"
 require "./atcoder/SegTree.cr"
 require "./atcoder/RedBlackTree.cr"
-require "./atcoder/UnionFindTree.cr"
+require "./atcoder/DSU.cr"
 require "./atcoder/ModInt.cr"
