@@ -29,9 +29,24 @@ For the convinience of usage in programming contest, each class in the library d
 
 * `dynamic_modint` => Unimplemented
 
+## [<atcoder/fenwicktree>](https://atcoder.github.io/ac-library/document_en/fenwicktree.html)
+
+* `fenwick_tree<T> fw(n)` => `AtCoder::FenwickTree(T).new(n)`
+
+  ```cr
+  tree = AtCoder::FenwickTree(Int64).new(10)
+  tree.add(3, 10)
+  tree.add(5, 20)
+  tree[3..5] #=> 30
+  tree[3...5] #=> 10
+  ```
+
+  * `.add(p, x)` => `#add(p, x)`
+  * `.sum(l, r)` => `#[](l...r)`
+
 ## [<atcoder/segtree>](https://atcoder.github.io/ac-library/document_en/segtree.html)
 
-* `segtree<S, op, e> seg(v)` => `AtCoder::SegTree<S>.new(v, &op?)`
+* `segtree<S, op, e> seg(v)` => `AtCoder::SegTree(S).new(v, &op?)`
 
   単位元は暗黙的にnilで定義されるため使用する際に定義する必要はありません。逆に言えばモノイドの (単位元以外の) 元にnilを含めることはできません。
 
