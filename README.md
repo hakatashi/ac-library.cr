@@ -68,8 +68,8 @@ For the convinience of usage in programming contest, each class in the library d
 
   ```cr
   dsu = AtCoder::DSU.new(10)
-  dsu.unite(0, 2)
-  dsu.unite(4, 2)
+  dsu.merge(0, 2)
+  dsu.merge(4, 2)
   dsu.same(0, 4) #=> true
   dsu.size(4) #=> 3
   ```
