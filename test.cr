@@ -16,6 +16,7 @@
 
 require "./atcoder/PriorityQueue.test.cr"
 require "./atcoder/SegTree.test.cr"
+require "./atcoder/FenwickTree.test.cr"
 require "./atcoder/RedBlackTree.test.cr"
 require "./atcoder/UnionFindTree.test.cr"
 require "./atcoder/ModInt.test.cr"
