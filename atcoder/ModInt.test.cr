@@ -15,6 +15,7 @@
 # limitations under the License.
 
 require "./ModInt.cr"
+require "./test_utils.cr"
 require "spec"
 
 include AtCoder
@@ -189,7 +190,6 @@ describe "ModInt1000000007" do
   end
 end
 
-static_modint(ModInt7, 7_i64)
 describe "static_modint" do
   it "can define new ModInt record using custom modulo" do
     n = ModInt7.new(3)

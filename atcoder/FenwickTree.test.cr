@@ -16,12 +16,10 @@
 
 require "./FenwickTree.cr"
 require "./ModInt.cr"
+require "./test_utils.cr"
 require "spec"
 
 include AtCoder
-
-static_modint(ModInt7, 7_i64)
-alias Mint = AtCoder::ModInt7
 
 describe "FenwickTree" do
   describe "#left_sum" do
@@ -63,7 +61,7 @@ describe "FenwickTree" do
   end
 
   it "can be used with ModInt" do
-    tree = FenwickTree(Mint).new(11_i64)
+    tree = FenwickTree(ModInt7).new(11_i64)
     11_i64.times do |i|
       tree.add(i, i)
     end
