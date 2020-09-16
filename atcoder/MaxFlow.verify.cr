@@ -18,10 +18,10 @@
 
 require "./MaxFlow.cr"
 
-v, e = read_line.split.map(&.to_i64)
-flow = AtCoder::MaxFlow.new(v)
-e.times do
+nv, ne = read_line.split.map(&.to_i64)
+flow = AtCoder::MaxFlow.new(nv)
+ne.times do
   u, v, c = read_line.split.map(&.to_i64)
   flow.add_edge(u, v, c)
 end
-p flow.max_flow(0, v - 1)
+p flow.max_flow(0, nv - 1)
