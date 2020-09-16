@@ -14,17 +14,26 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# verify-helper: PROBLEM https://judge.yosupo.jp/problem/staticrmq
+# verify-helper: PROBLEM https://judge.yosupo.jp/problem/point_add_range_sum
 
-require "./SegTree.cr"
+require "./FenwickTree.cr"
 
 include AtCoder
 
 n, q = read_line.split.map(&.to_i64)
 ais = read_line.split.map(&.to_i64)
-tree = SegTree.new(ais) {|a, b| a > b ? b : a}
+tree = FenwickTree(Int64).new(n)
+ais.each_with_index do |a, i|
+  tree.add(i, a)
+end
 
 q.times do
-  l, r = read_line.split.map(&.to_i64)
-  p tree[l...r]
+  args = read_line.split.map(&.to_i64)
+  if args[0] == 0
+    _, p, x = args
+    tree.add(p, x)
+  else
+    _, l, r = args
+    p tree[l...r]
+  end
 end
