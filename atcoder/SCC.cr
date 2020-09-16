@@ -20,12 +20,10 @@ module AtCoder
 
     getter size : Int64
     getter adjacencies : Array(Adjacency)
-    getter topological_order : Array(Int64)
-    getter visit_counts : Array(Int64)
-    getter visited : Set(Int64)
 
     def initialize(@size)
       @adjacencies = Array(Adjacency).new(@size) { {in: [] of Int64, out: [] of Int64} }
+
       @topological_order = Array(Int64).new(@size)
       @visit_counts = Array(Int64).new(@size, 0_i64)
       @visited = Set(Int64).new
@@ -86,6 +84,8 @@ module AtCoder
       @visited = Set(Int64).new
       @stack = Deque(Int64).new
       @visit_counts = Array(Int64).new(@size, 0_i64)
+      @topological_order = Array(Int64).new(@size)
+      @groups = Array(Set(Int64)).new
 
       @size.times do |node|
         unless @visited.includes?(node)
