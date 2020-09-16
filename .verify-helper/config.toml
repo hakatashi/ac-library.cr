@@ -1,0 +1,5 @@
+[languages.cr]
+compile = "bash .verify-helper/build.sh {path} {tempdir}/a.out --release"
+execute = "{tempdir}/a.out"
+bundle = "false"
+list_dependencies = "true"
