@@ -33,9 +33,13 @@ module AtCoder
 
     getter depths : Array(Int64)
 
+    # Number of visited adjacencies for each nodes
+    getter visit_counts : Array(Int64)
+
     def initialize(@size)
       @adjacencies = Array(Array(Edge)).new(@size) { [] of Edge }
       @depths = Array(Int64).new(@size, -1_i64)
+      @visit_counts = Array(Int64).new(@size, 0_i64)
     end
 
     def add_edge(from, to, capacity)
@@ -55,6 +59,7 @@ module AtCoder
           return flow
         end
 
+        @visit_counts.fill(0_i64)
         while (flowed = dfs(start, target, Int64::MAX)) > 0
           flow += flowed
         end
@@ -82,7 +87,9 @@ module AtCoder
     private def dfs(node, target, flow)
       return flow if node == target
 
-      @adjacencies[node].each do |edge|
+      edges = @adjacencies[node]
+      while @visit_counts[node] < edges.size
+        edge = edges[@visit_counts[node]]
         if edge.capacity > 0 && @depths[node] < @depths[edge.to]
           flowed = dfs(edge.to, target, min(flow, edge.capacity))
 
@@ -92,6 +99,8 @@ module AtCoder
             return flowed
           end
         end
+
+        @visit_counts[node] += 1
       end
 
       return 0_i64
