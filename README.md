@@ -81,3 +81,24 @@ For the convinience of usage in programming contest, each class in the library d
   * `.groups()` => `#groups`
 
     * This method returns set instead of list.
+
+## [<atcoder/maxflow>](https://atcoder.github.io/ac-library/document_en/maxflow.html)
+
+* `mf_graph<Cap> graph(n)` => `AtCoder::MaxFlow.new(n)`
+
+  `Cap` will be always `Int64`.
+
+  ```cr
+  mf = AtCoder::MaxFlow.new(3)
+  mf.add_edge(0, 1, 3)
+  mf.add_edge(1, 2, 1)
+  mf.add_edge(0, 2, 2)
+  mf.flow(0, 2) #=> 3
+  ```
+
+  * `.add_edge(from, to, cap)` => `#add_edge(from, to, cap)`
+  * `.flow(s, t)` => `#flow(s, t)`
+  * `.min_cut(s)` => Unimplemented
+  * `.get_edge(i)` => Unimplemented
+  * `.edges()` => Unimplemented
+  * `.change_edge(i, new_cap, new_flow)` => Unimplemented

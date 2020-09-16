@@ -50,7 +50,7 @@ module AtCoder
       @adjacencies[to] << Edge.new(from.to_i64, 0_i64, from_index)
     end
 
-    def max_flow(start, target)
+    def flow(start, target)
       flow = 0_i64
 
       loop do
