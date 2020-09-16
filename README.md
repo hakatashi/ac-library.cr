@@ -102,3 +102,18 @@ For the convinience of usage in programming contest, each class in the library d
   * `.get_edge(i)` => Unimplemented
   * `.edges()` => Unimplemented
   * `.change_edge(i, new_cap, new_flow)` => Unimplemented
+
+## [<atcoder/scc>](https://atcoder.github.io/ac-library/document_en/scc.html)
+
+* `scc_graph graph(n)` => `AtCoder::SCC.new(n)`
+
+  ```cr
+  scc = AtCoder::SCC.new(3_i64)
+  scc.add_edge(0, 1)
+  scc.add_edge(1, 0)
+  scc.add_edge(2, 0)
+  scc.scc #=> [Set{2}, Set{0, 1}]
+  ```
+
+  * `.add_edge(from, to)` => `#add_edge(from, to)`
+  * `.scc()` => `#scc`
