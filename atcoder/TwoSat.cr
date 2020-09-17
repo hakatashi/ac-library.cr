@@ -124,9 +124,9 @@ module AtCoder
     @[AlwaysInline]
     def var(i, f)
       if f
-        i
+        i.to_i64
       else
-        i + @size
+        i.to_i64 + @size
       end
     end
 

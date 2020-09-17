@@ -117,3 +117,23 @@ For the convinience of usage in programming contest, each class in the library d
 
   * `.add_edge(from, to)` => `#add_edge(from, to)`
   * `.scc()` => `#scc`
+
+## [<atcoder/twosat>](https://atcoder.github.io/ac-library/document_en/twosat.html)
+
+* `two_sat graph(n)` => `AtCoder::SCC.new(n)`
+
+  ```cr
+  twosat = AtCoder::TwoSat.new(2_i64)
+  twosat.add_clause(0, true, 1, false)
+  twosat.add_clause(1, true, 0, false)
+  twosat.add_clause(0, false, 1, false)
+  twosat.satisfiable? #=> true
+  twosat.answer #=> [false, false]
+  ```
+
+  * `.add_clause(i, f, j, g)` => `#add_clause(i, f, j, g)`
+  * `.satisfiable()` => `#satisfiable?`
+  * `.answer()` => `#answer`
+
+    This method will raise if it's not satisfiable
+
