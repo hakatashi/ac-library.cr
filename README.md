@@ -140,3 +140,29 @@ For the convinience of usage in programming contest, each class in the library d
 
     This method will raise if it's not satisfiable
 
+
+## [PriorityQueue.cr](atcoder/PriorityQueue.cr) (not in ACL)
+
+* `AtCoder::PriorityQueue(T).new`
+
+  ```cr
+  q = AtCoder::PriorityQueue(Int64).new
+  q << 1_i64
+  q << 3_i64
+  q << 2_i64
+  q.pop #=> 3
+  q.pop #=> 2
+  q.pop #=> 1
+  ```
+
+  * `#<<(v : T)`
+
+    Push value into the queue.
+
+  * `#pop`
+
+    Pop value from the queue.
+
+  * `#size`
+
+    Returns size of the queue
