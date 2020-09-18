@@ -16,7 +16,9 @@ jobs:
     - name: Install dependencies
       run: apk add python3 py3-pip bash
     - name: Install pip dependencies
-      run: pip install -r requirements.txt
+      run: |
+        python3 -m pip install --upgrade pip
+        python3 -m pip install -r requirements.txt
     - name: Run tests
       run: crystal spec --verbose
     - name: Run verifier
