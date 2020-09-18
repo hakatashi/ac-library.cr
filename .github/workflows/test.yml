@@ -10,21 +10,15 @@ jobs:
   build:
     runs-on: ubuntu-latest
     container:
-      image: crystallang/crystal:0.33.0
+      image: crystallang/crystal:0.33.0-alpine
     steps:
     - uses: actions/checkout@v2
-    - name: Install libpython
-      run: |
-        apt-get update -y
-        apt-get install libpython3.8 -y
     - name: Set up Python 3.8.3
       uses: actions/setup-python@v2
       with:
         python-version: 3.8.3
     - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
+      run: pip install -r requirements.txt
     - name: Run tests
       run: crystal spec --verbose
     - name: Run verifier
