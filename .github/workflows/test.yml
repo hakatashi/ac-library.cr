@@ -10,7 +10,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     container:
-      image: crystallang/crystal:0.33.0
+      image: crystallang/crystal:0.33.0-build
     steps:
     - uses: actions/checkout@v2
     - name: Set up Python 3.8.3
