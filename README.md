@@ -1,4 +1,7 @@
-# ac-library.cr
+# ac-library.cr [![Run test and verifier][ci-badge]][ci-link]
+
+[ci-badge]: https://github.com/google/ac-library.cr/workflows/Run%20test%20and%20verifier/badge.svg
+[ci-link]: https://github.com/google/ac-library.cr/actions?query=workflow%3A%22Run+test+and+verifier%22
 
 This is not an officially supported Google product.
 
