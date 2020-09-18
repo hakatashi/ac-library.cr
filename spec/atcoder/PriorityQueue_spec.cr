@@ -17,6 +17,8 @@
 require "../../atcoder/PriorityQueue.cr"
 require "spec"
 
+include AtCoder
+
 describe "PriorityQueue" do
   it "pops values in priority order" do
     q = PriorityQueue(Int32).new
@@ -46,6 +48,17 @@ describe "PriorityQueue" do
       q.empty?.should eq false
       q.pop
       q.empty?.should eq true
+    end
+  end
+
+  describe "#size" do
+    it "returns size of the queue" do
+      q = PriorityQueue(Int32).new
+      q << 1
+      q << 1
+      q << 1
+      q << 1
+      q.size.should eq 4
     end
   end
 end

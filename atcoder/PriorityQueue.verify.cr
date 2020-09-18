@@ -18,6 +18,8 @@
 
 require "./PriorityQueue.cr"
 
+include AtCoder
+
 q = PriorityQueue(Int64).new
 loop do
   tokens = read_line.split

@@ -17,6 +17,8 @@
 require "./PriorityQueue.cr"
 require "spec"
 
+include AtCoder
+
 describe "PriorityQueue" do
   describe "bench" do 
     # O(nlogn)
