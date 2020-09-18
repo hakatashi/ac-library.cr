@@ -14,8 +14,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require "./SegTree.cr"
-require "./ModInt.cr"
+require "../../atcoder/SegTree.cr"
+require "../../atcoder/ModInt.cr"
 require "spec"
 
 include AtCoder

@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require "./RedBlackTree.cr"
+require "../../atcoder/RedBlackTree.cr"
 require "spec"
 
 describe "RedBlackTree" do

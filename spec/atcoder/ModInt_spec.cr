@@ -14,8 +14,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require "./ModInt.cr"
-require "./test_utils.cr"
+require "../../atcoder/ModInt.cr"
+require "../test_utils.cr"
 require "spec"
 
 include AtCoder

@@ -14,9 +14,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require "./FenwickTree.cr"
-require "./ModInt.cr"
-require "./test_utils.cr"
+require "../../atcoder/FenwickTree.cr"
+require "../../atcoder/ModInt.cr"
+require "../test_utils.cr"
 require "spec"
 
 include AtCoder
