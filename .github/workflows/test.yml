@@ -16,7 +16,7 @@ jobs:
     - name: Install libpython
       run: |
         apt-get update -y
-        apt-get install libpython3.8
+        apt-get install libpython3.8 -y
     - name: Set up Python 3.8.3
       uses: actions/setup-python@v2
       with:
