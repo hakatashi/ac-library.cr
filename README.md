@@ -8,7 +8,7 @@ This library aims to provide the almost-equivalent (and additional) functionalit
 
 For the convinience of usage in programming contest, each class in the library does not depend on the other files and can be independently used.
 
-## [<atcoder/modint>](https://atcoder.github.io/ac-library/document_en/modint.html)
+## [ModInt.cr](atcoder/ModInt.cr) ([<atcoder/modint>](https://atcoder.github.io/ac-library/document_en/modint.html))
 
 * `modint` => Unimplemented
 * `modint998244353` => `AtCoder::ModInt998244353`
@@ -29,7 +29,7 @@ For the convinience of usage in programming contest, each class in the library d
 
 * `dynamic_modint` => Unimplemented
 
-## [<atcoder/fenwicktree>](https://atcoder.github.io/ac-library/document_en/fenwicktree.html)
+## [FenwickTree.cr](atcoder/FenwickTree.cr) ([<atcoder/fenwicktree>](https://atcoder.github.io/ac-library/document_en/fenwicktree.html))
 
 * `fenwick_tree<T> fw(n)` => `AtCoder::FenwickTree(T).new(n)`
 
@@ -44,7 +44,7 @@ For the convinience of usage in programming contest, each class in the library d
   * `.add(p, x)` => `#add(p, x)`
   * `.sum(l, r)` => `#[](l...r)`
 
-## [<atcoder/segtree>](https://atcoder.github.io/ac-library/document_en/segtree.html)
+## [SegTree.cr](atcoder/SegTree.cr) ([<atcoder/segtree>](https://atcoder.github.io/ac-library/document_en/segtree.html))
 
 * `segtree<S, op, e> seg(v)` => `AtCoder::SegTree(S).new(v, &op?)`
 
@@ -62,7 +62,7 @@ For the convinience of usage in programming contest, each class in the library d
   * `.max_right<f>(l)` => Unimplemented
   * `.max_left<f>(r)` => Unimplemented
 
-## [<atcoder/dsu>](https://atcoder.github.io/ac-library/document_en/dsu.html)
+## [DSU.cr](atcoder/DSU.cr) ([<atcoder/dsu>](https://atcoder.github.io/ac-library/document_en/dsu.html))
 
 * `dsu(n)` => `AtCoder::DSU.new(n)`
 
@@ -82,7 +82,7 @@ For the convinience of usage in programming contest, each class in the library d
 
     * This method returns set instead of list.
 
-## [<atcoder/maxflow>](https://atcoder.github.io/ac-library/document_en/maxflow.html)
+## [MaxFlow.cr](atcoder/MaxFlow.cr) ([<atcoder/maxflow>](https://atcoder.github.io/ac-library/document_en/maxflow.html))
 
 * `mf_graph<Cap> graph(n)` => `AtCoder::MaxFlow.new(n)`
 
@@ -103,7 +103,7 @@ For the convinience of usage in programming contest, each class in the library d
   * `.edges()` => Unimplemented
   * `.change_edge(i, new_cap, new_flow)` => Unimplemented
 
-## [<atcoder/scc>](https://atcoder.github.io/ac-library/document_en/scc.html)
+## [SCC.cr](atcoder/SCC.cr) ([<atcoder/scc>](https://atcoder.github.io/ac-library/document_en/scc.html))
 
 * `scc_graph graph(n)` => `AtCoder::SCC.new(n)`
 
