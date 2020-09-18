@@ -28,4 +28,4 @@ jobs:
     - name: Run tests
       run: crystal spec --verbose
     - name: Run verifier
-      run: git ls-files | grep \.verify\.cr$ | xargs oj-verify run
+      run: find atcoder -name "*.verify.cr" | xargs oj-verify run
