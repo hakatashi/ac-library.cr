@@ -1,0 +1,1 @@
+online-judge-verify-helper >= 5.1.0
