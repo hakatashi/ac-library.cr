@@ -118,7 +118,7 @@ For the convinience of usage in programming contest, each class in the library d
   * `.add_edge(from, to)` => `#add_edge(from, to)`
   * `.scc()` => `#scc`
 
-## [<atcoder/twosat>](https://atcoder.github.io/ac-library/document_en/twosat.html)
+## [TwoSat.cr](atcoder/TwoSat.cr) ([<atcoder/twosat>](https://atcoder.github.io/ac-library/document_en/twosat.html))
 
 * `two_sat graph(n)` => `AtCoder::SCC.new(n)`
 
