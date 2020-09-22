@@ -177,5 +177,9 @@ module AtCoder
 
       operate(child1, child2)
     end
+
+    def all_prod
+      self[0...@values.size]
+    end
   end
 end

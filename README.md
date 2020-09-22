@@ -65,6 +65,33 @@ For the convinience of usage in programming contest, each class in the library d
   * `.max_right<f>(l)` => Unimplemented
   * `.max_left<f>(r)` => Unimplemented
 
+## [LazySegTree.cr](atcoder/LazySegTree.cr) ([<atcoder/lazysegtree>](https://atcoder.github.io/ac-library/document_en/lazysegtree.html))
+
+* `lazy_segtree<S, op, e, F, mapping, composition, id> seg(v)` => `AtCoder::LazySegTree(S, F).new(v, op, mapping, composition)`
+
+  単位元は暗黙的にnilで定義されるため使用する際に定義する必要はありません。逆に言えばモノイドの (単位元以外の) 元にnilを含めることはできません。
+
+  また、恒等写像は暗黙的にnilで定義されるため使用する際に定義する必要はありません。逆に言えばFの (恒等写像以外の) 元にnilを含めることはできません。
+
+  ```cr
+  op = ->(a : Int32, b : Int32) { [a, b].min }
+  mapping = ->(f : Int32, x : Int32) { f }
+  composition = ->(a : Int32, b : Int32) { a }
+  tree = AtCoder::LazySegTree(Int32, Int32).new((0...100).to_a, op, mapping, composition)
+  tree[10...50] #=> 10
+  tree[20...60] = 0
+  tree[50...80] #=> 0
+  ```
+
+  * `.set(p, x)` => Unimplemented
+  * `.get(p)` => `#[](p)`
+  * `.prod(l, r)` => `#[](l...r)`
+  * `.all_prod()` => `#all_prod`
+  * `.apply(p, f)` => `#[]=(p, f)`
+  * `.apply(l, r, f)` => `#[]=(l...r, f)`
+  * `.max_right<f>(l)` => Unimplemented
+  * `.max_left<f>(r)` => Unimplemented
+
 ## [DSU.cr](atcoder/DSU.cr) ([<atcoder/dsu>](https://atcoder.github.io/ac-library/document_en/dsu.html))
 
 * `dsu(n)` => `AtCoder::DSU.new(n)`
