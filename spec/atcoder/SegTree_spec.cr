@@ -16,11 +16,10 @@
 
 require "../../atcoder/SegTree.cr"
 require "../../atcoder/ModInt.cr"
+require "../spec_helper.cr"
 require "spec"
 
 include AtCoder
-
-alias Mint = ModInt1000000007
 
 describe "SegTree" do
   describe "with default comparison" do

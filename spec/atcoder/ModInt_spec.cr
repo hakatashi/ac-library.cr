@@ -15,7 +15,7 @@
 # limitations under the License.
 
 require "../../atcoder/ModInt.cr"
-require "../test_utils.cr"
+require "../spec_helper.cr"
 require "spec"
 
 include AtCoder
