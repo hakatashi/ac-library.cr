@@ -106,8 +106,8 @@ module AtCoder
       @segments[segment_index] = apply(applicator, @segments[segment_index])
 
       if range.end - range.begin > 2
-        @applicators[segment_index * 2 + 1] = compose(@applicators[segment_index * 2 + 1], applicator)
-        @applicators[segment_index * 2 + 2] = compose(@applicators[segment_index * 2 + 2], applicator)
+        @applicators[segment_index * 2 + 1] = compose(applicator, @applicators[segment_index * 2 + 1])
+        @applicators[segment_index * 2 + 2] = compose(applicator, @applicators[segment_index * 2 + 2])
       else
         @values[segment_index * 2 + 1 - @segments.size] = apply(applicator, @values[segment_index * 2 + 1 - @segments.size])
         @values[segment_index * 2 + 2 - @segments.size] = apply(applicator, @values[segment_index * 2 + 2 - @segments.size])
@@ -118,6 +118,10 @@ module AtCoder
 
     # range must be exclusive
     def apply_range(a : Int, b : Int, f : F, segment_index : Int, range : Range(Int, Int))
+      if segment_index >= @segments.size + @values.size
+        return nil
+      end
+
       if segment_index < @segments.size
         eval_segment(segment_index, range)
       end
@@ -175,20 +179,3 @@ module AtCoder
     end
   end
 end
-
-alias Segment = NamedTuple(sum: Int64, size: Int64)
-
-op = ->(a : Segment, b : Segment) { {sum: a[:sum] + b[:sum], size: a[:size] + b[:size]} }
-mapping = ->(f : Int64, x : Segment) { {sum: f * x[:size], size: x[:size]} }
-composition = ->(a : Int64, b : Int64) { a }
-segments = (0_i64...10_i64).map {|v| {sum: v, size: 1_i64}}
-tree = AtCoder::LazySegTree(Segment, Int64).new(segments, op, mapping, composition)
-tree[1..8] = 6_i64
-tree[7..9] = 2_i64
-p! tree[0...10]
-p! tree[1...5]
-10.times do |i|
-  p! tree[i]
-end
-p! tree[0...10]
-
