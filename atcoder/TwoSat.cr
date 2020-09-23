@@ -15,97 +15,97 @@
 # limitations under the License.
 
 module AtCoder
-  class SCC
-    alias Adjacency = NamedTuple(in: Array(Int64), out: Array(Int64))
-
-    getter size : Int64
-    getter adjacencies : Array(Adjacency)
-
-    def initialize(@size)
-      @adjacencies = Array(Adjacency).new(@size) { {in: [] of Int64, out: [] of Int64} }
-
-      @topological_order = Array(Int64).new(@size)
-      @visit_counts = Array(Int64).new(@size, 0_i64)
-      @visited = Set(Int64).new
-      @stack = Deque(Int64).new
-      @groups = Array(Set(Int64)).new
-    end
-
-    def add_edge(from, to)
-      @adjacencies[from][:out] << to.to_i64
-      @adjacencies[to][:in] << from.to_i64
-    end
-
-    def dfs(start)
-      @stack << start
-      @visited << start
-
-      until @stack.empty?
-        node = @stack.last
-        children = @adjacencies[node][:out]
-
-        if @visit_counts[node] < children.size
-          child = children[@visit_counts[node]]
-          @visit_counts[node] += 1
-
-          unless @visited.includes?(child)
-            @visited << child
-            @stack << child
-          end
-        else
-          @topological_order << node
-          @stack.pop
-        end
-      end
-    end
-
-    def reverse_dfs(start)
-      @stack << start
-      @visited << start
-      group = Set{start}
-
-      until @stack.empty?
-        node = @stack.pop
-        children = @adjacencies[node][:in]
-
-        children.each do |child|
-          unless @visited.includes?(child)
-            @stack << child
-            @visited << child
-            group << child
-          end
-        end
-      end
-
-      @groups << group
-    end
-
-    def scc
-      @visited = Set(Int64).new
-      @stack = Deque(Int64).new
-      @visit_counts = Array(Int64).new(@size, 0_i64)
-      @topological_order = Array(Int64).new(@size)
-      @groups = Array(Set(Int64)).new
-
-      @size.times do |node|
-        unless @visited.includes?(node)
-          dfs(node)
-        end
-      end
-
-      @visited = Set(Int64).new
-
-      @topological_order.reverse_each do |node|
-        unless @visited.includes?(node)
-          reverse_dfs(node)
-        end
-      end
-
-      @groups
-    end
-  end
-
   class TwoSat
+    class SCC
+      alias Adjacency = NamedTuple(in: Array(Int64), out: Array(Int64))
+
+      getter size : Int64
+      getter adjacencies : Array(Adjacency)
+
+      def initialize(@size)
+        @adjacencies = Array(Adjacency).new(@size) { {in: [] of Int64, out: [] of Int64} }
+
+        @topological_order = Array(Int64).new(@size)
+        @visit_counts = Array(Int64).new(@size, 0_i64)
+        @visited = Set(Int64).new
+        @stack = Deque(Int64).new
+        @groups = Array(Set(Int64)).new
+      end
+
+      def add_edge(from, to)
+        @adjacencies[from][:out] << to.to_i64
+        @adjacencies[to][:in] << from.to_i64
+      end
+
+      def dfs(start)
+        @stack << start
+        @visited << start
+
+        until @stack.empty?
+          node = @stack.last
+          children = @adjacencies[node][:out]
+
+          if @visit_counts[node] < children.size
+            child = children[@visit_counts[node]]
+            @visit_counts[node] += 1
+
+            unless @visited.includes?(child)
+              @visited << child
+              @stack << child
+            end
+          else
+            @topological_order << node
+            @stack.pop
+          end
+        end
+      end
+
+      def reverse_dfs(start)
+        @stack << start
+        @visited << start
+        group = Set{start}
+
+        until @stack.empty?
+          node = @stack.pop
+          children = @adjacencies[node][:in]
+
+          children.each do |child|
+            unless @visited.includes?(child)
+              @stack << child
+              @visited << child
+              group << child
+            end
+          end
+        end
+
+        @groups << group
+      end
+
+      def scc
+        @visited = Set(Int64).new
+        @stack = Deque(Int64).new
+        @visit_counts = Array(Int64).new(@size, 0_i64)
+        @topological_order = Array(Int64).new(@size)
+        @groups = Array(Set(Int64)).new
+
+        @size.times do |node|
+          unless @visited.includes?(node)
+            dfs(node)
+          end
+        end
+
+        @visited = Set(Int64).new
+
+        @topological_order.reverse_each do |node|
+          unless @visited.includes?(node)
+            reverse_dfs(node)
+          end
+        end
+
+        @groups
+      end
+    end
+
     getter size : Int64
 
     class NotSatisfiableError < Exception
