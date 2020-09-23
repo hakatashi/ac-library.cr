@@ -24,6 +24,6 @@ jobs:
     - name: Run tests
       run: crystal spec --verbose
     - name: Run verifier
-      run: find atcoder -name "*.verify.cr" | xargs oj-verify run
+      run: oj-verify run
     - name: Run linter
       run: bin/ameba
