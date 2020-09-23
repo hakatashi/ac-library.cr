@@ -16,3 +16,8 @@ homepage: https://github.com/google/ac-library.cr
 documentation: https://github.com/google/ac-library.cr#readme
 
 license: Apache-2.0
+
+development_dependencies:
+  ameba:
+    github: crystal-ameba/ameba
+    version: ~> 0.12.0
