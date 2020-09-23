@@ -22,58 +22,60 @@ module AtCoder
       initialize(values) {|a, b| a > b ? a : b}
     end
 
-    def initialize(values : Array(T), &block : T, T -> T)
-      @compare_proc = block
+    def initialize(values : Array(T), &@operator : T, T -> T)
       @values = values
-      @segments = Array(T | Nil).new(2 ** Math.log2(values.size).ceil.to_i, nil)
+      @segments = Array(T | Nil).new(2 ** Math.log2(values.size).ceil.to_i - 1, nil)
 
       # initialize segments
-      (@segments.size - 2).downto(0) do |i|
+      (@segments.size - 1).downto(0) do |i|
         child1 = nil.as(T | Nil)
         child2 = nil.as(T | Nil)
-        if i * 2 + 2 < @segments.size
+        if i * 2 + 1 < @segments.size
           child1 = @segments[i * 2 + 1]
           child2 = @segments[i * 2 + 2]
         else
+          if i * 2 + 1 - @segments.size < @values.size
+            child1 = @values[i * 2 + 1 - @segments.size]
+          end
           if i * 2 + 2 - @segments.size < @values.size
-            child1 = @values[i * 2 + 2 - @segments.size]
-          end
-          if i * 2 + 3 - @segments.size < @values.size
-            child2 = @values[i * 2 + 3 - @segments.size]
+            child2 = @values[i * 2 + 2 - @segments.size]
           end
         end
-        if !child1.nil? && !child2.nil?
-          @segments[i] = @compare_proc.call(child1, child2)
-        elsif !child1.nil? && child2.nil?
-          @segments[i] = child1
-        end
+        @segments[i] = operate(child1, child2)
+      end
+    end
+
+    @[AlwaysInline]
+    private def operate(a : T | Nil, b : T | Nil)
+      if a.nil?
+        b
+      elsif b.nil?
+        a
+      else
+        @operator.call(a, b)
       end
     end
 
     def []=(index : Int, value : T)
       @values[index] = value
 
-      parent_index = (index + @segments.size - 2) // 2
+      parent_index = (index + @segments.size - 1) // 2
       while parent_index >= 0
         i = parent_index
         child1 = nil.as(T | Nil)
         child2 = nil.as(T | Nil)
-        if i * 2 + 2 < @segments.size
+        if i * 2 + 1 < @segments.size
           child1 = @segments[i * 2 + 1]
           child2 = @segments[i * 2 + 2]
         else
+          if i * 2 + 1 - @segments.size < @values.size
+            child1 = @values[i * 2 + 1 - @segments.size]
+          end
           if i * 2 + 2 - @segments.size < @values.size
-            child1 = @values[i * 2 + 2 - @segments.size]
-          end
-          if i * 2 + 3 - @segments.size < @values.size
-            child2 = @values[i * 2 + 3 - @segments.size]
+            child2 = @values[i * 2 + 2 - @segments.size]
           end
         end
-        if !child1.nil? && !child2.nil?
-          @segments[i] = @compare_proc.call(child1, child2)
-        elsif !child1.nil? && child2.nil?
-          @segments[i] = child1
-        end
+        @segments[i] = operate(child1, child2)
         parent_index = (parent_index - 1) // 2
       end
     end
@@ -85,32 +87,27 @@ module AtCoder
     def [](range : Range(Int, Int))
       a = range.begin
       b = range.exclusive? ? range.end : range.end + 1
-      get_value(a, b, 0, 0...@segments.size).not_nil!
+      get_value(a, b, 0, 0...(@segments.size + 1)).not_nil!
     end
 
     def get_value(a : Int, b : Int, segment_index : Int, range : Range(Int, Int))
       if range.end <= a || b <= range.begin
         return nil
       end
+
       if a <= range.begin && range.end <= b
-        if segment_index + 1 < @segments.size
+        if segment_index < @segments.size
           return @segments[segment_index]
         else
-          return @values[segment_index + 1 - @segments.size]
+          return @values[segment_index - @segments.size]
         end
       end
+
       range_median = (range.begin + range.end) // 2
       child1 = get_value(a, b, 2 * segment_index + 1, range.begin...range_median)
       child2 = get_value(a, b, 2 * segment_index + 2, range_median...range.end)
-      if !child1.nil? && !child2.nil?
-        @compare_proc.call(child1, child2)
-      elsif !child1.nil? && child2.nil?
-        child1
-      elsif child1.nil? && !child2.nil?
-        child2
-      else
-        nil
-      end
+
+      operate(child1, child2)
     end
 
     # compatibility with ac-library
@@ -128,7 +125,7 @@ module AtCoder
     end
 
     def all_prod
-      self.[](0...@segments.size)
+      self.[](0...@values.size)
     end
   end
 end
