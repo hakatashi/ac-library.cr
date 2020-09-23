@@ -1,5 +1,5 @@
 # ac-library.cr by hakatashi https://github.com/hakatashi/ac-library.cr
-# 
+#
 # Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");

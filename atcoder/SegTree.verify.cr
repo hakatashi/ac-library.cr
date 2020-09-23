@@ -20,7 +20,7 @@ require "./SegTree.cr"
 
 include AtCoder
 
-n, q = read_line.split.map(&.to_i64)
+_, q = read_line.split.map(&.to_i64)
 ais = read_line.split.map(&.to_i64)
 tree = SegTree.new(ais) {|a, b| a > b ? b : a}
 

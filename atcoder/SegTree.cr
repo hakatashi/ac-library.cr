@@ -53,7 +53,6 @@ module AtCoder
     def []=(index : Int, value : T)
       @values[index] = value
 
-      child = value
       parent_index = (index + @segments.size - 2) // 2
       while parent_index >= 0
         i = parent_index

@@ -103,7 +103,7 @@ module AtCoder
         @visit_counts[node] += 1
       end
 
-      return 0_i64
+      0_i64
     end
 
     @[AlwaysInline]

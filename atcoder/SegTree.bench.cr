@@ -20,7 +20,7 @@ require "spec"
 include AtCoder
 
 describe "SegTree" do
-  describe "bench" do 
+  describe "bench" do
     # O(nlogn)
     it "should finish" do
       n = 1000000

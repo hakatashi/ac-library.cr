@@ -19,7 +19,7 @@
 require "./LazySegTree.cr"
 require "./ModInt.cr"
 
-n, q = read_line.split.map(&.to_i64)
+_, q = read_line.split.map(&.to_i64)
 ais = read_line.split.map(&.to_i64)
 
 alias Mint = AtCoder::ModInt998244353
@@ -32,7 +32,7 @@ composition = ->(a : Affine, b : Affine) { {b: a[:b] * b[:b], c: b[:c] * a[:b] +
 segments = ais.map {|a| {sum: Mint.new(a), size: 1_i64} }
 tree = AtCoder::LazySegTree(Segment, Affine).new(segments, op, mapping, composition)
 
-q.times do |i|
+q.times do
   args = read_line.split.map(&.to_i64)
   if args[0] == 0
     _, l, r, b, c = args

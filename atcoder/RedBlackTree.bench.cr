@@ -18,7 +18,7 @@ require "./RedBlackTree.cr"
 require "spec"
 
 describe "RedBlackTree" do
-  describe "bench" do 
+  describe "bench" do
     # O(nlogn)
     it "should finish" do
       n = 500000
