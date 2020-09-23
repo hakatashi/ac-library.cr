@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Crystal Docs 0.32.1">
+
+<link href="../css/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="../js/doc.js"></script>
+
+<svg class="hidden">
+  <symbol id="octicon-link" viewBox="0 0 16 16">
+    <path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+  </symbol>
+</svg>
+
+  <meta id="repository-name" content="github.com/google/ac-library.cr">
+  <title>RedBlackTree::Node - github.com/google/ac-library.cr</title>
+  <script type="text/javascript">
+    CrystalDoc.base_path = "../";
+  </script>
+</head>
+<body>
+
+<div class="sidebar">
+  <div class="sidebar-header">
+    <div class="search-box">
+      <input type="search" class="search-input" placeholder="Search..." spellcheck="false" aria-label="Search">
+    </div>
+
+    <div class="repository-links">
+      <a href="../index.html">README</a>
+    </div>
+  </div>
+
+  <div class="search-results" class="hidden">
+    <ul class="search-list"></ul>
+  </div>
+
+  <div class="types-list">
+    <ul>
+  
+  <li class="parent " data-id="github.com/google/ac-library.cr/AtCoder" data-name="atcoder">
+      <a href="../AtCoder.html">AtCoder</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/google/ac-library.cr/AtCoder/DSU" data-name="atcoder::dsu">
+      <a href="../AtCoder/DSU.html">DSU</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/google/ac-library.cr/AtCoder/FenwickTree" data-name="atcoder::fenwicktree(t)">
+      <a href="../AtCoder/FenwickTree.html">FenwickTree</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/google/ac-library.cr/AtCoder/LazySegTree" data-name="atcoder::lazysegtree(s, f)">
+      <a href="../AtCoder/LazySegTree.html">LazySegTree</a>
+      
+    </li>
+  
+  <li class="parent " data-id="github.com/google/ac-library.cr/AtCoder/MaxFlow" data-name="atcoder::maxflow">
+      <a href="../AtCoder/MaxFlow.html">MaxFlow</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/google/ac-library.cr/AtCoder/MaxFlow/Edge" data-name="atcoder::maxflow::edge">
+      <a href="../AtCoder/MaxFlow/Edge.html">Edge</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="github.com/google/ac-library.cr/AtCoder/ModInt1000000007" data-name="atcoder::modint1000000007">
+      <a href="../AtCoder/ModInt1000000007.html">ModInt1000000007</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/google/ac-library.cr/AtCoder/ModInt998244353" data-name="atcoder::modint998244353">
+      <a href="../AtCoder/ModInt998244353.html">ModInt998244353</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/google/ac-library.cr/AtCoder/PriorityQueue" data-name="atcoder::priorityqueue(t)">
+      <a href="../AtCoder/PriorityQueue.html">PriorityQueue</a>
+      
+    </li>
+  
+  <li class="parent " data-id="github.com/google/ac-library.cr/AtCoder/SCC" data-name="atcoder::scc">
+      <a href="../AtCoder/SCC.html">SCC</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/google/ac-library.cr/AtCoder/SCC/Adjacency" data-name="atcoder::scc::adjacency">
+      <a href="../AtCoder/SCC/Adjacency.html">Adjacency</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="github.com/google/ac-library.cr/AtCoder/SegTree" data-name="atcoder::segtree(t)">
+      <a href="../AtCoder/SegTree.html">SegTree</a>
+      
+    </li>
+  
+  <li class="parent " data-id="github.com/google/ac-library.cr/AtCoder/TwoSat" data-name="atcoder::twosat">
+      <a href="../AtCoder/TwoSat.html">TwoSat</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/google/ac-library.cr/AtCoder/TwoSat/NotSatisfiableError" data-name="atcoder::twosat::notsatisfiableerror">
+      <a href="../AtCoder/TwoSat/NotSatisfiableError.html">NotSatisfiableError</a>
+      
+    </li>
+  
+  <li class="parent " data-id="github.com/google/ac-library.cr/AtCoder/TwoSat/SCC" data-name="atcoder::twosat::scc">
+      <a href="../AtCoder/TwoSat/SCC.html">SCC</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/google/ac-library.cr/AtCoder/TwoSat/SCC/Adjacency" data-name="atcoder::twosat::scc::adjacency">
+      <a href="../AtCoder/TwoSat/SCC/Adjacency.html">Adjacency</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="github.com/google/ac-library.cr/Int" data-name="int">
+      <a href="../Int.html">Int</a>
+      
+    </li>
+  
+  <li class="parent open current" data-id="github.com/google/ac-library.cr/RedBlackTree" data-name="redblacktree">
+      <a href="../RedBlackTree.html">RedBlackTree</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/google/ac-library.cr/RedBlackTree/NilNode" data-name="redblacktree::nilnode">
+      <a href="../RedBlackTree/NilNode.html">NilNode</a>
+      
+    </li>
+  
+  <li class=" current" data-id="github.com/google/ac-library.cr/RedBlackTree/Node" data-name="redblacktree::node">
+      <a href="../RedBlackTree/Node.html">Node</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+</ul>
+
+  </div>
+</div>
+
+
+<div class="main-content">
+<h1 class="type-name">
+
+  <span class="kind">class</span> RedBlackTree::Node
+
+</h1>
+
+
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../RedBlackTree/Node.html">RedBlackTree::Node</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2>
+    <a id="direct-known-subclasses" class="anchor" href="#direct-known-subclasses">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Direct Known Subclasses
+  </h2>
+  <ul class="other-types-list">
+    
+      <li class="other-type"><a href="../RedBlackTree/NilNode.html">RedBlackTree::NilNode</a></li>
+    
+  </ul>
+
+
+
+
+
+
+  <h2>
+    <a id="defined-in" class="anchor" href="#defined-in">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Defined in:
+  </h2>
+  
+    
+      <a href="https://github.com/google/ac-library.cr/blob/8be6ee85aac9f071578582f0adbd002d821892eb/atcoder/RedBlackTree.cr#L26" target="_blank">
+        atcoder/RedBlackTree.cr
+      </a>
+    
+    <br/>
+  
+
+
+
+  
+    <h2>
+      <a id="constant-summary" class="anchor" href="#constant-summary">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+      Constant Summary
+    </h2>
+  
+  <dl>
+    
+      <dt class="entry-const" id="BLACK">
+        <strong>BLACK</strong> = <code><span class="n">:black</span></code>
+      </dt>
+      
+    
+      <dt class="entry-const" id="RED">
+        <strong>RED</strong> = <code><span class="n">:red</span></code>
+      </dt>
+      
+    
+  </dl>
+
+
+
+  <h2>
+    <a id="constructors" class="anchor" href="#constructors">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Constructors
+  </h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#new(key:Int32,color=RED)-class-method" class="signature"><strong>.new</strong>(key : Int32, color = <span class="t">RED</span>)</a>
+        
+      </li>
+    
+  </ul>
+
+
+
+
+
+  <h2>
+    <a id="instance-method-summary" class="anchor" href="#instance-method-summary">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Instance Method Summary
+  </h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#black?-instance-method" class="signature"><strong>#black?</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#color:Symbol-instance-method" class="signature"><strong>#color</strong> : Symbol</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#color=(color)-instance-method" class="signature"><strong>#color=</strong>(color)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#key:Int32-instance-method" class="signature"><strong>#key</strong> : Int32</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#key=(key)-instance-method" class="signature"><strong>#key=</strong>(key)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#left-instance-method" class="signature"><strong>#left</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#left=(left)-instance-method" class="signature"><strong>#left=</strong>(left)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#left?:RedBlackTree::Node?-instance-method" class="signature"><strong>#left?</strong> : RedBlackTree::Node?</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#nil_node?-instance-method" class="signature"><strong>#nil_node?</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#parent:self-instance-method" class="signature"><strong>#parent</strong> : <span class="k">self</span></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#parent=(parent:self)-instance-method" class="signature"><strong>#parent=</strong>(parent : <span class="k">self</span>)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#parent?:self?-instance-method" class="signature"><strong>#parent?</strong> : <span class="k">self</span>?</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#red?-instance-method" class="signature"><strong>#red?</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#right-instance-method" class="signature"><strong>#right</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#right=(right)-instance-method" class="signature"><strong>#right=</strong>(right)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#right?:RedBlackTree::Node?-instance-method" class="signature"><strong>#right?</strong> : RedBlackTree::Node?</a>
+        
+      </li>
+    
+  </ul>
+
+
+
+
+
+<div class="methods-inherited">
+  
+    
+
+
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
+  
+</div>
+
+
+  <h2>
+    <a id="constructor-detail" class="anchor" href="#constructor-detail">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Constructor Detail
+  </h2>
+  
+    <div class="entry-detail" id="new(key:Int32,color=RED)-class-method">
+      <div class="signature">
+        
+        def self.<strong>new</strong>(key : Int32, color = <span class="t">RED</span>)
+
+        <a class="method-permalink" href="#new(key:Int32,color=RED)-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/google/ac-library.cr/blob/8be6ee85aac9f071578582f0adbd002d821892eb/atcoder/RedBlackTree.cr#L36" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+
+
+
+
+
+  <h2>
+    <a id="instance-method-detail" class="anchor" href="#instance-method-detail">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Instance Method Detail
+  </h2>
+  
+    <div class="entry-detail" id="black?-instance-method">
+      <div class="signature">
+        
+        def <strong>black?</strong>
+
+        <a class="method-permalink" href="#black?-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/google/ac-library.cr/blob/8be6ee85aac9f071578582f0adbd002d821892eb/atcoder/RedBlackTree.cr#L40" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="color:Symbol-instance-method">
+      <div class="signature">
+        
+        def <strong>color</strong> : Symbol
+
+        <a class="method-permalink" href="#color:Symbol-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/google/ac-library.cr/blob/8be6ee85aac9f071578582f0adbd002d821892eb/atcoder/RedBlackTree.cr#L27" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="color=(color)-instance-method">
+      <div class="signature">
+        
+        def <strong>color=</strong>(color)
+
+        <a class="method-permalink" href="#color=(color)-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/google/ac-library.cr/blob/8be6ee85aac9f071578582f0adbd002d821892eb/atcoder/RedBlackTree.cr#L27" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="key:Int32-instance-method">
+      <div class="signature">
+        
+        def <strong>key</strong> : Int32
+
+        <a class="method-permalink" href="#key:Int32-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/google/ac-library.cr/blob/8be6ee85aac9f071578582f0adbd002d821892eb/atcoder/RedBlackTree.cr#L28" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="key=(key)-instance-method">
+      <div class="signature">
+        
+        def <strong>key=</strong>(key)
+
+        <a class="method-permalink" href="#key=(key)-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/google/ac-library.cr/blob/8be6ee85aac9f071578582f0adbd002d821892eb/atcoder/RedBlackTree.cr#L28" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="left-instance-method">
+      <div class="signature">
+        
+        def <strong>left</strong>
+
+        <a class="method-permalink" href="#left-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="left=(left)-instance-method">
+      <div class="signature">
+        
+        def <strong>left=</strong>(left)
+
+        <a class="method-permalink" href="#left=(left)-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/google/ac-library.cr/blob/8be6ee85aac9f071578582f0adbd002d821892eb/atcoder/RedBlackTree.cr#L29" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="left?:RedBlackTree::Node?-instance-method">
+      <div class="signature">
+        
+        def <strong>left?</strong> : <a href="../RedBlackTree/Node.html">RedBlackTree::Node</a>?
+
+        <a class="method-permalink" href="#left?:RedBlackTree::Node?-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="nil_node?-instance-method">
+      <div class="signature">
+        
+        def <strong>nil_node?</strong>
+
+        <a class="method-permalink" href="#nil_node?-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/google/ac-library.cr/blob/8be6ee85aac9f071578582f0adbd002d821892eb/atcoder/RedBlackTree.cr#L48" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="parent:self-instance-method">
+      <div class="signature">
+        
+        def <strong>parent</strong> : <span class="k">self</span>
+
+        <a class="method-permalink" href="#parent:self-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="parent=(parent:self)-instance-method">
+      <div class="signature">
+        
+        def <strong>parent=</strong>(parent : <span class="k">self</span>)
+
+        <a class="method-permalink" href="#parent=(parent:self)-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/google/ac-library.cr/blob/8be6ee85aac9f071578582f0adbd002d821892eb/atcoder/RedBlackTree.cr#L31" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="parent?:self?-instance-method">
+      <div class="signature">
+        
+        def <strong>parent?</strong> : <span class="k">self</span>?
+
+        <a class="method-permalink" href="#parent?:self?-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="red?-instance-method">
+      <div class="signature">
+        
+        def <strong>red?</strong>
+
+        <a class="method-permalink" href="#red?-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/google/ac-library.cr/blob/8be6ee85aac9f071578582f0adbd002d821892eb/atcoder/RedBlackTree.cr#L44" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="right-instance-method">
+      <div class="signature">
+        
+        def <strong>right</strong>
+
+        <a class="method-permalink" href="#right-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="right=(right)-instance-method">
+      <div class="signature">
+        
+        def <strong>right=</strong>(right)
+
+        <a class="method-permalink" href="#right=(right)-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/google/ac-library.cr/blob/8be6ee85aac9f071578582f0adbd002d821892eb/atcoder/RedBlackTree.cr#L30" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="right?:RedBlackTree::Node?-instance-method">
+      <div class="signature">
+        
+        def <strong>right?</strong> : <a href="../RedBlackTree/Node.html">RedBlackTree::Node</a>?
+
+        <a class="method-permalink" href="#right?:RedBlackTree::Node?-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
+
+
+
+
+</div>
+
+</body>
+</html>
