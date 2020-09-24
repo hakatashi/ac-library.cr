@@ -243,7 +243,7 @@
 
 <ul><li><code>segtree<S, op, e> seg(v)</code> => <code><a href="AtCoder/SegTree.html">AtCoder::SegTree</a>(S).new(v, &op?)</code></li></ul>
 
-<p>単位元は暗黙的にnilで定義されるため使用する際に定義する必要はありません。逆に言えばモノイドの (単位元以外の) 元にnilを含めることはできません。</p>
+<p>単位元は暗黙的にnilで定義されるため使用する際に定義する必要はありません。逆に言えばモノイドの (単位元以外の) 元にnilを含めることはできません。 The identity element will be implicitly defined as nil, so you don't have to manually define it. In the other words, you cannot include nil into an element of the monoid.</p>
 
 <p><code></code>`cr
   tree = AtCoder::SegTree.new((0...100).to_a) {|a, b| [a, b].min}
@@ -260,9 +260,9 @@
 
 <ul><li><code>lazy_segtree<S, op, e, F, mapping, composition, id> seg(v)</code> => <code><a href="AtCoder/LazySegTree.html">AtCoder::LazySegTree</a>(S, F).new(v, op, mapping, composition)</code></li></ul>
 
-<p>単位元は暗黙的にnilで定義されるため使用する際に定義する必要はありません。逆に言えばモノイドの (単位元以外の) 元にnilを含めることはできません。</p>
+<p>単位元は暗黙的にnilで定義されるため使用する際に定義する必要はありません。逆に言えばモノイドの (単位元以外の) 元にnilを含めることはできません。 The identity element will be implicitly defined as nil, so you don't have to manually define it. In the other words, you cannot include nil into an element of the monoid.</p>
 
-<p>また、恒等写像は暗黙的にnilで定義されるため使用する際に定義する必要はありません。逆に言えばFの (恒等写像以外の) 元にnilを含めることはできません。</p>
+<p>また、恒等写像は暗黙的にnilで定義されるため使用する際に定義する必要はありません。逆に言えばFの (恒等写像以外の) 元にnilを含めることはできません。 Similarly, the identity map of F will be implicitly defined as nil, so you don't have to manually define it. In the other words, you cannot include nil into an element of the set F.</p>
 
 <p><code></code>`cr
   op = ->(a : Int32, b : Int32) { [a, b].min }
