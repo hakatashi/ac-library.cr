@@ -1,4 +1,4 @@
-# ac-library.cr by hakatashi https://github.com/hakatashi/ac-library.cr
+# ac-library.cr by hakatashi https://github.com/google/ac-library.cr
 #
 # Copyright 2020 Google LLC
 #
