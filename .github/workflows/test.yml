@@ -14,7 +14,17 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Install dependencies
-      run: apk add python3 python3-dev py3-pip bash libxml2-dev libxslt-dev build-base
+      run: apk add python3 python3-dev py3-pip bash libxml2-dev libxslt-dev build-base cmake git binutils-dev libelf libcurl elfutils-dev curl-dev
+    - name: Install kcov
+      run: |
+        cd /tmp
+        git clone --depth 1 -b 38 https://github.com/SimonKagstrom/kcov.git
+        cd kcov
+        mkdir build
+        cd build
+        CXXFLAGS="-D__ptrace_request=int" cmake ..
+        make
+        make install
     - name: Install pip dependencies
       run: |
         python3 -m pip install --upgrade pip
@@ -27,6 +37,13 @@ jobs:
       run: oj-verify run
     - name: Run linter
       run: bin/ameba
+    - name: Run coverage
+      run: |
+        shards build test
+        kcov --clean --include-path=atcoder coverage ./bin/test
+        bash <(curl -s https://codecov.io/bash) -s coverage
+      env:
+        CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
     - name: Build docs
       run: git ls-files atcoder | grep -v test | grep -v bench | xargs crystal docs -o dist 
     - name: Deploy docs to GitHub Pages

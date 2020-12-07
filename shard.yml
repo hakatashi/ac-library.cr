@@ -21,3 +21,7 @@ development_dependencies:
   ameba:
     github: crystal-ameba/ameba
     version: ~> 0.12.0
+
+targets:
+  test:
+    main: 'spec/test_runner.cr'
