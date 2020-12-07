@@ -14,7 +14,9 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Install dependencies
-      run: apk add python3 python3-dev py3-pip bash libxml2-dev libxslt-dev build-base cmake git binutils-dev elfutils-libelf libcurl elfutils-dev curl-dev
+      run: |
+        apk add python3 python3-dev py3-pip bash libxml2-dev libxslt-dev build-base cmake git binutils-dev libcurl elfutils-dev curl-dev
+        apk add libelf --repository http://dl-cdn.alpinelinux.org/alpine/v3.12/main
     - name: Install kcov
       run: |
         cd /tmp
