@@ -39,19 +39,20 @@ jobs:
         python3 -m pip install -r requirements.txt
     - name: Install Crystal dependencies
       run: shards
-    - name: Run coverage
-      run: |
-        shards build test
-        kcov --clean --include-path=atcoder coverage ./bin/test
-        bash -c "bash <(curl -s https://codecov.io/bash) -s coverage"
-      env:
-        CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
     - name: Run tests
       run: crystal spec --verbose
     - name: Run verifier
       run: oj-verify run
     - name: Run linter
       run: bin/ameba
+    - name: Run coverage
+      run: |
+        shards build test
+        kcov --clean --include-path=atcoder coverage ./bin/test
+        bash <(curl -s https://codecov.io/bash) -s coverage
+      env:
+        CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+      shell: bash
     - name: Build docs
       run: git ls-files atcoder | grep -v test | grep -v bench | xargs crystal docs -o dist 
     - name: Deploy docs to GitHub Pages
