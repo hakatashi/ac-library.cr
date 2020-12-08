@@ -11,6 +11,8 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: crystallang/crystal:0.33.0
+      # https://github.com/SimonKagstrom/kcov/issues/151#issuecomment-249284631
+      options: --security-opt seccomp=unconfined
     steps:
     - name: Install latest git
       run: |
