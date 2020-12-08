@@ -26,11 +26,10 @@ jobs:
       run: |
         cd /tmp
         git clone --depth 1 -b v38 https://github.com/SimonKagstrom/kcov.git
-        cd kcov
-        mkdir build
-        cd build
-        CXXFLAGS="-D__ptrace_request=int" cmake ..
-        make
+        mkdir -p kcov/build
+        cd kcov/build
+        cmake ..
+        make -j8
         make install
     - name: Install pip dependencies
       run: |
