@@ -39,7 +39,13 @@ module AtCoder
     end
 
     def self.pow_mod(x, n, m)
-      b = x > 0 ? x : inv_mod(x, m)
+      if n == 0
+        return x.class.zero + 1
+      end
+      if x == 0
+        return x
+      end
+      b = n > 0 ? x : inv_mod(x, m)
       e = n.abs
       ret = 1_i64
       while e > 0

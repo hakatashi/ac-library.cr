@@ -24,16 +24,32 @@ describe "Math" do
       AtCoder::Math.inv_mod(1, 9).should eq 1
       AtCoder::Math.inv_mod(8, 13).should eq 5
       AtCoder::Math.inv_mod(3, 299).should eq 100
+      AtCoder::Math.inv_mod(-1, 7).should eq 6
+      AtCoder::Math.inv_mod(1_000_000_007_i64, 1_000_000_000_000_000_000_i64).should eq 551_020_408_142_857_143_i64
     end
 
     it "raises error when there's no inverse" do
       expect_raises(ArgumentError) {AtCoder::Math.inv_mod(3, 9)}
+      expect_raises(ArgumentError) {AtCoder::Math.inv_mod(0, 1000)}
     end
   end
 
   describe ".pow_mod" do
     it "generates powered number" do
       AtCoder::Math.pow_mod(10, 3, 29).should eq 14
+      AtCoder::Math.pow_mod(123_456, 0, 1_000_003).should eq 1
+      AtCoder::Math.pow_mod(100, 100, 299).should eq 100
+      AtCoder::Math.pow_mod(3, -100, 299).should eq 100
+      AtCoder::Math.pow_mod(0, 0, 1000).should eq 1
+      AtCoder::Math.pow_mod(100, 10, 1000).should eq 0
+      AtCoder::Math.pow_mod(100, 0, 1000).should eq 1
+      AtCoder::Math.pow_mod(0, -10, 1000).should eq 0
+      AtCoder::Math.pow_mod(123_456_789_i64, 1_000_000_006_i64, 1_000_000_007_i64).should eq 1
+    end
+
+    it "raises error when there's no inverse" do
+      expect_raises(ArgumentError) {AtCoder::Math.pow_mod(3, -2, 9)}
+      expect_raises(ArgumentError) {AtCoder::Math.pow_mod(100, -10, 1000)}
     end
   end
 end
