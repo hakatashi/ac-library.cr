@@ -17,7 +17,7 @@
 require "../../atcoder/DSU.cr"
 require "spec"
 
-include AtCoder
+alias DSU = AtCoder::DSU
 
 describe "DSU" do
   describe "#merge" do

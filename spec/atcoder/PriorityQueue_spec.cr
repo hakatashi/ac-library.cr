@@ -17,7 +17,7 @@
 require "../../atcoder/PriorityQueue.cr"
 require "spec"
 
-include AtCoder
+alias PriorityQueue = AtCoder::PriorityQueue
 
 describe "PriorityQueue" do
   it "pops values in priority order" do

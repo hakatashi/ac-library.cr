@@ -19,7 +19,7 @@ require "../../atcoder/ModInt.cr"
 require "../spec_helper.cr"
 require "spec"
 
-include AtCoder
+alias FenwickTree = AtCoder::FenwickTree
 
 describe "FenwickTree" do
   describe "#left_sum" do

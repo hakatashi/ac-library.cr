@@ -19,7 +19,7 @@ require "../../atcoder/ModInt.cr"
 require "../spec_helper.cr"
 require "spec"
 
-include AtCoder
+alias SegTree = AtCoder::SegTree
 
 describe "SegTree" do
   describe "with default comparison" do

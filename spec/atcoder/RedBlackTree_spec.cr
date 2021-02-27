@@ -17,6 +17,8 @@
 require "../../atcoder/RedBlackTree.cr"
 require "spec"
 
+alias RedBlackTree = AtCoder::RedBlackTree
+
 describe "RedBlackTree" do
   it "pops values in priority order" do
     tree = RedBlackTree.new

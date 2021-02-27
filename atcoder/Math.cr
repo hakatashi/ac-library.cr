@@ -16,7 +16,7 @@
 
 module AtCoder
   module Math
-    def extended_gcd(a, b)
+    def self.extended_gcd(a, b)
       last_remainder, remainder = a.abs, b.abs
       x, last_x, y, last_y = 0_i64, 1_i64, 1_i64, 0_i64
       while remainder != 0
@@ -30,17 +30,17 @@ module AtCoder
       return last_remainder, last_x * (a < 0 ? -1 : 1)
     end
 
-    def inv_mod(x, m)
+    def self.inv_mod(x, m)
       g, n = extended_gcd(x, m)
       if g != 1
         raise ArgumentError.new("#{x} and #{m} are not coprime")
       end
-      n % MOD
+      n % m
     end
 
-    def pow_mod(x, n, m)
+    def self.pow_mod(x, n, m)
       b = x > 0 ? x : inv_mod(x, m)
-      e = x.abs
+      e = n.abs
       ret = 1_i64
       while e > 0
         if e % 2 == 1

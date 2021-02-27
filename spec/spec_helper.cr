@@ -1,3 +1,5 @@
-static_modint(ModInt7, 7_i64)
+require "../atcoder/ModInt.cr"
 
-alias Mint = ModInt1000000007
+AtCoder.static_modint(ModInt7, 7_i64)
+
+alias Mint = AtCoder::ModInt1000000007

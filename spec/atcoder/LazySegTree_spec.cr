@@ -19,7 +19,7 @@ require "../../atcoder/ModInt.cr"
 require "../spec_helper.cr"
 require "spec"
 
-include AtCoder
+alias LazySegTree = AtCoder::LazySegTree
 
 describe "LazySegTree" do
   describe "#[]" do

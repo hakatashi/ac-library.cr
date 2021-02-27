@@ -24,7 +24,7 @@ module AtCoder
 
     def initialize(values : Array(T), &@operator : T, T -> T)
       @values = values
-      @segments = Array(T | Nil).new(2 ** Math.log2(values.size).ceil.to_i - 1, nil)
+      @segments = Array(T | Nil).new(2 ** ::Math.log2(values.size).ceil.to_i - 1, nil)
 
       # initialize segments
       (@segments.size - 1).downto(0) do |i|
