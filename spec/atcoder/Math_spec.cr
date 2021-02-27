@@ -52,4 +52,28 @@ describe "Math" do
       expect_raises(ArgumentError) {AtCoder::Math.pow_mod(100, -10, 1000)}
     end
   end
+
+  describe ".crt" do
+    it "calculates chinese remainder theorem answers" do
+      AtCoder::Math.crt([5, 7], [10, 11]).should eq ({95, 110})
+      AtCoder::Math.crt([73, 10073], [10000, 20000]).should eq ({10073, 20000})
+      AtCoder::Math.crt([2, 3, 2], [3, 5, 7]).should eq ({23, 105})
+      AtCoder::Math.crt([10, 15, 10], [15, 25, 35]).should eq ({115, 525})
+      AtCoder::Math.crt([11, 16, 11], [15, 25, 35]).should eq ({116, 525})
+    end
+
+    it "returns {0, 1} if the given array is empty" do
+      AtCoder::Math.crt([] of Int32, [] of Int32).should eq ({0, 1})
+    end
+
+    it "returns {0, 0} if there's no such answer" do
+      AtCoder::Math.crt([1, 2], [10, 15]).should eq ({0, 0})
+      AtCoder::Math.crt([109, 185], [213, 267]).should eq ({0, 0})
+    end
+
+    it "raises error when sizes of given arrays don't match" do
+      expect_raises(ArgumentError) {AtCoder::Math.crt([] of Int32, [1])}
+      expect_raises(ArgumentError) {AtCoder::Math.crt([1, 2, 3], [4, 5])}
+    end
+  end
 end

@@ -30,32 +30,55 @@ module AtCoder
       return last_remainder, last_x * (a < 0 ? -1 : 1)
     end
 
-    def self.inv_mod(x, m)
-      g, n = extended_gcd(x, m)
-      if g != 1
-        raise ArgumentError.new("#{x} and #{m} are not coprime")
+    def self.inv_mod(value, modulo)
+      gcd, inv = extended_gcd(value, modulo)
+      if gcd != 1
+        raise ArgumentError.new("#{value} and #{modulo} are not coprime")
       end
-      n % m
+      inv % modulo
     end
 
-    def self.pow_mod(x, n, m)
-      if n == 0
-        return x.class.zero + 1
+    def self.pow_mod(base, exponent, modulo)
+      if exponent == 0
+        return base.class.zero + 1
       end
-      if x == 0
-        return x
+      if base == 0
+        return base
       end
-      b = n > 0 ? x : inv_mod(x, m)
-      e = n.abs
+      b = exponent > 0 ? base : inv_mod(base, modulo)
+      e = exponent.abs
       ret = 1_i64
       while e > 0
         if e % 2 == 1
-          ret = ret * b % m
+          ret = ret * b % modulo
         end
-        b = b * b % m
+        b = b * b % modulo
         e //= 2
       end
       ret
+    end
+
+    def self.crt(remainders, modulos)
+      raise ArgumentError.new unless remainders.size == modulos.size
+
+      if remainders.size == 1
+        return 0_i64, 1_i64
+      end
+
+      total_modulo = 1_i64
+      answer = 0_i64
+
+      remainders.zip(modulos).each do |(remainder, modulo)|
+        gcd, p = extended_gcd(total_modulo, modulo)
+        if (remainder - answer) % gcd != 0
+          return 0_i64, 0_i64
+        end
+        tmp = (remainder - answer) // gcd * p % (modulo // gcd)
+        answer += total_modulo * tmp
+        total_modulo *= modulo // gcd
+      end
+
+      return answer % total_modulo, total_modulo
     end
   end
 end

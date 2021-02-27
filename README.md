@@ -169,9 +169,9 @@ For the convinience of usage in programming contest, each class in the library d
 
 ## [Math.cr](atcoder/Math.cr) ([<atcoder/math>](https://atcoder.github.io/ac-library/document_en/math.html))
 
-* `inv_mod` => `AtCoder::Math.inv_mod`
-* `pow_mod` => `AtCoder::Math.pow_mod`
-* `crt` => Unimplemented
+* `pow_mod(x, n, m)` => `AtCoder::Math.pow_mod(x, n, m)`
+* `inv_mod(x, m)` => `AtCoder::Math.inv_mod(x, m)`
+* `crt(r, m)` => `AtCoder::Math.crt(r, m)`
 * `floor_sum` => Unimplemented
 
 ## [PriorityQueue.cr](atcoder/PriorityQueue.cr) (not in ACL)
