@@ -42,6 +42,7 @@ describe "Math" do
       AtCoder::Math.pow_mod(3, -100, 299).should eq 100
       AtCoder::Math.pow_mod(0, 0, 1000).should eq 1
       AtCoder::Math.pow_mod(100, 10, 1000).should eq 0
+      AtCoder::Math.pow_mod(10, 2, 1000).should eq 100
       AtCoder::Math.pow_mod(100, 0, 1000).should eq 1
       AtCoder::Math.pow_mod(0, -10, 1000).should eq 0
       AtCoder::Math.pow_mod(123_456_789_i64, 1_000_000_006_i64, 1_000_000_007_i64).should eq 1
