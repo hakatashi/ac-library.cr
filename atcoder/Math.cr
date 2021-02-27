@@ -61,10 +61,6 @@ module AtCoder
     def self.crt(remainders, modulos)
       raise ArgumentError.new unless remainders.size == modulos.size
 
-      if remainders.size == 1
-        return 0_i64, 1_i64
-      end
-
       total_modulo = 1_i64
       answer = 0_i64
 
