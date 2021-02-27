@@ -59,4 +59,3 @@ module AtCoder
     end
   end
 end
-
