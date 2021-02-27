@@ -167,6 +167,12 @@ For the convinience of usage in programming contest, each class in the library d
 
     This method will raise if it's not satisfiable
 
+## [Math.cr](atcoder/Math.cr) ([<atcoder/math>](https://atcoder.github.io/ac-library/document_en/math.html))
+
+* `inv_mod` => `AtCoder::Math.inv_mod`
+* `pow_mod` => `AtCoder::Math.pow_mod`
+* `crt` => Unimplemented
+* `floor_sum` => Unimplemented
 
 ## [PriorityQueue.cr](atcoder/PriorityQueue.cr) (not in ACL)
 
