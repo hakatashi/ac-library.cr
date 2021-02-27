@@ -18,7 +18,7 @@
 
 require "./Math.cr"
 
-n, m, d = read_line.split.map(&.to_i64)
+n, _, d = read_line.split.map(&.to_i64)
 ais = read_line.split.map(&.to_i64)
 d.times do
   rs = read_line.split.map(&.to_i64)
