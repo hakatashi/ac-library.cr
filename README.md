@@ -116,7 +116,7 @@ For the convinience of usage in programming contest, each class in the library d
 
 * `mf_graph<Cap> graph(n)` => `AtCoder::MaxFlow.new(n)`
 
-  `Cap` will be always `Int64`.
+  `Cap` is always `Int64`.
 
   ```cr
   mf = AtCoder::MaxFlow.new(3)

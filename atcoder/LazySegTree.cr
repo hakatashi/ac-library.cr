@@ -15,6 +15,25 @@
 # limitations under the License.
 
 module AtCoder
+  # Implements atcoder::lazy_segtree.
+  #
+  # The identity element will be implicitly defined as nil, so you don't
+  # have to manually define it. In the other words, you cannot include
+  # nil into an element of the monoid.
+  #
+  # Similarly, the identity map of F will be implicitly defined as nil,
+  # so you don't have to manually define it. In the other words, you
+  # cannot include nil into an element of the set F.
+  #
+  # ```
+  # op = ->(a : Int32, b : Int32) { [a, b].min }
+  # mapping = ->(f : Int32, x : Int32) { f }
+  # composition = ->(a : Int32, b : Int32) { a }
+  # tree = AtCoder::LazySegTree(Int32, Int32).new((0...100).to_a, op, mapping, composition)
+  # tree[10...50] # => 10
+  # tree[20...60] = 0
+  # tree[50...80] # => 0
+  # ```
   class LazySegTree(S, F)
     getter values : Array(S | Nil)
 
@@ -43,20 +62,29 @@ module AtCoder
       end
     end
 
+    # FIXME: Unimplemented
+    def set
+      raise NotImplementedError.new
+    end
+
+    # Implements atcoder::lazy_segtree.apply(index, applicator).
     def []=(index : Int, applicator : F)
       apply_range(index, index + 1, applicator, 0, 0...(@segments.size + 1))
     end
 
+    # Implements atcoder::lazy_segtree.apply(left, right, applicator).
     def []=(range : Range(Int, Int), applicator : F)
       l = range.begin
       r = range.exclusive? ? range.end : range.end + 1
       apply_range(l, r, applicator, 0, 0...(@segments.size + 1))
     end
 
+    # Implements atcoder::lazy_segtree.get(index).
     def [](index : Int)
       get_range(index, index + 1, 0, 0...(@segments.size + 1)).not_nil!
     end
 
+    # Implements atcoder::lazy_segtree.prod(left, right).
     def [](range : Range(Int, Int))
       l = range.begin
       r = range.exclusive? ? range.end : range.end + 1
@@ -96,9 +124,11 @@ module AtCoder
       end
     end
 
-    # range must be exclusive
-    # assert(segment_index < @segments.size)
-    # assert(range.end - range.begin > 1)
+    # Evaluates segment, whose range is `range`. `range` is exclusive here.
+    #
+    # Preconditions:
+    # * segment_index < @segments.size
+    # * range.end - range.begin > 1
     def eval_segment(segment_index : Int, range : Range(Int, Int))
       applicator = @applicators[segment_index]
       return if applicator.nil?
@@ -116,7 +146,7 @@ module AtCoder
       @applicators[segment_index] = nil
     end
 
-    # range must be exclusive
+    # Applies applicator `f` onto segment, whose range is `range`. `range` is exclusive here.
     def apply_range(a : Int, b : Int, f : F, segment_index : Int, range : Range(Int, Int))
       if segment_index >= @segments.size + @values.size
         return nil
@@ -153,7 +183,7 @@ module AtCoder
       @segments[segment_index]
     end
 
-    # range must be exclusive
+    # Gets evaluated value of a segment, whose range is `range`. `range` is exclusive here.
     def get_range(a : Int, b : Int, segment_index : Int, range : Range(Int, Int))
       if range.end <= a || b <= range.begin
         return nil
@@ -178,8 +208,19 @@ module AtCoder
       operate(child1, child2)
     end
 
+    # Implements atcoder::lazy_segtree.all_prod().
     def all_prod
       self[0...@values.size]
+    end
+
+    # FIXME: Unimplemented
+    def max_right
+      raise NotImplementedError.new
+    end
+
+    # FIXME: Unimplemented
+    def max_left
+      raise NotImplementedError.new
     end
   end
 end

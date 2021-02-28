@@ -15,6 +15,15 @@
 # limitations under the License.
 
 module AtCoder
+  # Implements atcoder::fenwick_tree.
+  #
+  # ```
+  # tree = AtCoder::FenwickTree(Int64).new(10)
+  # tree.add(3, 10)
+  # tree.add(5, 20)
+  # tree[3..5] # => 30
+  # tree[3...5] # => 10
+  # ```
   class FenwickTree(T)
     getter size : Int64
     getter bits : Array(T)
@@ -23,6 +32,7 @@ module AtCoder
       @bits = Array(T).new(@size, T.zero)
     end
 
+    # Implements atcoder::fenwick_tree.add(index, value)
     def add(index, value)
       index += 1 # convert to 1-indexed
       while index <= @size
@@ -41,10 +51,12 @@ module AtCoder
       ret
     end
 
+    # Implements atcoder::fenwick_tree.sum(left, right)
     def sum(left, right)
       left_sum(right) - left_sum(left)
     end
 
+    # :ditto:
     def [](range : Range(Int, Int))
       left = range.begin
       right = range.exclusive? ? range.end : range.end + 1

@@ -15,18 +15,41 @@
 # limitations under the License.
 
 module AtCoder
+  # Implements standard priority queue like std::priority_queue
+  #
+  # ```
+  # q = AtCoder::PriorityQueue(Int64).new
+  # q << 1_i64
+  # q << 3_i64
+  # q << 2_i64
+  # q.pop # => 3
+  # q.pop # => 2
+  # q.pop # => 1
+  # ```
   class PriorityQueue(T)
-    property heap : Array(T)
+    getter heap : Array(T)
 
     def initialize
       initialize(&.itself)
     end
 
+    # Initializes queue with the custom comperator.
+    #
+    # ```
+    # q = AtCoder::PriorityQueue(Int64).new {|n| -n}
+    # q << 1_i64
+    # q << 3_i64
+    # q << 2_i64
+    # q.pop # => 1
+    # q.pop # => 2
+    # q.pop # => 3
+    # ```
     def initialize(&block : T -> (Int8 | Int16 | Int32 | Int64 | UInt8 | UInt16 | UInt32 | UInt64))
       @heap = Array(T).new
       @priority_proc = block
     end
 
+    # Pushes value into the queue.
     def push(v : T)
       @heap << v
       index = @heap.size - 1
@@ -40,10 +63,12 @@ module AtCoder
       end
     end
 
+    # Alias of `push`
     def <<(v : T)
       push(v)
     end
 
+    # Pops value from the queue.
     def pop
       if @heap.size == 0
         return nil
@@ -69,7 +94,10 @@ module AtCoder
       ret
     end
 
+    # Returns `true` if the queue is empty.
     delegate :empty?, to: @heap
+
+    # Returns size of the queue.
     delegate :size, to: @heap
   end
 end

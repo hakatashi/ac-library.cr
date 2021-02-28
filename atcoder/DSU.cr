@@ -15,6 +15,15 @@
 # limitations under the License.
 
 module AtCoder
+  # Implements atcoder::dsu.
+  #
+  # ```
+  # dsu = AtCoder::DSU.new(10)
+  # dsu.merge(0, 2)
+  # dsu.merge(4, 2)
+  # dsu.same(0, 4) # => true
+  # dsu.size(4) # => 3
+  # ```
   class DSU
     getter parents : Array(Int64)
     getter sizes : Array(Int64)
@@ -25,6 +34,7 @@ module AtCoder
       @sizes = Array.new(size, 1_i64)
     end
 
+    # Implements atcoder::dsu.leader(node).
     def leader(node)
       until @parents[node] == node
         @parents[node] = @parents[@parents[node]]
@@ -33,6 +43,7 @@ module AtCoder
       node
     end
 
+    # Implements atcoder::dsu.merge(a, b).
     def merge(a, b)
       leader_a = leader(a.to_i64)
       leader_b = leader(b.to_i64)
@@ -45,14 +56,18 @@ module AtCoder
       end
     end
 
+    # Implements atcoder::dsu.same(a, b).
     def same(a, b)
       leader(a) == leader(b)
     end
 
+    # Implements atcoder::dsu.size().
     def size(node)
       @sizes[leader(node)]
     end
 
+    # Implements atcoder::dsu.groups().
+    # This method returns `Set` instead of list.
     def groups
       groups = Hash(Int64, Set(Int64)).new {|h, k| h[k] = Set(Int64).new}
       @size.times do |i|

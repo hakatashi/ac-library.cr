@@ -15,11 +15,26 @@
 # limitations under the License.
 
 module AtCoder
+  # Implements atcoder::static_modint.
+  #
+  # ```
+  # AtCoder.static_modint(ModInt101, 101_i64)
+  # alias Mint = AtCoder::ModInt101
+  # Mint.new(80_i64) + Mint.new(90_i64) #=> 89
+  # ```
   macro static_modint(name, modulo)
     module AtCoder
+      # Implements atcoder::modint{{name}}.
+      #
+      # ```
+      # alias Mint = AtCoder::{{name}}
+      # Mint.new(30_i64) // Mint.new(7_i64)
+      # ```
       record {{name}}, value : Int64 do
-        @@factorials = Array(self).new(100_000_i64) # Change here to improve performance
         MOD = {{modulo}}
+
+        # Change the initial capacity of this array to improve performance
+        @@factorials = Array(self).new(100_000_i64)
 
         def self.factorial(n)
           if @@factorials.empty?

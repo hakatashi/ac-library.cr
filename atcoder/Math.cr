@@ -30,6 +30,7 @@ module AtCoder
       return last_remainder, last_x * (a < 0 ? -1 : 1)
     end
 
+    # Implements atcoder::inv_mod(value, modulo).
     def self.inv_mod(value, modulo)
       gcd, inv = extended_gcd(value, modulo)
       if gcd != 1
@@ -38,6 +39,7 @@ module AtCoder
       inv % modulo
     end
 
+    # Implements atcoder::pow_mod(base, exponent, modulo).
     def self.pow_mod(base, exponent, modulo)
       if exponent == 0
         return base.class.zero + 1
@@ -58,6 +60,7 @@ module AtCoder
       ret
     end
 
+    # Implements atcoder::crt(remainders, modulos).
     def self.crt(remainders, modulos)
       raise ArgumentError.new unless remainders.size == modulos.size
 
@@ -75,6 +78,11 @@ module AtCoder
       end
 
       return answer % total_modulo, total_modulo
+    end
+
+    # FIXME: Unimplemented
+    def self.floor_sum
+      raise NotImplementedError.new
     end
   end
 end

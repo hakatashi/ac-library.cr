@@ -15,6 +15,16 @@
 # limitations under the License.
 
 module AtCoder
+  # Implements atcoder::segtree.
+  #
+  # The identity element will be implicitly defined as nil, so you don't
+  # have to manually define it. In the other words, you cannot include
+  # nil into an element of the monoid.
+  #
+  # ```
+  # tree = AtCoder::SegTree.new((0...100).to_a) {|a, b| [a, b].min}
+  # tree[10...50] # => 10
+  # ```
   class SegTree(T)
     property values : Array(T)
 
@@ -56,6 +66,7 @@ module AtCoder
       end
     end
 
+    # Implements atcoder::segtree.set(index, value)
     def []=(index : Int, value : T)
       @values[index] = value
 
@@ -80,10 +91,12 @@ module AtCoder
       end
     end
 
+    # Implements atcoder::segtree.get(index)
     def [](index : Int)
       @values[index]
     end
 
+    # Implements atcoder::segtree.prod(l, r)
     def [](range : Range(Int, Int))
       a = range.begin
       b = range.exclusive? ? range.end : range.end + 1
@@ -112,20 +125,36 @@ module AtCoder
 
     # compatibility with ac-library
 
+    # Implements atcoder::segtree.set(index, value)
+    # alias of `.[]=`
     def set(index : Int, value : T)
       self.[]=(index, value)
     end
 
+    # Implements atcoder::segtree.get(index)
+    # alias of `.[]`
     def get(index : Int)
       self.[](index)
     end
 
+    # Implements atcoder::segtree.prod(left, right)
     def prod(left : Int, right : Int)
       self.[](left...right)
     end
 
+    # Implements atcoder::segtree.all_prod(l, r)
     def all_prod
       self.[](0...@values.size)
+    end
+
+    # FIXME: Unimplemented
+    def max_right
+      raise NotImplementedError.new
+    end
+
+    # FIXME: Unimplemented
+    def max_left
+      raise NotImplementedError.new
     end
   end
 end

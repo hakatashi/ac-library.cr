@@ -15,6 +15,15 @@
 # limitations under the License.
 
 module AtCoder
+  # Implements atcoder::scc_graph.
+  #
+  # ```
+  # scc = AtCoder::SCC.new(3_i64)
+  # scc.add_edge(0, 1)
+  # scc.add_edge(1, 0)
+  # scc.add_edge(2, 0)
+  # scc.scc # => [Set{2}, Set{0, 1}]
+  # ```
   class SCC
     alias Adjacency = NamedTuple(in: Array(Int64), out: Array(Int64))
 
@@ -31,12 +40,13 @@ module AtCoder
       @groups = Array(Set(Int64)).new
     end
 
+    # Implements atcoder::scc_graph.add_edge(from, to).
     def add_edge(from, to)
       @adjacencies[from][:out] << to.to_i64
       @adjacencies[to][:in] << from.to_i64
     end
 
-    def dfs(start)
+    private def dfs(start)
       @stack << start
       @visited << start
 
@@ -59,7 +69,7 @@ module AtCoder
       end
     end
 
-    def reverse_dfs(start)
+    private def reverse_dfs(start)
       @stack << start
       @visited << start
       group = Set{start}
@@ -80,6 +90,7 @@ module AtCoder
       @groups << group
     end
 
+    # Implements atcoder::scc_graph.scc().
     def scc
       @visited = Set(Int64).new
       @stack = Deque(Int64).new

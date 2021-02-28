@@ -15,6 +15,16 @@
 # limitations under the License.
 
 module AtCoder
+  # Implements atcoder::mf_graph.
+  # `Cap` is always `Int64`.
+  #
+  # ```
+  # mf = AtCoder::MaxFlow.new(3)
+  # mf.add_edge(0, 1, 3)
+  # mf.add_edge(1, 2, 1)
+  # mf.add_edge(0, 2, 2)
+  # mf.flow(0, 2) # => 3
+  # ```
   class MaxFlow
     class Edge
       getter to : Int64
@@ -42,6 +52,7 @@ module AtCoder
       @visit_counts = Array(Int64).new(@size, 0_i64)
     end
 
+    # Implements atcoder::mf_graph.add_edge(from, to, capacity).
     def add_edge(from, to, capacity)
       from_index = @adjacencies[from].size.to_i64
       to_index = @adjacencies[to].size.to_i64
@@ -50,6 +61,7 @@ module AtCoder
       @adjacencies[to] << Edge.new(from.to_i64, 0_i64, from_index)
     end
 
+    # Implements atcoder::mf_graph.flow(start, target).
     def flow(start, target)
       flow = 0_i64
 
@@ -64,6 +76,26 @@ module AtCoder
           flow += flowed
         end
       end
+    end
+
+    # FIXME: Unimplemented
+    def min_cut
+      raise NotImplementedError.new
+    end
+
+    # FIXME: Unimplemented
+    def get_edge
+      raise NotImplementedError.new
+    end
+
+    # FIXME: Unimplemented
+    def edges
+      raise NotImplementedError.new
+    end
+
+    # FIXME: Unimplemented
+    def change_edge
+      raise NotImplementedError.new
     end
 
     private def bfs(start)

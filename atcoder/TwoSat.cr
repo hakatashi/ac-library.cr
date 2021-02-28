@@ -15,8 +15,27 @@
 # limitations under the License.
 
 module AtCoder
+  # Implements atcoder::two_sat
+  #
+  # ```
+  # twosat = AtCoder::TwoSat.new(2_i64)
+  # twosat.add_clause(0, true, 1, false)
+  # twosat.add_clause(1, true, 0, false)
+  # twosat.add_clause(0, false, 1, false)
+  # twosat.satisfiable? #=> true
+  # twosat.answer # => [false, false]
+  # ```
   class TwoSat
-    class SCC
+    # Implements atcoder::scc_graph.
+    #
+    # ```
+    # scc = AtCoder::SCC.new(3_i64)
+    # scc.add_edge(0, 1)
+    # scc.add_edge(1, 0)
+    # scc.add_edge(2, 0)
+    # scc.scc # => [Set{2}, Set{0, 1}]
+    # ```
+    private class SCC
       alias Adjacency = NamedTuple(in: Array(Int64), out: Array(Int64))
 
       getter size : Int64
@@ -32,12 +51,13 @@ module AtCoder
         @groups = Array(Set(Int64)).new
       end
 
+      # Implements atcoder::scc_graph.add_edge(from, to).
       def add_edge(from, to)
         @adjacencies[from][:out] << to.to_i64
         @adjacencies[to][:in] << from.to_i64
       end
 
-      def dfs(start)
+      private def dfs(start)
         @stack << start
         @visited << start
 
@@ -60,7 +80,7 @@ module AtCoder
         end
       end
 
-      def reverse_dfs(start)
+      private def reverse_dfs(start)
         @stack << start
         @visited << start
         group = Set{start}
@@ -81,6 +101,7 @@ module AtCoder
         @groups << group
       end
 
+      # Implements atcoder::scc_graph.scc().
       def scc
         @visited = Set(Int64).new
         @stack = Deque(Int64).new
@@ -122,7 +143,7 @@ module AtCoder
     end
 
     @[AlwaysInline]
-    def var(i, f)
+    private def var(i, f)
       if f
         i.to_i64
       else
@@ -130,11 +151,13 @@ module AtCoder
       end
     end
 
+    # Implements atcoder::two_sat.add_clause(i, f, j, g).
     def add_clause(i, f, j, g)
       @scc.add_edge(var(i, !f), var(j, g))
       @scc.add_edge(var(j, !g), var(i, f))
     end
 
+    # Implements atcoder::two_sat.satisfiable().
     def satisfiable?
       @satisfiable = false
 
@@ -155,6 +178,9 @@ module AtCoder
       @satisfiable = true
     end
 
+    # Implements atcoder::two_sat.answer().
+    #
+    # This method will raise `NotSatisfiableError` if it's not satisfiable.
     def answer
       unless @satisfiable
         raise NotSatisfiableError.new
