@@ -145,21 +145,6 @@
       
     </li>
   
-  <li class="parent " data-id="github.com/google/ac-library.cr/AtCoder/TwoSat/SCC" data-name="atcoder::twosat::scc">
-      <a href="../AtCoder/TwoSat/SCC.html">SCC</a>
-      
-        <ul>
-  
-  <li class=" " data-id="github.com/google/ac-library.cr/AtCoder/TwoSat/SCC/Adjacency" data-name="atcoder::twosat::scc::adjacency">
-      <a href="../AtCoder/TwoSat/SCC/Adjacency.html">Adjacency</a>
-      
-    </li>
-  
-</ul>
-
-      
-    </li>
-  
 </ul>
 
       
@@ -194,6 +179,33 @@
 
 
 
+  <h2>
+    <a id="overview" class="anchor" href="#overview">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Overview
+  </h2>
+
+  <p>Implements atcoder::lazy_segtree.</p>
+
+<p>The identity element will be implicitly defined as nil, so you don't
+have to manually define it. In the other words, you cannot include
+nil into an element of the monoid.</p>
+
+<p>Similarly, the identity map of F will be implicitly defined as nil,
+so you don't have to manually define it. In the other words, you
+cannot include nil into an element of the set F.</p>
+
+<pre><code>op <span class="o">=</span> ->(a : <span class="t">Int32</span>, b : <span class="t">Int32</span>) { [a, b].min }
+mapping <span class="o">=</span> ->(f : <span class="t">Int32</span>, x : <span class="t">Int32</span>) { f }
+composition <span class="o">=</span> ->(a : <span class="t">Int32</span>, b : <span class="t">Int32</span>) { a }
+tree <span class="o">=</span> <span class="t">AtCoder</span><span class="t">::</span><span class="t">LazySegTree</span>(<span class="t">Int32</span>, <span class="t">Int32</span>).<span class="k">new</span>((<span class="n">0</span>...<span class="n">100</span>).to_a, op, mapping, composition)
+tree[<span class="n">10</span>...<span class="n">50</span>] <span class="c"># =&gt; 10</span>
+tree[<span class="n">20</span>...<span class="n">60</span>] <span class="o">=</span> <span class="n">0</span>
+tree[<span class="n">50</span>...<span class="n">80</span>] <span class="c"># =&gt; 0</span></code></pre>
+
 
 
 
@@ -217,7 +229,7 @@
   </h2>
   
     
-      <a href="https://github.com/google/ac-library.cr/blob/2f81fe4ff57f2a45c632d8470846cc314065e7e9/atcoder/LazySegTree.cr#L18" target="_blank">
+      <a href="https://github.com/google/ac-library.cr/blob/e81f82f3dee9b9b93f28fd9f1324cd52f82450a3/atcoder/LazySegTree.cr#L37" target="_blank">
         atcoder/LazySegTree.cr
       </a>
     
@@ -262,46 +274,77 @@
       <li class="entry-summary">
         <a href="#[](index:Int)-instance-method" class="signature"><strong>#[]</strong>(index : Int)</a>
         
+          <div class="summary"><p>Implements atcoder::lazy_segtree.get(index).</p></div>
+        
       </li>
     
       <li class="entry-summary">
         <a href="#[](range:Range(Int,Int))-instance-method" class="signature"><strong>#[]</strong>(range : Range(Int, Int))</a>
+        
+          <div class="summary"><p>Implements atcoder::lazy_segtree.prod(left, right).</p></div>
         
       </li>
     
       <li class="entry-summary">
         <a href="#[]=(index:Int,applicator:F)-instance-method" class="signature"><strong>#[]=</strong>(index : Int, applicator : F)</a>
         
+          <div class="summary"><p>Implements atcoder::lazy_segtree.apply(index, applicator).</p></div>
+        
       </li>
     
       <li class="entry-summary">
         <a href="#[]=(range:Range(Int,Int),applicator:F)-instance-method" class="signature"><strong>#[]=</strong>(range : Range(Int, Int), applicator : F)</a>
+        
+          <div class="summary"><p>Implements atcoder::lazy_segtree.apply(left, right, applicator).</p></div>
         
       </li>
     
       <li class="entry-summary">
         <a href="#all_prod-instance-method" class="signature"><strong>#all_prod</strong></a>
         
+          <div class="summary"><p>Implements atcoder::lazy_segtree.all_prod().</p></div>
+        
       </li>
     
       <li class="entry-summary">
         <a href="#apply_range(a:Int,b:Int,f:F,segment_index:Int,range:Range(Int,Int))-instance-method" class="signature"><strong>#apply_range</strong>(a : Int, b : Int, f : F, segment_index : Int, range : Range(Int, Int))</a>
         
-          <div class="summary"><p>range must be exclusive</p></div>
+          <div class="summary"><p>Applies applicator <code>f</code> onto segment, whose range is <code>range</code>.</p></div>
         
       </li>
     
       <li class="entry-summary">
         <a href="#eval_segment(segment_index:Int,range:Range(Int,Int))-instance-method" class="signature"><strong>#eval_segment</strong>(segment_index : Int, range : Range(Int, Int))</a>
         
-          <div class="summary"><p>range must be exclusive assert(segment_index &lt; @segments.size) assert(range.end - range.begin > 1)</p></div>
+          <div class="summary"><p>Evaluates segment, whose range is <code>range</code>.</p></div>
         
       </li>
     
       <li class="entry-summary">
         <a href="#get_range(a:Int,b:Int,segment_index:Int,range:Range(Int,Int))-instance-method" class="signature"><strong>#get_range</strong>(a : Int, b : Int, segment_index : Int, range : Range(Int, Int))</a>
         
-          <div class="summary"><p>range must be exclusive</p></div>
+          <div class="summary"><p>Gets evaluated value of a segment, whose range is <code>range</code>.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#max_left-instance-method" class="signature"><strong>#max_left</strong></a>
+        
+          <div class="summary"><p><span class="flag yellow">FIXME</span>  Unimplemented</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#max_right-instance-method" class="signature"><strong>#max_right</strong></a>
+        
+          <div class="summary"><p><span class="flag yellow">FIXME</span>  Unimplemented</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#set-instance-method" class="signature"><strong>#set</strong></a>
+        
+          <div class="summary"><p><span class="flag yellow">FIXME</span>  Unimplemented</p></div>
         
       </li>
     
@@ -361,7 +404,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/2f81fe4ff57f2a45c632d8470846cc314065e7e9/atcoder/LazySegTree.cr#L21" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/e81f82f3dee9b9b93f28fd9f1324cd52f82450a3/atcoder/LazySegTree.cr#L40" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -388,10 +431,15 @@
         <a class="method-permalink" href="#[](index:Int)-instance-method">#</a>
       </div>
       
+        <div class="doc">
+          
+          <p>Implements atcoder::lazy_segtree.get(index).</p>
+        </div>
+      
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/2f81fe4ff57f2a45c632d8470846cc314065e7e9/atcoder/LazySegTree.cr#L56" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/e81f82f3dee9b9b93f28fd9f1324cd52f82450a3/atcoder/LazySegTree.cr#L83" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -404,10 +452,15 @@
         <a class="method-permalink" href="#[](range:Range(Int,Int))-instance-method">#</a>
       </div>
       
+        <div class="doc">
+          
+          <p>Implements atcoder::lazy_segtree.prod(left, right).</p>
+        </div>
+      
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/2f81fe4ff57f2a45c632d8470846cc314065e7e9/atcoder/LazySegTree.cr#L60" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/e81f82f3dee9b9b93f28fd9f1324cd52f82450a3/atcoder/LazySegTree.cr#L88" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -420,10 +473,15 @@
         <a class="method-permalink" href="#[]=(index:Int,applicator:F)-instance-method">#</a>
       </div>
       
+        <div class="doc">
+          
+          <p>Implements atcoder::lazy_segtree.apply(index, applicator).</p>
+        </div>
+      
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/2f81fe4ff57f2a45c632d8470846cc314065e7e9/atcoder/LazySegTree.cr#L46" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/e81f82f3dee9b9b93f28fd9f1324cd52f82450a3/atcoder/LazySegTree.cr#L71" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -436,10 +494,15 @@
         <a class="method-permalink" href="#[]=(range:Range(Int,Int),applicator:F)-instance-method">#</a>
       </div>
       
+        <div class="doc">
+          
+          <p>Implements atcoder::lazy_segtree.apply(left, right, applicator).</p>
+        </div>
+      
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/2f81fe4ff57f2a45c632d8470846cc314065e7e9/atcoder/LazySegTree.cr#L50" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/e81f82f3dee9b9b93f28fd9f1324cd52f82450a3/atcoder/LazySegTree.cr#L76" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -452,10 +515,15 @@
         <a class="method-permalink" href="#all_prod-instance-method">#</a>
       </div>
       
+        <div class="doc">
+          
+          <p>Implements atcoder::lazy_segtree.all_prod().</p>
+        </div>
+      
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/2f81fe4ff57f2a45c632d8470846cc314065e7e9/atcoder/LazySegTree.cr#L181" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/e81f82f3dee9b9b93f28fd9f1324cd52f82450a3/atcoder/LazySegTree.cr#L212" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -470,13 +538,13 @@
       
         <div class="doc">
           
-          <p>range must be exclusive</p>
+          <p>Applies applicator <code>f</code> onto segment, whose range is <code>range</code>. <code>range</code> is exclusive here.</p>
         </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/2f81fe4ff57f2a45c632d8470846cc314065e7e9/atcoder/LazySegTree.cr#L120" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/e81f82f3dee9b9b93f28fd9f1324cd52f82450a3/atcoder/LazySegTree.cr#L150" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -491,15 +559,17 @@
       
         <div class="doc">
           
-          <p>range must be exclusive
-assert(segment_index &lt; @segments.size)
-assert(range.end - range.begin > 1)</p>
+          <p>Evaluates segment, whose range is <code>range</code>. <code>range</code> is exclusive here.</p>
+
+<p>Preconditions:</p>
+
+<ul><li>segment_index &lt; @segments.size</li><li>range.end - range.begin > 1</li></ul>
         </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/2f81fe4ff57f2a45c632d8470846cc314065e7e9/atcoder/LazySegTree.cr#L102" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/e81f82f3dee9b9b93f28fd9f1324cd52f82450a3/atcoder/LazySegTree.cr#L132" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -514,13 +584,76 @@ assert(range.end - range.begin > 1)</p>
       
         <div class="doc">
           
-          <p>range must be exclusive</p>
+          <p>Gets evaluated value of a segment, whose range is <code>range</code>. <code>range</code> is exclusive here.</p>
         </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/2f81fe4ff57f2a45c632d8470846cc314065e7e9/atcoder/LazySegTree.cr#L157" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/e81f82f3dee9b9b93f28fd9f1324cd52f82450a3/atcoder/LazySegTree.cr#L187" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="max_left-instance-method">
+      <div class="signature">
+        
+        def <strong>max_left</strong>
+
+        <a class="method-permalink" href="#max_left-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p><span class="flag yellow">FIXME</span>  Unimplemented</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/google/ac-library.cr/blob/e81f82f3dee9b9b93f28fd9f1324cd52f82450a3/atcoder/LazySegTree.cr#L222" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="max_right-instance-method">
+      <div class="signature">
+        
+        def <strong>max_right</strong>
+
+        <a class="method-permalink" href="#max_right-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p><span class="flag yellow">FIXME</span>  Unimplemented</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/google/ac-library.cr/blob/e81f82f3dee9b9b93f28fd9f1324cd52f82450a3/atcoder/LazySegTree.cr#L217" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="set-instance-method">
+      <div class="signature">
+        
+        def <strong>set</strong>
+
+        <a class="method-permalink" href="#set-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p><span class="flag yellow">FIXME</span>  Unimplemented</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/google/ac-library.cr/blob/e81f82f3dee9b9b93f28fd9f1324cd52f82450a3/atcoder/LazySegTree.cr#L66" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -536,7 +669,7 @@ assert(range.end - range.begin > 1)</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/2f81fe4ff57f2a45c632d8470846cc314065e7e9/atcoder/LazySegTree.cr#L19" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/e81f82f3dee9b9b93f28fd9f1324cd52f82450a3/atcoder/LazySegTree.cr#L38" target="_blank">View source</a>]
         
       </div>
     </div>

@@ -145,21 +145,6 @@
       
     </li>
   
-  <li class="parent " data-id="github.com/google/ac-library.cr/AtCoder/TwoSat/SCC" data-name="atcoder::twosat::scc">
-      <a href="../AtCoder/TwoSat/SCC.html">SCC</a>
-      
-        <ul>
-  
-  <li class=" " data-id="github.com/google/ac-library.cr/AtCoder/TwoSat/SCC/Adjacency" data-name="atcoder::twosat::scc::adjacency">
-      <a href="../AtCoder/TwoSat/SCC/Adjacency.html">Adjacency</a>
-      
-    </li>
-  
-</ul>
-
-      
-    </li>
-  
 </ul>
 
       
@@ -194,6 +179,23 @@
 
 
 
+  <h2>
+    <a id="overview" class="anchor" href="#overview">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Overview
+  </h2>
+
+  <p>Implements atcoder::fenwick_tree.</p>
+
+<pre><code>tree <span class="o">=</span> <span class="t">AtCoder</span><span class="t">::</span><span class="t">FenwickTree</span>(<span class="t">Int64</span>).<span class="k">new</span>(<span class="n">10</span>)
+tree.add(<span class="n">3</span>, <span class="n">10</span>)
+tree.add(<span class="n">5</span>, <span class="n">20</span>)
+tree[<span class="n">3</span>..<span class="n">5</span>] <span class="c"># =&gt; 30</span>
+tree[<span class="n">3</span>...<span class="n">5</span>] <span class="c"># =&gt; 10</span></code></pre>
+
 
 
 
@@ -217,7 +219,7 @@
   </h2>
   
     
-      <a href="https://github.com/google/ac-library.cr/blob/2f81fe4ff57f2a45c632d8470846cc314065e7e9/atcoder/FenwickTree.cr#L18" target="_blank">
+      <a href="https://github.com/google/ac-library.cr/blob/e81f82f3dee9b9b93f28fd9f1324cd52f82450a3/atcoder/FenwickTree.cr#L27" target="_blank">
         atcoder/FenwickTree.cr
       </a>
     
@@ -262,10 +264,14 @@
       <li class="entry-summary">
         <a href="#[](range:Range(Int,Int))-instance-method" class="signature"><strong>#[]</strong>(range : Range(Int, Int))</a>
         
+          <div class="summary"><p>Implements atcoder::fenwick_tree.sum(left, right)</p></div>
+        
       </li>
     
       <li class="entry-summary">
         <a href="#add(index,value)-instance-method" class="signature"><strong>#add</strong>(index, value)</a>
+        
+          <div class="summary"><p>Implements atcoder::fenwick_tree.add(index, value)</p></div>
         
       </li>
     
@@ -288,6 +294,8 @@
     
       <li class="entry-summary">
         <a href="#sum(left,right)-instance-method" class="signature"><strong>#sum</strong>(left, right)</a>
+        
+          <div class="summary"><p>Implements atcoder::fenwick_tree.sum(left, right)</p></div>
         
       </li>
     
@@ -342,7 +350,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/2f81fe4ff57f2a45c632d8470846cc314065e7e9/atcoder/FenwickTree.cr#L22" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/e81f82f3dee9b9b93f28fd9f1324cd52f82450a3/atcoder/FenwickTree.cr#L31" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -369,10 +377,15 @@
         <a class="method-permalink" href="#[](range:Range(Int,Int))-instance-method">#</a>
       </div>
       
+        <div class="doc">
+          
+          <p>Implements atcoder::fenwick_tree.sum(left, right)</p>
+        </div>
+      
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/2f81fe4ff57f2a45c632d8470846cc314065e7e9/atcoder/FenwickTree.cr#L48" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/e81f82f3dee9b9b93f28fd9f1324cd52f82450a3/atcoder/FenwickTree.cr#L60" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -385,10 +398,15 @@
         <a class="method-permalink" href="#add(index,value)-instance-method">#</a>
       </div>
       
+        <div class="doc">
+          
+          <p>Implements atcoder::fenwick_tree.add(index, value)</p>
+        </div>
+      
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/2f81fe4ff57f2a45c632d8470846cc314065e7e9/atcoder/FenwickTree.cr#L26" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/e81f82f3dee9b9b93f28fd9f1324cd52f82450a3/atcoder/FenwickTree.cr#L36" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -404,7 +422,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/2f81fe4ff57f2a45c632d8470846cc314065e7e9/atcoder/FenwickTree.cr#L20" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/e81f82f3dee9b9b93f28fd9f1324cd52f82450a3/atcoder/FenwickTree.cr#L29" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -425,7 +443,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/2f81fe4ff57f2a45c632d8470846cc314065e7e9/atcoder/FenwickTree.cr#L35" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/e81f82f3dee9b9b93f28fd9f1324cd52f82450a3/atcoder/FenwickTree.cr#L45" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -441,7 +459,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/2f81fe4ff57f2a45c632d8470846cc314065e7e9/atcoder/FenwickTree.cr#L19" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/e81f82f3dee9b9b93f28fd9f1324cd52f82450a3/atcoder/FenwickTree.cr#L28" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -454,10 +472,15 @@
         <a class="method-permalink" href="#sum(left,right)-instance-method">#</a>
       </div>
       
+        <div class="doc">
+          
+          <p>Implements atcoder::fenwick_tree.sum(left, right)</p>
+        </div>
+      
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/2f81fe4ff57f2a45c632d8470846cc314065e7e9/atcoder/FenwickTree.cr#L44" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/e81f82f3dee9b9b93f28fd9f1324cd52f82450a3/atcoder/FenwickTree.cr#L55" target="_blank">View source</a>]
         
       </div>
     </div>

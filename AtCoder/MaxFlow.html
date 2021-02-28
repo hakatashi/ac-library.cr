@@ -145,21 +145,6 @@
       
     </li>
   
-  <li class="parent " data-id="github.com/google/ac-library.cr/AtCoder/TwoSat/SCC" data-name="atcoder::twosat::scc">
-      <a href="../AtCoder/TwoSat/SCC.html">SCC</a>
-      
-        <ul>
-  
-  <li class=" " data-id="github.com/google/ac-library.cr/AtCoder/TwoSat/SCC/Adjacency" data-name="atcoder::twosat::scc::adjacency">
-      <a href="../AtCoder/TwoSat/SCC/Adjacency.html">Adjacency</a>
-      
-    </li>
-  
-</ul>
-
-      
-    </li>
-  
 </ul>
 
       
@@ -194,6 +179,24 @@
 
 
 
+  <h2>
+    <a id="overview" class="anchor" href="#overview">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Overview
+  </h2>
+
+  <p>Implements atcoder::mf_graph.
+<code>Cap</code> is always <code>Int64</code>.</p>
+
+<pre><code>mf <span class="o">=</span> <span class="t">AtCoder</span><span class="t">::</span><span class="t">MaxFlow</span>.<span class="k">new</span>(<span class="n">3</span>)
+mf.add_edge(<span class="n">0</span>, <span class="n">1</span>, <span class="n">3</span>)
+mf.add_edge(<span class="n">1</span>, <span class="n">2</span>, <span class="n">1</span>)
+mf.add_edge(<span class="n">0</span>, <span class="n">2</span>, <span class="n">2</span>)
+mf.flow(<span class="n">0</span>, <span class="n">2</span>) <span class="c"># =&gt; 3</span></code></pre>
+
 
 
 
@@ -217,7 +220,7 @@
   </h2>
   
     
-      <a href="https://github.com/google/ac-library.cr/blob/2f81fe4ff57f2a45c632d8470846cc314065e7e9/atcoder/MaxFlow.cr#L18" target="_blank">
+      <a href="https://github.com/google/ac-library.cr/blob/e81f82f3dee9b9b93f28fd9f1324cd52f82450a3/atcoder/MaxFlow.cr#L28" target="_blank">
         atcoder/MaxFlow.cr
       </a>
     
@@ -262,6 +265,8 @@
       <li class="entry-summary">
         <a href="#add_edge(from,to,capacity)-instance-method" class="signature"><strong>#add_edge</strong>(from, to, capacity)</a>
         
+          <div class="summary"><p>Implements atcoder::mf_graph.add_edge(from, to, capacity).</p></div>
+        
       </li>
     
       <li class="entry-summary">
@@ -272,12 +277,42 @@
       </li>
     
       <li class="entry-summary">
+        <a href="#change_edge-instance-method" class="signature"><strong>#change_edge</strong></a>
+        
+          <div class="summary"><p><span class="flag yellow">FIXME</span>  Unimplemented</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
         <a href="#depths:Array(Int64)-instance-method" class="signature"><strong>#depths</strong> : Array(Int64)</a>
         
       </li>
     
       <li class="entry-summary">
+        <a href="#edges-instance-method" class="signature"><strong>#edges</strong></a>
+        
+          <div class="summary"><p><span class="flag yellow">FIXME</span>  Unimplemented</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
         <a href="#flow(start,target)-instance-method" class="signature"><strong>#flow</strong>(start, target)</a>
+        
+          <div class="summary"><p>Implements atcoder::mf_graph.flow(start, target).</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#get_edge-instance-method" class="signature"><strong>#get_edge</strong></a>
+        
+          <div class="summary"><p><span class="flag yellow">FIXME</span>  Unimplemented</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#min_cut-instance-method" class="signature"><strong>#min_cut</strong></a>
+        
+          <div class="summary"><p><span class="flag yellow">FIXME</span>  Unimplemented</p></div>
         
       </li>
     
@@ -346,7 +381,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/2f81fe4ff57f2a45c632d8470846cc314065e7e9/atcoder/MaxFlow.cr#L39" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/e81f82f3dee9b9b93f28fd9f1324cd52f82450a3/atcoder/MaxFlow.cr#L49" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -373,10 +408,15 @@
         <a class="method-permalink" href="#add_edge(from,to,capacity)-instance-method">#</a>
       </div>
       
+        <div class="doc">
+          
+          <p>Implements atcoder::mf_graph.add_edge(from, to, capacity).</p>
+        </div>
+      
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/2f81fe4ff57f2a45c632d8470846cc314065e7e9/atcoder/MaxFlow.cr#L45" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/e81f82f3dee9b9b93f28fd9f1324cd52f82450a3/atcoder/MaxFlow.cr#L56" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -397,7 +437,28 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/2f81fe4ff57f2a45c632d8470846cc314065e7e9/atcoder/MaxFlow.cr#L32" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/e81f82f3dee9b9b93f28fd9f1324cd52f82450a3/atcoder/MaxFlow.cr#L42" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="change_edge-instance-method">
+      <div class="signature">
+        
+        def <strong>change_edge</strong>
+
+        <a class="method-permalink" href="#change_edge-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p><span class="flag yellow">FIXME</span>  Unimplemented</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/google/ac-library.cr/blob/e81f82f3dee9b9b93f28fd9f1324cd52f82450a3/atcoder/MaxFlow.cr#L97" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -413,7 +474,28 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/2f81fe4ff57f2a45c632d8470846cc314065e7e9/atcoder/MaxFlow.cr#L34" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/e81f82f3dee9b9b93f28fd9f1324cd52f82450a3/atcoder/MaxFlow.cr#L44" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="edges-instance-method">
+      <div class="signature">
+        
+        def <strong>edges</strong>
+
+        <a class="method-permalink" href="#edges-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p><span class="flag yellow">FIXME</span>  Unimplemented</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/google/ac-library.cr/blob/e81f82f3dee9b9b93f28fd9f1324cd52f82450a3/atcoder/MaxFlow.cr#L92" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -426,10 +508,57 @@
         <a class="method-permalink" href="#flow(start,target)-instance-method">#</a>
       </div>
       
+        <div class="doc">
+          
+          <p>Implements atcoder::mf_graph.flow(start, target).</p>
+        </div>
+      
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/2f81fe4ff57f2a45c632d8470846cc314065e7e9/atcoder/MaxFlow.cr#L53" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/e81f82f3dee9b9b93f28fd9f1324cd52f82450a3/atcoder/MaxFlow.cr#L65" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="get_edge-instance-method">
+      <div class="signature">
+        
+        def <strong>get_edge</strong>
+
+        <a class="method-permalink" href="#get_edge-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p><span class="flag yellow">FIXME</span>  Unimplemented</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/google/ac-library.cr/blob/e81f82f3dee9b9b93f28fd9f1324cd52f82450a3/atcoder/MaxFlow.cr#L87" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="min_cut-instance-method">
+      <div class="signature">
+        
+        def <strong>min_cut</strong>
+
+        <a class="method-permalink" href="#min_cut-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p><span class="flag yellow">FIXME</span>  Unimplemented</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/google/ac-library.cr/blob/e81f82f3dee9b9b93f28fd9f1324cd52f82450a3/atcoder/MaxFlow.cr#L82" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -450,7 +579,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/2f81fe4ff57f2a45c632d8470846cc314065e7e9/atcoder/MaxFlow.cr#L29" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/e81f82f3dee9b9b93f28fd9f1324cd52f82450a3/atcoder/MaxFlow.cr#L39" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -471,7 +600,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/2f81fe4ff57f2a45c632d8470846cc314065e7e9/atcoder/MaxFlow.cr#L37" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/e81f82f3dee9b9b93f28fd9f1324cd52f82450a3/atcoder/MaxFlow.cr#L47" target="_blank">View source</a>]
         
       </div>
     </div>

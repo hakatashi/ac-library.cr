@@ -145,21 +145,6 @@
       
     </li>
   
-  <li class="parent " data-id="github.com/google/ac-library.cr/AtCoder/TwoSat/SCC" data-name="atcoder::twosat::scc">
-      <a href="../AtCoder/TwoSat/SCC.html">SCC</a>
-      
-        <ul>
-  
-  <li class=" " data-id="github.com/google/ac-library.cr/AtCoder/TwoSat/SCC/Adjacency" data-name="atcoder::twosat::scc::adjacency">
-      <a href="../AtCoder/TwoSat/SCC/Adjacency.html">Adjacency</a>
-      
-    </li>
-  
-</ul>
-
-      
-    </li>
-  
 </ul>
 
       
@@ -194,6 +179,23 @@
 
 
 
+  <h2>
+    <a id="overview" class="anchor" href="#overview">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Overview
+  </h2>
+
+  <p>Implements atcoder::scc_graph.</p>
+
+<pre><code>scc <span class="o">=</span> <span class="t">AtCoder</span><span class="t">::</span><span class="t">SCC</span>.<span class="k">new</span>(<span class="n">3_i64</span>)
+scc.add_edge(<span class="n">0</span>, <span class="n">1</span>)
+scc.add_edge(<span class="n">1</span>, <span class="n">0</span>)
+scc.add_edge(<span class="n">2</span>, <span class="n">0</span>)
+scc.scc <span class="c"># =&gt; [Set{2}, Set{0, 1}]</span></code></pre>
+
 
 
 
@@ -217,7 +219,7 @@
   </h2>
   
     
-      <a href="https://github.com/google/ac-library.cr/blob/2f81fe4ff57f2a45c632d8470846cc314065e7e9/atcoder/SCC.cr#L18" target="_blank">
+      <a href="https://github.com/google/ac-library.cr/blob/e81f82f3dee9b9b93f28fd9f1324cd52f82450a3/atcoder/SCC.cr#L27" target="_blank">
         atcoder/SCC.cr
       </a>
     
@@ -262,6 +264,8 @@
       <li class="entry-summary">
         <a href="#add_edge(from,to)-instance-method" class="signature"><strong>#add_edge</strong>(from, to)</a>
         
+          <div class="summary"><p>Implements atcoder::scc_graph.add_edge(from, to).</p></div>
+        
       </li>
     
       <li class="entry-summary">
@@ -270,17 +274,9 @@
       </li>
     
       <li class="entry-summary">
-        <a href="#dfs(start)-instance-method" class="signature"><strong>#dfs</strong>(start)</a>
-        
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#reverse_dfs(start)-instance-method" class="signature"><strong>#reverse_dfs</strong>(start)</a>
-        
-      </li>
-    
-      <li class="entry-summary">
         <a href="#scc-instance-method" class="signature"><strong>#scc</strong></a>
+        
+          <div class="summary"><p>Implements atcoder::scc_graph.scc().</p></div>
         
       </li>
     
@@ -340,7 +336,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/2f81fe4ff57f2a45c632d8470846cc314065e7e9/atcoder/SCC.cr#L24" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/e81f82f3dee9b9b93f28fd9f1324cd52f82450a3/atcoder/SCC.cr#L33" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -367,10 +363,15 @@
         <a class="method-permalink" href="#add_edge(from,to)-instance-method">#</a>
       </div>
       
+        <div class="doc">
+          
+          <p>Implements atcoder::scc_graph.add_edge(from, to).</p>
+        </div>
+      
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/2f81fe4ff57f2a45c632d8470846cc314065e7e9/atcoder/SCC.cr#L34" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/e81f82f3dee9b9b93f28fd9f1324cd52f82450a3/atcoder/SCC.cr#L44" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -386,39 +387,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/2f81fe4ff57f2a45c632d8470846cc314065e7e9/atcoder/SCC.cr#L22" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="dfs(start)-instance-method">
-      <div class="signature">
-        
-        def <strong>dfs</strong>(start)
-
-        <a class="method-permalink" href="#dfs(start)-instance-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/google/ac-library.cr/blob/2f81fe4ff57f2a45c632d8470846cc314065e7e9/atcoder/SCC.cr#L39" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="reverse_dfs(start)-instance-method">
-      <div class="signature">
-        
-        def <strong>reverse_dfs</strong>(start)
-
-        <a class="method-permalink" href="#reverse_dfs(start)-instance-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/google/ac-library.cr/blob/2f81fe4ff57f2a45c632d8470846cc314065e7e9/atcoder/SCC.cr#L62" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/e81f82f3dee9b9b93f28fd9f1324cd52f82450a3/atcoder/SCC.cr#L31" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -431,10 +400,15 @@
         <a class="method-permalink" href="#scc-instance-method">#</a>
       </div>
       
+        <div class="doc">
+          
+          <p>Implements atcoder::scc_graph.scc().</p>
+        </div>
+      
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/2f81fe4ff57f2a45c632d8470846cc314065e7e9/atcoder/SCC.cr#L83" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/e81f82f3dee9b9b93f28fd9f1324cd52f82450a3/atcoder/SCC.cr#L94" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -450,7 +424,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/2f81fe4ff57f2a45c632d8470846cc314065e7e9/atcoder/SCC.cr#L21" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/e81f82f3dee9b9b93f28fd9f1324cd52f82450a3/atcoder/SCC.cr#L30" target="_blank">View source</a>]
         
       </div>
     </div>

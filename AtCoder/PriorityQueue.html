@@ -145,21 +145,6 @@
       
     </li>
   
-  <li class="parent " data-id="github.com/google/ac-library.cr/AtCoder/TwoSat/SCC" data-name="atcoder::twosat::scc">
-      <a href="../AtCoder/TwoSat/SCC.html">SCC</a>
-      
-        <ul>
-  
-  <li class=" " data-id="github.com/google/ac-library.cr/AtCoder/TwoSat/SCC/Adjacency" data-name="atcoder::twosat::scc::adjacency">
-      <a href="../AtCoder/TwoSat/SCC/Adjacency.html">Adjacency</a>
-      
-    </li>
-  
-</ul>
-
-      
-    </li>
-  
 </ul>
 
       
@@ -194,6 +179,25 @@
 
 
 
+  <h2>
+    <a id="overview" class="anchor" href="#overview">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Overview
+  </h2>
+
+  <p>Implements standard priority queue like std::priority_queue</p>
+
+<pre><code>q <span class="o">=</span> <span class="t">AtCoder</span><span class="t">::</span><span class="t">PriorityQueue</span>(<span class="t">Int64</span>).<span class="k">new</span>
+q <span class="o">&lt;&lt;</span> <span class="n">1_i64</span>
+q <span class="o">&lt;&lt;</span> <span class="n">3_i64</span>
+q <span class="o">&lt;&lt;</span> <span class="n">2_i64</span>
+q.pop <span class="c"># =&gt; 3</span>
+q.pop <span class="c"># =&gt; 2</span>
+q.pop <span class="c"># =&gt; 1</span></code></pre>
+
 
 
 
@@ -217,7 +221,7 @@
   </h2>
   
     
-      <a href="https://github.com/google/ac-library.cr/blob/2f81fe4ff57f2a45c632d8470846cc314065e7e9/atcoder/PriorityQueue.cr#L18" target="_blank">
+      <a href="https://github.com/google/ac-library.cr/blob/e81f82f3dee9b9b93f28fd9f1324cd52f82450a3/atcoder/PriorityQueue.cr#L29" target="_blank">
         atcoder/PriorityQueue.cr
       </a>
     
@@ -246,6 +250,8 @@
       <li class="entry-summary">
         <a href="#new(&block:T-%3EInt8%7CInt16%7CInt32%7CInt64%7CUInt8%7CUInt16%7CUInt32%7CUInt64)-class-method" class="signature"><strong>.new</strong>(&block : T -> Int8 | Int16 | Int32 | Int64 | UInt8 | UInt16 | UInt32 | UInt64)</a>
         
+          <div class="summary"><p>Initializes queue with the custom comperator.</p></div>
+        
       </li>
     
   </ul>
@@ -267,15 +273,21 @@
       <li class="entry-summary">
         <a href="#%3C%3C(v:T)-instance-method" class="signature"><strong>#<<</strong>(v : T)</a>
         
+          <div class="summary"><p>Alias of <code><a href="../AtCoder/PriorityQueue.html#push(v:T)-instance-method">#push</a></code></p></div>
+        
       </li>
     
       <li class="entry-summary">
         <a href="#empty?(*args,**options)-instance-method" class="signature"><strong>#empty?</strong>(*args, **options)</a>
         
+          <div class="summary"><p>Returns <code>true</code> if the queue is empty.</p></div>
+        
       </li>
     
       <li class="entry-summary">
         <a href="#empty?(*args,**options,&)-instance-method" class="signature"><strong>#empty?</strong>(*args, **options, &)</a>
+        
+          <div class="summary"><p>Returns <code>true</code> if the queue is empty.</p></div>
         
       </li>
     
@@ -285,27 +297,30 @@
       </li>
     
       <li class="entry-summary">
-        <a href="#heap=(heap:Array(T))-instance-method" class="signature"><strong>#heap=</strong>(heap : Array(T))</a>
-        
-      </li>
-    
-      <li class="entry-summary">
         <a href="#pop-instance-method" class="signature"><strong>#pop</strong></a>
+        
+          <div class="summary"><p>Pops value from the queue.</p></div>
         
       </li>
     
       <li class="entry-summary">
         <a href="#push(v:T)-instance-method" class="signature"><strong>#push</strong>(v : T)</a>
         
+          <div class="summary"><p>Pushes value into the queue.</p></div>
+        
       </li>
     
       <li class="entry-summary">
         <a href="#size(*args,**options)-instance-method" class="signature"><strong>#size</strong>(*args, **options)</a>
         
+          <div class="summary"><p>Returns size of the queue.</p></div>
+        
       </li>
     
       <li class="entry-summary">
         <a href="#size(*args,**options,&)-instance-method" class="signature"><strong>#size</strong>(*args, **options, &)</a>
+        
+          <div class="summary"><p>Returns size of the queue.</p></div>
         
       </li>
     
@@ -360,7 +375,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/2f81fe4ff57f2a45c632d8470846cc314065e7e9/atcoder/PriorityQueue.cr#L21" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/e81f82f3dee9b9b93f28fd9f1324cd52f82450a3/atcoder/PriorityQueue.cr#L32" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -373,10 +388,23 @@
         <a class="method-permalink" href="#new(&block:T-%3EInt8%7CInt16%7CInt32%7CInt64%7CUInt8%7CUInt16%7CUInt32%7CUInt64)-class-method">#</a>
       </div>
       
+        <div class="doc">
+          
+          <p>Initializes queue with the custom comperator.</p>
+
+<pre><code>q <span class="o">=</span> <span class="t">AtCoder</span><span class="t">::</span><span class="t">PriorityQueue</span>(<span class="t">Int64</span>).<span class="k">new</span> {<span class="o">|</span>n<span class="o">|</span> <span class="o">-</span>n}
+q <span class="o">&lt;&lt;</span> <span class="n">1_i64</span>
+q <span class="o">&lt;&lt;</span> <span class="n">3_i64</span>
+q <span class="o">&lt;&lt;</span> <span class="n">2_i64</span>
+q.pop <span class="c"># =&gt; 1</span>
+q.pop <span class="c"># =&gt; 2</span>
+q.pop <span class="c"># =&gt; 3</span></code></pre>
+        </div>
+      
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/2f81fe4ff57f2a45c632d8470846cc314065e7e9/atcoder/PriorityQueue.cr#L25" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/e81f82f3dee9b9b93f28fd9f1324cd52f82450a3/atcoder/PriorityQueue.cr#L47" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -403,10 +431,15 @@
         <a class="method-permalink" href="#%3C%3C(v:T)-instance-method">#</a>
       </div>
       
+        <div class="doc">
+          
+          <p>Alias of <code><a href="../AtCoder/PriorityQueue.html#push(v:T)-instance-method">#push</a></code></p>
+        </div>
+      
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/2f81fe4ff57f2a45c632d8470846cc314065e7e9/atcoder/PriorityQueue.cr#L43" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/e81f82f3dee9b9b93f28fd9f1324cd52f82450a3/atcoder/PriorityQueue.cr#L67" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -419,10 +452,15 @@
         <a class="method-permalink" href="#empty?(*args,**options)-instance-method">#</a>
       </div>
       
+        <div class="doc">
+          
+          <p>Returns <code>true</code> if the queue is empty.</p>
+        </div>
+      
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/2f81fe4ff57f2a45c632d8470846cc314065e7e9/atcoder/PriorityQueue.cr#L72" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/e81f82f3dee9b9b93f28fd9f1324cd52f82450a3/atcoder/PriorityQueue.cr#L98" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -435,10 +473,15 @@
         <a class="method-permalink" href="#empty?(*args,**options,&)-instance-method">#</a>
       </div>
       
+        <div class="doc">
+          
+          <p>Returns <code>true</code> if the queue is empty.</p>
+        </div>
+      
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/2f81fe4ff57f2a45c632d8470846cc314065e7e9/atcoder/PriorityQueue.cr#L72" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/e81f82f3dee9b9b93f28fd9f1324cd52f82450a3/atcoder/PriorityQueue.cr#L98" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -454,23 +497,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/2f81fe4ff57f2a45c632d8470846cc314065e7e9/atcoder/PriorityQueue.cr#L19" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="heap=(heap:Array(T))-instance-method">
-      <div class="signature">
-        
-        def <strong>heap=</strong>(heap : Array(T))
-
-        <a class="method-permalink" href="#heap=(heap:Array(T))-instance-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/google/ac-library.cr/blob/2f81fe4ff57f2a45c632d8470846cc314065e7e9/atcoder/PriorityQueue.cr#L19" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/e81f82f3dee9b9b93f28fd9f1324cd52f82450a3/atcoder/PriorityQueue.cr#L30" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -483,10 +510,15 @@
         <a class="method-permalink" href="#pop-instance-method">#</a>
       </div>
       
+        <div class="doc">
+          
+          <p>Pops value from the queue.</p>
+        </div>
+      
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/2f81fe4ff57f2a45c632d8470846cc314065e7e9/atcoder/PriorityQueue.cr#L47" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/e81f82f3dee9b9b93f28fd9f1324cd52f82450a3/atcoder/PriorityQueue.cr#L72" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -499,10 +531,15 @@
         <a class="method-permalink" href="#push(v:T)-instance-method">#</a>
       </div>
       
+        <div class="doc">
+          
+          <p>Pushes value into the queue.</p>
+        </div>
+      
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/2f81fe4ff57f2a45c632d8470846cc314065e7e9/atcoder/PriorityQueue.cr#L30" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/e81f82f3dee9b9b93f28fd9f1324cd52f82450a3/atcoder/PriorityQueue.cr#L53" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -515,10 +552,15 @@
         <a class="method-permalink" href="#size(*args,**options)-instance-method">#</a>
       </div>
       
+        <div class="doc">
+          
+          <p>Returns size of the queue.</p>
+        </div>
+      
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/2f81fe4ff57f2a45c632d8470846cc314065e7e9/atcoder/PriorityQueue.cr#L73" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/e81f82f3dee9b9b93f28fd9f1324cd52f82450a3/atcoder/PriorityQueue.cr#L101" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -531,10 +573,15 @@
         <a class="method-permalink" href="#size(*args,**options,&)-instance-method">#</a>
       </div>
       
+        <div class="doc">
+          
+          <p>Returns size of the queue.</p>
+        </div>
+      
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/2f81fe4ff57f2a45c632d8470846cc314065e7e9/atcoder/PriorityQueue.cr#L73" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/e81f82f3dee9b9b93f28fd9f1324cd52f82450a3/atcoder/PriorityQueue.cr#L101" target="_blank">View source</a>]
         
       </div>
     </div>
