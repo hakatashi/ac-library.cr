@@ -15,7 +15,7 @@
 </svg>
 
   <meta id="repository-name" content="github.com/google/ac-library.cr">
-  <title>AtCoder::SCC - github.com/google/ac-library.cr</title>
+  <title>AtCoder::Prime - github.com/google/ac-library.cr</title>
   <script type="text/javascript">
     CrystalDoc.base_path = "../";
   </script>
@@ -90,7 +90,7 @@
       
     </li>
   
-  <li class=" " data-id="github.com/google/ac-library.cr/AtCoder/Prime" data-name="atcoder::prime">
+  <li class=" current" data-id="github.com/google/ac-library.cr/AtCoder/Prime" data-name="atcoder::prime">
       <a href="../AtCoder/Prime.html">Prime</a>
       
     </li>
@@ -120,7 +120,7 @@
       
     </li>
   
-  <li class="parent open current" data-id="github.com/google/ac-library.cr/AtCoder/SCC" data-name="atcoder::scc">
+  <li class="parent " data-id="github.com/google/ac-library.cr/AtCoder/SCC" data-name="atcoder::scc">
       <a href="../AtCoder/SCC.html">SCC</a>
       
         <ul>
@@ -174,12 +174,10 @@
 <div class="main-content">
 <h1 class="type-name">
 
-  <span class="kind">class</span> AtCoder::SCC
+  <span class="kind">module</span> AtCoder::Prime
 
 </h1>
 
-
-  <ul class="superclass-hierarchy"><li class="superclass"><a href="../AtCoder/SCC.html">AtCoder::SCC</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
 
 
 
@@ -193,19 +191,43 @@
     Overview
   </h2>
 
-  <p>Implements atcoder::scc_graph.</p>
+  <p>Implements <a href="https://ruby-doc.com/stdlib/libdoc/prime/rdoc/Prime.html" target="_blank">Ruby's prime library</a>.</p>
 
-<pre><code>scc <span class="o">=</span> <span class="t">AtCoder</span><span class="t">::</span><span class="t">SCC</span>.<span class="k">new</span>(<span class="n">3_i64</span>)
-scc.add_edge(<span class="n">0</span>, <span class="n">1</span>)
-scc.add_edge(<span class="n">1</span>, <span class="n">0</span>)
-scc.add_edge(<span class="n">2</span>, <span class="n">0</span>)
-scc.scc <span class="c"># =&gt; [Set{2}, Set{0, 1}]</span></code></pre>
+<pre><code><span class="t">AtCoder</span><span class="t">::</span><span class="t">Prime</span>.first(<span class="n">7</span>) <span class="c"># =&gt; [2, 3, 5, 7, 11, 13, 17]</span></code></pre>
 
 
 
 
 
+  <h2>
+    <a id="included-modules" class="anchor" href="#included-modules">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Included Modules
+  </h2>
+  <ul class="other-types-list">
+    
+      <li class="other-type">Enumerable(Int64)</li>
+    
+  </ul>
 
+
+
+  <h2>
+    <a id="extended-modules" class="anchor" href="#extended-modules">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Extended Modules
+  </h2>
+  <ul class="other-types-list">
+    
+      <li class="other-type"><a href="../AtCoder/Prime.html">AtCoder::Prime</a></li>
+    
+  </ul>
 
 
 
@@ -224,8 +246,8 @@ scc.scc <span class="c"># =&gt; [Set{2}, Set{0, 1}]</span></code></pre>
   </h2>
   
     
-      <a href="https://github.com/google/ac-library.cr/blob/7de1839801f70790ff793624e209ca1f9eef7404/atcoder/SCC.cr#L27" target="_blank">
-        atcoder/SCC.cr
+      <a href="https://github.com/google/ac-library.cr/blob/7de1839801f70790ff793624e209ca1f9eef7404/atcoder/Prime.cr#L23" target="_blank">
+        atcoder/Prime.cr
       </a>
     
     <br/>
@@ -234,23 +256,6 @@ scc.scc <span class="c"># =&gt; [Set{2}, Set{0, 1}]</span></code></pre>
 
 
 
-
-  <h2>
-    <a id="constructors" class="anchor" href="#constructors">
-  <svg class="octicon-link" aria-hidden="true">
-    <use href="#octicon-link"/>
-  </svg>
-</a>
-    Constructors
-  </h2>
-  <ul class="list-summary">
-    
-      <li class="entry-summary">
-        <a href="#new(size)-class-method" class="signature"><strong>.new</strong>(size)</a>
-        
-      </li>
-    
-  </ul>
 
 
 
@@ -267,26 +272,9 @@ scc.scc <span class="c"># =&gt; [Set{2}, Set{0, 1}]</span></code></pre>
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#add_edge(from,to)-instance-method" class="signature"><strong>#add_edge</strong>(from, to)</a>
+        <a href="#each(&)-instance-method" class="signature"><strong>#each</strong>(&)</a>
         
-          <div class="summary"><p>Implements atcoder::scc_graph.add_edge(from, to).</p></div>
-        
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#adjacencies:Array(Adjacency)-instance-method" class="signature"><strong>#adjacencies</strong> : Array(Adjacency)</a>
-        
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#scc-instance-method" class="signature"><strong>#scc</strong></a>
-        
-          <div class="summary"><p>Implements atcoder::scc_graph.scc().</p></div>
-        
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#size:Int64-instance-method" class="signature"><strong>#size</strong> : Int64</a>
+          <div class="summary"><p>Must yield this collection's elements to the block.</p></div>
         
       </li>
     
@@ -308,44 +296,8 @@ scc.scc <span class="c"># =&gt; [Set{2}, Set{0, 1}]</span></code></pre>
 
 
   
-    
-
-
-    
-
-
-    
-
-
-  
 </div>
 
-
-  <h2>
-    <a id="constructor-detail" class="anchor" href="#constructor-detail">
-  <svg class="octicon-link" aria-hidden="true">
-    <use href="#octicon-link"/>
-  </svg>
-</a>
-    Constructor Detail
-  </h2>
-  
-    <div class="entry-detail" id="new(size)-class-method">
-      <div class="signature">
-        
-        def self.<strong>new</strong>(size)
-
-        <a class="method-permalink" href="#new(size)-class-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/google/ac-library.cr/blob/7de1839801f70790ff793624e209ca1f9eef7404/atcoder/SCC.cr#L33" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
 
 
 
@@ -360,76 +312,27 @@ scc.scc <span class="c"># =&gt; [Set{2}, Set{0, 1}]</span></code></pre>
     Instance Method Detail
   </h2>
   
-    <div class="entry-detail" id="add_edge(from,to)-instance-method">
+    <div class="entry-detail" id="each(&amp;)-instance-method">
       <div class="signature">
         
-        def <strong>add_edge</strong>(from, to)
+        def <strong>each</strong>(&)
 
-        <a class="method-permalink" href="#add_edge(from,to)-instance-method">#</a>
+        <a class="method-permalink" href="#each(&)-instance-method">#</a>
       </div>
       
         <div class="doc">
           
-          <p>Implements atcoder::scc_graph.add_edge(from, to).</p>
+            <div class="doc-inherited">
+              Description copied from module Enumerable(Int64)
+            </div>
+          
+          <p>Must yield this collection's elements to the block.</p>
         </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/7de1839801f70790ff793624e209ca1f9eef7404/atcoder/SCC.cr#L44" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="adjacencies:Array(Adjacency)-instance-method">
-      <div class="signature">
-        
-        def <strong>adjacencies</strong> : Array(<a href="../AtCoder/SCC/Adjacency.html">Adjacency</a>)
-
-        <a class="method-permalink" href="#adjacencies:Array(Adjacency)-instance-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/google/ac-library.cr/blob/7de1839801f70790ff793624e209ca1f9eef7404/atcoder/SCC.cr#L31" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="scc-instance-method">
-      <div class="signature">
-        
-        def <strong>scc</strong>
-
-        <a class="method-permalink" href="#scc-instance-method">#</a>
-      </div>
-      
-        <div class="doc">
-          
-          <p>Implements atcoder::scc_graph.scc().</p>
-        </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/google/ac-library.cr/blob/7de1839801f70790ff793624e209ca1f9eef7404/atcoder/SCC.cr#L94" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="size:Int64-instance-method">
-      <div class="signature">
-        
-        def <strong>size</strong> : Int64
-
-        <a class="method-permalink" href="#size:Int64-instance-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/google/ac-library.cr/blob/7de1839801f70790ff793624e209ca1f9eef7404/atcoder/SCC.cr#L30" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/7de1839801f70790ff793624e209ca1f9eef7404/atcoder/Prime.cr#L36" target="_blank">View source</a>]
         
       </div>
     </div>
