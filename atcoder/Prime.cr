@@ -15,7 +15,7 @@
 # limitations under the License.
 
 module AtCoder
-  # Implements [Ruby's prime library](https://ruby-doc.com/stdlib/libdoc/prime/rdoc/Prime.html).
+  # Implements [Ruby's Prime library](https://ruby-doc.com/stdlib/libdoc/prime/rdoc/Prime.html).
   #
   # ```
   # AtCoder::Prime.first(7) # => [2, 3, 5, 7, 11, 13, 17]
@@ -49,7 +49,8 @@ module AtCoder
       @@primes[@@index]
     end
 
-    # Doubles the size of the cached prime array and performs Sieve of Eratosthenes on it.
+    # Doubles the size of the cached prime array and performs the
+    # Sieve of Eratosthenes on it.
     private def generate_primes
       new_primes_size = @@primes.size
       new_primes = Array(Int64).new(new_primes_size) {|i| (@@primes.last + (i + 1) * 2).to_i64}
@@ -59,9 +60,11 @@ module AtCoder
         next if prime == 2
         break if prime * prime > new_primes_max
 
-        # Here I use Sieve of Sundaram. We can only test against the odd multiple of the given prime.
-        # min_composite is the minimum number that is greater than the last confirmed prime,
-        # and is an odd multiple of the given prime.
+        # Here I use the technique of the Sieve of Sundaram. We can
+        # only test against the odd multiple of the given prime.
+        # min_composite is the minimum number that is greater than
+        # the last confirmed prime, and is an odd multiple of
+        # the given prime.
         min_multiple = ((@@primes.last // prime + 1) // 2 * 2 + 1) * prime
         min_multiple.step(by: prime * 2, to: new_primes_max) do |multiple|
           index = new_primes_size - (new_primes_max - multiple) // 2 - 1
