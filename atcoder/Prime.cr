@@ -69,6 +69,137 @@ module AtCoder
       factors
     end
 
+    def prime?(value)
+      # Obvious patterns
+      return false if value < 2
+      return true if value <= 3
+      return true if value == 5
+      return false if value.even?
+
+      if value < 0xffff
+        return false unless 30_i64.gcd(value % 30) == 1
+
+        7.step(by: 30, to: value) do |base|
+          break if base * base > value
+
+          if {0, 4, 6, 10, 12, 16, 22, 24}.any? {|i| value % (base + i) == 0}
+            return false
+          end
+        end
+
+        return true
+      end
+
+      d = value - 1
+      s = 0_i64
+      until d.odd?
+        d >>= 1
+        s += 1
+      end
+
+      miller_rabin_bases(value).each do |base|
+        next if base == value
+
+        x = pow_mod(base, d, value)
+        next if x == 1 || x == value - 1
+
+        is_composite = s.times.all? do
+          x = pow_mod(x, 2, value)
+          x != value - 1
+        end
+
+        return false if is_composite
+      end
+
+      true
+    end
+
+    # Simplified AtCoder::Math.pow_mod with support of Int64
+    # We cannot use Int128 in AtCoder Environment ;(
+    private def pow_mod(base, exponent, modulo)
+      if base == 0
+        return base
+      end
+      b = base
+      e = exponent.abs
+      ret = 1_i64
+      while e > 0
+        if e % 2 == 1
+          ret = (mul(ret, b) % modulo).to_i64
+        end
+        b = (mul(b, b) % modulo).to_i64
+        e //= 2
+      end
+      ret
+    end
+
+    # Caluculates a * b without overflow detection
+    private def mul(a, b)
+      if !a.is_a?(Int64) && !b.is_a?(Int64)
+        return a * b
+      end
+
+      # 31-bit width
+      a_high = (a >> 32).to_u64
+      # 32-bit width
+      a_low = (a & 0xFFFFFFFF).to_u64
+      # 31-bit width
+      b_high = (b >> 32).to_u64
+      # 32-bit width
+      b_low = (b & 0xFFFFFFFF).to_u64
+
+      # 31-bit + 32-bit + 1-bit = 64-bit
+      c = a_high * b_low + b_high * a_low
+      c_high = c >> 32
+      c_low = c & 0xFFFFFFFF
+
+      # 31-bit + 31-bit
+      res_high = a_high * b_high + c_high
+      # 32-bit + 32-bit
+      res_low = a_low * b_low
+      res_low_high = res_low >> 32
+      res_low_low = res_low & 0xFFFFFFFF
+      
+      # Overflow
+      if res_low_high + c_low >= 0x100000000
+        res_high += 1
+      end
+
+      res_low = (((res_low_high + c_low) & 0xFFFFFFFF) << 32) | res_low_low
+
+      (res_high.to_i128 << 64) | res_low
+    end
+
+    # We can reduce time complexity of Miller-Rabin tests by testing against
+    # predefined bases which is enough to test against primarity in the given range.
+    # https://en.wikipedia.org/wiki/Miller%E2%80%93Rabin_primality_test
+    private def miller_rabin_bases(value)
+      case
+      when value < 1_373_653_i64
+        [2, 3]
+      when value < 9_080_191_i64
+        [31, 73]
+      when value < 25_326_001_i64
+        [2, 3, 5]
+      when value < 3_215_031_751_i64
+        [2, 3, 5, 7]
+      when value < 4_759_123_141_i64
+        [2, 7, 61]
+      when value < 1_122_004_669_633_i64
+        [2, 13, 23, 1662803]
+      when value < 2_152_302_898_747_i64
+        [2, 3, 5, 7, 11]
+      when value < 3_474_749_660_383_i64
+        [2, 3, 5, 7, 11, 13]
+      when value < 341_550_071_728_321_i64
+        [2, 3, 5, 7, 11, 13, 17]
+      when value < 3_825_123_056_546_413_051_i64
+        [2, 3, 5, 7, 11, 13, 17, 19, 23]
+      else
+        [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37]
+      end
+    end
+
     private def get_nth_prime(n)
       while @@primes.size <= n
         generate_primes
