@@ -31,29 +31,56 @@ module AtCoder
       83_i64, 89_i64, 97_i64, 101_i64,
     ]
 
-    @@index = -1
-
     def each
+      index = 0
       loop do
-        yield succ
+        yield get_nth_prime(index)
+        index += 1
       end
     end
 
-    private def succ
-      @@index += 1
+    def prime_division(value)
+      raise DivisionByZeroError.new if value == 0
 
-      while @@primes.size <= @@index
+      factors = [] of Tuple(Int64, Int64)
+
+      if value < 0
+        value = value.abs
+        factors << {-1_i64, 1_i64}
+      end
+
+      each do |prime|
+        count = 0_i64
+        while value % prime == 0
+          value //= prime
+          count += 1
+        end
+        if count != 0
+          factors << {prime, count}
+        end
+        break if value <= prime * prime
+      end
+
+      if value > 1
+        factors << {value, 1_i64}
+      end
+
+      factors
+    end
+
+    private def get_nth_prime(n)
+      while @@primes.size <= n
         generate_primes
       end
 
-      @@primes[@@index]
+      @@primes[n]
     end
 
     # Doubles the size of the cached prime array and performs the
     # Sieve of Eratosthenes on it.
     private def generate_primes
       new_primes_size = @@primes.size < 1_000_000 ? @@primes.size : 1_000_000
-      new_primes = Array(Int64).new(new_primes_size) {|i| (@@primes.last + (i + 1) * 2).to_i64}
+      new_primes = Array(Int64).new(new_primes_size) {|i| @@primes.last + (i + 1) * 2}
       new_primes_max = new_primes.last
 
       @@primes.each do |prime|

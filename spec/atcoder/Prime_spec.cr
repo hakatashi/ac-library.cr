@@ -31,4 +31,14 @@ describe "Prime" do
 
     Prime.first(58).should eq expected
   end
+
+  describe "#prime_division" do
+    it "should factorize given number" do
+      Prime.prime_division(1_000_000_i64).should eq [{2, 6}, {5, 6}]
+      Prime.prime_division(4_096_i64).should eq [{2, 12}]
+      Prime.prime_division(-1_000_000_i64).should eq [{-1, 1}, {2, 6}, {5, 6}]
+      Prime.prime_division(1_231_230_i64).should eq [{2, 1}, {3, 1}, {5, 1}, {7, 1}, {11, 1}, {13, 1}, {41, 1}]
+      Prime.prime_division(4_295_098_369_i64).should eq [{65537, 2}]
+    end
+  end
 end
