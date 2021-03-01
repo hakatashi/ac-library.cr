@@ -52,7 +52,7 @@ module AtCoder
     # Doubles the size of the cached prime array and performs the
     # Sieve of Eratosthenes on it.
     private def generate_primes
-      new_primes_size = @@primes.size
+      new_primes_size = @@primes.size < 1_000_000 ? @@primes.size : 1_000_000
       new_primes = Array(Int64).new(new_primes_size) {|i| (@@primes.last + (i + 1) * 2).to_i64}
       new_primes_max = new_primes.last
 

@@ -199,3 +199,13 @@ For the convinience of usage in programming contest, each class in the library d
   * `#size`
 
     Returns size of the queue
+
+## [Prime.cr](atcoder/Prime.cr) (not in ACL)
+
+* `AtCoder::Prime` (module)
+
+  Implements [Ruby's Prime library](https://ruby-doc.com/stdlib/libdoc/prime/rdoc/Prime.html).
+
+  ```cr
+  AtCoder::Prime.first(7) # => [2, 3, 5, 7, 11, 13, 17]
+  ```
