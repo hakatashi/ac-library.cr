@@ -90,28 +90,7 @@ module AtCoder
         return true
       end
 
-      d = value - 1
-      s = 0_i64
-      until d.odd?
-        d >>= 1
-        s += 1
-      end
-
-      miller_rabin_bases(value).each do |base|
-        next if base == value
-
-        x = pow_mod(base.to_i64, d, value)
-        next if x == 1 || x == value - 1
-
-        is_composite = s.times.all? do
-          x = mul_mod(x, x, value)
-          x != value - 1
-        end
-
-        return false if is_composite
-      end
-
-      true
+      miller_rabin(value)
     end
 
     # Simplified AtCoder::Math.pow_mod with support of Int64
@@ -158,7 +137,7 @@ module AtCoder
       res_low = a_low * b_low
       res_low_high = res_low >> 32
       res_low_low = res_low & 0xFFFFFFFF
-      
+
       # Overflow
       if res_low_high + c_low >= 0x100000000
         res_high += 1
@@ -169,9 +148,35 @@ module AtCoder
       (((res_high.to_i128 << 64) | res_low) % mod).to_i64
     end
 
+    private def miller_rabin(value)
+      d = value - 1
+      s = 0_i64
+      until d.odd?
+        d >>= 1
+        s += 1
+      end
+
+      miller_rabin_bases(value).each do |base|
+        next if base == value
+
+        x = pow_mod(base.to_i64, d, value)
+        next if x == 1 || x == value - 1
+
+        is_composite = s.times.all? do
+          x = mul_mod(x, x, value)
+          x != value - 1
+        end
+
+        return false if is_composite
+      end
+
+      true
+    end
+
     # We can reduce time complexity of Miller-Rabin tests by testing against
     # predefined bases which is enough to test against primarity in the given range.
     # https://en.wikipedia.org/wiki/Miller%E2%80%93Rabin_primality_test
+    # ameba:disable Metrics/CyclomaticComplexity
     private def miller_rabin_bases(value)
       case
       when value < 1_373_653_i64
