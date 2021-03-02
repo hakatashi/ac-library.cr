@@ -69,7 +69,7 @@ module AtCoder
       factors
     end
 
-    def prime?(value)
+    def prime?(value : Int64)
       # Obvious patterns
       return false if value < 2
       return true if value <= 3
@@ -100,11 +100,11 @@ module AtCoder
       miller_rabin_bases(value).each do |base|
         next if base == value
 
-        x = pow_mod(base, d, value)
+        x = pow_mod(base.to_i64, d, value)
         next if x == 1 || x == value - 1
 
         is_composite = s.times.all? do
-          x = pow_mod(x, 2, value)
+          x = mul_mod(x, x, value)
           x != value - 1
         end
 
@@ -115,7 +115,6 @@ module AtCoder
     end
 
     # Simplified AtCoder::Math.pow_mod with support of Int64
-    # We cannot use Int128 in AtCoder Environment ;(
     private def pow_mod(base, exponent, modulo)
       if base == 0
         return base
@@ -125,18 +124,18 @@ module AtCoder
       ret = 1_i64
       while e > 0
         if e % 2 == 1
-          ret = (mul(ret, b) % modulo).to_i64
+          ret = mul_mod(ret, b, modulo)
         end
-        b = (mul(b, b) % modulo).to_i64
+        b = mul_mod(b, b, modulo)
         e //= 2
       end
       ret
     end
 
-    # Caluculates a * b without overflow detection
-    private def mul(a, b)
-      if !a.is_a?(Int64) && !b.is_a?(Int64)
-        return a * b
+    # Caluculates a * b % mod without overflow detection
+    private def mul_mod(a, b, mod)
+      if (!a.is_a?(Int64) && !b.is_a?(Int64)) || mod < Int32::MAX
+        return a * b % mod
       end
 
       # 31-bit width
@@ -167,7 +166,7 @@ module AtCoder
 
       res_low = (((res_low_high + c_low) & 0xFFFFFFFF) << 32) | res_low_low
 
-      (res_high.to_i128 << 64) | res_low
+      (((res_high.to_i128 << 64) | res_low) % mod).to_i64
     end
 
     # We can reduce time complexity of Miller-Rabin tests by testing against
