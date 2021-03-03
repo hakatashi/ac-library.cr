@@ -69,6 +69,15 @@ module AtCoder
       factors
     end
 
+    private def extract_prime_division_base(prime_divisions_class : Array({T, T}).class) forall T
+      T
+    end
+
+    def int_from_prime_division(prime_divisions : Array({Int, Int}))
+      int_class = extract_prime_division_base(prime_divisions.class)
+      prime_divisions.reduce(int_class.new(1)) {|i, (factor, exponent)| i * factor ** exponent}
+    end
+
     def prime?(value : Int64)
       # Obvious patterns
       return false if value < 2

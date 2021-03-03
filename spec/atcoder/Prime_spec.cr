@@ -43,6 +43,15 @@ describe "Prime" do
     end
   end
 
+  describe ".int_from_prime_division" do
+    it "should calculate weighted product of given base factors" do
+      Prime.int_from_prime_division([{2, 6}, {5, 6}]).should eq 1_000_000
+      Prime.int_from_prime_division([{2, 1}, {3, 1}, {5, 1}, {7, 1}, {11, 1}, {13, 1}, {41, 1}]).should eq 1_231_230
+      Prime.int_from_prime_division([{2_i64, 32_i64}]).should eq 4_294_967_296_i64
+      Prime.int_from_prime_division([{65521_u64, 4_u64}]).should eq 18_429_861_372_428_076_481_u64
+    end
+  end
+
   describe ".prime?" do
     it "is consistent with the result of prime generation" do
       primes_under1000 = Prime.take_while {|prime| prime < 1000}.to_set
