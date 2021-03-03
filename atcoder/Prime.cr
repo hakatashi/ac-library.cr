@@ -43,37 +43,42 @@ module AtCoder
     def prime_division(value : Int)
       raise DivisionByZeroError.new if value == 0
 
-      value = value.to_i64
+      int = typeof(value)
 
-      factors = [] of Tuple(typeof(value), Int64)
+      factors = [] of Tuple(typeof(value), typeof(value))
 
       if value < 0
         value = value.abs
-        factors << {typeof(value).new(-1), 1_i64}
+        factors << {int.new(-1), int.new(1)}
       end
 
       until prime?(value) || value == 1
         factor = value
         until prime?(factor)
-          if factor == 4
-            factor = typeof(value).new(2)
-          else
-            factor = pollard_rho(factor).not_nil!
-          end
+          factor = find_factor(factor)
         end
-        count = 0_i64
+        count = 0
         while value % factor == 0
           value //= factor
           count += 1
         end
-        factors << {typeof(value).new(factor), count}
+        factors << {int.new(factor), int.new(count)}
       end
 
       if value > 1
-        factors << {value, 1_i64}
+        factors << {value, int.new(1)}
       end
 
       factors.sort_by! {|(factor, _)| factor}
+    end
+
+    private def find_factor(n : Int)
+      # Factor of 4 cannot be discovered by Pollard's Rho with f(x) = x^x+1
+      if n == 4
+        typeof(n).new(2)
+      else
+        pollard_rho(n).not_nil!
+      end
     end
 
     # Get single factor by Pollard's Rho Algorithm
@@ -111,15 +116,15 @@ module AtCoder
       prime_divisions.reduce(int_class.new(1)) {|i, (factor, exponent)| i * factor ** exponent}
     end
 
-    def prime?(value : Int64)
+    def prime?(value : Int)
       # Obvious patterns
       return false if value < 2
       return true if value <= 3
-      return true if value == 5
       return false if value.even?
+      return true if value < 9
 
       if value < 0xffff
-        return false unless 30_i64.gcd(value % 30) == 1
+        return false unless typeof(value).new(30).gcd(value % 30) == 1
 
         7.step(by: 30, to: value) do |base|
           break if base * base > value
@@ -132,7 +137,7 @@ module AtCoder
         return true
       end
 
-      miller_rabin(value)
+      miller_rabin(value.to_i64)
     end
 
     # Simplified AtCoder::Math.pow_mod with support of Int64
@@ -154,8 +159,8 @@ module AtCoder
     end
 
     # Caluculates a * b % mod without overflow detection
-    private def mul_mod(a, b, mod)
-      if (!a.is_a?(Int64) && !b.is_a?(Int64)) || mod < Int32::MAX
+    private def mul_mod(a : Int64, b : Int64, mod : Int64)
+      if mod < Int32::MAX
         return a * b % mod
       end
 
@@ -188,6 +193,10 @@ module AtCoder
       res_low = (((res_low_high + c_low) & 0xFFFFFFFF) << 32) | res_low_low
 
       (((res_high.to_i128 << 64) | res_low) % mod).to_i64
+    end
+
+    private def mul_mod(a, b, mod)
+      typeof(mod).new(a.to_i64 * b % mod)
     end
 
     private def miller_rabin(value)

@@ -34,13 +34,13 @@ describe "Prime" do
 
   describe ".prime_division" do
     it "should factorize given number" do
-      Prime.prime_division(1_i64).should eq [] of Int64
-      Prime.prime_division(175_i64).should eq [{5, 2}, {7, 1}]
-      Prime.prime_division(59049_i64).should eq [{3, 10}]
-      Prime.prime_division(9219364293862490881_i64).should eq [{55103, 4}]
-      Prime.prime_division(4611686018427387904_i64).should eq [{2, 62}]
+      Prime.prime_division(1).should eq [] of Int64
+      Prime.prime_division(175_i16).should eq [{5, 2}, {7, 1}]
+      Prime.prime_division(4096).should eq [{2, 12}]
+      Prime.prime_division(59049).should eq [{3, 10}]
+      Prime.prime_division(9_219_364_293_862_490_881_i64).should eq [{55103, 4}]
+      Prime.prime_division(4_611_686_018_427_387_904_i64).should eq [{2, 62}]
       Prime.prime_division(1_000_000_000_000_000_000_i64).should eq [{2, 18}, {5, 18}]
-      Prime.prime_division(4_096_i64).should eq [{2, 12}]
       Prime.prime_division(-1_000_000_i64).should eq [{-1, 1}, {2, 6}, {5, 6}]
       Prime.prime_division(1_231_230_i64).should eq [{2, 1}, {3, 1}, {5, 1}, {7, 1}, {11, 1}, {13, 1}, {41, 1}]
       Prime.prime_division(4_295_098_369_i64).should eq [{65537, 2}]
