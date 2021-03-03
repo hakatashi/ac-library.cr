@@ -39,7 +39,6 @@ module AtCoder
       end
     end
 
-    # TODO: Rewrite with Pollard Rho algorithm
     def prime_division(value : Int)
       raise DivisionByZeroError.new if value == 0
 
