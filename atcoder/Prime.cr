@@ -252,8 +252,16 @@ module AtCoder
     end
 
     # Returns an enumerator that iterates through the all positive divisors of
-    # the given number. The order is not guaranteed.
+    # the given number. **The order is not guaranteed.**
     # Not in the original Ruby's Prime library.
+    #
+    # ```
+    # AtCoder::Prime.each_divisor(20) do |n|
+    #   puts n
+    # end # => Puts 1, 2, 4, 5, 10, and 20
+    #
+    # AtCoder::Prime.each_divisor(10).map {|n| 1.0 / n}.to_a # => [1.0, 0.5, 0.2, 0.1]
+    # ```
     def each_divisor(value : Int)
       raise ArgumentError.new unless value > 0
 
