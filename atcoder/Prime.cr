@@ -40,14 +40,14 @@ module AtCoder
     end
 
     # TODO: Rewrite with Pollard Rho algorithm
-    def prime_division(value)
+    def prime_division(value : Int)
       raise DivisionByZeroError.new if value == 0
 
-      factors = [] of Tuple(Int64, Int64)
+      factors = [] of Tuple(typeof(value), Int64)
 
       if value < 0
         value = value.abs
-        factors << {-1_i64, 1_i64}
+        factors << {typeof(value).new(-1), 1_i64}
       end
 
       each do |prime|
@@ -57,7 +57,7 @@ module AtCoder
           count += 1
         end
         if count != 0
-          factors << {prime, count}
+          factors << {typeof(value).new(prime), count}
         end
         break if value <= prime * prime
       end
@@ -237,5 +237,55 @@ module AtCoder
 
       @@primes.concat(new_primes.reject(0_i64))
     end
+
+    private struct EachDivisor(T)
+      include Enumerable(T)
+
+      def initialize(@exponential_factors : Array(Array(T)))
+      end
+
+      def each
+        Array.each_product(@exponential_factors) do |factors|
+          yield factors.reduce {|a, b| a * b}
+        end
+      end
+    end
+
+    # Returns an enumerator that iterates through the all positive divisors of
+    # the given number. The order is not guaranteed.
+    # Not in the original Ruby's Prime library.
+    def each_divisor(value : Int)
+      raise ArgumentError.new unless value > 0
+
+      factors = prime_division(value)
+
+      if value == 1
+        exponential_factors = [[value]]
+      else
+        exponential_factors = factors.map do |(factor, count)|
+          cnt = typeof(value).zero + 1
+          Array(typeof(value)).new(count + 1) do |i|
+            cnt_copy = cnt
+            if i < cnt
+              cnt *= factor
+            end
+            cnt_copy
+          end
+        end
+      end
+
+      EachDivisor(typeof(value)).new(exponential_factors)
+    end
+
+    # :ditto:
+    def each_divisor(value : T, &block : T ->)
+      each_divisor(value).each(&block)
+    end
+  end
+end
+
+struct Int64
+  def prime?
+    AtCoder::Prime.prime?(self)
   end
 end

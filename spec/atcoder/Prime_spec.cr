@@ -34,6 +34,7 @@ describe "Prime" do
 
   describe ".prime_division" do
     it "should factorize given number" do
+      Prime.prime_division(1_i64).should eq [] of Int64
       Prime.prime_division(1_000_000_i64).should eq [{2, 6}, {5, 6}]
       Prime.prime_division(4_096_i64).should eq [{2, 12}]
       Prime.prime_division(-1_000_000_i64).should eq [{-1, 1}, {2, 6}, {5, 6}]
@@ -111,6 +112,19 @@ describe "Prime" do
       Prime.prime?(2_646_216_567_629_137_i64).should be_true
       Prime.prime?(12_646_216_567_629_137_i64).should be_true
       Prime.prime?(312_646_216_567_629_137_i64).should be_true
+    end
+  end
+
+  describe ".each_divisor" do
+    it "should iterate through all positive divisor of given number" do
+      Prime.each_divisor(1).to_set.should eq Set{1}
+      Prime.each_divisor(100_i8).to_set.should eq Set{1, 2, 4, 5, 10, 20, 25, 50, 100}
+      Prime.each_divisor(4_295_098_369_i64).to_set.should eq Set{1, 65537, 4_295_098_369}
+    end
+
+    it "raises if the argument is non-positive" do
+      expect_raises(ArgumentError) {Prime.each_divisor(0)}
+      expect_raises(ArgumentError) {Prime.each_divisor(-100_i64)}
     end
   end
 end
