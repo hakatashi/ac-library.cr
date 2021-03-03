@@ -251,7 +251,7 @@
   </h2>
   
     
-      <a href="https://github.com/google/ac-library.cr/blob/5767d6c0b3fc70dc25f58af3c2490ef4a18844ef/atcoder/Prime.cr#L23" target="_blank">
+      <a href="https://github.com/google/ac-library.cr/blob/c0aaa62870e8f2276d1951fa227c0288cee6f8ff/atcoder/Prime.cr#L23" target="_blank">
         atcoder/Prime.cr
       </a>
     
@@ -294,6 +294,11 @@
         <a href="#each_divisor(value:T,&block:T-%3E)-instance-method" class="signature"><strong>#each_divisor</strong>(value : T, &block : T -> )</a>
         
           <div class="summary"><p>Returns an enumerator that iterates through the all positive divisors of the given number.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#int_from_prime_division(prime_divisions:Array(::Tuple(Int,Int)))-instance-method" class="signature"><strong>#int_from_prime_division</strong>(prime_divisions : Array(::Tuple(Int, Int)))</a>
         
       </li>
     
@@ -363,7 +368,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/5767d6c0b3fc70dc25f58af3c2490ef4a18844ef/atcoder/Prime.cr#L34" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/c0aaa62870e8f2276d1951fa227c0288cee6f8ff/atcoder/Prime.cr#L34" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -379,14 +384,20 @@
         <div class="doc">
           
           <p>Returns an enumerator that iterates through the all positive divisors of
-the given number. The order is not guaranteed.
+the given number. <strong>The order is not guaranteed.</strong>
 Not in the original Ruby's Prime library.</p>
+
+<pre><code><span class="t">AtCoder</span><span class="t">::</span><span class="t">Prime</span>.each_divisor(<span class="n">20</span>) <span class="k">do</span> <span class="o">|</span>n<span class="o">|</span>
+  puts n
+<span class="k">end</span> <span class="c"># =&gt; Puts 1, 2, 4, 5, 10, and 20</span>
+
+<span class="t">AtCoder</span><span class="t">::</span><span class="t">Prime</span>.each_divisor(<span class="n">10</span>).map {<span class="o">|</span>n<span class="o">|</span> <span class="n">1.0</span> <span class="o">/</span> n}.to_a <span class="c"># =&gt; [1.0, 0.5, 0.2, 0.1]</span></code></pre>
         </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/5767d6c0b3fc70dc25f58af3c2490ef4a18844ef/atcoder/Prime.cr#L257" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/c0aaa62870e8f2276d1951fa227c0288cee6f8ff/atcoder/Prime.cr#L274" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -402,14 +413,36 @@ Not in the original Ruby's Prime library.</p>
         <div class="doc">
           
           <p>Returns an enumerator that iterates through the all positive divisors of
-the given number. The order is not guaranteed.
+the given number. <strong>The order is not guaranteed.</strong>
 Not in the original Ruby's Prime library.</p>
+
+<pre><code><span class="t">AtCoder</span><span class="t">::</span><span class="t">Prime</span>.each_divisor(<span class="n">20</span>) <span class="k">do</span> <span class="o">|</span>n<span class="o">|</span>
+  puts n
+<span class="k">end</span> <span class="c"># =&gt; Puts 1, 2, 4, 5, 10, and 20</span>
+
+<span class="t">AtCoder</span><span class="t">::</span><span class="t">Prime</span>.each_divisor(<span class="n">10</span>).map {<span class="o">|</span>n<span class="o">|</span> <span class="n">1.0</span> <span class="o">/</span> n}.to_a <span class="c"># =&gt; [1.0, 0.5, 0.2, 0.1]</span></code></pre>
         </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/5767d6c0b3fc70dc25f58af3c2490ef4a18844ef/atcoder/Prime.cr#L281" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/c0aaa62870e8f2276d1951fa227c0288cee6f8ff/atcoder/Prime.cr#L298" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="int_from_prime_division(prime_divisions:Array(::Tuple(Int,Int)))-instance-method">
+      <div class="signature">
+        
+        def <strong>int_from_prime_division</strong>(prime_divisions : Array(::Tuple(<a href="../Int.html">Int</a>, <a href="../Int.html">Int</a>)))
+
+        <a class="method-permalink" href="#int_from_prime_division(prime_divisions:Array(::Tuple(Int,Int)))-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/google/ac-library.cr/blob/c0aaa62870e8f2276d1951fa227c0288cee6f8ff/atcoder/Prime.cr#L76" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -425,7 +458,7 @@ Not in the original Ruby's Prime library.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/5767d6c0b3fc70dc25f58af3c2490ef4a18844ef/atcoder/Prime.cr#L72" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/c0aaa62870e8f2276d1951fa227c0288cee6f8ff/atcoder/Prime.cr#L81" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -446,7 +479,7 @@ Not in the original Ruby's Prime library.</p>
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/5767d6c0b3fc70dc25f58af3c2490ef4a18844ef/atcoder/Prime.cr#L43" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/c0aaa62870e8f2276d1951fa227c0288cee6f8ff/atcoder/Prime.cr#L43" target="_blank">View source</a>]
         
       </div>
     </div>
