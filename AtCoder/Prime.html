@@ -165,6 +165,11 @@
       
     </li>
   
+  <li class=" " data-id="github.com/google/ac-library.cr/Int64" data-name="int64">
+      <a href="../Int64.html">Int64</a>
+      
+    </li>
+  
 </ul>
 
   </div>
@@ -209,7 +214,7 @@
   </h2>
   <ul class="other-types-list">
     
-      <li class="other-type">Enumerable(Int64)</li>
+      <li class="other-type">Enumerable(<a href="../Int64.html">Int64</a>)</li>
     
   </ul>
 
@@ -246,7 +251,7 @@
   </h2>
   
     
-      <a href="https://github.com/google/ac-library.cr/blob/91c4ee88e3c39b2e519f93bd6a03ce72b3d0b6d3/atcoder/Prime.cr#L23" target="_blank">
+      <a href="https://github.com/google/ac-library.cr/blob/5767d6c0b3fc70dc25f58af3c2490ef4a18844ef/atcoder/Prime.cr#L23" target="_blank">
         atcoder/Prime.cr
       </a>
     
@@ -279,12 +284,26 @@
       </li>
     
       <li class="entry-summary">
+        <a href="#each_divisor(value:Int)-instance-method" class="signature"><strong>#each_divisor</strong>(value : Int)</a>
+        
+          <div class="summary"><p>Returns an enumerator that iterates through the all positive divisors of the given number.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#each_divisor(value:T,&block:T-%3E)-instance-method" class="signature"><strong>#each_divisor</strong>(value : T, &block : T -> )</a>
+        
+          <div class="summary"><p>Returns an enumerator that iterates through the all positive divisors of the given number.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
         <a href="#prime?(value:Int64)-instance-method" class="signature"><strong>#prime?</strong>(value : Int64)</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#prime_division(value)-instance-method" class="signature"><strong>#prime_division</strong>(value)</a>
+        <a href="#prime_division(value:Int)-instance-method" class="signature"><strong>#prime_division</strong>(value : Int)</a>
         
           <div class="summary"><p><span class="flag orange">TODO</span>  Rewrite with Pollard Rho algorithm</p></div>
         
@@ -335,7 +354,7 @@
         <div class="doc">
           
             <div class="doc-inherited">
-              Description copied from module Enumerable(Int64)
+              Description copied from module Enumerable(<a href="../Int64.html">Int64</a>)
             </div>
           
           <p>Must yield this collection's elements to the block.</p>
@@ -344,7 +363,53 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/91c4ee88e3c39b2e519f93bd6a03ce72b3d0b6d3/atcoder/Prime.cr#L34" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/5767d6c0b3fc70dc25f58af3c2490ef4a18844ef/atcoder/Prime.cr#L34" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="each_divisor(value:Int)-instance-method">
+      <div class="signature">
+        
+        def <strong>each_divisor</strong>(value : <a href="../Int.html">Int</a>)
+
+        <a class="method-permalink" href="#each_divisor(value:Int)-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Returns an enumerator that iterates through the all positive divisors of
+the given number. The order is not guaranteed.
+Not in the original Ruby's Prime library.</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/google/ac-library.cr/blob/5767d6c0b3fc70dc25f58af3c2490ef4a18844ef/atcoder/Prime.cr#L257" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="each_divisor(value:T,&amp;block:T-&gt;)-instance-method">
+      <div class="signature">
+        
+        def <strong>each_divisor</strong>(value : <a href="../Int64.html">T</a>, &block : <a href="../Int64.html">T</a> -> )
+
+        <a class="method-permalink" href="#each_divisor(value:T,&block:T-%3E)-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Returns an enumerator that iterates through the all positive divisors of
+the given number. The order is not guaranteed.
+Not in the original Ruby's Prime library.</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/google/ac-library.cr/blob/5767d6c0b3fc70dc25f58af3c2490ef4a18844ef/atcoder/Prime.cr#L281" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -352,7 +417,7 @@
     <div class="entry-detail" id="prime?(value:Int64)-instance-method">
       <div class="signature">
         
-        def <strong>prime?</strong>(value : Int64)
+        def <strong>prime?</strong>(value : <a href="../Int64.html">Int64</a>)
 
         <a class="method-permalink" href="#prime?(value:Int64)-instance-method">#</a>
       </div>
@@ -360,17 +425,17 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/91c4ee88e3c39b2e519f93bd6a03ce72b3d0b6d3/atcoder/Prime.cr#L72" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/5767d6c0b3fc70dc25f58af3c2490ef4a18844ef/atcoder/Prime.cr#L72" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="prime_division(value)-instance-method">
+    <div class="entry-detail" id="prime_division(value:Int)-instance-method">
       <div class="signature">
         
-        def <strong>prime_division</strong>(value)
+        def <strong>prime_division</strong>(value : <a href="../Int.html">Int</a>)
 
-        <a class="method-permalink" href="#prime_division(value)-instance-method">#</a>
+        <a class="method-permalink" href="#prime_division(value:Int)-instance-method">#</a>
       </div>
       
         <div class="doc">
@@ -381,7 +446,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/91c4ee88e3c39b2e519f93bd6a03ce72b3d0b6d3/atcoder/Prime.cr#L43" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/5767d6c0b3fc70dc25f58af3c2490ef4a18844ef/atcoder/Prime.cr#L43" target="_blank">View source</a>]
         
       </div>
     </div>
