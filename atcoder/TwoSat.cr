@@ -15,7 +15,7 @@
 # limitations under the License.
 
 module AtCoder
-  # Implements atcoder::two_sat
+  # Implements [atcoder::two_sat](https://atcoder.github.io/ac-library/master/document_en/twosat.html)
   #
   # ```
   # twosat = AtCoder::TwoSat.new(2_i64)
@@ -26,7 +26,7 @@ module AtCoder
   # twosat.answer # => [false, false]
   # ```
   class TwoSat
-    # Implements atcoder::scc_graph.
+    # Implements [atcoder::scc_graph](https://atcoder.github.io/ac-library/master/document_en/scc.html).
     #
     # ```
     # scc = AtCoder::SCC.new(3_i64)

@@ -15,7 +15,7 @@
 # limitations under the License.
 
 module AtCoder
-  # Implements atcoder::lazy_segtree.
+  # Implements [atcoder::lazy_segtree](https://atcoder.github.io/ac-library/master/document_en/lazysegtree.html).
   #
   # The identity element will be implicitly defined as nil, so you don't
   # have to manually define it. In the other words, you cannot include

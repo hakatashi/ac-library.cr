@@ -15,7 +15,7 @@
 # limitations under the License.
 
 module AtCoder
-  # Implements atcoder::mf_graph.
+  # Implements [atcoder::mf_graph](https://atcoder.github.io/ac-library/master/document_en/maxflow.html).
   # `Cap` is always `Int64`.
   #
   # ```

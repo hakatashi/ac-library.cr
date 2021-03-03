@@ -15,7 +15,7 @@
 # limitations under the License.
 
 module AtCoder
-  # Implements atcoder::scc_graph.
+  # Implements [atcoder::scc_graph](https://atcoder.github.io/ac-library/master/document_en/scc.html).
   #
   # ```
   # scc = AtCoder::SCC.new(3_i64)

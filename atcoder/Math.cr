@@ -15,6 +15,7 @@
 # limitations under the License.
 
 module AtCoder
+  # Implements [ACL's Math library](https://atcoder.github.io/ac-library/master/document_en/math.html)
   module Math
     def self.extended_gcd(a, b)
       last_remainder, remainder = a.abs, b.abs

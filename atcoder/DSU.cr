@@ -15,7 +15,7 @@
 # limitations under the License.
 
 module AtCoder
-  # Implements atcoder::dsu.
+  # Implements [atcoder::dsu](https://atcoder.github.io/ac-library/master/document_en/dsu.html).
   #
   # ```
   # dsu = AtCoder::DSU.new(10)

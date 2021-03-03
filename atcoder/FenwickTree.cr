@@ -15,7 +15,7 @@
 # limitations under the License.
 
 module AtCoder
-  # Implements atcoder::fenwick_tree.
+  # Implements [atcoder::fenwick_tree](https://atcoder.github.io/ac-library/master/document_en/fenwicktree.html).
   #
   # ```
   # tree = AtCoder::FenwickTree(Int64).new(10)

@@ -15,7 +15,7 @@
 # limitations under the License.
 
 module AtCoder
-  # Implements standard priority queue like std::priority_queue
+  # Implements standard priority queue like [std::priority_queue](https://en.cppreference.com/w/cpp/container/priority_queue).
   #
   # ```
   # q = AtCoder::PriorityQueue(Int64).new

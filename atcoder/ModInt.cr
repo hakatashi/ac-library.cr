@@ -15,7 +15,7 @@
 # limitations under the License.
 
 module AtCoder
-  # Implements atcoder::static_modint.
+  # Implements [atcoder::static_modint](https://atcoder.github.io/ac-library/master/document_en/modint.html).
   #
   # ```
   # AtCoder.static_modint(ModInt101, 101_i64)
@@ -24,7 +24,7 @@ module AtCoder
   # ```
   macro static_modint(name, modulo)
     module AtCoder
-      # Implements atcoder::modint{{name}}.
+      # Implements atcoder::modint{{modulo}}.
       #
       # ```
       # alias Mint = AtCoder::{{name}}
