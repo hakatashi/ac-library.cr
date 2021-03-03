@@ -35,6 +35,7 @@ describe "Prime" do
   describe ".prime_division" do
     it "should factorize given number" do
       Prime.prime_division(1_i64).should eq [] of Int64
+      Prime.prime_division(175_i64).should eq [{5, 2}, {7, 1}]
       Prime.prime_division(59049_i64).should eq [{3, 10}]
       Prime.prime_division(9219364293862490881_i64).should eq [{55103, 4}]
       Prime.prime_division(4611686018427387904_i64).should eq [{2, 62}]

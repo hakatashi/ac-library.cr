@@ -67,7 +67,6 @@ module AtCoder
           count += 1
         end
         factors << {typeof(value).new(factor), count}
-        break if value <= factor * factor
       end
 
       if value > 1
