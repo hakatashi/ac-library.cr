@@ -43,6 +43,8 @@ module AtCoder
     def prime_division(value : Int)
       raise DivisionByZeroError.new if value == 0
 
+      value = value.to_i64
+
       factors = [] of Tuple(typeof(value), Int64)
 
       if value < 0
@@ -50,23 +52,55 @@ module AtCoder
         factors << {typeof(value).new(-1), 1_i64}
       end
 
-      each do |prime|
+      until prime?(value) || value == 1
+        factor = value
+        until prime?(factor)
+          if factor == 4
+            factor = typeof(value).new(2)
+          else
+            factor = pollard_rho(factor).not_nil!
+          end
+        end
         count = 0_i64
-        while value % prime == 0
-          value //= prime
+        while value % factor == 0
+          value //= factor
           count += 1
         end
-        if count != 0
-          factors << {typeof(value).new(prime), count}
-        end
-        break if value <= prime * prime
+        factors << {typeof(value).new(factor), count}
+        break if value <= factor * factor
       end
 
       if value > 1
         factors << {value, 1_i64}
       end
 
-      factors
+      factors.sort_by! {|(factor, _)| factor}
+    end
+
+    # Get single factor by Pollard's Rho Algorithm
+    private def pollard_rho(n : Int)
+      typeof(n).new(1).upto(n) do |i|
+        x = i
+        y = pollard_random_f(x, n)
+
+        loop do
+          x = pollard_random_f(x, n)
+          y = pollard_random_f(pollard_random_f(y, n), n)
+          gcd = (x - y).gcd(n)
+
+          if gcd == n
+            break
+          end
+
+          if gcd != 1
+            return gcd
+          end
+        end
+      end
+    end
+
+    private def pollard_random_f(n : Int, mod : Int)
+      (mul_mod(n, n, mod) + 1) % mod
     end
 
     private def extract_prime_division_base(prime_divisions_class : Array({T, T}).class) forall T
