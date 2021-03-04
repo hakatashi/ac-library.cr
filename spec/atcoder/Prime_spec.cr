@@ -133,6 +133,7 @@ describe "Prime" do
       Prime.each_divisor(1).to_set.should eq Set{1}
       Prime.each_divisor(100_i8).to_set.should eq Set{1, 2, 4, 5, 10, 20, 25, 50, 100}
       Prime.each_divisor(4_295_098_369_i64).to_set.should eq Set{1, 65537, 4_295_098_369}
+      Prime.each_divisor(321_593_407_609_i64).to_set.should eq Set{1, 41, 7843741649, 321593407609}
     end
 
     it "raises if the argument is non-positive" do

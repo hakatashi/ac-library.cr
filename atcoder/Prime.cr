@@ -324,7 +324,7 @@ module AtCoder
           cnt = typeof(value).zero + 1
           Array(typeof(value)).new(count + 1) do |i|
             cnt_copy = cnt
-            if i < cnt
+            if i < count
               cnt *= factor
             end
             cnt_copy
