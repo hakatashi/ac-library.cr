@@ -72,33 +72,23 @@ module AtCoder
     end
 
     private def find_factor(n : Int)
-      # Factor of 2*n cannot be discovered by Pollard's Rho with f(x) = x^x+n-1
-      if n.even?
+      # Factor of 4 cannot be discovered by Pollard's Rho with f(x) = x^x+1
+      if n == 4
         typeof(n).new(2)
       else
-        factor = pollard_rho(n)
-        if factor.nil?
-          puts "Factor not found: #{n}"
-        end
-        factor.not_nil!
+        pollard_rho(n).not_nil!
       end
-    end
-
-    private def get_max(n : T) forall T
-      T::MAX
     end
 
     # Get single factor by Pollard's Rho Algorithm
     private def pollard_rho(n : Int)
-      seed = (rand(n - 1) + 1) % (get_max(n) - n)
-
       typeof(n).new(1).upto(n) do |i|
         x = i
-        y = pollard_random_f(x, n, seed)
+        y = pollard_random_f(x, n)
 
         loop do
-          x = pollard_random_f(x, n, seed)
-          y = pollard_random_f(pollard_random_f(y, n, seed), n, seed)
+          x = pollard_random_f(x, n)
+          y = pollard_random_f(pollard_random_f(y, n), n)
           gcd = (x - y).gcd(n)
 
           if gcd == n
@@ -112,9 +102,8 @@ module AtCoder
       end
     end
 
-    @[AlwaysInline]
-    private def pollard_random_f(n : Int, mod : Int, seed : Int)
-      (mul_mod(n, n, mod) + seed) % mod
+    private def pollard_random_f(n : Int, mod : Int)
+      (mul_mod(n, n, mod) + 1) % mod
     end
 
     private def extract_prime_division_base(prime_divisions_class : Array({T, T}).class) forall T
