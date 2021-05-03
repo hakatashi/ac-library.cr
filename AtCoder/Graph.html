@@ -15,7 +15,7 @@
 </svg>
 
   <meta id="repository-name" content="github.com/google/ac-library.cr">
-  <title>AtCoder::FenwickTree(T) - github.com/google/ac-library.cr</title>
+  <title>AtCoder::Graph - github.com/google/ac-library.cr</title>
   <script type="text/javascript">
     CrystalDoc.base_path = "../";
   </script>
@@ -55,12 +55,12 @@
       
     </li>
   
-  <li class=" current" data-id="github.com/google/ac-library.cr/AtCoder/FenwickTree" data-name="atcoder::fenwicktree(t)">
+  <li class=" " data-id="github.com/google/ac-library.cr/AtCoder/FenwickTree" data-name="atcoder::fenwicktree(t)">
       <a href="../AtCoder/FenwickTree.html">FenwickTree</a>
       
     </li>
   
-  <li class=" " data-id="github.com/google/ac-library.cr/AtCoder/Graph" data-name="atcoder::graph">
+  <li class=" current" data-id="github.com/google/ac-library.cr/AtCoder/Graph" data-name="atcoder::graph">
       <a href="../AtCoder/Graph.html">Graph</a>
       
     </li>
@@ -194,40 +194,39 @@
 <div class="main-content">
 <h1 class="type-name">
 
-  <span class="kind">class</span> AtCoder::FenwickTree(T)
+  <span class="kind">class</span> AtCoder::Graph
 
 </h1>
 
 
-  <ul class="superclass-hierarchy"><li class="superclass"><a href="../AtCoder/FenwickTree.html">AtCoder::FenwickTree(T)</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../AtCoder/Graph.html">AtCoder::Graph</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
+
+
+
+
+
+
+
+
 
 
 
 
   <h2>
-    <a id="overview" class="anchor" href="#overview">
+    <a id="direct-known-subclasses" class="anchor" href="#direct-known-subclasses">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
 </a>
-    Overview
+    Direct Known Subclasses
   </h2>
-
-  <p>Implements <a href="https://atcoder.github.io/ac-library/master/document_en/fenwicktree.html" target="_blank">atcoder::fenwick_tree</a>.</p>
-
-<pre><code>tree <span class="o">=</span> <span class="t">AtCoder</span><span class="t">::</span><span class="t">FenwickTree</span>(<span class="t">Int64</span>).<span class="k">new</span>(<span class="n">10</span>)
-tree.add(<span class="n">3</span>, <span class="n">10</span>)
-tree.add(<span class="n">5</span>, <span class="n">20</span>)
-tree[<span class="n">3</span>..<span class="n">5</span>] <span class="c"># =&gt; 30</span>
-tree[<span class="n">3</span>...<span class="n">5</span>] <span class="c"># =&gt; 10</span></code></pre>
-
-
-
-
-
-
-
-
+  <ul class="other-types-list">
+    
+      <li class="other-type"><a href="../AtCoder/DirectedGraph.html">AtCoder::DirectedGraph</a></li>
+    
+      <li class="other-type"><a href="../AtCoder/UndirectedGraph.html">AtCoder::UndirectedGraph</a></li>
+    
+  </ul>
 
 
 
@@ -244,14 +243,33 @@ tree[<span class="n">3</span>...<span class="n">5</span>] <span class="c"># =&gt
   </h2>
   
     
-      <a href="https://github.com/google/ac-library.cr/blob/1d9206835cbd5ff51cbff5d935368f39296b0349/atcoder/FenwickTree.cr#L27" target="_blank">
-        atcoder/FenwickTree.cr
+      <a href="https://github.com/google/ac-library.cr/blob/1d9206835cbd5ff51cbff5d935368f39296b0349/atcoder/Graph.cr#L18" target="_blank">
+        atcoder/Graph.cr
       </a>
     
     <br/>
   
 
 
+
+  
+    <h2>
+      <a id="constant-summary" class="anchor" href="#constant-summary">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+      Constant Summary
+    </h2>
+  
+  <dl>
+    
+      <dt class="entry-const" id="INF">
+        <strong>INF</strong> = <code><span class="n">1000000000000000000_i64</span></code>
+      </dt>
+      
+    
+  </dl>
 
 
 
@@ -266,7 +284,7 @@ tree[<span class="n">3</span>...<span class="n">5</span>] <span class="c"># =&gt
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#new(size)-class-method" class="signature"><strong>.new</strong>(size)</a>
+        <a href="#new(size:Int64)-class-method" class="signature"><strong>.new</strong>(size : Int64)</a>
         
       </li>
     
@@ -287,40 +305,12 @@ tree[<span class="n">3</span>...<span class="n">5</span>] <span class="c"># =&gt
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#[](range:Range(Int,Int))-instance-method" class="signature"><strong>#[]</strong>(range : Range(Int, Int))</a>
-        
-          <div class="summary"><p>Implements atcoder::fenwick_tree.sum(left, right)</p></div>
+        <a href="#adjacencies:Array(Array(::Tuple(Int64,Int64)))-instance-method" class="signature"><strong>#adjacencies</strong> : Array(Array(::Tuple(Int64, Int64)))</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#add(index,value)-instance-method" class="signature"><strong>#add</strong>(index, value)</a>
-        
-          <div class="summary"><p>Implements atcoder::fenwick_tree.add(index, value)</p></div>
-        
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#bits:Array(T)-instance-method" class="signature"><strong>#bits</strong> : Array(T)</a>
-        
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#left_sum(index)-instance-method" class="signature"><strong>#left_sum</strong>(index)</a>
-        
-          <div class="summary"><p>Exclusive left sum</p></div>
-        
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#size:Int64-instance-method" class="signature"><strong>#size</strong> : Int64</a>
-        
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#sum(left,right)-instance-method" class="signature"><strong>#sum</strong>(left, right)</a>
-        
-          <div class="summary"><p>Implements atcoder::fenwick_tree.sum(left, right)</p></div>
+        <a href="#dijkstra(start_node)-instance-method" class="signature"><strong>#dijkstra</strong>(start_node)</a>
         
       </li>
     
@@ -364,18 +354,18 @@ tree[<span class="n">3</span>...<span class="n">5</span>] <span class="c"># =&gt
     Constructor Detail
   </h2>
   
-    <div class="entry-detail" id="new(size)-class-method">
+    <div class="entry-detail" id="new(size:Int64)-class-method">
       <div class="signature">
         
-        def self.<strong>new</strong>(size)
+        def self.<strong>new</strong>(size : <a href="../Int64.html">Int64</a>)
 
-        <a class="method-permalink" href="#new(size)-class-method">#</a>
+        <a class="method-permalink" href="#new(size:Int64)-class-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/1d9206835cbd5ff51cbff5d935368f39296b0349/atcoder/FenwickTree.cr#L31" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/1d9206835cbd5ff51cbff5d935368f39296b0349/atcoder/Graph.cr#L22" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -394,118 +384,34 @@ tree[<span class="n">3</span>...<span class="n">5</span>] <span class="c"># =&gt
     Instance Method Detail
   </h2>
   
-    <div class="entry-detail" id="[](range:Range(Int,Int))-instance-method">
+    <div class="entry-detail" id="adjacencies:Array(Array(::Tuple(Int64,Int64)))-instance-method">
       <div class="signature">
         
-        def <strong>[]</strong>(range : Range(<a href="../Int.html">Int</a>, <a href="../Int.html">Int</a>))
+        def <strong>adjacencies</strong> : Array(Array(::Tuple(<a href="../Int64.html">Int64</a>, <a href="../Int64.html">Int64</a>)))
 
-        <a class="method-permalink" href="#[](range:Range(Int,Int))-instance-method">#</a>
+        <a class="method-permalink" href="#adjacencies:Array(Array(::Tuple(Int64,Int64)))-instance-method">#</a>
       </div>
-      
-        <div class="doc">
-          
-          <p>Implements atcoder::fenwick_tree.sum(left, right)</p>
-        </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/1d9206835cbd5ff51cbff5d935368f39296b0349/atcoder/FenwickTree.cr#L60" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/1d9206835cbd5ff51cbff5d935368f39296b0349/atcoder/Graph.cr#L19" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="add(index,value)-instance-method">
+    <div class="entry-detail" id="dijkstra(start_node)-instance-method">
       <div class="signature">
         
-        def <strong>add</strong>(index, value)
+        def <strong>dijkstra</strong>(start_node)
 
-        <a class="method-permalink" href="#add(index,value)-instance-method">#</a>
-      </div>
-      
-        <div class="doc">
-          
-          <p>Implements atcoder::fenwick_tree.add(index, value)</p>
-        </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/google/ac-library.cr/blob/1d9206835cbd5ff51cbff5d935368f39296b0349/atcoder/FenwickTree.cr#L36" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="bits:Array(T)-instance-method">
-      <div class="signature">
-        
-        def <strong>bits</strong> : Array(T)
-
-        <a class="method-permalink" href="#bits:Array(T)-instance-method">#</a>
+        <a class="method-permalink" href="#dijkstra(start_node)-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/1d9206835cbd5ff51cbff5d935368f39296b0349/atcoder/FenwickTree.cr#L29" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="left_sum(index)-instance-method">
-      <div class="signature">
-        
-        def <strong>left_sum</strong>(index)
-
-        <a class="method-permalink" href="#left_sum(index)-instance-method">#</a>
-      </div>
-      
-        <div class="doc">
-          
-          <p>Exclusive left sum</p>
-        </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/google/ac-library.cr/blob/1d9206835cbd5ff51cbff5d935368f39296b0349/atcoder/FenwickTree.cr#L45" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="size:Int64-instance-method">
-      <div class="signature">
-        
-        def <strong>size</strong> : <a href="../Int64.html">Int64</a>
-
-        <a class="method-permalink" href="#size:Int64-instance-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/google/ac-library.cr/blob/1d9206835cbd5ff51cbff5d935368f39296b0349/atcoder/FenwickTree.cr#L28" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="sum(left,right)-instance-method">
-      <div class="signature">
-        
-        def <strong>sum</strong>(left, right)
-
-        <a class="method-permalink" href="#sum(left,right)-instance-method">#</a>
-      </div>
-      
-        <div class="doc">
-          
-          <p>Implements atcoder::fenwick_tree.sum(left, right)</p>
-        </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/google/ac-library.cr/blob/1d9206835cbd5ff51cbff5d935368f39296b0349/atcoder/FenwickTree.cr#L55" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/1d9206835cbd5ff51cbff5d935368f39296b0349/atcoder/Graph.cr#L26" target="_blank">View source</a>]
         
       </div>
     </div>

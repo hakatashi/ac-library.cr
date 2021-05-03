@@ -15,7 +15,7 @@
 </svg>
 
   <meta id="repository-name" content="github.com/google/ac-library.cr">
-  <title>AtCoder::Math - github.com/google/ac-library.cr</title>
+  <title>AtCoder::UndirectedGraph - github.com/google/ac-library.cr</title>
   <script type="text/javascript">
     CrystalDoc.base_path = "../";
   </script>
@@ -70,7 +70,7 @@
       
     </li>
   
-  <li class=" current" data-id="github.com/google/ac-library.cr/AtCoder/Math" data-name="atcoder::math">
+  <li class=" " data-id="github.com/google/ac-library.cr/AtCoder/Math" data-name="atcoder::math">
       <a href="../AtCoder/Math.html">Math</a>
       
     </li>
@@ -165,7 +165,7 @@
       
     </li>
   
-  <li class=" " data-id="github.com/google/ac-library.cr/AtCoder/UndirectedGraph" data-name="atcoder::undirectedgraph">
+  <li class=" current" data-id="github.com/google/ac-library.cr/AtCoder/UndirectedGraph" data-name="atcoder::undirectedgraph">
       <a href="../AtCoder/UndirectedGraph.html">UndirectedGraph</a>
       
     </li>
@@ -194,24 +194,15 @@
 <div class="main-content">
 <h1 class="type-name">
 
-  <span class="kind">module</span> AtCoder::Math
+  <span class="kind">class</span> AtCoder::UndirectedGraph
 
 </h1>
 
 
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../AtCoder/UndirectedGraph.html">AtCoder::UndirectedGraph</a></li><li class="superclass"><a href="../AtCoder/Graph.html">AtCoder::Graph</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
 
 
 
-  <h2>
-    <a id="overview" class="anchor" href="#overview">
-  <svg class="octicon-link" aria-hidden="true">
-    <use href="#octicon-link"/>
-  </svg>
-</a>
-    Overview
-  </h2>
-
-  <p>Implements <a href="https://atcoder.github.io/ac-library/master/document_en/math.html" target="_blank">ACL's Math library</a></p>
 
 
 
@@ -236,8 +227,8 @@
   </h2>
   
     
-      <a href="https://github.com/google/ac-library.cr/blob/1d9206835cbd5ff51cbff5d935368f39296b0349/atcoder/Math.cr#L19" target="_blank">
-        atcoder/Math.cr
+      <a href="https://github.com/google/ac-library.cr/blob/1d9206835cbd5ff51cbff5d935368f39296b0349/atcoder/Graph.cr#L62" target="_blank">
+        atcoder/Graph.cr
       </a>
     
     <br/>
@@ -249,46 +240,20 @@
 
 
 
+
+
   <h2>
-    <a id="class-method-summary" class="anchor" href="#class-method-summary">
+    <a id="instance-method-summary" class="anchor" href="#instance-method-summary">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
 </a>
-    Class Method Summary
+    Instance Method Summary
   </h2>
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#crt(remainders,modulos)-class-method" class="signature"><strong>.crt</strong>(remainders, modulos)</a>
-        
-          <div class="summary"><p>Implements atcoder::crt(remainders, modulos).</p></div>
-        
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#extended_gcd(a,b)-class-method" class="signature"><strong>.extended_gcd</strong>(a, b)</a>
-        
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#floor_sum-class-method" class="signature"><strong>.floor_sum</strong></a>
-        
-          <div class="summary"><p><span class="flag yellow">FIXME</span>  Unimplemented</p></div>
-        
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#inv_mod(value,modulo)-class-method" class="signature"><strong>.inv_mod</strong>(value, modulo)</a>
-        
-          <div class="summary"><p>Implements atcoder::inv_mod(value, modulo).</p></div>
-        
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#pow_mod(base,exponent,modulo)-class-method" class="signature"><strong>.pow_mod</strong>(base, exponent, modulo)</a>
-        
-          <div class="summary"><p>Implements atcoder::pow_mod(base, exponent, modulo).</p></div>
+        <a href="#add_edge(a:Int64,b:Int64,weight=1_i64)-instance-method" class="signature"><strong>#add_edge</strong>(a : Int64, b : Int64, weight = <span class="n">1_i64</span>)</a>
         
       </li>
     
@@ -298,126 +263,93 @@
 
 
 
-
-
 <div class="methods-inherited">
+  
+    
+
+  <h3>Instance methods inherited from class <code><a href="../AtCoder/Graph.html">AtCoder::Graph</a></code></h3>
+  
+  
+    <a href="../AtCoder/Graph.html#adjacencies:Array(Array(::Tuple(Int64,Int64)))-instance-method" class="tooltip">
+      <span>adjacencies : Array(Array(::Tuple(Int64, Int64)))</span>
+    adjacencies</a>, 
+    
+  
+    <a href="../AtCoder/Graph.html#dijkstra(start_node)-instance-method" class="tooltip">
+      <span>dijkstra(start_node)</span>
+    dijkstra</a>
+    
+  
+
+
+    
+
+  <h3>Constructor methods inherited from class <code><a href="../AtCoder/Graph.html">AtCoder::Graph</a></code></h3>
+  
+  
+    <a href="../AtCoder/Graph.html#new(size:Int64)-class-method" class="tooltip">
+      <span>new(size : Int64)</span>
+    new</a>
+    
+  
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
   
 </div>
 
 
 
 
+
+
   <h2>
-    <a id="class-method-detail" class="anchor" href="#class-method-detail">
+    <a id="instance-method-detail" class="anchor" href="#instance-method-detail">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
 </a>
-    Class Method Detail
+    Instance Method Detail
   </h2>
   
-    <div class="entry-detail" id="crt(remainders,modulos)-class-method">
+    <div class="entry-detail" id="add_edge(a:Int64,b:Int64,weight=1_i64)-instance-method">
       <div class="signature">
         
-        def self.<strong>crt</strong>(remainders, modulos)
+        def <strong>add_edge</strong>(a : <a href="../Int64.html">Int64</a>, b : <a href="../Int64.html">Int64</a>, weight = <span class="n">1_i64</span>)
 
-        <a class="method-permalink" href="#crt(remainders,modulos)-class-method">#</a>
-      </div>
-      
-        <div class="doc">
-          
-          <p>Implements atcoder::crt(remainders, modulos).</p>
-        </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/google/ac-library.cr/blob/1d9206835cbd5ff51cbff5d935368f39296b0349/atcoder/Math.cr#L65" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="extended_gcd(a,b)-class-method">
-      <div class="signature">
-        
-        def self.<strong>extended_gcd</strong>(a, b)
-
-        <a class="method-permalink" href="#extended_gcd(a,b)-class-method">#</a>
+        <a class="method-permalink" href="#add_edge(a:Int64,b:Int64,weight=1_i64)-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/1d9206835cbd5ff51cbff5d935368f39296b0349/atcoder/Math.cr#L20" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/1d9206835cbd5ff51cbff5d935368f39296b0349/atcoder/Graph.cr#L63" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="floor_sum-class-method">
-      <div class="signature">
-        
-        def self.<strong>floor_sum</strong>
-
-        <a class="method-permalink" href="#floor_sum-class-method">#</a>
-      </div>
-      
-        <div class="doc">
-          
-          <p><span class="flag yellow">FIXME</span>  Unimplemented</p>
-        </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/google/ac-library.cr/blob/1d9206835cbd5ff51cbff5d935368f39296b0349/atcoder/Math.cr#L85" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="inv_mod(value,modulo)-class-method">
-      <div class="signature">
-        
-        def self.<strong>inv_mod</strong>(value, modulo)
-
-        <a class="method-permalink" href="#inv_mod(value,modulo)-class-method">#</a>
-      </div>
-      
-        <div class="doc">
-          
-          <p>Implements atcoder::inv_mod(value, modulo).</p>
-        </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/google/ac-library.cr/blob/1d9206835cbd5ff51cbff5d935368f39296b0349/atcoder/Math.cr#L35" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="pow_mod(base,exponent,modulo)-class-method">
-      <div class="signature">
-        
-        def self.<strong>pow_mod</strong>(base, exponent, modulo)
-
-        <a class="method-permalink" href="#pow_mod(base,exponent,modulo)-class-method">#</a>
-      </div>
-      
-        <div class="doc">
-          
-          <p>Implements atcoder::pow_mod(base, exponent, modulo).</p>
-        </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/google/ac-library.cr/blob/1d9206835cbd5ff51cbff5d935368f39296b0349/atcoder/Math.cr#L44" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-
-
 
 
 
