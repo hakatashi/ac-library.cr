@@ -150,6 +150,11 @@
       
     </li>
   
+  <li class=" " data-id="github.com/google/ac-library.cr/AtCoder/Tree" data-name="atcoder::tree">
+      <a href="../AtCoder/Tree.html">Tree</a>
+      
+    </li>
+  
   <li class="parent " data-id="github.com/google/ac-library.cr/AtCoder/TwoSat" data-name="atcoder::twosat">
       <a href="../AtCoder/TwoSat.html">TwoSat</a>
       
@@ -243,7 +248,7 @@
   </h2>
   
     
-      <a href="https://github.com/google/ac-library.cr/blob/bd5949cfc9abdc6bf809423ceea844e52b951c34/atcoder/Graph.cr#L18" target="_blank">
+      <a href="https://github.com/google/ac-library.cr/blob/1f5155f28755b77e90a906080dbbe8f2ee1f62d9/atcoder/Graph.cr#L18" target="_blank">
         atcoder/Graph.cr
       </a>
     
@@ -305,7 +310,12 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#adjacencies:Array(Array(::Tuple(Int64,Int64)))-instance-method" class="signature"><strong>#adjacencies</strong> : Array(Array(::Tuple(Int64, Int64)))</a>
+        <a href="#dfs(node:Int64,parent:Int64,value:T,&block:Int64,Int64,Int64,T,T-%3E-%3E)forallT-instance-method" class="signature"><strong>#dfs</strong>(node : Int64, parent : Int64, value : T, &block : Int64, Int64, Int64, T, T ->  -> ) forall T</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#dfs(node:Int64,initial_value:T,&block:Int64,Int64,Int64,T,T-%3E-%3E)forallT-instance-method" class="signature"><strong>#dfs</strong>(node : Int64, initial_value : T, &block : Int64, Int64, Int64, T, T ->  -> ) forall T</a>
         
       </li>
     
@@ -365,7 +375,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/bd5949cfc9abdc6bf809423ceea844e52b951c34/atcoder/Graph.cr#L22" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/1f5155f28755b77e90a906080dbbe8f2ee1f62d9/atcoder/Graph.cr#L21" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -384,18 +394,34 @@
     Instance Method Detail
   </h2>
   
-    <div class="entry-detail" id="adjacencies:Array(Array(::Tuple(Int64,Int64)))-instance-method">
+    <div class="entry-detail" id="dfs(node:Int64,parent:Int64,value:T,&amp;block:Int64,Int64,Int64,T,T-&gt;-&gt;)forallT-instance-method">
       <div class="signature">
         
-        def <strong>adjacencies</strong> : Array(Array(::Tuple(<a href="../Int64.html">Int64</a>, <a href="../Int64.html">Int64</a>)))
+        def <strong>dfs</strong>(node : <a href="../Int64.html">Int64</a>, parent : <a href="../Int64.html">Int64</a>, value : T, &block : <a href="../Int64.html">Int64</a>, <a href="../Int64.html">Int64</a>, <a href="../Int64.html">Int64</a>, T, T ->  -> ) forall T
 
-        <a class="method-permalink" href="#adjacencies:Array(Array(::Tuple(Int64,Int64)))-instance-method">#</a>
+        <a class="method-permalink" href="#dfs(node:Int64,parent:Int64,value:T,&block:Int64,Int64,Int64,T,T-%3E-%3E)forallT-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/bd5949cfc9abdc6bf809423ceea844e52b951c34/atcoder/Graph.cr#L19" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/1f5155f28755b77e90a906080dbbe8f2ee1f62d9/atcoder/Graph.cr#L59" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="dfs(node:Int64,initial_value:T,&amp;block:Int64,Int64,Int64,T,T-&gt;-&gt;)forallT-instance-method">
+      <div class="signature">
+        
+        def <strong>dfs</strong>(node : <a href="../Int64.html">Int64</a>, initial_value : T, &block : <a href="../Int64.html">Int64</a>, <a href="../Int64.html">Int64</a>, <a href="../Int64.html">Int64</a>, T, T ->  -> ) forall T
+
+        <a class="method-permalink" href="#dfs(node:Int64,initial_value:T,&block:Int64,Int64,Int64,T,T-%3E-%3E)forallT-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/google/ac-library.cr/blob/1f5155f28755b77e90a906080dbbe8f2ee1f62d9/atcoder/Graph.cr#L54" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -411,7 +437,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/bd5949cfc9abdc6bf809423ceea844e52b951c34/atcoder/Graph.cr#L26" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/1f5155f28755b77e90a906080dbbe8f2ee1f62d9/atcoder/Graph.cr#L25" target="_blank">View source</a>]
         
       </div>
     </div>
