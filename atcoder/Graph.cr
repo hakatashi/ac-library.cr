@@ -16,7 +16,6 @@
 
 module AtCoder
   class Graph
-    getter adjacencies : Array(Array({Int64, Int64}))
     INF = 1_000_000_000_000_000_000_i64
 
     def initialize(@size : Int64)
@@ -51,6 +50,21 @@ module AtCoder
         {dist: dist[i], prev: prev_nodes[i]}
       end
     end
+
+    def dfs(node : Int64, initial_value : T, &block : Int64, Int64, Int64, T, (T ->) ->) forall T
+      @visited = Set(Int64).new
+      dfs(node, -1_i64, initial_value, &block)
+    end
+
+    def dfs(node : Int64, parent : Int64, value : T, &block : Int64, Int64, Int64, T, (T ->) ->) forall T
+      @visited.not_nil! << node
+      @adjacencies[node].each do |(child, weight)|
+        next if @visited.not_nil!.includes?(child)
+        block.call(child, weight, node, value, ->(new_value : T) {
+          dfs(child, node, new_value, &block)
+        })
+      end
+    end
   end
 
   class DirectedGraph < Graph
@@ -63,6 +77,35 @@ module AtCoder
     def add_edge(a : Int64, b : Int64, weight = 1_i64)
       @adjacencies[a] << {b.to_i64, weight}
       @adjacencies[b] << {a.to_i64, weight}
+    end
+  end
+
+  class Tree < UndirectedGraph
+    def diameter
+      @farthest_node = -1_i64
+      @farthest_depth = 0_i64
+      dfs(0_i64, 0_i64) do |node, weight, parent, depth, callback|
+        if @farthest_depth.not_nil! < depth + weight
+          @farthest_node = node
+          @farthest_depth = depth + weight
+        end
+        callback.call(depth + weight)
+      end
+
+      start_node = @farthest_node.not_nil!
+      @farthest_node = -1_i64
+      @farthest_depth = 0_i64
+      @parents = Array(Int64).new(@size, -1_i64)
+      dfs(start_node, 0_i64) do |node, weight, parent, depth, callback|
+        @parents.not_nil![node] = parent
+        if @farthest_depth.not_nil! < depth + weight
+          @farthest_node = node
+          @farthest_depth = depth + weight
+        end
+        callback.call(depth + weight)
+      end
+
+      {@farthest_depth.not_nil!, start_node, @farthest_node.not_nil!, @parents.not_nil!}
     end
   end
 end
