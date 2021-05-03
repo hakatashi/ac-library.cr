@@ -84,7 +84,7 @@ module AtCoder
     def diameter
       @farthest_node = -1_i64
       @farthest_depth = 0_i64
-      dfs(0_i64, 0_i64) do |node, weight, parent, depth, callback|
+      dfs(0_i64, 0_i64) do |node, weight, _, depth, callback|
         if @farthest_depth.not_nil! < depth + weight
           @farthest_node = node
           @farthest_depth = depth + weight
