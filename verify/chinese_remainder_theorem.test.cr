@@ -16,7 +16,7 @@
 
 # verify-helper: PROBLEM http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=2659
 
-require "./Math.cr"
+require "../atcoder/Math.cr"
 
 n, _, d = read_line.split.map(&.to_i64)
 ais = read_line.split.map(&.to_i64)

@@ -16,8 +16,8 @@
 
 # verify-helper: PROBLEM https://judge.yosupo.jp/problem/shortest_path
 
-require "./PriorityQueue.cr"
-require "./Graph.cr"
+require "../atcoder/PriorityQueue.cr"
+require "../atcoder/Graph.cr"
 
 n, m, s, t = read_line.split.map(&.to_i64)
 graph = AtCoder::DirectedGraph.new(n)

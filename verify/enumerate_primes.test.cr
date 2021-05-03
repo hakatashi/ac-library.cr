@@ -16,7 +16,7 @@
 
 # verify-helper: PROBLEM https://judge.yosupo.jp/problem/enumerate_primes
 
-require "./Prime.cr"
+require "../atcoder/Prime.cr"
 
 n, a, b = read_line.split.map(&.to_i64)
 ans = Array(Int64).new(1_000_000_i64)

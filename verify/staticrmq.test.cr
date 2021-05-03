@@ -16,7 +16,7 @@
 
 # verify-helper: PROBLEM https://judge.yosupo.jp/problem/staticrmq
 
-require "./SegTree.cr"
+require "../atcoder/SegTree.cr"
 
 include AtCoder
 

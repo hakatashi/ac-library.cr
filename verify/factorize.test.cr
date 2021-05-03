@@ -16,7 +16,7 @@
 
 # verify-helper: PROBLEM https://judge.yosupo.jp/problem/factorize
 
-require "./Prime.cr"
+require "../atcoder/Prime.cr"
 
 q = read_line.to_i64
 q.times do

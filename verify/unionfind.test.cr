@@ -16,7 +16,7 @@
 
 # verify-helper: PROBLEM https://judge.yosupo.jp/problem/unionfind
 
-require "./DSU.cr"
+require "../atcoder/DSU.cr"
 
 include AtCoder
 

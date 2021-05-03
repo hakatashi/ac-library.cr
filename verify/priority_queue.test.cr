@@ -16,7 +16,7 @@
 
 # verify-helper: PROBLEM http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_9_C
 
-require "./PriorityQueue.cr"
+require "../atcoder/PriorityQueue.cr"
 
 include AtCoder
 

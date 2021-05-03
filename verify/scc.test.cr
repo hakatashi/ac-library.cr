@@ -16,7 +16,7 @@
 
 # verify-helper: PROBLEM https://judge.yosupo.jp/problem/scc
 
-require "./SCC.cr"
+require "../atcoder/SCC.cr"
 
 n, m = read_line.split.map(&.to_i64)
 scc = AtCoder::SCC.new(n)

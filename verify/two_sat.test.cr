@@ -16,7 +16,7 @@
 
 # verify-helper: PROBLEM https://judge.yosupo.jp/problem/two_sat
 
-require "./TwoSat.cr"
+require "../atcoder/TwoSat.cr"
 
 _, _, nt, mt = read_line.split
 n = nt.to_i64
