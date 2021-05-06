@@ -51,12 +51,14 @@ module AtCoder
       end
     end
 
-    def dfs(node : Int64, initial_value : T, &block : Int64, Int64, Int64, T, (T ->) ->) forall T
+    def dfs(node : Int64, initial_value : T, &block : Int64, Int64 | Nil, Int64, T, (T ->) ->) forall T
       @visited = Set(Int64).new
-      dfs(node, -1_i64, initial_value, &block)
+      block.call(node, nil, -1_i64, initial_value, ->(new_value : T) {
+        dfs(node, -1_i64, new_value, &block)
+      })
     end
 
-    def dfs(node : Int64, parent : Int64, value : T, &block : Int64, Int64, Int64, T, (T ->) ->) forall T
+    def dfs(node : Int64, parent : Int64, value : T, &block : Int64, Int64 | Nil, Int64, T, (T ->) ->) forall T
       @visited.not_nil! << node
       @adjacencies[node].each do |(child, weight)|
         next if @visited.not_nil!.includes?(child)
@@ -85,11 +87,12 @@ module AtCoder
       @farthest_node = -1_i64
       @farthest_depth = 0_i64
       dfs(0_i64, 0_i64) do |node, weight, _, depth, callback|
-        if @farthest_depth.not_nil! < depth + weight
+        depth += weight.nil? ? 0 : weight
+        if @farthest_depth.not_nil! < depth
           @farthest_node = node
-          @farthest_depth = depth + weight
+          @farthest_depth = depth
         end
-        callback.call(depth + weight)
+        callback.call(depth)
       end
 
       start_node = @farthest_node.not_nil!
@@ -97,12 +100,13 @@ module AtCoder
       @farthest_depth = 0_i64
       @parents = Array(Int64).new(@size, -1_i64)
       dfs(start_node, 0_i64) do |node, weight, parent, depth, callback|
+        depth += weight.nil? ? 0 : weight
         @parents.not_nil![node] = parent
-        if @farthest_depth.not_nil! < depth + weight
+        if @farthest_depth.not_nil! < depth
           @farthest_node = node
-          @farthest_depth = depth + weight
+          @farthest_depth = depth
         end
-        callback.call(depth + weight)
+        callback.call(depth)
       end
 
       {@farthest_depth.not_nil!, start_node, @farthest_node.not_nil!, @parents.not_nil!}
