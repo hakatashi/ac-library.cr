@@ -197,8 +197,8 @@ module AtCoder
         def <=(value)
           raise NotImplementedError.new("<=")
         end
-        def <(value)
-          raise NotImplementedError.new("<")
+        def >(value)
+          raise NotImplementedError.new(">")
         end
         def >=(value)
           raise NotImplementedError.new(">=")
