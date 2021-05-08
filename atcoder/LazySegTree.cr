@@ -70,6 +70,7 @@ module AtCoder
     # Implements atcoder::lazy_segtree.apply(index, applicator).
     def []=(index : Int, applicator : F)
       apply_range(index, index + 1, applicator, 0, 0...(@segments.size + 1))
+      applicator
     end
 
     # Implements atcoder::lazy_segtree.apply(left, right, applicator).
@@ -77,6 +78,7 @@ module AtCoder
       l = range.begin
       r = range.exclusive? ? range.end : range.end + 1
       apply_range(l, r, applicator, 0, 0...(@segments.size + 1))
+      applicator
     end
 
     # Implements atcoder::lazy_segtree.get(index).
