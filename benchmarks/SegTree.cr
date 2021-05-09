@@ -16,18 +16,15 @@
 
 require "../atcoder/SegTree.cr"
 require "spec"
+require "benchmark"
 
-include AtCoder
-
-describe "SegTree" do
-  describe "bench" do
-    # O(nlogn)
-    it "should finish" do
-      n = 1000000
-      segtree = SegTree.new((1..n).to_a)
-      n.times do |i|
-        segtree[0..i].should eq i + 1
-      end
+Benchmark.bm do |x|
+  # O(nlogn)
+  x.report("AtCoder::SegTree") do
+    n = 1000000
+    segtree = AtCoder::SegTree.new((1..n).to_a)
+    n.times do |i|
+      segtree[0..i].should eq i + 1
     end
   end
 end

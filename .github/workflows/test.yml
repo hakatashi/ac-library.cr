@@ -60,3 +60,5 @@ jobs:
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./dist
+    - name: Run Benchmarks
+      run: crystal run --release benchmarks/*
