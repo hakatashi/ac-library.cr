@@ -14,26 +14,25 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require "./RedBlackTree.cr"
+require "../atcoder/PriorityQueue.cr"
 require "spec"
 
-describe "RedBlackTree" do
+include AtCoder
+
+describe "PriorityQueue" do
   describe "bench" do
     # O(nlogn)
     it "should finish" do
       n = 500000
-      tree = RedBlackTree.new
+      q = PriorityQueue(Int32).new
       n.times do |i|
-        tree << i
-        tree << i + n
-        tree << i + n * 2
+        q << i
+        q << i + n
+        q << i + n * 2
       end
       (n * 3).times do |i|
-        tree.has_key?(n * 3 - i - 1).should eq true
-        tree.max.should eq n * 3 - i - 1
-        tree.delete(n * 3 - i - 1)
+        q.pop.should eq n * 3 - i - 1
       end
-      tree.empty?.should eq true
     end
   end
 end

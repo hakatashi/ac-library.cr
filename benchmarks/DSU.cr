@@ -14,25 +14,38 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require "./PriorityQueue.cr"
+require "../atcoder/DSU.cr"
 require "spec"
 
 include AtCoder
 
-describe "PriorityQueue" do
+describe "DSU" do
   describe "bench" do
     # O(nlogn)
     it "should finish" do
-      n = 500000
-      q = PriorityQueue(Int32).new
+      n = 1000000_i64
+
+      tree = DSU.new((n + 1) * 3)
+      (0...n).to_a.shuffle.each do |i|
+        tree.merge(i * 3, (i + 1) * 3)
+        tree.merge(i * 3 + 1, (i + 1) * 3 + 1)
+        tree.merge(i * 3 + 2, (i + 1) * 3 + 2)
+      end
+
+      tree.size(n * 3).should eq n + 1
+      tree.size(n * 3 + 1).should eq n + 1
+      tree.size(n * 3 + 2).should eq n + 1
+
       n.times do |i|
-        q << i
-        q << i + n
-        q << i + n * 2
+        tree.same(0, i * 3 + 1).should eq false
+        tree.same(1, i * 3 + 2).should eq false
+        tree.same(2, i * 3 + 2).should eq true
       end
-      (n * 3).times do |i|
-        q.pop.should eq n * 3 - i - 1
-      end
+
+      tree.merge(0, 1)
+      tree.merge(1, 2)
+
+      tree.size(n // 2).should eq (n + 1) * 3
     end
   end
 end

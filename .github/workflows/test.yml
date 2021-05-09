@@ -54,7 +54,7 @@ jobs:
         CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
       shell: bash
     - name: Build docs
-      run: git ls-files atcoder | grep -v test | grep -v bench | xargs crystal docs -o dist
+      run: crystal docs atcoder/* -o dist
     - name: Deploy docs to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
       with:
