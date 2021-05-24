@@ -28,8 +28,19 @@ module AtCoder
     getter size : Int64
     getter bits : Array(T)
 
-    def initialize(@size)
+    def initialize(@size : Int64)
       @bits = Array(T).new(@size, T.zero)
+    end
+
+    def initialize(@bits : Array)
+      @bits = @bits.dup
+      @size = @bits.size.to_i64
+      (1 ... @size).each do |index|
+        up = index + (index & -index)
+        next if up > @size
+
+        @bits[up - 1] += @bits[index - 1]
+      end
     end
 
     # Implements atcoder::fenwick_tree.add(index, value)
