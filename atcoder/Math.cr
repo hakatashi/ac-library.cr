@@ -81,9 +81,48 @@ module AtCoder
       return answer % total_modulo, total_modulo
     end
 
-    # FIXME: Unimplemented
-    def self.floor_sum
-      raise NotImplementedError.new
+    def self.floor_sum(n, m, a, b)
+      n, m, a, b = n.to_i64, m.to_i64, a.to_i64, b.to_i64
+      res = 0i64
+
+      if a < 0
+        a2 = a % m
+        res -= n * (n - 1) // 2 * ((a2 - a) // m)
+        a = a2
+      end
+
+      if b < 0
+        b2 = b % m
+        res -= n * ((b2 - b) // m)
+        b = b2
+      end
+
+      res + floor_sum_unsigned(n, m, a, b)
+    end
+
+    def self.floor_sum_unsigned(n, m, a, b)
+      res = 0i64
+
+      loop do
+        if a >= m
+          res += n * (n - 1) // 2 * (a // m)
+          a = a % m
+        end
+
+        if b >= m
+          res += n * (b // m)
+          b = b % m
+        end
+
+        y_max = a * n + b
+        break if y_max < m
+
+        n = y_max // m
+        b = y_max % m
+        m, a = a, m
+      end
+
+      res
     end
   end
 end

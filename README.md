@@ -172,7 +172,7 @@ For the convinience of usage in programming contest, each class in the library d
 * `pow_mod(x, n, m)` => `AtCoder::Math.pow_mod(x, n, m)`
 * `inv_mod(x, m)` => `AtCoder::Math.inv_mod(x, m)`
 * `crt(r, m)` => `AtCoder::Math.crt(r, m)`
-* `floor_sum` => Unimplemented
+* `floor_sum` => `AtCoder::Math.floor_sum(n, m, a, b)`
 
 ## [PriorityQueue.cr](atcoder/PriorityQueue.cr) (not in ACL)
 
