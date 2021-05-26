@@ -18,6 +18,15 @@ require "../../atcoder/Math.cr"
 require "../spec_helper.cr"
 require "spec"
 
+def floor_sum_naive(n, m, a, b)
+    sum = 0i64
+    n.times do |i|
+         z = a * i + b
+        sum += (z - z % m) // m;
+    end
+    sum
+end
+
 describe "Math" do
   describe ".inv_mod" do
     it "generates inverse number under modulo" do
@@ -75,6 +84,29 @@ describe "Math" do
     it "raises error when sizes of given arrays don't match" do
       expect_raises(ArgumentError) {AtCoder::Math.crt([] of Int32, [1])}
       expect_raises(ArgumentError) {AtCoder::Math.crt([1, 2, 3], [4, 5])}
+    end
+  end
+
+  describe ".floor_sum" do
+    it "calculates floor_sum" do
+      # https://atcoder.jp/contests/practice2/tasks/practice2_c
+      AtCoder::Math.floor_sum(4, 10, 6, 3).should eq 3
+      AtCoder::Math.floor_sum(6, 5, 4, 3).should eq 13
+      AtCoder::Math.floor_sum(1, 1, 0, 0).should eq 0
+      AtCoder::Math.floor_sum(31415, 92653, 58979, 32384).should eq 314_095_480
+      AtCoder::Math.floor_sum(1_000_000_000, 1_000_000_000, 999_999_999, 999_999_999).should eq 499_999_999_500_000_000
+    end
+
+    it "equals floor_sum_naive" do
+      (0...20).each do |n|
+        (1...20).each do |m|
+          (-20...20).each do |a|
+            (-20...20).each do |b|
+              AtCoder::Math.floor_sum(n, m, a, b).should eq floor_sum_naive(n, m, a, b)
+            end
+          end
+        end
+      end
     end
   end
 end
