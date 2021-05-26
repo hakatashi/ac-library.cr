@@ -35,6 +35,7 @@ For the convinience of usage in programming contest, each class in the library d
 ## [FenwickTree.cr](atcoder/FenwickTree.cr) ([<atcoder/fenwicktree>](https://atcoder.github.io/ac-library/document_en/fenwicktree.html))
 
 * `fenwick_tree<T> fw(n)` => `AtCoder::FenwickTree(T).new(n)`
+* `fenwick_tree<T> fw(array)` => `AtCoder::FenwickTree(T).new(array)`
 
   ```cr
   tree = AtCoder::FenwickTree(Int64).new(10)
