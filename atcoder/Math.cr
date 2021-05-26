@@ -81,6 +81,7 @@ module AtCoder
       return answer % total_modulo, total_modulo
     end
 
+    # Implements atcoder::floor_sum(n, m, a, b).
     def self.floor_sum(n, m, a, b)
       n, m, a, b = n.to_i64, m.to_i64, a.to_i64, b.to_i64
       res = 0_i64
@@ -100,7 +101,7 @@ module AtCoder
       res + floor_sum_unsigned(n, m, a, b)
     end
 
-    def self.floor_sum_unsigned(n, m, a, b)
+    private def self.floor_sum_unsigned(n, m, a, b)
       res = 0_i64
 
       loop do
