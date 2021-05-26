@@ -83,7 +83,7 @@ module AtCoder
 
     def self.floor_sum(n, m, a, b)
       n, m, a, b = n.to_i64, m.to_i64, a.to_i64, b.to_i64
-      res = 0i64
+      res = 0_i64
 
       if a < 0
         a2 = a % m
@@ -101,7 +101,7 @@ module AtCoder
     end
 
     def self.floor_sum_unsigned(n, m, a, b)
-      res = 0i64
+      res = 0_i64
 
       loop do
         if a >= m
