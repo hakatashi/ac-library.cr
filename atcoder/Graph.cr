@@ -18,8 +18,11 @@ module AtCoder
   class Graph
     INF = 1_000_000_000_000_000_000_i64
 
+    getter visited : Set(Int64)
+
     def initialize(@size : Int64)
       @adjacencies = Array(Array({Int64, Int64})).new(@size) { [] of {Int64, Int64} }
+      @visited = Set(Int64).new
     end
 
     def dijkstra(start_node)
@@ -59,9 +62,9 @@ module AtCoder
     end
 
     def dfs(node : Int64, parent : Int64, value : T, &block : Int64, Int64 | Nil, Int64, T, (T ->) ->) forall T
-      @visited.not_nil! << node
+      @visited << node
       @adjacencies[node].each do |(child, weight)|
-        next if @visited.not_nil!.includes?(child)
+        next if @visited.includes?(child)
         block.call(child, weight, node, value, ->(new_value : T) {
           dfs(child, node, new_value, &block)
         })
