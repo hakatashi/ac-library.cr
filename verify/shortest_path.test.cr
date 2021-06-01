@@ -20,7 +20,7 @@ require "../atcoder/PriorityQueue.cr"
 require "../atcoder/Graph.cr"
 
 n, m, s, t = read_line.split.map(&.to_i64)
-graph = AtCoder::DirectedGraph.new(n)
+graph = AtCoder::DirectedGraph(Nil, Int64).new(n)
 m.times do
   a, b, c = read_line.split.map(&.to_i64)
   graph.add_edge(a, b, c)

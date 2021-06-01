@@ -20,7 +20,7 @@ require "../atcoder/PriorityQueue.cr"
 require "../atcoder/Graph.cr"
 
 n = read_line.to_i64
-tree = AtCoder::Tree.new(n)
+tree = AtCoder::Tree(Nil, Int64).new(n)
 (n - 1).times do
   a, b, c = read_line.split.map(&.to_i64)
   tree.add_edge(a, b, c)

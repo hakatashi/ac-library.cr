@@ -14,32 +14,44 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-module AtCoder
-  class Graph
-    INF = 1_000_000_000_000_000_000_i64
+require "./PriorityQueue.cr"
 
+module AtCoder
+  class Graph(NodeInfo, EdgeInfo)
     getter visited : Set(Int64)
 
-    def initialize(@size : Int64)
+    def initialize(@nodes : Array(NodeInfo))
+      @size = @nodes.size.to_i64
+      @edges = [] of EdgeInfo
       @adjacencies = Array(Array({Int64, Int64})).new(@size) { [] of {Int64, Int64} }
       @visited = Set(Int64).new
     end
 
+    def initialize(@size : Int64, initial_node : NodeInfo = nil)
+      @nodes = Array(NodeInfo).new(@size, initial_node)
+      @edges = [] of EdgeInfo
+      @adjacencies = Array(Array({Int64, Int64})).new(@size) { [] of {Int64, Int64} }
+      @visited = Set(Int64).new
+    end
+
+    # Performs Dijkstra's Algorithm to calculate the distance of each node from `start_node`.
+    # To use this method, `EdgeInfo` must implement `.zero` and `#-` and `#+(EdgeInfo)` and `#>(EdgeInfo)`.
     def dijkstra(start_node)
-      dist = Array(Int64 | Nil).new(@size, nil)
-      dist[start_node] = 0_i64
+      dist = Array(EdgeInfo | Nil).new(@size, nil)
+      dist[start_node] = EdgeInfo.zero
 
       prev_nodes = Array(Int64 | Nil).new(@size, nil)
 
-      queue = AtCoder::PriorityQueue({Int64, Int64}).new {|(d, v)| -d}
-      queue << {0_i64, start_node.to_i64}
+      queue = AtCoder::PriorityQueue({EdgeInfo, Int64}).new {|(d, v)| -d}
+      queue << {EdgeInfo.zero, start_node.to_i64}
 
       until queue.empty?
         d, v = queue.pop.not_nil!
         current_dist = dist[v].not_nil!
-        next if current_dist < d
+        next if d > current_dist
 
-        @adjacencies[v].each do |(to, cost)|
+        @adjacencies[v].each do |(to, edge_id)|
+          cost = @edges[edge_id]
           target_dist = dist[to]
           if target_dist.nil? || target_dist > current_dist + cost
             dist[to] = current_dist + cost
@@ -49,47 +61,80 @@ module AtCoder
         end
       end
 
-      Array({dist: Int64 | Nil, prev: Int64 | Nil}).new(@size) do |i|
+      Array({dist: EdgeInfo | Nil, prev: Int64 | Nil}).new(@size) do |i|
         {dist: dist[i], prev: prev_nodes[i]}
       end
     end
 
-    def dfs(node : Int64, initial_value : T, &block : Int64, Int64 | Nil, Int64, T, (T ->) ->) forall T
+    def dfs(node : Int64, initial_value : T, &block : Int64, T, NamedTuple(
+      node: Int64,
+      node_info: NodeInfo | Nil,
+      edge: Int64 | Nil,
+      edge_info: EdgeInfo | Nil,
+      parent: Int64,
+    ), (T ->) ->) forall T
       @visited = Set(Int64).new
-      block.call(node, nil, -1_i64, initial_value, ->(new_value : T) {
+      info = {
+        node: node,
+        node_info: @nodes[node].as(NodeInfo | Nil),
+        edge: nil.as(Int64 | Nil),
+        edge_info: nil.as(EdgeInfo | Nil),
+        parent: -1_i64,
+      }
+      block.call(node, initial_value, info, ->(new_value : T) {
         dfs(node, -1_i64, new_value, &block)
       })
     end
 
-    def dfs(node : Int64, parent : Int64, value : T, &block : Int64, Int64 | Nil, Int64, T, (T ->) ->) forall T
+    private def dfs(node : Int64, parent : Int64, value : T, &block : Int64, T, NamedTuple(
+      node: Int64,
+      node_info: NodeInfo | Nil,
+      edge: Int64 | Nil,
+      edge_info: EdgeInfo | Nil,
+      parent: Int64,
+    ), (T ->) ->) forall T
       @visited << node
-      @adjacencies[node].each do |(child, weight)|
+      @adjacencies[node].each do |(child, edge)|
         next if @visited.includes?(child)
-        block.call(child, weight, node, value, ->(new_value : T) {
+        info = {
+          node: child,
+          node_info: @nodes[child].as(NodeInfo | Nil),
+          edge: edge.as(Int64 | Nil),
+          edge_info: @edges[edge].as(EdgeInfo | Nil),
+          parent: node,
+        }
+        block.call(child, value, info, ->(new_value : T) {
           dfs(child, node, new_value, &block)
         })
       end
     end
   end
 
-  class DirectedGraph < Graph
-    def add_edge(from, to, weight = 1_i64)
-      @adjacencies[from] << {to.to_i64, weight}
+  class DirectedGraph(NodeInfo, EdgeInfo) < Graph(NodeInfo, EdgeInfo)
+    def add_edge(from, to, edge : EdgeInfo = 1_i64)
+      @edges << edge
+      edge_id = @edges.size.to_i64 - 1
+      @adjacencies[from] << {to.to_i64, edge_id}
+      edge_id
     end
   end
 
-  class UndirectedGraph < Graph
-    def add_edge(a : Int64, b : Int64, weight = 1_i64)
-      @adjacencies[a] << {b.to_i64, weight}
-      @adjacencies[b] << {a.to_i64, weight}
+  class UndirectedGraph(NodeInfo, EdgeInfo) < Graph(NodeInfo, EdgeInfo)
+    def add_edge(a : Int64, b : Int64, edge : EdgeInfo = 1_i64)
+      @edges << edge
+      edge_id = @edges.size.to_i64 - 1
+      @adjacencies[a] << {b.to_i64, edge_id}
+      @adjacencies[b] << {a.to_i64, edge_id}
+      edge_id
     end
   end
 
-  class Tree < UndirectedGraph
+  class Tree(NodeInfo, EdgeInfo) < UndirectedGraph(NodeInfo, EdgeInfo)
     def diameter
       @farthest_node = -1_i64
       @farthest_depth = 0_i64
-      dfs(0_i64, 0_i64) do |node, weight, _, depth, callback|
+      dfs(0_i64, 0_i64) do |node, depth, info, callback|
+        weight = info[:edge_info]
         depth += weight.nil? ? 0 : weight
         if @farthest_depth.not_nil! < depth
           @farthest_node = node
@@ -102,9 +147,10 @@ module AtCoder
       @farthest_node = -1_i64
       @farthest_depth = 0_i64
       @parents = Array(Int64).new(@size, -1_i64)
-      dfs(start_node, 0_i64) do |node, weight, parent, depth, callback|
+      dfs(start_node, 0_i64) do |node, depth, info, callback|
+        weight = info[:edge_info]
         depth += weight.nil? ? 0 : weight
-        @parents.not_nil![node] = parent
+        @parents.not_nil![node] = info[:parent]
         if @farthest_depth.not_nil! < depth
           @farthest_node = node
           @farthest_depth = depth
