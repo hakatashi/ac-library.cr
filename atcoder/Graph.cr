@@ -18,6 +18,7 @@ require "./PriorityQueue.cr"
 
 module AtCoder
   class Graph(NodeInfo, EdgeInfo)
+    @size_bits : Int32
     getter visited : Set(Int64)
 
     def initialize(@nodes : Array(NodeInfo))
@@ -25,6 +26,7 @@ module AtCoder
       @edges = [] of EdgeInfo
       @adjacencies = Array(Array({Int64, Int64})).new(@size) { [] of {Int64, Int64} }
       @visited = Set(Int64).new
+      @size_bits = @size.to_s(2).size
     end
 
     def initialize(@size : Int64, initial_node : NodeInfo = nil)
@@ -32,6 +34,7 @@ module AtCoder
       @edges = [] of EdgeInfo
       @adjacencies = Array(Array({Int64, Int64})).new(@size) { [] of {Int64, Int64} }
       @visited = Set(Int64).new
+      @size_bits = @size.to_s(2).size
     end
 
     # Performs Dijkstra's Algorithm to calculate the distance of each node from `start_node`.
@@ -120,7 +123,7 @@ module AtCoder
   end
 
   class UndirectedGraph(NodeInfo, EdgeInfo) < Graph(NodeInfo, EdgeInfo)
-    def add_edge(a : Int64, b : Int64, edge : EdgeInfo = 1_i64)
+    def add_edge(a, b, edge : EdgeInfo = 1_i64)
       @edges << edge
       edge_id = @edges.size.to_i64 - 1
       @adjacencies[a] << {b.to_i64, edge_id}
@@ -130,6 +133,10 @@ module AtCoder
   end
 
   class Tree(NodeInfo, EdgeInfo) < UndirectedGraph(NodeInfo, EdgeInfo)
+    @lca_root : Int64 | Nil
+    @lca_ancestors : Array(Array(Int64)) | Nil
+    @lca_depths : Array(Int64) | Nil
+
     def diameter
       @farthest_node = -1_i64
       @farthest_depth = 0_i64
@@ -159,6 +166,100 @@ module AtCoder
       end
 
       {@farthest_depth.not_nil!, start_node, @farthest_node.not_nil!, @parents.not_nil!}
+    end
+
+    private def lca_precompute(root)
+      lca_ancestors = Array(Array(Int64)).new(@size) { Array(Int64).new(@size_bits, -1_i64) }
+      lca_depths = Array(Int64).new(@size, -1_i64)
+
+      dfs(root, 0_i64) do |node, depth, info, callback|
+        lca_ancestors[node][0] = info[:parent]
+        lca_depths[node] = depth
+        callback.call(depth + 1)
+      end
+
+      1.upto(@size_bits - 1) do |i|
+        @size.times do |node|
+          if lca_ancestors[node][i - 1] == -1
+            lca_ancestors[node][i] = -1_i64
+          else
+            lca_ancestors[node][i] = lca_ancestors[lca_ancestors[node][i - 1]][i - 1]
+          end
+        end
+      end
+
+      @lca_root = root
+      @lca_ancestors = lca_ancestors
+      @lca_depths = lca_depths
+    end
+
+    private def lca_nth_prev(node, dist)
+      lca_ancestors = @lca_ancestors.not_nil!
+
+      i = 0_i64
+      until dist == 0
+        if dist.odd?
+          node = lca_ancestors[node][i]
+          if node == -1
+            raise Exception.new("#{dist}th previous node of #{node} does not exist")
+          end
+        end
+        dist //= 2
+        i += 1
+      end
+
+      node
+    end
+
+    def lca(a, b)
+      if @lca_root.nil?
+        lca_precompute(0_i64)
+      end
+
+      lca_ancestors = @lca_ancestors.not_nil!
+      lca_depths = @lca_depths.not_nil!
+
+      depth_a = lca_depths[a]
+      depth_b = lca_depths[b]
+
+      if depth_a < depth_b
+        depth_a, depth_b, a, b = depth_b, depth_a, b, a
+      end
+
+      if depth_a != depth_b
+        a = lca_nth_prev(a, depth_a - depth_b)
+      end
+
+      if a == b
+        return a
+      end
+
+      (@size_bits - 1).downto(0) do |i|
+        if lca_ancestors[a][i] == -1 || lca_ancestors[b][i] == -1
+          next
+        end
+
+        if lca_ancestors[a][i] != lca_ancestors[b][i]
+          a = lca_ancestors[a][i]
+          b = lca_ancestors[b][i]
+        end
+      end
+
+      a = lca_ancestors[a][0]
+      b = lca_ancestors[b][0]
+
+      if a != b || a == -1 || b == -1
+        raise Exception.new("Assertion error")
+      end
+
+      a
+    end
+
+    def dist(a, b)
+      lca_node = lca(a, b)
+
+      lca_depths = @lca_depths.not_nil!
+      (lca_depths[a] - lca_depths[lca_node]) + (lca_depths[b] - lca_depths[lca_node])
     end
   end
 end
