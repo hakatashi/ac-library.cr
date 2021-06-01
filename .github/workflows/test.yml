@@ -7,7 +7,7 @@ on:
     branches: [ master ]
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
     container:
       image: crystallang/crystal:0.33.0
@@ -33,16 +33,10 @@ jobs:
         cmake ..
         make -j8
         make install
-    - name: Install pip dependencies
-      run: |
-        python3 -m pip install --upgrade pip
-        python3 -m pip install -r requirements.txt
     - name: Install Crystal dependencies
       run: shards
     - name: Run tests
       run: crystal spec --verbose
-    - name: Run verifier
-      run: oj-verify run
     - name: Run linter
       run: bin/ameba
     - name: Run coverage
@@ -64,3 +58,19 @@ jobs:
         publish_dir: ./dist
     - name: Run Benchmarks
       run: crystal run --release benchmarks/*
+
+  verify:
+    runs-on: ubuntu-latest
+    container:
+      image: crystallang/crystal:0.33.0
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install dependencies
+      run: |
+        apt-get install python3 libpython3.8 python3-dev python3-pip bash libxml2-dev libxslt-dev build-essential binutils-dev libcurl4-openssl-dev zlib1g-dev libdw-dev libiberty-dev cmake curl -y
+    - name: Install pip dependencies
+      run: |
+        python3 -m pip install --upgrade pip
+        python3 -m pip install -r requirements.txt
+    - name: Run verifier
+      run: oj-verify run
