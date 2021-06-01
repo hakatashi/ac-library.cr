@@ -261,5 +261,10 @@ module AtCoder
       lca_depths = @lca_depths.not_nil!
       (lca_depths[a] - lca_depths[lca_node]) + (lca_depths[b] - lca_depths[lca_node])
     end
+
+    # Returns `true` if node `c` is on the path from `a` to `b`.
+    def on_path?(a, b, c)
+      dist(a, c) + dist(c, b) == dist(a, b)
+    end
   end
 end
