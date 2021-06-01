@@ -15,7 +15,7 @@
 </svg>
 
   <meta id="repository-name" content="github.com/google/ac-library.cr">
-  <title>AtCoder::Tree - github.com/google/ac-library.cr</title>
+  <title>AtCoder::Tree(NodeInfo, EdgeInfo) - github.com/google/ac-library.cr</title>
   <script type="text/javascript">
     CrystalDoc.base_path = "../";
   </script>
@@ -45,7 +45,7 @@
       
         <ul>
   
-  <li class=" " data-id="github.com/google/ac-library.cr/AtCoder/DirectedGraph" data-name="atcoder::directedgraph">
+  <li class=" " data-id="github.com/google/ac-library.cr/AtCoder/DirectedGraph" data-name="atcoder::directedgraph(nodeinfo, edgeinfo)">
       <a href="../AtCoder/DirectedGraph.html">DirectedGraph</a>
       
     </li>
@@ -60,7 +60,7 @@
       
     </li>
   
-  <li class=" " data-id="github.com/google/ac-library.cr/AtCoder/Graph" data-name="atcoder::graph">
+  <li class=" " data-id="github.com/google/ac-library.cr/AtCoder/Graph" data-name="atcoder::graph(nodeinfo, edgeinfo)">
       <a href="../AtCoder/Graph.html">Graph</a>
       
     </li>
@@ -150,7 +150,7 @@
       
     </li>
   
-  <li class=" current" data-id="github.com/google/ac-library.cr/AtCoder/Tree" data-name="atcoder::tree">
+  <li class=" current" data-id="github.com/google/ac-library.cr/AtCoder/Tree" data-name="atcoder::tree(nodeinfo, edgeinfo)">
       <a href="../AtCoder/Tree.html">Tree</a>
       
     </li>
@@ -170,7 +170,7 @@
       
     </li>
   
-  <li class=" " data-id="github.com/google/ac-library.cr/AtCoder/UndirectedGraph" data-name="atcoder::undirectedgraph">
+  <li class=" " data-id="github.com/google/ac-library.cr/AtCoder/UndirectedGraph" data-name="atcoder::undirectedgraph(nodeinfo, edgeinfo)">
       <a href="../AtCoder/UndirectedGraph.html">UndirectedGraph</a>
       
     </li>
@@ -199,12 +199,12 @@
 <div class="main-content">
 <h1 class="type-name">
 
-  <span class="kind">class</span> AtCoder::Tree
+  <span class="kind">class</span> AtCoder::Tree(NodeInfo, EdgeInfo)
 
 </h1>
 
 
-  <ul class="superclass-hierarchy"><li class="superclass"><a href="../AtCoder/Tree.html">AtCoder::Tree</a></li><li class="superclass"><a href="../AtCoder/UndirectedGraph.html">AtCoder::UndirectedGraph</a></li><li class="superclass"><a href="../AtCoder/Graph.html">AtCoder::Graph</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../AtCoder/Tree.html">AtCoder::Tree(NodeInfo, EdgeInfo)</a></li><li class="superclass"><a href="../AtCoder/UndirectedGraph.html">AtCoder::UndirectedGraph(NodeInfo, EdgeInfo)</a></li><li class="superclass"><a href="../AtCoder/Graph.html">AtCoder::Graph(NodeInfo, EdgeInfo)</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
 
 
 
@@ -232,7 +232,7 @@
   </h2>
   
     
-      <a href="https://github.com/google/ac-library.cr/blob/4caff7e45a0bbd02fe42634cc58370ba503c05ad/atcoder/Graph.cr#L85" target="_blank">
+      <a href="https://github.com/google/ac-library.cr/blob/f01243a4b534638a4bd216ec3bf3f12dc28b8270/atcoder/Graph.cr#L133" target="_blank">
         atcoder/Graph.cr
       </a>
     
@@ -242,6 +242,28 @@
 
 
 
+
+  <h2>
+    <a id="constructors" class="anchor" href="#constructors">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Constructors
+  </h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#new(nodes:Array(NodeInfo))-class-method" class="signature"><strong>.new</strong>(nodes : Array(NodeInfo))</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#new(size:Int64,initial_node:NodeInfo=nil)-class-method" class="signature"><strong>.new</strong>(size : Int64, initial_node : NodeInfo = <span class="n">nil</span>)</a>
+        
+      </li>
+    
+  </ul>
 
 
 
@@ -262,6 +284,25 @@
         
       </li>
     
+      <li class="entry-summary">
+        <a href="#dist(a,b)-instance-method" class="signature"><strong>#dist</strong>(a, b)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#lca(a,b)-instance-method" class="signature"><strong>#lca</strong>(a, b)</a>
+        
+          <div class="summary"><p>ameba:disable Metrics/CyclomaticComplexity</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#on_path?(a,b,c)-instance-method" class="signature"><strong>#on_path?</strong>(a, b, c)</a>
+        
+          <div class="summary"><p>Returns <code>true</code> if node <code>c</code> is on the path from <code>a</code> to <code>b</code>.</p></div>
+        
+      </li>
+    
   </ul>
 
 
@@ -272,11 +313,11 @@
   
     
 
-  <h3>Instance methods inherited from class <code><a href="../AtCoder/UndirectedGraph.html">AtCoder::UndirectedGraph</a></code></h3>
+  <h3>Instance methods inherited from class <code><a href="../AtCoder/UndirectedGraph.html">AtCoder::UndirectedGraph(NodeInfo, EdgeInfo)</a></code></h3>
   
   
-    <a href="../AtCoder/UndirectedGraph.html#add_edge(a:Int64,b:Int64,weight=1_i64)-instance-method" class="tooltip">
-      <span>add_edge(a : Int64, b : Int64, weight = <span class="n">1_i64</span>)</span>
+    <a href="../AtCoder/UndirectedGraph.html#add_edge(a,b,edge:EdgeInfo=1_i64)-instance-method" class="tooltip">
+      <span>add_edge(a, b, edge : EdgeInfo = <span class="n">1_i64</span>)</span>
     add_edge</a>
     
   
@@ -284,6 +325,15 @@
 
     
 
+  <h3>Constructor methods inherited from class <code><a href="../AtCoder/UndirectedGraph.html">AtCoder::UndirectedGraph(NodeInfo, EdgeInfo)</a></code></h3>
+  
+  
+    <a href="../AtCoder/UndirectedGraph.html#new(nodes:Array(NodeInfo))-class-method" class="tooltip">
+      <span>new(nodes : Array(NodeInfo))<br/>new(size : Int64, initial_node : NodeInfo = <span class="n">nil</span>)</span>
+    new</a>
+    
+  
+
 
     
 
@@ -291,28 +341,33 @@
   
     
 
-  <h3>Instance methods inherited from class <code><a href="../AtCoder/Graph.html">AtCoder::Graph</a></code></h3>
+  <h3>Instance methods inherited from class <code><a href="../AtCoder/Graph.html">AtCoder::Graph(NodeInfo, EdgeInfo)</a></code></h3>
   
   
-    <a href="../AtCoder/Graph.html#dfs(node:Int64,parent:Int64,value:T,&block:Int64,Int64?,Int64,T,T-%3E-%3E)forallT-instance-method" class="tooltip">
-      <span>dfs(node : Int64, parent : Int64, value : T, &block : Int64, Int64?, Int64, T, T ->  -> ) forall T<br/>dfs(node : Int64, initial_value : T, &block : Int64, Int64?, Int64, T, T ->  -> ) forall T</span>
+    <a href="../AtCoder/Graph.html#dfs(node:Int64,initial_value:T,&block:Int64,T,NamedTuple(),T-%3E-%3E)forallT-instance-method" class="tooltip">
+      <span>dfs(node : Int64, initial_value : T, &block : Int64, T, NamedTuple(), T ->  -> ) forall T</span>
     dfs</a>, 
     
   
     <a href="../AtCoder/Graph.html#dijkstra(start_node)-instance-method" class="tooltip">
       <span>dijkstra(start_node)</span>
-    dijkstra</a>
+    dijkstra</a>, 
+    
+  
+    <a href="../AtCoder/Graph.html#visited:Set(Int64)-instance-method" class="tooltip">
+      <span>visited : Set(Int64)</span>
+    visited</a>
     
   
 
 
     
 
-  <h3>Constructor methods inherited from class <code><a href="../AtCoder/Graph.html">AtCoder::Graph</a></code></h3>
+  <h3>Constructor methods inherited from class <code><a href="../AtCoder/Graph.html">AtCoder::Graph(NodeInfo, EdgeInfo)</a></code></h3>
   
   
-    <a href="../AtCoder/Graph.html#new(size:Int64)-class-method" class="tooltip">
-      <span>new(size : Int64)</span>
+    <a href="../AtCoder/Graph.html#new(nodes:Array(NodeInfo))-class-method" class="tooltip">
+      <span>new(nodes : Array(NodeInfo))<br/>new(size : Int64, initial_node : NodeInfo = <span class="n">nil</span>)</span>
     new</a>
     
   
@@ -345,6 +400,48 @@
 </div>
 
 
+  <h2>
+    <a id="constructor-detail" class="anchor" href="#constructor-detail">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Constructor Detail
+  </h2>
+  
+    <div class="entry-detail" id="new(nodes:Array(NodeInfo))-class-method">
+      <div class="signature">
+        
+        def self.<strong>new</strong>(nodes : Array(NodeInfo))
+
+        <a class="method-permalink" href="#new(nodes:Array(NodeInfo))-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/google/ac-library.cr/blob/f01243a4b534638a4bd216ec3bf3f12dc28b8270/atcoder/Graph.cr#L22" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="new(size:Int64,initial_node:NodeInfo=nil)-class-method">
+      <div class="signature">
+        
+        def self.<strong>new</strong>(size : <a href="../Int64.html">Int64</a>, initial_node : NodeInfo = <span class="n">nil</span>)
+
+        <a class="method-permalink" href="#new(size:Int64,initial_node:NodeInfo=nil)-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/google/ac-library.cr/blob/f01243a4b534638a4bd216ec3bf3f12dc28b8270/atcoder/Graph.cr#L30" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+
 
 
 
@@ -369,7 +466,65 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/4caff7e45a0bbd02fe42634cc58370ba503c05ad/atcoder/Graph.cr#L86" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/f01243a4b534638a4bd216ec3bf3f12dc28b8270/atcoder/Graph.cr#L138" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="dist(a,b)-instance-method">
+      <div class="signature">
+        
+        def <strong>dist</strong>(a, b)
+
+        <a class="method-permalink" href="#dist(a,b)-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/google/ac-library.cr/blob/f01243a4b534638a4bd216ec3bf3f12dc28b8270/atcoder/Graph.cr#L257" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="lca(a,b)-instance-method">
+      <div class="signature">
+        
+        def <strong>lca</strong>(a, b)
+
+        <a class="method-permalink" href="#lca(a,b)-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>ameba:disable Metrics/CyclomaticComplexity</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/google/ac-library.cr/blob/f01243a4b534638a4bd216ec3bf3f12dc28b8270/atcoder/Graph.cr#L213" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="on_path?(a,b,c)-instance-method">
+      <div class="signature">
+        
+        def <strong>on_path?</strong>(a, b, c)
+
+        <a class="method-permalink" href="#on_path?(a,b,c)-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Returns <code>true</code> if node <code>c</code> is on the path from <code>a</code> to <code>b</code>.</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/google/ac-library.cr/blob/f01243a4b534638a4bd216ec3bf3f12dc28b8270/atcoder/Graph.cr#L265" target="_blank">View source</a>]
         
       </div>
     </div>

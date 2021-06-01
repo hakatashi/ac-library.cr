@@ -15,7 +15,7 @@
 </svg>
 
   <meta id="repository-name" content="github.com/google/ac-library.cr">
-  <title>AtCoder::Graph - github.com/google/ac-library.cr</title>
+  <title>AtCoder::Graph(NodeInfo, EdgeInfo) - github.com/google/ac-library.cr</title>
   <script type="text/javascript">
     CrystalDoc.base_path = "../";
   </script>
@@ -45,7 +45,7 @@
       
         <ul>
   
-  <li class=" " data-id="github.com/google/ac-library.cr/AtCoder/DirectedGraph" data-name="atcoder::directedgraph">
+  <li class=" " data-id="github.com/google/ac-library.cr/AtCoder/DirectedGraph" data-name="atcoder::directedgraph(nodeinfo, edgeinfo)">
       <a href="../AtCoder/DirectedGraph.html">DirectedGraph</a>
       
     </li>
@@ -60,7 +60,7 @@
       
     </li>
   
-  <li class=" current" data-id="github.com/google/ac-library.cr/AtCoder/Graph" data-name="atcoder::graph">
+  <li class=" current" data-id="github.com/google/ac-library.cr/AtCoder/Graph" data-name="atcoder::graph(nodeinfo, edgeinfo)">
       <a href="../AtCoder/Graph.html">Graph</a>
       
     </li>
@@ -150,7 +150,7 @@
       
     </li>
   
-  <li class=" " data-id="github.com/google/ac-library.cr/AtCoder/Tree" data-name="atcoder::tree">
+  <li class=" " data-id="github.com/google/ac-library.cr/AtCoder/Tree" data-name="atcoder::tree(nodeinfo, edgeinfo)">
       <a href="../AtCoder/Tree.html">Tree</a>
       
     </li>
@@ -170,7 +170,7 @@
       
     </li>
   
-  <li class=" " data-id="github.com/google/ac-library.cr/AtCoder/UndirectedGraph" data-name="atcoder::undirectedgraph">
+  <li class=" " data-id="github.com/google/ac-library.cr/AtCoder/UndirectedGraph" data-name="atcoder::undirectedgraph(nodeinfo, edgeinfo)">
       <a href="../AtCoder/UndirectedGraph.html">UndirectedGraph</a>
       
     </li>
@@ -199,12 +199,12 @@
 <div class="main-content">
 <h1 class="type-name">
 
-  <span class="kind">class</span> AtCoder::Graph
+  <span class="kind">class</span> AtCoder::Graph(NodeInfo, EdgeInfo)
 
 </h1>
 
 
-  <ul class="superclass-hierarchy"><li class="superclass"><a href="../AtCoder/Graph.html">AtCoder::Graph</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../AtCoder/Graph.html">AtCoder::Graph(NodeInfo, EdgeInfo)</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
 
 
 
@@ -227,9 +227,9 @@
   </h2>
   <ul class="other-types-list">
     
-      <li class="other-type"><a href="../AtCoder/DirectedGraph.html">AtCoder::DirectedGraph</a></li>
+      <li class="other-type"><a href="../AtCoder/DirectedGraph.html">AtCoder::DirectedGraph(NodeInfo, EdgeInfo)</a></li>
     
-      <li class="other-type"><a href="../AtCoder/UndirectedGraph.html">AtCoder::UndirectedGraph</a></li>
+      <li class="other-type"><a href="../AtCoder/UndirectedGraph.html">AtCoder::UndirectedGraph(NodeInfo, EdgeInfo)</a></li>
     
   </ul>
 
@@ -248,7 +248,7 @@
   </h2>
   
     
-      <a href="https://github.com/google/ac-library.cr/blob/4caff7e45a0bbd02fe42634cc58370ba503c05ad/atcoder/Graph.cr#L18" target="_blank">
+      <a href="https://github.com/google/ac-library.cr/blob/f01243a4b534638a4bd216ec3bf3f12dc28b8270/atcoder/Graph.cr#L18" target="_blank">
         atcoder/Graph.cr
       </a>
     
@@ -256,25 +256,6 @@
   
 
 
-
-  
-    <h2>
-      <a id="constant-summary" class="anchor" href="#constant-summary">
-  <svg class="octicon-link" aria-hidden="true">
-    <use href="#octicon-link"/>
-  </svg>
-</a>
-      Constant Summary
-    </h2>
-  
-  <dl>
-    
-      <dt class="entry-const" id="INF">
-        <strong>INF</strong> = <code><span class="n">1000000000000000000_i64</span></code>
-      </dt>
-      
-    
-  </dl>
 
 
 
@@ -289,7 +270,12 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#new(size:Int64)-class-method" class="signature"><strong>.new</strong>(size : Int64)</a>
+        <a href="#new(nodes:Array(NodeInfo))-class-method" class="signature"><strong>.new</strong>(nodes : Array(NodeInfo))</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#new(size:Int64,initial_node:NodeInfo=nil)-class-method" class="signature"><strong>.new</strong>(size : Int64, initial_node : NodeInfo = <span class="n">nil</span>)</a>
         
       </li>
     
@@ -310,17 +296,19 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#dfs(node:Int64,parent:Int64,value:T,&block:Int64,Int64?,Int64,T,T-%3E-%3E)forallT-instance-method" class="signature"><strong>#dfs</strong>(node : Int64, parent : Int64, value : T, &block : Int64, Int64?, Int64, T, T ->  -> ) forall T</a>
-        
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#dfs(node:Int64,initial_value:T,&block:Int64,Int64?,Int64,T,T-%3E-%3E)forallT-instance-method" class="signature"><strong>#dfs</strong>(node : Int64, initial_value : T, &block : Int64, Int64?, Int64, T, T ->  -> ) forall T</a>
+        <a href="#dfs(node:Int64,initial_value:T,&block:Int64,T,NamedTuple(),T-%3E-%3E)forallT-instance-method" class="signature"><strong>#dfs</strong>(node : Int64, initial_value : T, &block : Int64, T, NamedTuple(), T ->  -> ) forall T</a>
         
       </li>
     
       <li class="entry-summary">
         <a href="#dijkstra(start_node)-instance-method" class="signature"><strong>#dijkstra</strong>(start_node)</a>
+        
+          <div class="summary"><p>Performs Dijkstra's Algorithm to calculate the distance of each node from <code>start_node</code>.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#visited:Set(Int64)-instance-method" class="signature"><strong>#visited</strong> : Set(Int64)</a>
         
       </li>
     
@@ -364,18 +352,34 @@
     Constructor Detail
   </h2>
   
-    <div class="entry-detail" id="new(size:Int64)-class-method">
+    <div class="entry-detail" id="new(nodes:Array(NodeInfo))-class-method">
       <div class="signature">
         
-        def self.<strong>new</strong>(size : <a href="../Int64.html">Int64</a>)
+        def self.<strong>new</strong>(nodes : Array(NodeInfo))
 
-        <a class="method-permalink" href="#new(size:Int64)-class-method">#</a>
+        <a class="method-permalink" href="#new(nodes:Array(NodeInfo))-class-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/4caff7e45a0bbd02fe42634cc58370ba503c05ad/atcoder/Graph.cr#L21" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/f01243a4b534638a4bd216ec3bf3f12dc28b8270/atcoder/Graph.cr#L22" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="new(size:Int64,initial_node:NodeInfo=nil)-class-method">
+      <div class="signature">
+        
+        def self.<strong>new</strong>(size : <a href="../Int64.html">Int64</a>, initial_node : NodeInfo = <span class="n">nil</span>)
+
+        <a class="method-permalink" href="#new(size:Int64,initial_node:NodeInfo=nil)-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/google/ac-library.cr/blob/f01243a4b534638a4bd216ec3bf3f12dc28b8270/atcoder/Graph.cr#L30" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -394,34 +398,18 @@
     Instance Method Detail
   </h2>
   
-    <div class="entry-detail" id="dfs(node:Int64,parent:Int64,value:T,&amp;block:Int64,Int64?,Int64,T,T-&gt;-&gt;)forallT-instance-method">
+    <div class="entry-detail" id="dfs(node:Int64,initial_value:T,&amp;block:Int64,T,NamedTuple(),T-&gt;-&gt;)forallT-instance-method">
       <div class="signature">
         
-        def <strong>dfs</strong>(node : <a href="../Int64.html">Int64</a>, parent : <a href="../Int64.html">Int64</a>, value : T, &block : <a href="../Int64.html">Int64</a>, <a href="../Int64.html">Int64</a>?, <a href="../Int64.html">Int64</a>, T, T ->  -> ) forall T
+        def <strong>dfs</strong>(node : <a href="../Int64.html">Int64</a>, initial_value : T, &block : <a href="../Int64.html">Int64</a>, T, NamedTuple(), T ->  -> ) forall T
 
-        <a class="method-permalink" href="#dfs(node:Int64,parent:Int64,value:T,&block:Int64,Int64?,Int64,T,T-%3E-%3E)forallT-instance-method">#</a>
+        <a class="method-permalink" href="#dfs(node:Int64,initial_value:T,&block:Int64,T,NamedTuple(),T-%3E-%3E)forallT-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/4caff7e45a0bbd02fe42634cc58370ba503c05ad/atcoder/Graph.cr#L61" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="dfs(node:Int64,initial_value:T,&amp;block:Int64,Int64?,Int64,T,T-&gt;-&gt;)forallT-instance-method">
-      <div class="signature">
-        
-        def <strong>dfs</strong>(node : <a href="../Int64.html">Int64</a>, initial_value : T, &block : <a href="../Int64.html">Int64</a>, <a href="../Int64.html">Int64</a>?, <a href="../Int64.html">Int64</a>, T, T ->  -> ) forall T
-
-        <a class="method-permalink" href="#dfs(node:Int64,initial_value:T,&block:Int64,Int64?,Int64,T,T-%3E-%3E)forallT-instance-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/google/ac-library.cr/blob/4caff7e45a0bbd02fe42634cc58370ba503c05ad/atcoder/Graph.cr#L54" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/f01243a4b534638a4bd216ec3bf3f12dc28b8270/atcoder/Graph.cr#L70" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -434,10 +422,32 @@
         <a class="method-permalink" href="#dijkstra(start_node)-instance-method">#</a>
       </div>
       
+        <div class="doc">
+          
+          <p>Performs Dijkstra's Algorithm to calculate the distance of each node from <code>start_node</code>.
+To use this method, <code>EdgeInfo</code> must implement <code>.zero</code> and <code>#-</code> and <code>#+(EdgeInfo)</code> and <code>#>(EdgeInfo)</code>.</p>
+        </div>
+      
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/4caff7e45a0bbd02fe42634cc58370ba503c05ad/atcoder/Graph.cr#L25" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/f01243a4b534638a4bd216ec3bf3f12dc28b8270/atcoder/Graph.cr#L40" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="visited:Set(Int64)-instance-method">
+      <div class="signature">
+        
+        def <strong>visited</strong> : Set(<a href="../Int64.html">Int64</a>)
+
+        <a class="method-permalink" href="#visited:Set(Int64)-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/google/ac-library.cr/blob/f01243a4b534638a4bd216ec3bf3f12dc28b8270/atcoder/Graph.cr#L20" target="_blank">View source</a>]
         
       </div>
     </div>
