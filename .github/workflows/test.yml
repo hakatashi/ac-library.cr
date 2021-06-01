@@ -48,11 +48,11 @@ jobs:
         CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
       shell: bash
     - name: Build docs
-      if: github.event == 'push' && github.ref == 'refs/heads/master'
+      if: ${{ github.event_name == 'push' }}
       run: crystal docs atcoder/* -o dist
     - name: Deploy docs to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
-      if: github.event == 'push' && github.ref == 'refs/heads/master'
+      if: ${{ github.event_name == 'push' }}
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./dist
