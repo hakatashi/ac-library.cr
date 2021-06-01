@@ -14,8 +14,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require "./PriorityQueue.cr"
-
 module AtCoder
   class Graph(NodeInfo, EdgeInfo)
     @size_bits : Int32
@@ -211,6 +209,7 @@ module AtCoder
       node
     end
 
+    # ameba:disable Metrics/CyclomaticComplexity
     def lca(a, b)
       if @lca_root.nil?
         lca_precompute(0_i64)
