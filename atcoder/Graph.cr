@@ -36,14 +36,14 @@ module AtCoder
     end
 
     # Performs Dijkstra's Algorithm to calculate the distance of each node from `start_node`.
-    # To use this method, `EdgeInfo` must implement `.zero` and `#-` and `#+(EdgeInfo)` and `#>(EdgeInfo)`.
+    # To use this method, `EdgeInfo` must implement `.zero` and `#+(EdgeInfo)` and `#>(EdgeInfo)`.
     def dijkstra(start_node)
       dist = Array(EdgeInfo | Nil).new(@size, nil)
       dist[start_node] = EdgeInfo.zero
 
       prev_nodes = Array(Int64 | Nil).new(@size, nil)
 
-      queue = AtCoder::PriorityQueue({EdgeInfo, Int64}).new {|(d, v)| -d}
+      queue = AtCoder::PriorityQueue({EdgeInfo, Int64}).new {|(ad, av), (bd, bv)| ad > bd}
       queue << {EdgeInfo.zero, start_node.to_i64}
 
       until queue.empty?

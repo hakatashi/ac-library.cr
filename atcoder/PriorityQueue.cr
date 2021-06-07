@@ -30,13 +30,16 @@ module AtCoder
     getter heap : Array(T)
 
     def initialize
-      initialize(&.itself)
+      initialize {|a, b| a <= b}
     end
 
     # Initializes queue with the custom comperator.
     #
+    # If the second argument `b` should be popped earlier than
+    # the first argument `a`, return `true`. Else, return `false`.
+    #
     # ```
-    # q = AtCoder::PriorityQueue(Int64).new {|n| -n}
+    # q = AtCoder::PriorityQueue(Int64).new {|a, b| a >= b}
     # q << 1_i64
     # q << 3_i64
     # q << 2_i64
@@ -44,9 +47,9 @@ module AtCoder
     # q.pop # => 2
     # q.pop # => 3
     # ```
-    def initialize(&block : T -> (Int8 | Int16 | Int32 | Int64 | UInt8 | UInt16 | UInt32 | UInt64))
+    def initialize(&block : T, T -> Bool)
       @heap = Array(T).new
-      @priority_proc = block
+      @compare_proc = block
     end
 
     # Pushes value into the queue.
@@ -55,7 +58,7 @@ module AtCoder
       index = @heap.size - 1
       while index != 0
         parent = (index - 1) // 2
-        if @priority_proc.call(@heap[parent]) >= @priority_proc.call(@heap[index])
+        if @compare_proc.call(@heap[index], @heap[parent])
           break
         end
         @heap[parent], @heap[index] = @heap[index], @heap[parent]
@@ -80,12 +83,12 @@ module AtCoder
       @heap[0] = @heap.pop
       index = 0
       while index * 2 + 1 < @heap.size
-        child = if index * 2 + 2 < @heap.size && @priority_proc.call(@heap[index * 2 + 1]) < @priority_proc.call(@heap[index * 2 + 2])
+        child = if index * 2 + 2 < @heap.size && !@compare_proc.call(@heap[index * 2 + 2], @heap[index * 2 + 1])
           index * 2 + 2
         else
           index * 2 + 1
         end
-        if @priority_proc.call(@heap[index]) >= @priority_proc.call(@heap[child])
+        if @compare_proc.call(@heap[child], @heap[index])
           break
         end
         @heap[child], @heap[index] = @heap[index], @heap[child]
