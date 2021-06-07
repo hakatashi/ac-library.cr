@@ -251,7 +251,7 @@ q.pop <span class="c"># =&gt; 1</span></code></pre>
   </h2>
   
     
-      <a href="https://github.com/google/ac-library.cr/blob/c8a09c5c79ead5498ec70353649fc45771165a3a/atcoder/PriorityQueue.cr#L29" target="_blank">
+      <a href="https://github.com/google/ac-library.cr/blob/9e3d4827d0e9d5f932709e205f27f71aa724e551/atcoder/PriorityQueue.cr#L29" target="_blank">
         atcoder/PriorityQueue.cr
       </a>
     
@@ -278,7 +278,7 @@ q.pop <span class="c"># =&gt; 1</span></code></pre>
       </li>
     
       <li class="entry-summary">
-        <a href="#new(&block:T-%3EInt8%7CInt16%7CInt32%7CInt64%7CUInt8%7CUInt16%7CUInt32%7CUInt64)-class-method" class="signature"><strong>.new</strong>(&block : T -> Int8 | Int16 | Int32 | Int64 | UInt8 | UInt16 | UInt32 | UInt64)</a>
+        <a href="#new(&block:T,T-%3EBool)-class-method" class="signature"><strong>.new</strong>(&block : T, T -> Bool)</a>
         
           <div class="summary"><p>Initializes queue with the custom comperator.</p></div>
         
@@ -405,24 +405,27 @@ q.pop <span class="c"># =&gt; 1</span></code></pre>
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/c8a09c5c79ead5498ec70353649fc45771165a3a/atcoder/PriorityQueue.cr#L32" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/9e3d4827d0e9d5f932709e205f27f71aa724e551/atcoder/PriorityQueue.cr#L32" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="new(&amp;block:T-&gt;Int8|Int16|Int32|Int64|UInt8|UInt16|UInt32|UInt64)-class-method">
+    <div class="entry-detail" id="new(&amp;block:T,T-&gt;Bool)-class-method">
       <div class="signature">
         
-        def self.<strong>new</strong>(&block : T -> Int8 | Int16 | Int32 | <a href="../Int64.html">Int64</a> | UInt8 | UInt16 | UInt32 | UInt64)
+        def self.<strong>new</strong>(&block : T, T -> Bool)
 
-        <a class="method-permalink" href="#new(&block:T-%3EInt8%7CInt16%7CInt32%7CInt64%7CUInt8%7CUInt16%7CUInt32%7CUInt64)-class-method">#</a>
+        <a class="method-permalink" href="#new(&block:T,T-%3EBool)-class-method">#</a>
       </div>
       
         <div class="doc">
           
           <p>Initializes queue with the custom comperator.</p>
 
-<pre><code>q <span class="o">=</span> <span class="t">AtCoder</span><span class="t">::</span><span class="t">PriorityQueue</span>(<span class="t">Int64</span>).<span class="k">new</span> {<span class="o">|</span>n<span class="o">|</span> <span class="o">-</span>n}
+<p>If the second argument <code>b</code> should be popped earlier than
+the first argument <code>a</code>, return <code>true</code>. Else, return <code>false</code>.</p>
+
+<pre><code>q <span class="o">=</span> <span class="t">AtCoder</span><span class="t">::</span><span class="t">PriorityQueue</span>(<span class="t">Int64</span>).<span class="k">new</span> {<span class="o">|</span>a, b<span class="o">|</span> a <span class="o">&gt;=</span> b}
 q <span class="o">&lt;&lt;</span> <span class="n">1_i64</span>
 q <span class="o">&lt;&lt;</span> <span class="n">3_i64</span>
 q <span class="o">&lt;&lt;</span> <span class="n">2_i64</span>
@@ -434,7 +437,7 @@ q.pop <span class="c"># =&gt; 3</span></code></pre>
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/c8a09c5c79ead5498ec70353649fc45771165a3a/atcoder/PriorityQueue.cr#L47" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/9e3d4827d0e9d5f932709e205f27f71aa724e551/atcoder/PriorityQueue.cr#L50" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -469,7 +472,7 @@ q.pop <span class="c"># =&gt; 3</span></code></pre>
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/c8a09c5c79ead5498ec70353649fc45771165a3a/atcoder/PriorityQueue.cr#L67" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/9e3d4827d0e9d5f932709e205f27f71aa724e551/atcoder/PriorityQueue.cr#L70" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -490,7 +493,7 @@ q.pop <span class="c"># =&gt; 3</span></code></pre>
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/c8a09c5c79ead5498ec70353649fc45771165a3a/atcoder/PriorityQueue.cr#L98" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/9e3d4827d0e9d5f932709e205f27f71aa724e551/atcoder/PriorityQueue.cr#L101" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -511,7 +514,7 @@ q.pop <span class="c"># =&gt; 3</span></code></pre>
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/c8a09c5c79ead5498ec70353649fc45771165a3a/atcoder/PriorityQueue.cr#L98" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/9e3d4827d0e9d5f932709e205f27f71aa724e551/atcoder/PriorityQueue.cr#L101" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -527,7 +530,7 @@ q.pop <span class="c"># =&gt; 3</span></code></pre>
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/c8a09c5c79ead5498ec70353649fc45771165a3a/atcoder/PriorityQueue.cr#L30" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/9e3d4827d0e9d5f932709e205f27f71aa724e551/atcoder/PriorityQueue.cr#L30" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -548,7 +551,7 @@ q.pop <span class="c"># =&gt; 3</span></code></pre>
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/c8a09c5c79ead5498ec70353649fc45771165a3a/atcoder/PriorityQueue.cr#L72" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/9e3d4827d0e9d5f932709e205f27f71aa724e551/atcoder/PriorityQueue.cr#L75" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -569,7 +572,7 @@ q.pop <span class="c"># =&gt; 3</span></code></pre>
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/c8a09c5c79ead5498ec70353649fc45771165a3a/atcoder/PriorityQueue.cr#L53" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/9e3d4827d0e9d5f932709e205f27f71aa724e551/atcoder/PriorityQueue.cr#L56" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -590,7 +593,7 @@ q.pop <span class="c"># =&gt; 3</span></code></pre>
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/c8a09c5c79ead5498ec70353649fc45771165a3a/atcoder/PriorityQueue.cr#L101" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/9e3d4827d0e9d5f932709e205f27f71aa724e551/atcoder/PriorityQueue.cr#L104" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -611,7 +614,7 @@ q.pop <span class="c"># =&gt; 3</span></code></pre>
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/c8a09c5c79ead5498ec70353649fc45771165a3a/atcoder/PriorityQueue.cr#L101" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/9e3d4827d0e9d5f932709e205f27f71aa724e551/atcoder/PriorityQueue.cr#L104" target="_blank">View source</a>]
         
       </div>
     </div>
