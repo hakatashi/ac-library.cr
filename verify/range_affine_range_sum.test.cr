@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# verify-helper: PROBLEM https://judge.yosupo.jp/problem/range_affine_range_sum
+# verification-helper: PROBLEM https://judge.yosupo.jp/problem/range_affine_range_sum
 
 require "../atcoder/LazySegTree.cr"
 require "../atcoder/ModInt.cr"

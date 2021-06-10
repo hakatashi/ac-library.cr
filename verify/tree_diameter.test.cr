@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# verify-helper: PROBLEM https://judge.yosupo.jp/problem/tree_diameter
+# verification-helper: PROBLEM https://judge.yosupo.jp/problem/tree_diameter
 
 require "../atcoder/PriorityQueue.cr"
 require "../atcoder/Graph.cr"

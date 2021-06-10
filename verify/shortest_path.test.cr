@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# verify-helper: PROBLEM https://judge.yosupo.jp/problem/shortest_path
+# verification-helper: PROBLEM https://judge.yosupo.jp/problem/shortest_path
 
 require "../atcoder/PriorityQueue.cr"
 require "../atcoder/Graph.cr"

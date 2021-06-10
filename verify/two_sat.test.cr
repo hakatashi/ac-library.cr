@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# verify-helper: PROBLEM https://judge.yosupo.jp/problem/two_sat
+# verification-helper: PROBLEM https://judge.yosupo.jp/problem/two_sat
 
 require "../atcoder/TwoSat.cr"
 

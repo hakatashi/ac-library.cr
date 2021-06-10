@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# verify-helper: PROBLEM https://judge.yosupo.jp/problem/staticrmq
+# verification-helper: PROBLEM https://judge.yosupo.jp/problem/staticrmq
 
 require "../atcoder/SegTree.cr"
 

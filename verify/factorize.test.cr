@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# verify-helper: PROBLEM https://judge.yosupo.jp/problem/factorize
+# verification-helper: PROBLEM https://judge.yosupo.jp/problem/factorize
 
 require "../atcoder/Prime.cr"
 

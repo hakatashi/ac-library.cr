@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# verify-helper: PROBLEM https://judge.yosupo.jp/problem/sum_of_floor_of_linear
+# verification-helper: PROBLEM https://judge.yosupo.jp/problem/sum_of_floor_of_linear
 
 require "../atcoder/Math.cr"
 
