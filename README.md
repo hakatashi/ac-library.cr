@@ -9,8 +9,6 @@ ac-library.cr is a Crystal port of [ac-library](https://github.com/atcoder/ac-li
 
 This library aims to provide the almost-equivalent (and additional) functionality with ac-library but in the manner of Crystal.
 
-For the convinience of usage in programming contest, each class in the library does not depend on the other files and can be independently used.
-
 ## [ModInt.cr](atcoder/ModInt.cr) ([<atcoder/modint>](https://atcoder.github.io/ac-library/document_en/modint.html))
 
 * `modint` => Unimplemented

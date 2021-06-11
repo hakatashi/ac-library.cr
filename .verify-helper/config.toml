@@ -1,5 +1,5 @@
 [languages.cr]
 compile = "bash .verify-helper/build.sh {path} {tempdir}/a.out --release"
 execute = "{tempdir}/a.out"
-bundle = "false"
-list_dependencies = "true"
+bundle = "bin/cr-bundle {path} -f"
+list_dependencies = "bin/cr-bundle {path} -d"

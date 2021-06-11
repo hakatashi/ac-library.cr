@@ -1,6 +1,10 @@
-version: 1.0
+version: 2.0
 shards:
   ameba:
-    github: crystal-ameba/ameba
+    git: https://github.com/crystal-ameba/ameba.git
     version: 0.13.4
+
+  cr-bundle:
+    git: https://github.com/hakatashi/cr-bundle.git
+    version: 0.3.0+git.commit.c8017537d69d675c0283dbe5a4926b1c5a976630
 
