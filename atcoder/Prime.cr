@@ -285,7 +285,7 @@ module AtCoder
   end
 end
 
-struct Int64
+struct Int
   def prime?
     AtCoder::Prime.prime?(self)
   end
