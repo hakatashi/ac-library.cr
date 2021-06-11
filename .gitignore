@@ -2,3 +2,4 @@ bin
 dist
 lib
 coverage
+.sass-cache
