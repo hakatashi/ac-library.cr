@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Crystal Docs 0.32.1">
+
+<link href="../css/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="../js/doc.js"></script>
+
+<svg class="hidden">
+  <symbol id="octicon-link" viewBox="0 0 16 16">
+    <path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+  </symbol>
+</svg>
+
+  <meta id="repository-name" content="github.com/google/ac-library.cr">
+  <title>AtCoder::Prime - github.com/google/ac-library.cr</title>
+  <script type="text/javascript">
+    CrystalDoc.base_path = "../";
+  </script>
+</head>
+<body>
+
+<div class="sidebar">
+  <div class="sidebar-header">
+    <div class="search-box">
+      <input type="search" class="search-input" placeholder="Search..." spellcheck="false" aria-label="Search">
+    </div>
+
+    <div class="repository-links">
+      <a href="../index.html">README</a>
+    </div>
+  </div>
+
+  <div class="search-results" class="hidden">
+    <ul class="search-list"></ul>
+  </div>
+
+  <div class="types-list">
+    <ul>
+  
+  <li class="parent open current" data-id="github.com/google/ac-library.cr/AtCoder" data-name="atcoder">
+      <a href="../AtCoder.html">AtCoder</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/google/ac-library.cr/AtCoder/DirectedGraph" data-name="atcoder::directedgraph(nodeinfo, edgeinfo)">
+      <a href="../AtCoder/DirectedGraph.html">DirectedGraph</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/google/ac-library.cr/AtCoder/DSU" data-name="atcoder::dsu">
+      <a href="../AtCoder/DSU.html">DSU</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/google/ac-library.cr/AtCoder/FenwickTree" data-name="atcoder::fenwicktree(t)">
+      <a href="../AtCoder/FenwickTree.html">FenwickTree</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/google/ac-library.cr/AtCoder/Graph" data-name="atcoder::graph(nodeinfo, edgeinfo)">
+      <a href="../AtCoder/Graph.html">Graph</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/google/ac-library.cr/AtCoder/LazySegTree" data-name="atcoder::lazysegtree(s, f)">
+      <a href="../AtCoder/LazySegTree.html">LazySegTree</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/google/ac-library.cr/AtCoder/Math" data-name="atcoder::math">
+      <a href="../AtCoder/Math.html">Math</a>
+      
+    </li>
+  
+  <li class="parent " data-id="github.com/google/ac-library.cr/AtCoder/MaxFlow" data-name="atcoder::maxflow">
+      <a href="../AtCoder/MaxFlow.html">MaxFlow</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/google/ac-library.cr/AtCoder/MaxFlow/Edge" data-name="atcoder::maxflow::edge">
+      <a href="../AtCoder/MaxFlow/Edge.html">Edge</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="github.com/google/ac-library.cr/AtCoder/ModInt1000000007" data-name="atcoder::modint1000000007">
+      <a href="../AtCoder/ModInt1000000007.html">ModInt1000000007</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/google/ac-library.cr/AtCoder/ModInt998244353" data-name="atcoder::modint998244353">
+      <a href="../AtCoder/ModInt998244353.html">ModInt998244353</a>
+      
+    </li>
+  
+  <li class=" current" data-id="github.com/google/ac-library.cr/AtCoder/Prime" data-name="atcoder::prime">
+      <a href="../AtCoder/Prime.html">Prime</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/google/ac-library.cr/AtCoder/PriorityQueue" data-name="atcoder::priorityqueue(t)">
+      <a href="../AtCoder/PriorityQueue.html">PriorityQueue</a>
+      
+    </li>
+  
+  <li class="parent " data-id="github.com/google/ac-library.cr/AtCoder/RedBlackTree" data-name="atcoder::redblacktree">
+      <a href="../AtCoder/RedBlackTree.html">RedBlackTree</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/google/ac-library.cr/AtCoder/RedBlackTree/NilNode" data-name="atcoder::redblacktree::nilnode">
+      <a href="../AtCoder/RedBlackTree/NilNode.html">NilNode</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/google/ac-library.cr/AtCoder/RedBlackTree/Node" data-name="atcoder::redblacktree::node">
+      <a href="../AtCoder/RedBlackTree/Node.html">Node</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class="parent " data-id="github.com/google/ac-library.cr/AtCoder/SCC" data-name="atcoder::scc">
+      <a href="../AtCoder/SCC.html">SCC</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/google/ac-library.cr/AtCoder/SCC/Adjacency" data-name="atcoder::scc::adjacency">
+      <a href="../AtCoder/SCC/Adjacency.html">Adjacency</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="github.com/google/ac-library.cr/AtCoder/SegTree" data-name="atcoder::segtree(t)">
+      <a href="../AtCoder/SegTree.html">SegTree</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/google/ac-library.cr/AtCoder/Tree" data-name="atcoder::tree(nodeinfo, edgeinfo)">
+      <a href="../AtCoder/Tree.html">Tree</a>
+      
+    </li>
+  
+  <li class="parent " data-id="github.com/google/ac-library.cr/AtCoder/TwoSat" data-name="atcoder::twosat">
+      <a href="../AtCoder/TwoSat.html">TwoSat</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/google/ac-library.cr/AtCoder/TwoSat/NotSatisfiableError" data-name="atcoder::twosat::notsatisfiableerror">
+      <a href="../AtCoder/TwoSat/NotSatisfiableError.html">NotSatisfiableError</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="github.com/google/ac-library.cr/AtCoder/UndirectedGraph" data-name="atcoder::undirectedgraph(nodeinfo, edgeinfo)">
+      <a href="../AtCoder/UndirectedGraph.html">UndirectedGraph</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="github.com/google/ac-library.cr/Int" data-name="int">
+      <a href="../Int.html">Int</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/google/ac-library.cr/Int64" data-name="int64">
+      <a href="../Int64.html">Int64</a>
+      
+    </li>
+  
+</ul>
+
+  </div>
+</div>
+
+
+<div class="main-content">
+<h1 class="type-name">
+
+  <span class="kind">module</span> AtCoder::Prime
+
+</h1>
+
+
+
+
+
+  <h2>
+    <a id="overview" class="anchor" href="#overview">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Overview
+  </h2>
+
+  <p>Implements <a href="https://ruby-doc.com/stdlib/libdoc/prime/rdoc/Prime.html" target="_blank">Ruby's Prime library</a>.</p>
+
+<pre><code><span class="t">AtCoder</span><span class="t">::</span><span class="t">Prime</span>.first(<span class="n">7</span>) <span class="c"># =&gt; [2, 3, 5, 7, 11, 13, 17]</span></code></pre>
+
+
+
+
+
+  <h2>
+    <a id="included-modules" class="anchor" href="#included-modules">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Included Modules
+  </h2>
+  <ul class="other-types-list">
+    
+      <li class="other-type">Enumerable(<a href="../Int64.html">Int64</a>)</li>
+    
+  </ul>
+
+
+
+  <h2>
+    <a id="extended-modules" class="anchor" href="#extended-modules">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Extended Modules
+  </h2>
+  <ul class="other-types-list">
+    
+      <li class="other-type"><a href="../AtCoder/Prime.html">AtCoder::Prime</a></li>
+    
+  </ul>
+
+
+
+
+
+
+
+
+  <h2>
+    <a id="defined-in" class="anchor" href="#defined-in">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Defined in:
+  </h2>
+  
+    
+      <a href="https://github.com/google/ac-library.cr/blob/edaa6da7f5486f29be2af54ead2a57502a7015cd/atcoder/Prime.cr#L23" target="_blank">
+        atcoder/Prime.cr
+      </a>
+    
+    <br/>
+  
+
+
+
+
+
+
+
+
+
+  <h2>
+    <a id="instance-method-summary" class="anchor" href="#instance-method-summary">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Instance Method Summary
+  </h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#each(&)-instance-method" class="signature"><strong>#each</strong>(&)</a>
+        
+          <div class="summary"><p>Must yield this collection's elements to the block.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#each_divisor(value:Int)-instance-method" class="signature"><strong>#each_divisor</strong>(value : Int)</a>
+        
+          <div class="summary"><p>Returns an enumerator that iterates through the all positive divisors of the given number.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#each_divisor(value:T,&block:T-%3E)-instance-method" class="signature"><strong>#each_divisor</strong>(value : T, &block : T -> )</a>
+        
+          <div class="summary"><p>Returns an enumerator that iterates through the all positive divisors of the given number.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#int_from_prime_division(prime_divisions:Array(::Tuple(Int,Int)))-instance-method" class="signature"><strong>#int_from_prime_division</strong>(prime_divisions : Array(::Tuple(Int, Int)))</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#prime?(value:Int)-instance-method" class="signature"><strong>#prime?</strong>(value : Int)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#prime_division(value:Int)-instance-method" class="signature"><strong>#prime_division</strong>(value : Int)</a>
+        
+      </li>
+    
+  </ul>
+
+
+
+
+
+<div class="methods-inherited">
+  
+    
+
+
+    
+
+
+    
+
+
+  
+</div>
+
+
+
+
+
+
+  <h2>
+    <a id="instance-method-detail" class="anchor" href="#instance-method-detail">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Instance Method Detail
+  </h2>
+  
+    <div class="entry-detail" id="each(&amp;)-instance-method">
+      <div class="signature">
+        
+        def <strong>each</strong>(&)
+
+        <a class="method-permalink" href="#each(&)-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+            <div class="doc-inherited">
+              Description copied from module Enumerable(<a href="../Int64.html">Int64</a>)
+            </div>
+          
+          <p>Must yield this collection's elements to the block.</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/google/ac-library.cr/blob/edaa6da7f5486f29be2af54ead2a57502a7015cd/atcoder/Prime.cr#L34" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="each_divisor(value:Int)-instance-method">
+      <div class="signature">
+        
+        def <strong>each_divisor</strong>(value : <a href="../Int.html">Int</a>)
+
+        <a class="method-permalink" href="#each_divisor(value:Int)-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Returns an enumerator that iterates through the all positive divisors of
+the given number. <strong>The order is not guaranteed.</strong>
+Not in the original Ruby's Prime library.</p>
+
+<pre><code><span class="t">AtCoder</span><span class="t">::</span><span class="t">Prime</span>.each_divisor(<span class="n">20</span>) <span class="k">do</span> <span class="o">|</span>n<span class="o">|</span>
+  puts n
+<span class="k">end</span> <span class="c"># =&gt; Puts 1, 2, 4, 5, 10, and 20</span>
+
+<span class="t">AtCoder</span><span class="t">::</span><span class="t">Prime</span>.each_divisor(<span class="n">10</span>).map {<span class="o">|</span>n<span class="o">|</span> <span class="n">1.0</span> <span class="o">/</span> n}.to_a <span class="c"># =&gt; [1.0, 0.5, 0.2, 0.1]</span></code></pre>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/google/ac-library.cr/blob/edaa6da7f5486f29be2af54ead2a57502a7015cd/atcoder/Prime.cr#L315" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="each_divisor(value:T,&amp;block:T-&gt;)-instance-method">
+      <div class="signature">
+        
+        def <strong>each_divisor</strong>(value : <a href="../Int64.html">T</a>, &block : <a href="../Int64.html">T</a> -> )
+
+        <a class="method-permalink" href="#each_divisor(value:T,&block:T-%3E)-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Returns an enumerator that iterates through the all positive divisors of
+the given number. <strong>The order is not guaranteed.</strong>
+Not in the original Ruby's Prime library.</p>
+
+<pre><code><span class="t">AtCoder</span><span class="t">::</span><span class="t">Prime</span>.each_divisor(<span class="n">20</span>) <span class="k">do</span> <span class="o">|</span>n<span class="o">|</span>
+  puts n
+<span class="k">end</span> <span class="c"># =&gt; Puts 1, 2, 4, 5, 10, and 20</span>
+
+<span class="t">AtCoder</span><span class="t">::</span><span class="t">Prime</span>.each_divisor(<span class="n">10</span>).map {<span class="o">|</span>n<span class="o">|</span> <span class="n">1.0</span> <span class="o">/</span> n}.to_a <span class="c"># =&gt; [1.0, 0.5, 0.2, 0.1]</span></code></pre>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/google/ac-library.cr/blob/edaa6da7f5486f29be2af54ead2a57502a7015cd/atcoder/Prime.cr#L339" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="int_from_prime_division(prime_divisions:Array(::Tuple(Int,Int)))-instance-method">
+      <div class="signature">
+        
+        def <strong>int_from_prime_division</strong>(prime_divisions : Array(::Tuple(<a href="../Int.html">Int</a>, <a href="../Int.html">Int</a>)))
+
+        <a class="method-permalink" href="#int_from_prime_division(prime_divisions:Array(::Tuple(Int,Int)))-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/google/ac-library.cr/blob/edaa6da7f5486f29be2af54ead2a57502a7015cd/atcoder/Prime.cr#L113" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="prime?(value:Int)-instance-method">
+      <div class="signature">
+        
+        def <strong>prime?</strong>(value : <a href="../Int.html">Int</a>)
+
+        <a class="method-permalink" href="#prime?(value:Int)-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/google/ac-library.cr/blob/edaa6da7f5486f29be2af54ead2a57502a7015cd/atcoder/Prime.cr#L118" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="prime_division(value:Int)-instance-method">
+      <div class="signature">
+        
+        def <strong>prime_division</strong>(value : <a href="../Int.html">Int</a>)
+
+        <a class="method-permalink" href="#prime_division(value:Int)-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/google/ac-library.cr/blob/edaa6da7f5486f29be2af54ead2a57502a7015cd/atcoder/Prime.cr#L42" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+
+
+
+
+</div>
+
+</body>
+</html>
