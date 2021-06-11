@@ -90,7 +90,7 @@ h1 a:focus {
 
 <ul>
     <li><a href="/blob/master/verify/chinese_remainder_theorem.test.cr">View this file on GitHub</a></li>
-    <li>Last update: 2021-06-11 23:49:29+09:00</li>
+    <li>Last update: 2021-06-12 06:29:11+09:00</li>
     
     <li>Problem: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=2659">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=2659</a>
 </li>
@@ -242,7 +242,7 @@ h1 a:focus {
       <span class="n">inv</span> <span class="o">%</span> <span class="n">modulo</span>
     <span class="n">end</span>
 
-    <span class="cp"># Implements atcoder::pow_mod(base, exponent, modulo).
+    <span class="cp"># Simplified AtCoder::Math.pow_mod with support of Int64
 </span>    <span class="n">def</span> <span class="n">self</span><span class="p">.</span><span class="n">pow_mod</span><span class="p">(</span><span class="n">base</span><span class="p">,</span> <span class="n">exponent</span><span class="p">,</span> <span class="n">modulo</span><span class="p">)</span>
       <span class="k">if</span> <span class="n">exponent</span> <span class="o">==</span> <span class="mi">0</span>
         <span class="k">return</span> <span class="n">base</span><span class="p">.</span><span class="k">class</span><span class="p">.</span><span class="n">zero</span> <span class="o">+</span> <span class="mi">1</span>
@@ -255,12 +255,55 @@ h1 a:focus {
       <span class="n">ret</span> <span class="o">=</span> <span class="mi">1</span><span class="n">_i64</span>
       <span class="k">while</span> <span class="n">e</span> <span class="o">&gt;</span> <span class="mi">0</span>
         <span class="k">if</span> <span class="n">e</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span>
-          <span class="n">ret</span> <span class="o">=</span> <span class="n">ret</span> <span class="o">*</span> <span class="n">b</span> <span class="o">%</span> <span class="n">modulo</span>
+          <span class="n">ret</span> <span class="o">=</span> <span class="n">mul_mod</span><span class="p">(</span><span class="n">ret</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">modulo</span><span class="p">)</span>
         <span class="n">end</span>
-        <span class="n">b</span> <span class="o">=</span> <span class="n">b</span> <span class="o">*</span> <span class="n">b</span> <span class="o">%</span> <span class="n">modulo</span>
+        <span class="n">b</span> <span class="o">=</span> <span class="n">mul_mod</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">modulo</span><span class="p">)</span>
         <span class="n">e</span> <span class="c1">//= 2</span>
       <span class="n">end</span>
       <span class="n">ret</span>
+    <span class="n">end</span>
+
+    <span class="cp"># Caluculates a * b % mod without overflow detection
+</span>    <span class="err">@</span><span class="p">[</span><span class="n">AlwaysInline</span><span class="p">]</span>
+    <span class="n">def</span> <span class="n">self</span><span class="p">.</span><span class="n">mul_mod</span><span class="p">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">Int64</span><span class="p">,</span> <span class="n">b</span> <span class="o">:</span> <span class="n">Int64</span><span class="p">,</span> <span class="n">mod</span> <span class="o">:</span> <span class="n">Int64</span><span class="p">)</span>
+      <span class="k">if</span> <span class="n">mod</span> <span class="o">&lt;</span> <span class="n">Int32</span><span class="o">::</span><span class="n">MAX</span>
+        <span class="k">return</span> <span class="n">a</span> <span class="o">*</span> <span class="n">b</span> <span class="o">%</span> <span class="n">mod</span>
+      <span class="n">end</span>
+
+      <span class="cp"># 31-bit width
+</span>      <span class="n">a_high</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span> <span class="o">&gt;&gt;</span> <span class="mi">32</span><span class="p">).</span><span class="n">to_u64</span>
+      <span class="cp"># 32-bit width
+</span>      <span class="n">a_low</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span> <span class="o">&amp;</span> <span class="mh">0xFFFFFFFF</span><span class="p">).</span><span class="n">to_u64</span>
+      <span class="cp"># 31-bit width
+</span>      <span class="n">b_high</span> <span class="o">=</span> <span class="p">(</span><span class="n">b</span> <span class="o">&gt;&gt;</span> <span class="mi">32</span><span class="p">).</span><span class="n">to_u64</span>
+      <span class="cp"># 32-bit width
+</span>      <span class="n">b_low</span> <span class="o">=</span> <span class="p">(</span><span class="n">b</span> <span class="o">&amp;</span> <span class="mh">0xFFFFFFFF</span><span class="p">).</span><span class="n">to_u64</span>
+
+      <span class="cp"># 31-bit + 32-bit + 1-bit = 64-bit
+</span>      <span class="n">c</span> <span class="o">=</span> <span class="n">a_high</span> <span class="o">*</span> <span class="n">b_low</span> <span class="o">+</span> <span class="n">b_high</span> <span class="o">*</span> <span class="n">a_low</span>
+      <span class="n">c_high</span> <span class="o">=</span> <span class="n">c</span> <span class="o">&gt;&gt;</span> <span class="mi">32</span>
+      <span class="n">c_low</span> <span class="o">=</span> <span class="n">c</span> <span class="o">&amp;</span> <span class="mh">0xFFFFFFFF</span>
+
+      <span class="cp"># 31-bit + 31-bit
+</span>      <span class="n">res_high</span> <span class="o">=</span> <span class="n">a_high</span> <span class="o">*</span> <span class="n">b_high</span> <span class="o">+</span> <span class="n">c_high</span>
+      <span class="cp"># 32-bit + 32-bit
+</span>      <span class="n">res_low</span> <span class="o">=</span> <span class="n">a_low</span> <span class="o">*</span> <span class="n">b_low</span>
+      <span class="n">res_low_high</span> <span class="o">=</span> <span class="n">res_low</span> <span class="o">&gt;&gt;</span> <span class="mi">32</span>
+      <span class="n">res_low_low</span> <span class="o">=</span> <span class="n">res_low</span> <span class="o">&amp;</span> <span class="mh">0xFFFFFFFF</span>
+
+      <span class="cp"># Overflow
+</span>      <span class="k">if</span> <span class="n">res_low_high</span> <span class="o">+</span> <span class="n">c_low</span> <span class="o">&gt;=</span> <span class="mh">0x100000000</span>
+        <span class="n">res_high</span> <span class="o">+=</span> <span class="mi">1</span>
+      <span class="n">end</span>
+
+      <span class="n">res_low</span> <span class="o">=</span> <span class="p">(((</span><span class="n">res_low_high</span> <span class="o">+</span> <span class="n">c_low</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mh">0xFFFFFFFF</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="mi">32</span><span class="p">)</span> <span class="o">|</span> <span class="n">res_low_low</span>
+
+      <span class="p">(((</span><span class="n">res_high</span><span class="p">.</span><span class="n">to_i128</span> <span class="o">&lt;&lt;</span> <span class="mi">64</span><span class="p">)</span> <span class="o">|</span> <span class="n">res_low</span><span class="p">)</span> <span class="o">%</span> <span class="n">mod</span><span class="p">).</span><span class="n">to_i64</span>
+    <span class="n">end</span>
+
+    <span class="err">@</span><span class="p">[</span><span class="n">AlwaysInline</span><span class="p">]</span>
+    <span class="n">def</span> <span class="n">self</span><span class="p">.</span><span class="n">mul_mod</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">mod</span><span class="p">)</span>
+      <span class="n">typeof</span><span class="p">(</span><span class="n">mod</span><span class="p">).</span><span class="k">new</span><span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="n">to_i64</span> <span class="o">*</span> <span class="n">b</span> <span class="o">%</span> <span class="n">mod</span><span class="p">)</span>
     <span class="n">end</span>
 
     <span class="cp"># Implements atcoder::crt(remainders, modulos).
