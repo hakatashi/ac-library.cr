@@ -83,7 +83,10 @@ jobs:
         tar xf crystal-1.0.0-1-linux-x86_64.tar.gz
         cp crystal-1.0.0-1/bin/shards /usr/local/bin
     - name: Install Crystal dependencies
-      run: /usr/local/bin/shards install --ignore-crystal-version
+      run: |
+        /usr/local/bin/shards install --ignore-crystal-version
+        # Remove lib directory since it includes recursive symlink and that makes oj-verify hang
+        rm -rf lib
     - name: Run verifier
       run: oj-verify run --jobs 4
     - name: Generate bundled docs
