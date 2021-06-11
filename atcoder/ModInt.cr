@@ -14,6 +14,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+require "./Math.cr"
+
 module AtCoder
   # Implements [atcoder::static_modint](https://atcoder.github.io/ac-library/master/document_en/modint.html).
   #
@@ -60,26 +62,12 @@ module AtCoder
           combination(n + k - 1, k)
         end
 
-        def self.extended_gcd(a, b)
-          last_remainder, remainder = a.abs, b.abs
-          x, last_x, y, last_y = 0_i64, 1_i64, 1_i64, 0_i64
-          while remainder != 0
-            new_last_remainder = remainder
-            quotient, remainder = last_remainder.divmod(remainder)
-            last_remainder = new_last_remainder
-            x, last_x = last_x - quotient * x, x
-            y, last_y = last_y - quotient * y, y
-          end
-
-          return last_remainder, last_x * (a < 0 ? -1 : 1)
-        end
-
         def self.zero
           self.new(0_i64)
         end
 
         def inv
-          g, x = self.class.extended_gcd(@value, MOD)
+          g, x = AtCoder::Math.extended_gcd(@value, MOD)
           self.class.new(x % MOD)
         end
 
@@ -110,17 +98,7 @@ module AtCoder
         end
 
         def **(value)
-          b = value > 0 ? self : self.inv
-          e = value.abs
-          ret = self.class.new(1_i64)
-          while e > 0
-            if e % 2 == 1
-              ret *= b
-            end
-            b *= b
-            e //= 2
-          end
-          ret
+          self.class.new(AtCoder::Math.pow_mod(@value, value.to_i64, MOD))
         end
 
         def <<(value)

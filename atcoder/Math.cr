@@ -40,7 +40,7 @@ module AtCoder
       inv % modulo
     end
 
-    # Implements atcoder::pow_mod(base, exponent, modulo).
+    # Simplified AtCoder::Math.pow_mod with support of Int64
     def self.pow_mod(base, exponent, modulo)
       if exponent == 0
         return base.class.zero + 1
@@ -53,12 +53,55 @@ module AtCoder
       ret = 1_i64
       while e > 0
         if e % 2 == 1
-          ret = ret * b % modulo
+          ret = mul_mod(ret, b, modulo)
         end
-        b = b * b % modulo
+        b = mul_mod(b, b, modulo)
         e //= 2
       end
       ret
+    end
+
+    # Caluculates a * b % mod without overflow detection
+    @[AlwaysInline]
+    def self.mul_mod(a : Int64, b : Int64, mod : Int64)
+      if mod < Int32::MAX
+        return a * b % mod
+      end
+
+      # 31-bit width
+      a_high = (a >> 32).to_u64
+      # 32-bit width
+      a_low = (a & 0xFFFFFFFF).to_u64
+      # 31-bit width
+      b_high = (b >> 32).to_u64
+      # 32-bit width
+      b_low = (b & 0xFFFFFFFF).to_u64
+
+      # 31-bit + 32-bit + 1-bit = 64-bit
+      c = a_high * b_low + b_high * a_low
+      c_high = c >> 32
+      c_low = c & 0xFFFFFFFF
+
+      # 31-bit + 31-bit
+      res_high = a_high * b_high + c_high
+      # 32-bit + 32-bit
+      res_low = a_low * b_low
+      res_low_high = res_low >> 32
+      res_low_low = res_low & 0xFFFFFFFF
+
+      # Overflow
+      if res_low_high + c_low >= 0x100000000
+        res_high += 1
+      end
+
+      res_low = (((res_low_high + c_low) & 0xFFFFFFFF) << 32) | res_low_low
+
+      (((res_high.to_i128 << 64) | res_low) % mod).to_i64
+    end
+
+    @[AlwaysInline]
+    def self.mul_mod(a, b, mod)
+      typeof(mod).new(a.to_i64 * b % mod)
     end
 
     # Implements atcoder::crt(remainders, modulos).

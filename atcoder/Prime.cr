@@ -14,6 +14,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+require "./Math.cr"
+
 module AtCoder
   # Implements [Ruby's Prime library](https://ruby-doc.com/stdlib/libdoc/prime/rdoc/Prime.html).
   #
@@ -103,7 +105,7 @@ module AtCoder
     end
 
     private def pollard_random_f(n : Int, mod : Int)
-      (mul_mod(n, n, mod) + 1) % mod
+      (AtCoder::Math.mul_mod(n, n, mod) + 1) % mod
     end
 
     private def extract_prime_division_base(prime_divisions_class : Array({T, T}).class) forall T
@@ -139,65 +141,6 @@ module AtCoder
       miller_rabin(value.to_i64)
     end
 
-    # Simplified AtCoder::Math.pow_mod with support of Int64
-    private def pow_mod(base, exponent, modulo)
-      if base == 0
-        return base
-      end
-      b = base
-      e = exponent.abs
-      ret = 1_i64
-      while e > 0
-        if e % 2 == 1
-          ret = mul_mod(ret, b, modulo)
-        end
-        b = mul_mod(b, b, modulo)
-        e //= 2
-      end
-      ret
-    end
-
-    # Caluculates a * b % mod without overflow detection
-    private def mul_mod(a : Int64, b : Int64, mod : Int64)
-      if mod < Int32::MAX
-        return a * b % mod
-      end
-
-      # 31-bit width
-      a_high = (a >> 32).to_u64
-      # 32-bit width
-      a_low = (a & 0xFFFFFFFF).to_u64
-      # 31-bit width
-      b_high = (b >> 32).to_u64
-      # 32-bit width
-      b_low = (b & 0xFFFFFFFF).to_u64
-
-      # 31-bit + 32-bit + 1-bit = 64-bit
-      c = a_high * b_low + b_high * a_low
-      c_high = c >> 32
-      c_low = c & 0xFFFFFFFF
-
-      # 31-bit + 31-bit
-      res_high = a_high * b_high + c_high
-      # 32-bit + 32-bit
-      res_low = a_low * b_low
-      res_low_high = res_low >> 32
-      res_low_low = res_low & 0xFFFFFFFF
-
-      # Overflow
-      if res_low_high + c_low >= 0x100000000
-        res_high += 1
-      end
-
-      res_low = (((res_low_high + c_low) & 0xFFFFFFFF) << 32) | res_low_low
-
-      (((res_high.to_i128 << 64) | res_low) % mod).to_i64
-    end
-
-    private def mul_mod(a, b, mod)
-      typeof(mod).new(a.to_i64 * b % mod)
-    end
-
     private def miller_rabin(value)
       d = value - 1
       s = 0_i64
@@ -209,11 +152,11 @@ module AtCoder
       miller_rabin_bases(value).each do |base|
         next if base == value
 
-        x = pow_mod(base.to_i64, d, value)
+        x = AtCoder::Math.pow_mod(base.to_i64, d, value)
         next if x == 1 || x == value - 1
 
         is_composite = s.times.all? do
-          x = mul_mod(x, x, value)
+          x = AtCoder::Math.mul_mod(x, x, value)
           x != value - 1
         end
 
