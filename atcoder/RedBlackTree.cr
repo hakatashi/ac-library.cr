@@ -67,6 +67,8 @@ module AtCoder
       end
     end
 
+    include Enumerable(Int32)
+
     property root : Node
     property :size
 

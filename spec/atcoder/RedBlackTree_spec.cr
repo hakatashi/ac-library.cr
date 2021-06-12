@@ -41,6 +41,19 @@ describe "RedBlackTree" do
     tree.min.should eq 2
   end
 
+  it "implements enumerable" do
+    tree = RedBlackTree.new
+    tree << 5
+    tree << 6
+    tree << 1
+    tree << 3
+    tree << 2
+    tree << 8
+    tree << 7
+    tree << 4
+    tree.first(5).should eq [1, 2, 3, 4, 5]
+  end
+
   describe "#empty?" do
     it "should report true if queue is empty" do
       tree = RedBlackTree.new
