@@ -90,7 +90,7 @@ h1 a:focus {
 
 <ul>
     <li><a href="/blob/master/spec/atcoder/RedBlackTree_spec.cr">View this file on GitHub</a></li>
-    <li>Last update: 2021-06-12 06:29:11+09:00</li>
+    <li>Last update: 2021-06-12 09:18:17+09:00</li>
     
     
     
@@ -183,6 +183,19 @@ h1 a:focus {
 
     <span class="n">tree</span><span class="p">.</span><span class="n">max</span><span class="p">.</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">7</span>
     <span class="n">tree</span><span class="p">.</span><span class="n">min</span><span class="p">.</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">2</span>
+  <span class="n">end</span>
+
+  <span class="n">it</span> <span class="s">"implements enumerable"</span> <span class="k">do</span>
+    <span class="n">tree</span> <span class="o">=</span> <span class="n">RedBlackTree</span><span class="p">.</span><span class="k">new</span>
+    <span class="n">tree</span> <span class="o">&lt;&lt;</span> <span class="mi">5</span>
+    <span class="n">tree</span> <span class="o">&lt;&lt;</span> <span class="mi">6</span>
+    <span class="n">tree</span> <span class="o">&lt;&lt;</span> <span class="mi">1</span>
+    <span class="n">tree</span> <span class="o">&lt;&lt;</span> <span class="mi">3</span>
+    <span class="n">tree</span> <span class="o">&lt;&lt;</span> <span class="mi">2</span>
+    <span class="n">tree</span> <span class="o">&lt;&lt;</span> <span class="mi">8</span>
+    <span class="n">tree</span> <span class="o">&lt;&lt;</span> <span class="mi">7</span>
+    <span class="n">tree</span> <span class="o">&lt;&lt;</span> <span class="mi">4</span>
+    <span class="n">tree</span><span class="p">.</span><span class="n">first</span><span class="p">(</span><span class="mi">5</span><span class="p">).</span><span class="n">should</span> <span class="n">eq</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
   <span class="n">end</span>
 
   <span class="n">describe</span> <span class="s">"#empty?"</span> <span class="k">do</span>
@@ -291,6 +304,8 @@ h1 a:focus {
         <span class="nb">true</span>
       <span class="n">end</span>
     <span class="n">end</span>
+
+    <span class="n">include</span> <span class="n">Enumerable</span><span class="p">(</span><span class="n">Int32</span><span class="p">)</span>
 
     <span class="n">property</span> <span class="n">root</span> <span class="o">:</span> <span class="n">Node</span>
     <span class="n">property</span> <span class="o">:</span><span class="n">size</span>
@@ -623,6 +638,19 @@ h1 a:focus {
 
     <span class="n">tree</span><span class="p">.</span><span class="n">max</span><span class="p">.</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">7</span>
     <span class="n">tree</span><span class="p">.</span><span class="n">min</span><span class="p">.</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">2</span>
+  <span class="n">end</span>
+
+  <span class="n">it</span> <span class="s">"implements enumerable"</span> <span class="k">do</span>
+    <span class="n">tree</span> <span class="o">=</span> <span class="n">RedBlackTree</span><span class="p">.</span><span class="k">new</span>
+    <span class="n">tree</span> <span class="o">&lt;&lt;</span> <span class="mi">5</span>
+    <span class="n">tree</span> <span class="o">&lt;&lt;</span> <span class="mi">6</span>
+    <span class="n">tree</span> <span class="o">&lt;&lt;</span> <span class="mi">1</span>
+    <span class="n">tree</span> <span class="o">&lt;&lt;</span> <span class="mi">3</span>
+    <span class="n">tree</span> <span class="o">&lt;&lt;</span> <span class="mi">2</span>
+    <span class="n">tree</span> <span class="o">&lt;&lt;</span> <span class="mi">8</span>
+    <span class="n">tree</span> <span class="o">&lt;&lt;</span> <span class="mi">7</span>
+    <span class="n">tree</span> <span class="o">&lt;&lt;</span> <span class="mi">4</span>
+    <span class="n">tree</span><span class="p">.</span><span class="n">first</span><span class="p">(</span><span class="mi">5</span><span class="p">).</span><span class="n">should</span> <span class="n">eq</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
   <span class="n">end</span>
 
   <span class="n">describe</span> <span class="s">"#empty?"</span> <span class="k">do</span>

@@ -90,7 +90,7 @@ h1 a:focus {
 
 <ul>
     <li><a href="/blob/master/verify/shortest_path.test.cr">View this file on GitHub</a></li>
-    <li>Last update: 2021-06-12 06:29:11+09:00</li>
+    <li>Last update: 2021-06-12 09:18:17+09:00</li>
     
     <li>Problem: <a href="https://judge.yosupo.jp/problem/shortest_path">https://judge.yosupo.jp/problem/shortest_path</a>
 </li>
@@ -111,10 +111,6 @@ h1 a:focus {
     <ul>
     
         <li><a href="/ac-library.cr/docs/atcoder/Graph.cr"><img class="emoji" title=":heavy_check_mark:" alt=":heavy_check_mark:" src="https://github.githubassets.com/images/icons/emoji/unicode/2714.png" height="20" width="20"> atcoder/Graph.cr
-            
-        </a></li>
-    
-        <li><a href="/ac-library.cr/docs/atcoder/PriorityQueue.cr"><img class="emoji" title=":heavy_check_mark:" alt=":heavy_check_mark:" src="https://github.githubassets.com/images/icons/emoji/unicode/2714.png" height="20" width="20"> atcoder/PriorityQueue.cr
             
         </a></li>
     
@@ -158,7 +154,6 @@ h1 a:focus {
 </span>
 <span class="cp"># verification-helper: PROBLEM https://judge.yosupo.jp/problem/shortest_path
 </span>
-<span class="n">require</span> <span class="s">"../atcoder/PriorityQueue.cr"</span>
 <span class="n">require</span> <span class="s">"../atcoder/Graph.cr"</span>
 
 <span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">read_line</span><span class="p">.</span><span class="n">split</span><span class="p">.</span><span class="n">map</span><span class="p">(</span><span class="o">&amp;</span><span class="p">.</span><span class="n">to_i64</span><span class="p">)</span>
@@ -210,7 +205,24 @@ h1 a:focus {
 </span>
 <span class="cp"># verification-helper: PROBLEM https://judge.yosupo.jp/problem/shortest_path
 </span>
-<span class="cp"># require "../atcoder/PriorityQueue.cr"
+<span class="cp"># require "../atcoder/Graph.cr"
+# ac-library.cr by hakatashi https://github.com/google/ac-library.cr
+#
+# Copyright 2021 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+</span>
+<span class="cp"># require "./PriorityQueue.cr"
 # ac-library.cr by hakatashi https://github.com/google/ac-library.cr
 #
 # Copyright 2021 Google LLC
@@ -318,27 +330,8 @@ h1 a:focus {
   <span class="n">end</span>
 <span class="n">end</span>
 
-<span class="cp"># require "../atcoder/Graph.cr"
-# ac-library.cr by hakatashi https://github.com/google/ac-library.cr
-#
-# Copyright 2021 Google LLC
-#
-# Licensed under the Apache License, Version 2.0 (the "License")</span><span class="p">;</span>
-<span class="cp"># you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#      https://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-</span>
-<span class="cp"># require "./PriorityQueue.cr"
-</span>
 <span class="n">module</span> <span class="n">AtCoder</span>
-  <span class="k">class</span> <span class="nf">Graph</span><span class="p">(</span><span class="n">NodeInfo</span><span class="p">,</span> <span class="n">EdgeInfo</span><span class="p">)</span>
+  <span class="k">class</span> <span class="nc">Graph</span><span class="p">(</span><span class="n">NodeInfo</span><span class="p">,</span> <span class="n">EdgeInfo</span><span class="p">)</span>
     <span class="err">@</span><span class="n">size_bits</span> <span class="o">:</span> <span class="n">Int32</span>
     <span class="n">getter</span> <span class="n">visited</span> <span class="o">:</span> <span class="n">Set</span><span class="p">(</span><span class="n">Int64</span><span class="p">)</span>
 
