@@ -20,7 +20,7 @@ license: Apache-2.0
 development_dependencies:
   ameba:
     github: crystal-ameba/ameba
-    version: ~> 0.13.0
+    version: 0.13.2
   cr-bundle:
     github: yuruhi/cr-bundle
     branch: main
