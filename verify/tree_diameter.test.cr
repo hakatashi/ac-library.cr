@@ -16,7 +16,6 @@
 
 # verification-helper: PROBLEM https://judge.yosupo.jp/problem/tree_diameter
 
-require "../atcoder/PriorityQueue.cr"
 require "../atcoder/Graph.cr"
 
 n = read_line.to_i64

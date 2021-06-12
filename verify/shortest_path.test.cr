@@ -16,7 +16,6 @@
 
 # verification-helper: PROBLEM https://judge.yosupo.jp/problem/shortest_path
 
-require "../atcoder/PriorityQueue.cr"
 require "../atcoder/Graph.cr"
 
 n, m, s, t = read_line.split.map(&.to_i64)

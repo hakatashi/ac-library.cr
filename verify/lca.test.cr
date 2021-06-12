@@ -16,7 +16,6 @@
 
 # verification-helper: PROBLEM https://judge.yosupo.jp/problem/lca
 
-require "../atcoder/PriorityQueue.cr"
 require "../atcoder/Graph.cr"
 
 n, q = read_line.split.map(&.to_i64)
