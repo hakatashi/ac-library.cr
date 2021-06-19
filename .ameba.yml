@@ -3,4 +3,4 @@ Globs:
   - '!lib'
 
 Excluded:
-  - atcoder/RedBlackTree.cr
+  - src/RedBlackTree.cr
