@@ -1,4 +1,4 @@
-require "../atcoder/ModInt.cr"
+require "../src/ModInt.cr"
 
 AtCoder.static_modint(ModInt7, 7_i64)
 

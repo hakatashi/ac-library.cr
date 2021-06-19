@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require "../atcoder/SegTree.cr"
+require "../src/SegTree.cr"
 require "spec"
 require "benchmark"
 

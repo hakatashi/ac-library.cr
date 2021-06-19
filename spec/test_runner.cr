@@ -1,1 +1,1 @@
-require "./atcoder/**"
+require "./src/**"

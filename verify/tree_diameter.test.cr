@@ -16,7 +16,7 @@
 
 # verification-helper: PROBLEM https://judge.yosupo.jp/problem/tree_diameter
 
-require "../atcoder/Graph.cr"
+require "../src/Graph.cr"
 
 n = read_line.to_i64
 tree = AtCoder::Tree(Nil, Int64).new(n)

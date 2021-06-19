@@ -16,7 +16,7 @@
 
 # verification-helper: PROBLEM http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_6_A
 
-require "../atcoder/MaxFlow.cr"
+require "../src/MaxFlow.cr"
 
 nv, ne = read_line.split.map(&.to_i64)
 flow = AtCoder::MaxFlow.new(nv)

@@ -16,7 +16,7 @@
 
 # verification-helper: PROBLEM https://judge.yosupo.jp/problem/shortest_path
 
-require "../atcoder/Graph.cr"
+require "../src/Graph.cr"
 
 n, m, s, t = read_line.split.map(&.to_i64)
 graph = AtCoder::DirectedGraph(Nil, Int64).new(n)

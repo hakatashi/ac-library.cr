@@ -16,7 +16,7 @@
 
 # verification-helper: PROBLEM https://judge.yosupo.jp/problem/bipartitematching
 
-require "../atcoder/MaxFlow.cr"
+require "../src/MaxFlow.cr"
 
 l, r, m = read_line.split.map(&.to_i64)
 flow = AtCoder::MaxFlow.new(l + r + 2)

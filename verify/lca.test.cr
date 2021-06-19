@@ -16,7 +16,7 @@
 
 # verification-helper: PROBLEM https://judge.yosupo.jp/problem/lca
 
-require "../atcoder/Graph.cr"
+require "../src/Graph.cr"
 
 n, q = read_line.split.map(&.to_i64)
 ps = read_line.split.map(&.to_i64)
