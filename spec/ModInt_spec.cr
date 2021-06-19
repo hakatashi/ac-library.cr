@@ -14,8 +14,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require "../../src/ModInt.cr"
-require "../spec_helper.cr"
+require "../src/ModInt.cr"
+require "./spec_helper.cr"
 require "spec"
 
 alias ModInt1000000007 = AtCoder::ModInt1000000007

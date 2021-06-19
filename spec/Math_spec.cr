@@ -14,8 +14,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require "../../src/Math.cr"
-require "../spec_helper.cr"
+require "../src/Math.cr"
+require "./spec_helper.cr"
 require "spec"
 
 def floor_sum_naive(n, m, a, b)

@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require "../../src/RedBlackTree.cr"
+require "../src/RedBlackTree.cr"
 require "spec"
 
 alias RedBlackTree = AtCoder::RedBlackTree
