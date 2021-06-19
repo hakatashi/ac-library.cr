@@ -103,7 +103,7 @@ jobs:
       run: oj-verify docs --jobs 4
     - name: Generate API docs
       if: ${{ github.event_name == 'push' }}
-      run: crystal docs atcoder/* -o dist/api
+      run: crystal docs --progress --stats --time -o dist/api
     - name: Build bundled docs
       if: ${{ github.event_name == 'push' }}
       run: |
