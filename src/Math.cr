@@ -1,6 +1,6 @@
 # ac-library.cr by hakatashi https://github.com/google/ac-library.cr
 #
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -167,6 +167,11 @@ module AtCoder
       end
 
       res
+    end
+
+    # Returns `a * b > target`, without concern of overflows.
+    def self.product_greater_than(a : Int, b : Int, target : Int)
+      target // b < a
     end
   end
 end

@@ -1,6 +1,6 @@
 # ac-library.cr by hakatashi https://github.com/google/ac-library.cr
 #
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -107,6 +107,20 @@ describe "Math" do
           end
         end
       end
+    end
+  end
+
+  describe ".product_greater_than" do
+    it "checks if the product of a and b is greater than target" do
+      AtCoder::Math.product_greater_than(4, 3, 13).should eq false
+      AtCoder::Math.product_greater_than(4, 3, 12).should eq false
+      AtCoder::Math.product_greater_than(4, 3, 11).should eq true
+      AtCoder::Math.product_greater_than(4, 3, 10).should eq true
+
+      AtCoder::Math.product_greater_than(3, 4, 13).should eq false
+      AtCoder::Math.product_greater_than(3, 4, 12).should eq false
+      AtCoder::Math.product_greater_than(3, 4, 11).should eq true
+      AtCoder::Math.product_greater_than(3, 4, 10).should eq true
     end
   end
 end
