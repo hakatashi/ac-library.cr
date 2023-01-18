@@ -37,8 +37,8 @@ module AtCoder
 
         getter value : Int64
 
-        def initialize(@value)
-          @value %= MOD
+        def initialize(value : Int)
+          @value = value.to_i64 % MOD
         end
 
         # Change the initial capacity of this array to improve performance
