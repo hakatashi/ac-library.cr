@@ -75,6 +75,8 @@ jobs:
     - uses: ruby/setup-ruby@v1
       with:
         ruby-version: '2.6'
+      env:
+        ImageOS: ubuntu18
     - name: Cache .verify-helper
       uses: actions/cache@v2
       with:
