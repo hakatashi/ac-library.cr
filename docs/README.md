@@ -1,7 +1,9 @@
-# ac-library.cr [![Run test and verifier][ci-badge]][ci-link]
+# ac-library.cr [![Run test and verifier][ci-badge]][ci-link] [![Coverage][coverage-badge]][coverage-link]
 
 [ci-badge]: https://github.com/google/ac-library.cr/workflows/Run%20test%20and%20verifier/badge.svg
 [ci-link]: https://github.com/google/ac-library.cr/actions?query=workflow%3A%22Run+test+and+verifier%22
+[coverage-badge]: https://codecov.io/gh/google/ac-library.cr/branch/master/graph/badge.svg
+[coverage-link]: https://codecov.io/gh/google/ac-library.cr
 
 This is not an officially supported Google product.
 
