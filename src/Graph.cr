@@ -45,7 +45,7 @@ module AtCoder
 
       prev_nodes = Array(Int64 | Nil).new(@size, nil)
 
-      queue = AtCoder::PriorityQueue({EdgeInfo, Int64}).new {|(ad, av), (bd, bv)| ad < bd}
+      queue = AtCoder::PriorityQueue({EdgeInfo, Int64}).new {|(ad, av), (bd, bv)| ad >= bd}
       queue << {EdgeInfo.zero, start_node.to_i64}
 
       until queue.empty?
