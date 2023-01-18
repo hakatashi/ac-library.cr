@@ -37,7 +37,7 @@ module AtCoder
 
         getter value : Int64
 
-        def initialize(value : Int)
+        def initialize(value)
           @value = value.to_i64 % MOD
         end
 
