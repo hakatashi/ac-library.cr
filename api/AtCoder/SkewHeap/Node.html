@@ -15,7 +15,7 @@
 </svg>
 
   <meta id="repository-name" content="github.com/google/ac-library.cr">
-  <title>AtCoder::MaxFlow::Edge - github.com/google/ac-library.cr</title>
+  <title>AtCoder::SkewHeap::Node(T) - github.com/google/ac-library.cr</title>
   <script type="text/javascript">
     CrystalDoc.base_path = "../../";
   </script>
@@ -75,12 +75,12 @@
       
     </li>
   
-  <li class="parent open current" data-id="github.com/google/ac-library.cr/AtCoder/MaxFlow" data-name="atcoder::maxflow">
+  <li class="parent " data-id="github.com/google/ac-library.cr/AtCoder/MaxFlow" data-name="atcoder::maxflow">
       <a href="../../AtCoder/MaxFlow.html">MaxFlow</a>
       
         <ul>
   
-  <li class=" current" data-id="github.com/google/ac-library.cr/AtCoder/MaxFlow/Edge" data-name="atcoder::maxflow::edge">
+  <li class=" " data-id="github.com/google/ac-library.cr/AtCoder/MaxFlow/Edge" data-name="atcoder::maxflow::edge">
       <a href="../../AtCoder/MaxFlow/Edge.html">Edge</a>
       
     </li>
@@ -150,12 +150,12 @@
       
     </li>
   
-  <li class="parent " data-id="github.com/google/ac-library.cr/AtCoder/SkewHeap" data-name="atcoder::skewheap(t)">
+  <li class="parent open current" data-id="github.com/google/ac-library.cr/AtCoder/SkewHeap" data-name="atcoder::skewheap(t)">
       <a href="../../AtCoder/SkewHeap.html">SkewHeap</a>
       
         <ul>
   
-  <li class=" " data-id="github.com/google/ac-library.cr/AtCoder/SkewHeap/Node" data-name="atcoder::skewheap::node(t)">
+  <li class=" current" data-id="github.com/google/ac-library.cr/AtCoder/SkewHeap/Node" data-name="atcoder::skewheap::node(t)">
       <a href="../../AtCoder/SkewHeap/Node.html">Node</a>
       
     </li>
@@ -209,12 +209,12 @@
 <div class="main-content">
 <h1 class="type-name">
 
-  <span class="kind">class</span> AtCoder::MaxFlow::Edge
+  <span class="kind">class</span> AtCoder::SkewHeap::Node(T)
 
 </h1>
 
 
-  <ul class="superclass-hierarchy"><li class="superclass"><a href="../../AtCoder/MaxFlow/Edge.html">AtCoder::MaxFlow::Edge</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../../AtCoder/SkewHeap/Node.html">AtCoder::SkewHeap::Node(T)</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
 
 
 
@@ -242,8 +242,8 @@
   </h2>
   
     
-      <a href="https://github.com/google/ac-library.cr/blob/175f0bcc020fb1d227d525d69b56c9a244f20e15/src/MaxFlow.cr#L29" target="_blank">
-        MaxFlow.cr
+      <a href="https://github.com/google/ac-library.cr/blob/175f0bcc020fb1d227d525d69b56c9a244f20e15/src/SkewHeap.cr#L24" target="_blank">
+        SkewHeap.cr
       </a>
     
     <br/>
@@ -264,7 +264,7 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#new(to,capacity,reverse_index)-class-method" class="signature"><strong>.new</strong>(to, capacity, reverse_index)</a>
+        <a href="#new(left,right,value)-class-method" class="signature"><strong>.new</strong>(left, right, value)</a>
         
       </li>
     
@@ -285,22 +285,32 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#capacity:Int64-instance-method" class="signature"><strong>#capacity</strong> : Int64</a>
+        <a href="#left-instance-method" class="signature"><strong>#left</strong></a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#capacity=(capacity:Int64)-instance-method" class="signature"><strong>#capacity=</strong>(capacity : Int64)</a>
+        <a href="#left=(left)-instance-method" class="signature"><strong>#left=</strong>(left)</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#reverse_index:Int64-instance-method" class="signature"><strong>#reverse_index</strong> : Int64</a>
+        <a href="#right-instance-method" class="signature"><strong>#right</strong></a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#to:Int64-instance-method" class="signature"><strong>#to</strong> : Int64</a>
+        <a href="#right=(right)-instance-method" class="signature"><strong>#right=</strong>(right)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#value-instance-method" class="signature"><strong>#value</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#value=(value)-instance-method" class="signature"><strong>#value=</strong>(value)</a>
         
       </li>
     
@@ -344,18 +354,18 @@
     Constructor Detail
   </h2>
   
-    <div class="entry-detail" id="new(to,capacity,reverse_index)-class-method">
+    <div class="entry-detail" id="new(left,right,value)-class-method">
       <div class="signature">
         
-        def self.<strong>new</strong>(to, capacity, reverse_index)
+        def self.<strong>new</strong>(left, right, value)
 
-        <a class="method-permalink" href="#new(to,capacity,reverse_index)-class-method">#</a>
+        <a class="method-permalink" href="#new(left,right,value)-class-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/175f0bcc020fb1d227d525d69b56c9a244f20e15/src/MaxFlow.cr#L34" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/175f0bcc020fb1d227d525d69b56c9a244f20e15/src/SkewHeap.cr#L31" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -374,66 +384,98 @@
     Instance Method Detail
   </h2>
   
-    <div class="entry-detail" id="capacity:Int64-instance-method">
+    <div class="entry-detail" id="left-instance-method">
       <div class="signature">
         
-        def <strong>capacity</strong> : Int64
+        def <strong>left</strong>
 
-        <a class="method-permalink" href="#capacity:Int64-instance-method">#</a>
+        <a class="method-permalink" href="#left-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/175f0bcc020fb1d227d525d69b56c9a244f20e15/src/MaxFlow.cr#L32" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/175f0bcc020fb1d227d525d69b56c9a244f20e15/src/SkewHeap.cr#L29" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="capacity=(capacity:Int64)-instance-method">
+    <div class="entry-detail" id="left=(left)-instance-method">
       <div class="signature">
         
-        def <strong>capacity=</strong>(capacity : Int64)
+        def <strong>left=</strong>(left)
 
-        <a class="method-permalink" href="#capacity=(capacity:Int64)-instance-method">#</a>
+        <a class="method-permalink" href="#left=(left)-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/175f0bcc020fb1d227d525d69b56c9a244f20e15/src/MaxFlow.cr#L32" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/175f0bcc020fb1d227d525d69b56c9a244f20e15/src/SkewHeap.cr#L29" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="reverse_index:Int64-instance-method">
+    <div class="entry-detail" id="right-instance-method">
       <div class="signature">
         
-        def <strong>reverse_index</strong> : Int64
+        def <strong>right</strong>
 
-        <a class="method-permalink" href="#reverse_index:Int64-instance-method">#</a>
+        <a class="method-permalink" href="#right-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/175f0bcc020fb1d227d525d69b56c9a244f20e15/src/MaxFlow.cr#L31" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/175f0bcc020fb1d227d525d69b56c9a244f20e15/src/SkewHeap.cr#L29" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="to:Int64-instance-method">
+    <div class="entry-detail" id="right=(right)-instance-method">
       <div class="signature">
         
-        def <strong>to</strong> : Int64
+        def <strong>right=</strong>(right)
 
-        <a class="method-permalink" href="#to:Int64-instance-method">#</a>
+        <a class="method-permalink" href="#right=(right)-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/175f0bcc020fb1d227d525d69b56c9a244f20e15/src/MaxFlow.cr#L30" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/175f0bcc020fb1d227d525d69b56c9a244f20e15/src/SkewHeap.cr#L29" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="value-instance-method">
+      <div class="signature">
+        
+        def <strong>value</strong>
+
+        <a class="method-permalink" href="#value-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/google/ac-library.cr/blob/175f0bcc020fb1d227d525d69b56c9a244f20e15/src/SkewHeap.cr#L29" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="value=(value)-instance-method">
+      <div class="signature">
+        
+        def <strong>value=</strong>(value)
+
+        <a class="method-permalink" href="#value=(value)-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/google/ac-library.cr/blob/175f0bcc020fb1d227d525d69b56c9a244f20e15/src/SkewHeap.cr#L29" target="_blank">View source</a>]
         
       </div>
     </div>
