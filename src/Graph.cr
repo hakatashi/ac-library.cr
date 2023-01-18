@@ -59,7 +59,7 @@ module AtCoder
           if target_dist.nil? || target_dist > current_dist + cost
             dist[to] = current_dist + cost
             prev_nodes[to] = v
-            queue << {current_dist, to}
+            queue << {current_dist + cost, to}
           end
         end
       end
