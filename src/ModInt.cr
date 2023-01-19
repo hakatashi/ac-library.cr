@@ -78,11 +78,11 @@ module AtCoder
         end
 
         def +(value)
-          self.class.new(@value + (value.to_i64 % MOD))
+          self.class.new(@value + value.to_i64 % MOD)
         end
 
         def -(value)
-          self.class.new(@value - (value.to_i64 % MOD))
+          self.class.new(@value - value.to_i64 % MOD)
         end
 
         def *(value)
