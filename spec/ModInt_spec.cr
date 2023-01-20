@@ -42,6 +42,31 @@ describe "ModInt1000000007" do
       n = ModInt1000000007.new(100_i64)
       n.should eq 100
     end
+
+    it "rounds numbers larger than MOD" do
+      n = ModInt1000000007.new(1_000_000_007_i64)
+      n.should eq 0
+
+      n = ModInt1000000007.new(1_000_000_008_i64)
+      n.should eq 1
+
+      n = ModInt1000000007.new(3_000_000_025_i64)
+      n.should eq 4
+
+      n = ModInt1000000007.new(Int64::MAX)
+      n.should eq 291_172_003
+    end
+
+    it "rounds negative numbers" do
+      n = ModInt1000000007.new(-1_i64)
+      n.should eq 1_000_000_006
+
+      n = ModInt1000000007.new(-1_000_000_007_i64)
+      n.should eq 0
+
+      n = ModInt1000000007.new(Int64::MIN)
+      n.should eq 708_828_003
+    end
   end
 
   describe "#inv" do
