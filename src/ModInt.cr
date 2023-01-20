@@ -32,8 +32,14 @@ module AtCoder
       # alias Mint = AtCoder::{{name}}
       # Mint.new(30_i64) // Mint.new(7_i64)
       # ```
-      record {{name}}, value : Int64 do
+      struct {{name}}
         MOD = {{modulo}}
+
+        getter value : Int64
+
+        def initialize(value)
+          @value = value.to_i64 % MOD
+        end
 
         # Change the initial capacity of this array to improve performance
         @@factorials = Array(self).new(100_000_i64)
@@ -68,19 +74,19 @@ module AtCoder
 
         def inv
           g, x = AtCoder::Math.extended_gcd(@value, MOD)
-          self.class.new(x % MOD)
+          self.class.new(x)
         end
 
         def +(value)
-          self.class.new((@value + value.to_i64 % MOD) % MOD)
+          self.class.new(@value + value.to_i64 % MOD)
         end
 
         def -(value)
-          self.class.new((@value + MOD - value.to_i64 % MOD) % MOD)
+          self.class.new(@value - value.to_i64 % MOD)
         end
 
         def *(value)
-          self.class.new((@value * value.to_i64 % MOD) % MOD)
+          self.class.new(@value * (value.to_i64 % MOD))
         end
 
         def /(value : self)
@@ -90,7 +96,7 @@ module AtCoder
 
         def /(value)
           raise DivisionByZeroError.new if value == 0
-          self * self.class.new(value.to_i64 % MOD).inv
+          self * self.class.new(value.to_i64).inv
         end
 
         def //(value)
@@ -163,6 +169,7 @@ module AtCoder
         def pow(value)
           self.**(value)
         end
+
         def val
           self.to_i64
         end
