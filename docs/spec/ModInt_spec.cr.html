@@ -102,7 +102,7 @@ h1 a:focus {
 
 <ul>
     <li><a href="/blob/master/spec/ModInt_spec.cr">View this file on GitHub</a></li>
-    <li>Last update: 2023-01-20 14:32:19+09:00</li>
+    <li>Last update: 2023-01-20 20:11:28+00:00</li>
     
     
     
@@ -201,6 +201,31 @@ h1 a:focus {
     <span class="n">it</span> <span class="s">"constructs ModInt1000000007 from Int64"</span> <span class="k">do</span>
       <span class="n">n</span> <span class="o">=</span> <span class="n">ModInt1000000007</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="mi">100</span><span class="n">_i64</span><span class="p">)</span>
       <span class="n">n</span><span class="p">.</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">100</span>
+    <span class="n">end</span>
+
+    <span class="n">it</span> <span class="s">"rounds numbers larger than MOD"</span> <span class="k">do</span>
+      <span class="n">n</span> <span class="o">=</span> <span class="n">ModInt1000000007</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="mi">1</span><span class="n">_000_000_007_i64</span><span class="p">)</span>
+      <span class="n">n</span><span class="p">.</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">0</span>
+
+      <span class="n">n</span> <span class="o">=</span> <span class="n">ModInt1000000007</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="mi">1</span><span class="n">_000_000_008_i64</span><span class="p">)</span>
+      <span class="n">n</span><span class="p">.</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">1</span>
+
+      <span class="n">n</span> <span class="o">=</span> <span class="n">ModInt1000000007</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="mi">3</span><span class="n">_000_000_025_i64</span><span class="p">)</span>
+      <span class="n">n</span><span class="p">.</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">4</span>
+
+      <span class="n">n</span> <span class="o">=</span> <span class="n">ModInt1000000007</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="n">Int64</span><span class="o">::</span><span class="n">MAX</span><span class="p">)</span>
+      <span class="n">n</span><span class="p">.</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">291</span><span class="n">_172_003</span>
+    <span class="n">end</span>
+
+    <span class="n">it</span> <span class="s">"rounds negative numbers"</span> <span class="k">do</span>
+      <span class="n">n</span> <span class="o">=</span> <span class="n">ModInt1000000007</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="n">_i64</span><span class="p">)</span>
+      <span class="n">n</span><span class="p">.</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">1</span><span class="n">_000_000_006</span>
+
+      <span class="n">n</span> <span class="o">=</span> <span class="n">ModInt1000000007</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="n">_000_000_007_i64</span><span class="p">)</span>
+      <span class="n">n</span><span class="p">.</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">0</span>
+
+      <span class="n">n</span> <span class="o">=</span> <span class="n">ModInt1000000007</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="n">Int64</span><span class="o">::</span><span class="n">MIN</span><span class="p">)</span>
+      <span class="n">n</span><span class="p">.</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">708</span><span class="n">_828_003</span>
     <span class="n">end</span>
   <span class="n">end</span>
 
@@ -820,6 +845,31 @@ h1 a:focus {
     <span class="n">it</span> <span class="s">"constructs ModInt1000000007 from Int64"</span> <span class="k">do</span>
       <span class="n">n</span> <span class="o">=</span> <span class="n">ModInt1000000007</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="mi">100</span><span class="n">_i64</span><span class="p">)</span>
       <span class="n">n</span><span class="p">.</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">100</span>
+    <span class="n">end</span>
+
+    <span class="n">it</span> <span class="s">"rounds numbers larger than MOD"</span> <span class="k">do</span>
+      <span class="n">n</span> <span class="o">=</span> <span class="n">ModInt1000000007</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="mi">1</span><span class="n">_000_000_007_i64</span><span class="p">)</span>
+      <span class="n">n</span><span class="p">.</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">0</span>
+
+      <span class="n">n</span> <span class="o">=</span> <span class="n">ModInt1000000007</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="mi">1</span><span class="n">_000_000_008_i64</span><span class="p">)</span>
+      <span class="n">n</span><span class="p">.</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">1</span>
+
+      <span class="n">n</span> <span class="o">=</span> <span class="n">ModInt1000000007</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="mi">3</span><span class="n">_000_000_025_i64</span><span class="p">)</span>
+      <span class="n">n</span><span class="p">.</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">4</span>
+
+      <span class="n">n</span> <span class="o">=</span> <span class="n">ModInt1000000007</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="n">Int64</span><span class="o">::</span><span class="n">MAX</span><span class="p">)</span>
+      <span class="n">n</span><span class="p">.</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">291</span><span class="n">_172_003</span>
+    <span class="n">end</span>
+
+    <span class="n">it</span> <span class="s">"rounds negative numbers"</span> <span class="k">do</span>
+      <span class="n">n</span> <span class="o">=</span> <span class="n">ModInt1000000007</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="n">_i64</span><span class="p">)</span>
+      <span class="n">n</span><span class="p">.</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">1</span><span class="n">_000_000_006</span>
+
+      <span class="n">n</span> <span class="o">=</span> <span class="n">ModInt1000000007</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="n">_000_000_007_i64</span><span class="p">)</span>
+      <span class="n">n</span><span class="p">.</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">0</span>
+
+      <span class="n">n</span> <span class="o">=</span> <span class="n">ModInt1000000007</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="n">Int64</span><span class="o">::</span><span class="n">MIN</span><span class="p">)</span>
+      <span class="n">n</span><span class="p">.</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">708</span><span class="n">_828_003</span>
     <span class="n">end</span>
   <span class="n">end</span>
 
