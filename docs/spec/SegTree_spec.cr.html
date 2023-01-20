@@ -102,7 +102,7 @@ h1 a:focus {
 
 <ul>
     <li><a href="/blob/master/spec/SegTree_spec.cr">View this file on GitHub</a></li>
-    <li>Last update: 2023-01-18 18:34:15+00:00</li>
+    <li>Last update: 2023-01-20 14:32:19+09:00</li>
     
     
     
@@ -648,8 +648,14 @@ h1 a:focus {
 </span>      <span class="cp"># alias Mint = AtCoder::{{name}}
 </span>      <span class="cp"># Mint.new(30_i64) // Mint.new(7_i64)
 </span>      <span class="cp"># ```
-</span>      <span class="n">record</span> <span class="p">{{</span><span class="n">name</span><span class="p">}},</span> <span class="n">value</span> <span class="o">:</span> <span class="n">Int64</span> <span class="k">do</span>
+</span>      <span class="k">struct</span> <span class="p">{{</span><span class="n">name</span><span class="p">}}</span>
         <span class="n">MOD</span> <span class="o">=</span> <span class="p">{{</span><span class="n">modulo</span><span class="p">}}</span>
+
+        <span class="n">getter</span> <span class="n">value</span> <span class="o">:</span> <span class="n">Int64</span>
+
+        <span class="n">def</span> <span class="n">initialize</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+          <span class="err">@</span><span class="n">value</span> <span class="o">=</span> <span class="n">value</span><span class="p">.</span><span class="n">to_i64</span> <span class="o">%</span> <span class="n">MOD</span>
+        <span class="n">end</span>
 
         <span class="cp"># Change the initial capacity of this array to improve performance
 </span>        <span class="err">@@</span><span class="n">factorials</span> <span class="o">=</span> <span class="n">Array</span><span class="p">(</span><span class="n">self</span><span class="p">).</span><span class="k">new</span><span class="p">(</span><span class="mi">100</span><span class="n">_000_i64</span><span class="p">)</span>
@@ -684,19 +690,19 @@ h1 a:focus {
 
         <span class="n">def</span> <span class="n">inv</span>
           <span class="n">g</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="n">AtCoder</span><span class="o">::</span><span class="n">Math</span><span class="p">.</span><span class="n">extended_gcd</span><span class="p">(</span><span class="err">@</span><span class="n">value</span><span class="p">,</span> <span class="n">MOD</span><span class="p">)</span>
-          <span class="n">self</span><span class="p">.</span><span class="k">class</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="n">x</span> <span class="o">%</span> <span class="n">MOD</span><span class="p">)</span>
+          <span class="n">self</span><span class="p">.</span><span class="k">class</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
         <span class="n">end</span>
 
         <span class="n">def</span> <span class="o">+</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
-          <span class="n">self</span><span class="p">.</span><span class="k">class</span><span class="p">.</span><span class="k">new</span><span class="p">((</span><span class="err">@</span><span class="n">value</span> <span class="o">+</span> <span class="n">value</span><span class="p">.</span><span class="n">to_i64</span> <span class="o">%</span> <span class="n">MOD</span><span class="p">)</span> <span class="o">%</span> <span class="n">MOD</span><span class="p">)</span>
+          <span class="n">self</span><span class="p">.</span><span class="k">class</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="err">@</span><span class="n">value</span> <span class="o">+</span> <span class="n">value</span><span class="p">.</span><span class="n">to_i64</span> <span class="o">%</span> <span class="n">MOD</span><span class="p">)</span>
         <span class="n">end</span>
 
         <span class="n">def</span> <span class="o">-</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
-          <span class="n">self</span><span class="p">.</span><span class="k">class</span><span class="p">.</span><span class="k">new</span><span class="p">((</span><span class="err">@</span><span class="n">value</span> <span class="o">+</span> <span class="n">MOD</span> <span class="o">-</span> <span class="n">value</span><span class="p">.</span><span class="n">to_i64</span> <span class="o">%</span> <span class="n">MOD</span><span class="p">)</span> <span class="o">%</span> <span class="n">MOD</span><span class="p">)</span>
+          <span class="n">self</span><span class="p">.</span><span class="k">class</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="err">@</span><span class="n">value</span> <span class="o">-</span> <span class="n">value</span><span class="p">.</span><span class="n">to_i64</span> <span class="o">%</span> <span class="n">MOD</span><span class="p">)</span>
         <span class="n">end</span>
 
         <span class="n">def</span> <span class="o">*</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
-          <span class="n">self</span><span class="p">.</span><span class="k">class</span><span class="p">.</span><span class="k">new</span><span class="p">((</span><span class="err">@</span><span class="n">value</span> <span class="o">*</span> <span class="n">value</span><span class="p">.</span><span class="n">to_i64</span> <span class="o">%</span> <span class="n">MOD</span><span class="p">)</span> <span class="o">%</span> <span class="n">MOD</span><span class="p">)</span>
+          <span class="n">self</span><span class="p">.</span><span class="k">class</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="err">@</span><span class="n">value</span> <span class="o">*</span> <span class="p">(</span><span class="n">value</span><span class="p">.</span><span class="n">to_i64</span> <span class="o">%</span> <span class="n">MOD</span><span class="p">))</span>
         <span class="n">end</span>
 
         <span class="n">def</span> <span class="o">/</span><span class="p">(</span><span class="n">value</span> <span class="o">:</span> <span class="n">self</span><span class="p">)</span>
@@ -706,7 +712,7 @@ h1 a:focus {
 
         <span class="n">def</span> <span class="o">/</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
           <span class="n">raise</span> <span class="n">DivisionByZeroError</span><span class="p">.</span><span class="k">new</span> <span class="k">if</span> <span class="n">value</span> <span class="o">==</span> <span class="mi">0</span>
-          <span class="n">self</span> <span class="o">*</span> <span class="n">self</span><span class="p">.</span><span class="k">class</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="n">value</span><span class="p">.</span><span class="n">to_i64</span> <span class="o">%</span> <span class="n">MOD</span><span class="p">).</span><span class="n">inv</span>
+          <span class="n">self</span> <span class="o">*</span> <span class="n">self</span><span class="p">.</span><span class="k">class</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="n">value</span><span class="p">.</span><span class="n">to_i64</span><span class="p">).</span><span class="n">inv</span>
         <span class="n">end</span>
 
         <span class="n">def</span> <span class="c1">//(value)</span>
@@ -779,6 +785,7 @@ h1 a:focus {
         <span class="n">def</span> <span class="n">pow</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
           <span class="n">self</span><span class="p">.</span><span class="o">**</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
         <span class="n">end</span>
+
         <span class="n">def</span> <span class="n">val</span>
           <span class="n">self</span><span class="p">.</span><span class="n">to_i64</span>
         <span class="n">end</span>
