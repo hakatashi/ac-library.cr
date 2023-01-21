@@ -14,6 +14,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+require "./Prime.cr"
+
 module AtCoder
   # Implements [ACL's Math library](https://atcoder.github.io/ac-library/master/document_en/math.html)
   module Math
@@ -172,6 +174,25 @@ module AtCoder
     # Returns `a * b > target`, without concern of overflows.
     def self.product_greater_than(a : Int, b : Int, target : Int)
       target // b < a
+    end
+
+    def self.get_primitive_root(p : Int)
+      return 1_i64 if p == 2
+      n = p - 1
+      factors = AtCoder::Prime.prime_division(n)
+      (2_i64..p.to_i64).each do |g|
+        ok = true
+        factors.each do |(factor, _)|
+          if pow_mod(g, n // factor, p) == 1
+            ok = false
+            break
+          end
+        end
+        if ok
+          return g
+        end
+      end
+      raise ArgumentError.new
     end
   end
 end

@@ -1,0 +1,113 @@
+# ac-library.cr by hakatashi https://github.com/google/ac-library.cr
+#
+# Copyright 2023 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+module AtCoder
+  module Convolution
+    private def self.bit_reverse(n : Int, bit_length : Int)
+      ret = n.class.zero
+      bit_length.times do |i|
+        ret |= ((n >> i) & 1) << (bit_length - i - 1)
+      end
+      ret
+    end
+
+    # In-place execution of FFT operation
+    # Length of a must be power of 2
+    private def self.fft(a, g)
+      size = a.size
+      bit_length = size.trailing_zeros_count
+
+      size.times do |i|
+        j = bit_reverse(i, bit_length)
+        if i < j
+          a[i], a[j] = a[j], a[i]
+        end
+      end
+
+      bit_length.times do |bit|
+        block_size = 1_i64 << bit
+
+        # Butterfly operation
+        block_size.times do |i|
+          w = (g ** (size // block_size // 2)) ** i
+          (size // (block_size * 2)).times do |j|
+            index1 = j * 2 * block_size + i
+            index2 = (j * 2 + 1) * block_size + i
+            a[index1], a[index2] = {
+              a[index1] + a[index2] * w,
+              a[index1] - a[index2] * w,
+            }
+          end
+        end
+      end
+
+      a
+    end
+
+    private def self.naive_dft(a, g)
+      ret = a.map {|n| n.class.zero }
+      ret.size.times do |i|
+        a.each_with_index do |ai, j|
+          ret[i] += ai * (g ** (i * j))
+        end
+      end
+      ret
+    end
+
+    private def self.ifft(a, g)
+      fft(a, g.inv)
+      a.size.times do |i|
+        a[i] //= a.size
+      end
+      a
+    end
+
+    # TODO: support for int
+    def self.convolution(a : Array(T), b : Array(T)) forall T
+      modulo = T::MOD
+      n = modulo - 1
+      result_size = a.size.to_i64 + b.size.to_i64 - 1
+
+      c = 1_i64 << n.trailing_zeros_count
+
+      if result_size > c
+        raise ArgumentError.new("With modulo #{modulo}, total array length must be less than or equal to #{c}")
+      end
+
+      fft_size = 1_i64
+      until fft_size >= result_size
+        fft_size <<= 1
+      end
+
+      input_a = Array(T).new(fft_size) {|i| i < a.size ? a[i] : T.zero}
+      input_b = Array(T).new(fft_size) {|i| i < b.size ? b[i] : T.zero}
+
+      primitive_root = AtCoder::Math.get_primitive_root(modulo)
+      g = T.new(primitive_root) ** (n // fft_size)
+
+      fft(input_a, g)
+      fft(input_b, g)
+
+      fft_size.times do |i|
+        input_a[i] *= input_b[i]
+      end
+
+      ifft(input_a, g)
+
+      input_a
+    end
+  end
+end
