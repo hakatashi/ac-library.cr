@@ -102,7 +102,7 @@ h1 a:focus {
 
 <ul>
     <li><a href="/blob/master/spec/test_runner.cr">View this file on GitHub</a></li>
-    <li>Last update: 2023-01-21 14:35:47+00:00</li>
+    <li>Last update: 2023-01-21 14:39:17+00:00</li>
     
     
     
@@ -327,7 +327,8 @@ h1 a:focus {
       <span class="n">input_a</span><span class="p">[</span><span class="mf">0.</span><span class="p">..</span><span class="n">result_size</span><span class="p">]</span>
     <span class="n">end</span>
 
-    <span class="n">def</span> <span class="n">self</span><span class="p">.</span><span class="n">convolution_ll</span><span class="p">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">Array</span><span class="p">(</span><span class="n">Int64</span><span class="p">),</span> <span class="n">b</span> <span class="o">:</span> <span class="n">Array</span><span class="p">(</span><span class="n">Int64</span><span class="p">))</span>
+    <span class="cp"># Implements atcoder::convolution.convolution_ll.
+</span>    <span class="n">def</span> <span class="n">self</span><span class="p">.</span><span class="n">convolution_ll</span><span class="p">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">Array</span><span class="p">(</span><span class="n">Int64</span><span class="p">),</span> <span class="n">b</span> <span class="o">:</span> <span class="n">Array</span><span class="p">(</span><span class="n">Int64</span><span class="p">))</span>
       <span class="k">return</span> <span class="p">[]</span> <span class="n">of</span> <span class="n">Int64</span> <span class="k">if</span> <span class="n">a</span><span class="p">.</span><span class="n">empty</span><span class="o">?</span> <span class="o">||</span> <span class="n">b</span><span class="p">.</span><span class="n">empty</span><span class="o">?</span>
 
       <span class="n">a1</span> <span class="o">=</span> <span class="n">a</span><span class="p">.</span><span class="n">map</span> <span class="p">{</span> <span class="o">|</span><span class="n">n</span><span class="o">|</span> <span class="n">AtCoder</span><span class="o">::</span><span class="n">ModInt754974721</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="p">}</span>
@@ -346,7 +347,7 @@ h1 a:focus {
       <span class="n">m2</span> <span class="o">=</span> <span class="mi">167</span><span class="n">_772_161_i64</span>
       <span class="n">m3</span> <span class="o">=</span> <span class="mi">469</span><span class="n">_762_049_i64</span>
 
-      <span class="n">c</span> <span class="o">=</span> <span class="n">c1</span><span class="p">.</span><span class="n">zip</span><span class="p">(</span><span class="n">c2</span><span class="p">,</span> <span class="n">c3</span><span class="p">).</span><span class="n">map</span> <span class="k">do</span> <span class="o">|</span><span class="n">n1</span><span class="p">,</span> <span class="n">n2</span><span class="p">,</span> <span class="n">n3</span><span class="o">|</span>
+      <span class="n">c1</span><span class="p">.</span><span class="n">zip</span><span class="p">(</span><span class="n">c2</span><span class="p">,</span> <span class="n">c3</span><span class="p">).</span><span class="n">map</span> <span class="k">do</span> <span class="o">|</span><span class="n">n1</span><span class="p">,</span> <span class="n">n2</span><span class="p">,</span> <span class="n">n3</span><span class="o">|</span>
         <span class="n">p</span> <span class="o">=</span> <span class="n">AtCoder</span><span class="o">::</span><span class="n">Math</span><span class="p">.</span><span class="n">inv_mod</span><span class="p">(</span><span class="n">m1</span><span class="p">,</span> <span class="n">m2</span><span class="p">)</span>
         <span class="n">tmp</span> <span class="o">=</span> <span class="p">(</span><span class="n">n2</span><span class="p">.</span><span class="n">val</span> <span class="o">-</span> <span class="n">n1</span><span class="p">.</span><span class="n">val</span><span class="p">)</span> <span class="o">*</span> <span class="n">p</span> <span class="o">%</span> <span class="n">m2</span>
         <span class="n">answer</span> <span class="o">=</span> <span class="n">n1</span><span class="p">.</span><span class="n">val</span> <span class="o">+</span> <span class="n">m1</span> <span class="o">*</span> <span class="n">tmp</span>
@@ -355,8 +356,6 @@ h1 a:focus {
         <span class="n">tmp</span> <span class="o">=</span> <span class="p">(((</span><span class="n">n3</span><span class="p">.</span><span class="n">val</span> <span class="o">-</span> <span class="n">answer</span><span class="p">)</span> <span class="o">%</span> <span class="n">m3</span><span class="p">)</span> <span class="o">*</span> <span class="n">p</span><span class="p">)</span> <span class="o">%</span> <span class="n">m3</span>
         <span class="n">answer</span> <span class="o">+</span> <span class="n">m1</span> <span class="o">*</span> <span class="n">m2</span> <span class="o">*</span> <span class="n">tmp</span>
       <span class="n">end</span>
-
-      <span class="n">c</span>
     <span class="n">end</span>
   <span class="n">end</span>
 <span class="n">end</span>

@@ -184,6 +184,13 @@ This library aims to provide the almost-equivalent (and additional) functionalit
   AtCoder::Convolution.convolution(a, a) #=> [1, 2, 3, 2, 1]
   ```
 
+* `convolution_ll(a, b)` => `AtCoder::Convolution.convolution_ll(a, b)`
+
+  ```cr
+  a = [1_000_000_000_i64]
+  AtCoder::Convolution.convolution_ll(a, a) #=> [1000000000000000000]
+  ```
+
 ## [PriorityQueue.cr](https://google.github.io/ac-library.cr/docs/src/PriorityQueue.cr) (not in ACL)
 
 * `AtCoder::PriorityQueue(T).new`
