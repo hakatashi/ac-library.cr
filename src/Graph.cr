@@ -20,11 +20,13 @@ module AtCoder
   class Graph(NodeInfo, EdgeInfo)
     @size_bits : Int32
     getter visited : Set(Int64)
+    getter :edges
+    getter :adjacencies
 
     def initialize(@nodes : Array(NodeInfo))
       @size = @nodes.size.to_i64
       @edges = [] of EdgeInfo
-      @adjacencies = Array(Array({Int64, Int64})).new(@size) { [] of {Int64, Int64} }
+      @adjacencies = Array(Hash(Int64, Int64)).new(@size) { Hash(Int64, Int64).new }
       @visited = Set(Int64).new
       @size_bits = @size.to_s(2).size
     end
@@ -32,7 +34,7 @@ module AtCoder
     def initialize(@size : Int64, initial_node : NodeInfo = nil)
       @nodes = Array(NodeInfo).new(@size, initial_node)
       @edges = [] of EdgeInfo
-      @adjacencies = Array(Array({Int64, Int64})).new(@size) { [] of {Int64, Int64} }
+      @adjacencies = Array(Hash(Int64, Int64)).new(@size) { Hash(Int64, Int64).new }
       @visited = Set(Int64).new
       @size_bits = @size.to_s(2).size
     end
@@ -117,7 +119,18 @@ module AtCoder
     def add_edge(from, to, edge : EdgeInfo = 1_i64)
       @edges << edge
       edge_id = @edges.size.to_i64 - 1
-      @adjacencies[from] << {to.to_i64, edge_id}
+      @adjacencies[from][to.to_i64] = edge_id
+      edge_id
+    end
+
+    def get_edge(from, to)
+      edge_id = @adjacencies[from][to.to_i64]
+      @edges[edge_id]
+    end
+
+    def update_edge(from, to, edge : EdgeInfo = 1_i64)
+      edge_id = @adjacencies[from][to.to_i64]
+      @edges[edge_id] = edge
       edge_id
     end
   end
@@ -126,8 +139,19 @@ module AtCoder
     def add_edge(a, b, edge : EdgeInfo = 1_i64)
       @edges << edge
       edge_id = @edges.size.to_i64 - 1
-      @adjacencies[a] << {b.to_i64, edge_id}
-      @adjacencies[b] << {a.to_i64, edge_id}
+      @adjacencies[a][b.to_i64] = edge_id
+      @adjacencies[b][a.to_i64] = edge_id
+      edge_id
+    end
+
+    def get_edge(a, b)
+      edge_id = @adjacencies[a][b.to_i64]
+      @edges[edge_id]
+    end
+
+    def update_edge(a, b, edge : EdgeInfo = 1_i64)
+      edge_id = @adjacencies[a][b.to_i64]
+      @edges[edge_id] = edge
       edge_id
     end
   end
