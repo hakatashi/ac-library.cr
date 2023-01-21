@@ -107,6 +107,7 @@ module AtCoder
       input_a[0...result_size]
     end
 
+    # Implements atcoder::convolution.convolution_ll.
     def self.convolution_ll(a : Array(Int64), b : Array(Int64))
       return [] of Int64 if a.empty? || b.empty?
 
@@ -126,7 +127,7 @@ module AtCoder
       m2 = 167_772_161_i64
       m3 = 469_762_049_i64
 
-      c = c1.zip(c2, c3).map do |n1, n2, n3|
+      c1.zip(c2, c3).map do |n1, n2, n3|
         p = AtCoder::Math.inv_mod(m1, m2)
         tmp = (n2.val - n1.val) * p % m2
         answer = n1.val + m1 * tmp
@@ -135,8 +136,6 @@ module AtCoder
         tmp = (((n3.val - answer) % m3) * p) % m3
         answer + m1 * m2 * tmp
       end
-
-      c
     end
   end
 end
