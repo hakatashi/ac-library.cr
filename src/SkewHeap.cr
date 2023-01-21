@@ -21,15 +21,18 @@ module AtCoder
 
     getter :size
 
-    class Node(T)
+    private class Node(T)
       @left : Node(T) | Nil
       @right : Node(T) | Nil
       @value : T
 
       property :value, :left, :right
 
-      def initialize(@left, @right, @value)
-      end
+      def initialize(@left, @right, @value) end
+    end
+
+    def initialize
+      initialize {|a, b| a <= b}
     end
 
     def initialize(&block : T, T -> Bool)

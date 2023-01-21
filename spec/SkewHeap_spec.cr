@@ -14,14 +14,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require "../src/PriorityQueue.cr"
+require "../src/SkewHeap.cr"
 require "spec"
 
-alias PriorityQueue = AtCoder::PriorityQueue
+alias SkewHeap = AtCoder::SkewHeap
 
-describe "PriorityQueue" do
+describe "SkewHeap" do
   it "pops values in priority order" do
-    q = PriorityQueue(Int32).new
+    q = SkewHeap(Int32).new
     q << 5
     q << 6
     q << 1
@@ -43,7 +43,7 @@ describe "PriorityQueue" do
 
   describe "with custom compare function" do
     it "pops values in priority order" do
-      q = PriorityQueue(Int32).new {|a, b| a >= b}
+      q = SkewHeap(Int32).new {|a, b| a >= b}
       q << 5
       q << 6
       q << 1
@@ -66,7 +66,7 @@ describe "PriorityQueue" do
 
   describe "#empty?" do
     it "should report true if queue is empty" do
-      q = PriorityQueue(Int32).new
+      q = SkewHeap(Int32).new
       q.empty?.should eq true
       q << 1
       q.empty?.should eq false
@@ -77,7 +77,7 @@ describe "PriorityQueue" do
 
   describe "#size" do
     it "returns size of the queue" do
-      q = PriorityQueue(Int32).new
+      q = SkewHeap(Int32).new
       q << 1
       q << 1
       q << 1
