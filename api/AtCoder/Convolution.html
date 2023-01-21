@@ -15,7 +15,7 @@
 </svg>
 
   <meta id="repository-name" content="github.com/google/ac-library.cr">
-  <title>AtCoder::SkewHeap(T) - github.com/google/ac-library.cr</title>
+  <title>AtCoder::Convolution - github.com/google/ac-library.cr</title>
   <script type="text/javascript">
     CrystalDoc.base_path = "../";
   </script>
@@ -45,7 +45,7 @@
       
         <ul>
   
-  <li class=" " data-id="github.com/google/ac-library.cr/AtCoder/Convolution" data-name="atcoder::convolution">
+  <li class=" current" data-id="github.com/google/ac-library.cr/AtCoder/Convolution" data-name="atcoder::convolution">
       <a href="../AtCoder/Convolution.html">Convolution</a>
       
     </li>
@@ -155,7 +155,7 @@
       
     </li>
   
-  <li class=" current" data-id="github.com/google/ac-library.cr/AtCoder/SkewHeap" data-name="atcoder::skewheap(t)">
+  <li class=" " data-id="github.com/google/ac-library.cr/AtCoder/SkewHeap" data-name="atcoder::skewheap(t)">
       <a href="../AtCoder/SkewHeap.html">SkewHeap</a>
       
     </li>
@@ -204,12 +204,10 @@
 <div class="main-content">
 <h1 class="type-name">
 
-  <span class="kind">class</span> AtCoder::SkewHeap(T)
+  <span class="kind">module</span> AtCoder::Convolution
 
 </h1>
 
-
-  <ul class="superclass-hierarchy"><li class="superclass"><a href="../AtCoder/SkewHeap.html">AtCoder::SkewHeap(T)</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
 
 
 
@@ -237,8 +235,8 @@
   </h2>
   
     
-      <a href="https://github.com/google/ac-library.cr/blob/3c737ebab103ce15ff9b432bf416fb2d1f7b474e/src/SkewHeap.cr#L18" target="_blank">
-        SkewHeap.cr
+      <a href="https://github.com/google/ac-library.cr/blob/3c737ebab103ce15ff9b432bf416fb2d1f7b474e/src/Convolution.cr#L18" target="_blank">
+        Convolution.cr
       </a>
     
     <br/>
@@ -248,75 +246,28 @@
 
 
 
+
+
   <h2>
-    <a id="constructors" class="anchor" href="#constructors">
+    <a id="class-method-summary" class="anchor" href="#class-method-summary">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
 </a>
-    Constructors
+    Class Method Summary
   </h2>
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#new-class-method" class="signature"><strong>.new</strong></a>
+        <a href="#convolution(a:Array(T),b:Array(T))forallT-class-method" class="signature"><strong>.convolution</strong>(a : Array(T), b : Array(T)) forall T</a>
         
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#new(&block:T,T-%3EBool)-class-method" class="signature"><strong>.new</strong>(&block : T, T -> Bool)</a>
+          <div class="summary"><p><span class="flag orange">TODO</span>  support for int</p></div>
         
       </li>
     
   </ul>
 
 
-
-
-
-  <h2>
-    <a id="instance-method-summary" class="anchor" href="#instance-method-summary">
-  <svg class="octicon-link" aria-hidden="true">
-    <use href="#octicon-link"/>
-  </svg>
-</a>
-    Instance Method Summary
-  </h2>
-  <ul class="list-summary">
-    
-      <li class="entry-summary">
-        <a href="#%3C%3C(v:T)-instance-method" class="signature"><strong>#<<</strong>(v : T)</a>
-        
-          <div class="summary"><p>Alias of <code><a href="../AtCoder/SkewHeap.html#push(value:T)-instance-method">#push</a></code></p></div>
-        
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#empty?-instance-method" class="signature"><strong>#empty?</strong></a>
-        
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#meld(a:Node(T)?,b:Node(T)?)-instance-method" class="signature"><strong>#meld</strong>(a : Node(T)?, b : Node(T)?)</a>
-        
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#pop-instance-method" class="signature"><strong>#pop</strong></a>
-        
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#push(value:T)-instance-method" class="signature"><strong>#push</strong>(value : T)</a>
-        
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#size-instance-method" class="signature"><strong>#size</strong></a>
-        
-      </li>
-    
-  </ul>
 
 
 
@@ -324,185 +275,43 @@
 
 <div class="methods-inherited">
   
-    
-
-
-    
-
-
-    
-
-
-  
-    
-
-
-    
-
-
-    
-
-
-  
 </div>
 
 
+
+
   <h2>
-    <a id="constructor-detail" class="anchor" href="#constructor-detail">
+    <a id="class-method-detail" class="anchor" href="#class-method-detail">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
 </a>
-    Constructor Detail
+    Class Method Detail
   </h2>
   
-    <div class="entry-detail" id="new-class-method">
+    <div class="entry-detail" id="convolution(a:Array(T),b:Array(T))forallT-class-method">
       <div class="signature">
         
-        def self.<strong>new</strong>
+        def self.<strong>convolution</strong>(a : Array(T), b : Array(T)) forall T
 
-        <a class="method-permalink" href="#new-class-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/google/ac-library.cr/blob/3c737ebab103ce15ff9b432bf416fb2d1f7b474e/src/SkewHeap.cr#L34" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="new(&amp;block:T,T-&gt;Bool)-class-method">
-      <div class="signature">
-        
-        def self.<strong>new</strong>(&block : T, T -> Bool)
-
-        <a class="method-permalink" href="#new(&block:T,T-%3EBool)-class-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/google/ac-library.cr/blob/3c737ebab103ce15ff9b432bf416fb2d1f7b474e/src/SkewHeap.cr#L38" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-
-
-
-
-
-  <h2>
-    <a id="instance-method-detail" class="anchor" href="#instance-method-detail">
-  <svg class="octicon-link" aria-hidden="true">
-    <use href="#octicon-link"/>
-  </svg>
-</a>
-    Instance Method Detail
-  </h2>
-  
-    <div class="entry-detail" id="&lt;&lt;(v:T)-instance-method">
-      <div class="signature">
-        
-        def <strong><<</strong>(v : T)
-
-        <a class="method-permalink" href="#%3C%3C(v:T)-instance-method">#</a>
+        <a class="method-permalink" href="#convolution(a:Array(T),b:Array(T))forallT-class-method">#</a>
       </div>
       
         <div class="doc">
           
-          <p>Alias of <code><a href="../AtCoder/SkewHeap.html#push(value:T)-instance-method">#push</a></code></p>
+          <p><span class="flag orange">TODO</span>  support for int</p>
         </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/3c737ebab103ce15ff9b432bf416fb2d1f7b474e/src/SkewHeap.cr#L70" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/3c737ebab103ce15ff9b432bf416fb2d1f7b474e/src/Convolution.cr#L79" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="empty?-instance-method">
-      <div class="signature">
-        
-        def <strong>empty?</strong>
 
-        <a class="method-permalink" href="#empty?-instance-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/google/ac-library.cr/blob/3c737ebab103ce15ff9b432bf416fb2d1f7b474e/src/SkewHeap.cr#L74" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="meld(a:Node(T)?,b:Node(T)?)-instance-method">
-      <div class="signature">
-        
-        def <strong>meld</strong>(a : Node(T)?, b : Node(T)?)
 
-        <a class="method-permalink" href="#meld(a:Node(T)?,b:Node(T)?)-instance-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/google/ac-library.cr/blob/3c737ebab103ce15ff9b432bf416fb2d1f7b474e/src/SkewHeap.cr#L44" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="pop-instance-method">
-      <div class="signature">
-        
-        def <strong>pop</strong>
-
-        <a class="method-permalink" href="#pop-instance-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/google/ac-library.cr/blob/3c737ebab103ce15ff9b432bf416fb2d1f7b474e/src/SkewHeap.cr#L60" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="push(value:T)-instance-method">
-      <div class="signature">
-        
-        def <strong>push</strong>(value : T)
-
-        <a class="method-permalink" href="#push(value:T)-instance-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/google/ac-library.cr/blob/3c737ebab103ce15ff9b432bf416fb2d1f7b474e/src/SkewHeap.cr#L55" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="size-instance-method">
-      <div class="signature">
-        
-        def <strong>size</strong>
-
-        <a class="method-permalink" href="#size-instance-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/google/ac-library.cr/blob/3c737ebab103ce15ff9b432bf416fb2d1f7b474e/src/SkewHeap.cr#L22" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
 
 
 

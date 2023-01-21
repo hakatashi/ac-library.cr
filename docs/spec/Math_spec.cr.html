@@ -102,7 +102,7 @@ h1 a:focus {
 
 <ul>
     <li><a href="/blob/master/spec/Math_spec.cr">View this file on GitHub</a></li>
-    <li>Last update: 2023-01-21 09:22:12+00:00</li>
+    <li>Last update: 2023-01-21 11:43:08+00:00</li>
     
     
     
@@ -327,6 +327,300 @@ h1 a:focus {
 # See the License for the specific language governing permissions and
 # limitations under the License.
 </span>
+<span class="cp"># require "./Prime.cr"
+# ac-library.cr by hakatashi https://github.com/google/ac-library.cr
+#
+# Copyright 2023 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+</span>
+<span class="cp"># require "./Math.cr"
+</span>
+<span class="n">module</span> <span class="n">AtCoder</span>
+  <span class="cp"># Implements [Ruby's Prime library](https://ruby-doc.com/stdlib/libdoc/prime/rdoc/Prime.html).
+</span>  <span class="cp">#
+</span>  <span class="cp"># ```
+</span>  <span class="cp"># AtCoder::Prime.first(7) # =&gt; [2, 3, 5, 7, 11, 13, 17]
+</span>  <span class="cp"># ```
+</span>  <span class="n">module</span> <span class="n">Prime</span>
+    <span class="n">extend</span> <span class="n">self</span>
+    <span class="n">include</span> <span class="nf">Enumerable</span><span class="p">(</span><span class="n">Int64</span><span class="p">)</span>
+
+    <span class="err">@@</span><span class="n">primes</span> <span class="o">=</span> <span class="p">[</span>
+      <span class="mi">2</span><span class="n">_i64</span><span class="p">,</span> <span class="mi">3</span><span class="n">_i64</span><span class="p">,</span> <span class="mi">5</span><span class="n">_i64</span><span class="p">,</span> <span class="mi">7</span><span class="n">_i64</span><span class="p">,</span> <span class="mi">11</span><span class="n">_i64</span><span class="p">,</span> <span class="mi">13</span><span class="n">_i64</span><span class="p">,</span> <span class="mi">17</span><span class="n">_i64</span><span class="p">,</span> <span class="mi">19</span><span class="n">_i64</span><span class="p">,</span>
+      <span class="mi">23</span><span class="n">_i64</span><span class="p">,</span> <span class="mi">29</span><span class="n">_i64</span><span class="p">,</span> <span class="mi">31</span><span class="n">_i64</span><span class="p">,</span> <span class="mi">37</span><span class="n">_i64</span><span class="p">,</span> <span class="mi">41</span><span class="n">_i64</span><span class="p">,</span> <span class="mi">43</span><span class="n">_i64</span><span class="p">,</span> <span class="mi">47</span><span class="n">_i64</span><span class="p">,</span>
+      <span class="mi">53</span><span class="n">_i64</span><span class="p">,</span> <span class="mi">59</span><span class="n">_i64</span><span class="p">,</span> <span class="mi">61</span><span class="n">_i64</span><span class="p">,</span> <span class="mi">67</span><span class="n">_i64</span><span class="p">,</span> <span class="mi">71</span><span class="n">_i64</span><span class="p">,</span> <span class="mi">73</span><span class="n">_i64</span><span class="p">,</span> <span class="mi">79</span><span class="n">_i64</span><span class="p">,</span>
+      <span class="mi">83</span><span class="n">_i64</span><span class="p">,</span> <span class="mi">89</span><span class="n">_i64</span><span class="p">,</span> <span class="mi">97</span><span class="n">_i64</span><span class="p">,</span> <span class="mi">101</span><span class="n">_i64</span><span class="p">,</span>
+    <span class="p">]</span>
+
+    <span class="n">def</span> <span class="n">each</span>
+      <span class="n">index</span> <span class="o">=</span> <span class="mi">0</span>
+      <span class="n">loop</span> <span class="k">do</span>
+        <span class="n">yield</span> <span class="n">get_nth_prime</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
+        <span class="n">index</span> <span class="o">+=</span> <span class="mi">1</span>
+      <span class="n">end</span>
+    <span class="n">end</span>
+
+    <span class="n">def</span> <span class="n">prime_division</span><span class="p">(</span><span class="n">value</span> <span class="o">:</span> <span class="n">Int</span><span class="p">)</span>
+      <span class="n">raise</span> <span class="n">DivisionByZeroError</span><span class="p">.</span><span class="k">new</span> <span class="k">if</span> <span class="n">value</span> <span class="o">==</span> <span class="mi">0</span>
+
+      <span class="kt">int</span> <span class="o">=</span> <span class="n">typeof</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+
+      <span class="n">factors</span> <span class="o">=</span> <span class="p">[]</span> <span class="n">of</span> <span class="n">Tuple</span><span class="p">(</span><span class="n">typeof</span><span class="p">(</span><span class="n">value</span><span class="p">),</span> <span class="n">typeof</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
+
+      <span class="k">if</span> <span class="n">value</span> <span class="o">&lt;</span> <span class="mi">0</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="n">value</span><span class="p">.</span><span class="n">abs</span>
+        <span class="n">factors</span> <span class="o">&lt;&lt;</span> <span class="p">{</span><span class="kt">int</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="kt">int</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="mi">1</span><span class="p">)}</span>
+      <span class="n">end</span>
+
+      <span class="n">until</span> <span class="n">prime</span><span class="o">?</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="o">||</span> <span class="n">value</span> <span class="o">==</span> <span class="mi">1</span>
+        <span class="n">factor</span> <span class="o">=</span> <span class="n">value</span>
+        <span class="n">until</span> <span class="n">prime</span><span class="o">?</span><span class="p">(</span><span class="n">factor</span><span class="p">)</span>
+          <span class="n">factor</span> <span class="o">=</span> <span class="n">find_factor</span><span class="p">(</span><span class="n">factor</span><span class="p">)</span>
+        <span class="n">end</span>
+        <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">while</span> <span class="n">value</span> <span class="o">%</span> <span class="n">factor</span> <span class="o">==</span> <span class="mi">0</span>
+          <span class="n">value</span> <span class="c1">//= factor</span>
+          <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">end</span>
+        <span class="n">factors</span> <span class="o">&lt;&lt;</span> <span class="p">{</span><span class="kt">int</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="n">factor</span><span class="p">),</span> <span class="kt">int</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="n">count</span><span class="p">)}</span>
+      <span class="n">end</span>
+
+      <span class="k">if</span> <span class="n">value</span> <span class="o">&gt;</span> <span class="mi">1</span>
+        <span class="n">factors</span> <span class="o">&lt;&lt;</span> <span class="p">{</span><span class="n">value</span><span class="p">,</span> <span class="kt">int</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="mi">1</span><span class="p">)}</span>
+      <span class="n">end</span>
+
+      <span class="n">factors</span><span class="p">.</span><span class="n">sort_by</span><span class="o">!</span> <span class="p">{</span> <span class="o">|</span><span class="p">(</span><span class="n">factor</span><span class="p">,</span> <span class="n">_</span><span class="p">)</span><span class="o">|</span> <span class="n">factor</span> <span class="p">}</span>
+    <span class="n">end</span>
+
+    <span class="k">private</span> <span class="n">def</span> <span class="n">find_factor</span><span class="p">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">Int</span><span class="p">)</span>
+      <span class="cp"># Factor of 4 cannot be discovered by Pollard's Rho with f(x) = x^x+1
+</span>      <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">4</span>
+        <span class="n">typeof</span><span class="p">(</span><span class="n">n</span><span class="p">).</span><span class="k">new</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+      <span class="k">else</span>
+        <span class="n">pollard_rho</span><span class="p">(</span><span class="n">n</span><span class="p">).</span><span class="n">not_nil</span><span class="o">!</span>
+      <span class="n">end</span>
+    <span class="n">end</span>
+
+    <span class="cp"># Get single factor by Pollard's Rho Algorithm
+</span>    <span class="k">private</span> <span class="n">def</span> <span class="n">pollard_rho</span><span class="p">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">Int</span><span class="p">)</span>
+      <span class="n">typeof</span><span class="p">(</span><span class="n">n</span><span class="p">).</span><span class="k">new</span><span class="p">(</span><span class="mi">1</span><span class="p">).</span><span class="n">upto</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">i</span><span class="o">|</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">i</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">pollard_random_f</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+
+        <span class="n">loop</span> <span class="k">do</span>
+          <span class="n">x</span> <span class="o">=</span> <span class="n">pollard_random_f</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+          <span class="n">y</span> <span class="o">=</span> <span class="n">pollard_random_f</span><span class="p">(</span><span class="n">pollard_random_f</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">n</span><span class="p">),</span> <span class="n">n</span><span class="p">)</span>
+          <span class="n">gcd</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">y</span><span class="p">).</span><span class="n">gcd</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+
+          <span class="k">if</span> <span class="n">gcd</span> <span class="o">==</span> <span class="n">n</span>
+            <span class="k">break</span>
+          <span class="n">end</span>
+
+          <span class="k">if</span> <span class="n">gcd</span> <span class="o">!=</span> <span class="mi">1</span>
+            <span class="k">return</span> <span class="n">gcd</span>
+          <span class="n">end</span>
+        <span class="n">end</span>
+      <span class="n">end</span>
+    <span class="n">end</span>
+
+    <span class="k">private</span> <span class="n">def</span> <span class="n">pollard_random_f</span><span class="p">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">Int</span><span class="p">,</span> <span class="n">mod</span> <span class="o">:</span> <span class="n">Int</span><span class="p">)</span>
+      <span class="p">(</span><span class="n">AtCoder</span><span class="o">::</span><span class="n">Math</span><span class="p">.</span><span class="n">mul_mod</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">mod</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="n">mod</span>
+    <span class="n">end</span>
+
+    <span class="k">private</span> <span class="n">def</span> <span class="n">extract_prime_division_base</span><span class="p">(</span><span class="n">prime_divisions_class</span> <span class="o">:</span> <span class="n">Array</span><span class="p">({</span><span class="n">T</span><span class="p">,</span> <span class="n">T</span><span class="p">}).</span><span class="k">class</span><span class="p">)</span> <span class="n">forall</span> <span class="n">T</span>
+      <span class="n">T</span>
+    <span class="n">end</span>
+
+    <span class="n">def</span> <span class="n">int_from_prime_division</span><span class="p">(</span><span class="n">prime_divisions</span> <span class="o">:</span> <span class="n">Array</span><span class="p">({</span><span class="n">Int</span><span class="p">,</span> <span class="n">Int</span><span class="p">}))</span>
+      <span class="n">int_class</span> <span class="o">=</span> <span class="n">extract_prime_division_base</span><span class="p">(</span><span class="n">prime_divisions</span><span class="p">.</span><span class="k">class</span><span class="p">)</span>
+      <span class="n">prime_divisions</span><span class="p">.</span><span class="n">reduce</span><span class="p">(</span><span class="n">int_class</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span> <span class="p">{</span> <span class="o">|</span><span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">factor</span><span class="p">,</span> <span class="n">exponent</span><span class="p">)</span><span class="o">|</span> <span class="n">i</span> <span class="o">*</span> <span class="n">factor</span> <span class="o">**</span> <span class="n">exponent</span> <span class="p">}</span>
+    <span class="n">end</span>
+
+    <span class="n">def</span> <span class="n">prime</span><span class="o">?</span><span class="p">(</span><span class="n">value</span> <span class="o">:</span> <span class="n">Int</span><span class="p">)</span>
+      <span class="cp"># Obvious patterns
+</span>      <span class="k">return</span> <span class="nb">false</span> <span class="k">if</span> <span class="n">value</span> <span class="o">&lt;</span> <span class="mi">2</span>
+      <span class="k">return</span> <span class="nb">true</span> <span class="k">if</span> <span class="n">value</span> <span class="o">&lt;=</span> <span class="mi">3</span>
+      <span class="k">return</span> <span class="nb">false</span> <span class="k">if</span> <span class="n">value</span><span class="p">.</span><span class="n">even</span><span class="o">?</span>
+      <span class="k">return</span> <span class="nb">true</span> <span class="k">if</span> <span class="n">value</span> <span class="o">&lt;</span> <span class="mi">9</span>
+
+      <span class="k">if</span> <span class="n">value</span> <span class="o">&lt;</span> <span class="mh">0xffff</span>
+        <span class="k">return</span> <span class="nb">false</span> <span class="n">unless</span> <span class="nf">typeof</span><span class="p">(</span><span class="n">value</span><span class="p">).</span><span class="k">new</span><span class="p">(</span><span class="mi">30</span><span class="p">).</span><span class="n">gcd</span><span class="p">(</span><span class="n">value</span> <span class="o">%</span> <span class="mi">30</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span>
+
+        <span class="mf">7.</span><span class="n">step</span><span class="p">(</span><span class="n">by</span><span class="o">:</span> <span class="mi">30</span><span class="p">,</span> <span class="n">to</span><span class="o">:</span> <span class="n">value</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">base</span><span class="o">|</span>
+          <span class="k">break</span> <span class="k">if</span> <span class="n">base</span> <span class="o">*</span> <span class="n">base</span> <span class="o">&gt;</span> <span class="n">value</span>
+
+          <span class="k">if</span> <span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">22</span><span class="p">,</span> <span class="mi">24</span><span class="p">}.</span><span class="n">any</span><span class="o">?</span> <span class="p">{</span> <span class="o">|</span><span class="n">i</span><span class="o">|</span> <span class="n">value</span> <span class="o">%</span> <span class="p">(</span><span class="n">base</span> <span class="o">+</span> <span class="n">i</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> <span class="p">}</span>
+            <span class="k">return</span> <span class="nb">false</span>
+          <span class="n">end</span>
+        <span class="n">end</span>
+
+        <span class="k">return</span> <span class="nb">true</span>
+      <span class="n">end</span>
+
+      <span class="n">miller_rabin</span><span class="p">(</span><span class="n">value</span><span class="p">.</span><span class="n">to_i64</span><span class="p">)</span>
+    <span class="n">end</span>
+
+    <span class="k">private</span> <span class="n">def</span> <span class="n">miller_rabin</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+      <span class="n">d</span> <span class="o">=</span> <span class="n">value</span> <span class="o">-</span> <span class="mi">1</span>
+      <span class="n">s</span> <span class="o">=</span> <span class="mi">0</span><span class="n">_i64</span>
+      <span class="n">until</span> <span class="n">d</span><span class="p">.</span><span class="n">odd</span><span class="o">?</span>
+        <span class="n">d</span> <span class="o">&gt;&gt;=</span> <span class="mi">1</span>
+        <span class="n">s</span> <span class="o">+=</span> <span class="mi">1</span>
+      <span class="n">end</span>
+
+      <span class="n">miller_rabin_bases</span><span class="p">(</span><span class="n">value</span><span class="p">).</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">base</span><span class="o">|</span>
+        <span class="n">next</span> <span class="k">if</span> <span class="n">base</span> <span class="o">==</span> <span class="n">value</span>
+
+        <span class="n">x</span> <span class="o">=</span> <span class="n">AtCoder</span><span class="o">::</span><span class="n">Math</span><span class="p">.</span><span class="n">pow_mod</span><span class="p">(</span><span class="n">base</span><span class="p">.</span><span class="n">to_i64</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+        <span class="n">next</span> <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="mi">1</span> <span class="o">||</span> <span class="n">x</span> <span class="o">==</span> <span class="n">value</span> <span class="o">-</span> <span class="mi">1</span>
+
+        <span class="n">is_composite</span> <span class="o">=</span> <span class="n">s</span><span class="p">.</span><span class="n">times</span><span class="p">.</span><span class="n">all</span><span class="o">?</span> <span class="k">do</span>
+          <span class="n">x</span> <span class="o">=</span> <span class="n">AtCoder</span><span class="o">::</span><span class="n">Math</span><span class="p">.</span><span class="n">mul_mod</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+          <span class="n">x</span> <span class="o">!=</span> <span class="n">value</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="n">end</span>
+
+        <span class="k">return</span> <span class="nb">false</span> <span class="k">if</span> <span class="n">is_composite</span>
+      <span class="n">end</span>
+
+      <span class="nb">true</span>
+    <span class="n">end</span>
+
+    <span class="cp"># We can reduce time complexity of Miller-Rabin tests by testing against
+</span>    <span class="cp"># predefined bases which is enough to test against primarity in the given range.
+</span>    <span class="cp"># https://en.wikipedia.org/wiki/Miller%E2%80%93Rabin_primality_test
+</span>    <span class="cp"># ameba:disable Metrics/CyclomaticComplexity
+</span>    <span class="k">private</span> <span class="n">def</span> <span class="n">miller_rabin_bases</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+      <span class="k">case</span>
+      <span class="n">when</span> <span class="n">value</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="n">_373_653_i64</span>
+        <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+      <span class="n">when</span> <span class="n">value</span> <span class="o">&lt;</span> <span class="mi">9</span><span class="n">_080_191_i64</span>
+        <span class="p">[</span><span class="mi">31</span><span class="p">,</span> <span class="mi">73</span><span class="p">]</span>
+      <span class="n">when</span> <span class="n">value</span> <span class="o">&lt;</span> <span class="mi">25</span><span class="n">_326_001_i64</span>
+        <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+      <span class="n">when</span> <span class="n">value</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="n">_215_031_751_i64</span>
+        <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">]</span>
+      <span class="n">when</span> <span class="n">value</span> <span class="o">&lt;</span> <span class="mi">4</span><span class="n">_759_123_141_i64</span>
+        <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">61</span><span class="p">]</span>
+      <span class="n">when</span> <span class="n">value</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="n">_122_004_669_633_i64</span>
+        <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">23</span><span class="p">,</span> <span class="mi">1662803</span><span class="p">]</span>
+      <span class="n">when</span> <span class="n">value</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="n">_152_302_898_747_i64</span>
+        <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">11</span><span class="p">]</span>
+      <span class="n">when</span> <span class="n">value</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="n">_474_749_660_383_i64</span>
+        <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">13</span><span class="p">]</span>
+      <span class="n">when</span> <span class="n">value</span> <span class="o">&lt;</span> <span class="mi">341</span><span class="n">_550_071_728_321_i64</span>
+        <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">17</span><span class="p">]</span>
+      <span class="n">when</span> <span class="n">value</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="n">_825_123_056_546_413_051_i64</span>
+        <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">23</span><span class="p">]</span>
+      <span class="k">else</span>
+        <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">23</span><span class="p">,</span> <span class="mi">29</span><span class="p">,</span> <span class="mi">31</span><span class="p">,</span> <span class="mi">37</span><span class="p">]</span>
+      <span class="n">end</span>
+    <span class="n">end</span>
+
+    <span class="k">private</span> <span class="n">def</span> <span class="n">get_nth_prime</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+      <span class="k">while</span> <span class="err">@@</span><span class="n">primes</span><span class="p">.</span><span class="n">size</span> <span class="o">&lt;=</span> <span class="n">n</span>
+        <span class="n">generate_primes</span>
+      <span class="n">end</span>
+
+      <span class="err">@@</span><span class="n">primes</span><span class="p">[</span><span class="n">n</span><span class="p">]</span>
+    <span class="n">end</span>
+
+    <span class="cp"># Doubles the size of the cached prime array and performs the
+</span>    <span class="cp"># Sieve of Eratosthenes on it.
+</span>    <span class="k">private</span> <span class="n">def</span> <span class="n">generate_primes</span>
+      <span class="n">new_primes_size</span> <span class="o">=</span> <span class="err">@@</span><span class="n">primes</span><span class="p">.</span><span class="n">size</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="n">_000_000</span> <span class="o">?</span> <span class="err">@@</span><span class="n">primes</span><span class="p">.</span><span class="n">size</span> <span class="p">:</span> <span class="mi">1</span><span class="n">_000_000</span>
+      <span class="n">new_primes</span> <span class="o">=</span> <span class="n">Array</span><span class="p">(</span><span class="n">Int64</span><span class="p">).</span><span class="k">new</span><span class="p">(</span><span class="n">new_primes_size</span><span class="p">)</span> <span class="p">{</span> <span class="o">|</span><span class="n">i</span><span class="o">|</span> <span class="err">@@</span><span class="n">primes</span><span class="p">.</span><span class="n">last</span> <span class="o">+</span> <span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="mi">2</span> <span class="p">}</span>
+      <span class="n">new_primes_max</span> <span class="o">=</span> <span class="n">new_primes</span><span class="p">.</span><span class="n">last</span>
+
+      <span class="err">@@</span><span class="n">primes</span><span class="p">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">prime</span><span class="o">|</span>
+        <span class="n">next</span> <span class="k">if</span> <span class="n">prime</span> <span class="o">==</span> <span class="mi">2</span>
+        <span class="k">break</span> <span class="k">if</span> <span class="n">prime</span> <span class="o">*</span> <span class="n">prime</span> <span class="o">&gt;</span> <span class="n">new_primes_max</span>
+
+        <span class="cp"># Here I use the technique of the Sieve of Sundaram. We can
+</span>        <span class="cp"># only test against the odd multiple of the given prime.
+</span>        <span class="cp"># min_composite is the minimum number that is greater than
+</span>        <span class="cp"># the last confirmed prime, and is an odd multiple of
+</span>        <span class="cp"># the given prime.
+</span>        <span class="n">min_multiple</span> <span class="o">=</span> <span class="p">((</span><span class="err">@@</span><span class="n">primes</span><span class="p">.</span><span class="n">last</span> <span class="c1">// prime + 1) // 2 * 2 + 1) * prime</span>
+        <span class="n">min_multiple</span><span class="p">.</span><span class="n">step</span><span class="p">(</span><span class="n">by</span><span class="o">:</span> <span class="n">prime</span> <span class="o">*</span> <span class="mi">2</span><span class="p">,</span> <span class="n">to</span><span class="o">:</span> <span class="n">new_primes_max</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">multiple</span><span class="o">|</span>
+          <span class="n">index</span> <span class="o">=</span> <span class="n">new_primes_size</span> <span class="o">-</span> <span class="p">(</span><span class="n">new_primes_max</span> <span class="o">-</span> <span class="n">multiple</span><span class="p">)</span> <span class="c1">// 2 - 1</span>
+          <span class="n">new_primes</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="n">_i64</span>
+        <span class="n">end</span>
+      <span class="n">end</span>
+
+      <span class="err">@@</span><span class="n">primes</span><span class="p">.</span><span class="n">concat</span><span class="p">(</span><span class="n">new_primes</span><span class="p">.</span><span class="n">reject</span><span class="p">(</span><span class="mi">0</span><span class="n">_i64</span><span class="p">))</span>
+    <span class="n">end</span>
+
+    <span class="k">private</span> <span class="k">struct</span> <span class="nf">EachDivisor</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
+      <span class="n">include</span> <span class="n">Enumerable</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
+
+      <span class="n">def</span> <span class="n">initialize</span><span class="p">(</span><span class="err">@</span><span class="n">exponential_factors</span> <span class="o">:</span> <span class="n">Array</span><span class="p">(</span><span class="n">Array</span><span class="p">(</span><span class="n">T</span><span class="p">)))</span>
+      <span class="n">end</span>
+
+      <span class="n">def</span> <span class="n">each</span>
+        <span class="n">Array</span><span class="p">.</span><span class="n">each_product</span><span class="p">(</span><span class="err">@</span><span class="n">exponential_factors</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">factors</span><span class="o">|</span>
+          <span class="n">yield</span> <span class="n">factors</span><span class="p">.</span><span class="n">reduce</span> <span class="p">{</span> <span class="o">|</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="o">|</span> <span class="n">a</span> <span class="o">*</span> <span class="n">b</span> <span class="p">}</span>
+        <span class="n">end</span>
+      <span class="n">end</span>
+    <span class="n">end</span>
+
+    <span class="cp"># Returns an enumerator that iterates through the all positive divisors of
+</span>    <span class="cp"># the given number. **The order is not guaranteed.**
+</span>    <span class="cp"># Not in the original Ruby's Prime library.
+</span>    <span class="cp">#
+</span>    <span class="cp"># ```
+</span>    <span class="cp"># AtCoder::Prime.each_divisor(20) do |n|
+</span>    <span class="cp">#   puts n
+</span>    <span class="cp"># end # =&gt; Puts 1, 2, 4, 5, 10, and 20
+</span>    <span class="cp">#
+</span>    <span class="cp"># AtCoder::Prime.each_divisor(10).map { |n| 1.0 / n }.to_a # =&gt; [1.0, 0.5, 0.2, 0.1]
+</span>    <span class="cp"># ```
+</span>    <span class="n">def</span> <span class="n">each_divisor</span><span class="p">(</span><span class="n">value</span> <span class="o">:</span> <span class="n">Int</span><span class="p">)</span>
+      <span class="n">raise</span> <span class="n">ArgumentError</span><span class="p">.</span><span class="k">new</span> <span class="n">unless</span> <span class="n">value</span> <span class="o">&gt;</span> <span class="mi">0</span>
+
+      <span class="n">factors</span> <span class="o">=</span> <span class="n">prime_division</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+
+      <span class="k">if</span> <span class="n">value</span> <span class="o">==</span> <span class="mi">1</span>
+        <span class="n">exponential_factors</span> <span class="o">=</span> <span class="p">[[</span><span class="n">value</span><span class="p">]]</span>
+      <span class="k">else</span>
+        <span class="n">exponential_factors</span> <span class="o">=</span> <span class="n">factors</span><span class="p">.</span><span class="n">map</span> <span class="k">do</span> <span class="o">|</span><span class="p">(</span><span class="n">factor</span><span class="p">,</span> <span class="n">count</span><span class="p">)</span><span class="o">|</span>
+          <span class="n">cnt</span> <span class="o">=</span> <span class="n">typeof</span><span class="p">(</span><span class="n">value</span><span class="p">).</span><span class="n">zero</span> <span class="o">+</span> <span class="mi">1</span>
+          <span class="n">Array</span><span class="p">(</span><span class="n">typeof</span><span class="p">(</span><span class="n">value</span><span class="p">)).</span><span class="k">new</span><span class="p">(</span><span class="n">count</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">i</span><span class="o">|</span>
+            <span class="n">cnt_copy</span> <span class="o">=</span> <span class="n">cnt</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">count</span>
+              <span class="n">cnt</span> <span class="o">*=</span> <span class="n">factor</span>
+            <span class="n">end</span>
+            <span class="n">cnt_copy</span>
+          <span class="n">end</span>
+        <span class="n">end</span>
+      <span class="n">end</span>
+
+      <span class="n">EachDivisor</span><span class="p">(</span><span class="n">typeof</span><span class="p">(</span><span class="n">value</span><span class="p">)).</span><span class="k">new</span><span class="p">(</span><span class="n">exponential_factors</span><span class="p">)</span>
+    <span class="n">end</span>
+
+    <span class="cp"># :ditto:
+</span>    <span class="n">def</span> <span class="n">each_divisor</span><span class="p">(</span><span class="n">value</span> <span class="o">:</span> <span class="n">T</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">block</span> <span class="o">:</span> <span class="n">T</span> <span class="o">-&gt;</span><span class="p">)</span>
+      <span class="n">each_divisor</span><span class="p">(</span><span class="n">value</span><span class="p">).</span><span class="n">each</span><span class="p">(</span><span class="o">&amp;</span><span class="n">block</span><span class="p">)</span>
+    <span class="n">end</span>
+  <span class="n">end</span>
+<span class="n">end</span>
+
+<span class="k">struct</span> <span class="nc">Int</span>
+  <span class="n">def</span> <span class="n">prime</span><span class="o">?</span>
+    <span class="n">AtCoder</span><span class="o">::</span><span class="n">Prime</span><span class="p">.</span><span class="n">prime</span><span class="o">?</span><span class="p">(</span><span class="n">self</span><span class="p">)</span>
+  <span class="n">end</span>
+<span class="n">end</span>
+
 <span class="n">module</span> <span class="n">AtCoder</span>
   <span class="cp"># Implements [ACL's Math library](https://atcoder.github.io/ac-library/master/document_en/math.html)
 </span>  <span class="n">module</span> <span class="n">Math</span>
@@ -486,6 +780,25 @@ h1 a:focus {
 </span>    <span class="n">def</span> <span class="n">self</span><span class="p">.</span><span class="n">product_greater_than</span><span class="p">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">Int</span><span class="p">,</span> <span class="n">b</span> <span class="o">:</span> <span class="n">Int</span><span class="p">,</span> <span class="n">target</span> <span class="o">:</span> <span class="n">Int</span><span class="p">)</span>
       <span class="n">target</span> <span class="c1">// b &lt; a</span>
     <span class="n">end</span>
+
+    <span class="n">def</span> <span class="n">self</span><span class="p">.</span><span class="n">get_primitive_root</span><span class="p">(</span><span class="n">p</span> <span class="o">:</span> <span class="n">Int</span><span class="p">)</span>
+      <span class="k">return</span> <span class="mi">1</span><span class="n">_i64</span> <span class="k">if</span> <span class="n">p</span> <span class="o">==</span> <span class="mi">2</span>
+      <span class="n">n</span> <span class="o">=</span> <span class="n">p</span> <span class="o">-</span> <span class="mi">1</span>
+      <span class="n">factors</span> <span class="o">=</span> <span class="n">AtCoder</span><span class="o">::</span><span class="n">Prime</span><span class="p">.</span><span class="n">prime_division</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+      <span class="p">(</span><span class="mi">2</span><span class="n">_i64</span><span class="p">..</span><span class="n">p</span><span class="p">.</span><span class="n">to_i64</span><span class="p">).</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">g</span><span class="o">|</span>
+        <span class="n">ok</span> <span class="o">=</span> <span class="nb">true</span>
+        <span class="n">factors</span><span class="p">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="p">(</span><span class="n">factor</span><span class="p">,</span> <span class="n">_</span><span class="p">)</span><span class="o">|</span>
+          <span class="k">if</span> <span class="n">pow_mod</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">n</span> <span class="c1">// factor, p) == 1</span>
+            <span class="n">ok</span> <span class="o">=</span> <span class="nb">false</span>
+            <span class="k">break</span>
+          <span class="n">end</span>
+        <span class="n">end</span>
+        <span class="k">if</span> <span class="n">ok</span>
+          <span class="k">return</span> <span class="n">g</span>
+        <span class="n">end</span>
+      <span class="n">end</span>
+      <span class="n">raise</span> <span class="n">ArgumentError</span><span class="p">.</span><span class="k">new</span>
+    <span class="n">end</span>
   <span class="n">end</span>
 <span class="n">end</span>
 
@@ -495,8 +808,8 @@ h1 a:focus {
 #
 # Copyright 2023 Google LLC
 #
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License")</span><span class="p">;</span>
+<span class="cp"># you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
 #      https://www.apache.org/licenses/LICENSE-2.0

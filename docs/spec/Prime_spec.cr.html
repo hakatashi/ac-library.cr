@@ -102,7 +102,7 @@ h1 a:focus {
 
 <ul>
     <li><a href="/blob/master/spec/Prime_spec.cr">View this file on GitHub</a></li>
-    <li>Last update: 2023-01-21 09:22:12+00:00</li>
+    <li>Last update: 2023-01-21 11:43:08+00:00</li>
     
     
     
@@ -358,6 +358,8 @@ h1 a:focus {
 # See the License for the specific language governing permissions and
 # limitations under the License.
 </span>
+<span class="cp"># require "./Prime.cr"
+</span>
 <span class="n">module</span> <span class="n">AtCoder</span>
   <span class="cp"># Implements [ACL's Math library](https://atcoder.github.io/ac-library/master/document_en/math.html)
 </span>  <span class="n">module</span> <span class="n">Math</span>
@@ -517,6 +519,25 @@ h1 a:focus {
 </span>    <span class="n">def</span> <span class="n">self</span><span class="p">.</span><span class="n">product_greater_than</span><span class="p">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">Int</span><span class="p">,</span> <span class="n">b</span> <span class="o">:</span> <span class="n">Int</span><span class="p">,</span> <span class="n">target</span> <span class="o">:</span> <span class="n">Int</span><span class="p">)</span>
       <span class="n">target</span> <span class="c1">// b &lt; a</span>
     <span class="n">end</span>
+
+    <span class="n">def</span> <span class="n">self</span><span class="p">.</span><span class="n">get_primitive_root</span><span class="p">(</span><span class="n">p</span> <span class="o">:</span> <span class="n">Int</span><span class="p">)</span>
+      <span class="k">return</span> <span class="mi">1</span><span class="n">_i64</span> <span class="k">if</span> <span class="n">p</span> <span class="o">==</span> <span class="mi">2</span>
+      <span class="n">n</span> <span class="o">=</span> <span class="n">p</span> <span class="o">-</span> <span class="mi">1</span>
+      <span class="n">factors</span> <span class="o">=</span> <span class="n">AtCoder</span><span class="o">::</span><span class="n">Prime</span><span class="p">.</span><span class="n">prime_division</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+      <span class="p">(</span><span class="mi">2</span><span class="n">_i64</span><span class="p">..</span><span class="n">p</span><span class="p">.</span><span class="n">to_i64</span><span class="p">).</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">g</span><span class="o">|</span>
+        <span class="n">ok</span> <span class="o">=</span> <span class="nb">true</span>
+        <span class="n">factors</span><span class="p">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="p">(</span><span class="n">factor</span><span class="p">,</span> <span class="n">_</span><span class="p">)</span><span class="o">|</span>
+          <span class="k">if</span> <span class="nf">pow_mod</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">n</span> <span class="c1">// factor, p) == 1</span>
+            <span class="n">ok</span> <span class="o">=</span> <span class="nb">false</span>
+            <span class="k">break</span>
+          <span class="n">end</span>
+        <span class="n">end</span>
+        <span class="k">if</span> <span class="n">ok</span>
+          <span class="k">return</span> <span class="n">g</span>
+        <span class="n">end</span>
+      <span class="n">end</span>
+      <span class="n">raise</span> <span class="n">ArgumentError</span><span class="p">.</span><span class="k">new</span>
+    <span class="n">end</span>
   <span class="n">end</span>
 <span class="n">end</span>
 
@@ -528,7 +549,7 @@ h1 a:focus {
 </span>  <span class="cp"># ```
 </span>  <span class="n">module</span> <span class="n">Prime</span>
     <span class="n">extend</span> <span class="n">self</span>
-    <span class="n">include</span> <span class="nf">Enumerable</span><span class="p">(</span><span class="n">Int64</span><span class="p">)</span>
+    <span class="n">include</span> <span class="n">Enumerable</span><span class="p">(</span><span class="n">Int64</span><span class="p">)</span>
 
     <span class="err">@@</span><span class="n">primes</span> <span class="o">=</span> <span class="p">[</span>
       <span class="mi">2</span><span class="n">_i64</span><span class="p">,</span> <span class="mi">3</span><span class="n">_i64</span><span class="p">,</span> <span class="mi">5</span><span class="n">_i64</span><span class="p">,</span> <span class="mi">7</span><span class="n">_i64</span><span class="p">,</span> <span class="mi">11</span><span class="n">_i64</span><span class="p">,</span> <span class="mi">13</span><span class="n">_i64</span><span class="p">,</span> <span class="mi">17</span><span class="n">_i64</span><span class="p">,</span> <span class="mi">19</span><span class="n">_i64</span><span class="p">,</span>
