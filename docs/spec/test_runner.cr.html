@@ -102,7 +102,7 @@ h1 a:focus {
 
 <ul>
     <li><a href="/blob/master/spec/test_runner.cr">View this file on GitHub</a></li>
-    <li>Last update: 2023-01-21 13:20:55+00:00</li>
+    <li>Last update: 2023-01-21 13:37:19+00:00</li>
     
     
     
@@ -292,6 +292,8 @@ h1 a:focus {
     <span class="cp"># Implements atcoder::convolution.convolution.
 </span>    <span class="cp"># TODO: Support for int
 </span>    <span class="n">def</span> <span class="n">self</span><span class="p">.</span><span class="n">convolution</span><span class="p">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">Array</span><span class="p">(</span><span class="n">T</span><span class="p">),</span> <span class="n">b</span> <span class="o">:</span> <span class="n">Array</span><span class="p">(</span><span class="n">T</span><span class="p">))</span> <span class="n">forall</span> <span class="n">T</span>
+      <span class="k">return</span> <span class="p">[]</span> <span class="n">of</span> <span class="n">T</span> <span class="k">if</span> <span class="n">a</span><span class="p">.</span><span class="n">empty</span><span class="o">?</span> <span class="o">||</span> <span class="n">b</span><span class="p">.</span><span class="n">empty</span><span class="o">?</span>
+
       <span class="n">modulo</span> <span class="o">=</span> <span class="n">T</span><span class="o">::</span><span class="n">MOD</span>
       <span class="n">n</span> <span class="o">=</span> <span class="n">modulo</span> <span class="o">-</span> <span class="mi">1</span>
       <span class="n">result_size</span> <span class="o">=</span> <span class="n">a</span><span class="p">.</span><span class="n">size</span><span class="p">.</span><span class="n">to_i64</span> <span class="o">+</span> <span class="n">b</span><span class="p">.</span><span class="n">size</span><span class="p">.</span><span class="n">to_i64</span> <span class="o">-</span> <span class="mi">1</span>
@@ -1048,9 +1050,16 @@ h1 a:focus {
 <span class="n">require</span> <span class="s">"spec"</span>
 
 <span class="n">alias</span> <span class="n">Convolution</span> <span class="o">=</span> <span class="n">AtCoder</span><span class="o">::</span><span class="n">Convolution</span>
+<span class="n">alias</span> <span class="n">Mint9</span> <span class="o">=</span> <span class="n">AtCoder</span><span class="o">::</span><span class="n">ModInt998244353</span>
 
 <span class="n">describe</span> <span class="s">"Convolution"</span> <span class="k">do</span>
   <span class="n">describe</span> <span class="s">".convolution"</span> <span class="k">do</span>
+    <span class="n">it</span> <span class="s">"return empty array if any of input array is empty"</span> <span class="k">do</span>
+      <span class="n">Convolution</span><span class="p">.</span><span class="n">convolution</span><span class="p">([]</span> <span class="n">of</span> <span class="n">Mint9</span><span class="p">,</span> <span class="p">[]</span> <span class="n">of</span> <span class="n">Mint9</span><span class="p">).</span><span class="n">should</span> <span class="n">eq</span> <span class="p">[]</span> <span class="n">of</span> <span class="n">Mint9</span>
+      <span class="n">Convolution</span><span class="p">.</span><span class="n">convolution</span><span class="p">([</span><span class="n">Mint9</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="mi">1</span><span class="n">_i64</span><span class="p">)],</span> <span class="p">[]</span> <span class="n">of</span> <span class="n">Mint9</span><span class="p">).</span><span class="n">should</span> <span class="n">eq</span> <span class="p">[]</span> <span class="n">of</span> <span class="n">Mint9</span>
+      <span class="n">Convolution</span><span class="p">.</span><span class="n">convolution</span><span class="p">([]</span> <span class="n">of</span> <span class="n">Mint9</span><span class="p">,</span> <span class="p">[</span><span class="n">Mint9</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="mi">1</span><span class="n">_i64</span><span class="p">)]).</span><span class="n">should</span> <span class="n">eq</span> <span class="p">[]</span> <span class="n">of</span> <span class="n">Mint9</span>
+    <span class="n">end</span>
+
     <span class="n">it</span> <span class="s">"calculates convolution of input arrays"</span> <span class="k">do</span>
       <span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="n">AtCoder</span><span class="o">::</span><span class="n">ModInt998244353</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="mi">1</span><span class="n">_i64</span><span class="p">)]</span> <span class="o">*</span> <span class="mi">3</span>
       <span class="n">Convolution</span><span class="p">.</span><span class="n">convolution</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">a</span><span class="p">).</span><span class="n">should</span> <span class="n">eq</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
