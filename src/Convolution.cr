@@ -76,7 +76,7 @@ module AtCoder
 
       modulo = T::MOD
       n = modulo - 1
-      result_size = a.size.to_i64 + b.size.to_i64 - 1
+      result_size = a.size + b.size - 1
 
       c = 1_i64 << n.trailing_zeros_count
 
@@ -105,6 +105,38 @@ module AtCoder
       ifft(input_a, g)
 
       input_a[0...result_size]
+    end
+
+    def self.convolution_ll(a : Array(Int64), b : Array(Int64))
+      return [] of Int64 if a.empty? || b.empty?
+
+      a1 = a.map {|n| AtCoder::ModInt754974721.new(n)}
+      a2 = a.map {|n| AtCoder::ModInt167772161.new(n)}
+      a3 = a.map {|n| AtCoder::ModInt469762049.new(n)}
+
+      b1 = b.map {|n| AtCoder::ModInt754974721.new(n)}
+      b2 = b.map {|n| AtCoder::ModInt167772161.new(n)}
+      b3 = b.map {|n| AtCoder::ModInt469762049.new(n)}
+
+      c1 = convolution(a1, b1)
+      c2 = convolution(a2, b2)
+      c3 = convolution(a3, b3)
+
+      m1 = 754_974_721_i64
+      m2 = 167_772_161_i64
+      m3 = 469_762_049_i64
+
+      c = c1.zip(c2, c3).map do |n1, n2, n3|
+        p = AtCoder::Math.inv_mod(m1, m2)
+        tmp = (n2.val - n1.val) * p % m2
+        answer = n1.val + m1 * tmp
+
+        p = AtCoder::Math.inv_mod(m1 * m2, m3)
+        tmp = (((n3.val - answer) % m3) * p) % m3
+        answer + m1 * m2 * tmp
+      end
+
+      c
     end
   end
 end

@@ -224,3 +224,6 @@ end
 
 AtCoder.static_modint(ModInt1000000007, 1_000_000_007_i64)
 AtCoder.static_modint(ModInt998244353, 998_244_353_i64)
+AtCoder.static_modint(ModInt754974721, 754_974_721_i64)
+AtCoder.static_modint(ModInt167772161, 167_772_161_i64)
+AtCoder.static_modint(ModInt469762049, 469_762_049_i64)
