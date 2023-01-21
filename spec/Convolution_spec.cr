@@ -19,12 +19,11 @@ require "../src/ModInt.cr"
 require "spec"
 
 alias Convolution = AtCoder::Convolution
-alias Mint = AtCoder::ModInt998244353
 
 describe "Convolution" do
   describe ".convolution" do
     it "calculates convolution of input arrays" do
-      a = [Mint.new(1_i64)] * 3
+      a = [AtCoder::ModInt998244353.new(1_i64)] * 3
       Convolution.convolution(a, a).should eq [1, 2, 3, 2, 1]
     end
   end
