@@ -102,7 +102,7 @@ h1 a:focus {
 
 <ul>
     <li><a href="/blob/master/src/SkewHeap.cr">View this file on GitHub</a></li>
-    <li>Last update: 2023-01-20 20:11:28+00:00</li>
+    <li>Last update: 2023-01-21 09:22:12+00:00</li>
     
     
     
@@ -118,6 +118,15 @@ h1 a:focus {
 
 
 
+
+    <h2>Required by</h2>
+    <ul>
+    
+        <li><a href="/ac-library.cr/docs/spec/SkewHeap_spec.cr"><img class="emoji" title=":warning:" alt=":warning:" src="https://github.githubassets.com/images/icons/emoji/unicode/26a0.png" height="20" width="20"> spec/SkewHeap_spec.cr
+            
+        </a></li>
+    
+    </ul>
 
 
 
@@ -159,15 +168,18 @@ h1 a:focus {
 
     <span class="n">getter</span> <span class="o">:</span><span class="n">size</span>
 
-    <span class="k">class</span> <span class="nc">Node</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
+    <span class="k">private</span> <span class="k">class</span> <span class="nc">Node</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
       <span class="err">@</span><span class="n">left</span> <span class="o">:</span> <span class="n">Node</span><span class="p">(</span><span class="n">T</span><span class="p">)</span> <span class="o">|</span> <span class="n">Nil</span>
       <span class="err">@</span><span class="n">right</span> <span class="o">:</span> <span class="n">Node</span><span class="p">(</span><span class="n">T</span><span class="p">)</span> <span class="o">|</span> <span class="n">Nil</span>
       <span class="err">@</span><span class="n">value</span> <span class="o">:</span> <span class="n">T</span>
 
       <span class="n">property</span> <span class="o">:</span><span class="n">value</span><span class="p">,</span> <span class="o">:</span><span class="n">left</span><span class="p">,</span> <span class="o">:</span><span class="n">right</span>
 
-      <span class="n">def</span> <span class="n">initialize</span><span class="p">(</span><span class="err">@</span><span class="n">left</span><span class="p">,</span> <span class="err">@</span><span class="n">right</span><span class="p">,</span> <span class="err">@</span><span class="n">value</span><span class="p">)</span>
-      <span class="n">end</span>
+      <span class="n">def</span> <span class="n">initialize</span><span class="p">(</span><span class="err">@</span><span class="n">left</span><span class="p">,</span> <span class="err">@</span><span class="n">right</span><span class="p">,</span> <span class="err">@</span><span class="n">value</span><span class="p">)</span> <span class="n">end</span>
+    <span class="n">end</span>
+
+    <span class="n">def</span> <span class="n">initialize</span>
+      <span class="n">initialize</span> <span class="p">{</span><span class="o">|</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="o">|</span> <span class="n">a</span> <span class="o">&lt;=</span> <span class="n">b</span><span class="p">}</span>
     <span class="n">end</span>
 
     <span class="n">def</span> <span class="n">initialize</span><span class="p">(</span><span class="o">&amp;</span><span class="n">block</span> <span class="o">:</span> <span class="n">T</span><span class="p">,</span> <span class="n">T</span> <span class="o">-&gt;</span> <span class="n">Bool</span><span class="p">)</span>
@@ -244,7 +256,7 @@ h1 a:focus {
 
     <span class="n">getter</span> <span class="o">:</span><span class="n">size</span>
 
-    <span class="k">class</span> <span class="nc">Node</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
+    <span class="k">private</span> <span class="k">class</span> <span class="nc">Node</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
       <span class="err">@</span><span class="n">left</span> <span class="o">:</span> <span class="n">Node</span><span class="p">(</span><span class="n">T</span><span class="p">)</span> <span class="o">|</span> <span class="n">Nil</span>
       <span class="err">@</span><span class="n">right</span> <span class="o">:</span> <span class="n">Node</span><span class="p">(</span><span class="n">T</span><span class="p">)</span> <span class="o">|</span> <span class="n">Nil</span>
       <span class="err">@</span><span class="n">value</span> <span class="o">:</span> <span class="n">T</span>
@@ -253,6 +265,10 @@ h1 a:focus {
 
       <span class="n">def</span> <span class="n">initialize</span><span class="p">(</span><span class="err">@</span><span class="n">left</span><span class="p">,</span> <span class="err">@</span><span class="n">right</span><span class="p">,</span> <span class="err">@</span><span class="n">value</span><span class="p">)</span>
       <span class="n">end</span>
+    <span class="n">end</span>
+
+    <span class="n">def</span> <span class="n">initialize</span>
+      <span class="n">initialize</span> <span class="p">{</span> <span class="o">|</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="o">|</span> <span class="n">a</span> <span class="o">&lt;=</span> <span class="n">b</span> <span class="p">}</span>
     <span class="n">end</span>
 
     <span class="n">def</span> <span class="n">initialize</span><span class="p">(</span><span class="o">&amp;</span><span class="n">block</span> <span class="o">:</span> <span class="n">T</span><span class="p">,</span> <span class="n">T</span> <span class="o">-&gt;</span> <span class="n">Bool</span><span class="p">)</span>
