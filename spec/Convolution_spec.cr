@@ -19,9 +19,16 @@ require "../src/ModInt.cr"
 require "spec"
 
 alias Convolution = AtCoder::Convolution
+alias Mint9 = AtCoder::ModInt998244353
 
 describe "Convolution" do
   describe ".convolution" do
+    it "return empty array if any of input array is empty" do
+      Convolution.convolution([] of Mint9, [] of Mint9).should eq [] of Mint9
+      Convolution.convolution([Mint9.new(1_i64)], [] of Mint9).should eq [] of Mint9
+      Convolution.convolution([] of Mint9, [Mint9.new(1_i64)]).should eq [] of Mint9
+    end
+
     it "calculates convolution of input arrays" do
       a = [AtCoder::ModInt998244353.new(1_i64)] * 3
       Convolution.convolution(a, a).should eq [1, 2, 3, 2, 1]

@@ -72,6 +72,8 @@ module AtCoder
     # Implements atcoder::convolution.convolution.
     # TODO: Support for int
     def self.convolution(a : Array(T), b : Array(T)) forall T
+      return [] of T if a.empty? || b.empty?
+
       modulo = T::MOD
       n = modulo - 1
       result_size = a.size.to_i64 + b.size.to_i64 - 1
