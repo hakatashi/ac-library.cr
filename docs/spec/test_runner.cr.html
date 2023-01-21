@@ -102,7 +102,7 @@ h1 a:focus {
 
 <ul>
     <li><a href="/blob/master/spec/test_runner.cr">View this file on GitHub</a></li>
-    <li>Last update: 2023-01-21 11:43:08+00:00</li>
+    <li>Last update: 2023-01-21 13:20:55+00:00</li>
     
     
     
@@ -235,7 +235,13 @@ h1 a:focus {
 # limitations under the License.
 </span>
 <span class="n">module</span> <span class="n">AtCoder</span>
-  <span class="n">module</span> <span class="n">Convolution</span>
+  <span class="cp"># Implements [atcoder::convolution](https://atcoder.github.io/ac-library/master/document_en/convolution.html).
+</span>  <span class="cp">#
+</span>  <span class="cp"># ```
+</span>  <span class="cp"># a = [AtCoder::ModInt998244353.new(1_i64)] * 3
+</span>  <span class="cp"># AtCoder::Convolution.convolution(a, a) # =&gt; [1, 2, 3, 2, 1]
+</span>  <span class="cp"># ```
+</span>  <span class="n">module</span> <span class="n">Convolution</span>
     <span class="k">private</span> <span class="n">def</span> <span class="n">self</span><span class="p">.</span><span class="n">bit_reverse</span><span class="p">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">Int</span><span class="p">,</span> <span class="n">bit_length</span> <span class="o">:</span> <span class="n">Int</span><span class="p">)</span>
       <span class="n">ret</span> <span class="o">=</span> <span class="n">n</span><span class="p">.</span><span class="k">class</span><span class="p">.</span><span class="n">zero</span>
       <span class="n">bit_length</span><span class="p">.</span><span class="n">times</span> <span class="k">do</span> <span class="o">|</span><span class="n">i</span><span class="o">|</span>
@@ -244,9 +250,10 @@ h1 a:focus {
       <span class="n">ret</span>
     <span class="n">end</span>
 
-    <span class="cp"># In-place execution of FFT operation
-</span>    <span class="cp"># Length of a must be power of 2
-</span>    <span class="k">private</span> <span class="n">def</span> <span class="n">self</span><span class="p">.</span><span class="n">fft</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">g</span><span class="p">)</span>
+    <span class="cp"># In-place execution of FFT operation.
+</span>    <span class="cp"># Element of `a` and `g` must implement ModInt operations.
+</span>    <span class="cp"># Length of `a` must be power of 2.
+</span>    <span class="k">private</span> <span class="n">def</span> <span class="n">self</span><span class="p">.</span><span class="n">fft</span><span class="p">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">Array</span><span class="p">(</span><span class="n">T</span><span class="p">),</span> <span class="n">g</span> <span class="o">:</span> <span class="n">T</span><span class="p">)</span> <span class="n">forall</span> <span class="n">T</span>
       <span class="n">size</span> <span class="o">=</span> <span class="n">a</span><span class="p">.</span><span class="n">size</span>
       <span class="n">bit_length</span> <span class="o">=</span> <span class="n">size</span><span class="p">.</span><span class="n">trailing_zeros_count</span>
 
@@ -273,18 +280,6 @@ h1 a:focus {
           <span class="n">end</span>
         <span class="n">end</span>
       <span class="n">end</span>
-
-      <span class="n">a</span>
-    <span class="n">end</span>
-
-    <span class="k">private</span> <span class="n">def</span> <span class="n">self</span><span class="p">.</span><span class="n">naive_dft</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">g</span><span class="p">)</span>
-      <span class="n">ret</span> <span class="o">=</span> <span class="n">a</span><span class="p">.</span><span class="n">map</span> <span class="p">{</span> <span class="o">|</span><span class="n">n</span><span class="o">|</span> <span class="n">n</span><span class="p">.</span><span class="k">class</span><span class="p">.</span><span class="n">zero</span> <span class="p">}</span>
-      <span class="n">ret</span><span class="p">.</span><span class="n">size</span><span class="p">.</span><span class="n">times</span> <span class="k">do</span> <span class="o">|</span><span class="n">i</span><span class="o">|</span>
-        <span class="n">a</span><span class="p">.</span><span class="n">each_with_index</span> <span class="k">do</span> <span class="o">|</span><span class="n">ai</span><span class="p">,</span> <span class="n">j</span><span class="o">|</span>
-          <span class="n">ret</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="n">ai</span> <span class="o">*</span> <span class="p">(</span><span class="n">g</span> <span class="o">**</span> <span class="p">(</span><span class="n">i</span> <span class="o">*</span> <span class="n">j</span><span class="p">))</span>
-        <span class="n">end</span>
-      <span class="n">end</span>
-      <span class="n">ret</span>
     <span class="n">end</span>
 
     <span class="k">private</span> <span class="n">def</span> <span class="n">self</span><span class="p">.</span><span class="n">ifft</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">g</span><span class="p">)</span>
@@ -292,10 +287,10 @@ h1 a:focus {
       <span class="n">a</span><span class="p">.</span><span class="n">size</span><span class="p">.</span><span class="n">times</span> <span class="k">do</span> <span class="o">|</span><span class="n">i</span><span class="o">|</span>
         <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="c1">//= a.size</span>
       <span class="n">end</span>
-      <span class="n">a</span>
     <span class="n">end</span>
 
-    <span class="cp"># TODO: support for int
+    <span class="cp"># Implements atcoder::convolution.convolution.
+</span>    <span class="cp"># TODO: Support for int
 </span>    <span class="n">def</span> <span class="n">self</span><span class="p">.</span><span class="n">convolution</span><span class="p">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">Array</span><span class="p">(</span><span class="n">T</span><span class="p">),</span> <span class="n">b</span> <span class="o">:</span> <span class="n">Array</span><span class="p">(</span><span class="n">T</span><span class="p">))</span> <span class="n">forall</span> <span class="n">T</span>
       <span class="n">modulo</span> <span class="o">=</span> <span class="n">T</span><span class="o">::</span><span class="n">MOD</span>
       <span class="n">n</span> <span class="o">=</span> <span class="n">modulo</span> <span class="o">-</span> <span class="mi">1</span>
@@ -327,7 +322,7 @@ h1 a:focus {
 
       <span class="nf">ifft</span><span class="p">(</span><span class="n">input_a</span><span class="p">,</span> <span class="n">g</span><span class="p">)</span>
 
-      <span class="n">input_a</span>
+      <span class="n">input_a</span><span class="p">[</span><span class="mf">0.</span><span class="p">..</span><span class="n">result_size</span><span class="p">]</span>
     <span class="n">end</span>
   <span class="n">end</span>
 <span class="n">end</span>
@@ -1053,23 +1048,12 @@ h1 a:focus {
 <span class="n">require</span> <span class="s">"spec"</span>
 
 <span class="n">alias</span> <span class="n">Convolution</span> <span class="o">=</span> <span class="n">AtCoder</span><span class="o">::</span><span class="n">Convolution</span>
-<span class="n">alias</span> <span class="n">Mint</span> <span class="o">=</span> <span class="n">AtCoder</span><span class="o">::</span><span class="n">ModInt998244353</span>
 
 <span class="n">describe</span> <span class="s">"Convolution"</span> <span class="k">do</span>
   <span class="n">describe</span> <span class="s">".convolution"</span> <span class="k">do</span>
-    <span class="n">it</span> <span class="s">"is sound"</span> <span class="k">do</span>
-      <span class="n">Convolution</span><span class="p">.</span><span class="n">convolution</span><span class="p">([</span>
-        <span class="n">Mint</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="mi">100</span><span class="n">_i64</span><span class="p">),</span>
-        <span class="n">Mint</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="mi">101</span><span class="n">_i64</span><span class="p">),</span>
-        <span class="n">Mint</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="mi">103</span><span class="n">_i64</span><span class="p">),</span>
-        <span class="n">Mint</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="mi">105</span><span class="n">_i64</span><span class="p">),</span>
-      <span class="p">],</span> <span class="p">[</span>
-        <span class="n">Mint</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="mi">100</span><span class="n">_i64</span><span class="p">),</span>
-        <span class="n">Mint</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="mi">200</span><span class="n">_i64</span><span class="p">),</span>
-        <span class="n">Mint</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="mi">400</span><span class="n">_i64</span><span class="p">),</span>
-        <span class="n">Mint</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="mi">900</span><span class="n">_i64</span><span class="p">),</span>
-        <span class="n">Mint</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="mi">1100</span><span class="n">_i64</span><span class="p">),</span>
-      <span class="p">]).</span><span class="n">should</span> <span class="n">eq</span> <span class="p">[</span><span class="mi">10000</span><span class="p">,</span> <span class="mi">30100</span><span class="p">,</span> <span class="mi">70500</span><span class="p">,</span> <span class="mi">161500</span><span class="p">,</span> <span class="mi">263100</span><span class="p">,</span> <span class="mi">245800</span><span class="p">,</span> <span class="mi">207800</span><span class="p">,</span> <span class="mi">115500</span><span class="p">]</span>
+    <span class="n">it</span> <span class="s">"calculates convolution of input arrays"</span> <span class="k">do</span>
+      <span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="n">AtCoder</span><span class="o">::</span><span class="n">ModInt998244353</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="mi">1</span><span class="n">_i64</span><span class="p">)]</span> <span class="o">*</span> <span class="mi">3</span>
+      <span class="n">Convolution</span><span class="p">.</span><span class="n">convolution</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">a</span><span class="p">).</span><span class="n">should</span> <span class="n">eq</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
     <span class="n">end</span>
   <span class="n">end</span>
 <span class="n">end</span>

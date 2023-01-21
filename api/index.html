@@ -388,6 +388,19 @@
 
 <ul><li><code>pow_mod(x, n, m)</code> => <code>AtCoder::Math.pow_mod(x, n, m)</code></li><li><code>inv_mod(x, m)</code> => <code>AtCoder::Math.inv_mod(x, m)</code></li><li><code>crt(r, m)</code> => <code>AtCoder::Math.crt(r, m)</code></li><li><code>floor_sum</code> => <code>AtCoder::Math.floor_sum(n, m, a, b)</code></li></ul>
 
+<h2><a id="convolution.crhttpsgoogle.github.ioac-library.crdocssrcconvolution.cr-atcoderconvolutionhttpsatcoder.github.ioac-librarydocument-enconvolution.html" class="anchor" href="#convolution.crhttpsgoogle.github.ioac-library.crdocssrcconvolution.cr-atcoderconvolutionhttpsatcoder.github.ioac-librarydocument-enconvolution.html">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a><a href="https://google.github.io/ac-library.cr/docs/src/Convolution.cr" target="_blank">Convolution.cr</a> (<a href="https://atcoder.github.io/ac-library/document_en/convolution.html" target="_blank">&lt;atcoder/convolution></a>)</h2>
+
+<ul><li><code>convolution(a, b)</code> => <code>AtCoder::Convolution.convolution(a, b)</code></li></ul>
+
+<p><code></code>`cr
+  a = [AtCoder::ModInt998244353.new(1_i64)] * 3
+  AtCoder::Convolution.convolution(a, a) #=> [1, 2, 3, 2, 1]
+  <code></code>`</p>
+
 <h2><a id="priority-queue.crhttpsgoogle.github.ioac-library.crdocssrcpriority-queue.cr-not-in-acl" class="anchor" href="#priority-queue.crhttpsgoogle.github.ioac-library.crdocssrcpriority-queue.cr-not-in-acl">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
