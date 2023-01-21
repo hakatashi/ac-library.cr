@@ -175,6 +175,15 @@ This library aims to provide the almost-equivalent (and additional) functionalit
 * `crt(r, m)` => `AtCoder::Math.crt(r, m)`
 * `floor_sum` => `AtCoder::Math.floor_sum(n, m, a, b)`
 
+## [Convolution.cr](https://google.github.io/ac-library.cr/docs/src/Convolution.cr) ([<atcoder/convolution>](https://atcoder.github.io/ac-library/document_en/convolution.html))
+
+* `convolution(a, b)` => `AtCoder::Convolution.convolution(a, b)`
+
+  ```cr
+  a = [AtCoder::ModInt998244353.new(1_i64)] * 3
+  AtCoder::Convolution.convolution(a, a) #=> [1, 2, 3, 2, 1]
+  ```
+
 ## [PriorityQueue.cr](https://google.github.io/ac-library.cr/docs/src/PriorityQueue.cr) (not in ACL)
 
 * `AtCoder::PriorityQueue(T).new`

@@ -23,20 +23,9 @@ alias Mint = AtCoder::ModInt998244353
 
 describe "Convolution" do
   describe ".convolution" do
-    it "is sound" do
-      Convolution.convolution([
-        Mint.new(100_i64),
-        Mint.new(101_i64),
-        Mint.new(103_i64),
-        Mint.new(105_i64),
-      ], [
-        Mint.new(100_i64),
-        Mint.new(200_i64),
-        Mint.new(400_i64),
-        Mint.new(900_i64),
-        Mint.new(1100_i64),
-      ]).should eq [10000, 30100, 70500, 161500, 263100, 245800, 207800, 115500]
+    it "calculates convolution of input arrays" do
+      a = [Mint.new(1_i64)] * 3
+      Convolution.convolution(a, a).should eq [1, 2, 3, 2, 1]
     end
   end
 end
-

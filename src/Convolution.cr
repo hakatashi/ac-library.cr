@@ -15,6 +15,12 @@
 # limitations under the License.
 
 module AtCoder
+  # Implements [atcoder::convolution](https://atcoder.github.io/ac-library/master/document_en/convolution.html).
+  #
+  # ```
+  # a = [AtCoder::ModInt998244353.new(1_i64)] * 3
+  # AtCoder::Convolution.convolution(a, a) #=> [1, 2, 3, 2, 1]
+  # ```
   module Convolution
     private def self.bit_reverse(n : Int, bit_length : Int)
       ret = n.class.zero
@@ -24,9 +30,10 @@ module AtCoder
       ret
     end
 
-    # In-place execution of FFT operation
-    # Length of a must be power of 2
-    private def self.fft(a, g)
+    # In-place execution of FFT operation.
+    # Element of `a` and `g` must implement ModInt operations.
+    # Length of `a` must be power of 2.
+    private def self.fft(a : Array(T), g : T) forall T
       size = a.size
       bit_length = size.trailing_zeros_count
 
@@ -53,18 +60,6 @@ module AtCoder
           end
         end
       end
-
-      a
-    end
-
-    private def self.naive_dft(a, g)
-      ret = a.map {|n| n.class.zero }
-      ret.size.times do |i|
-        a.each_with_index do |ai, j|
-          ret[i] += ai * (g ** (i * j))
-        end
-      end
-      ret
     end
 
     private def self.ifft(a, g)
@@ -72,10 +67,10 @@ module AtCoder
       a.size.times do |i|
         a[i] //= a.size
       end
-      a
     end
 
-    # TODO: support for int
+    # Implements atcoder::convolution.convolution.
+    # TODO: Support for int
     def self.convolution(a : Array(T), b : Array(T)) forall T
       modulo = T::MOD
       n = modulo - 1
@@ -107,7 +102,7 @@ module AtCoder
 
       ifft(input_a, g)
 
-      input_a
+      input_a[0...result_size]
     end
   end
 end
