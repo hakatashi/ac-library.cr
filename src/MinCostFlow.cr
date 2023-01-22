@@ -88,13 +88,13 @@ module AtCoder
     end
 
     # Implements atcoder::mcf_graph.slope(start, target, flow_limit).
+    # ameba:disable Metrics/CyclomaticComplexity
     def slope(start, target, flow_limit : Int | Nil = nil)
       raise ArgumentError.new("start and target cannot be the same") if start == target
 
       flow_points = [] of {Int64, Int64}
 
       current_cost = 0_i64
-      current_capacity = 0_i64
 
       flowed_capacity = 0_i64
       min_cost = 0_i64
@@ -187,7 +187,6 @@ module AtCoder
         min_cost += new_cost * new_capacity
         flowed_capacity += new_capacity
         current_cost = new_cost
-        current_capacity = new_capacity
       end
 
       flow_points << {flowed_capacity, min_cost}

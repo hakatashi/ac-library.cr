@@ -150,4 +150,3 @@ describe "MinCostFlow" do
     end
   end
 end
-
