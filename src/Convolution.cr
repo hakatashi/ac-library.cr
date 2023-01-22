@@ -31,7 +31,7 @@ module AtCoder
     end
 
     # In-place execution of FFT operation.
-    # Element of `a` and `g` must implement ModInt operations.
+    # `T` must implement ModInt operations.
     # Length of `a` must be power of 2.
     private def self.fft(a : Array(T), g : T) forall T
       size = a.size

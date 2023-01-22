@@ -20,6 +20,15 @@ module AtCoder
   # Implements [atcoder::mcf_graph](https://atcoder.github.io/ac-library/master/document_en/mincostflow.html).
   #
   # ```
+  # flow = AtCoder::MinCostFlow.new(5)
+  # flow.add_edge(0, 1, 30, 3)
+  # flow.add_edge(0, 2, 60, 9)
+  # flow.add_edge(1, 2, 40, 5)
+  # flow.add_edge(1, 3, 50, 7)
+  # flow.add_edge(2, 3, 20, 8)
+  # flow.add_edge(2, 4, 50, 6)
+  # flow.add_edge(3, 4, 60, 7)
+  # flow.flow(0, 4, 70) #=> {70, 1080}
   # ```
   class MinCostFlow
     private record EdgeInfo, capacity : Int64, cost : Int64 | Nil do
@@ -64,6 +73,7 @@ module AtCoder
 
     @graph : AtCoder::DirectedGraph(Nil, EdgeInfo)
 
+    # Implements atcoder::mcf_graph g(n).
     def initialize(@size : Int64)
       @graph = AtCoder::DirectedGraph(Nil, EdgeInfo).new(@size)
       @dists = Array(Int64 | Nil).new(@size, 0_i64)
@@ -77,6 +87,7 @@ module AtCoder
       @edges << {from.to_i64, to.to_i64}
     end
 
+    # Implements atcoder::mcf_graph.slope(start, target, flow_limit).
     def slope(start, target, flow_limit : Int | Nil = nil)
       raise ArgumentError.new("start and target cannot be the same") if start == target
 
@@ -184,6 +195,7 @@ module AtCoder
       flow_points
     end
 
+    # Implements atcoder::mcf_graph.flow(start, target, flow_limit).
     def flow(start, target, flow_limit : Int | Nil = nil)
       flow_points = slope(start, target, flow_limit)
       flow_points.last
