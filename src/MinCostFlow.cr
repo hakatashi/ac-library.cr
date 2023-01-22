@@ -72,12 +72,19 @@ module AtCoder
 
     # Implements atcoder::mcf_graph.add_edge(from, to, capacity, cost).
     def add_edge(from, to, capacity, cost)
-      @graph.add_edge(from, to, EdgeInfo.new(capacity, cost))
-      @graph.add_edge(to, from, EdgeInfo.new(0_i64, -cost))
+      @graph.add_edge(from, to, EdgeInfo.new(capacity.to_i64, cost.to_i64))
+      @graph.add_edge(to, from, EdgeInfo.new(0_i64, -cost.to_i64))
       @edges << {from.to_i64, to.to_i64}
     end
 
-    def flow(start, target, flow_limit)
+    def slope(start, target, flow_limit : Int | Nil = nil)
+      raise ArgumentError.new("start and target cannot be the same") if start == target
+
+      flow_points = [] of {Int64, Int64}
+
+      current_cost = 0_i64
+      current_capacity = 0_i64
+
       flowed_capacity = 0_i64
       min_cost = 0_i64
 
@@ -87,11 +94,12 @@ module AtCoder
         target_dist = nodes[target][:dist]
 
         if target_dist.nil? || target_dist.capacity == 0
-          return nil
+          break
         end
 
         capacity = target_dist.capacity
 
+        # Update edge capacities
         last_node = target
         until last_node == start
           prev_node = nodes[last_node][:prev].not_nil!
@@ -113,6 +121,7 @@ module AtCoder
           last_node = prev_node
         end
 
+        # Update edge costs
         @edges.each do |from, to|
           from_dist = nodes[from][:dist]
           to_dist = nodes[to][:dist]
@@ -140,6 +149,7 @@ module AtCoder
           )
         end
 
+        # Update distants
         nodes.each_with_index do |node, i|
           dist = node[:dist]
           if dist.nil? || @dists[i].nil? || dist.not_nil!.cost.nil?
@@ -149,11 +159,34 @@ module AtCoder
           end
         end
 
-        min_cost += @dists[target].not_nil! * min(capacity, flow_limit - flowed_capacity)
-        flowed_capacity += min(capacity, flow_limit - flowed_capacity)
+        new_cost = @dists[target].not_nil!
+        if flow_limit.nil?
+          new_capacity = capacity
+        else
+          new_capacity = min(capacity, flow_limit - flowed_capacity)
+        end
+
+        if new_cost != current_cost
+          if current_cost == 0 && flowed_capacity != 0
+            flow_points << {0_i64, 0_i64}
+          end
+          flow_points << {flowed_capacity, min_cost}
+        end
+
+        min_cost += new_cost * new_capacity
+        flowed_capacity += new_capacity
+        current_cost = new_cost
+        current_capacity = new_capacity
       end
 
-      min_cost
+      flow_points << {flowed_capacity, min_cost}
+
+      flow_points
+    end
+
+    def flow(start, target, flow_limit : Int | Nil = nil)
+      flow_points = slope(start, target, flow_limit)
+      flow_points.last
     end
 
     @[AlwaysInline]

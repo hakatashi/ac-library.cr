@@ -24,9 +24,9 @@ ne.times do
   u, v, c, d = read_line.split.map(&.to_i64)
   flow.add_edge(u, v, c, d)
 end
-cost = flow.flow(0, nv - 1, f)
-if cost.nil?
-  p -1
-else
+capacity, cost = flow.flow(0, nv - 1, f)
+if capacity == f
   p cost
+else
+  p -1
 end
