@@ -68,6 +68,13 @@ describe "MinCostFlow" do
       flow.add_edge(0, 2, 10, 2)
       flow.flow(0, 2, 30).should eq({20, 50})
     end
+
+    it "returns zero when the graph is not connected" do
+      flow = MinCostFlow.new(4)
+      flow.add_edge(0, 1, 30, 3)
+      flow.add_edge(2, 3, 30, 3)
+      flow.flow(0, 3, 10).should eq({0, 0})
+    end
   end
 
   describe ".slope" do

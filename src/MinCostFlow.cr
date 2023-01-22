@@ -71,8 +71,6 @@ module AtCoder
       end
     end
 
-    @graph : AtCoder::DirectedGraph(Nil, EdgeInfo)
-
     # Implements atcoder::mcf_graph g(n).
     def initialize(@size : Int64)
       @graph = AtCoder::DirectedGraph(Nil, EdgeInfo).new(@size)
@@ -85,6 +83,16 @@ module AtCoder
       @graph.add_edge(from, to, EdgeInfo.new(capacity.to_i64, cost.to_i64))
       @graph.add_edge(to, from, EdgeInfo.new(0_i64, -cost.to_i64))
       @edges << {from.to_i64, to.to_i64}
+    end
+
+    private def increment_edge_cost(from, to, cost_diff)
+      edge = @graph.get_edge(from, to)
+      @graph.update_edge(from, to, edge + EdgeInfo.new(edge.capacity, cost_diff))
+    end
+
+    private def increment_edge_capacity(from, to, capacity_diff)
+      edge = @graph.get_edge(from, to)
+      @graph.update_edge(from, to, EdgeInfo.new(edge.capacity + capacity_diff, edge.cost))
     end
 
     # Implements atcoder::mcf_graph.slope(start, target, flow_limit).
@@ -115,19 +123,8 @@ module AtCoder
         until last_node == start
           prev_node = nodes[last_node][:prev].not_nil!
 
-          forward_edge = @graph.get_edge(prev_node, last_node)
-          @graph.update_edge(
-            prev_node,
-            last_node,
-            EdgeInfo.new(forward_edge.capacity - capacity, forward_edge.cost),
-          )
-
-          backward_edge = @graph.get_edge(last_node, prev_node)
-          @graph.update_edge(
-            last_node,
-            prev_node,
-            EdgeInfo.new(backward_edge.capacity + capacity, backward_edge.cost),
-          )
+          increment_edge_capacity(prev_node, last_node, -capacity)
+          increment_edge_capacity(last_node, prev_node, capacity)
 
           last_node = prev_node
         end
@@ -137,27 +134,13 @@ module AtCoder
           from_dist = nodes[from][:dist]
           to_dist = nodes[to][:dist]
 
-          if from_dist.nil? || to_dist.nil?
-            dist = 0_i64
-          elsif from_dist.cost.nil? || to_dist.cost.nil?
-            dist = 0_i64
-          else
-            dist = to_dist.cost.not_nil! - from_dist.cost.not_nil!
-          end
+          next if from_dist.nil? || to_dist.nil?
+          next if from_dist.cost.nil? || to_dist.cost.nil?
 
-          forward_edge = @graph.get_edge(from, to)
-          @graph.update_edge(
-            from,
-            to,
-            forward_edge + EdgeInfo.new(forward_edge.capacity, -dist),
-          )
+          dist = to_dist.cost.not_nil! - from_dist.cost.not_nil!
 
-          backward_edge = @graph.get_edge(to, from)
-          @graph.update_edge(
-            to,
-            from,
-            backward_edge + EdgeInfo.new(backward_edge.capacity, dist),
-          )
+          increment_edge_cost(from, to, -dist)
+          increment_edge_cost(to, from, dist)
         end
 
         # Update distants
