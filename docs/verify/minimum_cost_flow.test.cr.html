@@ -102,7 +102,7 @@ h1 a:focus {
 
 <ul>
     <li><a href="/blob/master/verify/minimum_cost_flow.test.cr">View this file on GitHub</a></li>
-    <li>Last update: 2023-01-22 15:56:00+00:00</li>
+    <li>Last update: 2023-01-22 15:58:40+00:00</li>
     
     <li>Problem: <a href="https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_6_B">https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_6_B</a>
 </li>
@@ -653,10 +653,6 @@ h1 a:focus {
           <span class="k">return</span> <span class="n">self</span><span class="p">.</span><span class="k">class</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="mi">0</span><span class="n">_i64</span><span class="p">,</span> <span class="n">nil</span><span class="p">)</span>
         <span class="n">end</span>
 
-        <span class="k">if</span> <span class="err">@</span><span class="n">capacity</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">edge</span><span class="p">.</span><span class="n">capacity</span> <span class="o">==</span> <span class="mi">0</span>
-          <span class="k">return</span> <span class="n">self</span><span class="p">.</span><span class="k">class</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="mi">0</span><span class="n">_i64</span><span class="p">,</span> <span class="n">from_cost</span> <span class="o">+</span> <span class="n">to_cost</span><span class="p">)</span>
-        <span class="n">end</span>
-
         <span class="n">self</span><span class="p">.</span><span class="k">class</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="n">min</span><span class="p">(</span><span class="err">@</span><span class="n">capacity</span><span class="p">,</span> <span class="n">edge</span><span class="p">.</span><span class="n">capacity</span><span class="p">),</span> <span class="n">from_cost</span> <span class="o">+</span> <span class="n">to_cost</span><span class="p">)</span>
       <span class="n">end</span>
 
@@ -728,7 +724,7 @@ h1 a:focus {
 
         <span class="n">capacity</span> <span class="o">=</span> <span class="n">target_dist</span><span class="p">.</span><span class="n">capacity</span>
 
-        <span class="cp"># Update edge capacities
+        <span class="cp"># Update edge capacities on the path from start to target
 </span>        <span class="n">last_node</span> <span class="o">=</span> <span class="n">target</span>
         <span class="n">until</span> <span class="n">last_node</span> <span class="o">==</span> <span class="n">start</span>
           <span class="n">prev_node</span> <span class="o">=</span> <span class="n">nodes</span><span class="p">[</span><span class="n">last_node</span><span class="p">][</span><span class="o">:</span><span class="n">prev</span><span class="p">].</span><span class="n">not_nil</span><span class="o">!</span>
