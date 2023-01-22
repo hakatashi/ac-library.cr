@@ -28,12 +28,17 @@ module AtCoder
       end
 
       def +(edge : EdgeInfo)
-        from_dist = dist
-        to_dist = edge.dist
-        if from_dist.nil? || to_dist.nil?
+        from_cost = @cost
+        to_cost = edge.cost
+        if from_cost.nil? || to_cost.nil?
           return self.class.new(0_i64, nil)
         end
-        self.class.new(min(@capacity, edge.capacity), from_dist + to_dist)
+
+        if @capacity == 0 || edge.capacity == 0
+          return self.class.new(0_i64, from_cost + to_cost)
+        end
+
+        self.class.new(min(@capacity, edge.capacity), from_cost + to_cost)
       end
 
       def >(edge : EdgeInfo)
@@ -144,11 +149,8 @@ module AtCoder
           end
         end
 
-        current_cost = @dists[target].not_nil!
-        current_capacity = min(capacity, flow_limit - flowed_capacity)
         min_cost += @dists[target].not_nil! * min(capacity, flow_limit - flowed_capacity)
         flowed_capacity += min(capacity, flow_limit - flowed_capacity)
-        puts "#{flowed_capacity} #{min_cost} #{current_cost} #{current_capacity}"
       end
 
       min_cost

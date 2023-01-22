@@ -20,8 +20,6 @@ module AtCoder
   class Graph(NodeInfo, EdgeInfo)
     @size_bits : Int32
     getter visited : Set(Int64)
-    getter :edges
-    getter :adjacencies
 
     def initialize(@nodes : Array(NodeInfo))
       @size = @nodes.size.to_i64
