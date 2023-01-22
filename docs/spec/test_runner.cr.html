@@ -102,7 +102,7 @@ h1 a:focus {
 
 <ul>
     <li><a href="/blob/master/spec/test_runner.cr">View this file on GitHub</a></li>
-    <li>Last update: 2023-01-22 19:10:07+09:00</li>
+    <li>Last update: 2023-01-22 15:56:00+00:00</li>
     
     
     
@@ -2406,8 +2406,6 @@ h1 a:focus {
       <span class="n">end</span>
     <span class="n">end</span>
 
-    <span class="err">@</span><span class="n">graph</span> <span class="o">:</span> <span class="n">AtCoder</span><span class="o">::</span><span class="n">DirectedGraph</span><span class="p">(</span><span class="n">Nil</span><span class="p">,</span> <span class="n">EdgeInfo</span><span class="p">)</span>
-
     <span class="cp"># Implements atcoder::mcf_graph g(n).
 </span>    <span class="n">def</span> <span class="n">initialize</span><span class="p">(</span><span class="err">@</span><span class="n">size</span> <span class="o">:</span> <span class="n">Int64</span><span class="p">)</span>
       <span class="err">@</span><span class="n">graph</span> <span class="o">=</span> <span class="n">AtCoder</span><span class="o">::</span><span class="n">DirectedGraph</span><span class="p">(</span><span class="n">Nil</span><span class="p">,</span> <span class="n">EdgeInfo</span><span class="p">).</span><span class="k">new</span><span class="p">(</span><span class="err">@</span><span class="n">size</span><span class="p">)</span>
@@ -2420,6 +2418,16 @@ h1 a:focus {
       <span class="err">@</span><span class="n">graph</span><span class="p">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">from</span><span class="p">,</span> <span class="n">to</span><span class="p">,</span> <span class="n">EdgeInfo</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="n">capacity</span><span class="p">.</span><span class="n">to_i64</span><span class="p">,</span> <span class="n">cost</span><span class="p">.</span><span class="n">to_i64</span><span class="p">))</span>
       <span class="err">@</span><span class="n">graph</span><span class="p">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">to</span><span class="p">,</span> <span class="n">from</span><span class="p">,</span> <span class="n">EdgeInfo</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="mi">0</span><span class="n">_i64</span><span class="p">,</span> <span class="o">-</span><span class="n">cost</span><span class="p">.</span><span class="n">to_i64</span><span class="p">))</span>
       <span class="err">@</span><span class="n">edges</span> <span class="o">&lt;&lt;</span> <span class="p">{</span><span class="n">from</span><span class="p">.</span><span class="n">to_i64</span><span class="p">,</span> <span class="n">to</span><span class="p">.</span><span class="n">to_i64</span><span class="p">}</span>
+    <span class="n">end</span>
+
+    <span class="k">private</span> <span class="n">def</span> <span class="n">increment_edge_cost</span><span class="p">(</span><span class="n">from</span><span class="p">,</span> <span class="n">to</span><span class="p">,</span> <span class="n">cost_diff</span><span class="p">)</span>
+      <span class="n">edge</span> <span class="o">=</span> <span class="err">@</span><span class="n">graph</span><span class="p">.</span><span class="n">get_edge</span><span class="p">(</span><span class="n">from</span><span class="p">,</span> <span class="n">to</span><span class="p">)</span>
+      <span class="err">@</span><span class="n">graph</span><span class="p">.</span><span class="n">update_edge</span><span class="p">(</span><span class="n">from</span><span class="p">,</span> <span class="n">to</span><span class="p">,</span> <span class="n">edge</span> <span class="o">+</span> <span class="n">EdgeInfo</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="n">edge</span><span class="p">.</span><span class="n">capacity</span><span class="p">,</span> <span class="n">cost_diff</span><span class="p">))</span>
+    <span class="n">end</span>
+
+    <span class="k">private</span> <span class="n">def</span> <span class="n">increment_edge_capacity</span><span class="p">(</span><span class="n">from</span><span class="p">,</span> <span class="n">to</span><span class="p">,</span> <span class="n">capacity_diff</span><span class="p">)</span>
+      <span class="n">edge</span> <span class="o">=</span> <span class="err">@</span><span class="n">graph</span><span class="p">.</span><span class="n">get_edge</span><span class="p">(</span><span class="n">from</span><span class="p">,</span> <span class="n">to</span><span class="p">)</span>
+      <span class="err">@</span><span class="n">graph</span><span class="p">.</span><span class="n">update_edge</span><span class="p">(</span><span class="n">from</span><span class="p">,</span> <span class="n">to</span><span class="p">,</span> <span class="n">EdgeInfo</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="n">edge</span><span class="p">.</span><span class="n">capacity</span> <span class="o">+</span> <span class="n">capacity_diff</span><span class="p">,</span> <span class="n">edge</span><span class="p">.</span><span class="n">cost</span><span class="p">))</span>
     <span class="n">end</span>
 
     <span class="cp"># Implements atcoder::mcf_graph.slope(start, target, flow_limit).
@@ -2450,19 +2458,8 @@ h1 a:focus {
         <span class="n">until</span> <span class="n">last_node</span> <span class="o">==</span> <span class="n">start</span>
           <span class="n">prev_node</span> <span class="o">=</span> <span class="n">nodes</span><span class="p">[</span><span class="n">last_node</span><span class="p">][</span><span class="o">:</span><span class="n">prev</span><span class="p">].</span><span class="n">not_nil</span><span class="o">!</span>
 
-          <span class="n">forward_edge</span> <span class="o">=</span> <span class="err">@</span><span class="n">graph</span><span class="p">.</span><span class="n">get_edge</span><span class="p">(</span><span class="n">prev_node</span><span class="p">,</span> <span class="n">last_node</span><span class="p">)</span>
-          <span class="err">@</span><span class="n">graph</span><span class="p">.</span><span class="n">update_edge</span><span class="p">(</span>
-            <span class="n">prev_node</span><span class="p">,</span>
-            <span class="n">last_node</span><span class="p">,</span>
-            <span class="n">EdgeInfo</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="n">forward_edge</span><span class="p">.</span><span class="n">capacity</span> <span class="o">-</span> <span class="n">capacity</span><span class="p">,</span> <span class="n">forward_edge</span><span class="p">.</span><span class="n">cost</span><span class="p">),</span>
-          <span class="p">)</span>
-
-          <span class="n">backward_edge</span> <span class="o">=</span> <span class="err">@</span><span class="n">graph</span><span class="p">.</span><span class="n">get_edge</span><span class="p">(</span><span class="n">last_node</span><span class="p">,</span> <span class="n">prev_node</span><span class="p">)</span>
-          <span class="err">@</span><span class="n">graph</span><span class="p">.</span><span class="n">update_edge</span><span class="p">(</span>
-            <span class="n">last_node</span><span class="p">,</span>
-            <span class="n">prev_node</span><span class="p">,</span>
-            <span class="n">EdgeInfo</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="n">backward_edge</span><span class="p">.</span><span class="n">capacity</span> <span class="o">+</span> <span class="n">capacity</span><span class="p">,</span> <span class="n">backward_edge</span><span class="p">.</span><span class="n">cost</span><span class="p">),</span>
-          <span class="p">)</span>
+          <span class="n">increment_edge_capacity</span><span class="p">(</span><span class="n">prev_node</span><span class="p">,</span> <span class="n">last_node</span><span class="p">,</span> <span class="o">-</span><span class="n">capacity</span><span class="p">)</span>
+          <span class="n">increment_edge_capacity</span><span class="p">(</span><span class="n">last_node</span><span class="p">,</span> <span class="n">prev_node</span><span class="p">,</span> <span class="n">capacity</span><span class="p">)</span>
 
           <span class="n">last_node</span> <span class="o">=</span> <span class="n">prev_node</span>
         <span class="n">end</span>
@@ -2472,27 +2469,13 @@ h1 a:focus {
           <span class="n">from_dist</span> <span class="o">=</span> <span class="n">nodes</span><span class="p">[</span><span class="n">from</span><span class="p">][</span><span class="o">:</span><span class="n">dist</span><span class="p">]</span>
           <span class="n">to_dist</span> <span class="o">=</span> <span class="n">nodes</span><span class="p">[</span><span class="n">to</span><span class="p">][</span><span class="o">:</span><span class="n">dist</span><span class="p">]</span>
 
-          <span class="k">if</span> <span class="n">from_dist</span><span class="p">.</span><span class="n">nil</span><span class="o">?</span> <span class="o">||</span> <span class="n">to_dist</span><span class="p">.</span><span class="n">nil</span><span class="o">?</span>
-            <span class="n">dist</span> <span class="o">=</span> <span class="mi">0</span><span class="n">_i64</span>
-          <span class="n">elsif</span> <span class="n">from_dist</span><span class="p">.</span><span class="n">cost</span><span class="p">.</span><span class="n">nil</span><span class="o">?</span> <span class="o">||</span> <span class="n">to_dist</span><span class="p">.</span><span class="n">cost</span><span class="p">.</span><span class="n">nil</span><span class="o">?</span>
-            <span class="n">dist</span> <span class="o">=</span> <span class="mi">0</span><span class="n">_i64</span>
-          <span class="k">else</span>
-            <span class="n">dist</span> <span class="o">=</span> <span class="n">to_dist</span><span class="p">.</span><span class="n">cost</span><span class="p">.</span><span class="n">not_nil</span><span class="o">!</span> <span class="o">-</span> <span class="n">from_dist</span><span class="p">.</span><span class="n">cost</span><span class="p">.</span><span class="n">not_nil</span><span class="o">!</span>
-          <span class="n">end</span>
+          <span class="n">next</span> <span class="k">if</span> <span class="n">from_dist</span><span class="p">.</span><span class="n">nil</span><span class="o">?</span> <span class="o">||</span> <span class="n">to_dist</span><span class="p">.</span><span class="n">nil</span><span class="o">?</span>
+          <span class="n">next</span> <span class="k">if</span> <span class="n">from_dist</span><span class="p">.</span><span class="n">cost</span><span class="p">.</span><span class="n">nil</span><span class="o">?</span> <span class="o">||</span> <span class="n">to_dist</span><span class="p">.</span><span class="n">cost</span><span class="p">.</span><span class="n">nil</span><span class="o">?</span>
 
-          <span class="n">forward_edge</span> <span class="o">=</span> <span class="err">@</span><span class="n">graph</span><span class="p">.</span><span class="n">get_edge</span><span class="p">(</span><span class="n">from</span><span class="p">,</span> <span class="n">to</span><span class="p">)</span>
-          <span class="err">@</span><span class="n">graph</span><span class="p">.</span><span class="n">update_edge</span><span class="p">(</span>
-            <span class="n">from</span><span class="p">,</span>
-            <span class="n">to</span><span class="p">,</span>
-            <span class="n">forward_edge</span> <span class="o">+</span> <span class="n">EdgeInfo</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="n">forward_edge</span><span class="p">.</span><span class="n">capacity</span><span class="p">,</span> <span class="o">-</span><span class="n">dist</span><span class="p">),</span>
-          <span class="p">)</span>
+          <span class="n">dist</span> <span class="o">=</span> <span class="n">to_dist</span><span class="p">.</span><span class="n">cost</span><span class="p">.</span><span class="n">not_nil</span><span class="o">!</span> <span class="o">-</span> <span class="n">from_dist</span><span class="p">.</span><span class="n">cost</span><span class="p">.</span><span class="n">not_nil</span><span class="o">!</span>
 
-          <span class="n">backward_edge</span> <span class="o">=</span> <span class="err">@</span><span class="n">graph</span><span class="p">.</span><span class="n">get_edge</span><span class="p">(</span><span class="n">to</span><span class="p">,</span> <span class="n">from</span><span class="p">)</span>
-          <span class="err">@</span><span class="n">graph</span><span class="p">.</span><span class="n">update_edge</span><span class="p">(</span>
-            <span class="n">to</span><span class="p">,</span>
-            <span class="n">from</span><span class="p">,</span>
-            <span class="n">backward_edge</span> <span class="o">+</span> <span class="n">EdgeInfo</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="n">backward_edge</span><span class="p">.</span><span class="n">capacity</span><span class="p">,</span> <span class="n">dist</span><span class="p">),</span>
-          <span class="p">)</span>
+          <span class="n">increment_edge_cost</span><span class="p">(</span><span class="n">from</span><span class="p">,</span> <span class="n">to</span><span class="p">,</span> <span class="o">-</span><span class="n">dist</span><span class="p">)</span>
+          <span class="n">increment_edge_cost</span><span class="p">(</span><span class="n">to</span><span class="p">,</span> <span class="n">from</span><span class="p">,</span> <span class="n">dist</span><span class="p">)</span>
         <span class="n">end</span>
 
         <span class="cp"># Update distants
@@ -2596,6 +2579,13 @@ h1 a:focus {
       <span class="n">flow</span><span class="p">.</span><span class="n">add_edge</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
       <span class="n">flow</span><span class="p">.</span><span class="n">add_edge</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
       <span class="n">flow</span><span class="p">.</span><span class="n">flow</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">30</span><span class="p">).</span><span class="n">should</span> <span class="n">eq</span><span class="p">({</span><span class="mi">20</span><span class="p">,</span> <span class="mi">50</span><span class="p">})</span>
+    <span class="n">end</span>
+
+    <span class="n">it</span> <span class="s">"returns zero when the graph is not connected"</span> <span class="k">do</span>
+      <span class="n">flow</span> <span class="o">=</span> <span class="n">MinCostFlow</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+      <span class="n">flow</span><span class="p">.</span><span class="n">add_edge</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+      <span class="n">flow</span><span class="p">.</span><span class="n">add_edge</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+      <span class="n">flow</span><span class="p">.</span><span class="n">flow</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">10</span><span class="p">).</span><span class="n">should</span> <span class="n">eq</span><span class="p">({</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">})</span>
     <span class="n">end</span>
   <span class="n">end</span>
 
