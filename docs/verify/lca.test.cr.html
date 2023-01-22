@@ -102,7 +102,7 @@ h1 a:focus {
 
 <ul>
     <li><a href="/blob/master/verify/lca.test.cr">View this file on GitHub</a></li>
-    <li>Last update: 2023-01-21 14:39:17+00:00</li>
+    <li>Last update: 2023-01-22 19:10:07+09:00</li>
     
     <li>Problem: <a href="https://judge.yosupo.jp/problem/lca">https://judge.yosupo.jp/problem/lca</a>
 </li>
@@ -340,7 +340,7 @@ h1 a:focus {
     <span class="n">def</span> <span class="n">initialize</span><span class="p">(</span><span class="err">@</span><span class="n">nodes</span> <span class="o">:</span> <span class="n">Array</span><span class="p">(</span><span class="n">NodeInfo</span><span class="p">))</span>
       <span class="err">@</span><span class="n">size</span> <span class="o">=</span> <span class="err">@</span><span class="n">nodes</span><span class="p">.</span><span class="n">size</span><span class="p">.</span><span class="n">to_i64</span>
       <span class="err">@</span><span class="n">edges</span> <span class="o">=</span> <span class="p">[]</span> <span class="n">of</span> <span class="n">EdgeInfo</span>
-      <span class="err">@</span><span class="n">adjacencies</span> <span class="o">=</span> <span class="n">Array</span><span class="p">(</span><span class="n">Array</span><span class="p">({</span><span class="n">Int64</span><span class="p">,</span> <span class="n">Int64</span><span class="p">})).</span><span class="k">new</span><span class="p">(</span><span class="err">@</span><span class="n">size</span><span class="p">)</span> <span class="p">{</span> <span class="p">[]</span> <span class="n">of</span> <span class="p">{</span><span class="n">Int64</span><span class="p">,</span> <span class="n">Int64</span><span class="p">}</span> <span class="p">}</span>
+      <span class="err">@</span><span class="n">adjacencies</span> <span class="o">=</span> <span class="n">Array</span><span class="p">(</span><span class="n">Hash</span><span class="p">(</span><span class="n">Int64</span><span class="p">,</span> <span class="n">Int64</span><span class="p">)).</span><span class="k">new</span><span class="p">(</span><span class="err">@</span><span class="n">size</span><span class="p">)</span> <span class="p">{</span> <span class="n">Hash</span><span class="p">(</span><span class="n">Int64</span><span class="p">,</span> <span class="n">Int64</span><span class="p">).</span><span class="k">new</span> <span class="p">}</span>
       <span class="err">@</span><span class="n">visited</span> <span class="o">=</span> <span class="n">Set</span><span class="p">(</span><span class="n">Int64</span><span class="p">).</span><span class="k">new</span>
       <span class="err">@</span><span class="n">size_bits</span> <span class="o">=</span> <span class="err">@</span><span class="n">size</span><span class="p">.</span><span class="n">to_s</span><span class="p">(</span><span class="mi">2</span><span class="p">).</span><span class="n">size</span>
     <span class="n">end</span>
@@ -348,7 +348,7 @@ h1 a:focus {
     <span class="n">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="err">@</span><span class="n">size</span> <span class="o">:</span> <span class="n">Int64</span><span class="p">,</span> <span class="n">initial_node</span> <span class="o">:</span> <span class="n">NodeInfo</span> <span class="o">=</span> <span class="n">nil</span><span class="p">)</span>
       <span class="err">@</span><span class="n">nodes</span> <span class="o">=</span> <span class="n">Array</span><span class="p">(</span><span class="n">NodeInfo</span><span class="p">).</span><span class="k">new</span><span class="p">(</span><span class="err">@</span><span class="n">size</span><span class="p">,</span> <span class="n">initial_node</span><span class="p">)</span>
       <span class="err">@</span><span class="n">edges</span> <span class="o">=</span> <span class="p">[]</span> <span class="n">of</span> <span class="n">EdgeInfo</span>
-      <span class="err">@</span><span class="n">adjacencies</span> <span class="o">=</span> <span class="n">Array</span><span class="p">(</span><span class="n">Array</span><span class="p">({</span><span class="n">Int64</span><span class="p">,</span> <span class="n">Int64</span><span class="p">})).</span><span class="k">new</span><span class="p">(</span><span class="err">@</span><span class="n">size</span><span class="p">)</span> <span class="p">{</span> <span class="p">[]</span> <span class="n">of</span> <span class="p">{</span><span class="n">Int64</span><span class="p">,</span> <span class="n">Int64</span><span class="p">}</span> <span class="p">}</span>
+      <span class="err">@</span><span class="n">adjacencies</span> <span class="o">=</span> <span class="n">Array</span><span class="p">(</span><span class="n">Hash</span><span class="p">(</span><span class="n">Int64</span><span class="p">,</span> <span class="n">Int64</span><span class="p">)).</span><span class="k">new</span><span class="p">(</span><span class="err">@</span><span class="n">size</span><span class="p">)</span> <span class="p">{</span> <span class="n">Hash</span><span class="p">(</span><span class="n">Int64</span><span class="p">,</span> <span class="n">Int64</span><span class="p">).</span><span class="k">new</span> <span class="p">}</span>
       <span class="err">@</span><span class="n">visited</span> <span class="o">=</span> <span class="n">Set</span><span class="p">(</span><span class="n">Int64</span><span class="p">).</span><span class="k">new</span>
       <span class="err">@</span><span class="n">size_bits</span> <span class="o">=</span> <span class="err">@</span><span class="n">size</span><span class="p">.</span><span class="n">to_s</span><span class="p">(</span><span class="mi">2</span><span class="p">).</span><span class="n">size</span>
     <span class="n">end</span>
@@ -433,7 +433,18 @@ h1 a:focus {
     <span class="n">def</span> <span class="n">add_edge</span><span class="p">(</span><span class="n">from</span><span class="p">,</span> <span class="n">to</span><span class="p">,</span> <span class="n">edge</span> <span class="o">:</span> <span class="n">EdgeInfo</span> <span class="o">=</span> <span class="mi">1</span><span class="n">_i64</span><span class="p">)</span>
       <span class="err">@</span><span class="n">edges</span> <span class="o">&lt;&lt;</span> <span class="n">edge</span>
       <span class="n">edge_id</span> <span class="o">=</span> <span class="err">@</span><span class="n">edges</span><span class="p">.</span><span class="n">size</span><span class="p">.</span><span class="n">to_i64</span> <span class="o">-</span> <span class="mi">1</span>
-      <span class="err">@</span><span class="n">adjacencies</span><span class="p">[</span><span class="n">from</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="p">{</span><span class="n">to</span><span class="p">.</span><span class="n">to_i64</span><span class="p">,</span> <span class="n">edge_id</span><span class="p">}</span>
+      <span class="err">@</span><span class="n">adjacencies</span><span class="p">[</span><span class="n">from</span><span class="p">][</span><span class="n">to</span><span class="p">.</span><span class="n">to_i64</span><span class="p">]</span> <span class="o">=</span> <span class="n">edge_id</span>
+      <span class="n">edge_id</span>
+    <span class="n">end</span>
+
+    <span class="n">def</span> <span class="n">get_edge</span><span class="p">(</span><span class="n">from</span><span class="p">,</span> <span class="n">to</span><span class="p">)</span>
+      <span class="n">edge_id</span> <span class="o">=</span> <span class="err">@</span><span class="n">adjacencies</span><span class="p">[</span><span class="n">from</span><span class="p">][</span><span class="n">to</span><span class="p">.</span><span class="n">to_i64</span><span class="p">]</span>
+      <span class="err">@</span><span class="n">edges</span><span class="p">[</span><span class="n">edge_id</span><span class="p">]</span>
+    <span class="n">end</span>
+
+    <span class="n">def</span> <span class="n">update_edge</span><span class="p">(</span><span class="n">from</span><span class="p">,</span> <span class="n">to</span><span class="p">,</span> <span class="n">edge</span> <span class="o">:</span> <span class="n">EdgeInfo</span> <span class="o">=</span> <span class="mi">1</span><span class="n">_i64</span><span class="p">)</span>
+      <span class="n">edge_id</span> <span class="o">=</span> <span class="err">@</span><span class="n">adjacencies</span><span class="p">[</span><span class="n">from</span><span class="p">][</span><span class="n">to</span><span class="p">.</span><span class="n">to_i64</span><span class="p">]</span>
+      <span class="err">@</span><span class="n">edges</span><span class="p">[</span><span class="n">edge_id</span><span class="p">]</span> <span class="o">=</span> <span class="n">edge</span>
       <span class="n">edge_id</span>
     <span class="n">end</span>
   <span class="n">end</span>
@@ -442,8 +453,19 @@ h1 a:focus {
     <span class="n">def</span> <span class="n">add_edge</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">edge</span> <span class="o">:</span> <span class="n">EdgeInfo</span> <span class="o">=</span> <span class="mi">1</span><span class="n">_i64</span><span class="p">)</span>
       <span class="err">@</span><span class="n">edges</span> <span class="o">&lt;&lt;</span> <span class="n">edge</span>
       <span class="n">edge_id</span> <span class="o">=</span> <span class="err">@</span><span class="n">edges</span><span class="p">.</span><span class="n">size</span><span class="p">.</span><span class="n">to_i64</span> <span class="o">-</span> <span class="mi">1</span>
-      <span class="err">@</span><span class="n">adjacencies</span><span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="p">{</span><span class="n">b</span><span class="p">.</span><span class="n">to_i64</span><span class="p">,</span> <span class="n">edge_id</span><span class="p">}</span>
-      <span class="err">@</span><span class="n">adjacencies</span><span class="p">[</span><span class="n">b</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="p">{</span><span class="n">a</span><span class="p">.</span><span class="n">to_i64</span><span class="p">,</span> <span class="n">edge_id</span><span class="p">}</span>
+      <span class="err">@</span><span class="n">adjacencies</span><span class="p">[</span><span class="n">a</span><span class="p">][</span><span class="n">b</span><span class="p">.</span><span class="n">to_i64</span><span class="p">]</span> <span class="o">=</span> <span class="n">edge_id</span>
+      <span class="err">@</span><span class="n">adjacencies</span><span class="p">[</span><span class="n">b</span><span class="p">][</span><span class="n">a</span><span class="p">.</span><span class="n">to_i64</span><span class="p">]</span> <span class="o">=</span> <span class="n">edge_id</span>
+      <span class="n">edge_id</span>
+    <span class="n">end</span>
+
+    <span class="n">def</span> <span class="n">get_edge</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+      <span class="n">edge_id</span> <span class="o">=</span> <span class="err">@</span><span class="n">adjacencies</span><span class="p">[</span><span class="n">a</span><span class="p">][</span><span class="n">b</span><span class="p">.</span><span class="n">to_i64</span><span class="p">]</span>
+      <span class="err">@</span><span class="n">edges</span><span class="p">[</span><span class="n">edge_id</span><span class="p">]</span>
+    <span class="n">end</span>
+
+    <span class="n">def</span> <span class="n">update_edge</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">edge</span> <span class="o">:</span> <span class="n">EdgeInfo</span> <span class="o">=</span> <span class="mi">1</span><span class="n">_i64</span><span class="p">)</span>
+      <span class="n">edge_id</span> <span class="o">=</span> <span class="err">@</span><span class="n">adjacencies</span><span class="p">[</span><span class="n">a</span><span class="p">][</span><span class="n">b</span><span class="p">.</span><span class="n">to_i64</span><span class="p">]</span>
+      <span class="err">@</span><span class="n">edges</span><span class="p">[</span><span class="n">edge_id</span><span class="p">]</span> <span class="o">=</span> <span class="n">edge</span>
       <span class="n">edge_id</span>
     <span class="n">end</span>
   <span class="n">end</span>

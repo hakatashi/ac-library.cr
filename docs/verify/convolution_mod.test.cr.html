@@ -102,7 +102,7 @@ h1 a:focus {
 
 <ul>
     <li><a href="/blob/master/verify/convolution_mod.test.cr">View this file on GitHub</a></li>
-    <li>Last update: 2023-01-21 14:39:17+00:00</li>
+    <li>Last update: 2023-01-22 19:10:07+09:00</li>
     
     <li>Problem: <a href="https://judge.yosupo.jp/problem/convolution_mod">https://judge.yosupo.jp/problem/convolution_mod</a>
 </li>
@@ -240,7 +240,7 @@ h1 a:focus {
     <span class="n">end</span>
 
     <span class="cp"># In-place execution of FFT operation.
-</span>    <span class="cp"># Element of `a` and `g` must implement ModInt operations.
+</span>    <span class="cp"># `T` must implement ModInt operations.
 </span>    <span class="cp"># Length of `a` must be power of 2.
 </span>    <span class="k">private</span> <span class="n">def</span> <span class="n">self</span><span class="p">.</span><span class="n">fft</span><span class="p">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">Array</span><span class="p">(</span><span class="n">T</span><span class="p">),</span> <span class="n">g</span> <span class="o">:</span> <span class="n">T</span><span class="p">)</span> <span class="n">forall</span> <span class="n">T</span>
       <span class="n">size</span> <span class="o">=</span> <span class="n">a</span><span class="p">.</span><span class="n">size</span>

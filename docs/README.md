@@ -191,6 +191,30 @@ This library aims to provide the almost-equivalent (and additional) functionalit
   AtCoder::Convolution.convolution_ll(a, a) #=> [1000000000000000000]
   ```
 
+## [MinCostFlow.cr](https://google.github.io/ac-library.cr/docs/src/MinCostFlow.cr) ([<atcoder/mincostflow>](https://atcoder.github.io/ac-library/document_en/mincostflow.html))
+
+* `mcf_graph graph(n)` => `AtCoder::MinCostFlow.new(n)`
+
+  ```cr
+  flow = AtCoder::MinCostFlow.new(5)
+  flow.add_edge(0, 1, 30, 3)
+  flow.add_edge(0, 2, 60, 9)
+  flow.add_edge(1, 2, 40, 5)
+  flow.add_edge(1, 3, 50, 7)
+  flow.add_edge(2, 3, 20, 8)
+  flow.add_edge(2, 4, 50, 6)
+  flow.add_edge(3, 4, 60, 7)
+  flow.flow(0, 4, 70) #=> {70, 1080}
+  ```
+
+  * `.add_edge(from, to, cap, cost)` => `#add_edge(from, to, cap, cost)`
+  * `.flow(s, t)` => `#flow(s, t)`
+  * `.flow(s, t, flow_limit)` => `#flow(s, t, flow_limit)`
+  * `.slope(s, t)` => `#slope(s, t)`
+  * `.slope(s, t, flow_limit)` => `#slope(s, t, flow_limit)`
+  * `.get_edge(i)` => Unimplemented
+  * `.edges()` => Unimplemented
+
 ## [PriorityQueue.cr](https://google.github.io/ac-library.cr/docs/src/PriorityQueue.cr) (not in ACL)
 
 * `AtCoder::PriorityQueue(T).new`
