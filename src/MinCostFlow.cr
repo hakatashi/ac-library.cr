@@ -43,10 +43,6 @@ module AtCoder
           return self.class.new(0_i64, nil)
         end
 
-        if @capacity == 0 || edge.capacity == 0
-          return self.class.new(0_i64, from_cost + to_cost)
-        end
-
         self.class.new(min(@capacity, edge.capacity), from_cost + to_cost)
       end
 
@@ -118,7 +114,7 @@ module AtCoder
 
         capacity = target_dist.capacity
 
-        # Update edge capacities
+        # Update edge capacities on the path from start to target
         last_node = target
         until last_node == start
           prev_node = nodes[last_node][:prev].not_nil!
