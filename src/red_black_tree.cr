@@ -186,6 +186,7 @@ module AtCoder
       y
     end
 
+    # ameba:disable Lint/ShadowedArgument
     def inorder_walk(x = root)
       x = self.minimum_node
       while !x.nil_node?
@@ -198,6 +199,7 @@ module AtCoder
       inorder_walk(x) { |k| yield k }
     end
 
+    # ameba:disable Lint/ShadowedArgument
     def reverse_inorder_walk(x = root)
       x = self.maximum_node
       while !x.nil_node?
@@ -295,6 +297,7 @@ module AtCoder
       self.size += 1
     end
 
+    # ameba:disable Metrics/CyclomaticComplexity
     private def delete_fixup(x)
       while x != root && x.color == Node::BLACK
         if x == x.parent.left
@@ -305,7 +308,7 @@ module AtCoder
             left_rotate(x.parent)
             w = x.parent.right
           end
-          if {w.left.color, w.right.color}.all?(&.==(Node::BLACK))
+          if w.left.color == Node::BLACK && w.right.color == Node::BLACK
             w.color = Node::RED
             x = x.parent
           else
@@ -329,7 +332,7 @@ module AtCoder
             right_rotate(x.parent)
             w = x.parent.left
           end
-          if {w.right.color, w.left.color}.all?(&.==(Node::BLACK))
+          if w.right.color == Node::BLACK && w.left.color == Node::BLACK
             w.color = Node::RED
             x = x.parent
           else
