@@ -51,7 +51,7 @@ jobs:
     - name: Run coverage
       run: |
         shards build test --ignore-crystal-version
-        kcov --clean --include-path=atcoder coverage ./bin/test
+        kcov --clean --include-path=src coverage ./bin/test
         bash <(curl -s https://codecov.io/bash) -s coverage
       env:
         CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
