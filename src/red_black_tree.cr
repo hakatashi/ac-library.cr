@@ -305,7 +305,7 @@ module AtCoder
             left_rotate(x.parent)
             w = x.parent.right
           end
-          if w.left.color == Node::BLACK && w.right.color == Node::BLACK
+          if {w.left.color, w.right.color}.all?(&.==(Node::BLACK))
             w.color = Node::RED
             x = x.parent
           else
@@ -329,7 +329,7 @@ module AtCoder
             right_rotate(x.parent)
             w = x.parent.left
           end
-          if w.right.color == Node::BLACK && w.left.color == Node::BLACK
+          if {w.right.color, w.left.color}.all?(&.==(Node::BLACK))
             w.color = Node::RED
             x = x.parent
           else
