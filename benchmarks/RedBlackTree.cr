@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require "../src/RedBlackTree.cr"
+require "../src/red_black_tree.cr"
 require "spec"
 require "benchmark"
 

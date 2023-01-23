@@ -16,7 +16,7 @@
 
 # verification-helper: PROBLEM https://judge.yosupo.jp/problem/sum_of_floor_of_linear
 
-require "../src/Math.cr"
+require "../src/math.cr"
 
 t = read_line.to_i64
 

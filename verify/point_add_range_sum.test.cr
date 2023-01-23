@@ -16,7 +16,7 @@
 
 # verification-helper: PROBLEM https://judge.yosupo.jp/problem/point_add_range_sum
 
-require "../src/FenwickTree.cr"
+require "../src/fenwick_tree.cr"
 
 include AtCoder
 

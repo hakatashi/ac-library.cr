@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require "../src/MinCostFlow.cr"
+require "../src/min_cost_flow.cr"
 require "spec"
 
 alias MinCostFlow = AtCoder::MinCostFlow

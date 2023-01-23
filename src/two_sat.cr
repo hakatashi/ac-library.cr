@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require "./SCC.cr"
+require "./scc.cr"
 
 module AtCoder
   # Implements [atcoder::two_sat](https://atcoder.github.io/ac-library/master/document_en/twosat.html)

@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require "./Prime.cr"
+require "./prime.cr"
 
 module AtCoder
   # Implements [ACL's Math library](https://atcoder.github.io/ac-library/master/document_en/math.html)

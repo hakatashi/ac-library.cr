@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require "../src/DSU.cr"
+require "../src/dsu.cr"
 require "spec"
 
 alias DSU = AtCoder::DSU

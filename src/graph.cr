@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require "./PriorityQueue.cr"
+require "./priority_queue.cr"
 
 module AtCoder
   class Graph(NodeInfo, EdgeInfo)

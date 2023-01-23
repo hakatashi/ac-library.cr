@@ -16,7 +16,7 @@
 
 # verification-helper: PROBLEM https://judge.yosupo.jp/problem/lca
 
-require "../src/Graph.cr"
+require "../src/graph.cr"
 
 n, q = read_line.split.map(&.to_i64)
 ps = read_line.split.map(&.to_i64)

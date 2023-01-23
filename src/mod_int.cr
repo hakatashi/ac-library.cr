@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require "./Math.cr"
+require "./math.cr"
 
 module AtCoder
   # Implements [atcoder::static_modint](https://atcoder.github.io/ac-library/master/document_en/modint.html).
