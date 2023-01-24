@@ -13,7 +13,7 @@ This library aims to provide the almost-equivalent (and additional) functionalit
 
 ## Usage
 
-```
+```cr
 require "atcoder" # load all libraries
 require "atcoder/fenwick_tree" # load FenwickTree
 ```
@@ -257,3 +257,14 @@ require "atcoder/fenwick_tree" # load FenwickTree
   ```cr
   AtCoder::Prime.first(7) # => [2, 3, 5, 7, 11, 13, 17]
   ```
+
+## Install
+
+Add the following code to your project's `shard.yml`.
+
+```yml
+dependencies:
+  atcoder:
+    github: google/ac-library.cr
+```
+
