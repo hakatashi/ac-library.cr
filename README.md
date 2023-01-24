@@ -11,6 +11,13 @@ ac-library.cr is a Crystal port of [ac-library](https://github.com/atcoder/ac-li
 
 This library aims to provide the almost-equivalent (and additional) functionality with ac-library but in the manner of Crystal.
 
+## Usage
+
+```
+require "atcoder" # load all libraries
+require "atcoder/fenwick_tree" # load FenwickTree
+```
+
 ## [ModInt.cr](https://google.github.io/ac-library.cr/docs/src/mod_int.cr) ([<atcoder/modint>](https://atcoder.github.io/ac-library/document_en/modint.html))
 
 * `modint` => Unimplemented
