@@ -11,7 +11,14 @@ ac-library.cr is a Crystal port of [ac-library](https://github.com/atcoder/ac-li
 
 This library aims to provide the almost-equivalent (and additional) functionality with ac-library but in the manner of Crystal.
 
-## [ModInt.cr](https://google.github.io/ac-library.cr/docs/src/ModInt.cr) ([<atcoder/modint>](https://atcoder.github.io/ac-library/document_en/modint.html))
+## Usage
+
+```cr
+require "atcoder" # load all libraries
+require "atcoder/fenwick_tree" # load FenwickTree
+```
+
+## [ModInt.cr](https://google.github.io/ac-library.cr/docs/src/mod_int.cr) ([<atcoder/modint>](https://atcoder.github.io/ac-library/document_en/modint.html))
 
 * `modint` => Unimplemented
 * `modint998244353` => `AtCoder::ModInt998244353`
@@ -32,7 +39,7 @@ This library aims to provide the almost-equivalent (and additional) functionalit
 
 * `dynamic_modint` => Unimplemented
 
-## [FenwickTree.cr](https://google.github.io/ac-library.cr/docs/src/FenwickTree.cr) ([<atcoder/fenwicktree>](https://atcoder.github.io/ac-library/document_en/fenwicktree.html))
+## [FenwickTree.cr](https://google.github.io/ac-library.cr/docs/src/fenwick_tree.cr) ([<atcoder/fenwicktree>](https://atcoder.github.io/ac-library/document_en/fenwicktree.html))
 
 * `fenwick_tree<T> fw(n)` => `AtCoder::FenwickTree(T).new(n)`
 * `fenwick_tree<T> fw(array)` => `AtCoder::FenwickTree(T).new(array)`
@@ -48,7 +55,7 @@ This library aims to provide the almost-equivalent (and additional) functionalit
   * `.add(p, x)` => `#add(p, x)`
   * `.sum(l, r)` => `#[](l...r)`
 
-## [SegTree.cr](https://google.github.io/ac-library.cr/docs/src/SegTree.cr) ([<atcoder/segtree>](https://atcoder.github.io/ac-library/document_en/segtree.html))
+## [SegTree.cr](https://google.github.io/ac-library.cr/docs/src/seg_tree.cr) ([<atcoder/segtree>](https://atcoder.github.io/ac-library/document_en/segtree.html))
 
 * `segtree<S, op, e> seg(v)` => `AtCoder::SegTree(S).new(v, &op?)`
 
@@ -66,7 +73,7 @@ This library aims to provide the almost-equivalent (and additional) functionalit
   * `.max_right<f>(l)` => Unimplemented
   * `.max_left<f>(r)` => Unimplemented
 
-## [LazySegTree.cr](https://google.github.io/ac-library.cr/docs/src/LazySegTree.cr) ([<atcoder/lazysegtree>](https://atcoder.github.io/ac-library/document_en/lazysegtree.html))
+## [LazySegTree.cr](https://google.github.io/ac-library.cr/docs/src/lazy_seg_tree.cr) ([<atcoder/lazysegtree>](https://atcoder.github.io/ac-library/document_en/lazysegtree.html))
 
 * `lazy_segtree<S, op, e, F, mapping, composition, id> seg(v)` => `AtCoder::LazySegTree(S, F).new(v, op, mapping, composition)`
 
@@ -93,7 +100,7 @@ This library aims to provide the almost-equivalent (and additional) functionalit
   * `.max_right<f>(l)` => Unimplemented
   * `.max_left<f>(r)` => Unimplemented
 
-## [DSU.cr](https://google.github.io/ac-library.cr/docs/src/DSU.cr) ([<atcoder/dsu>](https://atcoder.github.io/ac-library/document_en/dsu.html))
+## [DSU.cr](https://google.github.io/ac-library.cr/docs/src/dsu.cr) ([<atcoder/dsu>](https://atcoder.github.io/ac-library/document_en/dsu.html))
 
 * `dsu(n)` => `AtCoder::DSU.new(n)`
 
@@ -113,7 +120,7 @@ This library aims to provide the almost-equivalent (and additional) functionalit
 
     * This method returns set instead of list.
 
-## [MaxFlow.cr](https://google.github.io/ac-library.cr/docs/src/MaxFlow.cr) ([<atcoder/maxflow>](https://atcoder.github.io/ac-library/document_en/maxflow.html))
+## [MaxFlow.cr](https://google.github.io/ac-library.cr/docs/src/max_flow.cr) ([<atcoder/maxflow>](https://atcoder.github.io/ac-library/document_en/maxflow.html))
 
 * `mf_graph<Cap> graph(n)` => `AtCoder::MaxFlow.new(n)`
 
@@ -134,7 +141,7 @@ This library aims to provide the almost-equivalent (and additional) functionalit
   * `.edges()` => Unimplemented
   * `.change_edge(i, new_cap, new_flow)` => Unimplemented
 
-## [SCC.cr](https://google.github.io/ac-library.cr/docs/src/SCC.cr) ([<atcoder/scc>](https://atcoder.github.io/ac-library/document_en/scc.html))
+## [SCC.cr](https://google.github.io/ac-library.cr/docs/src/scc.cr) ([<atcoder/scc>](https://atcoder.github.io/ac-library/document_en/scc.html))
 
 * `scc_graph graph(n)` => `AtCoder::SCC.new(n)`
 
@@ -149,7 +156,7 @@ This library aims to provide the almost-equivalent (and additional) functionalit
   * `.add_edge(from, to)` => `#add_edge(from, to)`
   * `.scc()` => `#scc`
 
-## [TwoSat.cr](https://google.github.io/ac-library.cr/docs/src/TwoSat.cr) ([<atcoder/twosat>](https://atcoder.github.io/ac-library/document_en/twosat.html))
+## [TwoSat.cr](https://google.github.io/ac-library.cr/docs/src/two_sat.cr) ([<atcoder/twosat>](https://atcoder.github.io/ac-library/document_en/twosat.html))
 
 * `two_sat graph(n)` => `AtCoder::SCC.new(n)`
 
@@ -168,14 +175,14 @@ This library aims to provide the almost-equivalent (and additional) functionalit
 
     This method will raise if it's not satisfiable
 
-## [Math.cr](https://google.github.io/ac-library.cr/docs/src/Math.cr) ([<atcoder/math>](https://atcoder.github.io/ac-library/document_en/math.html))
+## [Math.cr](https://google.github.io/ac-library.cr/docs/src/math.cr) ([<atcoder/math>](https://atcoder.github.io/ac-library/document_en/math.html))
 
 * `pow_mod(x, n, m)` => `AtCoder::Math.pow_mod(x, n, m)`
 * `inv_mod(x, m)` => `AtCoder::Math.inv_mod(x, m)`
 * `crt(r, m)` => `AtCoder::Math.crt(r, m)`
 * `floor_sum` => `AtCoder::Math.floor_sum(n, m, a, b)`
 
-## [Convolution.cr](https://google.github.io/ac-library.cr/docs/src/Convolution.cr) ([<atcoder/convolution>](https://atcoder.github.io/ac-library/document_en/convolution.html))
+## [Convolution.cr](https://google.github.io/ac-library.cr/docs/src/convolution.cr) ([<atcoder/convolution>](https://atcoder.github.io/ac-library/document_en/convolution.html))
 
 * `convolution(a, b)` => `AtCoder::Convolution.convolution(a, b)`
 
@@ -191,7 +198,7 @@ This library aims to provide the almost-equivalent (and additional) functionalit
   AtCoder::Convolution.convolution_ll(a, a) #=> [1000000000000000000]
   ```
 
-## [MinCostFlow.cr](https://google.github.io/ac-library.cr/docs/src/MinCostFlow.cr) ([<atcoder/mincostflow>](https://atcoder.github.io/ac-library/document_en/mincostflow.html))
+## [MinCostFlow.cr](https://google.github.io/ac-library.cr/docs/src/min_cost_flow.cr) ([<atcoder/mincostflow>](https://atcoder.github.io/ac-library/document_en/mincostflow.html))
 
 * `mcf_graph graph(n)` => `AtCoder::MinCostFlow.new(n)`
 
@@ -215,7 +222,7 @@ This library aims to provide the almost-equivalent (and additional) functionalit
   * `.get_edge(i)` => Unimplemented
   * `.edges()` => Unimplemented
 
-## [PriorityQueue.cr](https://google.github.io/ac-library.cr/docs/src/PriorityQueue.cr) (not in ACL)
+## [PriorityQueue.cr](https://google.github.io/ac-library.cr/docs/src/priority_queue.cr) (not in ACL)
 
 * `AtCoder::PriorityQueue(T).new`
 
@@ -245,8 +252,19 @@ This library aims to provide the almost-equivalent (and additional) functionalit
 
 * `AtCoder::Prime` (module)
 
-  Implements [Ruby's Prime library](https://ruby-doc.com/stdlib/libdoc/prime/rdoc/Prime.html).
+  Implements [Ruby's Prime library](https://ruby-doc.com/stdlib/libdoc/prime/rdoc/prime.html).
 
   ```cr
   AtCoder::Prime.first(7) # => [2, 3, 5, 7, 11, 13, 17]
   ```
+
+## Install
+
+Add the following code to your project's `shard.yml`.
+
+```yml
+dependencies:
+  atcoder:
+    github: google/ac-library.cr
+```
+

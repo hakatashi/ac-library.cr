@@ -16,7 +16,7 @@
 
 # verification-helper: PROBLEM https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_6_B
 
-require "../src/MinCostFlow.cr"
+require "../src/min_cost_flow.cr"
 
 nv, ne, f = read_line.split.map(&.to_i64)
 flow = AtCoder::MinCostFlow.new(nv)

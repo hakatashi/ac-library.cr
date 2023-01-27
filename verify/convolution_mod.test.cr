@@ -16,8 +16,8 @@
 
 # verification-helper: PROBLEM https://judge.yosupo.jp/problem/convolution_mod
 
-require "../src/Convolution.cr"
-require "../src/ModInt.cr"
+require "../src/convolution.cr"
+require "../src/mod_int.cr"
 
 _, _ = read_line.split.map(&.to_i64)
 ais = read_line.split.map {|i| AtCoder::ModInt998244353.new(i.to_i64)}

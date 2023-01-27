@@ -16,7 +16,7 @@
 
 # verification-helper: PROBLEM https://judge.yosupo.jp/problem/two_sat
 
-require "../src/TwoSat.cr"
+require "../src/two_sat.cr"
 
 _, _, nt, mt = read_line.split
 n = nt.to_i64

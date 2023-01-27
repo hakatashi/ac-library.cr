@@ -16,8 +16,8 @@
 
 # verification-helper: PROBLEM https://judge.yosupo.jp/problem/range_affine_range_sum
 
-require "../src/LazySegTree.cr"
-require "../src/ModInt.cr"
+require "../src/lazy_seg_tree.cr"
+require "../src/mod_int.cr"
 
 _, q = read_line.split.map(&.to_i64)
 ais = read_line.split.map(&.to_i64)

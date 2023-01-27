@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require "../src/ModInt.cr"
+require "../src/mod_int.cr"
 require "./spec_helper.cr"
 require "spec"
 

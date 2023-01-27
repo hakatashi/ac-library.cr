@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require "../src/Math.cr"
+require "../src/math.cr"
 require "./spec_helper.cr"
 require "spec"
 

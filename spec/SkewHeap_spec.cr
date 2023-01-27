@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require "../src/SkewHeap.cr"
+require "../src/skew_heap.cr"
 require "spec"
 
 alias SkewHeap = AtCoder::SkewHeap
