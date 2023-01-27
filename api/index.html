@@ -239,11 +239,20 @@
 
 <p>This library aims to provide the almost-equivalent (and additional) functionality with ac-library but in the manner of Crystal.</p>
 
+<h2><a id="usage" class="anchor" href="#usage">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>Usage</h2>
+
+<pre><code class="language-cr">require "atcoder" # load all libraries
+require "atcoder/fenwick_tree" # load FenwickTree</code></pre>
+
 <h2><a id="mod-int.crhttpsgoogle.github.ioac-library.crdocssrcmod-int.cr-atcodermodinthttpsatcoder.github.ioac-librarydocument-enmodint.html" class="anchor" href="#mod-int.crhttpsgoogle.github.ioac-library.crdocssrcmod-int.cr-atcodermodinthttpsatcoder.github.ioac-librarydocument-enmodint.html">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
-</a><a href="https://google.github.io/ac-library.cr/docs/src/ModInt.cr" target="_blank">ModInt.cr</a> (<a href="https://atcoder.github.io/ac-library/document_en/modint.html" target="_blank">&lt;atcoder/modint></a>)</h2>
+</a><a href="https://google.github.io/ac-library.cr/docs/src/mod_int.cr" target="_blank">ModInt.cr</a> (<a href="https://atcoder.github.io/ac-library/document_en/modint.html" target="_blank">&lt;atcoder/modint></a>)</h2>
 
 <ul><li><code>modint</code> => Unimplemented</li><li><code>modint998244353</code> => <code><a href="AtCoder/ModInt998244353.html">AtCoder::ModInt998244353</a></code></li><li><code>modint1000000007</code> => <code><a href="AtCoder/ModInt1000000007.html">AtCoder::ModInt1000000007</a></code></li></ul>
 
@@ -266,7 +275,7 @@
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
-</a><a href="https://google.github.io/ac-library.cr/docs/src/FenwickTree.cr" target="_blank">FenwickTree.cr</a> (<a href="https://atcoder.github.io/ac-library/document_en/fenwicktree.html" target="_blank">&lt;atcoder/fenwicktree></a>)</h2>
+</a><a href="https://google.github.io/ac-library.cr/docs/src/fenwick_tree.cr" target="_blank">FenwickTree.cr</a> (<a href="https://atcoder.github.io/ac-library/document_en/fenwicktree.html" target="_blank">&lt;atcoder/fenwicktree></a>)</h2>
 
 <ul><li><code>fenwick_tree<T> fw(n)</code> => <code><a href="AtCoder/FenwickTree.html">AtCoder::FenwickTree</a>(T).new(n)</code></li><li><code>fenwick_tree<T> fw(array)</code> => <code><a href="AtCoder/FenwickTree.html">AtCoder::FenwickTree</a>(T).new(array)</code></li></ul>
 
@@ -284,7 +293,7 @@
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
-</a><a href="https://google.github.io/ac-library.cr/docs/src/SegTree.cr" target="_blank">SegTree.cr</a> (<a href="https://atcoder.github.io/ac-library/document_en/segtree.html" target="_blank">&lt;atcoder/segtree></a>)</h2>
+</a><a href="https://google.github.io/ac-library.cr/docs/src/seg_tree.cr" target="_blank">SegTree.cr</a> (<a href="https://atcoder.github.io/ac-library/document_en/segtree.html" target="_blank">&lt;atcoder/segtree></a>)</h2>
 
 <ul><li><code>segtree<S, op, e> seg(v)</code> => <code><a href="AtCoder/SegTree.html">AtCoder::SegTree</a>(S).new(v, &op?)</code></li></ul>
 
@@ -301,7 +310,7 @@
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
-</a><a href="https://google.github.io/ac-library.cr/docs/src/LazySegTree.cr" target="_blank">LazySegTree.cr</a> (<a href="https://atcoder.github.io/ac-library/document_en/lazysegtree.html" target="_blank">&lt;atcoder/lazysegtree></a>)</h2>
+</a><a href="https://google.github.io/ac-library.cr/docs/src/lazy_seg_tree.cr" target="_blank">LazySegTree.cr</a> (<a href="https://atcoder.github.io/ac-library/document_en/lazysegtree.html" target="_blank">&lt;atcoder/lazysegtree></a>)</h2>
 
 <ul><li><code>lazy_segtree<S, op, e, F, mapping, composition, id> seg(v)</code> => <code><a href="AtCoder/LazySegTree.html">AtCoder::LazySegTree</a>(S, F).new(v, op, mapping, composition)</code></li></ul>
 
@@ -325,7 +334,7 @@
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
-</a><a href="https://google.github.io/ac-library.cr/docs/src/DSU.cr" target="_blank">DSU.cr</a> (<a href="https://atcoder.github.io/ac-library/document_en/dsu.html" target="_blank">&lt;atcoder/dsu></a>)</h2>
+</a><a href="https://google.github.io/ac-library.cr/docs/src/dsu.cr" target="_blank">DSU.cr</a> (<a href="https://atcoder.github.io/ac-library/document_en/dsu.html" target="_blank">&lt;atcoder/dsu></a>)</h2>
 
 <ul><li><code>dsu(n)</code> => <code>AtCoder::DSU.new(n)</code></li></ul>
 
@@ -345,7 +354,7 @@
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
-</a><a href="https://google.github.io/ac-library.cr/docs/src/MaxFlow.cr" target="_blank">MaxFlow.cr</a> (<a href="https://atcoder.github.io/ac-library/document_en/maxflow.html" target="_blank">&lt;atcoder/maxflow></a>)</h2>
+</a><a href="https://google.github.io/ac-library.cr/docs/src/max_flow.cr" target="_blank">MaxFlow.cr</a> (<a href="https://atcoder.github.io/ac-library/document_en/maxflow.html" target="_blank">&lt;atcoder/maxflow></a>)</h2>
 
 <ul><li><code>mf_graph<Cap> graph(n)</code> => <code>AtCoder::MaxFlow.new(n)</code></li></ul>
 
@@ -365,7 +374,7 @@
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
-</a><a href="https://google.github.io/ac-library.cr/docs/src/SCC.cr" target="_blank">SCC.cr</a> (<a href="https://atcoder.github.io/ac-library/document_en/scc.html" target="_blank">&lt;atcoder/scc></a>)</h2>
+</a><a href="https://google.github.io/ac-library.cr/docs/src/scc.cr" target="_blank">SCC.cr</a> (<a href="https://atcoder.github.io/ac-library/document_en/scc.html" target="_blank">&lt;atcoder/scc></a>)</h2>
 
 <ul><li><code>scc_graph graph(n)</code> => <code>AtCoder::SCC.new(n)</code></li></ul>
 
@@ -383,7 +392,7 @@
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
-</a><a href="https://google.github.io/ac-library.cr/docs/src/TwoSat.cr" target="_blank">TwoSat.cr</a> (<a href="https://atcoder.github.io/ac-library/document_en/twosat.html" target="_blank">&lt;atcoder/twosat></a>)</h2>
+</a><a href="https://google.github.io/ac-library.cr/docs/src/two_sat.cr" target="_blank">TwoSat.cr</a> (<a href="https://atcoder.github.io/ac-library/document_en/twosat.html" target="_blank">&lt;atcoder/twosat></a>)</h2>
 
 <ul><li><code>two_sat graph(n)</code> => <code>AtCoder::SCC.new(n)</code></li></ul>
 
@@ -404,7 +413,7 @@
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
-</a><a href="https://google.github.io/ac-library.cr/docs/src/Math.cr" target="_blank">Math.cr</a> (<a href="https://atcoder.github.io/ac-library/document_en/math.html" target="_blank">&lt;atcoder/math></a>)</h2>
+</a><a href="https://google.github.io/ac-library.cr/docs/src/math.cr" target="_blank">Math.cr</a> (<a href="https://atcoder.github.io/ac-library/document_en/math.html" target="_blank">&lt;atcoder/math></a>)</h2>
 
 <ul><li><code>pow_mod(x, n, m)</code> => <code>AtCoder::Math.pow_mod(x, n, m)</code></li><li><code>inv_mod(x, m)</code> => <code>AtCoder::Math.inv_mod(x, m)</code></li><li><code>crt(r, m)</code> => <code>AtCoder::Math.crt(r, m)</code></li><li><code>floor_sum</code> => <code>AtCoder::Math.floor_sum(n, m, a, b)</code></li></ul>
 
@@ -412,7 +421,7 @@
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
-</a><a href="https://google.github.io/ac-library.cr/docs/src/Convolution.cr" target="_blank">Convolution.cr</a> (<a href="https://atcoder.github.io/ac-library/document_en/convolution.html" target="_blank">&lt;atcoder/convolution></a>)</h2>
+</a><a href="https://google.github.io/ac-library.cr/docs/src/convolution.cr" target="_blank">Convolution.cr</a> (<a href="https://atcoder.github.io/ac-library/document_en/convolution.html" target="_blank">&lt;atcoder/convolution></a>)</h2>
 
 <ul><li><code>convolution(a, b)</code> => <code>AtCoder::Convolution.convolution(a, b)</code></li></ul>
 
@@ -432,7 +441,7 @@
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
-</a><a href="https://google.github.io/ac-library.cr/docs/src/MinCostFlow.cr" target="_blank">MinCostFlow.cr</a> (<a href="https://atcoder.github.io/ac-library/document_en/mincostflow.html" target="_blank">&lt;atcoder/mincostflow></a>)</h2>
+</a><a href="https://google.github.io/ac-library.cr/docs/src/min_cost_flow.cr" target="_blank">MinCostFlow.cr</a> (<a href="https://atcoder.github.io/ac-library/document_en/mincostflow.html" target="_blank">&lt;atcoder/mincostflow></a>)</h2>
 
 <ul><li><code>mcf_graph graph(n)</code> => <code>AtCoder::MinCostFlow.new(n)</code></li></ul>
 
@@ -454,7 +463,7 @@
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
-</a><a href="https://google.github.io/ac-library.cr/docs/src/PriorityQueue.cr" target="_blank">PriorityQueue.cr</a> (not in ACL)</h2>
+</a><a href="https://google.github.io/ac-library.cr/docs/src/priority_queue.cr" target="_blank">PriorityQueue.cr</a> (not in ACL)</h2>
 
 <ul><li><code><a href="AtCoder/PriorityQueue.html">AtCoder::PriorityQueue</a>(T).new</code></li></ul>
 
@@ -488,11 +497,25 @@
 
 <ul><li><code><a href="AtCoder/Prime.html">AtCoder::Prime</a></code> (module)</li></ul>
 
-<p>Implements <a href="https://ruby-doc.com/stdlib/libdoc/prime/rdoc/Prime.html" target="_blank">Ruby's Prime library</a>.</p>
+<p>Implements <a href="https://ruby-doc.com/stdlib/libdoc/prime/rdoc/prime.html" target="_blank">Ruby's Prime library</a>.</p>
 
 <p><code></code>`cr
   AtCoder::Prime.first(7) # => [2, 3, 5, 7, 11, 13, 17]
   <code></code>`</p>
+
+<h2><a id="install" class="anchor" href="#install">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>Install</h2>
+
+<p>Add the following code to your project's <code>shard.yml</code>.</p>
+
+<pre><code class="language-yml">dependencies:
+  atcoder:
+    github: google/ac-library.cr</code></pre>
+
+
 </div>
 </body>
 </html>

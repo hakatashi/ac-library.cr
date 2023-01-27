@@ -102,7 +102,7 @@ h1 a:focus {
 
 <ul>
     <li><a href="/blob/master/verify/range_affine_range_sum.test.cr">View this file on GitHub</a></li>
-    <li>Last update: 2023-01-23 14:37:17+09:00</li>
+    <li>Last update: 2023-01-28 06:57:01+09:00</li>
     
     <li>Problem: <a href="https://judge.yosupo.jp/problem/range_affine_range_sum">https://judge.yosupo.jp/problem/range_affine_range_sum</a>
 </li>
@@ -122,11 +122,11 @@ h1 a:focus {
     <h2>Depends on</h2>
     <ul>
     
-        <li><a href="/ac-library.cr/docs/src/LazySegTree.cr"><img class="emoji" title=":heavy_check_mark:" alt=":heavy_check_mark:" src="https://github.githubassets.com/images/icons/emoji/unicode/2714.png" height="20" width="20"> src/LazySegTree.cr
+        <li><a href="/ac-library.cr/docs/src/lazy_seg_tree.cr"><img class="emoji" title=":heavy_check_mark:" alt=":heavy_check_mark:" src="https://github.githubassets.com/images/icons/emoji/unicode/2714.png" height="20" width="20"> src/lazy_seg_tree.cr
             
         </a></li>
     
-        <li><a href="/ac-library.cr/docs/src/ModInt.cr"><img class="emoji" title=":heavy_check_mark:" alt=":heavy_check_mark:" src="https://github.githubassets.com/images/icons/emoji/unicode/2714.png" height="20" width="20"> src/ModInt.cr
+        <li><a href="/ac-library.cr/docs/src/mod_int.cr"><img class="emoji" title=":heavy_check_mark:" alt=":heavy_check_mark:" src="https://github.githubassets.com/images/icons/emoji/unicode/2714.png" height="20" width="20"> src/mod_int.cr
             
         </a></li>
     
@@ -170,8 +170,8 @@ h1 a:focus {
 </span>
 <span class="cp"># verification-helper: PROBLEM https://judge.yosupo.jp/problem/range_affine_range_sum
 </span>
-<span class="n">require</span> <span class="s">"../src/LazySegTree.cr"</span>
-<span class="n">require</span> <span class="s">"../src/ModInt.cr"</span>
+<span class="n">require</span> <span class="s">"../src/lazy_seg_tree.cr"</span>
+<span class="n">require</span> <span class="s">"../src/mod_int.cr"</span>
 
 <span class="n">_</span><span class="p">,</span> <span class="n">q</span> <span class="o">=</span> <span class="n">read_line</span><span class="p">.</span><span class="n">split</span><span class="p">.</span><span class="n">map</span><span class="p">(</span><span class="o">&amp;</span><span class="p">.</span><span class="n">to_i64</span><span class="p">)</span>
 <span class="n">ais</span> <span class="o">=</span> <span class="n">read_line</span><span class="p">.</span><span class="n">split</span><span class="p">.</span><span class="n">map</span><span class="p">(</span><span class="o">&amp;</span><span class="p">.</span><span class="n">to_i64</span><span class="p">)</span>
@@ -224,7 +224,7 @@ h1 a:focus {
 </span>
 <span class="cp"># verification-helper: PROBLEM https://judge.yosupo.jp/problem/range_affine_range_sum
 </span>
-<span class="cp"># require "../src/LazySegTree.cr"
+<span class="cp"># require "../src/lazy_seg_tree.cr"
 # ac-library.cr by hakatashi https://github.com/google/ac-library.cr
 #
 # Copyright 2023 Google LLC
@@ -454,7 +454,7 @@ h1 a:focus {
   <span class="n">end</span>
 <span class="n">end</span>
 
-<span class="cp"># require "../src/ModInt.cr"
+<span class="cp"># require "../src/mod_int.cr"
 # ac-library.cr by hakatashi https://github.com/google/ac-library.cr
 #
 # Copyright 2023 Google LLC
@@ -471,7 +471,7 @@ h1 a:focus {
 # See the License for the specific language governing permissions and
 # limitations under the License.
 </span>
-<span class="cp"># require "./Math.cr"
+<span class="cp"># require "./math.cr"
 # ac-library.cr by hakatashi https://github.com/google/ac-library.cr
 #
 # Copyright 2023 Google LLC
@@ -488,7 +488,7 @@ h1 a:focus {
 # See the License for the specific language governing permissions and
 # limitations under the License.
 </span>
-<span class="cp"># require "./Prime.cr"
+<span class="cp"># require "./prime.cr"
 # ac-library.cr by hakatashi https://github.com/google/ac-library.cr
 #
 # Copyright 2023 Google LLC
@@ -505,7 +505,7 @@ h1 a:focus {
 # See the License for the specific language governing permissions and
 # limitations under the License.
 </span>
-<span class="cp"># require "./Math.cr"
+<span class="cp"># require "./math.cr"
 </span>
 <span class="n">module</span> <span class="n">AtCoder</span>
   <span class="cp"># Implements [Ruby's Prime library](https://ruby-doc.com/stdlib/libdoc/prime/rdoc/Prime.html).
