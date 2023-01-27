@@ -239,6 +239,19 @@
 
 <p>This library aims to provide the almost-equivalent (and additional) functionality with ac-library but in the manner of Crystal.</p>
 
+<h2><a id="installation" class="anchor" href="#installation">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>Installation</h2>
+
+<p>Add the following code to your project's <code>shard.yml</code>.</p>
+
+<pre><code class="language-yml">dependencies:
+  atcoder:
+    github: google/ac-library.cr
+    branch: master</code></pre>
+
 <h2><a id="usage" class="anchor" href="#usage">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
@@ -248,11 +261,11 @@
 <pre><code class="language-cr">require "atcoder" # load all libraries
 require "atcoder/fenwick_tree" # load FenwickTree</code></pre>
 
-<h2><a id="mod-int.crhttpsgoogle.github.ioac-library.crdocssrcmod-int.cr-atcodermodinthttpsatcoder.github.ioac-librarydocument-enmodint.html" class="anchor" href="#mod-int.crhttpsgoogle.github.ioac-library.crdocssrcmod-int.cr-atcodermodinthttpsatcoder.github.ioac-librarydocument-enmodint.html">
+<h2><a id="atcodermod-inthttpsgoogle.github.ioac-library.crdocssrcmod-int.cr-implements-atcodermodinthttpsatcoder.github.ioac-librarydocument-enmodint.html" class="anchor" href="#atcodermod-inthttpsgoogle.github.ioac-library.crdocssrcmod-int.cr-implements-atcodermodinthttpsatcoder.github.ioac-librarydocument-enmodint.html">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
-</a><a href="https://google.github.io/ac-library.cr/docs/src/mod_int.cr" target="_blank">ModInt.cr</a> (<a href="https://atcoder.github.io/ac-library/document_en/modint.html" target="_blank">&lt;atcoder/modint></a>)</h2>
+</a><a href="https://google.github.io/ac-library.cr/docs/src/mod_int.cr" target="_blank"><code>atcoder/mod_int</code></a> (Implements <a href="https://atcoder.github.io/ac-library/document_en/modint.html" target="_blank">&lt;atcoder/modint></a>)</h2>
 
 <ul><li><code>modint</code> => Unimplemented</li><li><code>modint998244353</code> => <code><a href="AtCoder/ModInt998244353.html">AtCoder::ModInt998244353</a></code></li><li><code>modint1000000007</code> => <code><a href="AtCoder/ModInt1000000007.html">AtCoder::ModInt1000000007</a></code></li></ul>
 
@@ -271,11 +284,11 @@ require "atcoder/fenwick_tree" # load FenwickTree</code></pre>
 
 <ul><li><code>dynamic_modint</code> => Unimplemented</li></ul>
 
-<h2><a id="fenwick-tree.crhttpsgoogle.github.ioac-library.crdocssrcfenwick-tree.cr-atcoderfenwicktreehttpsatcoder.github.ioac-librarydocument-enfenwicktree.html" class="anchor" href="#fenwick-tree.crhttpsgoogle.github.ioac-library.crdocssrcfenwick-tree.cr-atcoderfenwicktreehttpsatcoder.github.ioac-librarydocument-enfenwicktree.html">
+<h2><a id="atcoderfenwick-treehttpsgoogle.github.ioac-library.crdocssrcfenwick-tree.cr-implements-atcoderfenwicktreehttpsatcoder.github.ioac-librarydocument-enfenwicktree.html" class="anchor" href="#atcoderfenwick-treehttpsgoogle.github.ioac-library.crdocssrcfenwick-tree.cr-implements-atcoderfenwicktreehttpsatcoder.github.ioac-librarydocument-enfenwicktree.html">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
-</a><a href="https://google.github.io/ac-library.cr/docs/src/fenwick_tree.cr" target="_blank">FenwickTree.cr</a> (<a href="https://atcoder.github.io/ac-library/document_en/fenwicktree.html" target="_blank">&lt;atcoder/fenwicktree></a>)</h2>
+</a><a href="https://google.github.io/ac-library.cr/docs/src/fenwick_tree.cr" target="_blank"><code>atcoder/fenwick_tree</code></a> (Implements <a href="https://atcoder.github.io/ac-library/document_en/fenwicktree.html" target="_blank">&lt;atcoder/fenwicktree></a>)</h2>
 
 <ul><li><code>fenwick_tree<T> fw(n)</code> => <code><a href="AtCoder/FenwickTree.html">AtCoder::FenwickTree</a>(T).new(n)</code></li><li><code>fenwick_tree<T> fw(array)</code> => <code><a href="AtCoder/FenwickTree.html">AtCoder::FenwickTree</a>(T).new(array)</code></li></ul>
 
@@ -289,11 +302,11 @@ require "atcoder/fenwick_tree" # load FenwickTree</code></pre>
 
 <ul><li><code>.add(p, x)</code> => <code>#add(p, x)</code></li><li><code>.sum(l, r)</code> => <code>#[](l...r)</code></li></ul></ul>
 
-<h2><a id="seg-tree.crhttpsgoogle.github.ioac-library.crdocssrcseg-tree.cr-atcodersegtreehttpsatcoder.github.ioac-librarydocument-ensegtree.html" class="anchor" href="#seg-tree.crhttpsgoogle.github.ioac-library.crdocssrcseg-tree.cr-atcodersegtreehttpsatcoder.github.ioac-librarydocument-ensegtree.html">
+<h2><a id="atcoderseg-treehttpsgoogle.github.ioac-library.crdocssrcseg-tree.cr-implements-atcodersegtreehttpsatcoder.github.ioac-librarydocument-ensegtree.html" class="anchor" href="#atcoderseg-treehttpsgoogle.github.ioac-library.crdocssrcseg-tree.cr-implements-atcodersegtreehttpsatcoder.github.ioac-librarydocument-ensegtree.html">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
-</a><a href="https://google.github.io/ac-library.cr/docs/src/seg_tree.cr" target="_blank">SegTree.cr</a> (<a href="https://atcoder.github.io/ac-library/document_en/segtree.html" target="_blank">&lt;atcoder/segtree></a>)</h2>
+</a><a href="https://google.github.io/ac-library.cr/docs/src/seg_tree.cr" target="_blank"><code>atcoder/seg_tree</code></a> (Implements <a href="https://atcoder.github.io/ac-library/document_en/segtree.html" target="_blank">&lt;atcoder/segtree></a>)</h2>
 
 <ul><li><code>segtree<S, op, e> seg(v)</code> => <code><a href="AtCoder/SegTree.html">AtCoder::SegTree</a>(S).new(v, &op?)</code></li></ul>
 
@@ -306,11 +319,11 @@ require "atcoder/fenwick_tree" # load FenwickTree</code></pre>
 
 <ul><li><code>.set(p, x)</code> => <code>#[]=(p, x)</code></li><li><code>.get(p)</code> => <code>#[](p)</code></li><li><code>.prod(l, r)</code> => <code>#[](l...r)</code></li><li><code>.all_prod()</code> => <code>#all_prod</code></li><li><code>.max_right<f>(l)</code> => Unimplemented</li><li><code>.max_left<f>(r)</code> => Unimplemented</li></ul></ul>
 
-<h2><a id="lazy-seg-tree.crhttpsgoogle.github.ioac-library.crdocssrclazy-seg-tree.cr-atcoderlazysegtreehttpsatcoder.github.ioac-librarydocument-enlazysegtree.html" class="anchor" href="#lazy-seg-tree.crhttpsgoogle.github.ioac-library.crdocssrclazy-seg-tree.cr-atcoderlazysegtreehttpsatcoder.github.ioac-librarydocument-enlazysegtree.html">
+<h2><a id="atcoderlazy-seg-treehttpsgoogle.github.ioac-library.crdocssrclazy-seg-tree.cr-implements-atcoderlazysegtreehttpsatcoder.github.ioac-librarydocument-enlazysegtree.html" class="anchor" href="#atcoderlazy-seg-treehttpsgoogle.github.ioac-library.crdocssrclazy-seg-tree.cr-implements-atcoderlazysegtreehttpsatcoder.github.ioac-librarydocument-enlazysegtree.html">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
-</a><a href="https://google.github.io/ac-library.cr/docs/src/lazy_seg_tree.cr" target="_blank">LazySegTree.cr</a> (<a href="https://atcoder.github.io/ac-library/document_en/lazysegtree.html" target="_blank">&lt;atcoder/lazysegtree></a>)</h2>
+</a><a href="https://google.github.io/ac-library.cr/docs/src/lazy_seg_tree.cr" target="_blank"><code>atcoder/lazy_seg_tree</code></a> (Implements <a href="https://atcoder.github.io/ac-library/document_en/lazysegtree.html" target="_blank">&lt;atcoder/lazysegtree></a>)</h2>
 
 <ul><li><code>lazy_segtree<S, op, e, F, mapping, composition, id> seg(v)</code> => <code><a href="AtCoder/LazySegTree.html">AtCoder::LazySegTree</a>(S, F).new(v, op, mapping, composition)</code></li></ul>
 
@@ -330,11 +343,11 @@ require "atcoder/fenwick_tree" # load FenwickTree</code></pre>
 
 <ul><li><code>.set(p, x)</code> => Unimplemented</li><li><code>.get(p)</code> => <code>#[](p)</code></li><li><code>.prod(l, r)</code> => <code>#[](l...r)</code></li><li><code>.all_prod()</code> => <code>#all_prod</code></li><li><code>.apply(p, f)</code> => <code>#[]=(p, f)</code></li><li><code>.apply(l, r, f)</code> => <code>#[]=(l...r, f)</code></li><li><code>.max_right<f>(l)</code> => Unimplemented</li><li><code>.max_left<f>(r)</code> => Unimplemented</li></ul></ul>
 
-<h2><a id="dsu.crhttpsgoogle.github.ioac-library.crdocssrcdsu.cr-atcoderdsuhttpsatcoder.github.ioac-librarydocument-endsu.html" class="anchor" href="#dsu.crhttpsgoogle.github.ioac-library.crdocssrcdsu.cr-atcoderdsuhttpsatcoder.github.ioac-librarydocument-endsu.html">
+<h2><a id="atcoderdsuhttpsgoogle.github.ioac-library.crdocssrcdsu.cr-implements-atcoderdsuhttpsatcoder.github.ioac-librarydocument-endsu.html" class="anchor" href="#atcoderdsuhttpsgoogle.github.ioac-library.crdocssrcdsu.cr-implements-atcoderdsuhttpsatcoder.github.ioac-librarydocument-endsu.html">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
-</a><a href="https://google.github.io/ac-library.cr/docs/src/dsu.cr" target="_blank">DSU.cr</a> (<a href="https://atcoder.github.io/ac-library/document_en/dsu.html" target="_blank">&lt;atcoder/dsu></a>)</h2>
+</a><a href="https://google.github.io/ac-library.cr/docs/src/dsu.cr" target="_blank"><code>atcoder/dsu</code></a> (Implements <a href="https://atcoder.github.io/ac-library/document_en/dsu.html" target="_blank">&lt;atcoder/dsu></a>)</h2>
 
 <ul><li><code>dsu(n)</code> => <code>AtCoder::DSU.new(n)</code></li></ul>
 
@@ -350,11 +363,11 @@ require "atcoder/fenwick_tree" # load FenwickTree</code></pre>
 
 <pre><code><span class="o">*</span> <span class="t">This</span> method returns set instead <span class="k">of</span> list.</code></pre>
 
-<h2><a id="max-flow.crhttpsgoogle.github.ioac-library.crdocssrcmax-flow.cr-atcodermaxflowhttpsatcoder.github.ioac-librarydocument-enmaxflow.html" class="anchor" href="#max-flow.crhttpsgoogle.github.ioac-library.crdocssrcmax-flow.cr-atcodermaxflowhttpsatcoder.github.ioac-librarydocument-enmaxflow.html">
+<h2><a id="atcodermax-flowhttpsgoogle.github.ioac-library.crdocssrcmax-flow.cr-implements-atcodermaxflowhttpsatcoder.github.ioac-librarydocument-enmaxflow.html" class="anchor" href="#atcodermax-flowhttpsgoogle.github.ioac-library.crdocssrcmax-flow.cr-implements-atcodermaxflowhttpsatcoder.github.ioac-librarydocument-enmaxflow.html">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
-</a><a href="https://google.github.io/ac-library.cr/docs/src/max_flow.cr" target="_blank">MaxFlow.cr</a> (<a href="https://atcoder.github.io/ac-library/document_en/maxflow.html" target="_blank">&lt;atcoder/maxflow></a>)</h2>
+</a><a href="https://google.github.io/ac-library.cr/docs/src/max_flow.cr" target="_blank"><code>atcoder/max_flow</code></a> (Implements <a href="https://atcoder.github.io/ac-library/document_en/maxflow.html" target="_blank">&lt;atcoder/maxflow></a>)</h2>
 
 <ul><li><code>mf_graph<Cap> graph(n)</code> => <code>AtCoder::MaxFlow.new(n)</code></li></ul>
 
@@ -370,11 +383,11 @@ require "atcoder/fenwick_tree" # load FenwickTree</code></pre>
 
 <ul><li><code>.add_edge(from, to, cap)</code> => <code>#add_edge(from, to, cap)</code></li><li><code>.flow(s, t)</code> => <code>#flow(s, t)</code></li><li><code>.min_cut(s)</code> => Unimplemented</li><li><code>.get_edge(i)</code> => Unimplemented</li><li><code>.edges()</code> => Unimplemented</li><li><code>.change_edge(i, new_cap, new_flow)</code> => Unimplemented</li></ul></ul>
 
-<h2><a id="scc.crhttpsgoogle.github.ioac-library.crdocssrcscc.cr-atcoderscchttpsatcoder.github.ioac-librarydocument-enscc.html" class="anchor" href="#scc.crhttpsgoogle.github.ioac-library.crdocssrcscc.cr-atcoderscchttpsatcoder.github.ioac-librarydocument-enscc.html">
+<h2><a id="atcoderscchttpsgoogle.github.ioac-library.crdocssrcscc.cr-impements-atcoderscchttpsatcoder.github.ioac-librarydocument-enscc.html" class="anchor" href="#atcoderscchttpsgoogle.github.ioac-library.crdocssrcscc.cr-impements-atcoderscchttpsatcoder.github.ioac-librarydocument-enscc.html">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
-</a><a href="https://google.github.io/ac-library.cr/docs/src/scc.cr" target="_blank">SCC.cr</a> (<a href="https://atcoder.github.io/ac-library/document_en/scc.html" target="_blank">&lt;atcoder/scc></a>)</h2>
+</a><a href="https://google.github.io/ac-library.cr/docs/src/scc.cr" target="_blank"><code>atcoder/scc</code></a> (Impements <a href="https://atcoder.github.io/ac-library/document_en/scc.html" target="_blank">&lt;atcoder/scc></a>)</h2>
 
 <ul><li><code>scc_graph graph(n)</code> => <code>AtCoder::SCC.new(n)</code></li></ul>
 
@@ -388,11 +401,11 @@ require "atcoder/fenwick_tree" # load FenwickTree</code></pre>
 
 <ul><li><code>.add_edge(from, to)</code> => <code>#add_edge(from, to)</code></li><li><code>.scc()</code> => <code>#scc</code></li></ul></ul>
 
-<h2><a id="two-sat.crhttpsgoogle.github.ioac-library.crdocssrctwo-sat.cr-atcodertwosathttpsatcoder.github.ioac-librarydocument-entwosat.html" class="anchor" href="#two-sat.crhttpsgoogle.github.ioac-library.crdocssrctwo-sat.cr-atcodertwosathttpsatcoder.github.ioac-librarydocument-entwosat.html">
+<h2><a id="atcodertwo-sathttpsgoogle.github.ioac-library.crdocssrctwo-sat.cr-implements-atcodertwosathttpsatcoder.github.ioac-librarydocument-entwosat.html" class="anchor" href="#atcodertwo-sathttpsgoogle.github.ioac-library.crdocssrctwo-sat.cr-implements-atcodertwosathttpsatcoder.github.ioac-librarydocument-entwosat.html">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
-</a><a href="https://google.github.io/ac-library.cr/docs/src/two_sat.cr" target="_blank">TwoSat.cr</a> (<a href="https://atcoder.github.io/ac-library/document_en/twosat.html" target="_blank">&lt;atcoder/twosat></a>)</h2>
+</a><a href="https://google.github.io/ac-library.cr/docs/src/two_sat.cr" target="_blank"><code>atcoder/two_sat</code></a> (Implements <a href="https://atcoder.github.io/ac-library/document_en/twosat.html" target="_blank">&lt;atcoder/twosat></a>)</h2>
 
 <ul><li><code>two_sat graph(n)</code> => <code>AtCoder::SCC.new(n)</code></li></ul>
 
@@ -409,19 +422,19 @@ require "atcoder/fenwick_tree" # load FenwickTree</code></pre>
 
 <pre><code><span class="t">This</span> method will raise <span class="k">if</span> it</code></pre>
 
-<h2><a id="math.crhttpsgoogle.github.ioac-library.crdocssrcmath.cr-atcodermathhttpsatcoder.github.ioac-librarydocument-enmath.html" class="anchor" href="#math.crhttpsgoogle.github.ioac-library.crdocssrcmath.cr-atcodermathhttpsatcoder.github.ioac-librarydocument-enmath.html">
+<h2><a id="atcodermathhttpsgoogle.github.ioac-library.crdocssrcmath.cr-implements-atcodermathhttpsatcoder.github.ioac-librarydocument-enmath.html" class="anchor" href="#atcodermathhttpsgoogle.github.ioac-library.crdocssrcmath.cr-implements-atcodermathhttpsatcoder.github.ioac-librarydocument-enmath.html">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
-</a><a href="https://google.github.io/ac-library.cr/docs/src/math.cr" target="_blank">Math.cr</a> (<a href="https://atcoder.github.io/ac-library/document_en/math.html" target="_blank">&lt;atcoder/math></a>)</h2>
+</a><a href="https://google.github.io/ac-library.cr/docs/src/math.cr" target="_blank"><code>atcoder/math</code></a> (Implements <a href="https://atcoder.github.io/ac-library/document_en/math.html" target="_blank">&lt;atcoder/math></a>)</h2>
 
 <ul><li><code>pow_mod(x, n, m)</code> => <code>AtCoder::Math.pow_mod(x, n, m)</code></li><li><code>inv_mod(x, m)</code> => <code>AtCoder::Math.inv_mod(x, m)</code></li><li><code>crt(r, m)</code> => <code>AtCoder::Math.crt(r, m)</code></li><li><code>floor_sum</code> => <code>AtCoder::Math.floor_sum(n, m, a, b)</code></li></ul>
 
-<h2><a id="convolution.crhttpsgoogle.github.ioac-library.crdocssrcconvolution.cr-atcoderconvolutionhttpsatcoder.github.ioac-librarydocument-enconvolution.html" class="anchor" href="#convolution.crhttpsgoogle.github.ioac-library.crdocssrcconvolution.cr-atcoderconvolutionhttpsatcoder.github.ioac-librarydocument-enconvolution.html">
+<h2><a id="atcoderconvolutionhttpsgoogle.github.ioac-library.crdocssrcconvolution.cr-implements-atcoderconvolutionhttpsatcoder.github.ioac-librarydocument-enconvolution.html" class="anchor" href="#atcoderconvolutionhttpsgoogle.github.ioac-library.crdocssrcconvolution.cr-implements-atcoderconvolutionhttpsatcoder.github.ioac-librarydocument-enconvolution.html">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
-</a><a href="https://google.github.io/ac-library.cr/docs/src/convolution.cr" target="_blank">Convolution.cr</a> (<a href="https://atcoder.github.io/ac-library/document_en/convolution.html" target="_blank">&lt;atcoder/convolution></a>)</h2>
+</a><a href="https://google.github.io/ac-library.cr/docs/src/convolution.cr" target="_blank"><code>atcoder/convolution</code></a> (Implements <a href="https://atcoder.github.io/ac-library/document_en/convolution.html" target="_blank">&lt;atcoder/convolution></a>)</h2>
 
 <ul><li><code>convolution(a, b)</code> => <code>AtCoder::Convolution.convolution(a, b)</code></li></ul>
 
@@ -437,11 +450,11 @@ require "atcoder/fenwick_tree" # load FenwickTree</code></pre>
   AtCoder::Convolution.convolution_ll(a, a) #=> [1000000000000000000]
   <code></code>`</p>
 
-<h2><a id="min-cost-flow.crhttpsgoogle.github.ioac-library.crdocssrcmin-cost-flow.cr-atcodermincostflowhttpsatcoder.github.ioac-librarydocument-enmincostflow.html" class="anchor" href="#min-cost-flow.crhttpsgoogle.github.ioac-library.crdocssrcmin-cost-flow.cr-atcodermincostflowhttpsatcoder.github.ioac-librarydocument-enmincostflow.html">
+<h2><a id="atcodermin-cost-flowhttpsgoogle.github.ioac-library.crdocssrcmin-cost-flow.cr-implements-atcodermincostflowhttpsatcoder.github.ioac-librarydocument-enmincostflow.html" class="anchor" href="#atcodermin-cost-flowhttpsgoogle.github.ioac-library.crdocssrcmin-cost-flow.cr-implements-atcodermincostflowhttpsatcoder.github.ioac-librarydocument-enmincostflow.html">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
-</a><a href="https://google.github.io/ac-library.cr/docs/src/min_cost_flow.cr" target="_blank">MinCostFlow.cr</a> (<a href="https://atcoder.github.io/ac-library/document_en/mincostflow.html" target="_blank">&lt;atcoder/mincostflow></a>)</h2>
+</a><a href="https://google.github.io/ac-library.cr/docs/src/min_cost_flow.cr" target="_blank"><code>atcoder/min_cost_flow</code></a> (Implements <a href="https://atcoder.github.io/ac-library/document_en/mincostflow.html" target="_blank">&lt;atcoder/mincostflow></a>)</h2>
 
 <ul><li><code>mcf_graph graph(n)</code> => <code>AtCoder::MinCostFlow.new(n)</code></li></ul>
 
@@ -459,11 +472,11 @@ require "atcoder/fenwick_tree" # load FenwickTree</code></pre>
 
 <ul><li><code>.add_edge(from, to, cap, cost)</code> => <code>#add_edge(from, to, cap, cost)</code></li><li><code>.flow(s, t)</code> => <code>#flow(s, t)</code></li><li><code>.flow(s, t, flow_limit)</code> => <code>#flow(s, t, flow_limit)</code></li><li><code>.slope(s, t)</code> => <code>#slope(s, t)</code></li><li><code>.slope(s, t, flow_limit)</code> => <code>#slope(s, t, flow_limit)</code></li><li><code>.get_edge(i)</code> => Unimplemented</li><li><code>.edges()</code> => Unimplemented</li></ul></ul>
 
-<h2><a id="priority-queue.crhttpsgoogle.github.ioac-library.crdocssrcpriority-queue.cr-not-in-acl" class="anchor" href="#priority-queue.crhttpsgoogle.github.ioac-library.crdocssrcpriority-queue.cr-not-in-acl">
+<h2><a id="atcoderpriority-queuehttpsgoogle.github.ioac-library.crdocssrcpriority-queue.cr-not-in-acl" class="anchor" href="#atcoderpriority-queuehttpsgoogle.github.ioac-library.crdocssrcpriority-queue.cr-not-in-acl">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
-</a><a href="https://google.github.io/ac-library.cr/docs/src/priority_queue.cr" target="_blank">PriorityQueue.cr</a> (not in ACL)</h2>
+</a><a href="https://google.github.io/ac-library.cr/docs/src/priority_queue.cr" target="_blank"><code>atcoder/priority_queue</code></a> (not in ACL)</h2>
 
 <ul><li><code><a href="AtCoder/PriorityQueue.html">AtCoder::PriorityQueue</a>(T).new</code></li></ul>
 
@@ -489,11 +502,11 @@ require "atcoder/fenwick_tree" # load FenwickTree</code></pre>
 
 <pre><code><span class="t">Returns</span> size <span class="k">of</span> the queue</code></pre>
 
-<h2><a id="prime.crhttpsgoogle.github.ioac-library.crdocssrcprime.cr-not-in-acl" class="anchor" href="#prime.crhttpsgoogle.github.ioac-library.crdocssrcprime.cr-not-in-acl">
+<h2><a id="atcoderprimehttpsgoogle.github.ioac-library.crdocssrcprime.cr-not-in-acl" class="anchor" href="#atcoderprimehttpsgoogle.github.ioac-library.crdocssrcprime.cr-not-in-acl">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
-</a><a href="https://google.github.io/ac-library.cr/docs/src/Prime.cr" target="_blank">Prime.cr</a> (not in ACL)</h2>
+</a><a href="https://google.github.io/ac-library.cr/docs/src/prime.cr" target="_blank"><code>atcoder/prime</code></a> (not in ACL)</h2>
 
 <ul><li><code><a href="AtCoder/Prime.html">AtCoder::Prime</a></code> (module)</li></ul>
 
@@ -502,20 +515,6 @@ require "atcoder/fenwick_tree" # load FenwickTree</code></pre>
 <p><code></code>`cr
   AtCoder::Prime.first(7) # => [2, 3, 5, 7, 11, 13, 17]
   <code></code>`</p>
-
-<h2><a id="install" class="anchor" href="#install">
-  <svg class="octicon-link" aria-hidden="true">
-    <use href="#octicon-link"/>
-  </svg>
-</a>Install</h2>
-
-<p>Add the following code to your project's <code>shard.yml</code>.</p>
-
-<pre><code class="language-yml">dependencies:
-  atcoder:
-    github: google/ac-library.cr</code></pre>
-
-
 </div>
 </body>
 </html>
