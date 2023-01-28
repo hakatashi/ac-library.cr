@@ -7,7 +7,7 @@ describe "String" do
       AtCoder::String.z_algorithm([] of Int32).should eq [] of Int32
       AtCoder::String.z_algorithm("").should eq [] of Int32
     end
-    
+
     it "returns the sequence of length n, such that the i-th element is the length of the LCP (Longest Common Prefix) of s[0...n] and s[i...n]." do
       AtCoder::String.z_algorithm("abcbcba").should eq [7, 0, 0, 0, 0, 0, 1]
       AtCoder::String.z_algorithm("mississippi").should eq [11, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
