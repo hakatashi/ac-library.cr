@@ -21,7 +21,7 @@ module AtCoder
   # dsu = AtCoder::DSU.new(10)
   # dsu.merge(0, 2)
   # dsu.merge(4, 2)
-  # dsu.same(0, 4) # => true
+  # dsu.same?(0, 4) # => true
   # dsu.size(4) # => 3
   # ```
   class DSU
@@ -57,7 +57,7 @@ module AtCoder
     end
 
     # Implements atcoder::dsu.same(a, b).
-    def same(a, b)
+    def same?(a, b)
       leader(a) == leader(b)
     end
 

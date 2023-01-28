@@ -35,9 +35,9 @@ Benchmark.bm do |x|
     tree.size(n * 3 + 2).should eq n + 1
 
     n.times do |i|
-      tree.same(0, i * 3 + 1).should eq false
-      tree.same(1, i * 3 + 2).should eq false
-      tree.same(2, i * 3 + 2).should eq true
+      tree.same?(0, i * 3 + 1).should eq false
+      tree.same?(1, i * 3 + 2).should eq false
+      tree.same?(2, i * 3 + 2).should eq true
     end
 
     tree.merge(0, 1)

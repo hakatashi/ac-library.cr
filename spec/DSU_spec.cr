@@ -32,15 +32,15 @@ describe "DSU" do
       tree.merge(7, 3)
       tree.merge(7, 5)
 
-      tree.same(2, 6).should eq true
-      tree.same(4, 2).should eq true
-      tree.same(1, 3).should eq true
-      tree.same(3, 5).should eq true
-      tree.same(8, 8).should eq true
-      tree.same(2, 1).should eq false
-      tree.same(7, 0).should eq false
-      tree.same(5, 4).should eq false
-      tree.same(8, 7).should eq false
+      tree.same?(2, 6).should eq true
+      tree.same?(4, 2).should eq true
+      tree.same?(1, 3).should eq true
+      tree.same?(3, 5).should eq true
+      tree.same?(8, 8).should eq true
+      tree.same?(2, 1).should eq false
+      tree.same?(7, 0).should eq false
+      tree.same?(5, 4).should eq false
+      tree.same?(8, 7).should eq false
 
       tree.size(4).should eq 4
       tree.size(1).should eq 4

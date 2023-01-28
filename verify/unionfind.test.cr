@@ -28,7 +28,7 @@ q.times do
   if t == 0
     tree.merge(u, v)
   else
-    if tree.same(u, v)
+    if tree.same?(u, v)
       p 1
     else
       p 0
