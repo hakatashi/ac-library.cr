@@ -119,12 +119,12 @@ require "atcoder/fenwick_tree" # load FenwickTree
   dsu = AtCoder::DSU.new(10)
   dsu.merge(0, 2)
   dsu.merge(4, 2)
-  dsu.same(0, 4) #=> true
+  dsu.same?(0, 4) #=> true
   dsu.size(4) #=> 3
   ```
 
   * `.merge(a, b)` => `#merge(a, b)`
-  * `.same(a, b)` => `#same(a, b)`
+  * `.same(a, b)` => `#same?(a, b)`
   * `.leader(a)` => `#leader(a)`
   * `.size()` => `#size`
   * `.groups()` => `#groups`

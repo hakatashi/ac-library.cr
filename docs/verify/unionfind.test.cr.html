@@ -96,20 +96,19 @@ h1 a:focus {
 
 
 <h1>
-<img class="emoji" title=":x:" alt=":x:" src="https://github.githubassets.com/images/icons/emoji/unicode/274c.png" height="20" width="20"> verify/unionfind.test.cr
+<img class="emoji" title=":heavy_check_mark:" alt=":heavy_check_mark:" src="https://github.githubassets.com/images/icons/emoji/unicode/2714.png" height="20" width="20"> verify/unionfind.test.cr
     
 </h1>
 
 <ul>
     <li><a href="/blob/master/verify/unionfind.test.cr">View this file on GitHub</a></li>
-    <li>Last update: 2023-01-27 22:29:14+00:00</li>
+    <li>Last update: 2023-01-29 05:05:21+09:00</li>
     
     <li>Problem: <a href="https://judge.yosupo.jp/problem/unionfind">https://judge.yosupo.jp/problem/unionfind</a>
 </li>
     
     
-    <li>Link: <a href="/actions"><img class="emoji" title=":x:" alt=":x:" src="https://github.githubassets.com/images/icons/emoji/unicode/274c.png" height="20" width="20"> View error logs on GitHub Actions</a>
-</li>
+    
     
 </ul>
 
@@ -123,7 +122,7 @@ h1 a:focus {
     <h2>Depends on</h2>
     <ul>
     
-        <li><a href="/ac-library.cr/docs/src/dsu.cr"><img class="emoji" title=":x:" alt=":x:" src="https://github.githubassets.com/images/icons/emoji/unicode/274c.png" height="20" width="20"> src/dsu.cr
+        <li><a href="/ac-library.cr/docs/src/dsu.cr"><img class="emoji" title=":heavy_check_mark:" alt=":heavy_check_mark:" src="https://github.githubassets.com/images/icons/emoji/unicode/2714.png" height="20" width="20"> src/dsu.cr
             
         </a></li>
     
@@ -179,7 +178,7 @@ h1 a:focus {
   <span class="k">if</span> <span class="n">t</span> <span class="o">==</span> <span class="mi">0</span>
     <span class="n">tree</span><span class="p">.</span><span class="n">merge</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
   <span class="k">else</span>
-    <span class="k">if</span> <span class="n">tree</span><span class="p">.</span><span class="n">same</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">tree</span><span class="p">.</span><span class="n">same</span><span class="o">?</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
       <span class="n">p</span> <span class="mi">1</span>
     <span class="k">else</span>
       <span class="n">p</span> <span class="mi">0</span>
@@ -238,8 +237,8 @@ h1 a:focus {
 </span>  <span class="cp"># dsu = AtCoder::DSU.new(10)
 </span>  <span class="cp"># dsu.merge(0, 2)
 </span>  <span class="cp"># dsu.merge(4, 2)
-</span>  <span class="cp"># dsu.same(0, 4) # =&gt; true
-</span>  <span class="cp"># dsu.size(4)    # =&gt; 3
+</span>  <span class="cp"># dsu.same?(0, 4) # =&gt; true
+</span>  <span class="cp"># dsu.size(4)     # =&gt; 3
 </span>  <span class="cp"># ```
 </span>  <span class="k">class</span> <span class="nc">DSU</span>
     <span class="n">getter</span> <span class="n">parents</span> <span class="o">:</span> <span class="n">Array</span><span class="p">(</span><span class="n">Int64</span><span class="p">)</span>
@@ -274,7 +273,7 @@ h1 a:focus {
     <span class="n">end</span>
 
     <span class="cp"># Implements atcoder::dsu.same(a, b).
-</span>    <span class="n">def</span> <span class="n">same</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+</span>    <span class="n">def</span> <span class="n">same</span><span class="o">?</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
       <span class="n">leader</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">==</span> <span class="n">leader</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
     <span class="n">end</span>
 
@@ -305,7 +304,7 @@ h1 a:focus {
   <span class="k">if</span> <span class="n">t</span> <span class="o">==</span> <span class="mi">0</span>
     <span class="n">tree</span><span class="p">.</span><span class="n">merge</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
   <span class="k">else</span>
-    <span class="k">if</span> <span class="n">tree</span><span class="p">.</span><span class="n">same</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">tree</span><span class="p">.</span><span class="n">same</span><span class="o">?</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
       <span class="n">p</span> <span class="mi">1</span>
     <span class="k">else</span>
       <span class="n">p</span> <span class="mi">0</span>

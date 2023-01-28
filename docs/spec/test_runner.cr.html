@@ -102,7 +102,7 @@ h1 a:focus {
 
 <ul>
     <li><a href="/blob/master/spec/test_runner.cr">View this file on GitHub</a></li>
-    <li>Last update: 2023-01-27 22:29:14+00:00</li>
+    <li>Last update: 2023-01-29 05:05:21+09:00</li>
     
     
     
@@ -1175,8 +1175,8 @@ h1 a:focus {
 </span>  <span class="cp"># dsu = AtCoder::DSU.new(10)
 </span>  <span class="cp"># dsu.merge(0, 2)
 </span>  <span class="cp"># dsu.merge(4, 2)
-</span>  <span class="cp"># dsu.same(0, 4) # =&gt; true
-</span>  <span class="cp"># dsu.size(4)    # =&gt; 3
+</span>  <span class="cp"># dsu.same?(0, 4) # =&gt; true
+</span>  <span class="cp"># dsu.size(4)     # =&gt; 3
 </span>  <span class="cp"># ```
 </span>  <span class="k">class</span> <span class="nc">DSU</span>
     <span class="n">getter</span> <span class="n">parents</span> <span class="o">:</span> <span class="n">Array</span><span class="p">(</span><span class="n">Int64</span><span class="p">)</span>
@@ -1211,7 +1211,7 @@ h1 a:focus {
     <span class="n">end</span>
 
     <span class="cp"># Implements atcoder::dsu.same(a, b).
-</span>    <span class="n">def</span> <span class="n">same</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+</span>    <span class="n">def</span> <span class="n">same</span><span class="o">?</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
       <span class="n">leader</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">==</span> <span class="n">leader</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
     <span class="n">end</span>
 
@@ -1249,15 +1249,15 @@ h1 a:focus {
       <span class="n">tree</span><span class="p">.</span><span class="n">merge</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
       <span class="n">tree</span><span class="p">.</span><span class="n">merge</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
 
-      <span class="n">tree</span><span class="p">.</span><span class="n">same</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">).</span><span class="n">should</span> <span class="n">eq</span> <span class="nb">true</span>
-      <span class="n">tree</span><span class="p">.</span><span class="n">same</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">).</span><span class="n">should</span> <span class="n">eq</span> <span class="nb">true</span>
-      <span class="n">tree</span><span class="p">.</span><span class="n">same</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">).</span><span class="n">should</span> <span class="n">eq</span> <span class="nb">true</span>
-      <span class="n">tree</span><span class="p">.</span><span class="n">same</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">).</span><span class="n">should</span> <span class="n">eq</span> <span class="nb">true</span>
-      <span class="n">tree</span><span class="p">.</span><span class="n">same</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">).</span><span class="n">should</span> <span class="n">eq</span> <span class="nb">true</span>
-      <span class="n">tree</span><span class="p">.</span><span class="n">same</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">).</span><span class="n">should</span> <span class="n">eq</span> <span class="nb">false</span>
-      <span class="n">tree</span><span class="p">.</span><span class="n">same</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">0</span><span class="p">).</span><span class="n">should</span> <span class="n">eq</span> <span class="nb">false</span>
-      <span class="n">tree</span><span class="p">.</span><span class="n">same</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">).</span><span class="n">should</span> <span class="n">eq</span> <span class="nb">false</span>
-      <span class="n">tree</span><span class="p">.</span><span class="n">same</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">7</span><span class="p">).</span><span class="n">should</span> <span class="n">eq</span> <span class="nb">false</span>
+      <span class="n">tree</span><span class="p">.</span><span class="n">same</span><span class="o">?</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">).</span><span class="n">should</span> <span class="n">eq</span> <span class="nb">true</span>
+      <span class="n">tree</span><span class="p">.</span><span class="n">same</span><span class="o">?</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">).</span><span class="n">should</span> <span class="n">eq</span> <span class="nb">true</span>
+      <span class="n">tree</span><span class="p">.</span><span class="n">same</span><span class="o">?</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">).</span><span class="n">should</span> <span class="n">eq</span> <span class="nb">true</span>
+      <span class="n">tree</span><span class="p">.</span><span class="n">same</span><span class="o">?</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">).</span><span class="n">should</span> <span class="n">eq</span> <span class="nb">true</span>
+      <span class="n">tree</span><span class="p">.</span><span class="n">same</span><span class="o">?</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">).</span><span class="n">should</span> <span class="n">eq</span> <span class="nb">true</span>
+      <span class="n">tree</span><span class="p">.</span><span class="n">same</span><span class="o">?</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">).</span><span class="n">should</span> <span class="n">eq</span> <span class="nb">false</span>
+      <span class="n">tree</span><span class="p">.</span><span class="n">same</span><span class="o">?</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">0</span><span class="p">).</span><span class="n">should</span> <span class="n">eq</span> <span class="nb">false</span>
+      <span class="n">tree</span><span class="p">.</span><span class="n">same</span><span class="o">?</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">).</span><span class="n">should</span> <span class="n">eq</span> <span class="nb">false</span>
+      <span class="n">tree</span><span class="p">.</span><span class="n">same</span><span class="o">?</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">7</span><span class="p">).</span><span class="n">should</span> <span class="n">eq</span> <span class="nb">false</span>
 
       <span class="n">tree</span><span class="p">.</span><span class="n">size</span><span class="p">(</span><span class="mi">4</span><span class="p">).</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">4</span>
       <span class="n">tree</span><span class="p">.</span><span class="n">size</span><span class="p">(</span><span class="mi">1</span><span class="p">).</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">4</span>

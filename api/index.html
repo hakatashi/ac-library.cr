@@ -355,11 +355,11 @@ require "atcoder/fenwick_tree" # load FenwickTree</code></pre>
   dsu = AtCoder::DSU.new(10)
   dsu.merge(0, 2)
   dsu.merge(4, 2)
-  dsu.same(0, 4) #=> true
+  dsu.same?(0, 4) #=> true
   dsu.size(4) #=> 3
   <code></code>`</p>
 
-<ul><li><code>.merge(a, b)</code> => <code>#merge(a, b)</code></li><li><code>.same(a, b)</code> => <code>#same(a, b)</code></li><li><code>.leader(a)</code> => <code>#leader(a)</code></li><li><code>.size()</code> => <code>#size</code></li><li><code>.groups()</code> => <code>#groups</code></li></ul></ul>
+<ul><li><code>.merge(a, b)</code> => <code>#merge(a, b)</code></li><li><code>.same(a, b)</code> => <code>#same?(a, b)</code></li><li><code>.leader(a)</code> => <code>#leader(a)</code></li><li><code>.size()</code> => <code>#size</code></li><li><code>.groups()</code> => <code>#groups</code></li></ul></ul>
 
 <pre><code><span class="o">*</span> <span class="t">This</span> method returns set instead <span class="k">of</span> list.</code></pre>
 
