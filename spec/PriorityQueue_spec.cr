@@ -86,7 +86,7 @@ describe "PriorityQueue" do
       q.pop.should eq nil
     end
   end
-  
+
   describe ".min" do
     it "pops values in descending order of priority" do
       q = PriorityQueue(Int32).min
