@@ -1,4 +1,4 @@
-# verification: PROBLEM https://judge.yosupo.jp/problem/zalgorithm
+# verification-helper: PROBLEM https://judge.yosupo.jp/problem/zalgorithm
 
 require "../src/string.cr"
 
