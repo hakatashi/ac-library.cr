@@ -41,6 +41,19 @@ describe "PriorityQueue" do
     q.pop.should eq nil
   end
 
+  it "initialized by elems" do
+    q = PriorityQueue(Int32).max([5, 6, 1, 3, 2, 8, 7, 4])
+    q.pop.should eq 8
+    q.pop.should eq 7
+    q.pop.should eq 6
+    q.pop.should eq 5
+    q.pop.should eq 4
+    q.pop.should eq 3
+    q.pop.should eq 2
+    q.pop.should eq 1
+    q.pop.should eq nil
+  end
+
   describe "with custom compare function" do
     it "pops values in priority order" do
       q = PriorityQueue(Int32).new {|a, b| a >= b}

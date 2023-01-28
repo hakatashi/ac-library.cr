@@ -33,12 +33,24 @@ module AtCoder
       self.new {|a, b| a <= b}
     end
 
+    def self.max(elems : Indexable(T))
+      self.new(elems) {|a, b| a <= b}
+    end
+
     def self.min
       self.new {|a, b| a >= b}
     end
 
+    def self.min(elems : Indexable(T))
+      self.new(elems) {|a, b| a >= b}
+    end
+
     def initialize
       initialize {|a, b| a <= b}
+    end
+
+    def self.new(elems : Indexable(T))
+      self.new(elems) {|a, b| a <= b}
     end
 
     # Initializes queue with the custom comperator.
@@ -58,6 +70,29 @@ module AtCoder
     def initialize(&block : T, T -> Bool)
       @heap = Array(T).new
       @compare_proc = block
+    end
+
+    def initialize(elems : Indexable(T), &block : T, T -> Bool)
+      @heap = elems.to_a
+      @compare_proc = block
+
+      len = @heap.size
+      (len // 2 - 1).downto(0) do |parent|
+        v = @heap[parent]
+        child = parent * 2 + 1
+        while child < len
+          if child + 1 < len && @compare_proc.call(@heap[child], @heap[child + 1])
+            child += 1
+          end
+          unless @compare_proc.call(v, @heap[child])
+            break
+          end
+          @heap[parent] = @heap[child]
+          parent = child
+          child = parent * 2 + 1
+        end
+        @heap[parent] = v
+      end
     end
 
     # Pushes value into the queue.
