@@ -64,6 +64,104 @@ describe "PriorityQueue" do
     end
   end
 
+  describe ".max" do
+    it "pops values in ascending order of priority" do
+      q = PriorityQueue(Int32).max
+      q << 5
+      q << 6
+      q << 1
+      q << 3
+      q << 2
+      q << 8
+      q << 7
+      q << 4
+      q.pop.should eq 8
+      q.pop.should eq 7
+      q.pop.should eq 6
+      q.pop.should eq 5
+      q.pop.should eq 4
+      q.pop.should eq 3
+      q.pop.should eq 2
+      q.pop.should eq 1
+      q.pop.should eq nil
+    end
+  end
+  
+  describe ".min" do
+    it "pops values in descending order of priority" do
+      q = PriorityQueue(Int32).min
+      q << 5
+      q << 6
+      q << 1
+      q << 3
+      q << 2
+      q << 8
+      q << 7
+      q << 4
+      q.pop.should eq 1
+      q.pop.should eq 2
+      q.pop.should eq 3
+      q.pop.should eq 4
+      q.pop.should eq 5
+      q.pop.should eq 6
+      q.pop.should eq 7
+      q.pop.should eq 8
+      q.pop.should eq nil
+    end
+  end
+
+  describe "#peek" do
+    it "returns, but does not remove, the head of the queue." do
+      q = PriorityQueue(Int32).new
+      q << 5
+      q << 6
+      q << 1
+      q << 3
+      q << 2
+      q << 8
+      q << 7
+      q << 4
+      q.peek.should eq 8
+      q.peek.should eq 8
+      q.pop.should eq 8
+      q.peek.should eq 7
+      q.pop.should eq 7
+      q.peek.should eq 6
+      q.pop.should eq 6
+      q.peek.should eq 5
+      q.pop.should eq 5
+      q.peek.should eq 4
+      q.pop.should eq 4
+      q.peek.should eq 3
+      q.pop.should eq 3
+      q.peek.should eq 2
+      q.pop.should eq 2
+      q.peek.should eq 1
+      q.pop.should eq 1
+    end
+  end
+
+  describe "#peek?" do
+    it "returns, but does not remove, the head of the queue, or returns `nil` if the queue is empty." do
+      q = PriorityQueue(Int32).new
+      q << 5
+      q << 6
+      q << 1
+      q << 3
+      q.peek?.should eq 6
+      q.peek?.should eq 6
+      q.pop.should eq 6
+      q.peek?.should eq 5
+      q.pop.should eq 5
+      q.peek?.should eq 3
+      q.pop.should eq 3
+      q.peek?.should eq 1
+      q.pop.should eq 1
+      q.peek?.should eq nil
+      q.pop.should eq nil
+    end
+  end
+
   describe "#empty?" do
     it "should report true if queue is empty" do
       q = PriorityQueue(Int32).new

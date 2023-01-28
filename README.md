@@ -255,9 +255,17 @@ require "atcoder/fenwick_tree" # load FenwickTree
 
     Pop value from the queue.
 
+  * `#peek`
+
+    Returns, but does not remove, the head of the queue.
+
   * `#size`
 
     Returns size of the queue
+
+  * `#empty?`
+
+    Returns `true` if the queue is empty.
 
 ## [`atcoder/prime`](https://google.github.io/ac-library.cr/docs/src/prime.cr) (not in ACL)
 

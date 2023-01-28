@@ -29,6 +29,14 @@ module AtCoder
   class PriorityQueue(T)
     getter heap : Array(T)
 
+    def self.max
+      self.new {|a, b| a <= b}
+    end
+
+    def self.min
+      self.new {|a, b| a >= b}
+    end
+
     def initialize
       initialize {|a, b| a <= b}
     end
@@ -95,6 +103,16 @@ module AtCoder
         index = child
       end
       ret
+    end
+
+    # Returns, but does not remove, the head of the queue.
+    def peek
+      @heap.first
+    end
+
+    # Returns, but does not remove, the head of the queue, or returns `nil` if the queue is empty.
+    def peek?
+      @heap.first?
     end
 
     # Returns `true` if the queue is empty.
