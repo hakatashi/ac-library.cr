@@ -41,8 +41,8 @@ describe "PriorityQueue" do
     q.pop.should eq nil
   end
 
-  it "initialized by elems" do
-    q = PriorityQueue(Int32).max([5, 6, 1, 3, 2, 8, 7, 4])
+  it "initialized by elements in *enumerable*" do
+    q = PriorityQueue.max([5, 6, 1, 3, 2, 8, 7, 4])
     q.pop.should eq 8
     q.pop.should eq 7
     q.pop.should eq 6

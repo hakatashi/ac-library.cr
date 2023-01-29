@@ -29,18 +29,22 @@ module AtCoder
   class PriorityQueue(T)
     getter heap : Array(T)
 
+    # Create a new queue in ascending order of priority.
     def self.max
       self.new {|a, b| a <= b}
     end
 
+    # Create a new queue in ascending order of priority with the elements in *enumerable*.
     def self.max(enumerable : Enumerable(T))
       self.new(enumerable) {|a, b| a <= b}
     end
 
+    # Create a new queue in descending order of priority.
     def self.min
       self.new {|a, b| a >= b}
     end
 
+    # Create a new queue in descending order of priority with the elements in *enumerable*.
     def self.min(enumerable : Enumerable(T))
       self.new(enumerable) {|a, b| a >= b}
     end
@@ -49,6 +53,7 @@ module AtCoder
       initialize {|a, b| a <= b}
     end
 
+    # Initializes queue with the elements in *enumerable*.
     def self.new(enumerable : Enumerable(T))
       self.new(enumerable) {|a, b| a <= b}
     end
@@ -72,6 +77,17 @@ module AtCoder
       @compare_proc = block
     end
 
+    # Initializes queue with the elements in *enumerable* and the custom comperator.
+    #
+    # If the second argument `b` should be popped earlier than
+    # the first argument `a`, return `true`. Else, return `false`.
+    #
+    # ```
+    # q = AtCoder::PriorityQueue.new([1, 3, 2]) {|a, b| a >= b}
+    # q.pop # => 1
+    # q.pop # => 2
+    # q.pop # => 3
+    # ```
     def initialize(enumerable : Enumerable(T), &block : T, T -> Bool)
       @heap = enumerable.to_a
       @compare_proc = block
