@@ -261,7 +261,7 @@ require "atcoder/fenwick_tree" # load FenwickTree
 
     ヒープを破壊せず列挙するため、$O(n \log{n})$ の前計算を行っています。ただし、`#first` は $O(1)$ で動作するように最適化されています。 it pre-calculates in $O(n \log{n})$ to enumerate without destroying the heap. Note, however, that `#first` works for $O(1)$
 
-    ```
+    ```cr
     q = AtCoder::PriorityQueue.new(1..n)
 
     # O(n log(n))
