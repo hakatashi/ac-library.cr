@@ -27,6 +27,8 @@ module AtCoder
   # q.pop # => 1
   # ```
   class PriorityQueue(T)
+    include Enumerable(T)
+
     getter heap : Array(T)
 
     # Create a new queue in ascending order of priority.
@@ -156,14 +158,16 @@ module AtCoder
       ret
     end
 
-    # Returns, but does not remove, the head of the queue.
-    def peek
-      @heap.first
+    # Yields each item in the queue in comparator's order.
+    def each(&)
+      @heap.sort {|a, b| @compare_proc.call(a, b) ? 1 : -1}.each do |e|
+        yield e
+      end
     end
 
-    # Returns, but does not remove, the head of the queue, or returns `nil` if the queue is empty.
-    def peek?
-      @heap.first?
+    # Returns, but does not remove, the head of the queue.
+    def first(&)
+      @heap.first { yield }
     end
 
     # Returns `true` if the queue is empty.
