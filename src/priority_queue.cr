@@ -33,24 +33,24 @@ module AtCoder
       self.new {|a, b| a <= b}
     end
 
-    def self.max(elems : Indexable(T))
-      self.new(elems) {|a, b| a <= b}
+    def self.max(enumerable : Enumerable(T))
+      self.new(enumerable) {|a, b| a <= b}
     end
 
     def self.min
       self.new {|a, b| a >= b}
     end
 
-    def self.min(elems : Indexable(T))
-      self.new(elems) {|a, b| a >= b}
+    def self.min(enumerable : Enumerable(T))
+      self.new(enumerable) {|a, b| a >= b}
     end
 
     def initialize
       initialize {|a, b| a <= b}
     end
 
-    def self.new(elems : Indexable(T))
-      self.new(elems) {|a, b| a <= b}
+    def self.new(enumerable : Enumerable(T))
+      self.new(enumerable) {|a, b| a <= b}
     end
 
     # Initializes queue with the custom comperator.
@@ -72,8 +72,8 @@ module AtCoder
       @compare_proc = block
     end
 
-    def initialize(elems : Indexable(T), &block : T, T -> Bool)
-      @heap = elems.to_a
+    def initialize(enumerable : Enumerable(T), &block : T, T -> Bool)
+      @heap = enumerable.to_a
       @compare_proc = block
 
       len = @heap.size

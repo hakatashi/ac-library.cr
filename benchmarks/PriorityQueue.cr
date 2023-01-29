@@ -36,7 +36,7 @@ end
 
 Benchmark.bm do |x|
   # O(N)
-  x.report("AtCoder::PriorityQueue initialized by self.new(elems)") do
+  x.report("AtCoder::PriorityQueue initialized by self.new(enumerable)") do
     n = 1000000
     elems = [] of Int32
     n.times do |i|
