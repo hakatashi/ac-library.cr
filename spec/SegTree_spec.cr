@@ -64,7 +64,7 @@ describe "SegTree" do
   describe "with custom comparison block" do
     describe "min comparison" do
       it "takes maximum value of selected range" do
-        segtree = SegTree.new((1..100).to_a) {|a, b| [a, b].min}
+        segtree = SegTree.new((1..100).to_a) { |a, b| [a, b].min }
         segtree[0...100].should eq 1
         segtree[10...50].should eq 11
         segtree[50...70].should eq 51
@@ -79,8 +79,8 @@ describe "SegTree" do
   end
 
   it "can be used with ModInt" do
-    values = 100.times.map {|i| Mint.new(1_i64) << i}.to_a
-    segtree = SegTree.new(values) {|a, b| a + b}
+    values = 100.times.map { |i| Mint.new(1_i64) << i }.to_a
+    segtree = SegTree.new(values) { |a, b| a + b }
     segtree[0...32].should eq 0xFFFFFFFF % Mint::MOD
   end
 end

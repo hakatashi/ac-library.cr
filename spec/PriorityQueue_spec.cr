@@ -56,7 +56,7 @@ describe "PriorityQueue" do
 
   describe "with custom compare function" do
     it "pops values in priority order" do
-      q = PriorityQueue(Int32).new {|a, b| a >= b}
+      q = PriorityQueue(Int32).new { |a, b| a >= b }
       q << 5
       q << 6
       q << 1

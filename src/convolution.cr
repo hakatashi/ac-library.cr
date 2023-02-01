@@ -19,7 +19,7 @@ module AtCoder
   #
   # ```
   # a = [AtCoder::ModInt998244353.new(1_i64)] * 3
-  # AtCoder::Convolution.convolution(a, a) #=> [1, 2, 3, 2, 1]
+  # AtCoder::Convolution.convolution(a, a) # => [1, 2, 3, 2, 1]
   # ```
   module Convolution
     private def self.bit_reverse(n : Int, bit_length : Int)
@@ -89,8 +89,8 @@ module AtCoder
         fft_size <<= 1
       end
 
-      input_a = Array(T).new(fft_size) {|i| i < a.size ? a[i] : T.zero}
-      input_b = Array(T).new(fft_size) {|i| i < b.size ? b[i] : T.zero}
+      input_a = Array(T).new(fft_size) { |i| i < a.size ? a[i] : T.zero }
+      input_b = Array(T).new(fft_size) { |i| i < b.size ? b[i] : T.zero }
 
       primitive_root = AtCoder::Math.get_primitive_root(modulo)
       g = T.new(primitive_root) ** (n // fft_size)
@@ -111,13 +111,13 @@ module AtCoder
     def self.convolution_ll(a : Array(Int64), b : Array(Int64))
       return [] of Int64 if a.empty? || b.empty?
 
-      a1 = a.map {|n| AtCoder::ModInt754974721.new(n)}
-      a2 = a.map {|n| AtCoder::ModInt167772161.new(n)}
-      a3 = a.map {|n| AtCoder::ModInt469762049.new(n)}
+      a1 = a.map { |n| AtCoder::ModInt754974721.new(n) }
+      a2 = a.map { |n| AtCoder::ModInt167772161.new(n) }
+      a3 = a.map { |n| AtCoder::ModInt469762049.new(n) }
 
-      b1 = b.map {|n| AtCoder::ModInt754974721.new(n)}
-      b2 = b.map {|n| AtCoder::ModInt167772161.new(n)}
-      b3 = b.map {|n| AtCoder::ModInt469762049.new(n)}
+      b1 = b.map { |n| AtCoder::ModInt754974721.new(n) }
+      b2 = b.map { |n| AtCoder::ModInt167772161.new(n) }
+      b3 = b.map { |n| AtCoder::ModInt469762049.new(n) }
 
       c1 = convolution(a1, b1)
       c2 = convolution(a2, b2)

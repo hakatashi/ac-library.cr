@@ -2,7 +2,7 @@ version: 2.0
 shards:
   ameba:
     git: https://github.com/crystal-ameba/ameba.git
-    version: 0.13.2
+    version: 1.4.0
 
   cr-bundle:
     git: https://github.com/yuruhi/cr-bundle.git

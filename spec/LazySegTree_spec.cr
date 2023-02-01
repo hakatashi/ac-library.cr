@@ -101,7 +101,7 @@ describe "LazySegTree" do
     op = ->(a : Mint, b : Mint) { a + b }
     mapping = ->(f : Int64, x : Mint) { x * f }
     composition = ->(a : Int64, b : Int64) { a * b }
-    values = 100.times.map {|i| Mint.new(1_i64) << i}.to_a
+    values = 100.times.map { |i| Mint.new(1_i64) << i }.to_a
     segtree = LazySegTree(Mint, Int64).new(values, op, mapping, composition)
 
     segtree[0...32].should eq 0xFFFFFFFF % Mint::MOD

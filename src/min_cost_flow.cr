@@ -28,7 +28,7 @@ module AtCoder
   # flow.add_edge(2, 3, 20, 8)
   # flow.add_edge(2, 4, 50, 6)
   # flow.add_edge(3, 4, 60, 7)
-  # flow.flow(0, 4, 70) #=> {70, 1080}
+  # flow.flow(0, 4, 70) # => {70, 1080}
   # ```
   class MinCostFlow
     private record EdgeInfo, capacity : Int64, cost : Int64 | Nil do

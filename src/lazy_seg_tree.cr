@@ -38,7 +38,7 @@ module AtCoder
     getter values : Array(S | Nil)
 
     def initialize(values : Array(S), @operator : S, S -> S, @application : F, S -> S, @composition : F, F -> F)
-      @values = values.map {|v| v.as(S | Nil)}
+      @values = values.map { |v| v.as(S | Nil) }
       segment_size = 2 ** ::Math.log2(@values.size).ceil.to_i - 1
       @segments = Array(S | Nil).new(segment_size, nil)
       @applicators = Array(F | Nil).new(segment_size, nil)

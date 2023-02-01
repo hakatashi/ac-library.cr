@@ -22,10 +22,10 @@ n, _, d = read_line.split.map(&.to_i64)
 ais = read_line.split.map(&.to_i64)
 d.times do
   rs = read_line.split.map(&.to_i64)
-  tuples = rs.zip(ais).reject {|(r, a)| r == -1}
+  tuples = rs.zip(ais).reject { |(r, a)| r == -1 }
   unless tuples.empty?
-    val, modulo = AtCoder::Math.crt(tuples.map {|(r, a)| r}, tuples.map {|(r, a)| a})
-    if {val, modulo} == {0, 0} || n < val
+    val, modulo = AtCoder::Math.crt(tuples.map { |(r, a)| r }, tuples.map { |(r, a)| a })
+    if ({val, modulo}) == ({0, 0}) || n < val
       p -1
       exit
     end
