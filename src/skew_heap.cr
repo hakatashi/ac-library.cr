@@ -21,7 +21,7 @@ module AtCoder
 
     getter :size
 
-    private class Node(T)
+    class Node(T)
       @left : Node(T) | Nil
       @right : Node(T) | Nil
       @value : T
