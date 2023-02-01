@@ -74,8 +74,8 @@ module AtCoder
     end
 
     private def find_factor(n : Int)
-      # Factor of 4 cannot be discovered by Pollard's Rho with f(x) = x^x+1
-      if n == 4
+      # Factor of even numbers cannot be discovered by Pollard's Rho with f(x) = x^x+i
+      if n.even?
         typeof(n).new(2)
       else
         pollard_rho(n).not_nil!
@@ -86,11 +86,11 @@ module AtCoder
     private def pollard_rho(n : Int)
       typeof(n).new(1).upto(n) do |i|
         x = i
-        y = pollard_random_f(x, n)
+        y = pollard_random_f(x, n, i)
 
         loop do
-          x = pollard_random_f(x, n)
-          y = pollard_random_f(pollard_random_f(y, n), n)
+          x = pollard_random_f(x, n, i)
+          y = pollard_random_f(pollard_random_f(y, n, i), n, i)
           gcd = (x - y).gcd(n)
 
           if gcd == n
@@ -104,8 +104,9 @@ module AtCoder
       end
     end
 
-    private def pollard_random_f(n : Int, mod : Int)
-      (AtCoder::Math.mul_mod(n, n, mod) + 1) % mod
+    @[AlwaysInline]
+    private def pollard_random_f(n : Int, mod : Int, seed : Int)
+      (AtCoder::Math.mul_mod(n, n, mod) + seed) % mod
     end
 
     private def extract_prime_division_base(prime_divisions_class : Array({T, T}).class) forall T
