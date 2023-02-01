@@ -96,17 +96,16 @@ h1 a:focus {
 
 
 <h1>
-<img class="emoji" title=":x:" alt=":x:" src="https://github.githubassets.com/images/icons/emoji/unicode/274c.png" height="20" width="20"> src/dsu.cr
+<img class="emoji" title=":warning:" alt=":warning:" src="https://github.githubassets.com/images/icons/emoji/unicode/26a0.png" height="20" width="20"> src/dsu.cr
     
 </h1>
 
 <ul>
     <li><a href="/blob/master/src/dsu.cr">View this file on GitHub</a></li>
-    <li>Last update: 2023-02-01 11:05:01+09:00</li>
+    <li>Last update: 1970-01-01 00:00:00+00:00</li>
     
     
-    <li>Link: <a href="/actions"><img class="emoji" title=":x:" alt=":x:" src="https://github.githubassets.com/images/icons/emoji/unicode/274c.png" height="20" width="20"> View error logs on GitHub Actions</a>
-</li>
+    
     
 </ul>
 
@@ -120,34 +119,8 @@ h1 a:focus {
 
 
 
-    <h2>Required by</h2>
-    <ul>
-    
-        <li><a href="/ac-library.cr/docs/benchmarks/DSU.cr"><img class="emoji" title=":warning:" alt=":warning:" src="https://github.githubassets.com/images/icons/emoji/unicode/26a0.png" height="20" width="20"> benchmarks/DSU.cr
-            
-        </a></li>
-    
-        <li><a href="/ac-library.cr/docs/spec/DSU_spec.cr"><img class="emoji" title=":warning:" alt=":warning:" src="https://github.githubassets.com/images/icons/emoji/unicode/26a0.png" height="20" width="20"> spec/DSU_spec.cr
-            
-        </a></li>
-    
-        <li><a href="/ac-library.cr/docs/src/atcoder.cr"><img class="emoji" title=":warning:" alt=":warning:" src="https://github.githubassets.com/images/icons/emoji/unicode/26a0.png" height="20" width="20"> src/atcoder.cr
-            
-        </a></li>
-    
-    </ul>
 
 
-
-
-    <h2>Verified with</h2>
-    <ul>
-    
-        <li><a href="/ac-library.cr/docs/verify/unionfind.test.cr"><img class="emoji" title=":x:" alt=":x:" src="https://github.githubassets.com/images/icons/emoji/unicode/274c.png" height="20" width="20"> verify/unionfind.test.cr
-            
-        </a></li>
-    
-    </ul>
 
 
 
@@ -159,95 +132,6 @@ h1 a:focus {
 <link rel="stylesheet" href="/ac-library.cr/docs/assets/css/copy-button.css">
 
 <span><a id="unbundled"></a></span>
-
-
-
-
-<figure class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span class="cp"># ac-library.cr by hakatashi https://github.com/google/ac-library.cr
-#
-# Copyright 2023 Google LLC
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#      https://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-</span>
-<span class="n">module</span> <span class="n">AtCoder</span>
-  <span class="cp"># Implements [atcoder::dsu](https://atcoder.github.io/ac-library/master/document_en/dsu.html).
-</span>  <span class="cp">#
-</span>  <span class="cp"># ```
-</span>  <span class="cp"># dsu = AtCoder::DSU.new(10)
-</span>  <span class="cp"># dsu.merge(0, 2)
-</span>  <span class="cp"># dsu.merge(4, 2)
-</span>  <span class="cp"># dsu.same?(0, 4) # =&gt; true
-</span>  <span class="cp"># dsu.size(4) # =&gt; 3
-</span>  <span class="cp"># ```
-</span>  <span class="k">class</span> <span class="nc">DSU</span>
-    <span class="n">getter</span> <span class="n">parents</span> <span class="o">:</span> <span class="n">Array</span><span class="p">(</span><span class="n">Int64</span><span class="p">)</span>
-    <span class="n">getter</span> <span class="n">sizes</span> <span class="o">:</span> <span class="n">Array</span><span class="p">(</span><span class="n">Int64</span><span class="p">)</span>
-    <span class="n">getter</span> <span class="n">size</span> <span class="o">:</span> <span class="n">Int64</span>
-
-    <span class="n">def</span> <span class="n">initialize</span><span class="p">(</span><span class="err">@</span><span class="n">size</span><span class="p">)</span>
-      <span class="err">@</span><span class="n">parents</span> <span class="o">=</span> <span class="n">Array</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="o">&amp;</span><span class="p">.</span><span class="n">to_i64</span><span class="p">)</span>
-      <span class="err">@</span><span class="n">sizes</span> <span class="o">=</span> <span class="n">Array</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="mi">1</span><span class="n">_i64</span><span class="p">)</span>
-    <span class="n">end</span>
-
-    <span class="cp"># Implements atcoder::dsu.leader(node).
-</span>    <span class="n">def</span> <span class="n">leader</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
-      <span class="n">until</span> <span class="err">@</span><span class="n">parents</span><span class="p">[</span><span class="n">node</span><span class="p">]</span> <span class="o">==</span> <span class="n">node</span>
-        <span class="err">@</span><span class="n">parents</span><span class="p">[</span><span class="n">node</span><span class="p">]</span> <span class="o">=</span> <span class="err">@</span><span class="n">parents</span><span class="p">[</span><span class="err">@</span><span class="n">parents</span><span class="p">[</span><span class="n">node</span><span class="p">]]</span>
-        <span class="n">node</span> <span class="o">=</span> <span class="err">@</span><span class="n">parents</span><span class="p">[</span><span class="n">node</span><span class="p">]</span>
-      <span class="n">end</span>
-      <span class="n">node</span>
-    <span class="n">end</span>
-
-    <span class="cp"># Implements atcoder::dsu.merge(a, b).
-</span>    <span class="n">def</span> <span class="n">merge</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
-      <span class="n">leader_a</span> <span class="o">=</span> <span class="n">leader</span><span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="n">to_i64</span><span class="p">)</span>
-      <span class="n">leader_b</span> <span class="o">=</span> <span class="n">leader</span><span class="p">(</span><span class="n">b</span><span class="p">.</span><span class="n">to_i64</span><span class="p">)</span>
-      <span class="n">unless</span> <span class="n">leader_a</span> <span class="o">==</span> <span class="n">leader_b</span>
-        <span class="k">if</span> <span class="err">@</span><span class="n">sizes</span><span class="p">[</span><span class="n">leader_a</span><span class="p">]</span> <span class="o">&lt;</span> <span class="err">@</span><span class="n">sizes</span><span class="p">[</span><span class="n">leader_b</span><span class="p">]</span>
-          <span class="n">leader_a</span><span class="p">,</span> <span class="n">leader_b</span> <span class="o">=</span> <span class="n">leader_b</span><span class="p">,</span> <span class="n">leader_a</span>
-        <span class="n">end</span>
-        <span class="err">@</span><span class="n">parents</span><span class="p">[</span><span class="n">leader_b</span><span class="p">]</span> <span class="o">=</span> <span class="n">leader_a</span>
-        <span class="err">@</span><span class="n">sizes</span><span class="p">[</span><span class="n">leader_a</span><span class="p">]</span> <span class="o">+=</span> <span class="err">@</span><span class="n">sizes</span><span class="p">[</span><span class="n">leader_b</span><span class="p">]</span>
-      <span class="n">end</span>
-    <span class="n">end</span>
-
-    <span class="cp"># Implements atcoder::dsu.same(a, b).
-</span>    <span class="n">def</span> <span class="n">same</span><span class="o">?</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
-      <span class="n">leader</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">==</span> <span class="n">leader</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
-    <span class="n">end</span>
-
-    <span class="cp"># Implements atcoder::dsu.size().
-</span>    <span class="n">def</span> <span class="n">size</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
-      <span class="err">@</span><span class="n">sizes</span><span class="p">[</span><span class="n">leader</span><span class="p">(</span><span class="n">node</span><span class="p">)]</span>
-    <span class="n">end</span>
-
-    <span class="cp"># Implements atcoder::dsu.groups().
-</span>    <span class="cp"># This method returns `Set` instead of list.
-</span>    <span class="n">def</span> <span class="n">groups</span>
-      <span class="n">groups</span> <span class="o">=</span> <span class="n">Hash</span><span class="p">(</span><span class="n">Int64</span><span class="p">,</span> <span class="n">Set</span><span class="p">(</span><span class="n">Int64</span><span class="p">)).</span><span class="k">new</span> <span class="p">{</span><span class="o">|</span><span class="n">h</span><span class="p">,</span> <span class="n">k</span><span class="o">|</span> <span class="n">h</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">Set</span><span class="p">(</span><span class="n">Int64</span><span class="p">).</span><span class="k">new</span><span class="p">}</span>
-      <span class="err">@</span><span class="n">size</span><span class="p">.</span><span class="n">times</span> <span class="k">do</span> <span class="o">|</span><span class="n">i</span><span class="o">|</span>
-        <span class="n">groups</span><span class="p">[</span><span class="n">leader</span><span class="p">(</span><span class="n">i</span><span class="p">)]</span> <span class="o">&lt;&lt;</span> <span class="n">i</span>
-      <span class="n">end</span>
-      <span class="n">groups</span><span class="p">.</span><span class="n">values</span><span class="p">.</span><span class="n">to_set</span>
-    <span class="n">end</span>
-  <span class="n">end</span>
-<span class="n">end</span></code></pre></figure>
-
-
-
-
-
-<span><a id="bundled"></a></span>
 
 
 
@@ -331,6 +215,30 @@ h1 a:focus {
     <span class="n">end</span>
   <span class="n">end</span>
 <span class="n">end</span></code></pre></figure>
+
+
+
+
+
+<span><a id="bundled"></a></span>
+
+
+
+
+<figure class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">)</span><span class="o">:</span>
+  <span class="n">File</span> <span class="s">"/usr/local/lib/python3.6/dist-packages/onlinejudge_verify/documentation/build.py"</span><span class="p">,</span> <span class="n">line</span> <span class="mi">71</span><span class="p">,</span> <span class="n">in</span> <span class="n">_render_source_code_stat</span>
+    <span class="n">bundled_code</span> <span class="o">=</span> <span class="n">language</span><span class="p">.</span><span class="n">bundle</span><span class="p">(</span><span class="n">stat</span><span class="p">.</span><span class="n">path</span><span class="p">,</span> <span class="n">basedir</span><span class="o">=</span><span class="n">basedir</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="p">{</span><span class="err">'</span><span class="n">include_paths</span><span class="err">'</span><span class="o">:</span> <span class="p">[</span><span class="n">basedir</span><span class="p">]}).</span><span class="n">decode</span><span class="p">()</span>
+  <span class="n">File</span> <span class="s">"/usr/local/lib/python3.6/dist-packages/onlinejudge_verify/languages/user_defined.py"</span><span class="p">,</span> <span class="n">line</span> <span class="mi">71</span><span class="p">,</span> <span class="n">in</span> <span class="n">bundle</span>
+    <span class="k">return</span> <span class="n">subprocess</span><span class="p">.</span><span class="n">check_output</span><span class="p">(</span><span class="n">shlex</span><span class="p">.</span><span class="n">split</span><span class="p">(</span><span class="n">command</span><span class="p">))</span>
+  <span class="n">File</span> <span class="s">"/usr/lib/python3.6/subprocess.py"</span><span class="p">,</span> <span class="n">line</span> <span class="mi">356</span><span class="p">,</span> <span class="n">in</span> <span class="n">check_output</span>
+    <span class="o">**</span><span class="n">kwargs</span><span class="p">).</span><span class="n">stdout</span>
+  <span class="n">File</span> <span class="s">"/usr/lib/python3.6/subprocess.py"</span><span class="p">,</span> <span class="n">line</span> <span class="mi">423</span><span class="p">,</span> <span class="n">in</span> <span class="n">run</span>
+    <span class="n">with</span> <span class="n">Popen</span><span class="p">(</span><span class="o">*</span><span class="n">popenargs</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="n">as</span> <span class="n">process</span><span class="o">:</span>
+  <span class="n">File</span> <span class="s">"/usr/lib/python3.6/subprocess.py"</span><span class="p">,</span> <span class="n">line</span> <span class="mi">729</span><span class="p">,</span> <span class="n">in</span> <span class="n">__init__</span>
+    <span class="n">restore_signals</span><span class="p">,</span> <span class="n">start_new_session</span><span class="p">)</span>
+  <span class="n">File</span> <span class="s">"/usr/lib/python3.6/subprocess.py"</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1364</span><span class="p">,</span> <span class="n">in</span> <span class="n">_execute_child</span>
+    <span class="n">raise</span> <span class="n">child_exception_type</span><span class="p">(</span><span class="n">errno_num</span><span class="p">,</span> <span class="n">err_msg</span><span class="p">,</span> <span class="n">err_filename</span><span class="p">)</span>
+<span class="n">FileNotFoundError</span><span class="o">:</span> <span class="p">[</span><span class="n">Errno</span> <span class="mi">2</span><span class="p">]</span> <span class="n">No</span> <span class="n">such</span> <span class="n">file</span> <span class="n">or</span> <span class="n">directory</span><span class="o">:</span> <span class="err">'</span><span class="n">bin</span><span class="o">/</span><span class="n">cr</span><span class="o">-</span><span class="n">bundle</span><span class="err">'</span><span class="o">:</span> <span class="err">'</span><span class="n">bin</span><span class="o">/</span><span class="n">cr</span><span class="o">-</span><span class="n">bundle</span><span class="err">'</span></code></pre></figure>
 
 
 
