@@ -186,7 +186,7 @@ module AtCoder
       y
     end
 
-    def inorder_walk(x = root)
+    def inorder_walk(x = root, &)
       # ameba:disable Lint/ShadowedArgument
       x = self.minimum_node
       while !x.nil_node?
@@ -195,11 +195,11 @@ module AtCoder
       end
     end
 
-    def each(x = root)
+    def each(x = root, &)
       inorder_walk(x) { |k| yield k }
     end
 
-    def reverse_inorder_walk(x = root)
+    def reverse_inorder_walk(x = root, &)
       # ameba:disable Lint/ShadowedArgument
       x = self.maximum_node
       while !x.nil_node?
@@ -208,7 +208,7 @@ module AtCoder
       end
     end
 
-    def reverse_each(x = root)
+    def reverse_each(x = root, &)
       reverse_inorder_walk(x) { |k| yield k }
     end
 

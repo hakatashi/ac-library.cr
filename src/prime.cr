@@ -33,7 +33,7 @@ module AtCoder
       83_i64, 89_i64, 97_i64, 101_i64,
     ]
 
-    def each
+    def each(&)
       index = 0
       loop do
         yield get_nth_prime(index)
@@ -70,7 +70,7 @@ module AtCoder
         factors << {value, int.new(1)}
       end
 
-      factors.sort_by! {|(factor, _)| factor}
+      factors.sort_by! { |(factor, _)| factor }
     end
 
     private def find_factor(n : Int)
@@ -114,7 +114,7 @@ module AtCoder
 
     def int_from_prime_division(prime_divisions : Array({Int, Int}))
       int_class = extract_prime_division_base(prime_divisions.class)
-      prime_divisions.reduce(int_class.new(1)) {|i, (factor, exponent)| i * factor ** exponent}
+      prime_divisions.reduce(int_class.new(1)) { |i, (factor, exponent)| i * factor ** exponent }
     end
 
     def prime?(value : Int)
@@ -130,7 +130,7 @@ module AtCoder
         7.step(by: 30, to: value) do |base|
           break if base * base > value
 
-          if {0, 4, 6, 10, 12, 16, 22, 24}.any? {|i| value % (base + i) == 0}
+          if {0, 4, 6, 10, 12, 16, 22, 24}.any? { |i| value % (base + i) == 0 }
             return false
           end
         end
@@ -209,7 +209,7 @@ module AtCoder
     # Sieve of Eratosthenes on it.
     private def generate_primes
       new_primes_size = @@primes.size < 1_000_000 ? @@primes.size : 1_000_000
-      new_primes = Array(Int64).new(new_primes_size) {|i| @@primes.last + (i + 1) * 2}
+      new_primes = Array(Int64).new(new_primes_size) { |i| @@primes.last + (i + 1) * 2 }
       new_primes_max = new_primes.last
 
       @@primes.each do |prime|
@@ -237,9 +237,9 @@ module AtCoder
       def initialize(@exponential_factors : Array(Array(T)))
       end
 
-      def each
+      def each(&)
         Array.each_product(@exponential_factors) do |factors|
-          yield factors.reduce {|a, b| a * b}
+          yield factors.reduce { |a, b| a * b }
         end
       end
     end
@@ -253,7 +253,7 @@ module AtCoder
     #   puts n
     # end # => Puts 1, 2, 4, 5, 10, and 20
     #
-    # AtCoder::Prime.each_divisor(10).map {|n| 1.0 / n}.to_a # => [1.0, 0.5, 0.2, 0.1]
+    # AtCoder::Prime.each_divisor(10).map { |n| 1.0 / n }.to_a # => [1.0, 0.5, 0.2, 0.1]
     # ```
     def each_divisor(value : Int)
       raise ArgumentError.new unless value > 0

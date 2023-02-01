@@ -28,11 +28,12 @@ module AtCoder
 
       property :value, :left, :right
 
-      def initialize(@left, @right, @value) end
+      def initialize(@left, @right, @value)
+      end
     end
 
     def initialize
-      initialize {|a, b| a <= b}
+      initialize { |a, b| a <= b }
     end
 
     def initialize(&block : T, T -> Bool)

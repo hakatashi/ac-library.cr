@@ -24,7 +24,7 @@ describe "MinCostFlow" do
     it "raises ArgumentError when start and target is the same" do
       flow = MinCostFlow.new(2)
       flow.add_edge(0, 1, 30, 3)
-      expect_raises(ArgumentError) {flow.flow(0, 0, 20)}
+      expect_raises(ArgumentError) { flow.flow(0, 0, 20) }
     end
 
     it "returns zero when there's no capacity anymore" do
@@ -81,7 +81,7 @@ describe "MinCostFlow" do
     it "raises ArgumentError when start and target is the same" do
       flow = MinCostFlow.new(2)
       flow.add_edge(0, 1, 30, 3)
-      expect_raises(ArgumentError) {flow.slope(0, 0, 20)}
+      expect_raises(ArgumentError) { flow.slope(0, 0, 20) }
     end
 
     it "returns single point when there's no capacity anymore" do

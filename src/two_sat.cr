@@ -24,8 +24,8 @@ module AtCoder
   # twosat.add_clause(0, true, 1, false)
   # twosat.add_clause(1, true, 0, false)
   # twosat.add_clause(0, false, 1, false)
-  # twosat.satisfiable? #=> true
-  # twosat.answer # => [false, false]
+  # twosat.satisfiable? # => true
+  # twosat.answer       # => [false, false]
   # ```
   class TwoSat
     getter size : Int64

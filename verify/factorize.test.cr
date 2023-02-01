@@ -22,6 +22,6 @@ q = read_line.to_i64
 q.times do
   a = read_line.to_i64
   factors = AtCoder::Prime.prime_division(a)
-  ans = factors.reduce([] of Int64) {|acc, (prime, count)| acc + [prime] * count}
+  ans = factors.reduce([] of Int64) { |acc, (prime, count)| acc + [prime] * count }
   puts "#{ans.size} #{ans.join(' ')}"
 end

@@ -20,7 +20,7 @@ require "../src/convolution.cr"
 require "../src/mod_int.cr"
 
 _, _ = read_line.split.map(&.to_i64)
-ais = read_line.split.map {|i| AtCoder::ModInt998244353.new(i.to_i64)}
-bs = read_line.split.map {|i| AtCoder::ModInt998244353.new(i.to_i64)}
+ais = read_line.split.map { |i| AtCoder::ModInt998244353.new(i.to_i64) }
+bs = read_line.split.map { |i| AtCoder::ModInt998244353.new(i.to_i64) }
 cs = AtCoder::Convolution.convolution(ais, bs)
 puts cs.map(&.to_s).join(" ")

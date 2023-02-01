@@ -22,7 +22,7 @@ module AtCoder
   # ```
   # AtCoder.static_modint(ModInt101, 101_i64)
   # alias Mint = AtCoder::ModInt101
-  # Mint.new(80_i64) + Mint.new(90_i64) #=> 89
+  # Mint.new(80_i64) + Mint.new(90_i64) # => 89
   # ```
   macro static_modint(name, modulo)
     module AtCoder

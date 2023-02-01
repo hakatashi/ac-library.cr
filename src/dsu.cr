@@ -22,7 +22,7 @@ module AtCoder
   # dsu.merge(0, 2)
   # dsu.merge(4, 2)
   # dsu.same?(0, 4) # => true
-  # dsu.size(4) # => 3
+  # dsu.size(4)     # => 3
   # ```
   class DSU
     getter parents : Array(Int64)
@@ -69,7 +69,7 @@ module AtCoder
     # Implements atcoder::dsu.groups().
     # This method returns `Set` instead of list.
     def groups
-      groups = Hash(Int64, Set(Int64)).new {|h, k| h[k] = Set(Int64).new}
+      groups = Hash(Int64, Set(Int64)).new { |h, k| h[k] = Set(Int64).new }
       @size.times do |i|
         groups[leader(i)] << i
       end

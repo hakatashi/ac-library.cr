@@ -20,8 +20,8 @@ require "../src/max_flow.cr"
 
 l, r, m = read_line.split.map(&.to_i64)
 flow = AtCoder::MaxFlow.new(l + r + 2)
-l.times {|i| flow.add_edge(0, i + 1, 1) }
-r.times {|i| flow.add_edge(l + i + 1, l + r + 1, 1) }
+l.times { |i| flow.add_edge(0, i + 1, 1) }
+r.times { |i| flow.add_edge(l + i + 1, l + r + 1, 1) }
 m.times do
   a, b = read_line.split.map(&.to_i64)
   flow.add_edge(a + 1, l + b + 1, 1)
