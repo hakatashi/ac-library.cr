@@ -261,9 +261,37 @@ require "atcoder/fenwick_tree" # load FenwickTree
 
     Pop value from the queue.
 
+  * `#each`
+
+    Yields each item in the queue in comparator's order.
+
+    ヒープを破壊せず列挙するため、$O(n \log{n})$ の前計算を行っています。ただし、`#first` は $O(1)$ で動作するように最適化されています。 it pre-calculates in $O(n \log{n})$ to enumerate without destroying the heap. Note, however, that `#first` works for $O(1)$
+
+    ```cr
+    q = AtCoder::PriorityQueue.new(1..n)
+
+    # O(n log(n))
+    q.each do |x|
+      break
+    end
+
+    # O(n log(n) + n) = O(n log(n))
+    q.each do |x|
+      # something to do in O(1)
+    end
+
+    # O(1)
+    q.first # => n
+    ```
+
+
   * `#size`
 
     Returns size of the queue
+
+  * `#empty?`
+
+    Returns `true` if the queue is empty.
 
 ## [`atcoder/prime`](https://google.github.io/ac-library.cr/docs/src/prime.cr) (not in ACL)
 
