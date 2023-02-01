@@ -570,7 +570,7 @@ q.pop <span class="c">#=&gt; 1</span></code></pre>
 <li>
 <p><code>#each</code></p>
 <p>Yields each item in the queue in comparator's order.</p>
-<p>ヒープを破壊せず列挙するため、$O(n \log{n})$ の前計算を行っています。ただし、<code>#first</code> は $O(1)$ で動作するように最適化されています。 it pre-calculates in $O(n \log{n})$ to enumerate without destroying the heap. Note, however, that <code>#first</code> works for $O(1)$</p>
+<p>ヒープを破壊せず列挙するため、O(NlogN) の前計算を行っています。ただし、<code>#first</code> は O(1) で動作するように最適化されています。 it pre-calculates in O(NlogN) to enumerate without destroying the heap. Note, however, that <code>#first</code> works for O(1).</p>
 <pre><code class="language-crystal">q <span class="o">=</span> <span class="t">AtCoder</span><span class="t">::</span><span class="t">PriorityQueue</span>.new(<span class="n">1</span>..n)
 
 <span class="c"># O(n log(n))</span>
