@@ -22,14 +22,14 @@ module AtCoder
   # nil into an element of the monoid.
   #
   # ```
-  # tree = AtCoder::SegTree.new((0...100).to_a) {|a, b| [a, b].min}
+  # tree = AtCoder::SegTree.new((0...100).to_a) { |a, b| [a, b].min }
   # tree[10...50] # => 10
   # ```
   class SegTree(T)
     property values : Array(T)
 
     def initialize(values : Array(T))
-      initialize(values) {|a, b| a > b ? a : b}
+      initialize(values) { |a, b| a > b ? a : b }
     end
 
     def initialize(values : Array(T), &@operator : T, T -> T)

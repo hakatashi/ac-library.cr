@@ -21,7 +21,7 @@ module AtCoder
   # tree = AtCoder::FenwickTree(Int64).new(10)
   # tree.add(3, 10)
   # tree.add(5, 20)
-  # tree[3..5] # => 30
+  # tree[3..5]  # => 30
   # tree[3...5] # => 10
   # ```
   class FenwickTree(T)
@@ -35,7 +35,7 @@ module AtCoder
     def initialize(@bits : Array)
       @bits = @bits.dup
       @size = @bits.size.to_i64
-      (1 ... @size).each do |index|
+      (1...@size).each do |index|
         up = index + (index & -index)
         next if up > @size
 

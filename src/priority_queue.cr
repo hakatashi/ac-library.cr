@@ -33,31 +33,31 @@ module AtCoder
 
     # Create a new queue in ascending order of priority.
     def self.max
-      self.new {|a, b| a <= b}
+      self.new { |a, b| a <= b }
     end
 
     # Create a new queue in ascending order of priority with the elements in *enumerable*.
     def self.max(enumerable : Enumerable(T))
-      self.new(enumerable) {|a, b| a <= b}
+      self.new(enumerable) { |a, b| a <= b }
     end
 
     # Create a new queue in descending order of priority.
     def self.min
-      self.new {|a, b| a >= b}
+      self.new { |a, b| a >= b }
     end
 
     # Create a new queue in descending order of priority with the elements in *enumerable*.
     def self.min(enumerable : Enumerable(T))
-      self.new(enumerable) {|a, b| a >= b}
+      self.new(enumerable) { |a, b| a >= b }
     end
 
     def initialize
-      initialize {|a, b| a <= b}
+      initialize { |a, b| a <= b }
     end
 
     # Initializes queue with the elements in *enumerable*.
     def self.new(enumerable : Enumerable(T))
-      self.new(enumerable) {|a, b| a <= b}
+      self.new(enumerable) { |a, b| a <= b }
     end
 
     # Initializes queue with the custom comperator.
@@ -66,7 +66,7 @@ module AtCoder
     # the first argument `a`, return `true`. Else, return `false`.
     #
     # ```
-    # q = AtCoder::PriorityQueue(Int64).new {|a, b| a >= b}
+    # q = AtCoder::PriorityQueue(Int64).new { |a, b| a >= b }
     # q << 1_i64
     # q << 3_i64
     # q << 2_i64
@@ -85,7 +85,7 @@ module AtCoder
     # the first argument `a`, return `true`. Else, return `false`.
     #
     # ```
-    # q = AtCoder::PriorityQueue.new([1, 3, 2]) {|a, b| a >= b}
+    # q = AtCoder::PriorityQueue.new([1, 3, 2]) { |a, b| a >= b }
     # q.pop # => 1
     # q.pop # => 2
     # q.pop # => 3
@@ -145,10 +145,10 @@ module AtCoder
       index = 0
       while index * 2 + 1 < @heap.size
         child = if index * 2 + 2 < @heap.size && !@compare_proc.call(@heap[index * 2 + 2], @heap[index * 2 + 1])
-          index * 2 + 2
-        else
-          index * 2 + 1
-        end
+                  index * 2 + 2
+                else
+                  index * 2 + 1
+                end
         if @compare_proc.call(@heap[child], @heap[index])
           break
         end
@@ -160,7 +160,7 @@ module AtCoder
 
     # Yields each item in the queue in comparator's order.
     def each(&)
-      @heap.sort {|a, b| @compare_proc.call(a, b) ? 1 : -1}.each do |e|
+      @heap.sort { |a, b| @compare_proc.call(a, b) ? 1 : -1 }.each do |e|
         yield e
       end
     end

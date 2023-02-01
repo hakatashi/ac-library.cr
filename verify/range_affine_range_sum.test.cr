@@ -29,7 +29,7 @@ alias Affine = NamedTuple(b: Mint, c: Mint)
 op = ->(a : Segment, b : Segment) { {sum: a[:sum] + b[:sum], size: a[:size] + b[:size]} }
 mapping = ->(f : Affine, x : Segment) { {sum: f[:b] * x[:sum] + f[:c] * x[:size], size: x[:size]} }
 composition = ->(a : Affine, b : Affine) { {b: a[:b] * b[:b], c: b[:c] * a[:b] + a[:c]} }
-segments = ais.map {|a| {sum: Mint.new(a), size: 1_i64} }
+segments = ais.map { |a| {sum: Mint.new(a), size: 1_i64} }
 tree = AtCoder::LazySegTree(Segment, Affine).new(segments, op, mapping, composition)
 
 q.times do

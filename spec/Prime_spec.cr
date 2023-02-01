@@ -58,7 +58,7 @@ describe "Prime" do
 
   describe ".prime?" do
     it "is consistent with the result of prime generation" do
-      primes_under1000 = Prime.take_while {|prime| prime < 1000}.to_set
+      primes_under1000 = Prime.take_while { |prime| prime < 1000 }.to_set
       0_i64.upto(1000_i64) do |n|
         Prime.prime?(n).should eq primes_under1000.includes?(n)
       end
@@ -137,8 +137,8 @@ describe "Prime" do
     end
 
     it "raises if the argument is non-positive" do
-      expect_raises(ArgumentError) {Prime.each_divisor(0)}
-      expect_raises(ArgumentError) {Prime.each_divisor(-100_i64)}
+      expect_raises(ArgumentError) { Prime.each_divisor(0) }
+      expect_raises(ArgumentError) { Prime.each_divisor(-100_i64) }
     end
   end
 end

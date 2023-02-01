@@ -45,7 +45,7 @@ module AtCoder
 
       prev_nodes = Array(Int64 | Nil).new(@size, nil)
 
-      queue = AtCoder::PriorityQueue({EdgeInfo, Int64}).new {|(ad, av), (bd, bv)| ad > bd}
+      queue = AtCoder::PriorityQueue({EdgeInfo, Int64}).new { |(ad, av), (bd, bv)| ad > bd }
       queue << {EdgeInfo.zero, start_node.to_i64}
 
       until queue.empty?
@@ -70,19 +70,19 @@ module AtCoder
     end
 
     def dfs(node : Int64, initial_value : T, &block : Int64, T, NamedTuple(
-      node: Int64,
-      node_info: NodeInfo | Nil,
-      edge: Int64 | Nil,
-      edge_info: EdgeInfo | Nil,
-      parent: Int64,
-    ), (T ->) ->) forall T
+              node: Int64,
+              node_info: NodeInfo | Nil,
+              edge: Int64 | Nil,
+              edge_info: EdgeInfo | Nil,
+              parent: Int64,
+            ), (T ->) ->) forall T
       @visited = Set(Int64).new
       info = {
-        node: node,
+        node:      node,
         node_info: @nodes[node].as(NodeInfo | Nil),
-        edge: nil.as(Int64 | Nil),
+        edge:      nil.as(Int64 | Nil),
         edge_info: nil.as(EdgeInfo | Nil),
-        parent: -1_i64,
+        parent:    -1_i64,
       }
       block.call(node, initial_value, info, ->(new_value : T) {
         dfs(node, -1_i64, new_value, &block)
@@ -90,21 +90,21 @@ module AtCoder
     end
 
     private def dfs(node : Int64, parent : Int64, value : T, &block : Int64, T, NamedTuple(
-      node: Int64,
-      node_info: NodeInfo | Nil,
-      edge: Int64 | Nil,
-      edge_info: EdgeInfo | Nil,
-      parent: Int64,
-    ), (T ->) ->) forall T
+                      node: Int64,
+                      node_info: NodeInfo | Nil,
+                      edge: Int64 | Nil,
+                      edge_info: EdgeInfo | Nil,
+                      parent: Int64,
+                    ), (T ->) ->) forall T
       @visited << node
       @adjacencies[node].each do |(child, edge)|
         next if @visited.includes?(child)
         info = {
-          node: child,
+          node:      child,
           node_info: @nodes[child].as(NodeInfo | Nil),
-          edge: edge.as(Int64 | Nil),
+          edge:      edge.as(Int64 | Nil),
           edge_info: @edges[edge].as(EdgeInfo | Nil),
-          parent: node,
+          parent:    node,
         }
         block.call(child, value, info, ->(new_value : T) {
           dfs(child, node, new_value, &block)

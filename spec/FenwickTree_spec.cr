@@ -27,7 +27,7 @@ describe "FenwickTree" do
       a = [10, 20, 30, 40, 50, 60, 70].map(&.to_i64)
       tree1 = FenwickTree(Int64).new(a)
       tree2 = FenwickTree(Int64).new(a.size.to_i64)
-      a.each_with_index{ |e, i| tree2.add(i, e) }
+      a.each_with_index { |e, i| tree2.add(i, e) }
 
       tree1.size.should eq tree2.size
       tree1.bits.should eq tree2.bits

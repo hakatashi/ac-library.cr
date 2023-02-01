@@ -22,7 +22,7 @@ include AtCoder
 
 _, q = read_line.split.map(&.to_i64)
 ais = read_line.split.map(&.to_i64)
-tree = SegTree.new(ais) {|a, b| a > b ? b : a}
+tree = SegTree.new(ais) { |a, b| a > b ? b : a }
 
 q.times do
   l, r = read_line.split.map(&.to_i64)

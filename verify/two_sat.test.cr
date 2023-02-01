@@ -30,7 +30,7 @@ end
 
 if twosat.satisfiable?
   solution = twosat.answer
-  variables = solution.map_with_index {|a, i| a ? i + 1 : -(i + 1)} .join(" ")
+  variables = solution.map_with_index { |a, i| a ? i + 1 : -(i + 1) }.join(" ")
   puts "s SATISFIABLE"
   puts "v #{variables} 0"
 else
