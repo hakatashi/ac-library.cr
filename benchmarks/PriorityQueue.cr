@@ -33,3 +33,40 @@ Benchmark.bm do |x|
     end
   end
 end
+
+Benchmark.bm do |x|
+  # O(N)
+  x.report("AtCoder::PriorityQueue initialized by self.new(enumerable)") do
+    n = 1000000
+    elems = [] of Int32
+    n.times do |i|
+      elems << i
+      elems << i + n
+      elems << i + n * 2
+    end
+
+    q = AtCoder::PriorityQueue(Int32).new(elems)
+
+    (n * 3).times do |i|
+      q.pop.should eq n * 3 - i - 1
+    end
+  end
+
+  # O(NlogN)
+  x.report("AtCoder::PriorityQueue initialized by n times push") do
+    n = 1000000
+    elems = [] of Int32
+    n.times do |i|
+      elems << i
+      elems << i + n
+      elems << i + n * 2
+    end
+
+    q = AtCoder::PriorityQueue(Int32).new
+    elems.each { |e| q << e }
+
+    (n * 3).times do |i|
+      q.pop.should eq n * 3 - i - 1
+    end
+  end
+end

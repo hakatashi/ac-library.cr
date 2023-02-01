@@ -27,10 +27,37 @@ module AtCoder
   # q.pop # => 1
   # ```
   class PriorityQueue(T)
+    include Enumerable(T)
+
     getter heap : Array(T)
+
+    # Create a new queue in ascending order of priority.
+    def self.max
+      self.new {|a, b| a <= b}
+    end
+
+    # Create a new queue in ascending order of priority with the elements in *enumerable*.
+    def self.max(enumerable : Enumerable(T))
+      self.new(enumerable) {|a, b| a <= b}
+    end
+
+    # Create a new queue in descending order of priority.
+    def self.min
+      self.new {|a, b| a >= b}
+    end
+
+    # Create a new queue in descending order of priority with the elements in *enumerable*.
+    def self.min(enumerable : Enumerable(T))
+      self.new(enumerable) {|a, b| a >= b}
+    end
 
     def initialize
       initialize {|a, b| a <= b}
+    end
+
+    # Initializes queue with the elements in *enumerable*.
+    def self.new(enumerable : Enumerable(T))
+      self.new(enumerable) {|a, b| a <= b}
     end
 
     # Initializes queue with the custom comperator.
@@ -50,6 +77,40 @@ module AtCoder
     def initialize(&block : T, T -> Bool)
       @heap = Array(T).new
       @compare_proc = block
+    end
+
+    # Initializes queue with the elements in *enumerable* and the custom comperator.
+    #
+    # If the second argument `b` should be popped earlier than
+    # the first argument `a`, return `true`. Else, return `false`.
+    #
+    # ```
+    # q = AtCoder::PriorityQueue.new([1, 3, 2]) {|a, b| a >= b}
+    # q.pop # => 1
+    # q.pop # => 2
+    # q.pop # => 3
+    # ```
+    def initialize(enumerable : Enumerable(T), &block : T, T -> Bool)
+      @heap = enumerable.to_a
+      @compare_proc = block
+
+      len = @heap.size
+      (len // 2 - 1).downto(0) do |parent|
+        v = @heap[parent]
+        child = parent * 2 + 1
+        while child < len
+          if child + 1 < len && @compare_proc.call(@heap[child], @heap[child + 1])
+            child += 1
+          end
+          unless @compare_proc.call(v, @heap[child])
+            break
+          end
+          @heap[parent] = @heap[child]
+          parent = child
+          child = parent * 2 + 1
+        end
+        @heap[parent] = v
+      end
     end
 
     # Pushes value into the queue.
@@ -95,6 +156,18 @@ module AtCoder
         index = child
       end
       ret
+    end
+
+    # Yields each item in the queue in comparator's order.
+    def each(&)
+      @heap.sort {|a, b| @compare_proc.call(a, b) ? 1 : -1}.each do |e|
+        yield e
+      end
+    end
+
+    # Returns, but does not remove, the head of the queue.
+    def first(&)
+      @heap.first { yield }
     end
 
     # Returns `true` if the queue is empty.

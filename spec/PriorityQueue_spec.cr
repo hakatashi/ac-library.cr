@@ -41,6 +41,19 @@ describe "PriorityQueue" do
     q.pop.should eq nil
   end
 
+  it "initialized by elements in *enumerable*" do
+    q = PriorityQueue.max([5, 6, 1, 3, 2, 8, 7, 4])
+    q.pop.should eq 8
+    q.pop.should eq 7
+    q.pop.should eq 6
+    q.pop.should eq 5
+    q.pop.should eq 4
+    q.pop.should eq 3
+    q.pop.should eq 2
+    q.pop.should eq 1
+    q.pop.should eq nil
+  end
+
   describe "with custom compare function" do
     it "pops values in priority order" do
       q = PriorityQueue(Int32).new {|a, b| a >= b}
@@ -60,6 +73,88 @@ describe "PriorityQueue" do
       q.pop.should eq 6
       q.pop.should eq 7
       q.pop.should eq 8
+      q.pop.should eq nil
+    end
+  end
+
+  describe ".max" do
+    it "pops values in ascending order of priority" do
+      q = PriorityQueue(Int32).max
+      q << 5
+      q << 6
+      q << 1
+      q << 3
+      q << 2
+      q << 8
+      q << 7
+      q << 4
+      q.pop.should eq 8
+      q.pop.should eq 7
+      q.pop.should eq 6
+      q.pop.should eq 5
+      q.pop.should eq 4
+      q.pop.should eq 3
+      q.pop.should eq 2
+      q.pop.should eq 1
+      q.pop.should eq nil
+    end
+  end
+
+  describe ".min" do
+    it "pops values in descending order of priority" do
+      q = PriorityQueue(Int32).min
+      q << 5
+      q << 6
+      q << 1
+      q << 3
+      q << 2
+      q << 8
+      q << 7
+      q << 4
+      q.pop.should eq 1
+      q.pop.should eq 2
+      q.pop.should eq 3
+      q.pop.should eq 4
+      q.pop.should eq 5
+      q.pop.should eq 6
+      q.pop.should eq 7
+      q.pop.should eq 8
+      q.pop.should eq nil
+    end
+  end
+
+  describe "#each" do
+    it "yields each item in the queue in comparator's order." do
+      array = [5, 6, 1, 3, 2, 8, 7, 4]
+      sorted = array.sort.reverse!
+
+      q = PriorityQueue.new(array)
+
+      i = 0
+      q.each do |x|
+        x.should eq sorted[i]
+        i += 1
+      end
+    end
+  end
+
+  describe "#first" do
+    it "returns, but does not remove, the head of the queue." do
+      q = PriorityQueue(Int32).new
+      q << 5
+      q << 6
+      q << 1
+      q << 3
+      q.first.should eq 6
+      q.first.should eq 6
+      q.pop.should eq 6
+      q.first.should eq 5
+      q.pop.should eq 5
+      q.first.should eq 3
+      q.pop.should eq 3
+      q.first.should eq 1
+      q.pop.should eq 1
+      q.first?.should eq nil
       q.pop.should eq nil
     end
   end
