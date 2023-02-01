@@ -212,8 +212,8 @@ h1 a:focus {
     <span class="n">end</span>
 
     <span class="k">private</span> <span class="n">def</span> <span class="n">find_factor</span><span class="p">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">Int</span><span class="p">)</span>
-      <span class="cp"># Factor of 4 cannot be discovered by Pollard's Rho with f(x) = x^x+1
-</span>      <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">4</span>
+      <span class="cp"># Factor of even numbers cannot be discovered by Pollard's Rho with f(x) = x^x+i
+</span>      <span class="k">if</span> <span class="n">n</span><span class="p">.</span><span class="n">even</span><span class="o">?</span>
         <span class="n">typeof</span><span class="p">(</span><span class="n">n</span><span class="p">).</span><span class="k">new</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
       <span class="k">else</span>
         <span class="n">pollard_rho</span><span class="p">(</span><span class="n">n</span><span class="p">).</span><span class="n">not_nil</span><span class="o">!</span>
@@ -224,11 +224,11 @@ h1 a:focus {
 </span>    <span class="k">private</span> <span class="n">def</span> <span class="n">pollard_rho</span><span class="p">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">Int</span><span class="p">)</span>
       <span class="n">typeof</span><span class="p">(</span><span class="n">n</span><span class="p">).</span><span class="k">new</span><span class="p">(</span><span class="mi">1</span><span class="p">).</span><span class="n">upto</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">i</span><span class="o">|</span>
         <span class="n">x</span> <span class="o">=</span> <span class="n">i</span>
-        <span class="n">y</span> <span class="o">=</span> <span class="n">pollard_random_f</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">pollard_random_f</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
 
         <span class="n">loop</span> <span class="k">do</span>
-          <span class="n">x</span> <span class="o">=</span> <span class="n">pollard_random_f</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
-          <span class="n">y</span> <span class="o">=</span> <span class="n">pollard_random_f</span><span class="p">(</span><span class="n">pollard_random_f</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">n</span><span class="p">),</span> <span class="n">n</span><span class="p">)</span>
+          <span class="n">x</span> <span class="o">=</span> <span class="n">pollard_random_f</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+          <span class="n">y</span> <span class="o">=</span> <span class="n">pollard_random_f</span><span class="p">(</span><span class="n">pollard_random_f</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">i</span><span class="p">),</span> <span class="n">n</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
           <span class="n">gcd</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">y</span><span class="p">).</span><span class="n">gcd</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
 
           <span class="k">if</span> <span class="n">gcd</span> <span class="o">==</span> <span class="n">n</span>
@@ -242,8 +242,9 @@ h1 a:focus {
       <span class="n">end</span>
     <span class="n">end</span>
 
-    <span class="k">private</span> <span class="n">def</span> <span class="n">pollard_random_f</span><span class="p">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">Int</span><span class="p">,</span> <span class="n">mod</span> <span class="o">:</span> <span class="n">Int</span><span class="p">)</span>
-      <span class="p">(</span><span class="n">AtCoder</span><span class="o">::</span><span class="n">Math</span><span class="p">.</span><span class="n">mul_mod</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">mod</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="n">mod</span>
+    <span class="err">@</span><span class="p">[</span><span class="n">AlwaysInline</span><span class="p">]</span>
+    <span class="k">private</span> <span class="n">def</span> <span class="n">pollard_random_f</span><span class="p">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">Int</span><span class="p">,</span> <span class="n">mod</span> <span class="o">:</span> <span class="n">Int</span><span class="p">,</span> <span class="n">seed</span> <span class="o">:</span> <span class="n">Int</span><span class="p">)</span>
+      <span class="p">(</span><span class="n">AtCoder</span><span class="o">::</span><span class="n">Math</span><span class="p">.</span><span class="n">mul_mod</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">mod</span><span class="p">)</span> <span class="o">+</span> <span class="n">seed</span><span class="p">)</span> <span class="o">%</span> <span class="n">mod</span>
     <span class="n">end</span>
 
     <span class="k">private</span> <span class="n">def</span> <span class="n">extract_prime_division_base</span><span class="p">(</span><span class="n">prime_divisions_class</span> <span class="o">:</span> <span class="n">Array</span><span class="p">({</span><span class="n">T</span><span class="p">,</span> <span class="n">T</span><span class="p">}).</span><span class="k">class</span><span class="p">)</span> <span class="n">forall</span> <span class="n">T</span>

@@ -13,7 +13,7 @@
 <script type="text/javascript" src="../../js/doc.js"></script>
 
   <meta name="repository-name" content="atcoder">
-  <title>AtCoder::TwoSat::NotSatisfiableError - atcoder master</title>
+  <title>AtCoder::SkewHeap::Node(T) - atcoder master</title>
   <script type="text/javascript">
     CrystalDocs.base_path = "../../";
   </script>
@@ -186,12 +186,12 @@
       
     </li>
   
-  <li class="parent " data-id="atcoder/AtCoder/SkewHeap" data-name="atcoder::skewheap(t)">
+  <li class="parent open current" data-id="atcoder/AtCoder/SkewHeap" data-name="atcoder::skewheap(t)">
       <a href="../../AtCoder/SkewHeap.html">SkewHeap</a>
       
         <ul>
   
-  <li class=" " data-id="atcoder/AtCoder/SkewHeap/Node" data-name="atcoder::skewheap::node(t)">
+  <li class=" current" data-id="atcoder/AtCoder/SkewHeap/Node" data-name="atcoder::skewheap::node(t)">
       <a href="../../AtCoder/SkewHeap/Node.html">Node</a>
       
     </li>
@@ -211,12 +211,12 @@
       
     </li>
   
-  <li class="parent open current" data-id="atcoder/AtCoder/TwoSat" data-name="atcoder::twosat">
+  <li class="parent " data-id="atcoder/AtCoder/TwoSat" data-name="atcoder::twosat">
       <a href="../../AtCoder/TwoSat.html">TwoSat</a>
       
         <ul>
   
-  <li class=" current" data-id="atcoder/AtCoder/TwoSat/NotSatisfiableError" data-name="atcoder::twosat::notsatisfiableerror">
+  <li class=" " data-id="atcoder/AtCoder/TwoSat/NotSatisfiableError" data-name="atcoder::twosat::notsatisfiableerror">
       <a href="../../AtCoder/TwoSat/NotSatisfiableError.html">NotSatisfiableError</a>
       
     </li>
@@ -250,12 +250,12 @@
 <div class="main-content">
 <h1 class="type-name">
 
-  <span class="kind">class</span> AtCoder::TwoSat::NotSatisfiableError
+  <span class="kind">class</span> AtCoder::SkewHeap::Node(T)
 
 </h1>
 
 
-  <ul class="superclass-hierarchy"><li class="superclass"><a href="../../AtCoder/TwoSat/NotSatisfiableError.html">AtCoder::TwoSat::NotSatisfiableError</a></li><li class="superclass">Exception</li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../../AtCoder/SkewHeap/Node.html">AtCoder::SkewHeap::Node(T)</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
 
 
 
@@ -283,8 +283,8 @@
   </h2>
   
     
-      <a href="https://github.com/google/ac-library.cr/blob/24d3ca023a9d353903be2435fd0230d649d1f0f2/src/two_sat.cr#L33" target="_blank">
-        two_sat.cr
+      <a href="https://github.com/google/ac-library.cr/blob/24d3ca023a9d353903be2435fd0230d649d1f0f2/src/skew_heap.cr#L24" target="_blank">
+        skew_heap.cr
       </a>
     
     <br/>
@@ -305,7 +305,7 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#new-class-method" class="signature"><strong>.new</strong></a>
+        <a href="#new%28left%3ANil%7CAtCoder%3A%3ASkewHeap%3A%3ANode%28T%29%2Cright%3ANil%7CAtCoder%3A%3ASkewHeap%3A%3ANode%28T%29%2Cvalue%3AT%29-class-method" class="signature"><strong>.new</strong>(left : Nil | AtCoder::SkewHeap::Node(T), right : Nil | AtCoder::SkewHeap::Node(T), value : T)</a>
         
       </li>
     
@@ -315,21 +315,53 @@
 
 
 
+  <h2>
+    <a id="instance-method-summary" class="anchor" href="#instance-method-summary">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Instance Method Summary
+  </h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#left-instance-method" class="signature"><strong>#left</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#left%3D%28left%3ANil%7CAtCoder%3A%3ASkewHeap%3A%3ANode%28T%29%29-instance-method" class="signature"><strong>#left=</strong>(left : Nil | AtCoder::SkewHeap::Node(T))</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#right-instance-method" class="signature"><strong>#right</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#right%3D%28right%3ANil%7CAtCoder%3A%3ASkewHeap%3A%3ANode%28T%29%29-instance-method" class="signature"><strong>#right=</strong>(right : Nil | AtCoder::SkewHeap::Node(T))</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#value-instance-method" class="signature"><strong>#value</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#value%3D%28value%3AT%29-instance-method" class="signature"><strong>#value=</strong>(value : T)</a>
+        
+      </li>
+    
+  </ul>
+
 
 
 
 
 <div class="methods-inherited">
-  
-    
-
-
-    
-
-
-    
-
-
   
     
 
@@ -363,18 +395,18 @@
     Constructor Detail
   </h2>
   
-    <div class="entry-detail" id="new-class-method">
+    <div class="entry-detail" id="new(left:Nil|AtCoder::SkewHeap::Node(T),right:Nil|AtCoder::SkewHeap::Node(T),value:T)-class-method">
       <div class="signature">
         
-        def self.<strong>new</strong>
+        def self.<strong>new</strong>(left : Nil | <a href="../../AtCoder/SkewHeap/Node.html">AtCoder::SkewHeap::Node</a>(T), right : Nil | <a href="../../AtCoder/SkewHeap/Node.html">AtCoder::SkewHeap::Node</a>(T), value : T)
 
-        <a class="method-permalink" href="#new-class-method">#</a>
+        <a class="method-permalink" href="#new%28left%3ANil%7CAtCoder%3A%3ASkewHeap%3A%3ANode%28T%29%2Cright%3ANil%7CAtCoder%3A%3ASkewHeap%3A%3ANode%28T%29%2Cvalue%3AT%29-class-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/24d3ca023a9d353903be2435fd0230d649d1f0f2/src/two_sat.cr#L34" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/24d3ca023a9d353903be2435fd0230d649d1f0f2/src/skew_heap.cr#L31" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -383,6 +415,112 @@
 
 
 
+
+  <h2>
+    <a id="instance-method-detail" class="anchor" href="#instance-method-detail">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Instance Method Detail
+  </h2>
+  
+    <div class="entry-detail" id="left-instance-method">
+      <div class="signature">
+        
+        def <strong>left</strong>
+
+        <a class="method-permalink" href="#left-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/google/ac-library.cr/blob/24d3ca023a9d353903be2435fd0230d649d1f0f2/src/skew_heap.cr#L29" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="left=(left:Nil|AtCoder::SkewHeap::Node(T))-instance-method">
+      <div class="signature">
+        
+        def <strong>left=</strong>(left : Nil | <a href="../../AtCoder/SkewHeap/Node.html">AtCoder::SkewHeap::Node</a>(T))
+
+        <a class="method-permalink" href="#left%3D%28left%3ANil%7CAtCoder%3A%3ASkewHeap%3A%3ANode%28T%29%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/google/ac-library.cr/blob/24d3ca023a9d353903be2435fd0230d649d1f0f2/src/skew_heap.cr#L29" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="right-instance-method">
+      <div class="signature">
+        
+        def <strong>right</strong>
+
+        <a class="method-permalink" href="#right-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/google/ac-library.cr/blob/24d3ca023a9d353903be2435fd0230d649d1f0f2/src/skew_heap.cr#L29" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="right=(right:Nil|AtCoder::SkewHeap::Node(T))-instance-method">
+      <div class="signature">
+        
+        def <strong>right=</strong>(right : Nil | <a href="../../AtCoder/SkewHeap/Node.html">AtCoder::SkewHeap::Node</a>(T))
+
+        <a class="method-permalink" href="#right%3D%28right%3ANil%7CAtCoder%3A%3ASkewHeap%3A%3ANode%28T%29%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/google/ac-library.cr/blob/24d3ca023a9d353903be2435fd0230d649d1f0f2/src/skew_heap.cr#L29" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="value-instance-method">
+      <div class="signature">
+        
+        def <strong>value</strong>
+
+        <a class="method-permalink" href="#value-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/google/ac-library.cr/blob/24d3ca023a9d353903be2435fd0230d649d1f0f2/src/skew_heap.cr#L29" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="value=(value:T)-instance-method">
+      <div class="signature">
+        
+        def <strong>value=</strong>(value : T)
+
+        <a class="method-permalink" href="#value%3D%28value%3AT%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/google/ac-library.cr/blob/24d3ca023a9d353903be2435fd0230d649d1f0f2/src/skew_heap.cr#L29" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
 
 
 
