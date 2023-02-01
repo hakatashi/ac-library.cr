@@ -180,6 +180,11 @@
       
     </li>
   
+  <li class=" " data-id="github.com/google/ac-library.cr/AtCoder/String" data-name="atcoder::string">
+      <a href="../AtCoder/String.html">String</a>
+      
+    </li>
+  
   <li class=" " data-id="github.com/google/ac-library.cr/AtCoder/Tree" data-name="atcoder::tree(nodeinfo, edgeinfo)">
       <a href="../AtCoder/Tree.html">Tree</a>
       
@@ -257,6 +262,20 @@ q.pop <span class="c"># =&gt; 1</span></code></pre>
 
 
 
+  <h2>
+    <a id="included-modules" class="anchor" href="#included-modules">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Included Modules
+  </h2>
+  <ul class="other-types-list">
+    
+      <li class="other-type">Enumerable(T)</li>
+    
+  </ul>
+
 
 
 
@@ -276,7 +295,7 @@ q.pop <span class="c"># =&gt; 1</span></code></pre>
   </h2>
   
     
-      <a href="https://github.com/google/ac-library.cr/blob/8d4ea6399ec9a47bb1f45f13aba608ef55e7ffaa/src/priority_queue.cr#L29" target="_blank">
+      <a href="https://github.com/google/ac-library.cr/blob/d4db39264cd176e9835f59d118c283bacaa9db03/src/priority_queue.cr#L29" target="_blank">
         priority_queue.cr
       </a>
     
@@ -298,7 +317,21 @@ q.pop <span class="c"># =&gt; 1</span></code></pre>
   <ul class="list-summary">
     
       <li class="entry-summary">
+        <a href="#new(enumerable:Enumerable(T))-class-method" class="signature"><strong>.new</strong>(enumerable : Enumerable(T))</a>
+        
+          <div class="summary"><p>Initializes queue with the elements in <em>enumerable</em>.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
         <a href="#new-class-method" class="signature"><strong>.new</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#new(enumerable:Enumerable(T),&block:T,T-%3EBool)-class-method" class="signature"><strong>.new</strong>(enumerable : Enumerable(T), &block : T, T -> Bool)</a>
+        
+          <div class="summary"><p>Initializes queue with the elements in <em>enumerable</em> and the custom comperator.</p></div>
         
       </li>
     
@@ -312,6 +345,46 @@ q.pop <span class="c"># =&gt; 1</span></code></pre>
   </ul>
 
 
+
+  <h2>
+    <a id="class-method-summary" class="anchor" href="#class-method-summary">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Class Method Summary
+  </h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#max(enumerable:Enumerable(T))-class-method" class="signature"><strong>.max</strong>(enumerable : Enumerable(T))</a>
+        
+          <div class="summary"><p>Create a new queue in ascending order of priority with the elements in <em>enumerable</em>.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#max-class-method" class="signature"><strong>.max</strong></a>
+        
+          <div class="summary"><p>Create a new queue in ascending order of priority.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#min(enumerable:Enumerable(T))-class-method" class="signature"><strong>.min</strong>(enumerable : Enumerable(T))</a>
+        
+          <div class="summary"><p>Create a new queue in descending order of priority with the elements in <em>enumerable</em>.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#min-class-method" class="signature"><strong>.min</strong></a>
+        
+          <div class="summary"><p>Create a new queue in descending order of priority.</p></div>
+        
+      </li>
+    
+  </ul>
 
 
 
@@ -333,6 +406,13 @@ q.pop <span class="c"># =&gt; 1</span></code></pre>
       </li>
     
       <li class="entry-summary">
+        <a href="#each(&)-instance-method" class="signature"><strong>#each</strong>(&)</a>
+        
+          <div class="summary"><p>Yields each item in the queue in comparator's order.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
         <a href="#empty?(*args,**options)-instance-method" class="signature"><strong>#empty?</strong>(*args, **options)</a>
         
           <div class="summary"><p>Returns <code>true</code> if the queue is empty.</p></div>
@@ -343,6 +423,13 @@ q.pop <span class="c"># =&gt; 1</span></code></pre>
         <a href="#empty?(*args,**options,&)-instance-method" class="signature"><strong>#empty?</strong>(*args, **options, &)</a>
         
           <div class="summary"><p>Returns <code>true</code> if the queue is empty.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#first(&)-instance-method" class="signature"><strong>#first</strong>(&)</a>
+        
+          <div class="summary"><p>Returns, but does not remove, the head of the queue.</p></div>
         
       </li>
     
@@ -407,6 +494,16 @@ q.pop <span class="c"># =&gt; 1</span></code></pre>
 
 
   
+    
+
+
+    
+
+
+    
+
+
+  
 </div>
 
 
@@ -419,6 +516,27 @@ q.pop <span class="c"># =&gt; 1</span></code></pre>
     Constructor Detail
   </h2>
   
+    <div class="entry-detail" id="new(enumerable:Enumerable(T))-class-method">
+      <div class="signature">
+        
+        def self.<strong>new</strong>(enumerable : Enumerable(T))
+
+        <a class="method-permalink" href="#new(enumerable:Enumerable(T))-class-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Initializes queue with the elements in <em>enumerable</em>.</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/google/ac-library.cr/blob/d4db39264cd176e9835f59d118c283bacaa9db03/src/priority_queue.cr#L59" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
     <div class="entry-detail" id="new-class-method">
       <div class="signature">
         
@@ -430,7 +548,36 @@ q.pop <span class="c"># =&gt; 1</span></code></pre>
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/8d4ea6399ec9a47bb1f45f13aba608ef55e7ffaa/src/priority_queue.cr#L32" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/d4db39264cd176e9835f59d118c283bacaa9db03/src/priority_queue.cr#L54" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="new(enumerable:Enumerable(T),&amp;block:T,T-&gt;Bool)-class-method">
+      <div class="signature">
+        
+        def self.<strong>new</strong>(enumerable : Enumerable(T), &block : T, T -> Bool)
+
+        <a class="method-permalink" href="#new(enumerable:Enumerable(T),&block:T,T-%3EBool)-class-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Initializes queue with the elements in <em>enumerable</em> and the custom comperator.</p>
+
+<p>If the second argument <code>b</code> should be popped earlier than
+the first argument <code>a</code>, return <code>true</code>. Else, return <code>false</code>.</p>
+
+<pre><code>q <span class="o">=</span> <span class="t">AtCoder</span><span class="t">::</span><span class="t">PriorityQueue</span>.<span class="k">new</span>([<span class="n">1</span>, <span class="n">3</span>, <span class="n">2</span>]) {<span class="o">|</span>a, b<span class="o">|</span> a <span class="o">&gt;=</span> b}
+q.pop <span class="c"># =&gt; 1</span>
+q.pop <span class="c"># =&gt; 2</span>
+q.pop <span class="c"># =&gt; 3</span></code></pre>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/google/ac-library.cr/blob/d4db39264cd176e9835f59d118c283bacaa9db03/src/priority_queue.cr#L93" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -462,13 +609,107 @@ q.pop <span class="c"># =&gt; 3</span></code></pre>
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/8d4ea6399ec9a47bb1f45f13aba608ef55e7ffaa/src/priority_queue.cr#L50" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/d4db39264cd176e9835f59d118c283bacaa9db03/src/priority_queue.cr#L77" target="_blank">View source</a>]
         
       </div>
     </div>
   
 
 
+
+  <h2>
+    <a id="class-method-detail" class="anchor" href="#class-method-detail">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Class Method Detail
+  </h2>
+  
+    <div class="entry-detail" id="max(enumerable:Enumerable(T))-class-method">
+      <div class="signature">
+        
+        def self.<strong>max</strong>(enumerable : Enumerable(T))
+
+        <a class="method-permalink" href="#max(enumerable:Enumerable(T))-class-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Create a new queue in ascending order of priority with the elements in <em>enumerable</em>.</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/google/ac-library.cr/blob/d4db39264cd176e9835f59d118c283bacaa9db03/src/priority_queue.cr#L40" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="max-class-method">
+      <div class="signature">
+        
+        def self.<strong>max</strong>
+
+        <a class="method-permalink" href="#max-class-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Create a new queue in ascending order of priority.</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/google/ac-library.cr/blob/d4db39264cd176e9835f59d118c283bacaa9db03/src/priority_queue.cr#L35" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="min(enumerable:Enumerable(T))-class-method">
+      <div class="signature">
+        
+        def self.<strong>min</strong>(enumerable : Enumerable(T))
+
+        <a class="method-permalink" href="#min(enumerable:Enumerable(T))-class-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Create a new queue in descending order of priority with the elements in <em>enumerable</em>.</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/google/ac-library.cr/blob/d4db39264cd176e9835f59d118c283bacaa9db03/src/priority_queue.cr#L50" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="min-class-method">
+      <div class="signature">
+        
+        def self.<strong>min</strong>
+
+        <a class="method-permalink" href="#min-class-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Create a new queue in descending order of priority.</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/google/ac-library.cr/blob/d4db39264cd176e9835f59d118c283bacaa9db03/src/priority_queue.cr#L45" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
 
 
 
@@ -497,7 +738,28 @@ q.pop <span class="c"># =&gt; 3</span></code></pre>
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/8d4ea6399ec9a47bb1f45f13aba608ef55e7ffaa/src/priority_queue.cr#L70" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/d4db39264cd176e9835f59d118c283bacaa9db03/src/priority_queue.cr#L131" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="each(&amp;)-instance-method">
+      <div class="signature">
+        
+        def <strong>each</strong>(&)
+
+        <a class="method-permalink" href="#each(&)-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Yields each item in the queue in comparator's order.</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/google/ac-library.cr/blob/d4db39264cd176e9835f59d118c283bacaa9db03/src/priority_queue.cr#L162" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -518,7 +780,7 @@ q.pop <span class="c"># =&gt; 3</span></code></pre>
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/8d4ea6399ec9a47bb1f45f13aba608ef55e7ffaa/src/priority_queue.cr#L101" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/d4db39264cd176e9835f59d118c283bacaa9db03/src/priority_queue.cr#L174" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -539,7 +801,28 @@ q.pop <span class="c"># =&gt; 3</span></code></pre>
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/8d4ea6399ec9a47bb1f45f13aba608ef55e7ffaa/src/priority_queue.cr#L101" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/d4db39264cd176e9835f59d118c283bacaa9db03/src/priority_queue.cr#L174" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="first(&amp;)-instance-method">
+      <div class="signature">
+        
+        def <strong>first</strong>(&)
+
+        <a class="method-permalink" href="#first(&)-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Returns, but does not remove, the head of the queue.</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/google/ac-library.cr/blob/d4db39264cd176e9835f59d118c283bacaa9db03/src/priority_queue.cr#L169" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -555,7 +838,7 @@ q.pop <span class="c"># =&gt; 3</span></code></pre>
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/8d4ea6399ec9a47bb1f45f13aba608ef55e7ffaa/src/priority_queue.cr#L30" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/d4db39264cd176e9835f59d118c283bacaa9db03/src/priority_queue.cr#L32" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -576,7 +859,7 @@ q.pop <span class="c"># =&gt; 3</span></code></pre>
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/8d4ea6399ec9a47bb1f45f13aba608ef55e7ffaa/src/priority_queue.cr#L75" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/d4db39264cd176e9835f59d118c283bacaa9db03/src/priority_queue.cr#L136" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -597,7 +880,7 @@ q.pop <span class="c"># =&gt; 3</span></code></pre>
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/8d4ea6399ec9a47bb1f45f13aba608ef55e7ffaa/src/priority_queue.cr#L56" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/d4db39264cd176e9835f59d118c283bacaa9db03/src/priority_queue.cr#L117" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -618,7 +901,7 @@ q.pop <span class="c"># =&gt; 3</span></code></pre>
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/8d4ea6399ec9a47bb1f45f13aba608ef55e7ffaa/src/priority_queue.cr#L104" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/d4db39264cd176e9835f59d118c283bacaa9db03/src/priority_queue.cr#L177" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -639,7 +922,7 @@ q.pop <span class="c"># =&gt; 3</span></code></pre>
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/8d4ea6399ec9a47bb1f45f13aba608ef55e7ffaa/src/priority_queue.cr#L104" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/d4db39264cd176e9835f59d118c283bacaa9db03/src/priority_queue.cr#L177" target="_blank">View source</a>]
         
       </div>
     </div>

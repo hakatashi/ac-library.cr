@@ -180,6 +180,11 @@
       
     </li>
   
+  <li class=" " data-id="github.com/google/ac-library.cr/AtCoder/String" data-name="atcoder::string">
+      <a href="AtCoder/String.html">String</a>
+      
+    </li>
+  
   <li class=" " data-id="github.com/google/ac-library.cr/AtCoder/Tree" data-name="atcoder::tree(nodeinfo, edgeinfo)">
       <a href="AtCoder/Tree.html">Tree</a>
       
@@ -343,6 +348,14 @@ require "atcoder/fenwick_tree" # load FenwickTree</code></pre>
 
 <ul><li><code>.set(p, x)</code> => Unimplemented</li><li><code>.get(p)</code> => <code>#[](p)</code></li><li><code>.prod(l, r)</code> => <code>#[](l...r)</code></li><li><code>.all_prod()</code> => <code>#all_prod</code></li><li><code>.apply(p, f)</code> => <code>#[]=(p, f)</code></li><li><code>.apply(l, r, f)</code> => <code>#[]=(l...r, f)</code></li><li><code>.max_right<f>(l)</code> => Unimplemented</li><li><code>.max_left<f>(r)</code> => Unimplemented</li></ul></ul>
 
+<h2><a id="atcoderstringhttpsgoogle.github.ioac-library.crdocssrcstring.cr-implements-atcoderstringhttpsatcoder.github.ioac-librarydocument-enstring.html" class="anchor" href="#atcoderstringhttpsgoogle.github.ioac-library.crdocssrcstring.cr-implements-atcoderstringhttpsatcoder.github.ioac-librarydocument-enstring.html">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a><a href="https://google.github.io/ac-library.cr/docs/src/string.cr" target="_blank"><code>atcoder/string</code></a> (Implements <a href="https://atcoder.github.io/ac-library/document_en/string.html" target="_blank">&lt;atcoder/string></a>)</h2>
+
+<ul><li><code>suffix_array(s)</code> => Unimplemented</li><li><code>lcp_array(s)</code> => Unimplemented</li><li><code>z_algorithm(s)</code> => <code>AtCoder::String.z_algorithm(s)</code></li></ul>
+
 <h2><a id="atcoderdsuhttpsgoogle.github.ioac-library.crdocssrcdsu.cr-implements-atcoderdsuhttpsatcoder.github.ioac-librarydocument-endsu.html" class="anchor" href="#atcoderdsuhttpsgoogle.github.ioac-library.crdocssrcdsu.cr-implements-atcoderdsuhttpsatcoder.github.ioac-librarydocument-endsu.html">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
@@ -498,9 +511,17 @@ require "atcoder/fenwick_tree" # load FenwickTree</code></pre>
 
 <pre><code><span class="t">Pop</span> value from the queue.</code></pre>
 
+<ul><li><code>#each</code></li></ul></ul>
+
+<pre><code><span class="t">Yields</span> each item <span class="k">in</span> the queue <span class="k">in</span> comparator</code></pre>
+
 <ul><li><code>#size</code></li></ul></ul>
 
 <pre><code><span class="t">Returns</span> size <span class="k">of</span> the queue</code></pre>
+
+<ul><li><code>#empty?</code></li></ul></ul>
+
+<pre><code><span class="t">Returns</span> <span class="s">`true`</span> <span class="k">if</span> the queue is empty.</code></pre>
 
 <h2><a id="atcoderprimehttpsgoogle.github.ioac-library.crdocssrcprime.cr-not-in-acl" class="anchor" href="#atcoderprimehttpsgoogle.github.ioac-library.crdocssrcprime.cr-not-in-acl">
   <svg class="octicon-link" aria-hidden="true">

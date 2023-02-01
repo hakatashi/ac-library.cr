@@ -15,7 +15,7 @@
 </svg>
 
   <meta id="repository-name" content="github.com/google/ac-library.cr">
-  <title>AtCoder::TwoSat - github.com/google/ac-library.cr</title>
+  <title>AtCoder::String - github.com/google/ac-library.cr</title>
   <script type="text/javascript">
     CrystalDoc.base_path = "../";
   </script>
@@ -180,7 +180,7 @@
       
     </li>
   
-  <li class=" " data-id="github.com/google/ac-library.cr/AtCoder/String" data-name="atcoder::string">
+  <li class=" current" data-id="github.com/google/ac-library.cr/AtCoder/String" data-name="atcoder::string">
       <a href="../AtCoder/String.html">String</a>
       
     </li>
@@ -190,7 +190,7 @@
       
     </li>
   
-  <li class="parent open current" data-id="github.com/google/ac-library.cr/AtCoder/TwoSat" data-name="atcoder::twosat">
+  <li class="parent " data-id="github.com/google/ac-library.cr/AtCoder/TwoSat" data-name="atcoder::twosat">
       <a href="../AtCoder/TwoSat.html">TwoSat</a>
       
         <ul>
@@ -229,33 +229,13 @@
 <div class="main-content">
 <h1 class="type-name">
 
-  <span class="kind">class</span> AtCoder::TwoSat
+  <span class="kind">module</span> AtCoder::String
 
 </h1>
 
 
-  <ul class="superclass-hierarchy"><li class="superclass"><a href="../AtCoder/TwoSat.html">AtCoder::TwoSat</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
 
 
-
-
-  <h2>
-    <a id="overview" class="anchor" href="#overview">
-  <svg class="octicon-link" aria-hidden="true">
-    <use href="#octicon-link"/>
-  </svg>
-</a>
-    Overview
-  </h2>
-
-  <p>Implements <a href="https://atcoder.github.io/ac-library/master/document_en/twosat.html" target="_blank">atcoder::two_sat</a></p>
-
-<pre><code>twosat <span class="o">=</span> <span class="t">AtCoder</span><span class="t">::</span><span class="t">TwoSat</span>.<span class="k">new</span>(<span class="n">2_i64</span>)
-twosat.add_clause(<span class="n">0</span>, <span class="n">true</span>, <span class="n">1</span>, <span class="n">false</span>)
-twosat.add_clause(<span class="n">1</span>, <span class="n">true</span>, <span class="n">0</span>, <span class="n">false</span>)
-twosat.add_clause(<span class="n">0</span>, <span class="n">false</span>, <span class="n">1</span>, <span class="n">false</span>)
-twosat.satisfiable? <span class="c">#=&gt; true</span>
-twosat.answer <span class="c"># =&gt; [false, false]</span></code></pre>
 
 
 
@@ -280,8 +260,8 @@ twosat.answer <span class="c"># =&gt; [false, false]</span></code></pre>
   </h2>
   
     
-      <a href="https://github.com/google/ac-library.cr/blob/d4db39264cd176e9835f59d118c283bacaa9db03/src/two_sat.cr#L30" target="_blank">
-        two_sat.cr
+      <a href="https://github.com/google/ac-library.cr/blob/d4db39264cd176e9835f59d118c283bacaa9db03/src/string.cr#L18" target="_blank">
+        string.cr
       </a>
     
     <br/>
@@ -291,64 +271,26 @@ twosat.answer <span class="c"># =&gt; [false, false]</span></code></pre>
 
 
 
+
+
   <h2>
-    <a id="constructors" class="anchor" href="#constructors">
+    <a id="class-method-summary" class="anchor" href="#class-method-summary">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
 </a>
-    Constructors
+    Class Method Summary
   </h2>
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#new(size)-class-method" class="signature"><strong>.new</strong>(size)</a>
+        <a href="#z_algorithm(sequence)-class-method" class="signature"><strong>.z_algorithm</strong>(sequence)</a>
         
       </li>
     
   </ul>
 
 
-
-
-
-  <h2>
-    <a id="instance-method-summary" class="anchor" href="#instance-method-summary">
-  <svg class="octicon-link" aria-hidden="true">
-    <use href="#octicon-link"/>
-  </svg>
-</a>
-    Instance Method Summary
-  </h2>
-  <ul class="list-summary">
-    
-      <li class="entry-summary">
-        <a href="#add_clause(i,f,j,g)-instance-method" class="signature"><strong>#add_clause</strong>(i, f, j, g)</a>
-        
-          <div class="summary"><p>Implements atcoder::two_sat.add_clause(i, f, j, g).</p></div>
-        
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#answer-instance-method" class="signature"><strong>#answer</strong></a>
-        
-          <div class="summary"><p>Implements atcoder::two_sat.answer().</p></div>
-        
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#satisfiable?-instance-method" class="signature"><strong>#satisfiable?</strong></a>
-        
-          <div class="summary"><p>Implements atcoder::two_sat.satisfiable().</p></div>
-        
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#size:Int64-instance-method" class="signature"><strong>#size</strong> : Int64</a>
-        
-      </li>
-    
-  </ul>
 
 
 
@@ -356,149 +298,38 @@ twosat.answer <span class="c"># =&gt; [false, false]</span></code></pre>
 
 <div class="methods-inherited">
   
-    
-
-
-    
-
-
-    
-
-
-  
-    
-
-
-    
-
-
-    
-
-
-  
 </div>
 
 
+
+
   <h2>
-    <a id="constructor-detail" class="anchor" href="#constructor-detail">
+    <a id="class-method-detail" class="anchor" href="#class-method-detail">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
 </a>
-    Constructor Detail
+    Class Method Detail
   </h2>
   
-    <div class="entry-detail" id="new(size)-class-method">
+    <div class="entry-detail" id="z_algorithm(sequence)-class-method">
       <div class="signature">
         
-        def self.<strong>new</strong>(size)
+        def self.<strong>z_algorithm</strong>(sequence)
 
-        <a class="method-permalink" href="#new(size)-class-method">#</a>
+        <a class="method-permalink" href="#z_algorithm(sequence)-class-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/d4db39264cd176e9835f59d118c283bacaa9db03/src/two_sat.cr#L39" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/d4db39264cd176e9835f59d118c283bacaa9db03/src/string.cr#L19" target="_blank">View source</a>]
         
       </div>
     </div>
   
 
 
-
-
-
-  <h2>
-    <a id="instance-method-detail" class="anchor" href="#instance-method-detail">
-  <svg class="octicon-link" aria-hidden="true">
-    <use href="#octicon-link"/>
-  </svg>
-</a>
-    Instance Method Detail
-  </h2>
-  
-    <div class="entry-detail" id="add_clause(i,f,j,g)-instance-method">
-      <div class="signature">
-        
-        def <strong>add_clause</strong>(i, f, j, g)
-
-        <a class="method-permalink" href="#add_clause(i,f,j,g)-instance-method">#</a>
-      </div>
-      
-        <div class="doc">
-          
-          <p>Implements atcoder::two_sat.add_clause(i, f, j, g).</p>
-        </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/google/ac-library.cr/blob/d4db39264cd176e9835f59d118c283bacaa9db03/src/two_sat.cr#L56" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="answer-instance-method">
-      <div class="signature">
-        
-        def <strong>answer</strong>
-
-        <a class="method-permalink" href="#answer-instance-method">#</a>
-      </div>
-      
-        <div class="doc">
-          
-          <p>Implements atcoder::two_sat.answer().</p>
-
-<p>This method will raise <code><a href="../AtCoder/TwoSat/NotSatisfiableError.html">NotSatisfiableError</a></code> if it's not satisfiable.</p>
-        </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/google/ac-library.cr/blob/d4db39264cd176e9835f59d118c283bacaa9db03/src/two_sat.cr#L85" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="satisfiable?-instance-method">
-      <div class="signature">
-        
-        def <strong>satisfiable?</strong>
-
-        <a class="method-permalink" href="#satisfiable?-instance-method">#</a>
-      </div>
-      
-        <div class="doc">
-          
-          <p>Implements atcoder::two_sat.satisfiable().</p>
-        </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/google/ac-library.cr/blob/d4db39264cd176e9835f59d118c283bacaa9db03/src/two_sat.cr#L62" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="size:Int64-instance-method">
-      <div class="signature">
-        
-        def <strong>size</strong> : Int64
-
-        <a class="method-permalink" href="#size:Int64-instance-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/google/ac-library.cr/blob/d4db39264cd176e9835f59d118c283bacaa9db03/src/two_sat.cr#L31" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
 
 
 
