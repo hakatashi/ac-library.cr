@@ -42,13 +42,8 @@ jobs:
       run: crystal spec --verbose
     - name: Run Benchmarks
       run: crystal run --release benchmarks/*
-    - uses: asdf-vm/actions/plugins-add@v1
-      with:
-        tool_versions: crystal 1.7.2
-    - uses: asdf-vm/actions/install@v1
-      with:
-        tool_versions: crystal 1.7.2
     - name: Run coverage
+      if: ${{ matrix.version == '1.7.2' }}
       run: |
         shards build test --ignore-crystal-version
         kcov --clean --include-path=src coverage ./bin/test
@@ -56,7 +51,6 @@ jobs:
       env:
         CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
       shell: bash
-      continue-on-error: true
 
   lint:
     runs-on: ubuntu-latest
