@@ -2,7 +2,7 @@ name: Run test and verifier
 
 on:
   push:
-    branches: [ master, gh-actions-update ]
+    branches: [ master ]
   pull_request:
     branches: [ master ]
 
