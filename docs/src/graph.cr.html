@@ -102,7 +102,7 @@ h1 a:focus {
 
 <ul>
     <li><a href="/blob/master/src/graph.cr">View this file on GitHub</a></li>
-    <li>Last update: 2023-02-01 11:03:24+09:00</li>
+    <li>Last update: 2023-02-01 11:03:06+09:00</li>
     
     
     
@@ -524,37 +524,10 @@ h1 a:focus {
 </span>  <span class="cp"># q.pop # =&gt; 1
 </span>  <span class="cp"># ```
 </span>  <span class="k">class</span> <span class="nf">PriorityQueue</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
-    <span class="n">include</span> <span class="n">Enumerable</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
-
     <span class="n">getter</span> <span class="n">heap</span> <span class="o">:</span> <span class="n">Array</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
-
-    <span class="cp"># Create a new queue in ascending order of priority.
-</span>    <span class="n">def</span> <span class="n">self</span><span class="p">.</span><span class="n">max</span>
-      <span class="n">self</span><span class="p">.</span><span class="k">new</span> <span class="p">{</span> <span class="o">|</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="o">|</span> <span class="n">a</span> <span class="o">&lt;=</span> <span class="n">b</span> <span class="p">}</span>
-    <span class="n">end</span>
-
-    <span class="cp"># Create a new queue in ascending order of priority with the elements in *enumerable*.
-</span>    <span class="n">def</span> <span class="n">self</span><span class="p">.</span><span class="n">max</span><span class="p">(</span><span class="n">enumerable</span> <span class="o">:</span> <span class="n">Enumerable</span><span class="p">(</span><span class="n">T</span><span class="p">))</span>
-      <span class="n">self</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="n">enumerable</span><span class="p">)</span> <span class="p">{</span> <span class="o">|</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="o">|</span> <span class="n">a</span> <span class="o">&lt;=</span> <span class="n">b</span> <span class="p">}</span>
-    <span class="n">end</span>
-
-    <span class="cp"># Create a new queue in descending order of priority.
-</span>    <span class="n">def</span> <span class="n">self</span><span class="p">.</span><span class="n">min</span>
-      <span class="n">self</span><span class="p">.</span><span class="k">new</span> <span class="p">{</span> <span class="o">|</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="o">|</span> <span class="n">a</span> <span class="o">&gt;=</span> <span class="n">b</span> <span class="p">}</span>
-    <span class="n">end</span>
-
-    <span class="cp"># Create a new queue in descending order of priority with the elements in *enumerable*.
-</span>    <span class="n">def</span> <span class="n">self</span><span class="p">.</span><span class="n">min</span><span class="p">(</span><span class="n">enumerable</span> <span class="o">:</span> <span class="n">Enumerable</span><span class="p">(</span><span class="n">T</span><span class="p">))</span>
-      <span class="n">self</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="n">enumerable</span><span class="p">)</span> <span class="p">{</span> <span class="o">|</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="o">|</span> <span class="n">a</span> <span class="o">&gt;=</span> <span class="n">b</span> <span class="p">}</span>
-    <span class="n">end</span>
 
     <span class="n">def</span> <span class="n">initialize</span>
       <span class="n">initialize</span> <span class="p">{</span> <span class="o">|</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="o">|</span> <span class="n">a</span> <span class="o">&lt;=</span> <span class="n">b</span> <span class="p">}</span>
-    <span class="n">end</span>
-
-    <span class="cp"># Initializes queue with the elements in *enumerable*.
-</span>    <span class="n">def</span> <span class="n">self</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="n">enumerable</span> <span class="o">:</span> <span class="n">Enumerable</span><span class="p">(</span><span class="n">T</span><span class="p">))</span>
-      <span class="n">self</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="n">enumerable</span><span class="p">)</span> <span class="p">{</span> <span class="o">|</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="o">|</span> <span class="n">a</span> <span class="o">&lt;=</span> <span class="n">b</span> <span class="p">}</span>
     <span class="n">end</span>
 
     <span class="cp"># Initializes queue with the custom comperator.
@@ -571,43 +544,9 @@ h1 a:focus {
 </span>    <span class="cp"># q.pop # =&gt; 2
 </span>    <span class="cp"># q.pop # =&gt; 3
 </span>    <span class="cp"># ```
-</span>    <span class="n">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="o">&amp;</span><span class="n">block</span> <span class="o">:</span> <span class="n">T</span><span class="p">,</span> <span class="n">T</span> <span class="o">-&gt;</span> <span class="n">Bool</span><span class="p">)</span>
+</span>    <span class="n">def</span> <span class="n">initialize</span><span class="p">(</span><span class="o">&amp;</span><span class="n">block</span> <span class="o">:</span> <span class="n">T</span><span class="p">,</span> <span class="n">T</span> <span class="o">-&gt;</span> <span class="n">Bool</span><span class="p">)</span>
       <span class="err">@</span><span class="n">heap</span> <span class="o">=</span> <span class="n">Array</span><span class="p">(</span><span class="n">T</span><span class="p">).</span><span class="k">new</span>
       <span class="err">@</span><span class="n">compare_proc</span> <span class="o">=</span> <span class="n">block</span>
-    <span class="n">end</span>
-
-    <span class="cp"># Initializes queue with the elements in *enumerable* and the custom comperator.
-</span>    <span class="cp">#
-</span>    <span class="cp"># If the second argument `b` should be popped earlier than
-</span>    <span class="cp"># the first argument `a`, return `true`. Else, return `false`.
-</span>    <span class="cp">#
-</span>    <span class="cp"># ```
-</span>    <span class="cp"># q = AtCoder::PriorityQueue.new([1, 3, 2])</span> <span class="p">{</span> <span class="o">|</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="o">|</span> <span class="n">a</span> <span class="o">&gt;=</span> <span class="n">b</span> <span class="p">}</span>
-    <span class="cp"># q.pop # =&gt; 1
-</span>    <span class="cp"># q.pop # =&gt; 2
-</span>    <span class="cp"># q.pop # =&gt; 3
-</span>    <span class="cp"># ```
-</span>    <span class="n">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">enumerable</span> <span class="o">:</span> <span class="n">Enumerable</span><span class="p">(</span><span class="n">T</span><span class="p">),</span> <span class="o">&amp;</span><span class="n">block</span> <span class="o">:</span> <span class="n">T</span><span class="p">,</span> <span class="n">T</span> <span class="o">-&gt;</span> <span class="n">Bool</span><span class="p">)</span>
-      <span class="err">@</span><span class="n">heap</span> <span class="o">=</span> <span class="n">enumerable</span><span class="p">.</span><span class="n">to_a</span>
-      <span class="err">@</span><span class="n">compare_proc</span> <span class="o">=</span> <span class="n">block</span>
-
-      <span class="n">len</span> <span class="o">=</span> <span class="err">@</span><span class="n">heap</span><span class="p">.</span><span class="n">size</span>
-      <span class="p">(</span><span class="n">len</span> <span class="c1">// 2 - 1).downto(0) do |parent|</span>
-        <span class="n">v</span> <span class="o">=</span> <span class="err">@</span><span class="n">heap</span><span class="p">[</span><span class="n">parent</span><span class="p">]</span>
-        <span class="n">child</span> <span class="o">=</span> <span class="n">parent</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span>
-        <span class="k">while</span> <span class="n">child</span> <span class="o">&lt;</span> <span class="n">len</span>
-          <span class="k">if</span> <span class="n">child</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">&lt;</span> <span class="n">len</span> <span class="o">&amp;&amp;</span> <span class="err">@</span><span class="n">compare_proc</span><span class="p">.</span><span class="n">call</span><span class="p">(</span><span class="err">@</span><span class="n">heap</span><span class="p">[</span><span class="n">child</span><span class="p">],</span> <span class="err">@</span><span class="n">heap</span><span class="p">[</span><span class="n">child</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span>
-            <span class="n">child</span> <span class="o">+=</span> <span class="mi">1</span>
-          <span class="n">end</span>
-          <span class="n">unless</span> <span class="err">@</span><span class="n">compare_proc</span><span class="p">.</span><span class="n">call</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="err">@</span><span class="n">heap</span><span class="p">[</span><span class="n">child</span><span class="p">])</span>
-            <span class="k">break</span>
-          <span class="n">end</span>
-          <span class="err">@</span><span class="n">heap</span><span class="p">[</span><span class="n">parent</span><span class="p">]</span> <span class="o">=</span> <span class="err">@</span><span class="n">heap</span><span class="p">[</span><span class="n">child</span><span class="p">]</span>
-          <span class="n">parent</span> <span class="o">=</span> <span class="n">child</span>
-          <span class="n">child</span> <span class="o">=</span> <span class="n">parent</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span>
-        <span class="n">end</span>
-        <span class="err">@</span><span class="n">heap</span><span class="p">[</span><span class="n">parent</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
-      <span class="n">end</span>
     <span class="n">end</span>
 
     <span class="cp"># Pushes value into the queue.
@@ -653,18 +592,6 @@ h1 a:focus {
         <span class="n">index</span> <span class="o">=</span> <span class="n">child</span>
       <span class="n">end</span>
       <span class="n">ret</span>
-    <span class="n">end</span>
-
-    <span class="cp"># Yields each item in the queue in comparator's order.
-</span>    <span class="n">def</span> <span class="n">each</span><span class="p">(</span><span class="o">&amp;</span><span class="p">)</span>
-      <span class="err">@</span><span class="n">heap</span><span class="p">.</span><span class="n">sort</span> <span class="p">{</span> <span class="o">|</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="o">|</span> <span class="err">@</span><span class="n">compare_proc</span><span class="p">.</span><span class="n">call</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="o">?</span> <span class="mi">1</span> <span class="o">:</span> <span class="o">-</span><span class="mi">1</span> <span class="p">}.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">e</span><span class="o">|</span>
-        <span class="n">yield</span> <span class="n">e</span>
-      <span class="n">end</span>
-    <span class="n">end</span>
-
-    <span class="cp"># Returns, but does not remove, the head of the queue.
-</span>    <span class="n">def</span> <span class="n">first</span><span class="p">(</span><span class="o">&amp;</span><span class="p">)</span>
-      <span class="err">@</span><span class="n">heap</span><span class="p">.</span><span class="n">first</span> <span class="p">{</span> <span class="n">yield</span> <span class="p">}</span>
     <span class="n">end</span>
 
     <span class="cp"># Returns `true` if the queue is empty.
