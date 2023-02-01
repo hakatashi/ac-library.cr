@@ -33,36 +33,16 @@ jobs:
         cmake ..
         make install
         make -j8
-
-    # Install shards dependency with latest crystal
+    - name: Run tests
+      run: crystal spec --verbose
+    - name: Run Benchmarks
+      run: crystal run --release benchmarks/*
     - uses: asdf-vm/actions/plugins-add@v1
       with:
         tool_versions: crystal 1.7.2
     - uses: asdf-vm/actions/install@v1
       with:
         tool_versions: crystal 1.7.2
-    - name: Install Crystal dependencies
-      run: |
-        shards install --ignore-crystal-version
-        git restore shards.lock
-        # Remove lib directory since it includes recursive symlink and that makes oj-verify hang
-        rm -rf lib
-
-    # Bring back the original crystal version
-    - uses: asdf-vm/actions/install@v1
-      with:
-        tool_versions: crystal 0.33.0
-    - name: Install shards with version 2 support
-      run: |
-        cd /tmp
-        wget https://github.com/crystal-lang/crystal/releases/download/1.0.0/crystal-1.0.0-1-linux-x86_64.tar.gz
-        tar xf crystal-1.0.0-1-linux-x86_64.tar.gz
-        cp crystal-1.0.0-1/bin/shards /usr/bin
-
-    - name: Run tests
-      run: crystal spec --verbose
-    - name: Run linter
-      run: bin/ameba
     - name: Run coverage
       run: |
         shards build test --ignore-crystal-version
@@ -71,8 +51,19 @@ jobs:
       env:
         CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
       shell: bash
-    - name: Run Benchmarks
-      run: crystal run --release benchmarks/*
+      continue-on-error: true
+
+  lint:
+    runs-on: ubuntu-latest
+    container:
+      image: crystallang/crystal:1.7.2
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install Crystal dependencies
+      run: |
+        shards install --ignore-crystal-version
+    - name: Run linter
+      run: bin/ameba
 
   verify:
     runs-on: ubuntu-latest
@@ -106,26 +97,6 @@ jobs:
       run: |
         python3 -m pip install --upgrade pip
         python3 -m pip install -r requirements.txt
-
-    # Install shards dependency with latest crystal
-    - uses: asdf-vm/actions/plugins-add@v1
-      with:
-        tool_versions: crystal 1.7.2
-    - uses: asdf-vm/actions/install@v1
-      with:
-        tool_versions: crystal 1.7.2
-    - name: Install Crystal dependencies
-      run: |
-        shards install --ignore-crystal-version
-        git restore shards.lock
-        # Remove lib directory since it includes recursive symlink and that makes oj-verify hang
-        rm -rf lib
-
-    # Bring back the original crystal version
-    - uses: asdf-vm/actions/install@v1
-      with:
-        tool_versions: crystal 0.33.0
-
     - name: Run verifier
       run: oj-verify run --jobs 4
     - name: Generate bundled docs
