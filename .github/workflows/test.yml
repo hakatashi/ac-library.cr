@@ -104,20 +104,20 @@ jobs:
     - name: Run verifier
       run: oj-verify run --jobs 4
     - name: Generate bundled docs
-      if: ${{ github.event_name == 'push' }}
+      if: ${{ github.event_name == 'push' && matrix.version == '1.7.2' }}
       run: oj-verify docs --jobs 4
     - name: Generate API docs
-      if: ${{ github.event_name == 'push' }}
+      if: ${{ github.event_name == 'push' && matrix.version == '1.7.2' }}
       run: crystal docs --progress --stats --time -o dist/api
     - name: Build bundled docs
-      if: ${{ github.event_name == 'push' }}
+      if: ${{ github.event_name == 'push' && matrix.version == '1.7.2' }}
       run: |
         gem install bundler
         bundle install --gemfile=.verify-helper/markdown/Gemfile --path .vendor/bundle
         bundle exec --gemfile=.verify-helper/markdown/Gemfile jekyll build --source .verify-helper/markdown --destination dist/docs --baseurl ac-library.cr/docs
     - name: Deploy docs to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
-      if: ${{ github.event_name == 'push' }}
+      if: ${{ github.event_name == 'push' && matrix.version == '1.7.2' }}
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./dist
