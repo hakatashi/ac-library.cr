@@ -3,89 +3,100 @@
 <head>
   <meta charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="generator" content="Crystal Docs 0.32.1">
+<meta name="generator" content="Crystal Docs 1.6.2">
+<meta name="crystal_docs.project_version" content="gh-actions-update">
+<meta name="crystal_docs.project_name" content="atcoder">
+
+
 
 <link href="../css/style.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="../js/doc.js"></script>
+
+  <meta name="repository-name" content="atcoder">
+  <title>AtCoder::PriorityQueue(T) - atcoder gh-actions-update</title>
+  <script type="text/javascript">
+    CrystalDocs.base_path = "../";
+  </script>
+</head>
+<body>
 
 <svg class="hidden">
   <symbol id="octicon-link" viewBox="0 0 16 16">
     <path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
   </symbol>
 </svg>
-
-  <meta id="repository-name" content="github.com/google/ac-library.cr">
-  <title>AtCoder::PriorityQueue(T) - github.com/google/ac-library.cr</title>
-  <script type="text/javascript">
-    CrystalDoc.base_path = "../";
-  </script>
-</head>
-<body>
-
 <div class="sidebar">
   <div class="sidebar-header">
     <div class="search-box">
       <input type="search" class="search-input" placeholder="Search..." spellcheck="false" aria-label="Search">
     </div>
 
-    <div class="repository-links">
-      <a href="../index.html">README</a>
+    <div class="project-summary">
+      <h1 class="project-name">
+        <a href="../index.html">
+          atcoder
+        </a>
+      </h1>
+
+      <span class="project-version">
+        gh-actions-update
+      </span>
     </div>
   </div>
 
-  <div class="search-results" class="hidden">
+  <div class="search-results hidden">
     <ul class="search-list"></ul>
   </div>
 
   <div class="types-list">
     <ul>
   
-  <li class="parent open current" data-id="github.com/google/ac-library.cr/AtCoder" data-name="atcoder">
+  <li class="parent open current" data-id="atcoder/AtCoder" data-name="atcoder">
       <a href="../AtCoder.html">AtCoder</a>
       
         <ul>
   
-  <li class=" " data-id="github.com/google/ac-library.cr/AtCoder/Convolution" data-name="atcoder::convolution">
+  <li class=" " data-id="atcoder/AtCoder/Convolution" data-name="atcoder::convolution">
       <a href="../AtCoder/Convolution.html">Convolution</a>
       
     </li>
   
-  <li class=" " data-id="github.com/google/ac-library.cr/AtCoder/DirectedGraph" data-name="atcoder::directedgraph(nodeinfo, edgeinfo)">
+  <li class=" " data-id="atcoder/AtCoder/DirectedGraph" data-name="atcoder::directedgraph(nodeinfo, edgeinfo)">
       <a href="../AtCoder/DirectedGraph.html">DirectedGraph</a>
       
     </li>
   
-  <li class=" " data-id="github.com/google/ac-library.cr/AtCoder/DSU" data-name="atcoder::dsu">
+  <li class=" " data-id="atcoder/AtCoder/DSU" data-name="atcoder::dsu">
       <a href="../AtCoder/DSU.html">DSU</a>
       
     </li>
   
-  <li class=" " data-id="github.com/google/ac-library.cr/AtCoder/FenwickTree" data-name="atcoder::fenwicktree(t)">
+  <li class=" " data-id="atcoder/AtCoder/FenwickTree" data-name="atcoder::fenwicktree(t)">
       <a href="../AtCoder/FenwickTree.html">FenwickTree</a>
       
     </li>
   
-  <li class=" " data-id="github.com/google/ac-library.cr/AtCoder/Graph" data-name="atcoder::graph(nodeinfo, edgeinfo)">
+  <li class=" " data-id="atcoder/AtCoder/Graph" data-name="atcoder::graph(nodeinfo, edgeinfo)">
       <a href="../AtCoder/Graph.html">Graph</a>
       
     </li>
   
-  <li class=" " data-id="github.com/google/ac-library.cr/AtCoder/LazySegTree" data-name="atcoder::lazysegtree(s, f)">
+  <li class=" " data-id="atcoder/AtCoder/LazySegTree" data-name="atcoder::lazysegtree(s, f)">
       <a href="../AtCoder/LazySegTree.html">LazySegTree</a>
       
     </li>
   
-  <li class=" " data-id="github.com/google/ac-library.cr/AtCoder/Math" data-name="atcoder::math">
+  <li class=" " data-id="atcoder/AtCoder/Math" data-name="atcoder::math">
       <a href="../AtCoder/Math.html">Math</a>
       
     </li>
   
-  <li class="parent " data-id="github.com/google/ac-library.cr/AtCoder/MaxFlow" data-name="atcoder::maxflow">
+  <li class="parent " data-id="atcoder/AtCoder/MaxFlow" data-name="atcoder::maxflow">
       <a href="../AtCoder/MaxFlow.html">MaxFlow</a>
       
         <ul>
   
-  <li class=" " data-id="github.com/google/ac-library.cr/AtCoder/MaxFlow/Edge" data-name="atcoder::maxflow::edge">
+  <li class=" " data-id="atcoder/AtCoder/MaxFlow/Edge" data-name="atcoder::maxflow::edge">
       <a href="../AtCoder/MaxFlow/Edge.html">Edge</a>
       
     </li>
@@ -95,57 +106,57 @@
       
     </li>
   
-  <li class=" " data-id="github.com/google/ac-library.cr/AtCoder/MinCostFlow" data-name="atcoder::mincostflow">
+  <li class=" " data-id="atcoder/AtCoder/MinCostFlow" data-name="atcoder::mincostflow">
       <a href="../AtCoder/MinCostFlow.html">MinCostFlow</a>
       
     </li>
   
-  <li class=" " data-id="github.com/google/ac-library.cr/AtCoder/ModInt1000000007" data-name="atcoder::modint1000000007">
+  <li class=" " data-id="atcoder/AtCoder/ModInt1000000007" data-name="atcoder::modint1000000007">
       <a href="../AtCoder/ModInt1000000007.html">ModInt1000000007</a>
       
     </li>
   
-  <li class=" " data-id="github.com/google/ac-library.cr/AtCoder/ModInt167772161" data-name="atcoder::modint167772161">
+  <li class=" " data-id="atcoder/AtCoder/ModInt167772161" data-name="atcoder::modint167772161">
       <a href="../AtCoder/ModInt167772161.html">ModInt167772161</a>
       
     </li>
   
-  <li class=" " data-id="github.com/google/ac-library.cr/AtCoder/ModInt469762049" data-name="atcoder::modint469762049">
+  <li class=" " data-id="atcoder/AtCoder/ModInt469762049" data-name="atcoder::modint469762049">
       <a href="../AtCoder/ModInt469762049.html">ModInt469762049</a>
       
     </li>
   
-  <li class=" " data-id="github.com/google/ac-library.cr/AtCoder/ModInt754974721" data-name="atcoder::modint754974721">
+  <li class=" " data-id="atcoder/AtCoder/ModInt754974721" data-name="atcoder::modint754974721">
       <a href="../AtCoder/ModInt754974721.html">ModInt754974721</a>
       
     </li>
   
-  <li class=" " data-id="github.com/google/ac-library.cr/AtCoder/ModInt998244353" data-name="atcoder::modint998244353">
+  <li class=" " data-id="atcoder/AtCoder/ModInt998244353" data-name="atcoder::modint998244353">
       <a href="../AtCoder/ModInt998244353.html">ModInt998244353</a>
       
     </li>
   
-  <li class=" " data-id="github.com/google/ac-library.cr/AtCoder/Prime" data-name="atcoder::prime">
+  <li class=" " data-id="atcoder/AtCoder/Prime" data-name="atcoder::prime">
       <a href="../AtCoder/Prime.html">Prime</a>
       
     </li>
   
-  <li class=" current" data-id="github.com/google/ac-library.cr/AtCoder/PriorityQueue" data-name="atcoder::priorityqueue(t)">
+  <li class=" current" data-id="atcoder/AtCoder/PriorityQueue" data-name="atcoder::priorityqueue(t)">
       <a href="../AtCoder/PriorityQueue.html">PriorityQueue</a>
       
     </li>
   
-  <li class="parent " data-id="github.com/google/ac-library.cr/AtCoder/RedBlackTree" data-name="atcoder::redblacktree">
+  <li class="parent " data-id="atcoder/AtCoder/RedBlackTree" data-name="atcoder::redblacktree">
       <a href="../AtCoder/RedBlackTree.html">RedBlackTree</a>
       
         <ul>
   
-  <li class=" " data-id="github.com/google/ac-library.cr/AtCoder/RedBlackTree/NilNode" data-name="atcoder::redblacktree::nilnode">
+  <li class=" " data-id="atcoder/AtCoder/RedBlackTree/NilNode" data-name="atcoder::redblacktree::nilnode">
       <a href="../AtCoder/RedBlackTree/NilNode.html">NilNode</a>
       
     </li>
   
-  <li class=" " data-id="github.com/google/ac-library.cr/AtCoder/RedBlackTree/Node" data-name="atcoder::redblacktree::node">
+  <li class=" " data-id="atcoder/AtCoder/RedBlackTree/Node" data-name="atcoder::redblacktree::node">
       <a href="../AtCoder/RedBlackTree/Node.html">Node</a>
       
     </li>
@@ -155,12 +166,12 @@
       
     </li>
   
-  <li class="parent " data-id="github.com/google/ac-library.cr/AtCoder/SCC" data-name="atcoder::scc">
+  <li class="parent " data-id="atcoder/AtCoder/SCC" data-name="atcoder::scc">
       <a href="../AtCoder/SCC.html">SCC</a>
       
         <ul>
   
-  <li class=" " data-id="github.com/google/ac-library.cr/AtCoder/SCC/Adjacency" data-name="atcoder::scc::adjacency">
+  <li class=" " data-id="atcoder/AtCoder/SCC/Adjacency" data-name="atcoder::scc::adjacency">
       <a href="../AtCoder/SCC/Adjacency.html">Adjacency</a>
       
     </li>
@@ -170,32 +181,32 @@
       
     </li>
   
-  <li class=" " data-id="github.com/google/ac-library.cr/AtCoder/SegTree" data-name="atcoder::segtree(t)">
+  <li class=" " data-id="atcoder/AtCoder/SegTree" data-name="atcoder::segtree(t)">
       <a href="../AtCoder/SegTree.html">SegTree</a>
       
     </li>
   
-  <li class=" " data-id="github.com/google/ac-library.cr/AtCoder/SkewHeap" data-name="atcoder::skewheap(t)">
+  <li class=" " data-id="atcoder/AtCoder/SkewHeap" data-name="atcoder::skewheap(t)">
       <a href="../AtCoder/SkewHeap.html">SkewHeap</a>
       
     </li>
   
-  <li class=" " data-id="github.com/google/ac-library.cr/AtCoder/String" data-name="atcoder::string">
+  <li class=" " data-id="atcoder/AtCoder/String" data-name="atcoder::string">
       <a href="../AtCoder/String.html">String</a>
       
     </li>
   
-  <li class=" " data-id="github.com/google/ac-library.cr/AtCoder/Tree" data-name="atcoder::tree(nodeinfo, edgeinfo)">
+  <li class=" " data-id="atcoder/AtCoder/Tree" data-name="atcoder::tree(nodeinfo, edgeinfo)">
       <a href="../AtCoder/Tree.html">Tree</a>
       
     </li>
   
-  <li class="parent " data-id="github.com/google/ac-library.cr/AtCoder/TwoSat" data-name="atcoder::twosat">
+  <li class="parent " data-id="atcoder/AtCoder/TwoSat" data-name="atcoder::twosat">
       <a href="../AtCoder/TwoSat.html">TwoSat</a>
       
         <ul>
   
-  <li class=" " data-id="github.com/google/ac-library.cr/AtCoder/TwoSat/NotSatisfiableError" data-name="atcoder::twosat::notsatisfiableerror">
+  <li class=" " data-id="atcoder/AtCoder/TwoSat/NotSatisfiableError" data-name="atcoder::twosat::notsatisfiableerror">
       <a href="../AtCoder/TwoSat/NotSatisfiableError.html">NotSatisfiableError</a>
       
     </li>
@@ -205,7 +216,7 @@
       
     </li>
   
-  <li class=" " data-id="github.com/google/ac-library.cr/AtCoder/UndirectedGraph" data-name="atcoder::undirectedgraph(nodeinfo, edgeinfo)">
+  <li class=" " data-id="atcoder/AtCoder/UndirectedGraph" data-name="atcoder::undirectedgraph(nodeinfo, edgeinfo)">
       <a href="../AtCoder/UndirectedGraph.html">UndirectedGraph</a>
       
     </li>
@@ -215,7 +226,7 @@
       
     </li>
   
-  <li class=" " data-id="github.com/google/ac-library.cr/Int" data-name="int">
+  <li class=" " data-id="atcoder/Int" data-name="int">
       <a href="../Int.html">Int</a>
       
     </li>
@@ -248,9 +259,8 @@
     Overview
   </h2>
 
-  <p>Implements standard priority queue like <a href="https://en.cppreference.com/w/cpp/container/priority_queue" target="_blank">std::priority_queue</a>.</p>
-
-<pre><code>q <span class="o">=</span> <span class="t">AtCoder</span><span class="t">::</span><span class="t">PriorityQueue</span>(<span class="t">Int64</span>).<span class="k">new</span>
+  <p>Implements standard priority queue like <a href="https://en.cppreference.com/w/cpp/container/priority_queue">std::priority_queue</a>.</p>
+<pre><code class="language-crystal">q <span class="o">=</span> <span class="t">AtCoder</span><span class="t">::</span><span class="t">PriorityQueue</span>(<span class="t">Int64</span>).new
 q <span class="o">&lt;&lt;</span> <span class="n">1_i64</span>
 q <span class="o">&lt;&lt;</span> <span class="n">3_i64</span>
 q <span class="o">&lt;&lt;</span> <span class="n">2_i64</span>
@@ -317,7 +327,7 @@ q.pop <span class="c"># =&gt; 1</span></code></pre>
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#new(enumerable:Enumerable(T))-class-method" class="signature"><strong>.new</strong>(enumerable : Enumerable(T))</a>
+        <a href="#new%28enumerable%3AEnumerable%28T%29%29-class-method" class="signature"><strong>.new</strong>(enumerable : Enumerable(T))</a>
         
           <div class="summary"><p>Initializes queue with the elements in <em>enumerable</em>.</p></div>
         
@@ -329,14 +339,14 @@ q.pop <span class="c"># =&gt; 1</span></code></pre>
       </li>
     
       <li class="entry-summary">
-        <a href="#new(enumerable:Enumerable(T),&block:T,T-%3EBool)-class-method" class="signature"><strong>.new</strong>(enumerable : Enumerable(T), &block : T, T -> Bool)</a>
+        <a href="#new%28enumerable%3AEnumerable%28T%29%2C%26block%3AT%2CT-%3EBool%29-class-method" class="signature"><strong>.new</strong>(enumerable : Enumerable(T), &block : T, T -> Bool)</a>
         
           <div class="summary"><p>Initializes queue with the elements in <em>enumerable</em> and the custom comperator.</p></div>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#new(&block:T,T-%3EBool)-class-method" class="signature"><strong>.new</strong>(&block : T, T -> Bool)</a>
+        <a href="#new%28%26block%3AT%2CT-%3EBool%29-class-method" class="signature"><strong>.new</strong>(&block : T, T -> Bool)</a>
         
           <div class="summary"><p>Initializes queue with the custom comperator.</p></div>
         
@@ -357,7 +367,7 @@ q.pop <span class="c"># =&gt; 1</span></code></pre>
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#max(enumerable:Enumerable(T))-class-method" class="signature"><strong>.max</strong>(enumerable : Enumerable(T))</a>
+        <a href="#max%28enumerable%3AEnumerable%28T%29%29-class-method" class="signature"><strong>.max</strong>(enumerable : Enumerable(T))</a>
         
           <div class="summary"><p>Create a new queue in ascending order of priority with the elements in <em>enumerable</em>.</p></div>
         
@@ -371,7 +381,7 @@ q.pop <span class="c"># =&gt; 1</span></code></pre>
       </li>
     
       <li class="entry-summary">
-        <a href="#min(enumerable:Enumerable(T))-class-method" class="signature"><strong>.min</strong>(enumerable : Enumerable(T))</a>
+        <a href="#min%28enumerable%3AEnumerable%28T%29%29-class-method" class="signature"><strong>.min</strong>(enumerable : Enumerable(T))</a>
         
           <div class="summary"><p>Create a new queue in descending order of priority with the elements in <em>enumerable</em>.</p></div>
         
@@ -399,42 +409,42 @@ q.pop <span class="c"># =&gt; 1</span></code></pre>
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#%3C%3C(v:T)-instance-method" class="signature"><strong>#<<</strong>(v : T)</a>
+        <a href="#%3C%3C%28v%3AT%29-instance-method" class="signature"><strong>#<<</strong>(v : T)</a>
         
-          <div class="summary"><p>Alias of <code><a href="../AtCoder/PriorityQueue.html#push(v:T)-instance-method">#push</a></code></p></div>
+          <div class="summary"><p>Alias of <code><a href="../AtCoder/PriorityQueue.html#push%28v%3AT%29-instance-method">#push</a></code></p></div>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#each(&)-instance-method" class="signature"><strong>#each</strong>(&)</a>
+        <a href="#each%28%26%29-instance-method" class="signature"><strong>#each</strong>(&)</a>
         
           <div class="summary"><p>Yields each item in the queue in comparator's order.</p></div>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#empty?(*args,**options)-instance-method" class="signature"><strong>#empty?</strong>(*args, **options)</a>
+        <a href="#empty%3F%28%2Aargs%2C%2A%2Aoptions%29-instance-method" class="signature"><strong>#empty?</strong>(*args, **options)</a>
         
           <div class="summary"><p>Returns <code>true</code> if the queue is empty.</p></div>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#empty?(*args,**options,&)-instance-method" class="signature"><strong>#empty?</strong>(*args, **options, &)</a>
+        <a href="#empty%3F%28%2Aargs%2C%2A%2Aoptions%2C%26%29-instance-method" class="signature"><strong>#empty?</strong>(*args, **options, &)</a>
         
           <div class="summary"><p>Returns <code>true</code> if the queue is empty.</p></div>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#first(&)-instance-method" class="signature"><strong>#first</strong>(&)</a>
+        <a href="#first%28%26%29-instance-method" class="signature"><strong>#first</strong>(&)</a>
         
           <div class="summary"><p>Returns, but does not remove, the head of the queue.</p></div>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#heap:Array(T)-instance-method" class="signature"><strong>#heap</strong> : Array(T)</a>
+        <a href="#heap%3AArray%28T%29-instance-method" class="signature"><strong>#heap</strong> : Array(T)</a>
         
       </li>
     
@@ -446,21 +456,21 @@ q.pop <span class="c"># =&gt; 1</span></code></pre>
       </li>
     
       <li class="entry-summary">
-        <a href="#push(v:T)-instance-method" class="signature"><strong>#push</strong>(v : T)</a>
+        <a href="#push%28v%3AT%29-instance-method" class="signature"><strong>#push</strong>(v : T)</a>
         
           <div class="summary"><p>Pushes value into the queue.</p></div>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#size(*args,**options)-instance-method" class="signature"><strong>#size</strong>(*args, **options)</a>
+        <a href="#size%28%2Aargs%2C%2A%2Aoptions%29-instance-method" class="signature"><strong>#size</strong>(*args, **options)</a>
         
           <div class="summary"><p>Returns size of the queue.</p></div>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#size(*args,**options,&)-instance-method" class="signature"><strong>#size</strong>(*args, **options, &)</a>
+        <a href="#size%28%2Aargs%2C%2A%2Aoptions%2C%26%29-instance-method" class="signature"><strong>#size</strong>(*args, **options, &)</a>
         
           <div class="summary"><p>Returns size of the queue.</p></div>
         
@@ -521,7 +531,7 @@ q.pop <span class="c"># =&gt; 1</span></code></pre>
         
         def self.<strong>new</strong>(enumerable : Enumerable(T))
 
-        <a class="method-permalink" href="#new(enumerable:Enumerable(T))-class-method">#</a>
+        <a class="method-permalink" href="#new%28enumerable%3AEnumerable%28T%29%29-class-method">#</a>
       </div>
       
         <div class="doc">
@@ -558,17 +568,15 @@ q.pop <span class="c"># =&gt; 1</span></code></pre>
         
         def self.<strong>new</strong>(enumerable : Enumerable(T), &block : T, T -> Bool)
 
-        <a class="method-permalink" href="#new(enumerable:Enumerable(T),&block:T,T-%3EBool)-class-method">#</a>
+        <a class="method-permalink" href="#new%28enumerable%3AEnumerable%28T%29%2C%26block%3AT%2CT-%3EBool%29-class-method">#</a>
       </div>
       
         <div class="doc">
           
           <p>Initializes queue with the elements in <em>enumerable</em> and the custom comperator.</p>
-
 <p>If the second argument <code>b</code> should be popped earlier than
 the first argument <code>a</code>, return <code>true</code>. Else, return <code>false</code>.</p>
-
-<pre><code>q <span class="o">=</span> <span class="t">AtCoder</span><span class="t">::</span><span class="t">PriorityQueue</span>.<span class="k">new</span>([<span class="n">1</span>, <span class="n">3</span>, <span class="n">2</span>]) { <span class="o">|</span>a, b<span class="o">|</span> a <span class="o">&gt;=</span> b }
+<pre><code class="language-crystal">q <span class="o">=</span> <span class="t">AtCoder</span><span class="t">::</span><span class="t">PriorityQueue</span>.new([<span class="n">1</span>, <span class="n">3</span>, <span class="n">2</span>]) { <span class="o">|</span>a, b<span class="o">|</span> a <span class="o">&gt;=</span> b }
 q.pop <span class="c"># =&gt; 1</span>
 q.pop <span class="c"># =&gt; 2</span>
 q.pop <span class="c"># =&gt; 3</span></code></pre>
@@ -587,17 +595,15 @@ q.pop <span class="c"># =&gt; 3</span></code></pre>
         
         def self.<strong>new</strong>(&block : T, T -> Bool)
 
-        <a class="method-permalink" href="#new(&block:T,T-%3EBool)-class-method">#</a>
+        <a class="method-permalink" href="#new%28%26block%3AT%2CT-%3EBool%29-class-method">#</a>
       </div>
       
         <div class="doc">
           
           <p>Initializes queue with the custom comperator.</p>
-
 <p>If the second argument <code>b</code> should be popped earlier than
 the first argument <code>a</code>, return <code>true</code>. Else, return <code>false</code>.</p>
-
-<pre><code>q <span class="o">=</span> <span class="t">AtCoder</span><span class="t">::</span><span class="t">PriorityQueue</span>(<span class="t">Int64</span>).<span class="k">new</span> { <span class="o">|</span>a, b<span class="o">|</span> a <span class="o">&gt;=</span> b }
+<pre><code class="language-crystal">q <span class="o">=</span> <span class="t">AtCoder</span><span class="t">::</span><span class="t">PriorityQueue</span>(<span class="t">Int64</span>).new { <span class="o">|</span>a, b<span class="o">|</span> a <span class="o">&gt;=</span> b }
 q <span class="o">&lt;&lt;</span> <span class="n">1_i64</span>
 q <span class="o">&lt;&lt;</span> <span class="n">3_i64</span>
 q <span class="o">&lt;&lt;</span> <span class="n">2_i64</span>
@@ -631,7 +637,7 @@ q.pop <span class="c"># =&gt; 3</span></code></pre>
         
         def self.<strong>max</strong>(enumerable : Enumerable(T))
 
-        <a class="method-permalink" href="#max(enumerable:Enumerable(T))-class-method">#</a>
+        <a class="method-permalink" href="#max%28enumerable%3AEnumerable%28T%29%29-class-method">#</a>
       </div>
       
         <div class="doc">
@@ -673,7 +679,7 @@ q.pop <span class="c"># =&gt; 3</span></code></pre>
         
         def self.<strong>min</strong>(enumerable : Enumerable(T))
 
-        <a class="method-permalink" href="#min(enumerable:Enumerable(T))-class-method">#</a>
+        <a class="method-permalink" href="#min%28enumerable%3AEnumerable%28T%29%29-class-method">#</a>
       </div>
       
         <div class="doc">
@@ -727,12 +733,12 @@ q.pop <span class="c"># =&gt; 3</span></code></pre>
         
         def <strong><<</strong>(v : T)
 
-        <a class="method-permalink" href="#%3C%3C(v:T)-instance-method">#</a>
+        <a class="method-permalink" href="#%3C%3C%28v%3AT%29-instance-method">#</a>
       </div>
       
         <div class="doc">
           
-          <p>Alias of <code><a href="../AtCoder/PriorityQueue.html#push(v:T)-instance-method">#push</a></code></p>
+          <p>Alias of <code><a href="../AtCoder/PriorityQueue.html#push%28v%3AT%29-instance-method">#push</a></code></p>
         </div>
       
       <br/>
@@ -748,7 +754,7 @@ q.pop <span class="c"># =&gt; 3</span></code></pre>
         
         def <strong>each</strong>(&)
 
-        <a class="method-permalink" href="#each(&)-instance-method">#</a>
+        <a class="method-permalink" href="#each%28%26%29-instance-method">#</a>
       </div>
       
         <div class="doc">
@@ -769,7 +775,7 @@ q.pop <span class="c"># =&gt; 3</span></code></pre>
         
         def <strong>empty?</strong>(*args, **options)
 
-        <a class="method-permalink" href="#empty?(*args,**options)-instance-method">#</a>
+        <a class="method-permalink" href="#empty%3F%28%2Aargs%2C%2A%2Aoptions%29-instance-method">#</a>
       </div>
       
         <div class="doc">
@@ -790,7 +796,7 @@ q.pop <span class="c"># =&gt; 3</span></code></pre>
         
         def <strong>empty?</strong>(*args, **options, &)
 
-        <a class="method-permalink" href="#empty?(*args,**options,&)-instance-method">#</a>
+        <a class="method-permalink" href="#empty%3F%28%2Aargs%2C%2A%2Aoptions%2C%26%29-instance-method">#</a>
       </div>
       
         <div class="doc">
@@ -811,7 +817,7 @@ q.pop <span class="c"># =&gt; 3</span></code></pre>
         
         def <strong>first</strong>(&)
 
-        <a class="method-permalink" href="#first(&)-instance-method">#</a>
+        <a class="method-permalink" href="#first%28%26%29-instance-method">#</a>
       </div>
       
         <div class="doc">
@@ -832,7 +838,7 @@ q.pop <span class="c"># =&gt; 3</span></code></pre>
         
         def <strong>heap</strong> : Array(T)
 
-        <a class="method-permalink" href="#heap:Array(T)-instance-method">#</a>
+        <a class="method-permalink" href="#heap%3AArray%28T%29-instance-method">#</a>
       </div>
       
       <br/>
@@ -869,7 +875,7 @@ q.pop <span class="c"># =&gt; 3</span></code></pre>
         
         def <strong>push</strong>(v : T)
 
-        <a class="method-permalink" href="#push(v:T)-instance-method">#</a>
+        <a class="method-permalink" href="#push%28v%3AT%29-instance-method">#</a>
       </div>
       
         <div class="doc">
@@ -890,7 +896,7 @@ q.pop <span class="c"># =&gt; 3</span></code></pre>
         
         def <strong>size</strong>(*args, **options)
 
-        <a class="method-permalink" href="#size(*args,**options)-instance-method">#</a>
+        <a class="method-permalink" href="#size%28%2Aargs%2C%2A%2Aoptions%29-instance-method">#</a>
       </div>
       
         <div class="doc">
@@ -911,7 +917,7 @@ q.pop <span class="c"># =&gt; 3</span></code></pre>
         
         def <strong>size</strong>(*args, **options, &)
 
-        <a class="method-permalink" href="#size(*args,**options,&)-instance-method">#</a>
+        <a class="method-permalink" href="#size%28%2Aargs%2C%2A%2Aoptions%2C%26%29-instance-method">#</a>
       </div>
       
         <div class="doc">
