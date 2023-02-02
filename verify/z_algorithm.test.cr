@@ -19,4 +19,4 @@
 require "../src/string.cr"
 
 s = read_line
-puts AtCoder::String.z_algorithm(s).join(" ")
+puts AtCoder::StringAlgorithm.z_algorithm(s).join(" ")
