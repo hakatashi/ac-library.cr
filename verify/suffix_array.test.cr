@@ -18,6 +18,6 @@
 
 require "../src/string_algorithm.cr"
 
-s = read_line.chars.map{ |c| (c.ord - 'a'.ord).to_i64}
+s = read_line
 sa = AtCoder::StringAlgorithm.suffix_array(s)
 puts sa.join(" ")
