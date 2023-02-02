@@ -193,10 +193,12 @@ module AtCoder
       sa
     end
 
+    # returns suffix array in O(n + upper)
     def self.suffix_array(sequence : Indexable(Int32), upper)
       sa_is(sequence, upper)
     end
 
+    # returns suffix array in O(n log(n))
     def self.suffix_array(sequence : Indexable)
       n = sequence.size
       indices = (0...n).to_a.sort { |l, r| sequence[l] <=> sequence[r] }
@@ -210,10 +212,12 @@ module AtCoder
       sa_is(s2, upper)
     end
 
+    # returns suffix array in O(n)
     def self.suffix_array(sequence : String)
       sa_is(sequence.bytes.map(&.to_i32), 255)
     end
 
+    # returns z array
     def self.z_algorithm(sequence)
       n = sequence.size
       return [] of Int32 if n == 0
