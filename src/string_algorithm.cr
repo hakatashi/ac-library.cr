@@ -16,7 +16,7 @@
 
 module AtCoder
   module StringAlgorithm
-    private SA_THRESHOLD_NAIVE = 10
+    private SA_THRESHOLD_NAIVE    = 10
     private SA_THRESHOLD_DOUBLING = 40
 
     private def self.sa_naive(s)
