@@ -101,9 +101,6 @@ jobs:
       run: |
         python3 -m pip install --upgrade pip
         python3 -m pip install -r requirements.txt
-    - name: Install Crystal dependencies
-      if: ${{ github.event_name == 'push' && matrix.version == '1.7.2' }}
-      run: shards install --ignore-crystal-version
     - name: Run verifier
       run: oj-verify run --jobs 4
     - name: Generate bundled docs
