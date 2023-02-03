@@ -16,7 +16,7 @@
 
 # verification-helper: PROBLEM https://judge.yosupo.jp/problem/zalgorithm
 
-require "../src/string_algorithm.cr"
+require "../src/string.cr"
 
 s = read_line
-puts AtCoder::StringAlgorithm.z_algorithm(s).join(" ")
+puts AtCoder::String.z_algorithm(s).join(" ")

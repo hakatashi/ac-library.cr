@@ -16,8 +16,8 @@
 
 # verification-helper: PROBLEM https://judge.yosupo.jp/problem/suffixarray
 
-require "../src/string_algorithm.cr"
+require "../src/string.cr"
 
 s = read_line
-sa = AtCoder::StringAlgorithm.suffix_array(s)
+sa = AtCoder::String.suffix_array(s)
 puts sa.join(" ")

@@ -15,7 +15,7 @@
 # limitations under the License.
 
 module AtCoder
-  module StringAlgorithm
+  module String
     private SA_THRESHOLD_NAIVE    = 10
     private SA_THRESHOLD_DOUBLING = 40
 
@@ -213,7 +213,7 @@ module AtCoder
     end
 
     # returns suffix array in O(n)
-    def self.suffix_array(sequence : String)
+    def self.suffix_array(sequence : ::String)
       sa_is(sequence.bytes.map(&.to_i32), 255)
     end
 
