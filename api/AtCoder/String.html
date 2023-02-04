@@ -281,7 +281,7 @@
   </h2>
   
     
-      <a href="https://github.com/google/ac-library.cr/blob/8bddc616f44d1a77e832cf5bef7515321f011fed/src/string.cr#L18" target="_blank">
+      <a href="https://github.com/google/ac-library.cr/blob/8c5986a14f490838c16ba108e9154ac4c153ed70/src/string.cr#L18" target="_blank">
         string.cr
       </a>
     
@@ -305,7 +305,30 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
+        <a href="#suffix_array%28sequence%3AIndexable%28Int32%29%2Cupper%29-class-method" class="signature"><strong>.suffix_array</strong>(sequence : Indexable(Int32), upper)</a>
+        
+          <div class="summary"><p>returns suffix array in O(n + upper)</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#suffix_array%28sequence%3AIndexable%29-class-method" class="signature"><strong>.suffix_array</strong>(sequence : Indexable)</a>
+        
+          <div class="summary"><p>returns suffix array in O(n log(n))</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#suffix_array%28sequence%3A%3A%3AString%29-class-method" class="signature"><strong>.suffix_array</strong>(sequence : ::String)</a>
+        
+          <div class="summary"><p>returns suffix array in O(n)</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
         <a href="#z_algorithm%28sequence%29-class-method" class="signature"><strong>.z_algorithm</strong>(sequence)</a>
+        
+          <div class="summary"><p>returns z array</p></div>
         
       </li>
     
@@ -333,6 +356,69 @@
     Class Method Detail
   </h2>
   
+    <div class="entry-detail" id="suffix_array(sequence:Indexable(Int32),upper)-class-method">
+      <div class="signature">
+        
+        def self.<strong>suffix_array</strong>(sequence : Indexable(Int32), upper)
+
+        <a class="method-permalink" href="#suffix_array%28sequence%3AIndexable%28Int32%29%2Cupper%29-class-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>returns suffix array in O(n + upper)</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/google/ac-library.cr/blob/8c5986a14f490838c16ba108e9154ac4c153ed70/src/string.cr#L197" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="suffix_array(sequence:Indexable)-class-method">
+      <div class="signature">
+        
+        def self.<strong>suffix_array</strong>(sequence : Indexable)
+
+        <a class="method-permalink" href="#suffix_array%28sequence%3AIndexable%29-class-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>returns suffix array in O(n log(n))</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/google/ac-library.cr/blob/8c5986a14f490838c16ba108e9154ac4c153ed70/src/string.cr#L202" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="suffix_array(sequence:::String)-class-method">
+      <div class="signature">
+        
+        def self.<strong>suffix_array</strong>(sequence : ::String)
+
+        <a class="method-permalink" href="#suffix_array%28sequence%3A%3A%3AString%29-class-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>returns suffix array in O(n)</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/google/ac-library.cr/blob/8c5986a14f490838c16ba108e9154ac4c153ed70/src/string.cr#L216" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
     <div class="entry-detail" id="z_algorithm(sequence)-class-method">
       <div class="signature">
         
@@ -341,10 +427,15 @@
         <a class="method-permalink" href="#z_algorithm%28sequence%29-class-method">#</a>
       </div>
       
+        <div class="doc">
+          
+          <p>returns z array</p>
+        </div>
+      
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/8bddc616f44d1a77e832cf5bef7515321f011fed/src/string.cr#L19" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/8c5986a14f490838c16ba108e9154ac4c153ed70/src/string.cr#L221" target="_blank">View source</a>]
         
       </div>
     </div>
