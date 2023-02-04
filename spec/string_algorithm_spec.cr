@@ -18,8 +18,31 @@ require "../src/string.cr"
 require "spec"
 
 describe "String" do
+  describe ".suffix_array" do
+    it "returns suffix array in O(n)" do
+      AtCoder::String.suffix_array("abcbcba").should eq [6, 0, 5, 3, 1, 4, 2]
+      AtCoder::String.suffix_array("mississippi").should eq [10, 7, 4, 1, 0, 9, 8, 6, 3, 5, 2]
+      AtCoder::String.suffix_array("ababacaca").should eq [8, 0, 2, 6, 4, 1, 3, 7, 5]
+      AtCoder::String.suffix_array("aaaaa").should eq [4, 3, 2, 1, 0]
+    end
+
+    it "returns suffix array in O(n log(n))" do
+      AtCoder::String.suffix_array([1_i64, 2_i64, 3_i64, 2_i64, 3_i64, 2_i64, 1_i64]).should eq [6, 0, 5, 3, 1, 4, 2]
+      AtCoder::String.suffix_array([2**12, 2**8, 2**18, 2**18, 2**8, 2**18, 2**18, 2**8, 2**15, 2**15, 2**8]).should eq [10, 7, 4, 1, 0, 9, 8, 6, 3, 5, 2]
+      AtCoder::String.suffix_array([1, 2, 1, 2, 1, 3, 1, 3, 1]).should eq [8, 0, 2, 6, 4, 1, 3, 7, 5]
+      AtCoder::String.suffix_array([10_i64**18, 10_i64**18, 10_i64**18, 10_i64**18, 10_i64**18]).should eq [4, 3, 2, 1, 0]
+    end
+
+    it "returns suffix array in O(n + uppper)" do
+      AtCoder::String.suffix_array([1, 2, 3, 2, 3, 2, 1], 3).should eq [6, 0, 5, 3, 1, 4, 2]
+      AtCoder::String.suffix_array([2**12, 2**8, 2**18, 2**18, 2**8, 2**18, 2**18, 2**8, 2**15, 2**15, 2**8], 2**18).should eq [10, 7, 4, 1, 0, 9, 8, 6, 3, 5, 2]
+      AtCoder::String.suffix_array([1, 2, 1, 2, 1, 3, 1, 3, 1], 3).should eq [8, 0, 2, 6, 4, 1, 3, 7, 5]
+      AtCoder::String.suffix_array([0, 0, 0, 0, 0], 10**8).should eq [4, 3, 2, 1, 0]
+    end
+  end
+
   describe ".z_algorithm" do
-    it "return empty array if input sequence is empty" do
+    it "returns empty array if input sequence is empty" do
       AtCoder::String.z_algorithm([] of Int32).should eq [] of Int32
       AtCoder::String.z_algorithm("").should eq [] of Int32
     end
