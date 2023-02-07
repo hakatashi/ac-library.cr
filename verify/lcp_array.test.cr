@@ -21,5 +21,5 @@ require "../src/string.cr"
 s = read_line
 n = s.size
 sa = AtCoder::String.suffix_array(s)
-ans = n.to_i64 * (n + 1) // 2 - AtCoder::String.lcp_array(s, sa).sum
+ans = n.to_i64 * (n + 1) // 2 - AtCoder::String.lcp_array(s, sa).sum(&.to_i64)
 puts ans
