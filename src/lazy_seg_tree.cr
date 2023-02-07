@@ -39,7 +39,7 @@ module AtCoder
 
     def initialize(values : Array(S), @operator : S, S -> S, @application : F, S -> S, @composition : F, F -> F)
       @values = values.map { |v| v.as(S | Nil) }
-      segment_size = 2 ** ::Math.log2(@values.size).ceil.to_i - 1
+      segment_size = next_power_of_two_minus_one(@values.size)
       @segments = Array(S | Nil).new(segment_size, nil)
       @applicators = Array(F | Nil).new(segment_size, nil)
 
@@ -223,6 +223,15 @@ module AtCoder
     # FIXME: Unimplemented
     def max_left
       raise NotImplementedError.new
+    end
+
+    @[AlwaysInline]
+    private def next_power_of_two_minus_one(n : Int32)
+      n -= 1
+      {% for sh in [1, 2, 4, 8, 16] %}
+        n |= n >> {{ sh }}
+      {% end %}
+      n
     end
   end
 end
