@@ -114,7 +114,7 @@ require "atcoder/fenwick_tree" # load FenwickTree
 ## [`atcoder/string`](https://google.github.io/ac-library.cr/docs/src/string.cr) (Implements [<atcoder/string>](https://atcoder.github.io/ac-library/document_en/string.html))
 
 * `suffix_array(s)` => `AtCoder::String.suffix_array(s)`
-* `lcp_array(s)` => Unimplemented
+* `lcp_array(s)` => `AtCoder::String.lcp_array(s)`
 * `z_algorithm(s)` => `AtCoder::String.z_algorithm(s)`
 
 ## [`atcoder/dsu`](https://google.github.io/ac-library.cr/docs/src/dsu.cr) (Implements [<atcoder/dsu>](https://atcoder.github.io/ac-library/document_en/dsu.html))

@@ -41,6 +41,20 @@ describe "String" do
     end
   end
 
+  describe ".lcp_array" do
+    it "returns lcp_array" do
+      AtCoder::String.lcp_array("abcbcba", AtCoder::String.suffix_array("abcbcba")).should eq [1, 0, 1, 3, 0, 2]
+      AtCoder::String.lcp_array("mississippi", AtCoder::String.suffix_array("mississippi")).should eq [1, 1, 4, 0, 0, 1, 0, 2, 1, 3]
+      AtCoder::String.lcp_array("ababacaca", AtCoder::String.suffix_array("ababacaca")).should eq [1, 3, 1, 3, 0, 2, 0, 2]
+      AtCoder::String.lcp_array("aaaaa", AtCoder::String.suffix_array("aaaaa")).should eq [1, 2, 3, 4]
+
+      AtCoder::String.lcp_array([1, 2, 3, 2, 3, 2, 1], AtCoder::String.suffix_array([1, 2, 3, 2, 3, 2, 1])).should eq [1, 0, 1, 3, 0, 2]
+      AtCoder::String.lcp_array([12, 8, 18, 18, 8, 18, 18, 8, 15, 15, 8], AtCoder::String.suffix_array([12, 8, 18, 18, 8, 18, 18, 8, 15, 15, 8])).should eq [1, 1, 4, 0, 0, 1, 0, 2, 1, 3]
+      AtCoder::String.lcp_array([1, 2, 1, 2, 1, 3, 1, 3, 1], AtCoder::String.suffix_array([1, 2, 1, 2, 1, 3, 1, 3, 1])).should eq [1, 3, 1, 3, 0, 2, 0, 2]
+      AtCoder::String.lcp_array([1, 1, 1, 1, 1], AtCoder::String.suffix_array([1, 1, 1, 1, 1])).should eq [1, 2, 3, 4]
+    end
+  end
+
   describe ".z_algorithm" do
     it "returns empty array if input sequence is empty" do
       AtCoder::String.z_algorithm([] of Int32).should eq [] of Int32
