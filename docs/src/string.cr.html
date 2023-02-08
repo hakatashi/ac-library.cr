@@ -355,6 +355,28 @@ h1 a:focus {
       <span class="n">sa_is</span><span class="p">(</span><span class="n">sequence</span><span class="p">.</span><span class="n">bytes</span><span class="p">.</span><span class="n">map</span><span class="p">(</span><span class="o">&amp;</span><span class="p">.</span><span class="n">to_i32</span><span class="p">),</span> <span class="mi">255</span><span class="p">)</span>
     <span class="n">end</span>
 
+    <span class="cp"># returns lcp array in O(n)
+</span>    <span class="n">def</span> <span class="n">self</span><span class="p">.</span><span class="n">lcp_array</span><span class="p">(</span><span class="n">sequence</span><span class="p">,</span> <span class="n">sa</span><span class="p">)</span>
+      <span class="n">n</span> <span class="o">=</span> <span class="n">sequence</span><span class="p">.</span><span class="n">size</span>
+      <span class="n">rank</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">n</span>
+      <span class="n">sa</span><span class="p">.</span><span class="n">each_with_index</span> <span class="p">{</span> <span class="o">|</span><span class="n">e</span><span class="p">,</span> <span class="n">i</span><span class="o">|</span> <span class="n">rank</span><span class="p">[</span><span class="n">e</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span> <span class="p">}</span>
+
+      <span class="n">lcp</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+      <span class="n">h</span> <span class="o">=</span> <span class="mi">0</span>
+      <span class="n">n</span><span class="p">.</span><span class="n">times</span> <span class="k">do</span> <span class="o">|</span><span class="n">i</span><span class="o">|</span>
+        <span class="n">h</span> <span class="o">-=</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">h</span> <span class="o">&gt;</span> <span class="mi">0</span>
+        <span class="n">next</span> <span class="k">if</span> <span class="n">rank</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span>
+        <span class="n">j</span> <span class="o">=</span> <span class="n">sa</span><span class="p">[</span><span class="n">rank</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+        <span class="k">while</span> <span class="n">j</span> <span class="o">+</span> <span class="n">h</span> <span class="o">&lt;</span> <span class="n">n</span> <span class="o">&amp;&amp;</span> <span class="n">i</span> <span class="o">+</span> <span class="n">h</span> <span class="o">&lt;</span> <span class="n">n</span>
+          <span class="k">break</span> <span class="k">if</span> <span class="n">sequence</span><span class="p">[</span><span class="n">j</span> <span class="o">+</span> <span class="n">h</span><span class="p">]</span> <span class="o">!=</span> <span class="n">sequence</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="n">h</span><span class="p">]</span>
+          <span class="n">h</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">end</span>
+        <span class="n">lcp</span><span class="p">[</span><span class="n">rank</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">h</span>
+      <span class="n">end</span>
+
+      <span class="n">lcp</span>
+    <span class="n">end</span>
+
     <span class="cp"># returns z array
 </span>    <span class="n">def</span> <span class="n">self</span><span class="p">.</span><span class="n">z_algorithm</span><span class="p">(</span><span class="n">sequence</span><span class="p">)</span>
       <span class="n">n</span> <span class="o">=</span> <span class="n">sequence</span><span class="p">.</span><span class="n">size</span>
