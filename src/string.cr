@@ -217,6 +217,28 @@ module AtCoder
       sa_is(sequence.bytes.map(&.to_i32), 255)
     end
 
+    # returns lcp array in O(n)
+    def self.lcp_array(sequence, sa)
+      n = sequence.size
+      rank = [0] * n
+      sa.each_with_index { |e, i| rank[e] = i }
+
+      lcp = [0] * (n - 1)
+      h = 0
+      n.times do |i|
+        h -= 1 if h > 0
+        next if rank[i] == 0
+        j = sa[rank[i] - 1]
+        while j + h < n && i + h < n
+          break if sequence[j + h] != sequence[i + h]
+          h += 1
+        end
+        lcp[rank[i] - 1] = h
+      end
+
+      lcp
+    end
+
     # returns z array
     def self.z_algorithm(sequence)
       n = sequence.size
