@@ -102,7 +102,7 @@ require "atcoder/fenwick_tree" # load FenwickTree
   tree[50...80] #=> 0
   ```
 
-  * `.set(p, x)` => Unimplemented
+  * `.set(p, x)` => `#set(p, x)`
   * `.get(p)` => `#[](p)`
   * `.prod(l, r)` => `#[](l...r)`
   * `.all_prod()` => `#all_prod`
