@@ -35,62 +35,199 @@ module AtCoder
   # tree[50...80] # => 0
   # ```
   class LazySegTree(S, F)
-    getter values : Array(S | Nil)
+    @n : Int32
+    @height : Int32
+    @n_leaves : Int32
 
     def initialize(values : Array(S), @operator : S, S -> S, @application : F, S -> S, @composition : F, F -> F)
-      @values = values.map { |v| v.as(S | Nil) }
-      segment_size = next_power_of_two_minus_one(@values.size)
-      @segments = Array(S | Nil).new(segment_size, nil)
-      @applicators = Array(F | Nil).new(segment_size, nil)
+      @n = values.size
+
+      @height = log2_ceil(@n)
+      @n_leaves = 1 << @height
+
+      @segments = Array(S | Nil).new(2 * @n_leaves, nil)
+      @applicators = Array(F | Nil).new(@n_leaves, nil)
 
       # initialize segments
-      (@segments.size - 1).downto(0) do |i|
-        child1 = nil.as(S | Nil)
-        child2 = nil.as(S | Nil)
-        if i * 2 + 1 < @segments.size
-          child1 = @segments[i * 2 + 1]
-          child2 = @segments[i * 2 + 2]
-        else
-          if i * 2 + 1 - @segments.size < @values.size
-            child1 = @values[i * 2 + 1 - @segments.size]
-          end
-          if i * 2 + 2 - @segments.size < @values.size
-            child2 = @values[i * 2 + 2 - @segments.size]
-          end
-        end
-        @segments[i] = operate(child1, child2)
-      end
+      values.each_with_index { |x, i| @segments[@n_leaves + i] = x.as(S | Nil) }
+      (@n_leaves - 1).downto(1) { |i| refresh(i) }
     end
 
-    # FIXME: Unimplemented
-    def set
-      raise NotImplementedError.new
+    # Implements atcoder::lazy_segtree.set(index, applicator).
+    def set(index : Int, value : S)
+      index += @n_leaves
+      @height.downto(1) { |j| propagate(ancestor(index, j)) }
+      @segments[index] = value.as(S | Nil)
+      (1..@height).each { |j| refresh(ancestor(index, j)) }
     end
 
     # Implements atcoder::lazy_segtree.apply(index, applicator).
     def []=(index : Int, applicator : F)
-      apply_range(index, index + 1, applicator, 0, 0...(@segments.size + 1))
+      index += @n_leaves
+      @height.downto(1) { |j| propagate(ancestor(index, j)) }
+      @segments[index] = apply(applicator, @segments[index])
+      (1..@height).each { |j| refresh(ancestor(index, j)) }
       applicator
     end
 
     # Implements atcoder::lazy_segtree.apply(left, right, applicator).
     def []=(range : Range(Int, Int), applicator : F)
-      l = range.begin
-      r = range.exclusive? ? range.end : range.end + 1
-      apply_range(l, r, applicator, 0, 0...(@segments.size + 1))
+      l = range.begin + @n_leaves
+      r = (range.exclusive? ? range.end : range.end + 1) + @n_leaves
+
+      @height.downto(1) do |i|
+        propagate(ancestor(l, i)) if right_side_child?(l, i)
+        propagate(ancestor(r - 1, i)) if right_side_child?(r, i)
+      end
+
+      l2, r2 = l, r
+      while l2 < r2
+        if l2.odd?
+          all_apply(l2, applicator)
+          l2 += 1
+        end
+        if r2.odd?
+          r2 -= 1
+          all_apply(r2, applicator)
+        end
+        l2 >>= 1
+        r2 >>= 1
+      end
+
+      (1..@height).each do |i|
+        refresh(ancestor(l, i)) if right_side_child?(l, i)
+        refresh(ancestor(r - 1, i)) if right_side_child?(r, i)
+      end
+
       applicator
     end
 
     # Implements atcoder::lazy_segtree.get(index).
     def [](index : Int)
-      get_range(index, index + 1, 0, 0...(@segments.size + 1)).not_nil!
+      index += @n_leaves
+      @height.downto(1) { |j| propagate(ancestor(index, j)) }
+      @segments[index].not_nil!
     end
 
     # Implements atcoder::lazy_segtree.prod(left, right).
     def [](range : Range(Int, Int))
-      l = range.begin
-      r = range.exclusive? ? range.end : range.end + 1
-      get_range(l, r, 0, 0...(@segments.size + 1)).not_nil!
+      l = range.begin + @n_leaves
+      r = (range.exclusive? ? range.end : range.end + 1) + @n_leaves
+
+      @height.downto(1) do |i|
+        propagate(ancestor(l, i)) if right_side_child?(l, i)
+        propagate(ancestor(r - 1, i)) if right_side_child?(r, i)
+      end
+
+      sml, smr = nil.as(S | Nil), nil.as(S | Nil)
+      while l < r
+        if l.odd?
+          sml = operate(sml, @segments[l])
+          l += 1
+        end
+        if r.odd?
+          r -= 1
+          smr = operate(@segments[r], smr)
+        end
+        l >>= 1
+        r >>= 1
+      end
+
+      operate(sml, smr).not_nil!
+    end
+
+    # Implements atcoder::lazy_segtree.all_prod().
+    def all_prod
+      self[0...@n]
+    end
+
+    # Implements atcoder::lazy_segtree.max_right(left, g).
+    def max_right(left, e : S | Nil = nil, & : S -> Bool)
+      unless 0 <= left && left <= @n
+        raise IndexError.new("{left: #{left}} must greater than or equal to 0 and less than or equal to {n: #{@n}}")
+      end
+
+      unless e.nil?
+        return nil unless yield e
+      end
+
+      return @n if left == @n
+
+      left += @n_leaves
+      @height.downto(1) { |i| propagate(ancestor(left, i)) }
+
+      sm = e
+      loop do
+        while left.even?
+          left >>= 1
+        end
+
+        res = operate(sm, @segments[left])
+        unless res.nil? || yield res
+          while left < @n_leaves
+            propagate(left)
+            left = 2*left
+            res = operate(sm, @segments[left])
+            if res.nil? || yield res
+              sm = res
+              left += 1
+            end
+          end
+          return left - @n_leaves
+        end
+
+        sm = operate(sm, @segments[left])
+        left += 1
+
+        ffs = left & -left
+        break if ffs == left
+      end
+
+      @n
+    end
+
+    # Implements atcoder::lazy_segtree.min_left(right, g).
+    def min_left(right, e : S | Nil = nil, & : S -> Bool)
+      unless 0 <= right && right <= @n
+        raise IndexError.new("{right: #{right}} must greater than or equal to 0 and less than or equal to {n: #{@n}}")
+      end
+
+      unless e.nil?
+        return nil unless yield e
+      end
+
+      return 0 if right == 0
+
+      right += @n_leaves
+      @height.downto(1) { |i| propagate(ancestor(right - 1, i)) }
+      sm = e
+      loop do
+        right -= 1
+        while right > 1 && right.odd?
+          right >>= 1
+        end
+
+        res = operate(@segments[right], sm)
+        unless res.nil? || yield res
+          while right < @n_leaves
+            propagate(right)
+            right = 2*right + 1
+            res = operate(@segments[right], sm)
+            if res.nil? || yield res
+              sm = res
+              right -= 1
+            end
+          end
+          return right + 1 - @n_leaves
+        end
+
+        sm = operate(@segments[right], sm)
+
+        ffs = right & -right
+        break if ffs == right
+      end
+
+      0
     end
 
     @[AlwaysInline]
@@ -126,112 +263,48 @@ module AtCoder
       end
     end
 
-    # Evaluates segment, whose range is `range`. `range` is exclusive here.
-    #
-    # Preconditions:
-    # * segment_index < @segments.size
-    # * range.end - range.begin > 1
-    def eval_segment(segment_index : Int, range : Range(Int, Int))
-      applicator = @applicators[segment_index]
-      return if applicator.nil?
-
-      @segments[segment_index] = apply(applicator, @segments[segment_index])
-
-      if range.end - range.begin > 2
-        @applicators[segment_index * 2 + 1] = compose(applicator, @applicators[segment_index * 2 + 1])
-        @applicators[segment_index * 2 + 2] = compose(applicator, @applicators[segment_index * 2 + 2])
-      else
-        @values[segment_index * 2 + 1 - @segments.size] = apply(applicator, @values[segment_index * 2 + 1 - @segments.size])
-        @values[segment_index * 2 + 2 - @segments.size] = apply(applicator, @values[segment_index * 2 + 2 - @segments.size])
-      end
-
-      @applicators[segment_index] = nil
-    end
-
-    # Applies applicator `f` onto segment, whose range is `range`. `range` is exclusive here.
-    def apply_range(a : Int, b : Int, f : F, segment_index : Int, range : Range(Int, Int))
-      if segment_index >= @segments.size + @values.size
-        return nil
-      end
-
-      if segment_index < @segments.size
-        eval_segment(segment_index, range)
-      end
-
-      if range.end <= a || b <= range.begin
-        if segment_index < @segments.size
-          return @segments[segment_index]
-        else
-          return @values[segment_index - @segments.size]
-        end
-      end
-
-      if a <= range.begin && range.end <= b
-        if segment_index < @segments.size
-          @applicators[segment_index] = compose(@applicators[segment_index], f)
-          eval_segment(segment_index, range)
-          return @segments[segment_index]
-        else
-          @values[segment_index - @segments.size] = apply(f, @values[segment_index - @segments.size])
-          return @values[segment_index - @segments.size]
-        end
-      end
-
-      range_median = (range.begin + range.end) // 2
-      child1 = apply_range(a, b, f, segment_index * 2 + 1, range.begin...range_median)
-      child2 = apply_range(a, b, f, segment_index * 2 + 2, range_median...range.end)
-
-      @segments[segment_index] = operate(child1, child2)
-      @segments[segment_index]
-    end
-
-    # Gets evaluated value of a segment, whose range is `range`. `range` is exclusive here.
-    def get_range(a : Int, b : Int, segment_index : Int, range : Range(Int, Int))
-      if range.end <= a || b <= range.begin
-        return nil
-      end
-
-      if segment_index < @segments.size
-        eval_segment(segment_index, range)
-      end
-
-      if a <= range.begin && range.end <= b
-        if segment_index < @segments.size
-          return @segments[segment_index]
-        else
-          return @values[segment_index - @segments.size]
-        end
-      end
-
-      range_median = (range.begin + range.end) // 2
-      child1 = get_range(a, b, segment_index * 2 + 1, range.begin...range_median)
-      child2 = get_range(a, b, segment_index * 2 + 2, range_median...range.end)
-
-      operate(child1, child2)
-    end
-
-    # Implements atcoder::lazy_segtree.all_prod().
-    def all_prod
-      self[0...@values.size]
-    end
-
-    # FIXME: Unimplemented
-    def max_right
-      raise NotImplementedError.new
-    end
-
-    # FIXME: Unimplemented
-    def max_left
-      raise NotImplementedError.new
+    @[AlwaysInline]
+    private def refresh(node : Int)
+      child1 = 2*node
+      child2 = 2*node + 1
+      @segments[node] = operate(@segments[child1], @segments[child2])
     end
 
     @[AlwaysInline]
-    private def next_power_of_two_minus_one(n : Int32)
-      n -= 1
-      {% for sh in [1, 2, 4, 8, 16] %}
-        n |= n >> {{ sh }}
-      {% end %}
-      n
+    private def all_apply(node, applicator : F | Nil)
+      @segments[node] = apply(applicator, @segments[node])
+      unless leaf?(node)
+        @applicators[node] = compose(applicator, @applicators[node])
+      end
+    end
+
+    @[AlwaysInline]
+    private def propagate(node : Int)
+      child1 = 2*node
+      child2 = 2*node + 1
+      all_apply(child1, @applicators[node])
+      all_apply(child2, @applicators[node])
+      @applicators[node] = nil
+    end
+
+    @[AlwaysInline]
+    private def right_side_child?(child, n_gens_ago)
+      ((child >> n_gens_ago) << n_gens_ago) != child
+    end
+
+    @[AlwaysInline]
+    private def ancestor(node, n_gens_ago)
+      node >> n_gens_ago
+    end
+
+    @[AlwaysInline]
+    private def leaf?(node)
+      node >= @n_leaves
+    end
+
+    @[AlwaysInline]
+    private def log2_ceil(n : Int32) : Int32
+      sizeof(Int32)*8 - (n - 1).leading_zeros_count
     end
   end
 end
