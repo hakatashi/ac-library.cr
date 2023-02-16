@@ -39,6 +39,7 @@ module AtCoder
 
         def initialize(value)
           @value = value.to_i64 % MOD
+          @value %= MOD unless 0 <= @value && @value < MOD
         end
 
         # Change the initial capacity of this array to improve performance
@@ -77,16 +78,34 @@ module AtCoder
           self.class.new(x)
         end
 
+        def +(value : self)
+          self.class.new(@value + value.to_i64)
+        end
+
         def +(value)
-          self.class.new(@value + value.to_i64 % MOD)
+          val = value.to_i64
+          val %= MOD unless 0 <= val && val < MOD
+          self.class.new(@value + val)
+        end
+
+        def -(value : self)
+          self.class.new(@value - value.to_i64)
         end
 
         def -(value)
-          self.class.new(@value - value.to_i64 % MOD)
+          val = value.to_i64
+          val %= MOD unless 0 <= val && val < MOD
+          self.class.new(@value - val)
+        end
+
+        def *(value : self)
+          self.class.new(@value * value.to_i64)
         end
 
         def *(value)
-          self.class.new(@value * (value.to_i64 % MOD))
+          val = value.to_i64
+          val %= MOD unless 0 <= val && val < MOD
+          self.class.new(@value * val)
         end
 
         def /(value : self)
@@ -162,6 +181,10 @@ module AtCoder
 
         def abs
           self
+        end
+
+        def zero?
+          @value == 0
         end
 
         # ac-library compatibility
