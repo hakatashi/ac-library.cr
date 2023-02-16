@@ -37,9 +37,12 @@ module AtCoder
 
         getter value : Int64
 
+        def initialize(@value : Int64)
+          @value %= MOD
+        end
+
         def initialize(value)
           @value = value.to_i64 % MOD
-          @value %= MOD unless 0 <= @value && @value < MOD
         end
 
         # Change the initial capacity of this array to improve performance
@@ -83,9 +86,7 @@ module AtCoder
         end
 
         def +(value)
-          val = value.to_i64
-          val %= MOD unless 0 <= val && val < MOD
-          self.class.new(@value + val)
+          self.class.new(@value + value.to_i64 % MOD)
         end
 
         def -(value : self)
@@ -93,9 +94,7 @@ module AtCoder
         end
 
         def -(value)
-          val = value.to_i64
-          val %= MOD unless 0 <= val && val < MOD
-          self.class.new(@value - val)
+          self.class.new(@value - value.to_i64 % MOD)
         end
 
         def *(value : self)
@@ -103,9 +102,7 @@ module AtCoder
         end
 
         def *(value)
-          val = value.to_i64
-          val %= MOD unless 0 <= val && val < MOD
-          self.class.new(@value * val)
+          self.class.new(@value * (value.to_i64 % MOD))
         end
 
         def /(value : self)
