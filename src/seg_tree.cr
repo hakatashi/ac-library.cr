@@ -26,33 +26,24 @@ module AtCoder
   # tree[10...50] # => 10
   # ```
   class SegTree(T)
-    property values : Array(T)
+    getter values : Array(T)
+
+    @height : Int32
+    @n_leaves : Int32
 
     def initialize(values : Array(T))
       initialize(values) { |a, b| a > b ? a : b }
     end
 
-    def initialize(values : Array(T), &@operator : T, T -> T)
-      @values = values
-      @segments = Array(T | Nil).new(2 ** ::Math.log2(values.size).ceil.to_i - 1, nil)
+    def initialize(@values : Array(T), &@operator : T, T -> T)
+      @height = log2_ceil(@values.size)
+      @n_leaves = 1 << @height
+
+      @segments = Array(T | Nil).new(2 * @n_leaves, nil)
 
       # initialize segments
-      (@segments.size - 1).downto(0) do |i|
-        child1 = nil.as(T | Nil)
-        child2 = nil.as(T | Nil)
-        if i * 2 + 1 < @segments.size
-          child1 = @segments[i * 2 + 1]
-          child2 = @segments[i * 2 + 2]
-        else
-          if i * 2 + 1 - @segments.size < @values.size
-            child1 = @values[i * 2 + 1 - @segments.size]
-          end
-          if i * 2 + 2 - @segments.size < @values.size
-            child2 = @values[i * 2 + 2 - @segments.size]
-          end
-        end
-        @segments[i] = operate(child1, child2)
-      end
+      values.each_with_index { |x, i| @segments[@n_leaves + i] = x.as(T | Nil) }
+      (@n_leaves - 1).downto(1) { |i| refresh(i) }
     end
 
     @[AlwaysInline]
@@ -70,25 +61,9 @@ module AtCoder
     def []=(index : Int, value : T)
       @values[index] = value
 
-      parent_index = (index + @segments.size - 1) // 2
-      while parent_index >= 0
-        i = parent_index
-        child1 = nil.as(T | Nil)
-        child2 = nil.as(T | Nil)
-        if i * 2 + 1 < @segments.size
-          child1 = @segments[i * 2 + 1]
-          child2 = @segments[i * 2 + 2]
-        else
-          if i * 2 + 1 - @segments.size < @values.size
-            child1 = @values[i * 2 + 1 - @segments.size]
-          end
-          if i * 2 + 2 - @segments.size < @values.size
-            child2 = @values[i * 2 + 2 - @segments.size]
-          end
-        end
-        @segments[i] = operate(child1, child2)
-        parent_index = (parent_index - 1) // 2
-      end
+      index += @n_leaves
+      @segments[index] = value.as(T | Nil)
+      (1..@height).each { |j| refresh(ancestor(index, j)) }
     end
 
     # Implements atcoder::segtree.get(index)
@@ -98,29 +73,24 @@ module AtCoder
 
     # Implements atcoder::segtree.prod(l, r)
     def [](range : Range(Int, Int))
-      a = range.begin
-      b = range.exclusive? ? range.end : range.end + 1
-      get_value(a, b, 0, 0...(@segments.size + 1)).not_nil!
-    end
+      l = range.begin + @n_leaves
+      r = (range.exclusive? ? range.end : range.end + 1) + @n_leaves
 
-    def get_value(a : Int, b : Int, segment_index : Int, range : Range(Int, Int))
-      if range.end <= a || b <= range.begin
-        return nil
-      end
-
-      if a <= range.begin && range.end <= b
-        if segment_index < @segments.size
-          return @segments[segment_index]
-        else
-          return @values[segment_index - @segments.size]
+      sml, smr = nil.as(T | Nil), nil.as(T | Nil)
+      while l < r
+        if l.odd?
+          sml = operate(sml, @segments[l])
+          l += 1
         end
+        if r.odd?
+          r -= 1
+          smr = operate(@segments[r], smr)
+        end
+        l >>= 1
+        r >>= 1
       end
 
-      range_median = (range.begin + range.end) // 2
-      child1 = get_value(a, b, 2 * segment_index + 1, range.begin...range_median)
-      child2 = get_value(a, b, 2 * segment_index + 2, range_median...range.end)
-
-      operate(child1, child2)
+      operate(sml, smr).not_nil!
     end
 
     # compatibility with ac-library
@@ -144,17 +114,108 @@ module AtCoder
 
     # Implements atcoder::segtree.all_prod(l, r)
     def all_prod
-      self.[](0...@values.size)
+      @segments[1]
     end
 
-    # FIXME: Unimplemented
-    def max_right
-      raise NotImplementedError.new
+    # Implements atcoder::lazy_segtree.max_right(left, g).
+    def max_right(left, e : T | Nil = nil, & : T -> Bool)
+      unless 0 <= left && left <= @values.size
+        raise IndexError.new("{left: #{left}} must greater than or equal to 0 and less than or equal to {n: #{@values.size}}")
+      end
+
+      unless e.nil?
+        return nil unless yield e
+      end
+
+      return @values.size if left == @values.size
+
+      left += @n_leaves
+      sm = e
+      loop do
+        while left.even?
+          left >>= 1
+        end
+
+        res = operate(sm, @segments[left])
+        unless res.nil? || yield res
+          while left < @n_leaves
+            left = 2*left
+            res = operate(sm, @segments[left])
+            if res.nil? || yield res
+              sm = res
+              left += 1
+            end
+          end
+          return left - @n_leaves
+        end
+
+        sm = operate(sm, @segments[left])
+        left += 1
+
+        ffs = left & -left
+        break if ffs == left
+      end
+
+      @values.size
     end
 
-    # FIXME: Unimplemented
-    def max_left
-      raise NotImplementedError.new
+    # Implements atcoder::lazy_segtree.min_left(right, g).
+    def min_left(right, e : T | Nil = nil, & : T -> Bool)
+      unless 0 <= right && right <= @values.size
+        raise IndexError.new("{right: #{right}} must greater than or equal to 0 and less than or equal to {n: #{@values.size}}")
+      end
+
+      unless e.nil?
+        return nil unless yield e
+      end
+
+      return 0 if right == 0
+
+      right += @n_leaves
+      sm = e
+      loop do
+        right -= 1
+        while right > 1 && right.odd?
+          right >>= 1
+        end
+
+        res = operate(@segments[right], sm)
+        unless res.nil? || yield res
+          while right < @n_leaves
+            right = 2*right + 1
+            res = operate(@segments[right], sm)
+            if res.nil? || yield res
+              sm = res
+              right -= 1
+            end
+          end
+          return right + 1 - @n_leaves
+        end
+
+        sm = operate(@segments[right], sm)
+
+        ffs = right & -right
+        break if ffs == right
+      end
+
+      0
+    end
+
+    @[AlwaysInline]
+    private def refresh(node : Int)
+      child1 = 2*node
+      child2 = 2*node + 1
+      @segments[node] = operate(@segments[child1], @segments[child2])
+    end
+
+    @[AlwaysInline]
+    private def ancestor(node, n_gens_ago)
+      node >> n_gens_ago
+    end
+
+    @[AlwaysInline]
+    private def log2_ceil(n : Int32) : Int32
+      sizeof(Int32)*8 - (n - 1).leading_zeros_count
     end
   end
 end
