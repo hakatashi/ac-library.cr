@@ -114,7 +114,7 @@ module AtCoder
 
     # Implements atcoder::segtree.all_prod(l, r)
     def all_prod
-      @segments[1]
+      @segments[1].not_nil!
     end
 
     # Implements atcoder::lazy_segtree.max_right(left, g).
