@@ -180,6 +180,14 @@ module AtCoder
           self
         end
 
+        def pred
+          self.class.new(@value - 1)
+        end
+
+        def succ
+          self.class.new(@value + 1)
+        end
+
         def zero?
           @value == 0
         end
