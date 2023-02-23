@@ -34,7 +34,7 @@ module AtCoder
 
     def initialize(values : Array(T), &@operator : T, T -> T)
       @values = values
-      @segments = Array(T | Nil).new(2 ** ::Math.log2(values.size).ceil.to_i - 1, nil)
+      @segments = Array(T | Nil).new(2 ** log2_ceil(values.size) - 1, nil)
 
       # initialize segments
       (@segments.size - 1).downto(0) do |i|
@@ -155,6 +155,11 @@ module AtCoder
     # FIXME: Unimplemented
     def max_left
       raise NotImplementedError.new
+    end
+
+    @[AlwaysInline]
+    private def log2_ceil(n : Int32) : Int32
+      sizeof(Int32)*8 - (n - 1).leading_zeros_count
     end
   end
 end
