@@ -307,7 +307,7 @@ tree[<span class="n">50</span>...<span class="n">80</span>] <span class="c"># =&
   </h2>
   
     
-      <a href="https://github.com/google/ac-library.cr/blob/8af5ed0c240caee55a53dcb135dba2c147e8764b/src/lazy_seg_tree.cr#L37" target="_blank">
+      <a href="https://github.com/google/ac-library.cr/blob/ff32302ba4127ce829e11b2767c3a7a2ccd32c60/src/lazy_seg_tree.cr#L37" target="_blank">
         lazy_seg_tree.cr
       </a>
     
@@ -385,49 +385,23 @@ tree[<span class="n">50</span>...<span class="n">80</span>] <span class="c"># =&
       </li>
     
       <li class="entry-summary">
-        <a href="#apply_range%28a%3AInt%2Cb%3AInt%2Cf%3AF%2Csegment_index%3AInt%2Crange%3ARange%28Int%2CInt%29%29-instance-method" class="signature"><strong>#apply_range</strong>(a : Int, b : Int, f : F, segment_index : Int, range : Range(Int, Int))</a>
+        <a href="#max_right%28left%2Ce%3AS%7CNil%3Dnil%2C%26%3AS-%3EBool%29-instance-method" class="signature"><strong>#max_right</strong>(left, e : S | Nil = <span class="n">nil</span>, & : S -> Bool)</a>
         
-          <div class="summary"><p>Applies applicator <code>f</code> onto segment, whose range is <code>range</code>.</p></div>
-        
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#eval_segment%28segment_index%3AInt%2Crange%3ARange%28Int%2CInt%29%29-instance-method" class="signature"><strong>#eval_segment</strong>(segment_index : Int, range : Range(Int, Int))</a>
-        
-          <div class="summary"><p>Evaluates segment, whose range is <code>range</code>.</p></div>
+          <div class="summary"><p>Implements atcoder::lazy_segtree.max_right(left, g).</p></div>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#get_range%28a%3AInt%2Cb%3AInt%2Csegment_index%3AInt%2Crange%3ARange%28Int%2CInt%29%29-instance-method" class="signature"><strong>#get_range</strong>(a : Int, b : Int, segment_index : Int, range : Range(Int, Int))</a>
+        <a href="#min_left%28right%2Ce%3AS%7CNil%3Dnil%2C%26%3AS-%3EBool%29-instance-method" class="signature"><strong>#min_left</strong>(right, e : S | Nil = <span class="n">nil</span>, & : S -> Bool)</a>
         
-          <div class="summary"><p>Gets evaluated value of a segment, whose range is <code>range</code>.</p></div>
-        
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#max_left-instance-method" class="signature"><strong>#max_left</strong></a>
-        
-          <div class="summary"><p><span class="flag yellow">FIXME</span>  Unimplemented</p></div>
+          <div class="summary"><p>Implements atcoder::lazy_segtree.min_left(right, g).</p></div>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#max_right-instance-method" class="signature"><strong>#max_right</strong></a>
+        <a href="#set%28index%3AInt%2Cvalue%3AS%29-instance-method" class="signature"><strong>#set</strong>(index : Int, value : S)</a>
         
-          <div class="summary"><p><span class="flag yellow">FIXME</span>  Unimplemented</p></div>
-        
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#set-instance-method" class="signature"><strong>#set</strong></a>
-        
-          <div class="summary"><p><span class="flag yellow">FIXME</span>  Unimplemented</p></div>
-        
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#values%3AArray%28S%7CNil%29-instance-method" class="signature"><strong>#values</strong> : Array(S | Nil)</a>
+          <div class="summary"><p>Implements atcoder::lazy_segtree.set(index, applicator).</p></div>
         
       </li>
     
@@ -482,7 +456,7 @@ tree[<span class="n">50</span>...<span class="n">80</span>] <span class="c"># =&
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/8af5ed0c240caee55a53dcb135dba2c147e8764b/src/lazy_seg_tree.cr#L40" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/ff32302ba4127ce829e11b2767c3a7a2ccd32c60/src/lazy_seg_tree.cr#L42" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -517,7 +491,7 @@ tree[<span class="n">50</span>...<span class="n">80</span>] <span class="c"># =&
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/8af5ed0c240caee55a53dcb135dba2c147e8764b/src/lazy_seg_tree.cr#L85" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/ff32302ba4127ce829e11b2767c3a7a2ccd32c60/src/lazy_seg_tree.cr#L106" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -538,7 +512,7 @@ tree[<span class="n">50</span>...<span class="n">80</span>] <span class="c"># =&
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/8af5ed0c240caee55a53dcb135dba2c147e8764b/src/lazy_seg_tree.cr#L90" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/ff32302ba4127ce829e11b2767c3a7a2ccd32c60/src/lazy_seg_tree.cr#L113" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -559,7 +533,7 @@ tree[<span class="n">50</span>...<span class="n">80</span>] <span class="c"># =&
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/8af5ed0c240caee55a53dcb135dba2c147e8764b/src/lazy_seg_tree.cr#L71" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/ff32302ba4127ce829e11b2767c3a7a2ccd32c60/src/lazy_seg_tree.cr#L65" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -580,7 +554,7 @@ tree[<span class="n">50</span>...<span class="n">80</span>] <span class="c"># =&
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/8af5ed0c240caee55a53dcb135dba2c147e8764b/src/lazy_seg_tree.cr#L77" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/ff32302ba4127ce829e11b2767c3a7a2ccd32c60/src/lazy_seg_tree.cr#L74" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -601,154 +575,70 @@ tree[<span class="n">50</span>...<span class="n">80</span>] <span class="c"># =&
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/8af5ed0c240caee55a53dcb135dba2c147e8764b/src/lazy_seg_tree.cr#L214" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/ff32302ba4127ce829e11b2767c3a7a2ccd32c60/src/lazy_seg_tree.cr#L140" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="apply_range(a:Int,b:Int,f:F,segment_index:Int,range:Range(Int,Int))-instance-method">
+    <div class="entry-detail" id="max_right(left,e:S|Nil=nil,&amp;:S-&gt;Bool)-instance-method">
       <div class="signature">
         
-        def <strong>apply_range</strong>(a : <a href="../Int.html">Int</a>, b : <a href="../Int.html">Int</a>, f : F, segment_index : <a href="../Int.html">Int</a>, range : Range(<a href="../Int.html">Int</a>, <a href="../Int.html">Int</a>))
+        def <strong>max_right</strong>(left, e : S | Nil = <span class="n">nil</span>, & : S -> Bool)
 
-        <a class="method-permalink" href="#apply_range%28a%3AInt%2Cb%3AInt%2Cf%3AF%2Csegment_index%3AInt%2Crange%3ARange%28Int%2CInt%29%29-instance-method">#</a>
+        <a class="method-permalink" href="#max_right%28left%2Ce%3AS%7CNil%3Dnil%2C%26%3AS-%3EBool%29-instance-method">#</a>
       </div>
       
         <div class="doc">
           
-          <p>Applies applicator <code>f</code> onto segment, whose range is <code>range</code>. <code>range</code> is exclusive here.</p>
+          <p>Implements atcoder::lazy_segtree.max_right(left, g).</p>
         </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/8af5ed0c240caee55a53dcb135dba2c147e8764b/src/lazy_seg_tree.cr#L152" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/ff32302ba4127ce829e11b2767c3a7a2ccd32c60/src/lazy_seg_tree.cr#L145" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="eval_segment(segment_index:Int,range:Range(Int,Int))-instance-method">
+    <div class="entry-detail" id="min_left(right,e:S|Nil=nil,&amp;:S-&gt;Bool)-instance-method">
       <div class="signature">
         
-        def <strong>eval_segment</strong>(segment_index : <a href="../Int.html">Int</a>, range : Range(<a href="../Int.html">Int</a>, <a href="../Int.html">Int</a>))
+        def <strong>min_left</strong>(right, e : S | Nil = <span class="n">nil</span>, & : S -> Bool)
 
-        <a class="method-permalink" href="#eval_segment%28segment_index%3AInt%2Crange%3ARange%28Int%2CInt%29%29-instance-method">#</a>
+        <a class="method-permalink" href="#min_left%28right%2Ce%3AS%7CNil%3Dnil%2C%26%3AS-%3EBool%29-instance-method">#</a>
       </div>
       
         <div class="doc">
           
-          <p>Evaluates segment, whose range is <code>range</code>. <code>range</code> is exclusive here.</p>
-<p>Preconditions:</p>
-<ul>
-<li>segment_index &lt; @segments.size</li>
-<li>range.end - range.begin &gt; 1</li>
-</ul>
+          <p>Implements atcoder::lazy_segtree.min_left(right, g).</p>
         </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/8af5ed0c240caee55a53dcb135dba2c147e8764b/src/lazy_seg_tree.cr#L134" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/ff32302ba4127ce829e11b2767c3a7a2ccd32c60/src/lazy_seg_tree.cr#L190" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="get_range(a:Int,b:Int,segment_index:Int,range:Range(Int,Int))-instance-method">
+    <div class="entry-detail" id="set(index:Int,value:S)-instance-method">
       <div class="signature">
         
-        def <strong>get_range</strong>(a : <a href="../Int.html">Int</a>, b : <a href="../Int.html">Int</a>, segment_index : <a href="../Int.html">Int</a>, range : Range(<a href="../Int.html">Int</a>, <a href="../Int.html">Int</a>))
+        def <strong>set</strong>(index : <a href="../Int.html">Int</a>, value : S)
 
-        <a class="method-permalink" href="#get_range%28a%3AInt%2Cb%3AInt%2Csegment_index%3AInt%2Crange%3ARange%28Int%2CInt%29%29-instance-method">#</a>
+        <a class="method-permalink" href="#set%28index%3AInt%2Cvalue%3AS%29-instance-method">#</a>
       </div>
       
         <div class="doc">
           
-          <p>Gets evaluated value of a segment, whose range is <code>range</code>. <code>range</code> is exclusive here.</p>
+          <p>Implements atcoder::lazy_segtree.set(index, applicator).</p>
         </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/8af5ed0c240caee55a53dcb135dba2c147e8764b/src/lazy_seg_tree.cr#L189" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="max_left-instance-method">
-      <div class="signature">
-        
-        def <strong>max_left</strong>
-
-        <a class="method-permalink" href="#max_left-instance-method">#</a>
-      </div>
-      
-        <div class="doc">
-          
-          <p><span class="flag yellow">FIXME</span>  Unimplemented</p>
-        </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/google/ac-library.cr/blob/8af5ed0c240caee55a53dcb135dba2c147e8764b/src/lazy_seg_tree.cr#L224" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="max_right-instance-method">
-      <div class="signature">
-        
-        def <strong>max_right</strong>
-
-        <a class="method-permalink" href="#max_right-instance-method">#</a>
-      </div>
-      
-        <div class="doc">
-          
-          <p><span class="flag yellow">FIXME</span>  Unimplemented</p>
-        </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/google/ac-library.cr/blob/8af5ed0c240caee55a53dcb135dba2c147e8764b/src/lazy_seg_tree.cr#L219" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="set-instance-method">
-      <div class="signature">
-        
-        def <strong>set</strong>
-
-        <a class="method-permalink" href="#set-instance-method">#</a>
-      </div>
-      
-        <div class="doc">
-          
-          <p><span class="flag yellow">FIXME</span>  Unimplemented</p>
-        </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/google/ac-library.cr/blob/8af5ed0c240caee55a53dcb135dba2c147e8764b/src/lazy_seg_tree.cr#L66" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="values:Array(S|Nil)-instance-method">
-      <div class="signature">
-        
-        def <strong>values</strong> : Array(S | Nil)
-
-        <a class="method-permalink" href="#values%3AArray%28S%7CNil%29-instance-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/google/ac-library.cr/blob/8af5ed0c240caee55a53dcb135dba2c147e8764b/src/lazy_seg_tree.cr#L38" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/ff32302ba4127ce829e11b2767c3a7a2ccd32c60/src/lazy_seg_tree.cr#L57" target="_blank">View source</a>]
         
       </div>
     </div>

@@ -172,7 +172,7 @@ h1 a:focus {
 
     <span class="n">def</span> <span class="n">initialize</span><span class="p">(</span><span class="n">values</span> <span class="o">:</span> <span class="n">Array</span><span class="p">(</span><span class="n">T</span><span class="p">),</span> <span class="o">&amp;</span><span class="err">@</span><span class="k">operator</span> <span class="o">:</span> <span class="n">T</span><span class="p">,</span> <span class="n">T</span> <span class="o">-&gt;</span> <span class="n">T</span><span class="p">)</span>
       <span class="err">@</span><span class="n">values</span> <span class="o">=</span> <span class="n">values</span>
-      <span class="err">@</span><span class="n">segments</span> <span class="o">=</span> <span class="n">Array</span><span class="p">(</span><span class="n">T</span> <span class="o">|</span> <span class="n">Nil</span><span class="p">).</span><span class="k">new</span><span class="p">(</span><span class="mi">2</span> <span class="o">**</span> <span class="o">::</span><span class="n">Math</span><span class="p">.</span><span class="n">log2</span><span class="p">(</span><span class="n">values</span><span class="p">.</span><span class="n">size</span><span class="p">).</span><span class="n">ceil</span><span class="p">.</span><span class="n">to_i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">nil</span><span class="p">)</span>
+      <span class="err">@</span><span class="n">segments</span> <span class="o">=</span> <span class="n">Array</span><span class="p">(</span><span class="n">T</span> <span class="o">|</span> <span class="n">Nil</span><span class="p">).</span><span class="k">new</span><span class="p">(</span><span class="mi">2</span> <span class="o">**</span> <span class="n">log2_ceil</span><span class="p">(</span><span class="n">values</span><span class="p">.</span><span class="n">size</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">nil</span><span class="p">)</span>
 
       <span class="cp"># initialize segments
 </span>      <span class="p">(</span><span class="err">@</span><span class="n">segments</span><span class="p">.</span><span class="n">size</span> <span class="o">-</span> <span class="mi">1</span><span class="p">).</span><span class="n">downto</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">i</span><span class="o">|</span>
@@ -293,6 +293,11 @@ h1 a:focus {
     <span class="cp"># FIXME: Unimplemented
 </span>    <span class="n">def</span> <span class="n">max_left</span>
       <span class="n">raise</span> <span class="n">NotImplementedError</span><span class="p">.</span><span class="k">new</span>
+    <span class="n">end</span>
+
+    <span class="err">@</span><span class="p">[</span><span class="n">AlwaysInline</span><span class="p">]</span>
+    <span class="k">private</span> <span class="n">def</span> <span class="n">log2_ceil</span><span class="p">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">Int32</span><span class="p">)</span> <span class="o">:</span> <span class="n">Int32</span>
+      <span class="k">sizeof</span><span class="p">(</span><span class="n">Int32</span><span class="p">)</span><span class="o">*</span><span class="mi">8</span> <span class="o">-</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">).</span><span class="n">leading_zeros_count</span>
     <span class="n">end</span>
   <span class="n">end</span>
 <span class="n">end</span></code></pre></figure>

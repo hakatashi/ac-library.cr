@@ -102,14 +102,16 @@ require "atcoder/fenwick_tree" # load FenwickTree
   tree[50...80] #=> 0
   ```
 
-  * `.set(p, x)` => Unimplemented
+  * `.set(p, x)` => `#set(p, x)`
   * `.get(p)` => `#[](p)`
   * `.prod(l, r)` => `#[](l...r)`
   * `.all_prod()` => `#all_prod`
   * `.apply(p, f)` => `#[]=(p, f)`
   * `.apply(l, r, f)` => `#[]=(l...r, f)`
-  * `.max_right<f>(l)` => Unimplemented
-  * `.max_left<f>(r)` => Unimplemented
+  * `.max_right<f>(l)` => `#max_right(l, e = nil, &f)`
+    * 明示的に単位元を与えない場合、`f(e: nil) = true` として計算します。If the identity element is not given, it computes as `f(e: nil) = true`.
+  * `.min_left<f>(r)` => `#min_left(r, e = nil, &f)`
+    * 明示的に単位元を与えない場合、`f(e: nil) = true` として計算します。If the identity element is not given, it computes as `f(e: nil) = true`.
 
 ## [`atcoder/string`](https://google.github.io/ac-library.cr/docs/src/string.cr) (Implements [<atcoder/string>](https://atcoder.github.io/ac-library/document_en/string.html))
 
