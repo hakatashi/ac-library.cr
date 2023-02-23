@@ -299,7 +299,7 @@ tree[<span class="n">10</span>...<span class="n">50</span>] <span class="c"># =&
   </h2>
   
     
-      <a href="https://github.com/google/ac-library.cr/blob/486af636e922b983543aedd645aa54acdc9dffd5/src/seg_tree.cr#L28" target="_blank">
+      <a href="https://github.com/google/ac-library.cr/blob/b7144ecf8343ce551dcda16a006590421b30bf6a/src/seg_tree.cr#L28" target="_blank">
         seg_tree.cr
       </a>
     
@@ -382,21 +382,16 @@ tree[<span class="n">10</span>...<span class="n">50</span>] <span class="c"># =&
       </li>
     
       <li class="entry-summary">
-        <a href="#get_value%28a%3AInt%2Cb%3AInt%2Csegment_index%3AInt%2Crange%3ARange%28Int%2CInt%29%29-instance-method" class="signature"><strong>#get_value</strong>(a : Int, b : Int, segment_index : Int, range : Range(Int, Int))</a>
+        <a href="#max_right%28left%2Ce%3AT%7CNil%3Dnil%2C%26%3AT-%3EBool%29-instance-method" class="signature"><strong>#max_right</strong>(left, e : T | Nil = <span class="n">nil</span>, & : T -> Bool)</a>
+        
+          <div class="summary"><p>Implements atcoder::lazy_segtree.max_right(left, g).</p></div>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#max_left-instance-method" class="signature"><strong>#max_left</strong></a>
+        <a href="#min_left%28right%2Ce%3AT%7CNil%3Dnil%2C%26%3AT-%3EBool%29-instance-method" class="signature"><strong>#min_left</strong>(right, e : T | Nil = <span class="n">nil</span>, & : T -> Bool)</a>
         
-          <div class="summary"><p><span class="flag yellow">FIXME</span>  Unimplemented</p></div>
-        
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#max_right-instance-method" class="signature"><strong>#max_right</strong></a>
-        
-          <div class="summary"><p><span class="flag yellow">FIXME</span>  Unimplemented</p></div>
+          <div class="summary"><p>Implements atcoder::lazy_segtree.min_left(right, g).</p></div>
         
       </li>
     
@@ -416,11 +411,6 @@ tree[<span class="n">10</span>...<span class="n">50</span>] <span class="c"># =&
     
       <li class="entry-summary">
         <a href="#values%3AArray%28T%29-instance-method" class="signature"><strong>#values</strong> : Array(T)</a>
-        
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#values%3D%28values%3AArray%28T%29%29-instance-method" class="signature"><strong>#values=</strong>(values : Array(T))</a>
         
       </li>
     
@@ -475,7 +465,7 @@ tree[<span class="n">10</span>...<span class="n">50</span>] <span class="c"># =&
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/486af636e922b983543aedd645aa54acdc9dffd5/src/seg_tree.cr#L31" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/b7144ecf8343ce551dcda16a006590421b30bf6a/src/seg_tree.cr#L34" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -491,7 +481,7 @@ tree[<span class="n">10</span>...<span class="n">50</span>] <span class="c"># =&
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/486af636e922b983543aedd645aa54acdc9dffd5/src/seg_tree.cr#L35" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/b7144ecf8343ce551dcda16a006590421b30bf6a/src/seg_tree.cr#L38" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -526,7 +516,7 @@ tree[<span class="n">10</span>...<span class="n">50</span>] <span class="c"># =&
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/486af636e922b983543aedd645aa54acdc9dffd5/src/seg_tree.cr#L95" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/b7144ecf8343ce551dcda16a006590421b30bf6a/src/seg_tree.cr#L70" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -547,7 +537,7 @@ tree[<span class="n">10</span>...<span class="n">50</span>] <span class="c"># =&
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/486af636e922b983543aedd645aa54acdc9dffd5/src/seg_tree.cr#L100" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/b7144ecf8343ce551dcda16a006590421b30bf6a/src/seg_tree.cr#L75" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -568,7 +558,7 @@ tree[<span class="n">10</span>...<span class="n">50</span>] <span class="c"># =&
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/486af636e922b983543aedd645aa54acdc9dffd5/src/seg_tree.cr#L70" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/b7144ecf8343ce551dcda16a006590421b30bf6a/src/seg_tree.cr#L61" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -589,7 +579,7 @@ tree[<span class="n">10</span>...<span class="n">50</span>] <span class="c"># =&
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/486af636e922b983543aedd645aa54acdc9dffd5/src/seg_tree.cr#L146" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/b7144ecf8343ce551dcda16a006590421b30bf6a/src/seg_tree.cr#L116" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -611,65 +601,49 @@ alias of <code><a href="../AtCoder/SegTree.html#%5B%5D%28index%3AInt%29-instance
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/486af636e922b983543aedd645aa54acdc9dffd5/src/seg_tree.cr#L136" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/b7144ecf8343ce551dcda16a006590421b30bf6a/src/seg_tree.cr#L106" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="get_value(a:Int,b:Int,segment_index:Int,range:Range(Int,Int))-instance-method">
+    <div class="entry-detail" id="max_right(left,e:T|Nil=nil,&amp;:T-&gt;Bool)-instance-method">
       <div class="signature">
         
-        def <strong>get_value</strong>(a : <a href="../Int.html">Int</a>, b : <a href="../Int.html">Int</a>, segment_index : <a href="../Int.html">Int</a>, range : Range(<a href="../Int.html">Int</a>, <a href="../Int.html">Int</a>))
+        def <strong>max_right</strong>(left, e : T | Nil = <span class="n">nil</span>, & : T -> Bool)
 
-        <a class="method-permalink" href="#get_value%28a%3AInt%2Cb%3AInt%2Csegment_index%3AInt%2Crange%3ARange%28Int%2CInt%29%29-instance-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/google/ac-library.cr/blob/486af636e922b983543aedd645aa54acdc9dffd5/src/seg_tree.cr#L106" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="max_left-instance-method">
-      <div class="signature">
-        
-        def <strong>max_left</strong>
-
-        <a class="method-permalink" href="#max_left-instance-method">#</a>
+        <a class="method-permalink" href="#max_right%28left%2Ce%3AT%7CNil%3Dnil%2C%26%3AT-%3EBool%29-instance-method">#</a>
       </div>
       
         <div class="doc">
           
-          <p><span class="flag yellow">FIXME</span>  Unimplemented</p>
+          <p>Implements atcoder::lazy_segtree.max_right(left, g).</p>
         </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/486af636e922b983543aedd645aa54acdc9dffd5/src/seg_tree.cr#L156" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/b7144ecf8343ce551dcda16a006590421b30bf6a/src/seg_tree.cr#L121" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="max_right-instance-method">
+    <div class="entry-detail" id="min_left(right,e:T|Nil=nil,&amp;:T-&gt;Bool)-instance-method">
       <div class="signature">
         
-        def <strong>max_right</strong>
+        def <strong>min_left</strong>(right, e : T | Nil = <span class="n">nil</span>, & : T -> Bool)
 
-        <a class="method-permalink" href="#max_right-instance-method">#</a>
+        <a class="method-permalink" href="#min_left%28right%2Ce%3AT%7CNil%3Dnil%2C%26%3AT-%3EBool%29-instance-method">#</a>
       </div>
       
         <div class="doc">
           
-          <p><span class="flag yellow">FIXME</span>  Unimplemented</p>
+          <p>Implements atcoder::lazy_segtree.min_left(right, g).</p>
         </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/486af636e922b983543aedd645aa54acdc9dffd5/src/seg_tree.cr#L151" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/b7144ecf8343ce551dcda16a006590421b30bf6a/src/seg_tree.cr#L163" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -690,7 +664,7 @@ alias of <code><a href="../AtCoder/SegTree.html#%5B%5D%28index%3AInt%29-instance
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/486af636e922b983543aedd645aa54acdc9dffd5/src/seg_tree.cr#L141" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/b7144ecf8343ce551dcda16a006590421b30bf6a/src/seg_tree.cr#L111" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -712,7 +686,7 @@ alias of <code><a href="../AtCoder/SegTree.html#%5B%5D%3D%28index%3AInt%2Cvalue%
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/486af636e922b983543aedd645aa54acdc9dffd5/src/seg_tree.cr#L130" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/b7144ecf8343ce551dcda16a006590421b30bf6a/src/seg_tree.cr#L100" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -728,23 +702,7 @@ alias of <code><a href="../AtCoder/SegTree.html#%5B%5D%3D%28index%3AInt%2Cvalue%
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/486af636e922b983543aedd645aa54acdc9dffd5/src/seg_tree.cr#L29" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="values=(values:Array(T))-instance-method">
-      <div class="signature">
-        
-        def <strong>values=</strong>(values : Array(T))
-
-        <a class="method-permalink" href="#values%3D%28values%3AArray%28T%29%29-instance-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/google/ac-library.cr/blob/486af636e922b983543aedd645aa54acdc9dffd5/src/seg_tree.cr#L29" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/b7144ecf8343ce551dcda16a006590421b30bf6a/src/seg_tree.cr#L29" target="_blank">View source</a>]
         
       </div>
     </div>

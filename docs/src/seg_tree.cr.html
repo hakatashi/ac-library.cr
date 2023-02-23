@@ -164,33 +164,24 @@ h1 a:focus {
 </span>  <span class="cp"># tree[10...50] # =&gt; 10
 </span>  <span class="cp"># ```
 </span>  <span class="k">class</span> <span class="nf">SegTree</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
-    <span class="n">property</span> <span class="n">values</span> <span class="o">:</span> <span class="n">Array</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
+    <span class="n">getter</span> <span class="n">values</span> <span class="o">:</span> <span class="n">Array</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
+
+    <span class="err">@</span><span class="n">height</span> <span class="o">:</span> <span class="n">Int32</span>
+    <span class="err">@</span><span class="n">n_leaves</span> <span class="o">:</span> <span class="n">Int32</span>
 
     <span class="n">def</span> <span class="n">initialize</span><span class="p">(</span><span class="n">values</span> <span class="o">:</span> <span class="n">Array</span><span class="p">(</span><span class="n">T</span><span class="p">))</span>
       <span class="n">initialize</span><span class="p">(</span><span class="n">values</span><span class="p">)</span> <span class="p">{</span> <span class="o">|</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="o">|</span> <span class="n">a</span> <span class="o">&gt;</span> <span class="n">b</span> <span class="o">?</span> <span class="n">a</span> <span class="o">:</span> <span class="n">b</span> <span class="p">}</span>
     <span class="n">end</span>
 
-    <span class="n">def</span> <span class="n">initialize</span><span class="p">(</span><span class="n">values</span> <span class="o">:</span> <span class="n">Array</span><span class="p">(</span><span class="n">T</span><span class="p">),</span> <span class="o">&amp;</span><span class="err">@</span><span class="k">operator</span> <span class="o">:</span> <span class="n">T</span><span class="p">,</span> <span class="n">T</span> <span class="o">-&gt;</span> <span class="n">T</span><span class="p">)</span>
-      <span class="err">@</span><span class="n">values</span> <span class="o">=</span> <span class="n">values</span>
-      <span class="err">@</span><span class="n">segments</span> <span class="o">=</span> <span class="n">Array</span><span class="p">(</span><span class="n">T</span> <span class="o">|</span> <span class="n">Nil</span><span class="p">).</span><span class="k">new</span><span class="p">(</span><span class="mi">2</span> <span class="o">**</span> <span class="n">log2_ceil</span><span class="p">(</span><span class="n">values</span><span class="p">.</span><span class="n">size</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">nil</span><span class="p">)</span>
+    <span class="n">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="err">@</span><span class="n">values</span> <span class="o">:</span> <span class="n">Array</span><span class="p">(</span><span class="n">T</span><span class="p">),</span> <span class="o">&amp;</span><span class="err">@</span><span class="k">operator</span> <span class="o">:</span> <span class="n">T</span><span class="p">,</span> <span class="n">T</span> <span class="o">-&gt;</span> <span class="n">T</span><span class="p">)</span>
+      <span class="err">@</span><span class="n">height</span> <span class="o">=</span> <span class="n">log2_ceil</span><span class="p">(</span><span class="err">@</span><span class="n">values</span><span class="p">.</span><span class="n">size</span><span class="p">)</span>
+      <span class="err">@</span><span class="n">n_leaves</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="err">@</span><span class="n">height</span>
+
+      <span class="err">@</span><span class="n">segments</span> <span class="o">=</span> <span class="n">Array</span><span class="p">(</span><span class="n">T</span> <span class="o">|</span> <span class="n">Nil</span><span class="p">).</span><span class="k">new</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="err">@</span><span class="n">n_leaves</span><span class="p">,</span> <span class="n">nil</span><span class="p">)</span>
 
       <span class="cp"># initialize segments
-</span>      <span class="p">(</span><span class="err">@</span><span class="n">segments</span><span class="p">.</span><span class="n">size</span> <span class="o">-</span> <span class="mi">1</span><span class="p">).</span><span class="n">downto</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">i</span><span class="o">|</span>
-        <span class="n">child1</span> <span class="o">=</span> <span class="n">nil</span><span class="p">.</span><span class="n">as</span><span class="p">(</span><span class="n">T</span> <span class="o">|</span> <span class="n">Nil</span><span class="p">)</span>
-        <span class="n">child2</span> <span class="o">=</span> <span class="n">nil</span><span class="p">.</span><span class="n">as</span><span class="p">(</span><span class="n">T</span> <span class="o">|</span> <span class="n">Nil</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">i</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">&lt;</span> <span class="err">@</span><span class="n">segments</span><span class="p">.</span><span class="n">size</span>
-          <span class="n">child1</span> <span class="o">=</span> <span class="err">@</span><span class="n">segments</span><span class="p">[</span><span class="n">i</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
-          <span class="n">child2</span> <span class="o">=</span> <span class="err">@</span><span class="n">segments</span><span class="p">[</span><span class="n">i</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span><span class="p">]</span>
-        <span class="k">else</span>
-          <span class="k">if</span> <span class="n">i</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">-</span> <span class="err">@</span><span class="n">segments</span><span class="p">.</span><span class="n">size</span> <span class="o">&lt;</span> <span class="err">@</span><span class="n">values</span><span class="p">.</span><span class="n">size</span>
-            <span class="n">child1</span> <span class="o">=</span> <span class="err">@</span><span class="n">values</span><span class="p">[</span><span class="n">i</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">-</span> <span class="err">@</span><span class="n">segments</span><span class="p">.</span><span class="n">size</span><span class="p">]</span>
-          <span class="n">end</span>
-          <span class="k">if</span> <span class="n">i</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">-</span> <span class="err">@</span><span class="n">segments</span><span class="p">.</span><span class="n">size</span> <span class="o">&lt;</span> <span class="err">@</span><span class="n">values</span><span class="p">.</span><span class="n">size</span>
-            <span class="n">child2</span> <span class="o">=</span> <span class="err">@</span><span class="n">values</span><span class="p">[</span><span class="n">i</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">-</span> <span class="err">@</span><span class="n">segments</span><span class="p">.</span><span class="n">size</span><span class="p">]</span>
-          <span class="n">end</span>
-        <span class="n">end</span>
-        <span class="err">@</span><span class="n">segments</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">operate</span><span class="p">(</span><span class="n">child1</span><span class="p">,</span> <span class="n">child2</span><span class="p">)</span>
-      <span class="n">end</span>
+</span>      <span class="n">values</span><span class="p">.</span><span class="n">each_with_index</span> <span class="p">{</span> <span class="o">|</span><span class="n">x</span><span class="p">,</span> <span class="n">i</span><span class="o">|</span> <span class="err">@</span><span class="n">segments</span><span class="p">[</span><span class="err">@</span><span class="n">n_leaves</span> <span class="o">+</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="p">.</span><span class="n">as</span><span class="p">(</span><span class="n">T</span> <span class="o">|</span> <span class="n">Nil</span><span class="p">)</span> <span class="p">}</span>
+      <span class="p">(</span><span class="err">@</span><span class="n">n_leaves</span> <span class="o">-</span> <span class="mi">1</span><span class="p">).</span><span class="n">downto</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span> <span class="o">|</span><span class="n">i</span><span class="o">|</span> <span class="n">refresh</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="p">}</span>
     <span class="n">end</span>
 
     <span class="err">@</span><span class="p">[</span><span class="n">AlwaysInline</span><span class="p">]</span>
@@ -208,25 +199,9 @@ h1 a:focus {
 </span>    <span class="n">def</span> <span class="p">[]</span><span class="o">=</span><span class="p">(</span><span class="n">index</span> <span class="o">:</span> <span class="n">Int</span><span class="p">,</span> <span class="n">value</span> <span class="o">:</span> <span class="n">T</span><span class="p">)</span>
       <span class="err">@</span><span class="n">values</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
 
-      <span class="n">parent_index</span> <span class="o">=</span> <span class="p">(</span><span class="n">index</span> <span class="o">+</span> <span class="err">@</span><span class="n">segments</span><span class="p">.</span><span class="n">size</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="c1">// 2</span>
-      <span class="k">while</span> <span class="n">parent_index</span> <span class="o">&gt;=</span> <span class="mi">0</span>
-        <span class="n">i</span> <span class="o">=</span> <span class="n">parent_index</span>
-        <span class="n">child1</span> <span class="o">=</span> <span class="n">nil</span><span class="p">.</span><span class="n">as</span><span class="p">(</span><span class="n">T</span> <span class="o">|</span> <span class="n">Nil</span><span class="p">)</span>
-        <span class="n">child2</span> <span class="o">=</span> <span class="n">nil</span><span class="p">.</span><span class="n">as</span><span class="p">(</span><span class="n">T</span> <span class="o">|</span> <span class="n">Nil</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">i</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">&lt;</span> <span class="err">@</span><span class="n">segments</span><span class="p">.</span><span class="n">size</span>
-          <span class="n">child1</span> <span class="o">=</span> <span class="err">@</span><span class="n">segments</span><span class="p">[</span><span class="n">i</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
-          <span class="n">child2</span> <span class="o">=</span> <span class="err">@</span><span class="n">segments</span><span class="p">[</span><span class="n">i</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span><span class="p">]</span>
-        <span class="k">else</span>
-          <span class="k">if</span> <span class="n">i</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">-</span> <span class="err">@</span><span class="n">segments</span><span class="p">.</span><span class="n">size</span> <span class="o">&lt;</span> <span class="err">@</span><span class="n">values</span><span class="p">.</span><span class="n">size</span>
-            <span class="n">child1</span> <span class="o">=</span> <span class="err">@</span><span class="n">values</span><span class="p">[</span><span class="n">i</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">-</span> <span class="err">@</span><span class="n">segments</span><span class="p">.</span><span class="n">size</span><span class="p">]</span>
-          <span class="n">end</span>
-          <span class="k">if</span> <span class="n">i</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">-</span> <span class="err">@</span><span class="n">segments</span><span class="p">.</span><span class="n">size</span> <span class="o">&lt;</span> <span class="err">@</span><span class="n">values</span><span class="p">.</span><span class="n">size</span>
-            <span class="n">child2</span> <span class="o">=</span> <span class="err">@</span><span class="n">values</span><span class="p">[</span><span class="n">i</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">-</span> <span class="err">@</span><span class="n">segments</span><span class="p">.</span><span class="n">size</span><span class="p">]</span>
-          <span class="n">end</span>
-        <span class="n">end</span>
-        <span class="err">@</span><span class="n">segments</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">operate</span><span class="p">(</span><span class="n">child1</span><span class="p">,</span> <span class="n">child2</span><span class="p">)</span>
-        <span class="n">parent_index</span> <span class="o">=</span> <span class="p">(</span><span class="n">parent_index</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="c1">// 2</span>
-      <span class="n">end</span>
+      <span class="n">index</span> <span class="o">+=</span> <span class="err">@</span><span class="n">n_leaves</span>
+      <span class="err">@</span><span class="n">segments</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span><span class="p">.</span><span class="n">as</span><span class="p">(</span><span class="n">T</span> <span class="o">|</span> <span class="n">Nil</span><span class="p">)</span>
+      <span class="p">(</span><span class="mf">1.</span><span class="p">.</span><span class="err">@</span><span class="n">height</span><span class="p">).</span><span class="n">each</span> <span class="p">{</span> <span class="o">|</span><span class="n">j</span><span class="o">|</span> <span class="n">refresh</span><span class="p">(</span><span class="n">ancestor</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">j</span><span class="p">))</span> <span class="p">}</span>
     <span class="n">end</span>
 
     <span class="cp"># Implements atcoder::segtree.get(index)
@@ -236,29 +211,24 @@ h1 a:focus {
 
     <span class="cp"># Implements atcoder::segtree.prod(l, r)
 </span>    <span class="n">def</span> <span class="p">[](</span><span class="n">range</span> <span class="o">:</span> <span class="n">Range</span><span class="p">(</span><span class="n">Int</span><span class="p">,</span> <span class="n">Int</span><span class="p">))</span>
-      <span class="n">a</span> <span class="o">=</span> <span class="n">range</span><span class="p">.</span><span class="n">begin</span>
-      <span class="n">b</span> <span class="o">=</span> <span class="n">range</span><span class="p">.</span><span class="n">exclusive</span><span class="o">?</span> <span class="o">?</span> <span class="n">range</span><span class="p">.</span><span class="n">end</span> <span class="o">:</span> <span class="n">range</span><span class="p">.</span><span class="n">end</span> <span class="o">+</span> <span class="mi">1</span>
-      <span class="n">get_value</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.</span><span class="p">..(</span><span class="err">@</span><span class="n">segments</span><span class="p">.</span><span class="n">size</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)).</span><span class="n">not_nil</span><span class="o">!</span>
-    <span class="n">end</span>
+      <span class="n">l</span> <span class="o">=</span> <span class="n">range</span><span class="p">.</span><span class="n">begin</span> <span class="o">+</span> <span class="err">@</span><span class="n">n_leaves</span>
+      <span class="n">r</span> <span class="o">=</span> <span class="p">(</span><span class="n">range</span><span class="p">.</span><span class="n">exclusive</span><span class="o">?</span> <span class="o">?</span> <span class="n">range</span><span class="p">.</span><span class="n">end</span> <span class="o">:</span> <span class="n">range</span><span class="p">.</span><span class="n">end</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="err">@</span><span class="n">n_leaves</span>
 
-    <span class="n">def</span> <span class="n">get_value</span><span class="p">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">Int</span><span class="p">,</span> <span class="n">b</span> <span class="o">:</span> <span class="n">Int</span><span class="p">,</span> <span class="n">segment_index</span> <span class="o">:</span> <span class="n">Int</span><span class="p">,</span> <span class="n">range</span> <span class="o">:</span> <span class="n">Range</span><span class="p">(</span><span class="n">Int</span><span class="p">,</span> <span class="n">Int</span><span class="p">))</span>
-      <span class="k">if</span> <span class="n">range</span><span class="p">.</span><span class="n">end</span> <span class="o">&lt;=</span> <span class="n">a</span> <span class="o">||</span> <span class="n">b</span> <span class="o">&lt;=</span> <span class="n">range</span><span class="p">.</span><span class="n">begin</span>
-        <span class="k">return</span> <span class="n">nil</span>
-      <span class="n">end</span>
-
-      <span class="k">if</span> <span class="n">a</span> <span class="o">&lt;=</span> <span class="n">range</span><span class="p">.</span><span class="n">begin</span> <span class="o">&amp;&amp;</span> <span class="n">range</span><span class="p">.</span><span class="n">end</span> <span class="o">&lt;=</span> <span class="n">b</span>
-        <span class="k">if</span> <span class="n">segment_index</span> <span class="o">&lt;</span> <span class="err">@</span><span class="n">segments</span><span class="p">.</span><span class="n">size</span>
-          <span class="k">return</span> <span class="err">@</span><span class="n">segments</span><span class="p">[</span><span class="n">segment_index</span><span class="p">]</span>
-        <span class="k">else</span>
-          <span class="k">return</span> <span class="err">@</span><span class="n">values</span><span class="p">[</span><span class="n">segment_index</span> <span class="o">-</span> <span class="err">@</span><span class="n">segments</span><span class="p">.</span><span class="n">size</span><span class="p">]</span>
+      <span class="n">sml</span><span class="p">,</span> <span class="n">smr</span> <span class="o">=</span> <span class="n">nil</span><span class="p">.</span><span class="n">as</span><span class="p">(</span><span class="n">T</span> <span class="o">|</span> <span class="n">Nil</span><span class="p">),</span> <span class="n">nil</span><span class="p">.</span><span class="n">as</span><span class="p">(</span><span class="n">T</span> <span class="o">|</span> <span class="n">Nil</span><span class="p">)</span>
+      <span class="k">while</span> <span class="n">l</span> <span class="o">&lt;</span> <span class="n">r</span>
+        <span class="k">if</span> <span class="n">l</span><span class="p">.</span><span class="n">odd</span><span class="o">?</span>
+          <span class="n">sml</span> <span class="o">=</span> <span class="n">operate</span><span class="p">(</span><span class="n">sml</span><span class="p">,</span> <span class="err">@</span><span class="n">segments</span><span class="p">[</span><span class="n">l</span><span class="p">])</span>
+          <span class="n">l</span> <span class="o">+=</span> <span class="mi">1</span>
         <span class="n">end</span>
+        <span class="k">if</span> <span class="n">r</span><span class="p">.</span><span class="n">odd</span><span class="o">?</span>
+          <span class="n">r</span> <span class="o">-=</span> <span class="mi">1</span>
+          <span class="n">smr</span> <span class="o">=</span> <span class="n">operate</span><span class="p">(</span><span class="err">@</span><span class="n">segments</span><span class="p">[</span><span class="n">r</span><span class="p">],</span> <span class="n">smr</span><span class="p">)</span>
+        <span class="n">end</span>
+        <span class="n">l</span> <span class="o">&gt;&gt;=</span> <span class="mi">1</span>
+        <span class="n">r</span> <span class="o">&gt;&gt;=</span> <span class="mi">1</span>
       <span class="n">end</span>
 
-      <span class="n">range_median</span> <span class="o">=</span> <span class="p">(</span><span class="n">range</span><span class="p">.</span><span class="n">begin</span> <span class="o">+</span> <span class="n">range</span><span class="p">.</span><span class="n">end</span><span class="p">)</span> <span class="c1">// 2</span>
-      <span class="n">child1</span> <span class="o">=</span> <span class="n">get_value</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">segment_index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">range</span><span class="p">.</span><span class="n">begin</span><span class="p">...</span><span class="n">range_median</span><span class="p">)</span>
-      <span class="n">child2</span> <span class="o">=</span> <span class="n">get_value</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">segment_index</span> <span class="o">+</span> <span class="mi">2</span><span class="p">,</span> <span class="n">range_median</span><span class="p">...</span><span class="n">range</span><span class="p">.</span><span class="n">end</span><span class="p">)</span>
-
-      <span class="n">operate</span><span class="p">(</span><span class="n">child1</span><span class="p">,</span> <span class="n">child2</span><span class="p">)</span>
+      <span class="n">operate</span><span class="p">(</span><span class="n">sml</span><span class="p">,</span> <span class="n">smr</span><span class="p">).</span><span class="n">not_nil</span><span class="o">!</span>
     <span class="n">end</span>
 
     <span class="cp"># compatibility with ac-library
@@ -282,17 +252,108 @@ h1 a:focus {
 
     <span class="cp"># Implements atcoder::segtree.all_prod(l, r)
 </span>    <span class="n">def</span> <span class="n">all_prod</span>
-      <span class="n">self</span><span class="p">.[](</span><span class="mf">0.</span><span class="p">..</span><span class="err">@</span><span class="n">values</span><span class="p">.</span><span class="n">size</span><span class="p">)</span>
+      <span class="err">@</span><span class="n">segments</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="n">not_nil</span><span class="o">!</span>
     <span class="n">end</span>
 
-    <span class="cp"># FIXME: Unimplemented
-</span>    <span class="n">def</span> <span class="n">max_right</span>
-      <span class="n">raise</span> <span class="n">NotImplementedError</span><span class="p">.</span><span class="k">new</span>
+    <span class="cp"># Implements atcoder::lazy_segtree.max_right(left, g).
+</span>    <span class="n">def</span> <span class="n">max_right</span><span class="p">(</span><span class="n">left</span><span class="p">,</span> <span class="n">e</span> <span class="o">:</span> <span class="n">T</span> <span class="o">|</span> <span class="n">Nil</span> <span class="o">=</span> <span class="n">nil</span><span class="p">,</span> <span class="o">&amp;</span> <span class="o">:</span> <span class="n">T</span> <span class="o">-&gt;</span> <span class="n">Bool</span><span class="p">)</span>
+      <span class="n">unless</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">left</span> <span class="o">&amp;&amp;</span> <span class="n">left</span> <span class="o">&lt;=</span> <span class="err">@</span><span class="n">values</span><span class="p">.</span><span class="n">size</span>
+        <span class="n">raise</span> <span class="n">IndexError</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="s">"{left: #{left}} must greater than or equal to 0 and less than or equal to {n: #{@values.size}}"</span><span class="p">)</span>
+      <span class="n">end</span>
+
+      <span class="n">unless</span> <span class="n">e</span><span class="p">.</span><span class="n">nil</span><span class="o">?</span>
+        <span class="k">return</span> <span class="n">nil</span> <span class="n">unless</span> <span class="n">yield</span> <span class="n">e</span>
+      <span class="n">end</span>
+
+      <span class="k">return</span> <span class="err">@</span><span class="n">values</span><span class="p">.</span><span class="n">size</span> <span class="k">if</span> <span class="n">left</span> <span class="o">==</span> <span class="err">@</span><span class="n">values</span><span class="p">.</span><span class="n">size</span>
+
+      <span class="n">left</span> <span class="o">+=</span> <span class="err">@</span><span class="n">n_leaves</span>
+      <span class="n">sm</span> <span class="o">=</span> <span class="n">e</span>
+      <span class="n">loop</span> <span class="k">do</span>
+        <span class="k">while</span> <span class="n">left</span><span class="p">.</span><span class="n">even</span><span class="o">?</span>
+          <span class="n">left</span> <span class="o">&gt;&gt;=</span> <span class="mi">1</span>
+        <span class="n">end</span>
+
+        <span class="n">res</span> <span class="o">=</span> <span class="n">operate</span><span class="p">(</span><span class="n">sm</span><span class="p">,</span> <span class="err">@</span><span class="n">segments</span><span class="p">[</span><span class="n">left</span><span class="p">])</span>
+        <span class="n">unless</span> <span class="n">res</span><span class="p">.</span><span class="n">nil</span><span class="o">?</span> <span class="o">||</span> <span class="n">yield</span> <span class="n">res</span>
+          <span class="k">while</span> <span class="n">left</span> <span class="o">&lt;</span> <span class="err">@</span><span class="n">n_leaves</span>
+            <span class="n">left</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">left</span>
+            <span class="n">res</span> <span class="o">=</span> <span class="n">operate</span><span class="p">(</span><span class="n">sm</span><span class="p">,</span> <span class="err">@</span><span class="n">segments</span><span class="p">[</span><span class="n">left</span><span class="p">])</span>
+            <span class="k">if</span> <span class="n">res</span><span class="p">.</span><span class="n">nil</span><span class="o">?</span> <span class="o">||</span> <span class="n">yield</span> <span class="n">res</span>
+              <span class="n">sm</span> <span class="o">=</span> <span class="n">res</span>
+              <span class="n">left</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">end</span>
+          <span class="n">end</span>
+          <span class="k">return</span> <span class="n">left</span> <span class="o">-</span> <span class="err">@</span><span class="n">n_leaves</span>
+        <span class="n">end</span>
+
+        <span class="n">sm</span> <span class="o">=</span> <span class="n">operate</span><span class="p">(</span><span class="n">sm</span><span class="p">,</span> <span class="err">@</span><span class="n">segments</span><span class="p">[</span><span class="n">left</span><span class="p">])</span>
+        <span class="n">left</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="n">ffs</span> <span class="o">=</span> <span class="n">left</span> <span class="o">&amp;</span> <span class="o">-</span><span class="n">left</span>
+        <span class="k">break</span> <span class="k">if</span> <span class="n">ffs</span> <span class="o">==</span> <span class="n">left</span>
+      <span class="n">end</span>
+
+      <span class="err">@</span><span class="n">values</span><span class="p">.</span><span class="n">size</span>
     <span class="n">end</span>
 
-    <span class="cp"># FIXME: Unimplemented
-</span>    <span class="n">def</span> <span class="n">max_left</span>
-      <span class="n">raise</span> <span class="n">NotImplementedError</span><span class="p">.</span><span class="k">new</span>
+    <span class="cp"># Implements atcoder::lazy_segtree.min_left(right, g).
+</span>    <span class="n">def</span> <span class="n">min_left</span><span class="p">(</span><span class="n">right</span><span class="p">,</span> <span class="n">e</span> <span class="o">:</span> <span class="n">T</span> <span class="o">|</span> <span class="n">Nil</span> <span class="o">=</span> <span class="n">nil</span><span class="p">,</span> <span class="o">&amp;</span> <span class="o">:</span> <span class="n">T</span> <span class="o">-&gt;</span> <span class="n">Bool</span><span class="p">)</span>
+      <span class="n">unless</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">right</span> <span class="o">&amp;&amp;</span> <span class="n">right</span> <span class="o">&lt;=</span> <span class="err">@</span><span class="n">values</span><span class="p">.</span><span class="n">size</span>
+        <span class="n">raise</span> <span class="n">IndexError</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="s">"{right: #{right}} must greater than or equal to 0 and less than or equal to {n: #{@values.size}}"</span><span class="p">)</span>
+      <span class="n">end</span>
+
+      <span class="n">unless</span> <span class="n">e</span><span class="p">.</span><span class="n">nil</span><span class="o">?</span>
+        <span class="k">return</span> <span class="n">nil</span> <span class="n">unless</span> <span class="n">yield</span> <span class="n">e</span>
+      <span class="n">end</span>
+
+      <span class="k">return</span> <span class="mi">0</span> <span class="k">if</span> <span class="n">right</span> <span class="o">==</span> <span class="mi">0</span>
+
+      <span class="n">right</span> <span class="o">+=</span> <span class="err">@</span><span class="n">n_leaves</span>
+      <span class="n">sm</span> <span class="o">=</span> <span class="n">e</span>
+      <span class="n">loop</span> <span class="k">do</span>
+        <span class="n">right</span> <span class="o">-=</span> <span class="mi">1</span>
+        <span class="k">while</span> <span class="n">right</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="n">right</span><span class="p">.</span><span class="n">odd</span><span class="o">?</span>
+          <span class="n">right</span> <span class="o">&gt;&gt;=</span> <span class="mi">1</span>
+        <span class="n">end</span>
+
+        <span class="n">res</span> <span class="o">=</span> <span class="n">operate</span><span class="p">(</span><span class="err">@</span><span class="n">segments</span><span class="p">[</span><span class="n">right</span><span class="p">],</span> <span class="n">sm</span><span class="p">)</span>
+        <span class="n">unless</span> <span class="n">res</span><span class="p">.</span><span class="n">nil</span><span class="o">?</span> <span class="o">||</span> <span class="n">yield</span> <span class="n">res</span>
+          <span class="k">while</span> <span class="n">right</span> <span class="o">&lt;</span> <span class="err">@</span><span class="n">n_leaves</span>
+            <span class="n">right</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">right</span> <span class="o">+</span> <span class="mi">1</span>
+            <span class="n">res</span> <span class="o">=</span> <span class="n">operate</span><span class="p">(</span><span class="err">@</span><span class="n">segments</span><span class="p">[</span><span class="n">right</span><span class="p">],</span> <span class="n">sm</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">res</span><span class="p">.</span><span class="n">nil</span><span class="o">?</span> <span class="o">||</span> <span class="n">yield</span> <span class="n">res</span>
+              <span class="n">sm</span> <span class="o">=</span> <span class="n">res</span>
+              <span class="n">right</span> <span class="o">-=</span> <span class="mi">1</span>
+            <span class="n">end</span>
+          <span class="n">end</span>
+          <span class="k">return</span> <span class="n">right</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">-</span> <span class="err">@</span><span class="n">n_leaves</span>
+        <span class="n">end</span>
+
+        <span class="n">sm</span> <span class="o">=</span> <span class="n">operate</span><span class="p">(</span><span class="err">@</span><span class="n">segments</span><span class="p">[</span><span class="n">right</span><span class="p">],</span> <span class="n">sm</span><span class="p">)</span>
+
+        <span class="n">ffs</span> <span class="o">=</span> <span class="n">right</span> <span class="o">&amp;</span> <span class="o">-</span><span class="n">right</span>
+        <span class="k">break</span> <span class="k">if</span> <span class="n">ffs</span> <span class="o">==</span> <span class="n">right</span>
+      <span class="n">end</span>
+
+      <span class="mi">0</span>
+    <span class="n">end</span>
+
+    <span class="err">@</span><span class="p">[</span><span class="n">AlwaysInline</span><span class="p">]</span>
+    <span class="k">private</span> <span class="n">def</span> <span class="n">refresh</span><span class="p">(</span><span class="n">node</span> <span class="o">:</span> <span class="n">Int</span><span class="p">)</span>
+      <span class="n">child1</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">node</span>
+      <span class="n">child2</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">node</span> <span class="o">+</span> <span class="mi">1</span>
+      <span class="err">@</span><span class="n">segments</span><span class="p">[</span><span class="n">node</span><span class="p">]</span> <span class="o">=</span> <span class="n">operate</span><span class="p">(</span><span class="err">@</span><span class="n">segments</span><span class="p">[</span><span class="n">child1</span><span class="p">],</span> <span class="err">@</span><span class="n">segments</span><span class="p">[</span><span class="n">child2</span><span class="p">])</span>
+    <span class="n">end</span>
+
+    <span class="err">@</span><span class="p">[</span><span class="n">AlwaysInline</span><span class="p">]</span>
+    <span class="k">private</span> <span class="n">def</span> <span class="n">ancestor</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">n_gens_ago</span><span class="p">)</span>
+      <span class="n">node</span> <span class="o">&gt;&gt;</span> <span class="n">n_gens_ago</span>
+    <span class="n">end</span>
+
+    <span class="err">@</span><span class="p">[</span><span class="n">AlwaysInline</span><span class="p">]</span>
+    <span class="k">private</span> <span class="n">def</span> <span class="n">log2_ceil</span><span class="p">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">Int32</span><span class="p">)</span> <span class="o">:</span> <span class="n">Int32</span>
+      <span class="k">sizeof</span><span class="p">(</span><span class="n">Int32</span><span class="p">)</span><span class="o">*</span><span class="mi">8</span> <span class="o">-</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">).</span><span class="n">leading_zeros_count</span>
     <span class="n">end</span>
 
     <span class="err">@</span><span class="p">[</span><span class="n">AlwaysInline</span><span class="p">]</span>

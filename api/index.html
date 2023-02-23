@@ -337,8 +337,16 @@ tree[<span class="n">10</span>...<span class="n">50</span>] <span class="c">#=&g
 <li><code>.get(p)</code> =&gt; <code>#[](p)</code></li>
 <li><code>.prod(l, r)</code> =&gt; <code>#[](l...r)</code></li>
 <li><code>.all_prod()</code> =&gt; <code>#all_prod</code></li>
-<li><code>.max_right&lt;f&gt;(l)</code> =&gt; Unimplemented</li>
-<li><code>.max_left&lt;f&gt;(r)</code> =&gt; Unimplemented</li>
+<li><code>.max_right&lt;f&gt;(l)</code> =&gt; <code>#max_right(l, e = nil, &amp;f)</code>
+<ul>
+<li>明示的に単位元を与えない場合、<code>f(e: nil) = true</code> として計算します。If the identity element is not given, it computes as <code>f(e: nil) = true</code>.</li>
+</ul>
+</li>
+<li><code>.min_left&lt;f&gt;(r)</code> =&gt; <code>#min_left(r, e = nil, &amp;f)</code>
+<ul>
+<li>明示的に単位元を与えない場合、<code>f(e: nil) = true</code> として計算します。If the identity element is not given, it computes as <code>f(e: nil) = true</code>.</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
