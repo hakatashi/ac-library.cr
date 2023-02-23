@@ -37,6 +37,10 @@ module AtCoder
 
         getter value : Int64
 
+        def initialize(@value : Int64)
+          @value %= MOD
+        end
+
         def initialize(value)
           @value = value.to_i64 % MOD
         end
@@ -77,12 +81,24 @@ module AtCoder
           self.class.new(x)
         end
 
+        def +(value : self)
+          self.class.new(@value + value.to_i64)
+        end
+
         def +(value)
           self.class.new(@value + value.to_i64 % MOD)
         end
 
+        def -(value : self)
+          self.class.new(@value - value.to_i64)
+        end
+
         def -(value)
           self.class.new(@value - value.to_i64 % MOD)
+        end
+
+        def *(value : self)
+          self.class.new(@value * value.to_i64)
         end
 
         def *(value)
@@ -162,6 +178,18 @@ module AtCoder
 
         def abs
           self
+        end
+
+        def pred
+          self.class.new(@value - 1)
+        end
+
+        def succ
+          self.class.new(@value + 1)
+        end
+
+        def zero?
+          @value == 0
         end
 
         # ac-library compatibility

@@ -217,5 +217,10 @@ module AtCoder
     private def log2_ceil(n : Int32) : Int32
       sizeof(Int32)*8 - (n - 1).leading_zeros_count
     end
+
+    @[AlwaysInline]
+    private def log2_ceil(n : Int32) : Int32
+      sizeof(Int32)*8 - (n - 1).leading_zeros_count
+    end
   end
 end
