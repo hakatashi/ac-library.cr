@@ -78,6 +78,42 @@ describe "SegTree" do
     end
   end
 
+  describe "#max_right" do
+    it "applies a binary search on the segment tree" do
+      segtree = SegTree(Int32).new((-10..10).map(&.**(2))) { |a, b| Math.min(a, b) }
+
+      (0..20).map { |i| segtree[0..i] }.to_a.should eq [100, 81, 64, 49, 36, 25, 16, 9, 4, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+
+      segtree.max_right(0) { |x| x >= 10**9 }.should eq 0
+      segtree.max_right(0) { |x| x >= 20 }.should eq 6
+      segtree.max_right(0) { |x| x >= 16 }.should eq 7
+      segtree.max_right(0) { |x| x >= -1 }.should eq 21
+
+      segtree.max_right(0) { |x| x <= 10**9 }.should eq 21
+
+      segtree.max_right(0, e: Int32::MAX) { |x| x >= 10**9 }.should eq 0
+      segtree.max_right(0, e: Int32::MAX) { |x| x <= 10**9 }.should eq nil
+    end
+  end
+
+  describe "#min_left" do
+    it "applies a binary search on the segment tree" do
+      segtree = SegTree(Int32).new((-10..10).map(&.**(2))) { |a, b| Math.min(a, b) }
+
+      (0..20).map { |i| segtree[i..20] }.to_a.should eq [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 4, 9, 16, 25, 36, 49, 64, 81, 100]
+
+      segtree.min_left(21) { |x| x >= 10**9 }.should eq 21
+      segtree.min_left(21) { |x| x >= 20 }.should eq 15
+      segtree.min_left(21) { |x| x >= 16 }.should eq 14
+      segtree.min_left(21) { |x| x >= -1 }.should eq 0
+
+      segtree.min_left(21) { |x| x <= 10**9 }.should eq 0
+
+      segtree.min_left(21, e: Int32::MAX) { |x| x <= 10**9 }.should eq nil
+      segtree.min_left(21, e: Int32::MAX) { |x| x >= 10**9 }.should eq 21
+    end
+  end
+
   it "can be used with ModInt" do
     values = 100.times.map { |i| Mint.new(1_i64) << i }.to_a
     segtree = SegTree.new(values) { |a, b| a + b }

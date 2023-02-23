@@ -81,8 +81,10 @@ require "atcoder/fenwick_tree" # load FenwickTree
   * `.get(p)` => `#[](p)`
   * `.prod(l, r)` => `#[](l...r)`
   * `.all_prod()` => `#all_prod`
-  * `.max_right<f>(l)` => Unimplemented
-  * `.max_left<f>(r)` => Unimplemented
+  * `.max_right<f>(l)` => `#max_right(l, e = nil, &f)`
+    * 明示的に単位元を与えない場合、`f(e: nil) = true` として計算します。If the identity element is not given, it computes as `f(e: nil) = true`.
+  * `.min_left<f>(r)` => `#min_left(r, e = nil, &f)`
+    * 明示的に単位元を与えない場合、`f(e: nil) = true` として計算します。If the identity element is not given, it computes as `f(e: nil) = true`.
 
 ## [`atcoder/lazy_seg_tree`](https://google.github.io/ac-library.cr/docs/src/lazy_seg_tree.cr) (Implements [<atcoder/lazysegtree>](https://atcoder.github.io/ac-library/document_en/lazysegtree.html))
 
