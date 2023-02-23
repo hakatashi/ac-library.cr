@@ -175,6 +175,10 @@ h1 a:focus {
 
         <span class="n">getter</span> <span class="n">value</span> <span class="o">:</span> <span class="n">Int64</span>
 
+        <span class="n">def</span> <span class="n">initialize</span><span class="p">(</span><span class="err">@</span><span class="n">value</span> <span class="o">:</span> <span class="n">Int64</span><span class="p">)</span>
+          <span class="err">@</span><span class="n">value</span> <span class="o">%=</span> <span class="n">MOD</span>
+        <span class="n">end</span>
+
         <span class="n">def</span> <span class="n">initialize</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
           <span class="err">@</span><span class="n">value</span> <span class="o">=</span> <span class="n">value</span><span class="p">.</span><span class="n">to_i64</span> <span class="o">%</span> <span class="n">MOD</span>
         <span class="n">end</span>
@@ -215,12 +219,24 @@ h1 a:focus {
           <span class="n">self</span><span class="p">.</span><span class="k">class</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
         <span class="n">end</span>
 
+        <span class="n">def</span> <span class="o">+</span><span class="p">(</span><span class="n">value</span> <span class="o">:</span> <span class="n">self</span><span class="p">)</span>
+          <span class="n">self</span><span class="p">.</span><span class="k">class</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="err">@</span><span class="n">value</span> <span class="o">+</span> <span class="n">value</span><span class="p">.</span><span class="n">to_i64</span><span class="p">)</span>
+        <span class="n">end</span>
+
         <span class="n">def</span> <span class="o">+</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
           <span class="n">self</span><span class="p">.</span><span class="k">class</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="err">@</span><span class="n">value</span> <span class="o">+</span> <span class="n">value</span><span class="p">.</span><span class="n">to_i64</span> <span class="o">%</span> <span class="n">MOD</span><span class="p">)</span>
         <span class="n">end</span>
 
+        <span class="n">def</span> <span class="o">-</span><span class="p">(</span><span class="n">value</span> <span class="o">:</span> <span class="n">self</span><span class="p">)</span>
+          <span class="n">self</span><span class="p">.</span><span class="k">class</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="err">@</span><span class="n">value</span> <span class="o">-</span> <span class="n">value</span><span class="p">.</span><span class="n">to_i64</span><span class="p">)</span>
+        <span class="n">end</span>
+
         <span class="n">def</span> <span class="o">-</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
           <span class="n">self</span><span class="p">.</span><span class="k">class</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="err">@</span><span class="n">value</span> <span class="o">-</span> <span class="n">value</span><span class="p">.</span><span class="n">to_i64</span> <span class="o">%</span> <span class="n">MOD</span><span class="p">)</span>
+        <span class="n">end</span>
+
+        <span class="n">def</span> <span class="o">*</span><span class="p">(</span><span class="n">value</span> <span class="o">:</span> <span class="n">self</span><span class="p">)</span>
+          <span class="n">self</span><span class="p">.</span><span class="k">class</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="err">@</span><span class="n">value</span> <span class="o">*</span> <span class="n">value</span><span class="p">.</span><span class="n">to_i64</span><span class="p">)</span>
         <span class="n">end</span>
 
         <span class="n">def</span> <span class="o">*</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
@@ -300,6 +316,18 @@ h1 a:focus {
 
         <span class="n">def</span> <span class="n">abs</span>
           <span class="n">self</span>
+        <span class="n">end</span>
+
+        <span class="n">def</span> <span class="n">pred</span>
+          <span class="n">self</span><span class="p">.</span><span class="k">class</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="err">@</span><span class="n">value</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">end</span>
+
+        <span class="n">def</span> <span class="n">succ</span>
+          <span class="n">self</span><span class="p">.</span><span class="k">class</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="err">@</span><span class="n">value</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">end</span>
+
+        <span class="n">def</span> <span class="n">zero</span><span class="o">?</span>
+          <span class="err">@</span><span class="n">value</span> <span class="o">==</span> <span class="mi">0</span>
         <span class="n">end</span>
 
         <span class="cp"># ac-library compatibility
