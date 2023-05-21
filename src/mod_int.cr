@@ -76,6 +76,10 @@ module AtCoder
           self.new(0_i64)
         end
 
+        def clone
+          self.new(@value)
+        end
+
         def inv
           g, x = AtCoder::Math.extended_gcd(@value, MOD)
           self.class.new(x)
