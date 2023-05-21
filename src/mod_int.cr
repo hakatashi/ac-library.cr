@@ -77,7 +77,7 @@ module AtCoder
         end
 
         def clone
-          self.new(@value)
+          self.class.new(@value)
         end
 
         def inv
