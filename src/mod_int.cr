@@ -45,11 +45,10 @@ module AtCoder
           @value = value.to_i64 % MOD
         end
 
-        # Change the initial capacity of this array to improve performance
-        @@factorials = Array(self).new(100_000_i64)
-
         def self.factorial(n)
           if @@factorials.empty?
+            # Change the initial capacity of this array to improve performance
+            @@factorials = Array(self).new(100_000_i64)
             @@factorials << self.new(1_i64)
           end
           @@factorials.size.upto(n) do |i|
