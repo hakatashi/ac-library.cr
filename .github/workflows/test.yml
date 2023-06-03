@@ -96,8 +96,7 @@ jobs:
       run: |
         git clone https://github.com/rbenv/ruby-build.git
         ./ruby-build/install.sh
-        ruby-build --definitions
-        apt-get install -y --no-install-recommends ruby-2.6.10
+        apt-get install -y --no-install-recommends ruby
     - name: Install pip dependencies
       run: |
         python3 -m pip install --upgrade pip
