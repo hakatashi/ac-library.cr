@@ -151,8 +151,8 @@ module AtCoder
             self / value
           end
 
-          def **(exponent)
-            if exponent == 0
+          def **(value)
+            if value == 0
               return self.class.new(1)
             end
 
@@ -160,8 +160,8 @@ module AtCoder
               self
             end
 
-            b = exponent > 0 ? self : inv
-            e = exponent.abs
+            b = value > 0 ? self : inv
+            e = value.abs
             ret = self.class.new(1)
             while e > 0
               if e.odd?
@@ -259,8 +259,8 @@ module AtCoder
             value == 0
           end
 
-          def pow(exponent : Int)
-            self ** exponent
+          def pow(value : Int)
+            self ** value
           end
 
           def <(value)
