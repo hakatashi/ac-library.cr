@@ -95,7 +95,6 @@ jobs:
     - name: Install Ruby
       run: |
         git clone --depth 1 https://github.com/rbenv/rbenv.git ~/.rbenv
-        (cd ~/.rbenv && src/configure && make -C src)
         export PATH="$HOME/.rbenv/bin:$PATH"
         eval "$(rbenv init - bash)"
         git clone --depth 1 https://github.com/rbenv/ruby-build.git "$(rbenv root)"/plugins/ruby-build
