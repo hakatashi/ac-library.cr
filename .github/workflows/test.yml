@@ -92,7 +92,7 @@ jobs:
     - name: Install dependencies
       run: |
         apt-get install python3 libpython3.8 python3-dev python3-pip bash libxml2-dev libxslt-dev build-essential binutils-dev libcurl4-openssl-dev zlib1g-dev libdw-dev libiberty-dev libyaml-dev libgdbm-dev libreadline-dev libncurses5-dev cmake curl wget time -y
-    - uses: Ruby Install
+    - name: Ruby Install
       run: |
         git clone https://github.com/rbenv/ruby-build.git
         sudo ./ruby-build/install.sh
