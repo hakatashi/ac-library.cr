@@ -12,7 +12,7 @@ jobs:
       matrix:
         version:
           - '0.33.0'
-          - '1.7.2'
+          - '1.7.3'
     runs-on: ubuntu-latest
     container:
       image: crystallang/crystal:${{ matrix.version }}
@@ -43,7 +43,7 @@ jobs:
     - name: Run Benchmarks
       run: crystal run --release benchmarks/*
     - name: Run coverage
-      if: ${{ matrix.version == '1.7.2' }}
+      if: ${{ matrix.version == '1.7.3' }}
       run: |
         shards build test --ignore-crystal-version
         kcov --clean --include-path=src coverage ./bin/test
@@ -55,7 +55,7 @@ jobs:
   lint:
     runs-on: ubuntu-latest
     container:
-      image: crystallang/crystal:1.7.2
+      image: crystallang/crystal:1.7.3
     steps:
     - uses: actions/checkout@v2
     - name: Install Crystal dependencies
@@ -69,7 +69,7 @@ jobs:
       matrix:
         version:
           - '0.33.0'
-          - '1.7.2'
+          - '1.7.3'
     runs-on: ubuntu-latest
     container:
       image: crystallang/crystal:${{ matrix.version }}
@@ -104,20 +104,20 @@ jobs:
     - name: Run verifier
       run: oj-verify run --jobs 4
     - name: Generate bundled docs
-      if: ${{ github.event_name == 'push' && matrix.version == '1.7.2' }}
+      if: ${{ github.event_name == 'push' && matrix.version == '1.7.3' }}
       run: oj-verify docs --jobs 4
     - name: Generate API docs
-      if: ${{ github.event_name == 'push' && matrix.version == '1.7.2' }}
+      if: ${{ github.event_name == 'push' && matrix.version == '1.7.3' }}
       run: crystal docs --progress --stats --time -o dist/api
     - name: Build bundled docs
-      if: ${{ github.event_name == 'push' && matrix.version == '1.7.2' }}
+      if: ${{ github.event_name == 'push' && matrix.version == '1.7.3' }}
       run: |
         gem install bundler
         bundle install --gemfile=.verify-helper/markdown/Gemfile --path .vendor/bundle
         bundle exec --gemfile=.verify-helper/markdown/Gemfile jekyll build --source .verify-helper/markdown --destination dist/docs --baseurl ac-library.cr/docs
     - name: Deploy docs to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
-      if: ${{ github.event_name == 'push' && matrix.version == '1.7.2' }}
+      if: ${{ github.event_name == 'push' && matrix.version == '1.7.3' }}
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./dist
