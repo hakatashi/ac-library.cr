@@ -114,8 +114,8 @@ module AtCoder
     end
 
     # Pushes value into the queue.
-    # This method returns self, so several calls can be chained. 
-    def push(v : T) : selfZ
+    # This method returns self, so several calls can be chained.
+    def push(v : T) : self
       @heap << v
       index = @heap.size - 1
       while index != 0
