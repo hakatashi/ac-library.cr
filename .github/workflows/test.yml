@@ -115,6 +115,9 @@ jobs:
     - verify
     steps:
     - uses: actions/checkout@v3
+    - name: Configure git
+      run: |
+        git config --global --add safe.directory /__w/ac-library.cr/ac-library.cr
     - name: Install Crystal dependencies
       run: |
         shards install
