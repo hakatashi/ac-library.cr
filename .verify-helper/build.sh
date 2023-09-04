@@ -12,7 +12,7 @@ if [ "$filename" -nt "${output}" ]; then
   elif [ -d /usr/local/share/crystal-1.9.1 ]; then
     /usr/local/share/crystal-1.9.1/bin/crystal build "$filename" -o "${output}" --error-trace $@ || exit 1
   elif [ -d /tmp/crystal-1.9.1 ]; then
-    /tmp/crystal-1.9.1/bin/crystal build "$filename" -o "${output}" --error-trace $@ || exit 1
+    /tmp/crystal-1.9.1-1/bin/crystal build "$filename" -o "${output}" --error-trace $@ || exit 1
   elif [[ "`crystal version`" == *"1.9.1"* ]]; then
     crystal build "$filename" -o "${output}" --error-trace $@ || exit 1
   else

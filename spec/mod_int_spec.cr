@@ -121,6 +121,13 @@ describe "ModInt1000000007" do
       (n // 10_000_000_000_i64).should eq -10 % 1_000_000_007_i64
     end
 
+    it "throws DivisionByZeroError when it tried to divide by zero" do
+      expect_raises(DivisionByZeroError) do
+        n = ModInt1000000007.new(700_i64)
+        n // 0
+      end
+    end
+
     it "generates number that multiplies with self into the original one" do
       1_i64.step(by: 9_837, to: 100_000) do |i|
         1_000_000_i64.step(by: 9_837, to: 100_000) do |j|
@@ -220,5 +227,8 @@ describe "static_modint" do
   it "can define new ModInt record using custom modulo" do
     n = ModInt7.new(3)
     (n + 10).should eq 6
+    (n - 20).should eq 4
+    (n * 10).should eq 2
+    (n / 11).should eq 6
   end
 end
