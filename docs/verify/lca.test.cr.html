@@ -102,7 +102,7 @@ h1 a:focus {
 
 <ul>
     <li><a href="/blob/master/verify/lca.test.cr">View this file on GitHub</a></li>
-    <li>Last update: 1970-01-01 00:00:00+00:00</li>
+    <li>Last update: 2023-09-04 21:11:40+00:00</li>
     
     <li>Problem: <a href="https://judge.yosupo.jp/problem/lca">https://judge.yosupo.jp/problem/lca</a>
 </li>
@@ -119,6 +119,15 @@ h1 a:focus {
 
 
 
+
+    <h2>Depends on</h2>
+    <ul>
+    
+        <li><a href="/ac-library.cr/docs/src/graph.cr"><img class="emoji" title=":x:" alt=":x:" src="https://github.githubassets.com/images/icons/emoji/unicode/274c.png" height="20" width="20"> src/graph.cr
+            
+        </a></li>
+    
+    </ul>
 
 
 
@@ -181,20 +190,509 @@ h1 a:focus {
 
 
 
-<figure class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">)</span><span class="o">:</span>
-  <span class="n">File</span> <span class="s">"/usr/local/lib/python3.10/dist-packages/onlinejudge_verify/documentation/build.py"</span><span class="p">,</span> <span class="n">line</span> <span class="mi">71</span><span class="p">,</span> <span class="n">in</span> <span class="n">_render_source_code_stat</span>
-    <span class="n">bundled_code</span> <span class="o">=</span> <span class="n">language</span><span class="p">.</span><span class="n">bundle</span><span class="p">(</span><span class="n">stat</span><span class="p">.</span><span class="n">path</span><span class="p">,</span> <span class="n">basedir</span><span class="o">=</span><span class="n">basedir</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="p">{</span><span class="err">'</span><span class="n">include_paths</span><span class="err">'</span><span class="o">:</span> <span class="p">[</span><span class="n">basedir</span><span class="p">]}).</span><span class="n">decode</span><span class="p">()</span>
-  <span class="n">File</span> <span class="s">"/usr/local/lib/python3.10/dist-packages/onlinejudge_verify/languages/user_defined.py"</span><span class="p">,</span> <span class="n">line</span> <span class="mi">71</span><span class="p">,</span> <span class="n">in</span> <span class="n">bundle</span>
-    <span class="k">return</span> <span class="n">subprocess</span><span class="p">.</span><span class="n">check_output</span><span class="p">(</span><span class="n">shlex</span><span class="p">.</span><span class="n">split</span><span class="p">(</span><span class="n">command</span><span class="p">))</span>
-  <span class="n">File</span> <span class="s">"/usr/lib/python3.10/subprocess.py"</span><span class="p">,</span> <span class="n">line</span> <span class="mi">421</span><span class="p">,</span> <span class="n">in</span> <span class="n">check_output</span>
-    <span class="k">return</span> <span class="n">run</span><span class="p">(</span><span class="o">*</span><span class="n">popenargs</span><span class="p">,</span> <span class="n">stdout</span><span class="o">=</span><span class="n">PIPE</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">,</span> <span class="n">check</span><span class="o">=</span><span class="n">True</span><span class="p">,</span>
-  <span class="n">File</span> <span class="s">"/usr/lib/python3.10/subprocess.py"</span><span class="p">,</span> <span class="n">line</span> <span class="mi">503</span><span class="p">,</span> <span class="n">in</span> <span class="n">run</span>
-    <span class="n">with</span> <span class="n">Popen</span><span class="p">(</span><span class="o">*</span><span class="n">popenargs</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="n">as</span> <span class="n">process</span><span class="o">:</span>
-  <span class="n">File</span> <span class="s">"/usr/lib/python3.10/subprocess.py"</span><span class="p">,</span> <span class="n">line</span> <span class="mi">971</span><span class="p">,</span> <span class="n">in</span> <span class="n">__init__</span>
-    <span class="n">self</span><span class="p">.</span><span class="n">_execute_child</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">executable</span><span class="p">,</span> <span class="n">preexec_fn</span><span class="p">,</span> <span class="n">close_fds</span><span class="p">,</span>
-  <span class="n">File</span> <span class="s">"/usr/lib/python3.10/subprocess.py"</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1863</span><span class="p">,</span> <span class="n">in</span> <span class="n">_execute_child</span>
-    <span class="n">raise</span> <span class="n">child_exception_type</span><span class="p">(</span><span class="n">errno_num</span><span class="p">,</span> <span class="n">err_msg</span><span class="p">,</span> <span class="n">err_filename</span><span class="p">)</span>
-<span class="n">FileNotFoundError</span><span class="o">:</span> <span class="p">[</span><span class="n">Errno</span> <span class="mi">2</span><span class="p">]</span> <span class="n">No</span> <span class="n">such</span> <span class="n">file</span> <span class="n">or</span> <span class="n">directory</span><span class="o">:</span> <span class="err">'</span><span class="n">bin</span><span class="o">/</span><span class="n">cr</span><span class="o">-</span><span class="n">bundle</span><span class="err">'</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span class="cp"># ac-library.cr by hakatashi https://github.com/google/ac-library.cr
+#
+# Copyright 2023 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+</span>
+<span class="cp"># verification-helper: PROBLEM https://judge.yosupo.jp/problem/lca
+</span>
+<span class="cp"># require "../src/graph.cr"
+# ac-library.cr by hakatashi https://github.com/google/ac-library.cr
+#
+# Copyright 2023 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+</span>
+<span class="cp"># require "./priority_queue.cr"
+# ac-library.cr by hakatashi https://github.com/google/ac-library.cr
+#
+# Copyright 2023 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+</span>
+<span class="n">module</span> <span class="n">AtCoder</span>
+  <span class="cp"># Implements standard priority queue like [std::priority_queue](https://en.cppreference.com/w/cpp/container/priority_queue).
+</span>  <span class="cp">#
+</span>  <span class="cp"># ```
+</span>  <span class="cp"># q = AtCoder::PriorityQueue(Int64).new
+</span>  <span class="cp"># q &lt;&lt; 1_i64
+</span>  <span class="cp"># q &lt;&lt; 3_i64
+</span>  <span class="cp"># q &lt;&lt; 2_i64
+</span>  <span class="cp"># q.pop # =&gt; 3
+</span>  <span class="cp"># q.pop # =&gt; 2
+</span>  <span class="cp"># q.pop # =&gt; 1
+</span>  <span class="cp"># ```
+</span>  <span class="k">class</span> <span class="nf">PriorityQueue</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
+    <span class="n">include</span> <span class="n">Enumerable</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
+
+    <span class="n">getter</span> <span class="n">heap</span> <span class="o">:</span> <span class="n">Array</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
+
+    <span class="cp"># Create a new queue in ascending order of priority.
+</span>    <span class="n">def</span> <span class="n">self</span><span class="p">.</span><span class="n">max</span>
+      <span class="n">self</span><span class="p">.</span><span class="k">new</span> <span class="p">{</span> <span class="o">|</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="o">|</span> <span class="n">a</span> <span class="o">&lt;=</span> <span class="n">b</span> <span class="p">}</span>
+    <span class="n">end</span>
+
+    <span class="cp"># Create a new queue in ascending order of priority with the elements in *enumerable*.
+</span>    <span class="n">def</span> <span class="n">self</span><span class="p">.</span><span class="n">max</span><span class="p">(</span><span class="n">enumerable</span> <span class="o">:</span> <span class="n">Enumerable</span><span class="p">(</span><span class="n">T</span><span class="p">))</span>
+      <span class="n">self</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="n">enumerable</span><span class="p">)</span> <span class="p">{</span> <span class="o">|</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="o">|</span> <span class="n">a</span> <span class="o">&lt;=</span> <span class="n">b</span> <span class="p">}</span>
+    <span class="n">end</span>
+
+    <span class="cp"># Create a new queue in descending order of priority.
+</span>    <span class="n">def</span> <span class="n">self</span><span class="p">.</span><span class="n">min</span>
+      <span class="n">self</span><span class="p">.</span><span class="k">new</span> <span class="p">{</span> <span class="o">|</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="o">|</span> <span class="n">a</span> <span class="o">&gt;=</span> <span class="n">b</span> <span class="p">}</span>
+    <span class="n">end</span>
+
+    <span class="cp"># Create a new queue in descending order of priority with the elements in *enumerable*.
+</span>    <span class="n">def</span> <span class="n">self</span><span class="p">.</span><span class="n">min</span><span class="p">(</span><span class="n">enumerable</span> <span class="o">:</span> <span class="n">Enumerable</span><span class="p">(</span><span class="n">T</span><span class="p">))</span>
+      <span class="n">self</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="n">enumerable</span><span class="p">)</span> <span class="p">{</span> <span class="o">|</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="o">|</span> <span class="n">a</span> <span class="o">&gt;=</span> <span class="n">b</span> <span class="p">}</span>
+    <span class="n">end</span>
+
+    <span class="n">def</span> <span class="n">initialize</span>
+      <span class="n">initialize</span> <span class="p">{</span> <span class="o">|</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="o">|</span> <span class="n">a</span> <span class="o">&lt;=</span> <span class="n">b</span> <span class="p">}</span>
+    <span class="n">end</span>
+
+    <span class="cp"># Initializes queue with the elements in *enumerable*.
+</span>    <span class="n">def</span> <span class="n">self</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="n">enumerable</span> <span class="o">:</span> <span class="n">Enumerable</span><span class="p">(</span><span class="n">T</span><span class="p">))</span>
+      <span class="n">self</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="n">enumerable</span><span class="p">)</span> <span class="p">{</span> <span class="o">|</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="o">|</span> <span class="n">a</span> <span class="o">&lt;=</span> <span class="n">b</span> <span class="p">}</span>
+    <span class="n">end</span>
+
+    <span class="cp"># Initializes queue with the custom comperator.
+</span>    <span class="cp">#
+</span>    <span class="cp"># If the second argument `b` should be popped earlier than
+</span>    <span class="cp"># the first argument `a`, return `true`. Else, return `false`.
+</span>    <span class="cp">#
+</span>    <span class="cp"># ```
+</span>    <span class="cp"># q = AtCoder::PriorityQueue(Int64).new { |a, b| a &gt;= b }
+</span>    <span class="cp"># q &lt;&lt; 1_i64
+</span>    <span class="cp"># q &lt;&lt; 3_i64
+</span>    <span class="cp"># q &lt;&lt; 2_i64
+</span>    <span class="cp"># q.pop # =&gt; 1
+</span>    <span class="cp"># q.pop # =&gt; 2
+</span>    <span class="cp"># q.pop # =&gt; 3
+</span>    <span class="cp"># ```
+</span>    <span class="n">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="o">&amp;</span><span class="n">block</span> <span class="o">:</span> <span class="n">T</span><span class="p">,</span> <span class="n">T</span> <span class="o">-&gt;</span> <span class="n">Bool</span><span class="p">)</span>
+      <span class="err">@</span><span class="n">heap</span> <span class="o">=</span> <span class="n">Array</span><span class="p">(</span><span class="n">T</span><span class="p">).</span><span class="k">new</span>
+      <span class="err">@</span><span class="n">compare_proc</span> <span class="o">=</span> <span class="n">block</span>
+    <span class="n">end</span>
+
+    <span class="cp"># Initializes queue with the elements in *enumerable* and the custom comperator.
+</span>    <span class="cp">#
+</span>    <span class="cp"># If the second argument `b` should be popped earlier than
+</span>    <span class="cp"># the first argument `a`, return `true`. Else, return `false`.
+</span>    <span class="cp">#
+</span>    <span class="cp"># ```
+</span>    <span class="cp"># q = AtCoder::PriorityQueue.new([1, 3, 2])</span> <span class="p">{</span> <span class="o">|</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="o">|</span> <span class="n">a</span> <span class="o">&gt;=</span> <span class="n">b</span> <span class="p">}</span>
+    <span class="cp"># q.pop # =&gt; 1
+</span>    <span class="cp"># q.pop # =&gt; 2
+</span>    <span class="cp"># q.pop # =&gt; 3
+</span>    <span class="cp"># ```
+</span>    <span class="n">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">enumerable</span> <span class="o">:</span> <span class="n">Enumerable</span><span class="p">(</span><span class="n">T</span><span class="p">),</span> <span class="o">&amp;</span><span class="n">block</span> <span class="o">:</span> <span class="n">T</span><span class="p">,</span> <span class="n">T</span> <span class="o">-&gt;</span> <span class="n">Bool</span><span class="p">)</span>
+      <span class="err">@</span><span class="n">heap</span> <span class="o">=</span> <span class="n">enumerable</span><span class="p">.</span><span class="n">to_a</span>
+      <span class="err">@</span><span class="n">compare_proc</span> <span class="o">=</span> <span class="n">block</span>
+
+      <span class="n">len</span> <span class="o">=</span> <span class="err">@</span><span class="n">heap</span><span class="p">.</span><span class="n">size</span>
+      <span class="p">(</span><span class="n">len</span> <span class="c1">// 2 - 1).downto(0) do |parent|</span>
+        <span class="n">v</span> <span class="o">=</span> <span class="err">@</span><span class="n">heap</span><span class="p">[</span><span class="n">parent</span><span class="p">]</span>
+        <span class="n">child</span> <span class="o">=</span> <span class="n">parent</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="k">while</span> <span class="n">child</span> <span class="o">&lt;</span> <span class="n">len</span>
+          <span class="k">if</span> <span class="n">child</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">&lt;</span> <span class="n">len</span> <span class="o">&amp;&amp;</span> <span class="err">@</span><span class="n">compare_proc</span><span class="p">.</span><span class="n">call</span><span class="p">(</span><span class="err">@</span><span class="n">heap</span><span class="p">[</span><span class="n">child</span><span class="p">],</span> <span class="err">@</span><span class="n">heap</span><span class="p">[</span><span class="n">child</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span>
+            <span class="n">child</span> <span class="o">+=</span> <span class="mi">1</span>
+          <span class="n">end</span>
+          <span class="n">unless</span> <span class="err">@</span><span class="n">compare_proc</span><span class="p">.</span><span class="n">call</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="err">@</span><span class="n">heap</span><span class="p">[</span><span class="n">child</span><span class="p">])</span>
+            <span class="k">break</span>
+          <span class="n">end</span>
+          <span class="err">@</span><span class="n">heap</span><span class="p">[</span><span class="n">parent</span><span class="p">]</span> <span class="o">=</span> <span class="err">@</span><span class="n">heap</span><span class="p">[</span><span class="n">child</span><span class="p">]</span>
+          <span class="n">parent</span> <span class="o">=</span> <span class="n">child</span>
+          <span class="n">child</span> <span class="o">=</span> <span class="n">parent</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="n">end</span>
+        <span class="err">@</span><span class="n">heap</span><span class="p">[</span><span class="n">parent</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
+      <span class="n">end</span>
+    <span class="n">end</span>
+
+    <span class="cp"># Pushes value into the queue.
+</span>    <span class="n">def</span> <span class="n">push</span><span class="p">(</span><span class="n">v</span> <span class="o">:</span> <span class="n">T</span><span class="p">)</span>
+      <span class="err">@</span><span class="n">heap</span> <span class="o">&lt;&lt;</span> <span class="n">v</span>
+      <span class="n">index</span> <span class="o">=</span> <span class="err">@</span><span class="n">heap</span><span class="p">.</span><span class="n">size</span> <span class="o">-</span> <span class="mi">1</span>
+      <span class="k">while</span> <span class="n">index</span> <span class="o">!=</span> <span class="mi">0</span>
+        <span class="n">parent</span> <span class="o">=</span> <span class="p">(</span><span class="n">index</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="c1">// 2</span>
+        <span class="k">if</span> <span class="err">@</span><span class="n">compare_proc</span><span class="p">.</span><span class="n">call</span><span class="p">(</span><span class="err">@</span><span class="n">heap</span><span class="p">[</span><span class="n">index</span><span class="p">],</span> <span class="err">@</span><span class="n">heap</span><span class="p">[</span><span class="n">parent</span><span class="p">])</span>
+          <span class="k">break</span>
+        <span class="n">end</span>
+        <span class="err">@</span><span class="n">heap</span><span class="p">[</span><span class="n">parent</span><span class="p">],</span> <span class="err">@</span><span class="n">heap</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="err">@</span><span class="n">heap</span><span class="p">[</span><span class="n">index</span><span class="p">],</span> <span class="err">@</span><span class="n">heap</span><span class="p">[</span><span class="n">parent</span><span class="p">]</span>
+        <span class="n">index</span> <span class="o">=</span> <span class="n">parent</span>
+      <span class="n">end</span>
+    <span class="n">end</span>
+
+    <span class="cp"># Alias of `push`
+</span>    <span class="n">def</span> <span class="o">&lt;&lt;</span><span class="p">(</span><span class="n">v</span> <span class="o">:</span> <span class="n">T</span><span class="p">)</span>
+      <span class="n">push</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+    <span class="n">end</span>
+
+    <span class="cp"># Pops value from the queue.
+</span>    <span class="n">def</span> <span class="n">pop</span>
+      <span class="k">if</span> <span class="err">@</span><span class="n">heap</span><span class="p">.</span><span class="n">size</span> <span class="o">==</span> <span class="mi">0</span>
+        <span class="k">return</span> <span class="n">nil</span>
+      <span class="n">end</span>
+      <span class="k">if</span> <span class="err">@</span><span class="n">heap</span><span class="p">.</span><span class="n">size</span> <span class="o">==</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="err">@</span><span class="n">heap</span><span class="p">.</span><span class="n">pop</span>
+      <span class="n">end</span>
+      <span class="n">ret</span> <span class="o">=</span> <span class="err">@</span><span class="n">heap</span><span class="p">.</span><span class="n">first</span>
+      <span class="err">@</span><span class="n">heap</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="err">@</span><span class="n">heap</span><span class="p">.</span><span class="n">pop</span>
+      <span class="n">index</span> <span class="o">=</span> <span class="mi">0</span>
+      <span class="k">while</span> <span class="n">index</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">&lt;</span> <span class="err">@</span><span class="n">heap</span><span class="p">.</span><span class="n">size</span>
+        <span class="n">child</span> <span class="o">=</span> <span class="k">if</span> <span class="n">index</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">&lt;</span> <span class="err">@</span><span class="n">heap</span><span class="p">.</span><span class="n">size</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="err">@</span><span class="n">compare_proc</span><span class="p">.</span><span class="n">call</span><span class="p">(</span><span class="err">@</span><span class="n">heap</span><span class="p">[</span><span class="n">index</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span><span class="p">],</span> <span class="err">@</span><span class="n">heap</span><span class="p">[</span><span class="n">index</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span>
+                  <span class="n">index</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span>
+                <span class="k">else</span>
+                  <span class="n">index</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span>
+                <span class="n">end</span>
+        <span class="k">if</span> <span class="err">@</span><span class="n">compare_proc</span><span class="p">.</span><span class="n">call</span><span class="p">(</span><span class="err">@</span><span class="n">heap</span><span class="p">[</span><span class="n">child</span><span class="p">],</span> <span class="err">@</span><span class="n">heap</span><span class="p">[</span><span class="n">index</span><span class="p">])</span>
+          <span class="k">break</span>
+        <span class="n">end</span>
+        <span class="err">@</span><span class="n">heap</span><span class="p">[</span><span class="n">child</span><span class="p">],</span> <span class="err">@</span><span class="n">heap</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="err">@</span><span class="n">heap</span><span class="p">[</span><span class="n">index</span><span class="p">],</span> <span class="err">@</span><span class="n">heap</span><span class="p">[</span><span class="n">child</span><span class="p">]</span>
+        <span class="n">index</span> <span class="o">=</span> <span class="n">child</span>
+      <span class="n">end</span>
+      <span class="n">ret</span>
+    <span class="n">end</span>
+
+    <span class="cp"># Yields each item in the queue in comparator's order.
+</span>    <span class="n">def</span> <span class="n">each</span><span class="p">(</span><span class="o">&amp;</span><span class="p">)</span>
+      <span class="err">@</span><span class="n">heap</span><span class="p">.</span><span class="n">sort</span> <span class="p">{</span> <span class="o">|</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="o">|</span> <span class="err">@</span><span class="n">compare_proc</span><span class="p">.</span><span class="n">call</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="o">?</span> <span class="mi">1</span> <span class="o">:</span> <span class="o">-</span><span class="mi">1</span> <span class="p">}.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">e</span><span class="o">|</span>
+        <span class="n">yield</span> <span class="n">e</span>
+      <span class="n">end</span>
+    <span class="n">end</span>
+
+    <span class="cp"># Returns, but does not remove, the head of the queue.
+</span>    <span class="n">def</span> <span class="n">first</span><span class="p">(</span><span class="o">&amp;</span><span class="p">)</span>
+      <span class="err">@</span><span class="n">heap</span><span class="p">.</span><span class="n">first</span> <span class="p">{</span> <span class="n">yield</span> <span class="p">}</span>
+    <span class="n">end</span>
+
+    <span class="cp"># Returns `true` if the queue is empty.
+</span>    <span class="n">delegate</span> <span class="o">:</span><span class="n">empty</span><span class="o">?</span><span class="p">,</span> <span class="n">to</span><span class="o">:</span> <span class="err">@</span><span class="n">heap</span>
+
+    <span class="cp"># Returns size of the queue.
+</span>    <span class="n">delegate</span> <span class="o">:</span><span class="n">size</span><span class="p">,</span> <span class="n">to</span><span class="o">:</span> <span class="err">@</span><span class="n">heap</span>
+  <span class="n">end</span>
+<span class="n">end</span>
+
+<span class="n">module</span> <span class="n">AtCoder</span>
+  <span class="k">class</span> <span class="nc">Graph</span><span class="p">(</span><span class="n">NodeInfo</span><span class="p">,</span> <span class="n">EdgeInfo</span><span class="p">)</span>
+    <span class="err">@</span><span class="n">size_bits</span> <span class="o">:</span> <span class="n">Int32</span>
+    <span class="n">getter</span> <span class="n">visited</span> <span class="o">:</span> <span class="n">Set</span><span class="p">(</span><span class="n">Int64</span><span class="p">)</span>
+
+    <span class="n">def</span> <span class="n">initialize</span><span class="p">(</span><span class="err">@</span><span class="n">nodes</span> <span class="o">:</span> <span class="n">Array</span><span class="p">(</span><span class="n">NodeInfo</span><span class="p">))</span>
+      <span class="err">@</span><span class="n">size</span> <span class="o">=</span> <span class="err">@</span><span class="n">nodes</span><span class="p">.</span><span class="n">size</span><span class="p">.</span><span class="n">to_i64</span>
+      <span class="err">@</span><span class="n">edges</span> <span class="o">=</span> <span class="p">[]</span> <span class="n">of</span> <span class="n">EdgeInfo</span>
+      <span class="err">@</span><span class="n">adjacencies</span> <span class="o">=</span> <span class="n">Array</span><span class="p">(</span><span class="n">Hash</span><span class="p">(</span><span class="n">Int64</span><span class="p">,</span> <span class="n">Int64</span><span class="p">)).</span><span class="k">new</span><span class="p">(</span><span class="err">@</span><span class="n">size</span><span class="p">)</span> <span class="p">{</span> <span class="n">Hash</span><span class="p">(</span><span class="n">Int64</span><span class="p">,</span> <span class="n">Int64</span><span class="p">).</span><span class="k">new</span> <span class="p">}</span>
+      <span class="err">@</span><span class="n">visited</span> <span class="o">=</span> <span class="n">Set</span><span class="p">(</span><span class="n">Int64</span><span class="p">).</span><span class="k">new</span>
+      <span class="err">@</span><span class="n">size_bits</span> <span class="o">=</span> <span class="err">@</span><span class="n">size</span><span class="p">.</span><span class="n">to_s</span><span class="p">(</span><span class="mi">2</span><span class="p">).</span><span class="n">size</span>
+    <span class="n">end</span>
+
+    <span class="n">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="err">@</span><span class="n">size</span> <span class="o">:</span> <span class="n">Int64</span><span class="p">,</span> <span class="n">initial_node</span> <span class="o">:</span> <span class="n">NodeInfo</span> <span class="o">=</span> <span class="n">nil</span><span class="p">)</span>
+      <span class="err">@</span><span class="n">nodes</span> <span class="o">=</span> <span class="n">Array</span><span class="p">(</span><span class="n">NodeInfo</span><span class="p">).</span><span class="k">new</span><span class="p">(</span><span class="err">@</span><span class="n">size</span><span class="p">,</span> <span class="n">initial_node</span><span class="p">)</span>
+      <span class="err">@</span><span class="n">edges</span> <span class="o">=</span> <span class="p">[]</span> <span class="n">of</span> <span class="n">EdgeInfo</span>
+      <span class="err">@</span><span class="n">adjacencies</span> <span class="o">=</span> <span class="n">Array</span><span class="p">(</span><span class="n">Hash</span><span class="p">(</span><span class="n">Int64</span><span class="p">,</span> <span class="n">Int64</span><span class="p">)).</span><span class="k">new</span><span class="p">(</span><span class="err">@</span><span class="n">size</span><span class="p">)</span> <span class="p">{</span> <span class="n">Hash</span><span class="p">(</span><span class="n">Int64</span><span class="p">,</span> <span class="n">Int64</span><span class="p">).</span><span class="k">new</span> <span class="p">}</span>
+      <span class="err">@</span><span class="n">visited</span> <span class="o">=</span> <span class="n">Set</span><span class="p">(</span><span class="n">Int64</span><span class="p">).</span><span class="k">new</span>
+      <span class="err">@</span><span class="n">size_bits</span> <span class="o">=</span> <span class="err">@</span><span class="n">size</span><span class="p">.</span><span class="n">to_s</span><span class="p">(</span><span class="mi">2</span><span class="p">).</span><span class="n">size</span>
+    <span class="n">end</span>
+
+    <span class="cp"># Performs Dijkstra's Algorithm to calculate the distance of each node from `start_node`.
+</span>    <span class="cp"># To use this method, `EdgeInfo` must implement `.zero` and `#+(EdgeInfo)` and `#&gt;(EdgeInfo)`.
+</span>    <span class="n">def</span> <span class="nf">dijkstra</span><span class="p">(</span><span class="n">start_node</span><span class="p">)</span>
+      <span class="n">dist</span> <span class="o">=</span> <span class="n">Array</span><span class="p">(</span><span class="n">EdgeInfo</span> <span class="o">|</span> <span class="n">Nil</span><span class="p">).</span><span class="k">new</span><span class="p">(</span><span class="err">@</span><span class="n">size</span><span class="p">,</span> <span class="n">nil</span><span class="p">)</span>
+      <span class="n">dist</span><span class="p">[</span><span class="n">start_node</span><span class="p">]</span> <span class="o">=</span> <span class="n">EdgeInfo</span><span class="p">.</span><span class="n">zero</span>
+
+      <span class="n">prev_nodes</span> <span class="o">=</span> <span class="n">Array</span><span class="p">(</span><span class="n">Int64</span> <span class="o">|</span> <span class="n">Nil</span><span class="p">).</span><span class="k">new</span><span class="p">(</span><span class="err">@</span><span class="n">size</span><span class="p">,</span> <span class="n">nil</span><span class="p">)</span>
+
+      <span class="n">queue</span> <span class="o">=</span> <span class="n">AtCoder</span><span class="o">::</span><span class="n">PriorityQueue</span><span class="p">({</span><span class="n">EdgeInfo</span><span class="p">,</span> <span class="n">Int64</span><span class="p">}).</span><span class="k">new</span> <span class="p">{</span> <span class="o">|</span><span class="p">(</span><span class="n">ad</span><span class="p">,</span> <span class="n">av</span><span class="p">),</span> <span class="p">(</span><span class="n">bd</span><span class="p">,</span> <span class="n">bv</span><span class="p">)</span><span class="o">|</span> <span class="n">ad</span> <span class="o">&gt;</span> <span class="n">bd</span> <span class="p">}</span>
+      <span class="n">queue</span> <span class="o">&lt;&lt;</span> <span class="p">{</span><span class="n">EdgeInfo</span><span class="p">.</span><span class="n">zero</span><span class="p">,</span> <span class="n">start_node</span><span class="p">.</span><span class="n">to_i64</span><span class="p">}</span>
+
+      <span class="n">until</span> <span class="n">queue</span><span class="p">.</span><span class="n">empty</span><span class="o">?</span>
+        <span class="n">d</span><span class="p">,</span> <span class="n">v</span> <span class="o">=</span> <span class="n">queue</span><span class="p">.</span><span class="n">pop</span><span class="p">.</span><span class="n">not_nil</span><span class="o">!</span>
+        <span class="n">current_dist</span> <span class="o">=</span> <span class="n">dist</span><span class="p">[</span><span class="n">v</span><span class="p">].</span><span class="n">not_nil</span><span class="o">!</span>
+        <span class="n">next</span> <span class="k">if</span> <span class="n">d</span> <span class="o">&gt;</span> <span class="n">current_dist</span>
+
+        <span class="err">@</span><span class="n">adjacencies</span><span class="p">[</span><span class="n">v</span><span class="p">].</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="p">(</span><span class="n">to</span><span class="p">,</span> <span class="n">edge_id</span><span class="p">)</span><span class="o">|</span>
+          <span class="n">cost</span> <span class="o">=</span> <span class="err">@</span><span class="n">edges</span><span class="p">[</span><span class="n">edge_id</span><span class="p">]</span>
+          <span class="n">target_dist</span> <span class="o">=</span> <span class="n">dist</span><span class="p">[</span><span class="n">to</span><span class="p">]</span>
+          <span class="k">if</span> <span class="n">target_dist</span><span class="p">.</span><span class="n">nil</span><span class="o">?</span> <span class="o">||</span> <span class="n">target_dist</span> <span class="o">&gt;</span> <span class="n">current_dist</span> <span class="o">+</span> <span class="n">cost</span>
+            <span class="n">dist</span><span class="p">[</span><span class="n">to</span><span class="p">]</span> <span class="o">=</span> <span class="n">current_dist</span> <span class="o">+</span> <span class="n">cost</span>
+            <span class="n">prev_nodes</span><span class="p">[</span><span class="n">to</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
+            <span class="n">queue</span> <span class="o">&lt;&lt;</span> <span class="p">{</span><span class="n">current_dist</span> <span class="o">+</span> <span class="n">cost</span><span class="p">,</span> <span class="n">to</span><span class="p">}</span>
+          <span class="n">end</span>
+        <span class="n">end</span>
+      <span class="n">end</span>
+
+      <span class="n">Array</span><span class="p">({</span><span class="n">dist</span><span class="o">:</span> <span class="n">EdgeInfo</span> <span class="o">|</span> <span class="n">Nil</span><span class="p">,</span> <span class="n">prev</span><span class="o">:</span> <span class="n">Int64</span> <span class="o">|</span> <span class="n">Nil</span><span class="p">}).</span><span class="k">new</span><span class="p">(</span><span class="err">@</span><span class="n">size</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">i</span><span class="o">|</span>
+        <span class="p">{</span><span class="n">dist</span><span class="o">:</span> <span class="n">dist</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">prev</span><span class="o">:</span> <span class="n">prev_nodes</span><span class="p">[</span><span class="n">i</span><span class="p">]}</span>
+      <span class="n">end</span>
+    <span class="n">end</span>
+
+    <span class="n">def</span> <span class="n">dfs</span><span class="p">(</span><span class="n">node</span> <span class="o">:</span> <span class="n">Int64</span><span class="p">,</span> <span class="n">initial_value</span> <span class="o">:</span> <span class="n">T</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">block</span> <span class="o">:</span> <span class="n">Int64</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">NamedTuple</span><span class="p">(</span>
+              <span class="n">node</span><span class="o">:</span> <span class="n">Int64</span><span class="p">,</span>
+              <span class="n">node_info</span><span class="o">:</span> <span class="n">NodeInfo</span> <span class="o">|</span> <span class="n">Nil</span><span class="p">,</span>
+              <span class="n">edge</span><span class="o">:</span> <span class="n">Int64</span> <span class="o">|</span> <span class="n">Nil</span><span class="p">,</span>
+              <span class="n">edge_info</span><span class="o">:</span> <span class="n">EdgeInfo</span> <span class="o">|</span> <span class="n">Nil</span><span class="p">,</span>
+              <span class="n">parent</span><span class="o">:</span> <span class="n">Int64</span><span class="p">,</span>
+            <span class="p">),</span> <span class="p">(</span><span class="n">T</span> <span class="o">-&gt;</span><span class="p">)</span> <span class="o">-&gt;</span><span class="p">)</span> <span class="n">forall</span> <span class="n">T</span>
+      <span class="err">@</span><span class="n">visited</span> <span class="o">=</span> <span class="n">Set</span><span class="p">(</span><span class="n">Int64</span><span class="p">).</span><span class="k">new</span>
+      <span class="n">info</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="nl">node:</span>      <span class="n">node</span><span class="p">,</span>
+        <span class="nl">node_info:</span> <span class="err">@</span><span class="n">nodes</span><span class="p">[</span><span class="n">node</span><span class="p">].</span><span class="n">as</span><span class="p">(</span><span class="n">NodeInfo</span> <span class="o">|</span> <span class="n">Nil</span><span class="p">),</span>
+        <span class="nl">edge:</span>      <span class="n">nil</span><span class="p">.</span><span class="n">as</span><span class="p">(</span><span class="n">Int64</span> <span class="o">|</span> <span class="n">Nil</span><span class="p">),</span>
+        <span class="nl">edge_info:</span> <span class="n">nil</span><span class="p">.</span><span class="n">as</span><span class="p">(</span><span class="n">EdgeInfo</span> <span class="o">|</span> <span class="n">Nil</span><span class="p">),</span>
+        <span class="nl">parent:</span>    <span class="o">-</span><span class="mi">1</span><span class="n">_i64</span><span class="p">,</span>
+      <span class="p">}</span>
+      <span class="n">block</span><span class="p">.</span><span class="n">call</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">initial_value</span><span class="p">,</span> <span class="n">info</span><span class="p">,</span> <span class="o">-&gt;</span><span class="p">(</span><span class="n">new_value</span> <span class="o">:</span> <span class="n">T</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">dfs</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="n">_i64</span><span class="p">,</span> <span class="n">new_value</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">block</span><span class="p">)</span>
+      <span class="p">})</span>
+    <span class="n">end</span>
+
+    <span class="k">private</span> <span class="n">def</span> <span class="nf">dfs</span><span class="p">(</span><span class="n">node</span> <span class="o">:</span> <span class="n">Int64</span><span class="p">,</span> <span class="n">parent</span> <span class="o">:</span> <span class="n">Int64</span><span class="p">,</span> <span class="n">value</span> <span class="o">:</span> <span class="n">T</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">block</span> <span class="o">:</span> <span class="n">Int64</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">NamedTuple</span><span class="p">(</span>
+                      <span class="n">node</span><span class="o">:</span> <span class="n">Int64</span><span class="p">,</span>
+                      <span class="n">node_info</span><span class="o">:</span> <span class="n">NodeInfo</span> <span class="o">|</span> <span class="n">Nil</span><span class="p">,</span>
+                      <span class="n">edge</span><span class="o">:</span> <span class="n">Int64</span> <span class="o">|</span> <span class="n">Nil</span><span class="p">,</span>
+                      <span class="n">edge_info</span><span class="o">:</span> <span class="n">EdgeInfo</span> <span class="o">|</span> <span class="n">Nil</span><span class="p">,</span>
+                      <span class="n">parent</span><span class="o">:</span> <span class="n">Int64</span><span class="p">,</span>
+                    <span class="p">),</span> <span class="p">(</span><span class="n">T</span> <span class="o">-&gt;</span><span class="p">)</span> <span class="o">-&gt;</span><span class="p">)</span> <span class="n">forall</span> <span class="n">T</span>
+      <span class="err">@</span><span class="n">visited</span> <span class="o">&lt;&lt;</span> <span class="n">node</span>
+      <span class="err">@</span><span class="n">adjacencies</span><span class="p">[</span><span class="n">node</span><span class="p">].</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="p">(</span><span class="n">child</span><span class="p">,</span> <span class="n">edge</span><span class="p">)</span><span class="o">|</span>
+        <span class="n">next</span> <span class="k">if</span> <span class="err">@</span><span class="n">visited</span><span class="p">.</span><span class="n">includes</span><span class="o">?</span><span class="p">(</span><span class="n">child</span><span class="p">)</span>
+        <span class="n">info</span> <span class="o">=</span> <span class="p">{</span>
+          <span class="nl">node:</span>      <span class="n">child</span><span class="p">,</span>
+          <span class="nl">node_info:</span> <span class="err">@</span><span class="n">nodes</span><span class="p">[</span><span class="n">child</span><span class="p">].</span><span class="n">as</span><span class="p">(</span><span class="n">NodeInfo</span> <span class="o">|</span> <span class="n">Nil</span><span class="p">),</span>
+          <span class="nl">edge:</span>      <span class="n">edge</span><span class="p">.</span><span class="n">as</span><span class="p">(</span><span class="n">Int64</span> <span class="o">|</span> <span class="n">Nil</span><span class="p">),</span>
+          <span class="nl">edge_info:</span> <span class="err">@</span><span class="n">edges</span><span class="p">[</span><span class="n">edge</span><span class="p">].</span><span class="n">as</span><span class="p">(</span><span class="n">EdgeInfo</span> <span class="o">|</span> <span class="n">Nil</span><span class="p">),</span>
+          <span class="nl">parent:</span>    <span class="n">node</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="n">block</span><span class="p">.</span><span class="n">call</span><span class="p">(</span><span class="n">child</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">info</span><span class="p">,</span> <span class="o">-&gt;</span><span class="p">(</span><span class="n">new_value</span> <span class="o">:</span> <span class="n">T</span><span class="p">)</span> <span class="p">{</span>
+          <span class="n">dfs</span><span class="p">(</span><span class="n">child</span><span class="p">,</span> <span class="n">node</span><span class="p">,</span> <span class="n">new_value</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">block</span><span class="p">)</span>
+        <span class="p">})</span>
+      <span class="n">end</span>
+    <span class="n">end</span>
+  <span class="n">end</span>
+
+  <span class="k">class</span> <span class="nf">DirectedGraph</span><span class="p">(</span><span class="n">NodeInfo</span><span class="p">,</span> <span class="n">EdgeInfo</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">Graph</span><span class="p">(</span><span class="n">NodeInfo</span><span class="p">,</span> <span class="n">EdgeInfo</span><span class="p">)</span>
+    <span class="n">def</span> <span class="n">add_edge</span><span class="p">(</span><span class="n">from</span><span class="p">,</span> <span class="n">to</span><span class="p">,</span> <span class="n">edge</span> <span class="o">:</span> <span class="n">EdgeInfo</span> <span class="o">=</span> <span class="mi">1</span><span class="n">_i64</span><span class="p">)</span>
+      <span class="err">@</span><span class="n">edges</span> <span class="o">&lt;&lt;</span> <span class="n">edge</span>
+      <span class="n">edge_id</span> <span class="o">=</span> <span class="err">@</span><span class="n">edges</span><span class="p">.</span><span class="n">size</span><span class="p">.</span><span class="n">to_i64</span> <span class="o">-</span> <span class="mi">1</span>
+      <span class="err">@</span><span class="n">adjacencies</span><span class="p">[</span><span class="n">from</span><span class="p">][</span><span class="n">to</span><span class="p">.</span><span class="n">to_i64</span><span class="p">]</span> <span class="o">=</span> <span class="n">edge_id</span>
+      <span class="n">edge_id</span>
+    <span class="n">end</span>
+
+    <span class="n">def</span> <span class="n">get_edge</span><span class="p">(</span><span class="n">from</span><span class="p">,</span> <span class="n">to</span><span class="p">)</span>
+      <span class="n">edge_id</span> <span class="o">=</span> <span class="err">@</span><span class="n">adjacencies</span><span class="p">[</span><span class="n">from</span><span class="p">][</span><span class="n">to</span><span class="p">.</span><span class="n">to_i64</span><span class="p">]</span>
+      <span class="err">@</span><span class="n">edges</span><span class="p">[</span><span class="n">edge_id</span><span class="p">]</span>
+    <span class="n">end</span>
+
+    <span class="n">def</span> <span class="n">update_edge</span><span class="p">(</span><span class="n">from</span><span class="p">,</span> <span class="n">to</span><span class="p">,</span> <span class="n">edge</span> <span class="o">:</span> <span class="n">EdgeInfo</span> <span class="o">=</span> <span class="mi">1</span><span class="n">_i64</span><span class="p">)</span>
+      <span class="n">edge_id</span> <span class="o">=</span> <span class="err">@</span><span class="n">adjacencies</span><span class="p">[</span><span class="n">from</span><span class="p">][</span><span class="n">to</span><span class="p">.</span><span class="n">to_i64</span><span class="p">]</span>
+      <span class="err">@</span><span class="n">edges</span><span class="p">[</span><span class="n">edge_id</span><span class="p">]</span> <span class="o">=</span> <span class="n">edge</span>
+      <span class="n">edge_id</span>
+    <span class="n">end</span>
+  <span class="n">end</span>
+
+  <span class="k">class</span> <span class="nc">UndirectedGraph</span><span class="p">(</span><span class="n">NodeInfo</span><span class="p">,</span> <span class="n">EdgeInfo</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">Graph</span><span class="p">(</span><span class="n">NodeInfo</span><span class="p">,</span> <span class="n">EdgeInfo</span><span class="p">)</span>
+    <span class="n">def</span> <span class="n">add_edge</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">edge</span> <span class="o">:</span> <span class="n">EdgeInfo</span> <span class="o">=</span> <span class="mi">1</span><span class="n">_i64</span><span class="p">)</span>
+      <span class="err">@</span><span class="n">edges</span> <span class="o">&lt;&lt;</span> <span class="n">edge</span>
+      <span class="n">edge_id</span> <span class="o">=</span> <span class="err">@</span><span class="n">edges</span><span class="p">.</span><span class="n">size</span><span class="p">.</span><span class="n">to_i64</span> <span class="o">-</span> <span class="mi">1</span>
+      <span class="err">@</span><span class="n">adjacencies</span><span class="p">[</span><span class="n">a</span><span class="p">][</span><span class="n">b</span><span class="p">.</span><span class="n">to_i64</span><span class="p">]</span> <span class="o">=</span> <span class="n">edge_id</span>
+      <span class="err">@</span><span class="n">adjacencies</span><span class="p">[</span><span class="n">b</span><span class="p">][</span><span class="n">a</span><span class="p">.</span><span class="n">to_i64</span><span class="p">]</span> <span class="o">=</span> <span class="n">edge_id</span>
+      <span class="n">edge_id</span>
+    <span class="n">end</span>
+
+    <span class="n">def</span> <span class="n">get_edge</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+      <span class="n">edge_id</span> <span class="o">=</span> <span class="err">@</span><span class="n">adjacencies</span><span class="p">[</span><span class="n">a</span><span class="p">][</span><span class="n">b</span><span class="p">.</span><span class="n">to_i64</span><span class="p">]</span>
+      <span class="err">@</span><span class="n">edges</span><span class="p">[</span><span class="n">edge_id</span><span class="p">]</span>
+    <span class="n">end</span>
+
+    <span class="n">def</span> <span class="n">update_edge</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">edge</span> <span class="o">:</span> <span class="n">EdgeInfo</span> <span class="o">=</span> <span class="mi">1</span><span class="n">_i64</span><span class="p">)</span>
+      <span class="n">edge_id</span> <span class="o">=</span> <span class="err">@</span><span class="n">adjacencies</span><span class="p">[</span><span class="n">a</span><span class="p">][</span><span class="n">b</span><span class="p">.</span><span class="n">to_i64</span><span class="p">]</span>
+      <span class="err">@</span><span class="n">edges</span><span class="p">[</span><span class="n">edge_id</span><span class="p">]</span> <span class="o">=</span> <span class="n">edge</span>
+      <span class="n">edge_id</span>
+    <span class="n">end</span>
+  <span class="n">end</span>
+
+  <span class="k">class</span> <span class="nc">Tree</span><span class="p">(</span><span class="n">NodeInfo</span><span class="p">,</span> <span class="n">EdgeInfo</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">UndirectedGraph</span><span class="p">(</span><span class="n">NodeInfo</span><span class="p">,</span> <span class="n">EdgeInfo</span><span class="p">)</span>
+    <span class="err">@</span><span class="n">lca_root</span> <span class="o">:</span> <span class="n">Int64</span> <span class="o">|</span> <span class="n">Nil</span>
+    <span class="err">@</span><span class="n">lca_ancestors</span> <span class="o">:</span> <span class="n">Array</span><span class="p">(</span><span class="n">Array</span><span class="p">(</span><span class="n">Int64</span><span class="p">))</span> <span class="o">|</span> <span class="n">Nil</span>
+    <span class="err">@</span><span class="n">lca_depths</span> <span class="o">:</span> <span class="n">Array</span><span class="p">(</span><span class="n">Int64</span><span class="p">)</span> <span class="o">|</span> <span class="n">Nil</span>
+
+    <span class="n">def</span> <span class="n">diameter</span>
+      <span class="err">@</span><span class="n">farthest_node</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="n">_i64</span>
+      <span class="err">@</span><span class="n">farthest_depth</span> <span class="o">=</span> <span class="mi">0</span><span class="n">_i64</span>
+      <span class="n">dfs</span><span class="p">(</span><span class="mi">0</span><span class="n">_i64</span><span class="p">,</span> <span class="mi">0</span><span class="n">_i64</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">node</span><span class="p">,</span> <span class="n">depth</span><span class="p">,</span> <span class="n">info</span><span class="p">,</span> <span class="n">callback</span><span class="o">|</span>
+        <span class="n">weight</span> <span class="o">=</span> <span class="n">info</span><span class="p">[</span><span class="o">:</span><span class="n">edge_info</span><span class="p">]</span>
+        <span class="n">depth</span> <span class="o">+=</span> <span class="n">weight</span><span class="p">.</span><span class="n">nil</span><span class="o">?</span> <span class="o">?</span> <span class="mi">0</span> <span class="o">:</span> <span class="n">weight</span>
+        <span class="k">if</span> <span class="err">@</span><span class="n">farthest_depth</span><span class="p">.</span><span class="n">not_nil</span><span class="o">!</span> <span class="o">&lt;</span> <span class="n">depth</span>
+          <span class="err">@</span><span class="n">farthest_node</span> <span class="o">=</span> <span class="n">node</span>
+          <span class="err">@</span><span class="n">farthest_depth</span> <span class="o">=</span> <span class="n">depth</span>
+        <span class="n">end</span>
+        <span class="n">callback</span><span class="p">.</span><span class="n">call</span><span class="p">(</span><span class="n">depth</span><span class="p">)</span>
+      <span class="n">end</span>
+
+      <span class="n">start_node</span> <span class="o">=</span> <span class="err">@</span><span class="n">farthest_node</span><span class="p">.</span><span class="n">not_nil</span><span class="o">!</span>
+      <span class="err">@</span><span class="n">farthest_node</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="n">_i64</span>
+      <span class="err">@</span><span class="n">farthest_depth</span> <span class="o">=</span> <span class="mi">0</span><span class="n">_i64</span>
+      <span class="err">@</span><span class="n">parents</span> <span class="o">=</span> <span class="n">Array</span><span class="p">(</span><span class="n">Int64</span><span class="p">).</span><span class="k">new</span><span class="p">(</span><span class="err">@</span><span class="n">size</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="n">_i64</span><span class="p">)</span>
+      <span class="n">dfs</span><span class="p">(</span><span class="n">start_node</span><span class="p">,</span> <span class="mi">0</span><span class="n">_i64</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">node</span><span class="p">,</span> <span class="n">depth</span><span class="p">,</span> <span class="n">info</span><span class="p">,</span> <span class="n">callback</span><span class="o">|</span>
+        <span class="n">weight</span> <span class="o">=</span> <span class="n">info</span><span class="p">[</span><span class="o">:</span><span class="n">edge_info</span><span class="p">]</span>
+        <span class="n">depth</span> <span class="o">+=</span> <span class="n">weight</span><span class="p">.</span><span class="n">nil</span><span class="o">?</span> <span class="o">?</span> <span class="mi">0</span> <span class="o">:</span> <span class="n">weight</span>
+        <span class="err">@</span><span class="n">parents</span><span class="p">.</span><span class="n">not_nil</span><span class="o">!</span><span class="p">[</span><span class="n">node</span><span class="p">]</span> <span class="o">=</span> <span class="n">info</span><span class="p">[</span><span class="o">:</span><span class="n">parent</span><span class="p">]</span>
+        <span class="k">if</span> <span class="err">@</span><span class="n">farthest_depth</span><span class="p">.</span><span class="n">not_nil</span><span class="o">!</span> <span class="o">&lt;</span> <span class="n">depth</span>
+          <span class="err">@</span><span class="n">farthest_node</span> <span class="o">=</span> <span class="n">node</span>
+          <span class="err">@</span><span class="n">farthest_depth</span> <span class="o">=</span> <span class="n">depth</span>
+        <span class="n">end</span>
+        <span class="n">callback</span><span class="p">.</span><span class="n">call</span><span class="p">(</span><span class="n">depth</span><span class="p">)</span>
+      <span class="n">end</span>
+
+      <span class="p">{</span><span class="err">@</span><span class="n">farthest_depth</span><span class="p">.</span><span class="n">not_nil</span><span class="o">!</span><span class="p">,</span> <span class="n">start_node</span><span class="p">,</span> <span class="err">@</span><span class="n">farthest_node</span><span class="p">.</span><span class="n">not_nil</span><span class="o">!</span><span class="p">,</span> <span class="err">@</span><span class="n">parents</span><span class="p">.</span><span class="n">not_nil</span><span class="o">!</span><span class="p">}</span>
+    <span class="n">end</span>
+
+    <span class="k">private</span> <span class="n">def</span> <span class="n">lca_precompute</span><span class="p">(</span><span class="n">root</span><span class="p">)</span>
+      <span class="n">lca_ancestors</span> <span class="o">=</span> <span class="n">Array</span><span class="p">(</span><span class="n">Array</span><span class="p">(</span><span class="n">Int64</span><span class="p">)).</span><span class="k">new</span><span class="p">(</span><span class="err">@</span><span class="n">size</span><span class="p">)</span> <span class="p">{</span> <span class="n">Array</span><span class="p">(</span><span class="n">Int64</span><span class="p">).</span><span class="k">new</span><span class="p">(</span><span class="err">@</span><span class="n">size_bits</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="n">_i64</span><span class="p">)</span> <span class="p">}</span>
+      <span class="n">lca_depths</span> <span class="o">=</span> <span class="n">Array</span><span class="p">(</span><span class="n">Int64</span><span class="p">).</span><span class="k">new</span><span class="p">(</span><span class="err">@</span><span class="n">size</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="n">_i64</span><span class="p">)</span>
+
+      <span class="n">dfs</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="mi">0</span><span class="n">_i64</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">node</span><span class="p">,</span> <span class="n">depth</span><span class="p">,</span> <span class="n">info</span><span class="p">,</span> <span class="n">callback</span><span class="o">|</span>
+        <span class="n">lca_ancestors</span><span class="p">[</span><span class="n">node</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">info</span><span class="p">[</span><span class="o">:</span><span class="n">parent</span><span class="p">]</span>
+        <span class="n">lca_depths</span><span class="p">[</span><span class="n">node</span><span class="p">]</span> <span class="o">=</span> <span class="n">depth</span>
+        <span class="n">callback</span><span class="p">.</span><span class="n">call</span><span class="p">(</span><span class="n">depth</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+      <span class="n">end</span>
+
+      <span class="mf">1.</span><span class="n">upto</span><span class="p">(</span><span class="err">@</span><span class="n">size_bits</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">i</span><span class="o">|</span>
+        <span class="err">@</span><span class="n">size</span><span class="p">.</span><span class="n">times</span> <span class="k">do</span> <span class="o">|</span><span class="n">node</span><span class="o">|</span>
+          <span class="k">if</span> <span class="n">lca_ancestors</span><span class="p">[</span><span class="n">node</span><span class="p">][</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span>
+            <span class="n">lca_ancestors</span><span class="p">[</span><span class="n">node</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="n">_i64</span>
+          <span class="k">else</span>
+            <span class="n">lca_ancestors</span><span class="p">[</span><span class="n">node</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">lca_ancestors</span><span class="p">[</span><span class="n">lca_ancestors</span><span class="p">[</span><span class="n">node</span><span class="p">][</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]][</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+          <span class="n">end</span>
+        <span class="n">end</span>
+      <span class="n">end</span>
+
+      <span class="err">@</span><span class="n">lca_root</span> <span class="o">=</span> <span class="n">root</span>
+      <span class="err">@</span><span class="n">lca_ancestors</span> <span class="o">=</span> <span class="n">lca_ancestors</span>
+      <span class="err">@</span><span class="n">lca_depths</span> <span class="o">=</span> <span class="n">lca_depths</span>
+    <span class="n">end</span>
+
+    <span class="k">private</span> <span class="n">def</span> <span class="n">lca_nth_prev</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">dist</span><span class="p">)</span>
+      <span class="n">lca_ancestors</span> <span class="o">=</span> <span class="err">@</span><span class="n">lca_ancestors</span><span class="p">.</span><span class="n">not_nil</span><span class="o">!</span>
+
+      <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="n">_i64</span>
+      <span class="n">until</span> <span class="n">dist</span> <span class="o">==</span> <span class="mi">0</span>
+        <span class="k">if</span> <span class="n">dist</span><span class="p">.</span><span class="n">odd</span><span class="o">?</span>
+          <span class="n">node</span> <span class="o">=</span> <span class="n">lca_ancestors</span><span class="p">[</span><span class="n">node</span><span class="p">][</span><span class="n">i</span><span class="p">]</span>
+          <span class="k">if</span> <span class="n">node</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span>
+            <span class="n">raise</span> <span class="n">Exception</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="s">"#{dist}th previous node of #{node} does not exist"</span><span class="p">)</span>
+          <span class="n">end</span>
+        <span class="n">end</span>
+        <span class="n">dist</span> <span class="c1">//= 2</span>
+        <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+      <span class="n">end</span>
+
+      <span class="n">node</span>
+    <span class="n">end</span>
+
+    <span class="cp"># ameba:disable Metrics/CyclomaticComplexity
+</span>    <span class="n">def</span> <span class="n">lca</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+      <span class="k">if</span> <span class="err">@</span><span class="n">lca_root</span><span class="p">.</span><span class="n">nil</span><span class="o">?</span>
+        <span class="n">lca_precompute</span><span class="p">(</span><span class="mi">0</span><span class="n">_i64</span><span class="p">)</span>
+      <span class="n">end</span>
+
+      <span class="n">lca_ancestors</span> <span class="o">=</span> <span class="err">@</span><span class="n">lca_ancestors</span><span class="p">.</span><span class="n">not_nil</span><span class="o">!</span>
+      <span class="n">lca_depths</span> <span class="o">=</span> <span class="err">@</span><span class="n">lca_depths</span><span class="p">.</span><span class="n">not_nil</span><span class="o">!</span>
+
+      <span class="n">depth_a</span> <span class="o">=</span> <span class="n">lca_depths</span><span class="p">[</span><span class="n">a</span><span class="p">]</span>
+      <span class="n">depth_b</span> <span class="o">=</span> <span class="n">lca_depths</span><span class="p">[</span><span class="n">b</span><span class="p">]</span>
+
+      <span class="k">if</span> <span class="n">depth_a</span> <span class="o">&lt;</span> <span class="n">depth_b</span>
+        <span class="n">depth_a</span><span class="p">,</span> <span class="n">depth_b</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">depth_b</span><span class="p">,</span> <span class="n">depth_a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">a</span>
+      <span class="n">end</span>
+
+      <span class="k">if</span> <span class="n">depth_a</span> <span class="o">!=</span> <span class="n">depth_b</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="n">lca_nth_prev</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">depth_a</span> <span class="o">-</span> <span class="n">depth_b</span><span class="p">)</span>
+      <span class="n">end</span>
+
+      <span class="k">if</span> <span class="n">a</span> <span class="o">==</span> <span class="n">b</span>
+        <span class="k">return</span> <span class="n">a</span>
+      <span class="n">end</span>
+
+      <span class="p">(</span><span class="err">@</span><span class="n">size_bits</span> <span class="o">-</span> <span class="mi">1</span><span class="p">).</span><span class="n">downto</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">i</span><span class="o">|</span>
+        <span class="k">if</span> <span class="n">lca_ancestors</span><span class="p">[</span><span class="n">a</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span> <span class="o">||</span> <span class="n">lca_ancestors</span><span class="p">[</span><span class="n">b</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span>
+          <span class="n">next</span>
+        <span class="n">end</span>
+
+        <span class="k">if</span> <span class="n">lca_ancestors</span><span class="p">[</span><span class="n">a</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="n">lca_ancestors</span><span class="p">[</span><span class="n">b</span><span class="p">][</span><span class="n">i</span><span class="p">]</span>
+          <span class="n">a</span> <span class="o">=</span> <span class="n">lca_ancestors</span><span class="p">[</span><span class="n">a</span><span class="p">][</span><span class="n">i</span><span class="p">]</span>
+          <span class="n">b</span> <span class="o">=</span> <span class="n">lca_ancestors</span><span class="p">[</span><span class="n">b</span><span class="p">][</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">end</span>
+      <span class="n">end</span>
+
+      <span class="n">a</span> <span class="o">=</span> <span class="n">lca_ancestors</span><span class="p">[</span><span class="n">a</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+      <span class="n">b</span> <span class="o">=</span> <span class="n">lca_ancestors</span><span class="p">[</span><span class="n">b</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+
+      <span class="k">if</span> <span class="n">a</span> <span class="o">!=</span> <span class="n">b</span> <span class="o">||</span> <span class="n">a</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span> <span class="o">||</span> <span class="n">b</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span>
+        <span class="n">raise</span> <span class="n">Exception</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="s">"Assertion error"</span><span class="p">)</span>
+      <span class="n">end</span>
+
+      <span class="n">a</span>
+    <span class="n">end</span>
+
+    <span class="n">def</span> <span class="n">dist</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+      <span class="n">lca_node</span> <span class="o">=</span> <span class="n">lca</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+
+      <span class="n">lca_depths</span> <span class="o">=</span> <span class="err">@</span><span class="n">lca_depths</span><span class="p">.</span><span class="n">not_nil</span><span class="o">!</span>
+      <span class="p">(</span><span class="n">lca_depths</span><span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="o">-</span> <span class="n">lca_depths</span><span class="p">[</span><span class="n">lca_node</span><span class="p">])</span> <span class="o">+</span> <span class="p">(</span><span class="n">lca_depths</span><span class="p">[</span><span class="n">b</span><span class="p">]</span> <span class="o">-</span> <span class="n">lca_depths</span><span class="p">[</span><span class="n">lca_node</span><span class="p">])</span>
+    <span class="n">end</span>
+
+    <span class="cp"># Returns `true` if node `c` is on the path from `a` to `b`.
+</span>    <span class="n">def</span> <span class="n">on_path</span><span class="o">?</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
+      <span class="n">dist</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span> <span class="o">+</span> <span class="n">dist</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="o">==</span> <span class="n">dist</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+    <span class="n">end</span>
+  <span class="n">end</span>
+<span class="n">end</span>
+
+<span class="n">n</span><span class="p">,</span> <span class="n">q</span> <span class="o">=</span> <span class="n">read_line</span><span class="p">.</span><span class="n">split</span><span class="p">.</span><span class="n">map</span><span class="p">(</span><span class="o">&amp;</span><span class="p">.</span><span class="n">to_i64</span><span class="p">)</span>
+<span class="n">ps</span> <span class="o">=</span> <span class="n">read_line</span><span class="p">.</span><span class="n">split</span><span class="p">.</span><span class="n">map</span><span class="p">(</span><span class="o">&amp;</span><span class="p">.</span><span class="n">to_i64</span><span class="p">)</span>
+
+<span class="n">tree</span> <span class="o">=</span> <span class="n">AtCoder</span><span class="o">::</span><span class="n">Tree</span><span class="p">(</span><span class="n">Nil</span><span class="p">,</span> <span class="n">Int64</span><span class="p">).</span><span class="k">new</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="n">ps</span><span class="p">.</span><span class="n">each_with_index</span> <span class="k">do</span> <span class="o">|</span><span class="n">p</span><span class="p">,</span> <span class="n">i</span><span class="o">|</span>
+  <span class="n">tree</span><span class="p">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+<span class="n">end</span>
+<span class="n">q</span><span class="p">.</span><span class="n">times</span> <span class="k">do</span>
+  <span class="n">u</span><span class="p">,</span> <span class="n">v</span> <span class="o">=</span> <span class="n">read_line</span><span class="p">.</span><span class="n">split</span><span class="p">.</span><span class="n">map</span><span class="p">(</span><span class="o">&amp;</span><span class="p">.</span><span class="n">to_i64</span><span class="p">)</span>
+  <span class="n">p</span> <span class="n">tree</span><span class="p">.</span><span class="n">lca</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+<span class="n">end</span></code></pre></figure>
 
 
 
