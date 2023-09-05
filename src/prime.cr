@@ -239,7 +239,7 @@ module AtCoder
       end
 
       def each(&)
-        Array.each_product(@exponential_factors) do |factors|
+        Indexable.each_cartesian(@exponential_factors) do |factors|
           yield factors.reduce { |a, b| a * b }
         end
       end
