@@ -7,7 +7,7 @@ authors:
 description: |
   Implementation of ac-library in Crystal language
 
-crystal: 0.33.0
+crystal: 1.9.1
 
 repository: https://github.com/google/ac-library.cr.git
 
