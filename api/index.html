@@ -335,7 +335,7 @@ tree[<span class="n">3</span>...<span class="n">5</span>] <span class="c">#=&gt;
 <ul>
 <li>
 <p><code>segtree&lt;S, op, e&gt; seg(v)</code> =&gt; <code><a href="AtCoder/SegTree.html">AtCoder::SegTree</a>(S).new(v, &amp;op?)</code></p>
-<p>単位元は暗黙的にnilで定義されるため使用する際に定義する必要はありません。逆に言えばモノイドの (単位元以外の) 元にnilを含めることはできません。 The identity element will be implicitly defined as nil, so you don't have to manually define it. In the other words, you cannot include nil into an element of the monoid.</p>
+<p>The identity element will be implicitly defined as nil, so you don't have to manually define it. In the other words, you cannot include nil into an element of the monoid.</p>
 <pre><code class="language-crystal">tree <span class="o">=</span> <span class="t">AtCoder</span><span class="t">::</span><span class="t">SegTree</span>.new((<span class="n">0</span>...<span class="n">100</span>).to_a) {<span class="o">|</span>a, b<span class="o">|</span> [a, b].min}
 tree[<span class="n">10</span>...<span class="n">50</span>] <span class="c">#=&gt; 10</span></code></pre>
 <ul>
@@ -345,12 +345,12 @@ tree[<span class="n">10</span>...<span class="n">50</span>] <span class="c">#=&g
 <li><code>.all_prod()</code> =&gt; <code>#all_prod</code></li>
 <li><code>.max_right&lt;f&gt;(l)</code> =&gt; <code>#max_right(l, e = nil, &amp;f)</code>
 <ul>
-<li>明示的に単位元を与えない場合、<code>f(e: nil) = true</code> として計算します。If the identity element is not given, it computes as <code>f(e: nil) = true</code>.</li>
+<li>If the identity element is not given, it computes as <code>f(e: nil) = true</code>.</li>
 </ul>
 </li>
 <li><code>.min_left&lt;f&gt;(r)</code> =&gt; <code>#min_left(r, e = nil, &amp;f)</code>
 <ul>
-<li>明示的に単位元を与えない場合、<code>f(e: nil) = true</code> として計算します。If the identity element is not given, it computes as <code>f(e: nil) = true</code>.</li>
+<li>If the identity element is not given, it computes as <code>f(e: nil) = true</code>.</li>
 </ul>
 </li>
 </ul>
@@ -364,8 +364,8 @@ tree[<span class="n">10</span>...<span class="n">50</span>] <span class="c">#=&g
 <ul>
 <li>
 <p><code>lazy_segtree&lt;S, op, e, F, mapping, composition, id&gt; seg(v)</code> =&gt; <code><a href="AtCoder/LazySegTree.html">AtCoder::LazySegTree</a>(S, F).new(v, op, mapping, composition)</code></p>
-<p>単位元は暗黙的にnilで定義されるため使用する際に定義する必要はありません。逆に言えばモノイドの (単位元以外の) 元にnilを含めることはできません。 The identity element will be implicitly defined as nil, so you don't have to manually define it. In the other words, you cannot include nil into an element of the monoid.</p>
-<p>また、恒等写像は暗黙的にnilで定義されるため使用する際に定義する必要はありません。逆に言えばFの (恒等写像以外の) 元にnilを含めることはできません。 Similarly, the identity map of F will be implicitly defined as nil, so you don't have to manually define it. In the other words, you cannot include nil into an element of the set F.</p>
+<p>The identity element will be implicitly defined as nil, so you don't have to manually define it. In the other words, you cannot include nil into an element of the monoid.</p>
+<p>Similarly, the identity map of F will be implicitly defined as nil, so you don't have to manually define it. In the other words, you cannot include nil into an element of the set F.</p>
 <pre><code class="language-crystal">op <span class="o">=</span> <span class="o">-&gt;</span>(a : <span class="t">Int32</span>, b : <span class="t">Int32</span>) { [a, b].min }
 mapping <span class="o">=</span> <span class="o">-&gt;</span>(f : <span class="t">Int32</span>, x : <span class="t">Int32</span>) { f }
 composition <span class="o">=</span> <span class="o">-&gt;</span>(a : <span class="t">Int32</span>, b : <span class="t">Int32</span>) { a }
@@ -382,12 +382,12 @@ tree[<span class="n">50</span>...<span class="n">80</span>] <span class="c">#=&g
 <li><code>.apply(l, r, f)</code> =&gt; <code>#[]=(l...r, f)</code></li>
 <li><code>.max_right&lt;f&gt;(l)</code> =&gt; <code>#max_right(l, e = nil, &amp;f)</code>
 <ul>
-<li>明示的に単位元を与えない場合、<code>f(e: nil) = true</code> として計算します。If the identity element is not given, it computes as <code>f(e: nil) = true</code>.</li>
+<li>If the identity element is not given, it computes as <code>f(e: nil) = true</code>.</li>
 </ul>
 </li>
 <li><code>.min_left&lt;f&gt;(r)</code> =&gt; <code>#min_left(r, e = nil, &amp;f)</code>
 <ul>
-<li>明示的に単位元を与えない場合、<code>f(e: nil) = true</code> として計算します。If the identity element is not given, it computes as <code>f(e: nil) = true</code>.</li>
+<li>If the identity element is not given, it computes as <code>f(e: nil) = true</code>.</li>
 </ul>
 </li>
 </ul>
@@ -592,7 +592,7 @@ q.pop <span class="c">#=&gt; 1</span></code></pre>
 <li>
 <p><code>#each</code></p>
 <p>Yields each item in the queue in comparator's order.</p>
-<p>ヒープを破壊せず列挙するため、O(NlogN) の前計算を行っています。ただし、<code>#first</code> は O(1) で動作するように最適化されています。 it pre-calculates in O(NlogN) to enumerate without destroying the heap. Note, however, that <code>#first</code> works for O(1).</p>
+<p>It pre-calculates in O(NlogN) to enumerate without destroying the heap. Note, however, that <code>#first</code> works for O(1).</p>
 <pre><code class="language-crystal">q <span class="o">=</span> <span class="t">AtCoder</span><span class="t">::</span><span class="t">PriorityQueue</span>.new(<span class="n">1</span>..n)
 
 <span class="c"># O(n log(n))</span>
