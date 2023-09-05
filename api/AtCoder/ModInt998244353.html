@@ -3,7 +3,8 @@
 <head>
   <meta charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="generator" content="Crystal Docs 1.6.2">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Crystal Docs 1.8.2">
 <meta name="crystal_docs.project_version" content="master">
 <meta name="crystal_docs.project_name" content="atcoder">
 
@@ -25,6 +26,11 @@
     <path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
   </symbol>
 </svg>
+<input type="checkbox" id="sidebar-btn">
+<label for="sidebar-btn" id="sidebar-btn-label">
+  <svg class="open" xmlns="http://www.w3.org/2000/svg" height="2em" width="2em" viewBox="0 0 512 512"><title>Open Sidebar</title><path fill="currentColor" d="M80 96v64h352V96H80zm0 112v64h352v-64H80zm0 112v64h352v-64H80z"></path></svg>
+  <svg class="close" xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 512 512"><title>Close Sidebar</title><path fill="currentColor" d="m118.6 73.4-45.2 45.2L210.7 256 73.4 393.4l45.2 45.2L256 301.3l137.4 137.3 45.2-45.2L301.3 256l137.3-137.4-45.2-45.2L256 210.7Z"></path></svg>
+</label>
 <div class="sidebar">
   <div class="sidebar-header">
     <div class="search-box">
@@ -296,7 +302,7 @@
   </h2>
   
     
-      <a href="https://github.com/google/ac-library.cr/blob/b7144ecf8343ce551dcda16a006590421b30bf6a/src/mod_int.cr#L254" target="_blank">
+      <a href="https://github.com/google/ac-library.cr/blob/bacf7a3232bc4748c69f64c77814f603caf3af1b/src/mod_int.cr#L371" target="_blank">
         mod_int.cr
       </a>
     
@@ -317,8 +323,28 @@
   
   <dl>
     
+      <dt class="entry-const" id="M">
+        <strong>M</strong> = <code><span class="n">998244353_u32</span></code>
+      </dt>
+      
+    
+      <dt class="entry-const" id="M2">
+        <strong>M2</strong> = <code><span class="n">932051910_u32</span></code>
+      </dt>
+      
+    
       <dt class="entry-const" id="MOD">
         <strong>MOD</strong> = <code><span class="n">998244353_i64</span></code>
+      </dt>
+      
+    
+      <dt class="entry-const" id="MR">
+        <strong>MR</strong> = <code><span class="n">998244351_u32</span></code>
+      </dt>
+      
+    
+      <dt class="entry-const" id="R">
+        <strong>R</strong> = <code><span class="n">3296722945_u32</span></code>
       </dt>
       
     
@@ -337,12 +363,12 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#new%28value%3AInt64%29-class-method" class="signature"><strong>.new</strong>(value : Int64)</a>
+        <a href="#new%28value%3AInt%29-class-method" class="signature"><strong>.new</strong>(value : Int)</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#new%28value%29-class-method" class="signature"><strong>.new</strong>(value)</a>
+        <a href="#new-class-method" class="signature"><strong>.new</strong></a>
         
       </li>
     
@@ -372,6 +398,13 @@
     
       <li class="entry-summary">
         <a href="#permutation%28n%2Ck%29-class-method" class="signature"><strong>.permutation</strong>(n, k)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#raw%28mgy%3AUInt32%29-class-method" class="signature"><strong>.raw</strong>(mgy : UInt32)</a>
+        
+          <div class="summary"><p>Initialize using montgomery representation</p></div>
         
       </li>
     
@@ -475,12 +508,12 @@
       </li>
     
       <li class="entry-summary">
-        <a href="#%3D%3D%28value%3Aself%29-instance-method" class="signature"><strong>#==</strong>(value : <span class="k">self</span>)</a>
+        <a href="#%3D%3D%28other%3Aself%29-instance-method" class="signature"><strong>#==</strong>(other : <span class="k">self</span>)</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#%3D%3D%28value%29-instance-method" class="signature"><strong>#==</strong>(value)</a>
+        <a href="#%3D%3D%28other%29-instance-method" class="signature"><strong>#==</strong>(other)</a>
         
           <div class="summary"><p>Returns <code>true</code> if this struct is equal to <em>other</em>.</p></div>
         
@@ -502,17 +535,29 @@
       </li>
     
       <li class="entry-summary">
-        <a href="#inspect%28%2Aargs%2C%2A%2Aoptions%29-instance-method" class="signature"><strong>#inspect</strong>(*args, **options)</a>
+        <a href="#clone-instance-method" class="signature"><strong>#clone</strong></a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#inspect%28%2Aargs%2C%2A%2Aoptions%2C%26%29-instance-method" class="signature"><strong>#inspect</strong>(*args, **options, &)</a>
+        <a href="#inspect%28io%3AIO%29-instance-method" class="signature"><strong>#inspect</strong>(io : IO)</a>
+        
+          <div class="summary"><p>Appends this struct's name and instance variables names and values to the given IO.</p></div>
         
       </li>
     
       <li class="entry-summary">
         <a href="#inv-instance-method" class="signature"><strong>#inv</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#mgy%3AUInt32-instance-method" class="signature"><strong>#mgy</strong> : UInt32</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#mgy%3D%28v%3AUInt32%29-instance-method" class="signature"><strong>#mgy=</strong>(v : UInt32)</a>
         
       </li>
     
@@ -527,6 +572,11 @@
       </li>
     
       <li class="entry-summary">
+        <a href="#reduce%28b%3AUInt64%29%3AUInt32-instance-method" class="signature"><strong>#reduce</strong>(b : UInt64) : UInt32</a>
+        
+      </li>
+    
+      <li class="entry-summary">
         <a href="#sqrt-instance-method" class="signature"><strong>#sqrt</strong></a>
         
       </li>
@@ -537,17 +587,14 @@
       </li>
     
       <li class="entry-summary">
-        <a href="#to_i64%3AInt64-instance-method" class="signature"><strong>#to_i64</strong> : Int64</a>
+        <a href="#to_i64-instance-method" class="signature"><strong>#to_i64</strong></a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#to_s%28%2Aargs%2C%2A%2Aoptions%29-instance-method" class="signature"><strong>#to_s</strong>(*args, **options)</a>
+        <a href="#to_s%28io%3AIO%29-instance-method" class="signature"><strong>#to_s</strong>(io : IO)</a>
         
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#to_s%28%2Aargs%2C%2A%2Aoptions%2C%26%29-instance-method" class="signature"><strong>#to_s</strong>(*args, **options, &)</a>
+          <div class="summary"><p>Same as <code><a href="../AtCoder/ModInt998244353.html#inspect%28io%3AIO%29-instance-method">#inspect(io)</a></code>.</p></div>
         
       </li>
     
@@ -557,7 +604,7 @@
       </li>
     
       <li class="entry-summary">
-        <a href="#value%3AInt64-instance-method" class="signature"><strong>#value</strong> : Int64</a>
+        <a href="#value-instance-method" class="signature"><strong>#value</strong></a>
         
       </li>
     
@@ -616,34 +663,34 @@
     Constructor Detail
   </h2>
   
-    <div class="entry-detail" id="new(value:Int64)-class-method">
+    <div class="entry-detail" id="new(value:Int)-class-method">
       <div class="signature">
         
-        def self.<strong>new</strong>(value : Int64)
+        def self.<strong>new</strong>(value : <a href="../Int.html">Int</a>)
 
-        <a class="method-permalink" href="#new%28value%3AInt64%29-class-method">#</a>
+        <a class="method-permalink" href="#new%28value%3AInt%29-class-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/b7144ecf8343ce551dcda16a006590421b30bf6a/src/mod_int.cr#L254" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/bacf7a3232bc4748c69f64c77814f603caf3af1b/src/mod_int.cr#L371" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="new(value)-class-method">
+    <div class="entry-detail" id="new-class-method">
       <div class="signature">
         
-        def self.<strong>new</strong>(value)
+        def self.<strong>new</strong>
 
-        <a class="method-permalink" href="#new%28value%29-class-method">#</a>
+        <a class="method-permalink" href="#new-class-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/b7144ecf8343ce551dcda16a006590421b30bf6a/src/mod_int.cr#L254" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/bacf7a3232bc4748c69f64c77814f603caf3af1b/src/mod_int.cr#L371" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -671,7 +718,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/b7144ecf8343ce551dcda16a006590421b30bf6a/src/mod_int.cr#L254" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/bacf7a3232bc4748c69f64c77814f603caf3af1b/src/mod_int.cr#L371" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -687,7 +734,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/b7144ecf8343ce551dcda16a006590421b30bf6a/src/mod_int.cr#L254" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/bacf7a3232bc4748c69f64c77814f603caf3af1b/src/mod_int.cr#L371" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -703,7 +750,28 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/b7144ecf8343ce551dcda16a006590421b30bf6a/src/mod_int.cr#L254" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/bacf7a3232bc4748c69f64c77814f603caf3af1b/src/mod_int.cr#L371" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="raw(mgy:UInt32)-class-method">
+      <div class="signature">
+        
+        def self.<strong>raw</strong>(mgy : UInt32)
+
+        <a class="method-permalink" href="#raw%28mgy%3AUInt32%29-class-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Initialize using montgomery representation</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/google/ac-library.cr/blob/bacf7a3232bc4748c69f64c77814f603caf3af1b/src/mod_int.cr#L371" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -719,7 +787,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/b7144ecf8343ce551dcda16a006590421b30bf6a/src/mod_int.cr#L254" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/bacf7a3232bc4748c69f64c77814f603caf3af1b/src/mod_int.cr#L371" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -735,7 +803,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/b7144ecf8343ce551dcda16a006590421b30bf6a/src/mod_int.cr#L254" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/bacf7a3232bc4748c69f64c77814f603caf3af1b/src/mod_int.cr#L371" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -763,7 +831,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/b7144ecf8343ce551dcda16a006590421b30bf6a/src/mod_int.cr#L254" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/bacf7a3232bc4748c69f64c77814f603caf3af1b/src/mod_int.cr#L371" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -779,7 +847,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/b7144ecf8343ce551dcda16a006590421b30bf6a/src/mod_int.cr#L254" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/bacf7a3232bc4748c69f64c77814f603caf3af1b/src/mod_int.cr#L371" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -795,7 +863,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/b7144ecf8343ce551dcda16a006590421b30bf6a/src/mod_int.cr#L254" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/bacf7a3232bc4748c69f64c77814f603caf3af1b/src/mod_int.cr#L371" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -811,7 +879,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/b7144ecf8343ce551dcda16a006590421b30bf6a/src/mod_int.cr#L254" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/bacf7a3232bc4748c69f64c77814f603caf3af1b/src/mod_int.cr#L371" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -827,7 +895,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/b7144ecf8343ce551dcda16a006590421b30bf6a/src/mod_int.cr#L254" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/bacf7a3232bc4748c69f64c77814f603caf3af1b/src/mod_int.cr#L371" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -843,7 +911,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/b7144ecf8343ce551dcda16a006590421b30bf6a/src/mod_int.cr#L254" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/bacf7a3232bc4748c69f64c77814f603caf3af1b/src/mod_int.cr#L371" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -859,7 +927,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/b7144ecf8343ce551dcda16a006590421b30bf6a/src/mod_int.cr#L254" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/bacf7a3232bc4748c69f64c77814f603caf3af1b/src/mod_int.cr#L371" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -875,7 +943,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/b7144ecf8343ce551dcda16a006590421b30bf6a/src/mod_int.cr#L254" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/bacf7a3232bc4748c69f64c77814f603caf3af1b/src/mod_int.cr#L371" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -891,7 +959,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/b7144ecf8343ce551dcda16a006590421b30bf6a/src/mod_int.cr#L254" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/bacf7a3232bc4748c69f64c77814f603caf3af1b/src/mod_int.cr#L371" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -907,7 +975,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/b7144ecf8343ce551dcda16a006590421b30bf6a/src/mod_int.cr#L254" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/bacf7a3232bc4748c69f64c77814f603caf3af1b/src/mod_int.cr#L371" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -923,7 +991,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/b7144ecf8343ce551dcda16a006590421b30bf6a/src/mod_int.cr#L254" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/bacf7a3232bc4748c69f64c77814f603caf3af1b/src/mod_int.cr#L371" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -939,7 +1007,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/b7144ecf8343ce551dcda16a006590421b30bf6a/src/mod_int.cr#L254" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/bacf7a3232bc4748c69f64c77814f603caf3af1b/src/mod_int.cr#L371" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -955,7 +1023,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/b7144ecf8343ce551dcda16a006590421b30bf6a/src/mod_int.cr#L254" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/bacf7a3232bc4748c69f64c77814f603caf3af1b/src/mod_int.cr#L371" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -971,7 +1039,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/b7144ecf8343ce551dcda16a006590421b30bf6a/src/mod_int.cr#L254" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/bacf7a3232bc4748c69f64c77814f603caf3af1b/src/mod_int.cr#L371" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -987,33 +1055,33 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/b7144ecf8343ce551dcda16a006590421b30bf6a/src/mod_int.cr#L254" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/bacf7a3232bc4748c69f64c77814f603caf3af1b/src/mod_int.cr#L371" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="==(value:self)-instance-method">
+    <div class="entry-detail" id="==(other:self)-instance-method">
       <div class="signature">
         
-        def <strong>==</strong>(value : <span class="k">self</span>)
+        def <strong>==</strong>(other : <span class="k">self</span>)
 
-        <a class="method-permalink" href="#%3D%3D%28value%3Aself%29-instance-method">#</a>
+        <a class="method-permalink" href="#%3D%3D%28other%3Aself%29-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/b7144ecf8343ce551dcda16a006590421b30bf6a/src/mod_int.cr#L254" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/bacf7a3232bc4748c69f64c77814f603caf3af1b/src/mod_int.cr#L371" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="==(value)-instance-method">
+    <div class="entry-detail" id="==(other)-instance-method">
       <div class="signature">
         
-        def <strong>==</strong>(value)
+        def <strong>==</strong>(other)
 
-        <a class="method-permalink" href="#%3D%3D%28value%29-instance-method">#</a>
+        <a class="method-permalink" href="#%3D%3D%28other%29-instance-method">#</a>
       </div>
       
         <div class="doc">
@@ -1043,7 +1111,7 @@ p1 <span class="o">==</span> p3 <span class="c"># =&gt; false</span></code></pre
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/b7144ecf8343ce551dcda16a006590421b30bf6a/src/mod_int.cr#L254" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/bacf7a3232bc4748c69f64c77814f603caf3af1b/src/mod_int.cr#L371" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1059,7 +1127,7 @@ p1 <span class="o">==</span> p3 <span class="c"># =&gt; false</span></code></pre
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/b7144ecf8343ce551dcda16a006590421b30bf6a/src/mod_int.cr#L254" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/bacf7a3232bc4748c69f64c77814f603caf3af1b/src/mod_int.cr#L371" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1075,7 +1143,7 @@ p1 <span class="o">==</span> p3 <span class="c"># =&gt; false</span></code></pre
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/b7144ecf8343ce551dcda16a006590421b30bf6a/src/mod_int.cr#L254" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/bacf7a3232bc4748c69f64c77814f603caf3af1b/src/mod_int.cr#L371" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1091,35 +1159,57 @@ p1 <span class="o">==</span> p3 <span class="c"># =&gt; false</span></code></pre
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/b7144ecf8343ce551dcda16a006590421b30bf6a/src/mod_int.cr#L254" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/bacf7a3232bc4748c69f64c77814f603caf3af1b/src/mod_int.cr#L371" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="inspect(*args,**options)-instance-method">
+    <div class="entry-detail" id="clone-instance-method">
       <div class="signature">
         
-        def <strong>inspect</strong>(*args, **options)
+        def <strong>clone</strong>
 
-        <a class="method-permalink" href="#inspect%28%2Aargs%2C%2A%2Aoptions%29-instance-method">#</a>
+        <a class="method-permalink" href="#clone-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
+          [<a href="https://github.com/google/ac-library.cr/blob/bacf7a3232bc4748c69f64c77814f603caf3af1b/src/mod_int.cr#L371" target="_blank">View source</a>]
+        
       </div>
     </div>
   
-    <div class="entry-detail" id="inspect(*args,**options,&amp;)-instance-method">
+    <div class="entry-detail" id="inspect(io:IO)-instance-method">
       <div class="signature">
         
-        def <strong>inspect</strong>(*args, **options, &)
+        def <strong>inspect</strong>(io : IO)
 
-        <a class="method-permalink" href="#inspect%28%2Aargs%2C%2A%2Aoptions%2C%26%29-instance-method">#</a>
+        <a class="method-permalink" href="#inspect%28io%3AIO%29-instance-method">#</a>
       </div>
+      
+        <div class="doc">
+          
+            <div class="doc-inherited">
+              Description copied from struct Struct
+            </div>
+          
+          <p>Appends this struct's name and instance variables names and values
+to the given IO.</p>
+<pre><code class="language-crystal"><span class="k">struct</span> <span class="t">Point</span>
+  <span class="k">def</span> <span class="m">initialize</span>(@x : <span class="t">Int32</span>, @y : <span class="t">Int32</span>)
+  <span class="k">end</span>
+<span class="k">end</span>
+
+p1 <span class="o">=</span> <span class="t">Point</span>.new <span class="n">1</span>, <span class="n">2</span>
+p1.to_s    <span class="c"># &quot;Point(@x=1, @y=2)&quot;</span>
+p1.inspect <span class="c"># &quot;Point(@x=1, @y=2)&quot;</span></code></pre>
+        </div>
       
       <br/>
       <div>
+        
+          [<a href="https://github.com/google/ac-library.cr/blob/bacf7a3232bc4748c69f64c77814f603caf3af1b/src/mod_int.cr#L371" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1135,7 +1225,37 @@ p1 <span class="o">==</span> p3 <span class="c"># =&gt; false</span></code></pre
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/b7144ecf8343ce551dcda16a006590421b30bf6a/src/mod_int.cr#L254" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/bacf7a3232bc4748c69f64c77814f603caf3af1b/src/mod_int.cr#L371" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="mgy:UInt32-instance-method">
+      <div class="signature">
+        
+        def <strong>mgy</strong> : UInt32
+
+        <a class="method-permalink" href="#mgy%3AUInt32-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="mgy=(v:UInt32)-instance-method">
+      <div class="signature">
+        
+        def <strong>mgy=</strong>(v : UInt32)
+
+        <a class="method-permalink" href="#mgy%3D%28v%3AUInt32%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/google/ac-library.cr/blob/bacf7a3232bc4748c69f64c77814f603caf3af1b/src/mod_int.cr#L371" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1151,7 +1271,7 @@ p1 <span class="o">==</span> p3 <span class="c"># =&gt; false</span></code></pre
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/b7144ecf8343ce551dcda16a006590421b30bf6a/src/mod_int.cr#L254" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/bacf7a3232bc4748c69f64c77814f603caf3af1b/src/mod_int.cr#L371" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1167,7 +1287,23 @@ p1 <span class="o">==</span> p3 <span class="c"># =&gt; false</span></code></pre
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/b7144ecf8343ce551dcda16a006590421b30bf6a/src/mod_int.cr#L254" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/bacf7a3232bc4748c69f64c77814f603caf3af1b/src/mod_int.cr#L371" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="reduce(b:UInt64):UInt32-instance-method">
+      <div class="signature">
+        
+        def <strong>reduce</strong>(b : UInt64) : UInt32
+
+        <a class="method-permalink" href="#reduce%28b%3AUInt64%29%3AUInt32-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/google/ac-library.cr/blob/bacf7a3232bc4748c69f64c77814f603caf3af1b/src/mod_int.cr#L371" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1183,7 +1319,7 @@ p1 <span class="o">==</span> p3 <span class="c"># =&gt; false</span></code></pre
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/b7144ecf8343ce551dcda16a006590421b30bf6a/src/mod_int.cr#L254" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/bacf7a3232bc4748c69f64c77814f603caf3af1b/src/mod_int.cr#L371" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1199,51 +1335,48 @@ p1 <span class="o">==</span> p3 <span class="c"># =&gt; false</span></code></pre
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/b7144ecf8343ce551dcda16a006590421b30bf6a/src/mod_int.cr#L254" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/bacf7a3232bc4748c69f64c77814f603caf3af1b/src/mod_int.cr#L371" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="to_i64:Int64-instance-method">
+    <div class="entry-detail" id="to_i64-instance-method">
       <div class="signature">
         
-        def <strong>to_i64</strong> : Int64
+        def <strong>to_i64</strong>
 
-        <a class="method-permalink" href="#to_i64%3AInt64-instance-method">#</a>
+        <a class="method-permalink" href="#to_i64-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/b7144ecf8343ce551dcda16a006590421b30bf6a/src/mod_int.cr#L254" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/bacf7a3232bc4748c69f64c77814f603caf3af1b/src/mod_int.cr#L371" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="to_s(*args,**options)-instance-method">
+    <div class="entry-detail" id="to_s(io:IO)-instance-method">
       <div class="signature">
         
-        def <strong>to_s</strong>(*args, **options)
+        def <strong>to_s</strong>(io : IO)
 
-        <a class="method-permalink" href="#to_s%28%2Aargs%2C%2A%2Aoptions%29-instance-method">#</a>
+        <a class="method-permalink" href="#to_s%28io%3AIO%29-instance-method">#</a>
       </div>
+      
+        <div class="doc">
+          
+            <div class="doc-inherited">
+              Description copied from struct Struct
+            </div>
+          
+          <p>Same as <code><a href="../AtCoder/ModInt998244353.html#inspect%28io%3AIO%29-instance-method">#inspect(io)</a></code>.</p>
+        </div>
       
       <br/>
       <div>
         
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="to_s(*args,**options,&amp;)-instance-method">
-      <div class="signature">
-        
-        def <strong>to_s</strong>(*args, **options, &)
-
-        <a class="method-permalink" href="#to_s%28%2Aargs%2C%2A%2Aoptions%2C%26%29-instance-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
+          [<a href="https://github.com/google/ac-library.cr/blob/bacf7a3232bc4748c69f64c77814f603caf3af1b/src/mod_int.cr#L371" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1259,21 +1392,23 @@ p1 <span class="o">==</span> p3 <span class="c"># =&gt; false</span></code></pre
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/b7144ecf8343ce551dcda16a006590421b30bf6a/src/mod_int.cr#L254" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/bacf7a3232bc4748c69f64c77814f603caf3af1b/src/mod_int.cr#L371" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="value:Int64-instance-method">
+    <div class="entry-detail" id="value-instance-method">
       <div class="signature">
         
-        def <strong>value</strong> : Int64
+        def <strong>value</strong>
 
-        <a class="method-permalink" href="#value%3AInt64-instance-method">#</a>
+        <a class="method-permalink" href="#value-instance-method">#</a>
       </div>
       
       <br/>
       <div>
+        
+          [<a href="https://github.com/google/ac-library.cr/blob/bacf7a3232bc4748c69f64c77814f603caf3af1b/src/mod_int.cr#L371" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1289,7 +1424,7 @@ p1 <span class="o">==</span> p3 <span class="c"># =&gt; false</span></code></pre
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/b7144ecf8343ce551dcda16a006590421b30bf6a/src/mod_int.cr#L254" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/bacf7a3232bc4748c69f64c77814f603caf3af1b/src/mod_int.cr#L371" target="_blank">View source</a>]
         
       </div>
     </div>
