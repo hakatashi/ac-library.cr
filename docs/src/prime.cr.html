@@ -377,7 +377,7 @@ h1 a:focus {
       <span class="n">end</span>
 
       <span class="n">def</span> <span class="n">each</span><span class="p">(</span><span class="o">&amp;</span><span class="p">)</span>
-        <span class="n">Array</span><span class="p">.</span><span class="n">each_product</span><span class="p">(</span><span class="err">@</span><span class="n">exponential_factors</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">factors</span><span class="o">|</span>
+        <span class="n">Indexable</span><span class="p">.</span><span class="n">each_cartesian</span><span class="p">(</span><span class="err">@</span><span class="n">exponential_factors</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">factors</span><span class="o">|</span>
           <span class="n">yield</span> <span class="n">factors</span><span class="p">.</span><span class="n">reduce</span> <span class="p">{</span> <span class="o">|</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="o">|</span> <span class="n">a</span> <span class="o">*</span> <span class="n">b</span> <span class="p">}</span>
         <span class="n">end</span>
       <span class="n">end</span>
