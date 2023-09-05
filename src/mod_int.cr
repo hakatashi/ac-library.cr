@@ -271,17 +271,8 @@ module AtCoder
           end
 
           def inv
-            x = value.to_i32
-            y = M.to_i32
-            u, v = 1, 0
-            while y > 0
-              t = x // y
-              x -= t * y
-              x, y = y, x
-              u -= t * v
-              u, v = v, u
-            end
-            self.class.new(u)
+            g, x = AtCoder::Math.extended_gcd(value.to_i32, M.to_i32)
+            self.class.new(x)
           end
 
           def to_s(io : IO)
