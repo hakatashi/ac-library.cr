@@ -41,6 +41,22 @@ describe "PriorityQueue" do
     q.pop.should eq nil
   end
 
+  describe ".pop!" do
+    it "pops values in priority order. Raises Enumerable::NotFoundError if queue is empty." do
+      q = PriorityQueue(Int32).max
+      q << 5 << 6 << 1 << 3 << 2 << 8 << 7 << 4
+      q.pop!.should eq 8
+      q.pop!.should eq 7
+      q.pop!.should eq 6
+      q.pop!.should eq 5
+      q.pop!.should eq 4
+      q.pop!.should eq 3
+      q.pop!.should eq 2
+      q.pop!.should eq 1
+      expect_raises(Enumerable::EmptyError) { q.pop! }
+    end
+  end
+
   it "initialized by elements in *enumerable*" do
     q = PriorityQueue.max([5, 6, 1, 3, 2, 8, 7, 4])
     q.pop.should eq 8
