@@ -51,6 +51,13 @@ describe "LazySegTree" do
       segtree[16..16].should eq 17
       segtree[49..49].should eq 50
       segtree[88..88].should eq 89
+
+      segtree[10...].should eq 4995
+      segtree[...60].should eq 1830
+      segtree[...].should eq 5050
+      segtree[10..].should eq 4995
+      segtree[..60].should eq 1891
+      segtree[..].should eq 5050
     end
   end
 
