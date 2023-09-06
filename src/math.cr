@@ -20,12 +20,14 @@ module AtCoder
   # Implements [ACL's Math library](https://atcoder.github.io/ac-library/master/document_en/math.html)
   module Math
     def self.extended_gcd(a, b)
+      zero = a.class.zero
+      one = zero + 1
+
       last_remainder, remainder = a.abs, b.abs
-      x, last_x, y, last_y = 0_i64, 1_i64, 1_i64, 0_i64
+      x, last_x, y, last_y = zero, one, one, zero
       while remainder != 0
-        new_last_remainder = remainder
-        quotient, remainder = last_remainder.divmod(remainder)
-        last_remainder = new_last_remainder
+        quotient, new_remainder = last_remainder.divmod(remainder)
+        last_remainder, remainder = remainder, new_remainder
         x, last_x = last_x - quotient * x, x
         y, last_y = last_y - quotient * y, y
       end

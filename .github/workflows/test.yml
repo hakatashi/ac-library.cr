@@ -11,8 +11,7 @@ jobs:
     strategy:
       matrix:
         version:
-          - '0.33.0'
-          - '1.7.2'
+          - '1.9.1'
     runs-on: ubuntu-latest
     container:
       image: crystallang/crystal:${{ matrix.version }}
@@ -25,7 +24,7 @@ jobs:
         apt-get install software-properties-common -y
         apt-add-repository ppa:git-core/ppa -y
         apt-get install git -y
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: Install dependencies
       run: |
         apt-get install python3 libpython3.8 python3-dev python3-pip bash libxml2-dev libxslt-dev build-essential binutils-dev libcurl4-openssl-dev zlib1g-dev libdw-dev libiberty-dev cmake curl wget -y
@@ -43,7 +42,7 @@ jobs:
     - name: Run Benchmarks
       run: crystal run --release benchmarks/*
     - name: Run coverage
-      if: ${{ matrix.version == '1.7.2' }}
+      if: ${{ matrix.version == '1.9.1' }}
       run: |
         shards build test --ignore-crystal-version
         kcov --clean --include-path=src coverage ./bin/test
@@ -55,12 +54,14 @@ jobs:
   lint:
     runs-on: ubuntu-latest
     container:
-      image: crystallang/crystal:1.7.2
+      image: crystallang/crystal:1.9.1
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: Install Crystal dependencies
       run: |
-        shards install --ignore-crystal-version
+        shards install
+        # We only need bin directory. lib contains recursive symlink and troublesome.
+        rm -rf lib
     - name: Run linter
       run: bin/ameba
 
@@ -68,8 +69,7 @@ jobs:
     strategy:
       matrix:
         version:
-          - '0.33.0'
-          - '1.7.2'
+          - '1.9.1'
     runs-on: ubuntu-latest
     container:
       image: crystallang/crystal:${{ matrix.version }}
@@ -81,12 +81,7 @@ jobs:
         apt-add-repository ppa:git-core/ppa -y
         apt-get install git -y
         git config --global --add safe.directory /__w/ac-library.cr/ac-library.cr
-    - uses: actions/checkout@v2
-    - uses: ruby/setup-ruby@v1
-      with:
-        ruby-version: '2.6'
-      env:
-        ImageOS: ubuntu18
+    - uses: actions/checkout@v3
     - name: Cache .verify-helper
       uses: actions/cache@v2
       with:
@@ -96,28 +91,60 @@ jobs:
         key: ${{ runner.os }}-crystal-${{ matrix.version }}-verify-helper
     - name: Install dependencies
       run: |
-        apt-get install python3 libpython3.8 python3-dev python3-pip bash libxml2-dev libxslt-dev build-essential binutils-dev libcurl4-openssl-dev zlib1g-dev libdw-dev libiberty-dev cmake curl wget time -y
+        apt-get install python3 libpython3.8 python3-dev python3-pip bash libxml2-dev libxslt-dev build-essential binutils-dev libcurl4-openssl-dev zlib1g-dev libdw-dev libiberty-dev libyaml-dev libgdbm-dev libreadline-dev libncurses5-dev cmake curl wget time -y
+    - name: Install Crystal dependencies
+      run: |
+        shards install
+        # We only need bin directory. lib contains recursive symlink and troublesome.
+        rm -rf lib
     - name: Install pip dependencies
       run: |
         python3 -m pip install --upgrade pip
         python3 -m pip install -r requirements.txt
     - name: Run verifier
       run: oj-verify run --jobs 4
+
+  deploy:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+    runs-on: ubuntu-latest
+    container:
+      image: crystallang/crystal:1.9.1
+    needs:
+    - test
+    - lint
+    - verify
+    steps:
+    - uses: actions/checkout@v3
+    - name: Configure git
+      run: |
+        git config --global --add safe.directory /__w/ac-library.cr/ac-library.cr
+    - name: Install Crystal dependencies
+      run: |
+        shards install
+        # We only need bin directory. lib contains recursive symlink and troublesome.
+        rm -rf lib
+    - name: Install dependencies
+      run: |
+        apt-get update
+        apt-get install python3 libpython3.8 python3-dev python3-pip bash libxml2-dev libxslt-dev build-essential binutils-dev libcurl4-openssl-dev zlib1g-dev libdw-dev libiberty-dev libyaml-dev libgdbm-dev libreadline-dev libncurses5-dev cmake curl wget time -y
+    - uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: '2.6'
+    - name: Install pip dependencies
+      run: |
+        python3 -m pip install --upgrade pip
+        python3 -m pip install -r requirements.txt
     - name: Generate bundled docs
-      if: ${{ github.event_name == 'push' && matrix.version == '1.7.2' }}
       run: oj-verify docs --jobs 4
     - name: Generate API docs
-      if: ${{ github.event_name == 'push' && matrix.version == '1.7.2' }}
       run: crystal docs --progress --stats --time -o dist/api
     - name: Build bundled docs
-      if: ${{ github.event_name == 'push' && matrix.version == '1.7.2' }}
       run: |
         gem install bundler
         bundle install --gemfile=.verify-helper/markdown/Gemfile --path .vendor/bundle
         bundle exec --gemfile=.verify-helper/markdown/Gemfile jekyll build --source .verify-helper/markdown --destination dist/docs --baseurl ac-library.cr/docs
     - name: Deploy docs to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
-      if: ${{ github.event_name == 'push' && matrix.version == '1.7.2' }}
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./dist

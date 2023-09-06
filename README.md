@@ -70,7 +70,7 @@ require "atcoder/fenwick_tree" # load FenwickTree
 
 * `segtree<S, op, e> seg(v)` => `AtCoder::SegTree(S).new(v, &op?)`
 
-  単位元は暗黙的にnilで定義されるため使用する際に定義する必要はありません。逆に言えばモノイドの (単位元以外の) 元にnilを含めることはできません。 The identity element will be implicitly defined as nil, so you don't have to manually define it. In the other words, you cannot include nil into an element of the monoid.
+  The identity element will be implicitly defined as nil, so you don't have to manually define it. In the other words, you cannot include nil into an element of the monoid.
 
   ```cr
   tree = AtCoder::SegTree.new((0...100).to_a) {|a, b| [a, b].min}
@@ -82,17 +82,17 @@ require "atcoder/fenwick_tree" # load FenwickTree
   * `.prod(l, r)` => `#[](l...r)`
   * `.all_prod()` => `#all_prod`
   * `.max_right<f>(l)` => `#max_right(l, e = nil, &f)`
-    * 明示的に単位元を与えない場合、`f(e: nil) = true` として計算します。If the identity element is not given, it computes as `f(e: nil) = true`.
+    * If the identity element is not given, it computes as `f(e: nil) = true`.
   * `.min_left<f>(r)` => `#min_left(r, e = nil, &f)`
-    * 明示的に単位元を与えない場合、`f(e: nil) = true` として計算します。If the identity element is not given, it computes as `f(e: nil) = true`.
+    * If the identity element is not given, it computes as `f(e: nil) = true`.
 
 ## [`atcoder/lazy_seg_tree`](https://google.github.io/ac-library.cr/docs/src/lazy_seg_tree.cr) (Implements [<atcoder/lazysegtree>](https://atcoder.github.io/ac-library/document_en/lazysegtree.html))
 
 * `lazy_segtree<S, op, e, F, mapping, composition, id> seg(v)` => `AtCoder::LazySegTree(S, F).new(v, op, mapping, composition)`
 
-  単位元は暗黙的にnilで定義されるため使用する際に定義する必要はありません。逆に言えばモノイドの (単位元以外の) 元にnilを含めることはできません。 The identity element will be implicitly defined as nil, so you don't have to manually define it. In the other words, you cannot include nil into an element of the monoid.
+  The identity element will be implicitly defined as nil, so you don't have to manually define it. In the other words, you cannot include nil into an element of the monoid.
 
-  また、恒等写像は暗黙的にnilで定義されるため使用する際に定義する必要はありません。逆に言えばFの (恒等写像以外の) 元にnilを含めることはできません。 Similarly, the identity map of F will be implicitly defined as nil, so you don't have to manually define it. In the other words, you cannot include nil into an element of the set F.
+  Similarly, the identity map of F will be implicitly defined as nil, so you don't have to manually define it. In the other words, you cannot include nil into an element of the set F.
 
   ```cr
   op = ->(a : Int32, b : Int32) { [a, b].min }
@@ -111,9 +111,9 @@ require "atcoder/fenwick_tree" # load FenwickTree
   * `.apply(p, f)` => `#[]=(p, f)`
   * `.apply(l, r, f)` => `#[]=(l...r, f)`
   * `.max_right<f>(l)` => `#max_right(l, e = nil, &f)`
-    * 明示的に単位元を与えない場合、`f(e: nil) = true` として計算します。If the identity element is not given, it computes as `f(e: nil) = true`.
+    * If the identity element is not given, it computes as `f(e: nil) = true`.
   * `.min_left<f>(r)` => `#min_left(r, e = nil, &f)`
-    * 明示的に単位元を与えない場合、`f(e: nil) = true` として計算します。If the identity element is not given, it computes as `f(e: nil) = true`.
+    * If the identity element is not given, it computes as `f(e: nil) = true`.
 
 ## [`atcoder/string`](https://google.github.io/ac-library.cr/docs/src/string.cr) (Implements [<atcoder/string>](https://atcoder.github.io/ac-library/document_en/string.html))
 
@@ -269,7 +269,7 @@ require "atcoder/fenwick_tree" # load FenwickTree
 
     Yields each item in the queue in comparator's order.
 
-    ヒープを破壊せず列挙するため、O(NlogN) の前計算を行っています。ただし、`#first` は O(1) で動作するように最適化されています。 it pre-calculates in O(NlogN) to enumerate without destroying the heap. Note, however, that `#first` works for O(1).
+    It pre-calculates in O(NlogN) to enumerate without destroying the heap. Note, however, that `#first` works for O(1).
 
     ```cr
     q = AtCoder::PriorityQueue.new(1..n)
