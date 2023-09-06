@@ -123,6 +123,30 @@ describe "LazySegTree" do
       segtree[40].should eq 41
       segtree[41].should eq 42
       segtree[0...100].should eq 5050 + 410 + 240 + 355 * 4
+
+      segtree[1...] = 2
+      segtree[...5] = 2
+      segtree[...] = 2
+      segtree[0].should eq 1 * 2**2
+      segtree[1].should eq 2 * 2**3
+      segtree[2].should eq 3 * 2**3
+      segtree[3].should eq 4 * 2**3
+      segtree[4].should eq 5 * 2**3
+      segtree[5].should eq 6 * 2**2
+      segtree[6].should eq 7 * 2**2
+      segtree[99].should eq 100 * 2**2
+
+      segtree[1..] = 2
+      segtree[..5] = 2
+      segtree[..] = 2
+      segtree[0].should eq 1 * 2**4
+      segtree[1].should eq 2 * 2**6
+      segtree[2].should eq 3 * 2**6
+      segtree[3].should eq 4 * 2**6
+      segtree[4].should eq 5 * 2**6
+      segtree[5].should eq 6 * 2**5
+      segtree[6].should eq 7 * 2**4
+      segtree[99].should eq 100 * 2**4
     end
   end
 
