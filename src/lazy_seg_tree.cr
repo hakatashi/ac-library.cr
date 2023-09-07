@@ -71,9 +71,10 @@ module AtCoder
     end
 
     # Implements atcoder::lazy_segtree.apply(left, right, applicator).
-    def []=(range : Range(Int, Int), applicator : F)
-      l = range.begin + @n_leaves
-      r = (range.exclusive? ? range.end : range.end + 1) + @n_leaves
+    # ameba:disable Metrics/CyclomaticComplexity
+    def []=(range : Range, applicator : F)
+      l = (range.begin || 0) + @n_leaves
+      r = (range.exclusive? ? (range.end || @n_leaves) : (range.end || @n_leaves - 1) + 1) + @n_leaves
 
       @height.downto(1) do |i|
         propagate(ancestor(l, i)) if right_side_child?(l, i)
@@ -110,9 +111,9 @@ module AtCoder
     end
 
     # Implements atcoder::lazy_segtree.prod(left, right).
-    def [](range : Range(Int, Int))
-      l = range.begin + @n_leaves
-      r = (range.exclusive? ? range.end : range.end + 1) + @n_leaves
+    def [](range : Range)
+      l = (range.begin || 0) + @n_leaves
+      r = (range.exclusive? ? (range.end || @n_leaves) : (range.end || @n_leaves - 1) + 1) + @n_leaves
 
       @height.downto(1) do |i|
         propagate(ancestor(l, i)) if right_side_child?(l, i)

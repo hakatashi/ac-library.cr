@@ -72,9 +72,9 @@ module AtCoder
     end
 
     # Implements atcoder::segtree.prod(l, r)
-    def [](range : Range(Int, Int))
-      l = range.begin + @n_leaves
-      r = (range.exclusive? ? range.end : range.end + 1) + @n_leaves
+    def [](range : Range)
+      l = (range.begin || 0) + @n_leaves
+      r = (range.exclusive? ? (range.end || @n_leaves) : (range.end || @n_leaves - 1) + 1) + @n_leaves
 
       sml, smr = nil.as(T | Nil), nil.as(T | Nil)
       while l < r

@@ -44,6 +44,13 @@ describe "SegTree" do
         segtree[16..16].should eq 17
         segtree[49..49].should eq 50
         segtree[88..88].should eq 89
+
+        segtree[10...].should eq 100
+        segtree[...60].should eq 60
+        segtree[...].should eq 100
+        segtree[10..].should eq 100
+        segtree[..60].should eq 61
+        segtree[..].should eq 100
       end
     end
 
