@@ -114,7 +114,8 @@ module AtCoder
     end
 
     # Pushes value into the queue.
-    def push(v : T)
+    # This method returns self, so several calls can be chained.
+    def push(v : T) : self
       @heap << v
       index = @heap.size - 1
       while index != 0
@@ -125,10 +126,11 @@ module AtCoder
         @heap[parent], @heap[index] = @heap[index], @heap[parent]
         index = parent
       end
+      self
     end
 
     # Alias of `push`
-    def <<(v : T)
+    def <<(v : T) : self
       push(v)
     end
 
@@ -156,6 +158,12 @@ module AtCoder
         index = child
       end
       ret
+    end
+
+    # Pops value from the queue.
+    # Raises `Enumerable::EmptyError` if queue is of 0 size.
+    def pop!
+      pop || raise Enumerable::EmptyError.new
     end
 
     # Yields each item in the queue in comparator's order.
