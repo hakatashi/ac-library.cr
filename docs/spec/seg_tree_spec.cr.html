@@ -102,7 +102,7 @@ h1 a:focus {
 
 <ul>
     <li><a href="/blob/master/spec/seg_tree_spec.cr">View this file on GitHub</a></li>
-    <li>Last update: 2023-09-07 10:39:18+09:00</li>
+    <li>Last update: 2023-09-07 10:41:29+09:00</li>
     
     
     
@@ -208,6 +208,13 @@ h1 a:focus {
         <span class="n">segtree</span><span class="p">[</span><span class="mf">16..16</span><span class="p">].</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">17</span>
         <span class="n">segtree</span><span class="p">[</span><span class="mf">49..49</span><span class="p">].</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">50</span>
         <span class="n">segtree</span><span class="p">[</span><span class="mf">88..88</span><span class="p">].</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">89</span>
+
+        <span class="n">segtree</span><span class="p">[</span><span class="mf">10.</span><span class="p">..].</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">100</span>
+        <span class="n">segtree</span><span class="p">[..</span><span class="mf">.60</span><span class="p">].</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">60</span>
+        <span class="n">segtree</span><span class="p">[...].</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">100</span>
+        <span class="n">segtree</span><span class="p">[</span><span class="mf">10.</span><span class="p">.].</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">100</span>
+        <span class="n">segtree</span><span class="p">[.</span><span class="mf">.60</span><span class="p">].</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">61</span>
+        <span class="n">segtree</span><span class="p">[..].</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">100</span>
       <span class="n">end</span>
     <span class="n">end</span>
 
@@ -385,9 +392,9 @@ h1 a:focus {
     <span class="n">end</span>
 
     <span class="cp"># Implements atcoder::segtree.prod(l, r)
-</span>    <span class="n">def</span> <span class="p">[](</span><span class="n">range</span> <span class="o">:</span> <span class="n">Range</span><span class="p">(</span><span class="n">Int</span><span class="p">,</span> <span class="n">Int</span><span class="p">))</span>
-      <span class="n">l</span> <span class="o">=</span> <span class="n">range</span><span class="p">.</span><span class="n">begin</span> <span class="o">+</span> <span class="err">@</span><span class="n">n_leaves</span>
-      <span class="n">r</span> <span class="o">=</span> <span class="p">(</span><span class="n">range</span><span class="p">.</span><span class="n">exclusive</span><span class="o">?</span> <span class="o">?</span> <span class="n">range</span><span class="p">.</span><span class="n">end</span> <span class="o">:</span> <span class="n">range</span><span class="p">.</span><span class="n">end</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="err">@</span><span class="n">n_leaves</span>
+</span>    <span class="n">def</span> <span class="p">[](</span><span class="n">range</span> <span class="o">:</span> <span class="n">Range</span><span class="p">)</span>
+      <span class="n">l</span> <span class="o">=</span> <span class="p">(</span><span class="n">range</span><span class="p">.</span><span class="n">begin</span> <span class="o">||</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="err">@</span><span class="n">n_leaves</span>
+      <span class="n">r</span> <span class="o">=</span> <span class="p">(</span><span class="n">range</span><span class="p">.</span><span class="n">exclusive</span><span class="o">?</span> <span class="o">?</span> <span class="p">(</span><span class="n">range</span><span class="p">.</span><span class="n">end</span> <span class="o">||</span> <span class="err">@</span><span class="n">n_leaves</span><span class="p">)</span> <span class="o">:</span> <span class="p">(</span><span class="n">range</span><span class="p">.</span><span class="n">end</span> <span class="o">||</span> <span class="err">@</span><span class="n">n_leaves</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="err">@</span><span class="n">n_leaves</span>
 
       <span class="n">sml</span><span class="p">,</span> <span class="n">smr</span> <span class="o">=</span> <span class="n">nil</span><span class="p">.</span><span class="n">as</span><span class="p">(</span><span class="n">T</span> <span class="o">|</span> <span class="n">Nil</span><span class="p">),</span> <span class="n">nil</span><span class="p">.</span><span class="n">as</span><span class="p">(</span><span class="n">T</span> <span class="o">|</span> <span class="n">Nil</span><span class="p">)</span>
       <span class="k">while</span> <span class="n">l</span> <span class="o">&lt;</span> <span class="n">r</span>
@@ -1441,6 +1448,13 @@ h1 a:focus {
         <span class="n">segtree</span><span class="p">[</span><span class="mf">16..16</span><span class="p">].</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">17</span>
         <span class="n">segtree</span><span class="p">[</span><span class="mf">49..49</span><span class="p">].</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">50</span>
         <span class="n">segtree</span><span class="p">[</span><span class="mf">88..88</span><span class="p">].</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">89</span>
+
+        <span class="n">segtree</span><span class="p">[</span><span class="mf">10.</span><span class="p">..].</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">100</span>
+        <span class="n">segtree</span><span class="p">[..</span><span class="mf">.60</span><span class="p">].</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">60</span>
+        <span class="n">segtree</span><span class="p">[...].</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">100</span>
+        <span class="n">segtree</span><span class="p">[</span><span class="mf">10.</span><span class="p">.].</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">100</span>
+        <span class="n">segtree</span><span class="p">[.</span><span class="mf">.60</span><span class="p">].</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">61</span>
+        <span class="n">segtree</span><span class="p">[..].</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">100</span>
       <span class="n">end</span>
     <span class="n">end</span>
 

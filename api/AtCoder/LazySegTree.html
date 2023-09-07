@@ -313,7 +313,7 @@ tree[<span class="n">50</span>...<span class="n">80</span>] <span class="c"># =&
   </h2>
   
     
-      <a href="https://github.com/google/ac-library.cr/blob/8cf6d4f4cdac0778626b92ae1773f5898747a481/src/lazy_seg_tree.cr#L37" target="_blank">
+      <a href="https://github.com/google/ac-library.cr/blob/0fe07c4a910c01049985a95e63aaf6750de9c8bb/src/lazy_seg_tree.cr#L37" target="_blank">
         lazy_seg_tree.cr
       </a>
     
@@ -363,7 +363,7 @@ tree[<span class="n">50</span>...<span class="n">80</span>] <span class="c"># =&
       </li>
     
       <li class="entry-summary">
-        <a href="#%5B%5D%28range%3ARange%28Int%2CInt%29%29-instance-method" class="signature"><strong>#[]</strong>(range : Range(Int, Int))</a>
+        <a href="#%5B%5D%28range%3ARange%29-instance-method" class="signature"><strong>#[]</strong>(range : Range)</a>
         
           <div class="summary"><p>Implements atcoder::lazy_segtree.prod(left, right).</p></div>
         
@@ -377,7 +377,7 @@ tree[<span class="n">50</span>...<span class="n">80</span>] <span class="c"># =&
       </li>
     
       <li class="entry-summary">
-        <a href="#%5B%5D%3D%28range%3ARange%28Int%2CInt%29%2Capplicator%3AF%29-instance-method" class="signature"><strong>#[]=</strong>(range : Range(Int, Int), applicator : F)</a>
+        <a href="#%5B%5D%3D%28range%3ARange%2Capplicator%3AF%29-instance-method" class="signature"><strong>#[]=</strong>(range : Range, applicator : F)</a>
         
           <div class="summary"><p>Implements atcoder::lazy_segtree.apply(left, right, applicator).</p></div>
         
@@ -462,7 +462,7 @@ tree[<span class="n">50</span>...<span class="n">80</span>] <span class="c"># =&
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/8cf6d4f4cdac0778626b92ae1773f5898747a481/src/lazy_seg_tree.cr#L42" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/0fe07c4a910c01049985a95e63aaf6750de9c8bb/src/lazy_seg_tree.cr#L42" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -497,17 +497,17 @@ tree[<span class="n">50</span>...<span class="n">80</span>] <span class="c"># =&
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/8cf6d4f4cdac0778626b92ae1773f5898747a481/src/lazy_seg_tree.cr#L106" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/0fe07c4a910c01049985a95e63aaf6750de9c8bb/src/lazy_seg_tree.cr#L107" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="[](range:Range(Int,Int))-instance-method">
+    <div class="entry-detail" id="[](range:Range)-instance-method">
       <div class="signature">
         
-        def <strong>[]</strong>(range : Range(<a href="../Int.html">Int</a>, <a href="../Int.html">Int</a>))
+        def <strong>[]</strong>(range : Range)
 
-        <a class="method-permalink" href="#%5B%5D%28range%3ARange%28Int%2CInt%29%29-instance-method">#</a>
+        <a class="method-permalink" href="#%5B%5D%28range%3ARange%29-instance-method">#</a>
       </div>
       
         <div class="doc">
@@ -518,7 +518,7 @@ tree[<span class="n">50</span>...<span class="n">80</span>] <span class="c"># =&
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/8cf6d4f4cdac0778626b92ae1773f5898747a481/src/lazy_seg_tree.cr#L113" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/0fe07c4a910c01049985a95e63aaf6750de9c8bb/src/lazy_seg_tree.cr#L114" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -539,28 +539,29 @@ tree[<span class="n">50</span>...<span class="n">80</span>] <span class="c"># =&
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/8cf6d4f4cdac0778626b92ae1773f5898747a481/src/lazy_seg_tree.cr#L65" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/0fe07c4a910c01049985a95e63aaf6750de9c8bb/src/lazy_seg_tree.cr#L65" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="[]=(range:Range(Int,Int),applicator:F)-instance-method">
+    <div class="entry-detail" id="[]=(range:Range,applicator:F)-instance-method">
       <div class="signature">
         
-        def <strong>[]=</strong>(range : Range(<a href="../Int.html">Int</a>, <a href="../Int.html">Int</a>), applicator : F)
+        def <strong>[]=</strong>(range : Range, applicator : F)
 
-        <a class="method-permalink" href="#%5B%5D%3D%28range%3ARange%28Int%2CInt%29%2Capplicator%3AF%29-instance-method">#</a>
+        <a class="method-permalink" href="#%5B%5D%3D%28range%3ARange%2Capplicator%3AF%29-instance-method">#</a>
       </div>
       
         <div class="doc">
           
-          <p>Implements atcoder::lazy_segtree.apply(left, right, applicator).</p>
+          <p>Implements atcoder::lazy_segtree.apply(left, right, applicator).
+ameba:disable Metrics/CyclomaticComplexity</p>
         </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/8cf6d4f4cdac0778626b92ae1773f5898747a481/src/lazy_seg_tree.cr#L74" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/0fe07c4a910c01049985a95e63aaf6750de9c8bb/src/lazy_seg_tree.cr#L75" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -581,7 +582,7 @@ tree[<span class="n">50</span>...<span class="n">80</span>] <span class="c"># =&
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/8cf6d4f4cdac0778626b92ae1773f5898747a481/src/lazy_seg_tree.cr#L140" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/0fe07c4a910c01049985a95e63aaf6750de9c8bb/src/lazy_seg_tree.cr#L141" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -602,7 +603,7 @@ tree[<span class="n">50</span>...<span class="n">80</span>] <span class="c"># =&
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/8cf6d4f4cdac0778626b92ae1773f5898747a481/src/lazy_seg_tree.cr#L145" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/0fe07c4a910c01049985a95e63aaf6750de9c8bb/src/lazy_seg_tree.cr#L146" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -623,7 +624,7 @@ tree[<span class="n">50</span>...<span class="n">80</span>] <span class="c"># =&
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/8cf6d4f4cdac0778626b92ae1773f5898747a481/src/lazy_seg_tree.cr#L190" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/0fe07c4a910c01049985a95e63aaf6750de9c8bb/src/lazy_seg_tree.cr#L191" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -644,7 +645,7 @@ tree[<span class="n">50</span>...<span class="n">80</span>] <span class="c"># =&
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/8cf6d4f4cdac0778626b92ae1773f5898747a481/src/lazy_seg_tree.cr#L57" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/0fe07c4a910c01049985a95e63aaf6750de9c8bb/src/lazy_seg_tree.cr#L57" target="_blank">View source</a>]
         
       </div>
     </div>
