@@ -102,7 +102,7 @@ h1 a:focus {
 
 <ul>
     <li><a href="/blob/master/spec/test_runner.cr">View this file on GitHub</a></li>
-    <li>Last update: 2023-09-04 21:11:40+00:00</li>
+    <li>Last update: 2023-09-07 10:38:14+09:00</li>
     
     
     
@@ -2382,7 +2382,8 @@ h1 a:focus {
     <span class="n">end</span>
 
     <span class="cp"># Pushes value into the queue.
-</span>    <span class="n">def</span> <span class="n">push</span><span class="p">(</span><span class="n">v</span> <span class="o">:</span> <span class="n">T</span><span class="p">)</span>
+</span>    <span class="cp"># This method returns self, so several calls can be chained.
+</span>    <span class="n">def</span> <span class="n">push</span><span class="p">(</span><span class="n">v</span> <span class="o">:</span> <span class="n">T</span><span class="p">)</span> <span class="o">:</span> <span class="n">self</span>
       <span class="err">@</span><span class="n">heap</span> <span class="o">&lt;&lt;</span> <span class="n">v</span>
       <span class="n">index</span> <span class="o">=</span> <span class="err">@</span><span class="n">heap</span><span class="p">.</span><span class="n">size</span> <span class="o">-</span> <span class="mi">1</span>
       <span class="k">while</span> <span class="n">index</span> <span class="o">!=</span> <span class="mi">0</span>
@@ -2393,10 +2394,11 @@ h1 a:focus {
         <span class="err">@</span><span class="n">heap</span><span class="p">[</span><span class="n">parent</span><span class="p">],</span> <span class="err">@</span><span class="n">heap</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="err">@</span><span class="n">heap</span><span class="p">[</span><span class="n">index</span><span class="p">],</span> <span class="err">@</span><span class="n">heap</span><span class="p">[</span><span class="n">parent</span><span class="p">]</span>
         <span class="n">index</span> <span class="o">=</span> <span class="n">parent</span>
       <span class="n">end</span>
+      <span class="n">self</span>
     <span class="n">end</span>
 
     <span class="cp"># Alias of `push`
-</span>    <span class="n">def</span> <span class="o">&lt;&lt;</span><span class="p">(</span><span class="n">v</span> <span class="o">:</span> <span class="n">T</span><span class="p">)</span>
+</span>    <span class="n">def</span> <span class="o">&lt;&lt;</span><span class="p">(</span><span class="n">v</span> <span class="o">:</span> <span class="n">T</span><span class="p">)</span> <span class="o">:</span> <span class="n">self</span>
       <span class="n">push</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
     <span class="n">end</span>
 
@@ -2424,6 +2426,12 @@ h1 a:focus {
         <span class="n">index</span> <span class="o">=</span> <span class="n">child</span>
       <span class="n">end</span>
       <span class="n">ret</span>
+    <span class="n">end</span>
+
+    <span class="cp"># Pops value from the queue.
+</span>    <span class="cp"># Raises `Enumerable::EmptyError` if queue is of 0 size.
+</span>    <span class="n">def</span> <span class="n">pop</span><span class="o">!</span>
+      <span class="n">pop</span> <span class="o">||</span> <span class="n">raise</span> <span class="n">Enumerable</span><span class="o">::</span><span class="n">EmptyError</span><span class="p">.</span><span class="k">new</span>
     <span class="n">end</span>
 
     <span class="cp"># Yields each item in the queue in comparator's order.
@@ -3462,6 +3470,22 @@ h1 a:focus {
     <span class="n">q</span><span class="p">.</span><span class="n">pop</span><span class="p">.</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">2</span>
     <span class="n">q</span><span class="p">.</span><span class="n">pop</span><span class="p">.</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">1</span>
     <span class="n">q</span><span class="p">.</span><span class="n">pop</span><span class="p">.</span><span class="n">should</span> <span class="n">eq</span> <span class="n">nil</span>
+  <span class="n">end</span>
+
+  <span class="n">describe</span> <span class="s">".pop!"</span> <span class="k">do</span>
+    <span class="n">it</span> <span class="s">"pops values in priority order. Raises Enumerable::NotFoundError if queue is empty."</span> <span class="k">do</span>
+      <span class="n">q</span> <span class="o">=</span> <span class="n">PriorityQueue</span><span class="p">(</span><span class="n">Int32</span><span class="p">).</span><span class="n">max</span>
+      <span class="n">q</span> <span class="o">&lt;&lt;</span> <span class="mi">5</span> <span class="o">&lt;&lt;</span> <span class="mi">6</span> <span class="o">&lt;&lt;</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">3</span> <span class="o">&lt;&lt;</span> <span class="mi">2</span> <span class="o">&lt;&lt;</span> <span class="mi">8</span> <span class="o">&lt;&lt;</span> <span class="mi">7</span> <span class="o">&lt;&lt;</span> <span class="mi">4</span>
+      <span class="n">q</span><span class="p">.</span><span class="n">pop</span><span class="o">!</span><span class="p">.</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">8</span>
+      <span class="n">q</span><span class="p">.</span><span class="n">pop</span><span class="o">!</span><span class="p">.</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">7</span>
+      <span class="n">q</span><span class="p">.</span><span class="n">pop</span><span class="o">!</span><span class="p">.</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">6</span>
+      <span class="n">q</span><span class="p">.</span><span class="n">pop</span><span class="o">!</span><span class="p">.</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">5</span>
+      <span class="n">q</span><span class="p">.</span><span class="n">pop</span><span class="o">!</span><span class="p">.</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">4</span>
+      <span class="n">q</span><span class="p">.</span><span class="n">pop</span><span class="o">!</span><span class="p">.</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">3</span>
+      <span class="n">q</span><span class="p">.</span><span class="n">pop</span><span class="o">!</span><span class="p">.</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">2</span>
+      <span class="n">q</span><span class="p">.</span><span class="n">pop</span><span class="o">!</span><span class="p">.</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">1</span>
+      <span class="nf">expect_raises</span><span class="p">(</span><span class="n">Enumerable</span><span class="o">::</span><span class="n">EmptyError</span><span class="p">)</span> <span class="p">{</span> <span class="n">q</span><span class="p">.</span><span class="n">pop</span><span class="o">!</span> <span class="p">}</span>
+    <span class="n">end</span>
   <span class="n">end</span>
 
   <span class="n">it</span> <span class="s">"initialized by elements in *enumerable*"</span> <span class="k">do</span>
