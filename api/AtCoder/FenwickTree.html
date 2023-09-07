@@ -305,7 +305,7 @@ tree[<span class="n">3</span>...<span class="n">5</span>] <span class="c"># =&gt
   </h2>
   
     
-      <a href="https://github.com/google/ac-library.cr/blob/99fc2f8e0e0d2347163a28af2958c760903b4646/src/fenwick_tree.cr#L27" target="_blank">
+      <a href="https://github.com/google/ac-library.cr/blob/8cf6d4f4cdac0778626b92ae1773f5898747a481/src/fenwick_tree.cr#L27" target="_blank">
         fenwick_tree.cr
       </a>
     
@@ -353,7 +353,7 @@ tree[<span class="n">3</span>...<span class="n">5</span>] <span class="c"># =&gt
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#%5B%5D%28range%3ARange%28Int%2CInt%29%29-instance-method" class="signature"><strong>#[]</strong>(range : Range(Int, Int))</a>
+        <a href="#%5B%5D%28range%3ARange%29-instance-method" class="signature"><strong>#[]</strong>(range : Range)</a>
         
           <div class="summary"><p>Implements atcoder::fenwick_tree.sum(left, right)</p></div>
         
@@ -385,6 +385,13 @@ tree[<span class="n">3</span>...<span class="n">5</span>] <span class="c"># =&gt
     
       <li class="entry-summary">
         <a href="#sum%28left%2Cright%29-instance-method" class="signature"><strong>#sum</strong>(left, right)</a>
+        
+          <div class="summary"><p>Implements atcoder::fenwick_tree.sum(left, right)</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#sum%28range%3ARange%29-instance-method" class="signature"><strong>#sum</strong>(range : Range)</a>
         
           <div class="summary"><p>Implements atcoder::fenwick_tree.sum(left, right)</p></div>
         
@@ -441,7 +448,7 @@ tree[<span class="n">3</span>...<span class="n">5</span>] <span class="c"># =&gt
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/99fc2f8e0e0d2347163a28af2958c760903b4646/src/fenwick_tree.cr#L31" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/8cf6d4f4cdac0778626b92ae1773f5898747a481/src/fenwick_tree.cr#L31" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -457,7 +464,7 @@ tree[<span class="n">3</span>...<span class="n">5</span>] <span class="c"># =&gt
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/99fc2f8e0e0d2347163a28af2958c760903b4646/src/fenwick_tree.cr#L35" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/8cf6d4f4cdac0778626b92ae1773f5898747a481/src/fenwick_tree.cr#L35" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -476,23 +483,24 @@ tree[<span class="n">3</span>...<span class="n">5</span>] <span class="c"># =&gt
     Instance Method Detail
   </h2>
   
-    <div class="entry-detail" id="[](range:Range(Int,Int))-instance-method">
+    <div class="entry-detail" id="[](range:Range)-instance-method">
       <div class="signature">
         
-        def <strong>[]</strong>(range : Range(<a href="../Int.html">Int</a>, <a href="../Int.html">Int</a>))
+        def <strong>[]</strong>(range : Range)
 
-        <a class="method-permalink" href="#%5B%5D%28range%3ARange%28Int%2CInt%29%29-instance-method">#</a>
+        <a class="method-permalink" href="#%5B%5D%28range%3ARange%29-instance-method">#</a>
       </div>
       
         <div class="doc">
           
           <p>Implements atcoder::fenwick_tree.sum(left, right)</p>
+<p>Open ended ranges are clamped at the start and end of array, respectively.</p>
         </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/99fc2f8e0e0d2347163a28af2958c760903b4646/src/fenwick_tree.cr#L71" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/8cf6d4f4cdac0778626b92ae1773f5898747a481/src/fenwick_tree.cr#L80" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -513,7 +521,7 @@ tree[<span class="n">3</span>...<span class="n">5</span>] <span class="c"># =&gt
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/99fc2f8e0e0d2347163a28af2958c760903b4646/src/fenwick_tree.cr#L47" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/8cf6d4f4cdac0778626b92ae1773f5898747a481/src/fenwick_tree.cr#L47" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -529,7 +537,7 @@ tree[<span class="n">3</span>...<span class="n">5</span>] <span class="c"># =&gt
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/99fc2f8e0e0d2347163a28af2958c760903b4646/src/fenwick_tree.cr#L29" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/8cf6d4f4cdac0778626b92ae1773f5898747a481/src/fenwick_tree.cr#L29" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -550,7 +558,7 @@ tree[<span class="n">3</span>...<span class="n">5</span>] <span class="c"># =&gt
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/99fc2f8e0e0d2347163a28af2958c760903b4646/src/fenwick_tree.cr#L56" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/8cf6d4f4cdac0778626b92ae1773f5898747a481/src/fenwick_tree.cr#L56" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -566,7 +574,7 @@ tree[<span class="n">3</span>...<span class="n">5</span>] <span class="c"># =&gt
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/99fc2f8e0e0d2347163a28af2958c760903b4646/src/fenwick_tree.cr#L28" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/8cf6d4f4cdac0778626b92ae1773f5898747a481/src/fenwick_tree.cr#L28" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -587,7 +595,29 @@ tree[<span class="n">3</span>...<span class="n">5</span>] <span class="c"># =&gt
       <br/>
       <div>
         
-          [<a href="https://github.com/google/ac-library.cr/blob/99fc2f8e0e0d2347163a28af2958c760903b4646/src/fenwick_tree.cr#L66" target="_blank">View source</a>]
+          [<a href="https://github.com/google/ac-library.cr/blob/8cf6d4f4cdac0778626b92ae1773f5898747a481/src/fenwick_tree.cr#L66" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="sum(range:Range)-instance-method">
+      <div class="signature">
+        
+        def <strong>sum</strong>(range : Range)
+
+        <a class="method-permalink" href="#sum%28range%3ARange%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Implements atcoder::fenwick_tree.sum(left, right)</p>
+<p>Open ended ranges are clamped at the start and end of array, respectively.</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/google/ac-library.cr/blob/8cf6d4f4cdac0778626b92ae1773f5898747a481/src/fenwick_tree.cr#L73" target="_blank">View source</a>]
         
       </div>
     </div>

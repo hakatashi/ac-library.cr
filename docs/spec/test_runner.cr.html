@@ -102,7 +102,7 @@ h1 a:focus {
 
 <ul>
     <li><a href="/blob/master/spec/test_runner.cr">View this file on GitHub</a></li>
-    <li>Last update: 2023-09-07 10:38:14+09:00</li>
+    <li>Last update: 2023-09-07 10:39:18+09:00</li>
     
     
     
@@ -1510,11 +1510,18 @@ h1 a:focus {
       <span class="n">left_sum</span><span class="p">(</span><span class="n">right</span><span class="p">)</span> <span class="o">-</span> <span class="n">left_sum</span><span class="p">(</span><span class="n">left</span><span class="p">)</span>
     <span class="n">end</span>
 
-    <span class="cp"># :ditto:
-</span>    <span class="n">def</span> <span class="p">[](</span><span class="n">range</span> <span class="o">:</span> <span class="n">Range</span><span class="p">(</span><span class="n">Int</span><span class="p">,</span> <span class="n">Int</span><span class="p">))</span>
-      <span class="n">left</span> <span class="o">=</span> <span class="n">range</span><span class="p">.</span><span class="n">begin</span>
-      <span class="n">right</span> <span class="o">=</span> <span class="n">range</span><span class="p">.</span><span class="n">exclusive</span><span class="o">?</span> <span class="o">?</span> <span class="n">range</span><span class="p">.</span><span class="n">end</span> <span class="o">:</span> <span class="n">range</span><span class="p">.</span><span class="n">end</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="cp"># Implements atcoder::fenwick_tree.sum(left, right)
+</span>    <span class="cp">#
+</span>    <span class="cp"># Open ended ranges are clamped at the start and end of array, respectively.
+</span>    <span class="n">def</span> <span class="n">sum</span><span class="p">(</span><span class="n">range</span> <span class="o">:</span> <span class="n">Range</span><span class="p">)</span>
+      <span class="n">left</span> <span class="o">=</span> <span class="n">range</span><span class="p">.</span><span class="n">begin</span> <span class="o">||</span> <span class="mi">0</span>
+      <span class="n">right</span> <span class="o">=</span> <span class="n">range</span><span class="p">.</span><span class="n">exclusive</span><span class="o">?</span> <span class="o">?</span> <span class="p">(</span><span class="n">range</span><span class="p">.</span><span class="n">end</span> <span class="o">||</span> <span class="err">@</span><span class="n">size</span><span class="p">)</span> <span class="o">:</span> <span class="p">(</span><span class="n">range</span><span class="p">.</span><span class="n">end</span> <span class="o">||</span> <span class="err">@</span><span class="n">size</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
       <span class="n">sum</span><span class="p">(</span><span class="n">left</span><span class="p">,</span> <span class="n">right</span><span class="p">)</span>
+    <span class="n">end</span>
+
+    <span class="cp"># :ditto:
+</span>    <span class="n">def</span> <span class="p">[](</span><span class="n">range</span> <span class="o">:</span> <span class="n">Range</span><span class="p">)</span>
+      <span class="n">sum</span><span class="p">(</span><span class="n">range</span><span class="p">)</span>
     <span class="n">end</span>
   <span class="n">end</span>
 <span class="n">end</span>
@@ -1580,6 +1587,13 @@ h1 a:focus {
       <span class="n">tree</span><span class="p">[</span><span class="mf">3.</span><span class="p">.</span><span class="mf">.7</span><span class="p">].</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">18</span>
       <span class="n">tree</span><span class="p">[</span><span class="mf">0.</span><span class="p">.</span><span class="mf">.11</span><span class="p">].</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">55</span>
       <span class="n">tree</span><span class="p">[</span><span class="mf">7.</span><span class="p">.</span><span class="mf">.7</span><span class="p">].</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">0</span>
+
+      <span class="n">tree</span><span class="p">[</span><span class="mf">3.</span><span class="p">..].</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">52</span>
+      <span class="n">tree</span><span class="p">[..</span><span class="mf">.6</span><span class="p">].</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">15</span>
+      <span class="n">tree</span><span class="p">[...].</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">55</span>
+      <span class="n">tree</span><span class="p">[</span><span class="mf">3.</span><span class="p">.].</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">52</span>
+      <span class="n">tree</span><span class="p">[.</span><span class="mf">.6</span><span class="p">].</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">21</span>
+      <span class="n">tree</span><span class="p">[..].</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">55</span>
     <span class="n">end</span>
   <span class="n">end</span>
 
