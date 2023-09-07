@@ -67,11 +67,18 @@ module AtCoder
       left_sum(right) - left_sum(left)
     end
 
-    # :ditto:
-    def [](range : Range(Int, Int))
-      left = range.begin
-      right = range.exclusive? ? range.end : range.end + 1
+    # Implements atcoder::fenwick_tree.sum(left, right)
+    #
+    # Open ended ranges are clamped at the start and end of array, respectively.
+    def sum(range : Range)
+      left = range.begin || 0
+      right = range.exclusive? ? (range.end || @size) : (range.end || @size - 1) + 1
       sum(left, right)
+    end
+
+    # :ditto:
+    def [](range : Range)
+      sum(range)
     end
   end
 end

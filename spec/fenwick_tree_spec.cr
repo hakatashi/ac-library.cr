@@ -69,6 +69,13 @@ describe "FenwickTree" do
       tree[3...7].should eq 18
       tree[0...11].should eq 55
       tree[7...7].should eq 0
+
+      tree[3...].should eq 52
+      tree[...6].should eq 15
+      tree[...].should eq 55
+      tree[3..].should eq 52
+      tree[..6].should eq 21
+      tree[..].should eq 55
     end
   end
 
