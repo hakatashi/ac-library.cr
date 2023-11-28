@@ -2,8 +2,8 @@
 
 [ci-badge]: https://github.com/hakatashi/ac-library.cr/workflows/Run%20test%20and%20verifier/badge.svg
 [ci-link]: https://github.com/hakatashi/ac-library.cr/actions?query=workflow%3A%22Run+test+and+verifier%22
-[coverage-badge]: https://codecov.io/gh/hakatashi/ac-library.cr/branch/master/graph/badge.svg
-[coverage-link]: https://codecov.io/gh/hakatashi/ac-library.cr
+[coverage-badge]: https://codecov.io/gh/google/ac-library.cr/branch/master/graph/badge.svg
+[coverage-link]: https://codecov.io/gh/google/ac-library.cr
 
 This is not an officially supported Google product.
 
