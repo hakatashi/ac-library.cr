@@ -257,7 +257,7 @@
 <h1><a id="ac-library.cr-run-test-and-verifier-coverage" class="anchor" href="#ac-library.cr-run-test-and-verifier-coverage">  <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
-</a>ac-library.cr <a href="https://github.com/google/ac-library.cr/actions?query=workflow:%22Run+test+and+verifier%22"><img src="https://github.com/google/ac-library.cr/workflows/Run%20test%20and%20verifier/badge.svg" alt="Run test and verifier" /></a> <a href="https://codecov.io/gh/google/ac-library.cr"><img src="https://codecov.io/gh/google/ac-library.cr/branch/master/graph/badge.svg" alt="Coverage" /></a></h1>
+</a>ac-library.cr <a href="https://github.com/hakatashi/ac-library.cr/actions?query=workflow:%22Run+test+and+verifier%22"><img src="https://github.com/hakatashi/ac-library.cr/workflows/Run%20test%20and%20verifier/badge.svg" alt="Run test and verifier" /></a> <a href="https://codecov.io/gh/hakatashi/ac-library.cr"><img src="https://codecov.io/gh/hakatashi/ac-library.cr/branch/master/graph/badge.svg" alt="Coverage" /></a></h1>
 <p>This is not an officially supported Google product.</p>
 <p>ac-library.cr is a Crystal port of <a href="https://github.com/atcoder/ac-library">ac-library</a>.</p>
 <p>This library aims to provide the almost-equivalent (and additional) functionality with ac-library but in the manner of Crystal.</p>
@@ -269,7 +269,7 @@
 <p>Add the following code to your project's <code>shard.yml</code>.</p>
 <pre><code class="language-yml">dependencies:
   atcoder:
-    github: google/ac-library.cr
+    github: hakatashi/ac-library.cr
     branch: master</code></pre>
 <h2><a id="usage" class="anchor" href="#usage">
   <svg class="octicon-link" aria-hidden="true">
@@ -282,7 +282,7 @@
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
-</a><a href="https://google.github.io/ac-library.cr/docs/src/mod_int.cr"><code>atcoder/mod_int</code></a> (Implements <a href="https://atcoder.github.io/ac-library/document_en/modint.html">&lt;atcoder/modint&gt;</a>)</h2>
+</a><a href="https://hakatashi.github.io/ac-library.cr/docs/src/mod_int.cr"><code>atcoder/mod_int</code></a> (Implements <a href="https://atcoder.github.io/ac-library/document_en/modint.html">&lt;atcoder/modint&gt;</a>)</h2>
 <ul>
 <li>
 <p><code>modint</code> =&gt; Unimplemented</p>
@@ -309,7 +309,7 @@
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
-</a><a href="https://google.github.io/ac-library.cr/docs/src/fenwick_tree.cr"><code>atcoder/fenwick_tree</code></a> (Implements <a href="https://atcoder.github.io/ac-library/document_en/fenwicktree.html">&lt;atcoder/fenwicktree&gt;</a>)</h2>
+</a><a href="https://hakatashi.github.io/ac-library.cr/docs/src/fenwick_tree.cr"><code>atcoder/fenwick_tree</code></a> (Implements <a href="https://atcoder.github.io/ac-library/document_en/fenwicktree.html">&lt;atcoder/fenwicktree&gt;</a>)</h2>
 <ul>
 <li>
 <p><code>fenwick_tree&lt;T&gt; fw(n)</code> =&gt; <code><a href="AtCoder/FenwickTree.html">AtCoder::FenwickTree</a>(T).new(n)</code></p>
@@ -331,7 +331,7 @@ tree[<span class="n">3</span>...<span class="n">5</span>] <span class="c">#=&gt;
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
-</a><a href="https://google.github.io/ac-library.cr/docs/src/seg_tree.cr"><code>atcoder/seg_tree</code></a> (Implements <a href="https://atcoder.github.io/ac-library/document_en/segtree.html">&lt;atcoder/segtree&gt;</a>)</h2>
+</a><a href="https://hakatashi.github.io/ac-library.cr/docs/src/seg_tree.cr"><code>atcoder/seg_tree</code></a> (Implements <a href="https://atcoder.github.io/ac-library/document_en/segtree.html">&lt;atcoder/segtree&gt;</a>)</h2>
 <ul>
 <li>
 <p><code>segtree&lt;S, op, e&gt; seg(v)</code> =&gt; <code><a href="AtCoder/SegTree.html">AtCoder::SegTree</a>(S).new(v, &amp;op?)</code></p>
@@ -360,7 +360,7 @@ tree[<span class="n">10</span>...<span class="n">50</span>] <span class="c">#=&g
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
-</a><a href="https://google.github.io/ac-library.cr/docs/src/lazy_seg_tree.cr"><code>atcoder/lazy_seg_tree</code></a> (Implements <a href="https://atcoder.github.io/ac-library/document_en/lazysegtree.html">&lt;atcoder/lazysegtree&gt;</a>)</h2>
+</a><a href="https://hakatashi.github.io/ac-library.cr/docs/src/lazy_seg_tree.cr"><code>atcoder/lazy_seg_tree</code></a> (Implements <a href="https://atcoder.github.io/ac-library/document_en/lazysegtree.html">&lt;atcoder/lazysegtree&gt;</a>)</h2>
 <ul>
 <li>
 <p><code>lazy_segtree&lt;S, op, e, F, mapping, composition, id&gt; seg(v)</code> =&gt; <code><a href="AtCoder/LazySegTree.html">AtCoder::LazySegTree</a>(S, F).new(v, op, mapping, composition)</code></p>
@@ -397,7 +397,7 @@ tree[<span class="n">50</span>...<span class="n">80</span>] <span class="c">#=&g
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
-</a><a href="https://google.github.io/ac-library.cr/docs/src/string.cr"><code>atcoder/string</code></a> (Implements <a href="https://atcoder.github.io/ac-library/document_en/string.html">&lt;atcoder/string&gt;</a>)</h2>
+</a><a href="https://hakatashi.github.io/ac-library.cr/docs/src/string.cr"><code>atcoder/string</code></a> (Implements <a href="https://atcoder.github.io/ac-library/document_en/string.html">&lt;atcoder/string&gt;</a>)</h2>
 <ul>
 <li><code>suffix_array(s)</code> =&gt; <code>AtCoder::String.suffix_array(s)</code></li>
 <li><code>lcp_array(s)</code> =&gt; <code>AtCoder::String.lcp_array(s)</code></li>
@@ -407,7 +407,7 @@ tree[<span class="n">50</span>...<span class="n">80</span>] <span class="c">#=&g
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
-</a><a href="https://google.github.io/ac-library.cr/docs/src/dsu.cr"><code>atcoder/dsu</code></a> (Implements <a href="https://atcoder.github.io/ac-library/document_en/dsu.html">&lt;atcoder/dsu&gt;</a>)</h2>
+</a><a href="https://hakatashi.github.io/ac-library.cr/docs/src/dsu.cr"><code>atcoder/dsu</code></a> (Implements <a href="https://atcoder.github.io/ac-library/document_en/dsu.html">&lt;atcoder/dsu&gt;</a>)</h2>
 <ul>
 <li>
 <p><code>dsu(n)</code> =&gt; <code>AtCoder::DSU.new(n)</code></p>
@@ -442,7 +442,7 @@ dsu.size(<span class="n">4</span>) <span class="c">#=&gt; 3</span></code></pre>
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
-</a><a href="https://google.github.io/ac-library.cr/docs/src/max_flow.cr"><code>atcoder/max_flow</code></a> (Implements <a href="https://atcoder.github.io/ac-library/document_en/maxflow.html">&lt;atcoder/maxflow&gt;</a>)</h2>
+</a><a href="https://hakatashi.github.io/ac-library.cr/docs/src/max_flow.cr"><code>atcoder/max_flow</code></a> (Implements <a href="https://atcoder.github.io/ac-library/document_en/maxflow.html">&lt;atcoder/maxflow&gt;</a>)</h2>
 <ul>
 <li>
 <p><code>mf_graph&lt;Cap&gt; graph(n)</code> =&gt; <code>AtCoder::MaxFlow.new(n)</code></p>
@@ -466,7 +466,7 @@ mf.flow(<span class="n">0</span>, <span class="n">2</span>) <span class="c">#=&g
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
-</a><a href="https://google.github.io/ac-library.cr/docs/src/scc.cr"><code>atcoder/scc</code></a> (Impements <a href="https://atcoder.github.io/ac-library/document_en/scc.html">&lt;atcoder/scc&gt;</a>)</h2>
+</a><a href="https://hakatashi.github.io/ac-library.cr/docs/src/scc.cr"><code>atcoder/scc</code></a> (Impements <a href="https://atcoder.github.io/ac-library/document_en/scc.html">&lt;atcoder/scc&gt;</a>)</h2>
 <ul>
 <li>
 <p><code>scc_graph graph(n)</code> =&gt; <code>AtCoder::SCC.new(n)</code></p>
@@ -485,7 +485,7 @@ scc.scc <span class="c">#=&gt; [Set{2}, Set{0, 1}]</span></code></pre>
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
-</a><a href="https://google.github.io/ac-library.cr/docs/src/two_sat.cr"><code>atcoder/two_sat</code></a> (Implements <a href="https://atcoder.github.io/ac-library/document_en/twosat.html">&lt;atcoder/twosat&gt;</a>)</h2>
+</a><a href="https://hakatashi.github.io/ac-library.cr/docs/src/two_sat.cr"><code>atcoder/two_sat</code></a> (Implements <a href="https://atcoder.github.io/ac-library/document_en/twosat.html">&lt;atcoder/twosat&gt;</a>)</h2>
 <ul>
 <li>
 <p><code>two_sat graph(n)</code> =&gt; <code>AtCoder::SCC.new(n)</code></p>
@@ -513,7 +513,7 @@ twosat.answer <span class="c">#=&gt; [false, false]</span></code></pre>
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
-</a><a href="https://google.github.io/ac-library.cr/docs/src/math.cr"><code>atcoder/math</code></a> (Implements <a href="https://atcoder.github.io/ac-library/document_en/math.html">&lt;atcoder/math&gt;</a>)</h2>
+</a><a href="https://hakatashi.github.io/ac-library.cr/docs/src/math.cr"><code>atcoder/math</code></a> (Implements <a href="https://atcoder.github.io/ac-library/document_en/math.html">&lt;atcoder/math&gt;</a>)</h2>
 <ul>
 <li><code>pow_mod(x, n, m)</code> =&gt; <code>AtCoder::Math.pow_mod(x, n, m)</code></li>
 <li><code>inv_mod(x, m)</code> =&gt; <code>AtCoder::Math.inv_mod(x, m)</code></li>
@@ -524,7 +524,7 @@ twosat.answer <span class="c">#=&gt; [false, false]</span></code></pre>
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
-</a><a href="https://google.github.io/ac-library.cr/docs/src/convolution.cr"><code>atcoder/convolution</code></a> (Implements <a href="https://atcoder.github.io/ac-library/document_en/convolution.html">&lt;atcoder/convolution&gt;</a>)</h2>
+</a><a href="https://hakatashi.github.io/ac-library.cr/docs/src/convolution.cr"><code>atcoder/convolution</code></a> (Implements <a href="https://atcoder.github.io/ac-library/document_en/convolution.html">&lt;atcoder/convolution&gt;</a>)</h2>
 <ul>
 <li>
 <p><code>convolution(a, b)</code> =&gt; <code>AtCoder::Convolution.convolution(a, b)</code></p>
@@ -541,7 +541,7 @@ twosat.answer <span class="c">#=&gt; [false, false]</span></code></pre>
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
-</a><a href="https://google.github.io/ac-library.cr/docs/src/min_cost_flow.cr"><code>atcoder/min_cost_flow</code></a> (Implements <a href="https://atcoder.github.io/ac-library/document_en/mincostflow.html">&lt;atcoder/mincostflow&gt;</a>)</h2>
+</a><a href="https://hakatashi.github.io/ac-library.cr/docs/src/min_cost_flow.cr"><code>atcoder/min_cost_flow</code></a> (Implements <a href="https://atcoder.github.io/ac-library/document_en/mincostflow.html">&lt;atcoder/mincostflow&gt;</a>)</h2>
 <ul>
 <li>
 <p><code>mcf_graph graph(n)</code> =&gt; <code>AtCoder::MinCostFlow.new(n)</code></p>
@@ -569,7 +569,7 @@ flow.flow(<span class="n">0</span>, <span class="n">4</span>, <span class="n">70
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
-</a><a href="https://google.github.io/ac-library.cr/docs/src/priority_queue.cr"><code>atcoder/priority_queue</code></a> (not in ACL)</h2>
+</a><a href="https://hakatashi.github.io/ac-library.cr/docs/src/priority_queue.cr"><code>atcoder/priority_queue</code></a> (not in ACL)</h2>
 <ul>
 <li>
 <p><code><a href="AtCoder/PriorityQueue.html">AtCoder::PriorityQueue</a>(T).new</code></p>
@@ -623,7 +623,7 @@ q.first <span class="c"># =&gt; n</span></code></pre>
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
-</a><a href="https://google.github.io/ac-library.cr/docs/src/prime.cr"><code>atcoder/prime</code></a> (not in ACL)</h2>
+</a><a href="https://hakatashi.github.io/ac-library.cr/docs/src/prime.cr"><code>atcoder/prime</code></a> (not in ACL)</h2>
 <ul>
 <li>
 <p><code><a href="AtCoder/Prime.html">AtCoder::Prime</a></code> (module)</p>

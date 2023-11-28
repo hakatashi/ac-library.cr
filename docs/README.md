@@ -1,9 +1,9 @@
 # ac-library.cr [![Run test and verifier][ci-badge]][ci-link] [![Coverage][coverage-badge]][coverage-link]
 
-[ci-badge]: https://github.com/google/ac-library.cr/workflows/Run%20test%20and%20verifier/badge.svg
-[ci-link]: https://github.com/google/ac-library.cr/actions?query=workflow%3A%22Run+test+and+verifier%22
-[coverage-badge]: https://codecov.io/gh/google/ac-library.cr/branch/master/graph/badge.svg
-[coverage-link]: https://codecov.io/gh/google/ac-library.cr
+[ci-badge]: https://github.com/hakatashi/ac-library.cr/workflows/Run%20test%20and%20verifier/badge.svg
+[ci-link]: https://github.com/hakatashi/ac-library.cr/actions?query=workflow%3A%22Run+test+and+verifier%22
+[coverage-badge]: https://codecov.io/gh/hakatashi/ac-library.cr/branch/master/graph/badge.svg
+[coverage-link]: https://codecov.io/gh/hakatashi/ac-library.cr
 
 This is not an officially supported Google product.
 
@@ -18,7 +18,7 @@ Add the following code to your project's `shard.yml`.
 ```yml
 dependencies:
   atcoder:
-    github: google/ac-library.cr
+    github: hakatashi/ac-library.cr
     branch: master
 ```
 
@@ -29,7 +29,7 @@ require "atcoder" # load all libraries
 require "atcoder/fenwick_tree" # load FenwickTree
 ```
 
-## [`atcoder/mod_int`](https://google.github.io/ac-library.cr/docs/src/mod_int.cr) (Implements [<atcoder/modint>](https://atcoder.github.io/ac-library/document_en/modint.html))
+## [`atcoder/mod_int`](https://hakatashi.github.io/ac-library.cr/docs/src/mod_int.cr) (Implements [<atcoder/modint>](https://atcoder.github.io/ac-library/document_en/modint.html))
 
 * `modint` => Unimplemented
 * `modint998244353` => `AtCoder::ModInt998244353`
@@ -50,7 +50,7 @@ require "atcoder/fenwick_tree" # load FenwickTree
 
 * `dynamic_modint` => Unimplemented
 
-## [`atcoder/fenwick_tree`](https://google.github.io/ac-library.cr/docs/src/fenwick_tree.cr) (Implements [<atcoder/fenwicktree>](https://atcoder.github.io/ac-library/document_en/fenwicktree.html))
+## [`atcoder/fenwick_tree`](https://hakatashi.github.io/ac-library.cr/docs/src/fenwick_tree.cr) (Implements [<atcoder/fenwicktree>](https://atcoder.github.io/ac-library/document_en/fenwicktree.html))
 
 * `fenwick_tree<T> fw(n)` => `AtCoder::FenwickTree(T).new(n)`
 * `fenwick_tree<T> fw(array)` => `AtCoder::FenwickTree(T).new(array)`
@@ -66,7 +66,7 @@ require "atcoder/fenwick_tree" # load FenwickTree
   * `.add(p, x)` => `#add(p, x)`
   * `.sum(l, r)` => `#[](l...r)`
 
-## [`atcoder/seg_tree`](https://google.github.io/ac-library.cr/docs/src/seg_tree.cr) (Implements [<atcoder/segtree>](https://atcoder.github.io/ac-library/document_en/segtree.html))
+## [`atcoder/seg_tree`](https://hakatashi.github.io/ac-library.cr/docs/src/seg_tree.cr) (Implements [<atcoder/segtree>](https://atcoder.github.io/ac-library/document_en/segtree.html))
 
 * `segtree<S, op, e> seg(v)` => `AtCoder::SegTree(S).new(v, &op?)`
 
@@ -86,7 +86,7 @@ require "atcoder/fenwick_tree" # load FenwickTree
   * `.min_left<f>(r)` => `#min_left(r, e = nil, &f)`
     * If the identity element is not given, it computes as `f(e: nil) = true`.
 
-## [`atcoder/lazy_seg_tree`](https://google.github.io/ac-library.cr/docs/src/lazy_seg_tree.cr) (Implements [<atcoder/lazysegtree>](https://atcoder.github.io/ac-library/document_en/lazysegtree.html))
+## [`atcoder/lazy_seg_tree`](https://hakatashi.github.io/ac-library.cr/docs/src/lazy_seg_tree.cr) (Implements [<atcoder/lazysegtree>](https://atcoder.github.io/ac-library/document_en/lazysegtree.html))
 
 * `lazy_segtree<S, op, e, F, mapping, composition, id> seg(v)` => `AtCoder::LazySegTree(S, F).new(v, op, mapping, composition)`
 
@@ -115,13 +115,13 @@ require "atcoder/fenwick_tree" # load FenwickTree
   * `.min_left<f>(r)` => `#min_left(r, e = nil, &f)`
     * If the identity element is not given, it computes as `f(e: nil) = true`.
 
-## [`atcoder/string`](https://google.github.io/ac-library.cr/docs/src/string.cr) (Implements [<atcoder/string>](https://atcoder.github.io/ac-library/document_en/string.html))
+## [`atcoder/string`](https://hakatashi.github.io/ac-library.cr/docs/src/string.cr) (Implements [<atcoder/string>](https://atcoder.github.io/ac-library/document_en/string.html))
 
 * `suffix_array(s)` => `AtCoder::String.suffix_array(s)`
 * `lcp_array(s)` => `AtCoder::String.lcp_array(s)`
 * `z_algorithm(s)` => `AtCoder::String.z_algorithm(s)`
 
-## [`atcoder/dsu`](https://google.github.io/ac-library.cr/docs/src/dsu.cr) (Implements [<atcoder/dsu>](https://atcoder.github.io/ac-library/document_en/dsu.html))
+## [`atcoder/dsu`](https://hakatashi.github.io/ac-library.cr/docs/src/dsu.cr) (Implements [<atcoder/dsu>](https://atcoder.github.io/ac-library/document_en/dsu.html))
 
 * `dsu(n)` => `AtCoder::DSU.new(n)`
 
@@ -141,7 +141,7 @@ require "atcoder/fenwick_tree" # load FenwickTree
 
     * This method returns set instead of list.
 
-## [`atcoder/max_flow`](https://google.github.io/ac-library.cr/docs/src/max_flow.cr) (Implements [<atcoder/maxflow>](https://atcoder.github.io/ac-library/document_en/maxflow.html))
+## [`atcoder/max_flow`](https://hakatashi.github.io/ac-library.cr/docs/src/max_flow.cr) (Implements [<atcoder/maxflow>](https://atcoder.github.io/ac-library/document_en/maxflow.html))
 
 * `mf_graph<Cap> graph(n)` => `AtCoder::MaxFlow.new(n)`
 
@@ -162,7 +162,7 @@ require "atcoder/fenwick_tree" # load FenwickTree
   * `.edges()` => Unimplemented
   * `.change_edge(i, new_cap, new_flow)` => Unimplemented
 
-## [`atcoder/scc`](https://google.github.io/ac-library.cr/docs/src/scc.cr) (Impements [<atcoder/scc>](https://atcoder.github.io/ac-library/document_en/scc.html))
+## [`atcoder/scc`](https://hakatashi.github.io/ac-library.cr/docs/src/scc.cr) (Impements [<atcoder/scc>](https://atcoder.github.io/ac-library/document_en/scc.html))
 
 * `scc_graph graph(n)` => `AtCoder::SCC.new(n)`
 
@@ -177,7 +177,7 @@ require "atcoder/fenwick_tree" # load FenwickTree
   * `.add_edge(from, to)` => `#add_edge(from, to)`
   * `.scc()` => `#scc`
 
-## [`atcoder/two_sat`](https://google.github.io/ac-library.cr/docs/src/two_sat.cr) (Implements [<atcoder/twosat>](https://atcoder.github.io/ac-library/document_en/twosat.html))
+## [`atcoder/two_sat`](https://hakatashi.github.io/ac-library.cr/docs/src/two_sat.cr) (Implements [<atcoder/twosat>](https://atcoder.github.io/ac-library/document_en/twosat.html))
 
 * `two_sat graph(n)` => `AtCoder::SCC.new(n)`
 
@@ -196,14 +196,14 @@ require "atcoder/fenwick_tree" # load FenwickTree
 
     This method will raise if it's not satisfiable
 
-## [`atcoder/math`](https://google.github.io/ac-library.cr/docs/src/math.cr) (Implements [<atcoder/math>](https://atcoder.github.io/ac-library/document_en/math.html))
+## [`atcoder/math`](https://hakatashi.github.io/ac-library.cr/docs/src/math.cr) (Implements [<atcoder/math>](https://atcoder.github.io/ac-library/document_en/math.html))
 
 * `pow_mod(x, n, m)` => `AtCoder::Math.pow_mod(x, n, m)`
 * `inv_mod(x, m)` => `AtCoder::Math.inv_mod(x, m)`
 * `crt(r, m)` => `AtCoder::Math.crt(r, m)`
 * `floor_sum` => `AtCoder::Math.floor_sum(n, m, a, b)`
 
-## [`atcoder/convolution`](https://google.github.io/ac-library.cr/docs/src/convolution.cr) (Implements [<atcoder/convolution>](https://atcoder.github.io/ac-library/document_en/convolution.html))
+## [`atcoder/convolution`](https://hakatashi.github.io/ac-library.cr/docs/src/convolution.cr) (Implements [<atcoder/convolution>](https://atcoder.github.io/ac-library/document_en/convolution.html))
 
 * `convolution(a, b)` => `AtCoder::Convolution.convolution(a, b)`
 
@@ -219,7 +219,7 @@ require "atcoder/fenwick_tree" # load FenwickTree
   AtCoder::Convolution.convolution_ll(a, a) #=> [1000000000000000000]
   ```
 
-## [`atcoder/min_cost_flow`](https://google.github.io/ac-library.cr/docs/src/min_cost_flow.cr) (Implements [<atcoder/mincostflow>](https://atcoder.github.io/ac-library/document_en/mincostflow.html))
+## [`atcoder/min_cost_flow`](https://hakatashi.github.io/ac-library.cr/docs/src/min_cost_flow.cr) (Implements [<atcoder/mincostflow>](https://atcoder.github.io/ac-library/document_en/mincostflow.html))
 
 * `mcf_graph graph(n)` => `AtCoder::MinCostFlow.new(n)`
 
@@ -243,7 +243,7 @@ require "atcoder/fenwick_tree" # load FenwickTree
   * `.get_edge(i)` => Unimplemented
   * `.edges()` => Unimplemented
 
-## [`atcoder/priority_queue`](https://google.github.io/ac-library.cr/docs/src/priority_queue.cr) (not in ACL)
+## [`atcoder/priority_queue`](https://hakatashi.github.io/ac-library.cr/docs/src/priority_queue.cr) (not in ACL)
 
 * `AtCoder::PriorityQueue(T).new`
 
@@ -297,7 +297,7 @@ require "atcoder/fenwick_tree" # load FenwickTree
 
     Returns `true` if the queue is empty.
 
-## [`atcoder/prime`](https://google.github.io/ac-library.cr/docs/src/prime.cr) (not in ACL)
+## [`atcoder/prime`](https://hakatashi.github.io/ac-library.cr/docs/src/prime.cr) (not in ACL)
 
 * `AtCoder::Prime` (module)
 
