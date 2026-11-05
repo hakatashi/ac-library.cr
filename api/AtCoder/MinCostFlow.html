@@ -313,7 +313,7 @@ flow.flow(<span class="n">0</span>, <span class="n">4</span>, <span class="n">70
   </h2>
   
     
-      <a href="https://github.com/hakatashi/ac-library.cr/blob/2c5a994ea9f438cf0a5a00bb1623acf98bfca974/src/min_cost_flow.cr#L33" target="_blank">
+      <a href="https://github.com/hakatashi/ac-library.cr/blob/9ffbd035146df9c3bce606c437b0dfc6729c7938/src/min_cost_flow.cr#L33" target="_blank">
         min_cost_flow.cr
       </a>
     
@@ -336,7 +336,7 @@ flow.flow(<span class="n">0</span>, <span class="n">4</span>, <span class="n">70
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#new%28size%3AInt64%29-class-method" class="signature"><strong>.new</strong>(size : Int64)</a>
+        <a href="#new%28size%29-class-method" class="signature"><strong>.new</strong>(size)</a>
         
           <div class="summary"><p>Implements atcoder::mcf_graph g(n).</p></div>
         
@@ -368,6 +368,13 @@ flow.flow(<span class="n">0</span>, <span class="n">4</span>, <span class="n">70
       </li>
     
       <li class="entry-summary">
+        <a href="#edges-instance-method" class="signature"><strong>#edges</strong></a>
+        
+          <div class="summary"><p><span class="flag yellow">FIXME</span>  Unimplemented</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
         <a href="#flow%28start%2Ctarget%2Cflow_limit%3AInt%7CNil%3Dnil%29-instance-method" class="signature"><strong>#flow</strong>(start, target, flow_limit : Int | Nil = <span class="n">nil</span>)</a>
         
           <div class="summary"><p>Implements atcoder::mcf_graph.flow(start, target, flow_limit).</p></div>
@@ -375,12 +382,16 @@ flow.flow(<span class="n">0</span>, <span class="n">4</span>, <span class="n">70
       </li>
     
       <li class="entry-summary">
-        <a href="#size%28%2Aargs%2C%2A%2Aoptions%29-instance-method" class="signature"><strong>#size</strong>(*args, **options)</a>
+        <a href="#get_edge%28i%29-instance-method" class="signature"><strong>#get_edge</strong>(i)</a>
+        
+          <div class="summary"><p><span class="flag yellow">FIXME</span>  Unimplemented</p></div>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#size%28%2Aargs%2C%2A%2Aoptions%2C%26%29-instance-method" class="signature"><strong>#size</strong>(*args, **options, &)</a>
+        <a href="#size%3AInt64-instance-method" class="signature"><strong>#size</strong> : Int64</a>
+        
+          <div class="summary"><p>Number of nodes</p></div>
         
       </li>
     
@@ -435,12 +446,12 @@ flow.flow(<span class="n">0</span>, <span class="n">4</span>, <span class="n">70
     Constructor Detail
   </h2>
   
-    <div class="entry-detail" id="new(size:Int64)-class-method">
+    <div class="entry-detail" id="new(size)-class-method">
       <div class="signature">
         
-        def self.<strong>new</strong>(size : Int64)
+        def self.<strong>new</strong>(size)
 
-        <a class="method-permalink" href="#new%28size%3AInt64%29-class-method">#</a>
+        <a class="method-permalink" href="#new%28size%29-class-method">#</a>
       </div>
       
         <div class="doc">
@@ -451,7 +462,7 @@ flow.flow(<span class="n">0</span>, <span class="n">4</span>, <span class="n">70
       <br/>
       <div>
         
-          [<a href="https://github.com/hakatashi/ac-library.cr/blob/2c5a994ea9f438cf0a5a00bb1623acf98bfca974/src/min_cost_flow.cr#L71" target="_blank">View source</a>]
+          [<a href="https://github.com/hakatashi/ac-library.cr/blob/9ffbd035146df9c3bce606c437b0dfc6729c7938/src/min_cost_flow.cr#L49" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -483,12 +494,34 @@ flow.flow(<span class="n">0</span>, <span class="n">4</span>, <span class="n">70
         <div class="doc">
           
           <p>Implements atcoder::mcf_graph.add_edge(from, to, capacity, cost).</p>
+<p>Returns the index of the added edge.</p>
         </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/hakatashi/ac-library.cr/blob/2c5a994ea9f438cf0a5a00bb1623acf98bfca974/src/min_cost_flow.cr#L78" target="_blank">View source</a>]
+          [<a href="https://github.com/hakatashi/ac-library.cr/blob/9ffbd035146df9c3bce606c437b0dfc6729c7938/src/min_cost_flow.cr#L67" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="edges-instance-method">
+      <div class="signature">
+        
+        def <strong>edges</strong>
+
+        <a class="method-permalink" href="#edges-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p><span class="flag yellow">FIXME</span>  Unimplemented</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hakatashi/ac-library.cr/blob/9ffbd035146df9c3bce606c437b0dfc6729c7938/src/min_cost_flow.cr#L141" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -509,39 +542,49 @@ flow.flow(<span class="n">0</span>, <span class="n">4</span>, <span class="n">70
       <br/>
       <div>
         
-          [<a href="https://github.com/hakatashi/ac-library.cr/blob/2c5a994ea9f438cf0a5a00bb1623acf98bfca974/src/min_cost_flow.cr#L177" target="_blank">View source</a>]
+          [<a href="https://github.com/hakatashi/ac-library.cr/blob/9ffbd035146df9c3bce606c437b0dfc6729c7938/src/min_cost_flow.cr#L131" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="size(*args,**options)-instance-method">
+    <div class="entry-detail" id="get_edge(i)-instance-method">
       <div class="signature">
         
-        def <strong>size</strong>(*args, **options)
+        def <strong>get_edge</strong>(i)
 
-        <a class="method-permalink" href="#size%28%2Aargs%2C%2A%2Aoptions%29-instance-method">#</a>
+        <a class="method-permalink" href="#get_edge%28i%29-instance-method">#</a>
       </div>
+      
+        <div class="doc">
+          
+          <p><span class="flag yellow">FIXME</span>  Unimplemented</p>
+        </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/hakatashi/ac-library.cr/blob/2c5a994ea9f438cf0a5a00bb1623acf98bfca974/src/min_cost_flow.cr#L187" target="_blank">View source</a>]
+          [<a href="https://github.com/hakatashi/ac-library.cr/blob/9ffbd035146df9c3bce606c437b0dfc6729c7938/src/min_cost_flow.cr#L136" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="size(*args,**options,&amp;)-instance-method">
+    <div class="entry-detail" id="size:Int64-instance-method">
       <div class="signature">
         
-        def <strong>size</strong>(*args, **options, &)
+        def <strong>size</strong> : Int64
 
-        <a class="method-permalink" href="#size%28%2Aargs%2C%2A%2Aoptions%2C%26%29-instance-method">#</a>
+        <a class="method-permalink" href="#size%3AInt64-instance-method">#</a>
       </div>
+      
+        <div class="doc">
+          
+          <p>Number of nodes</p>
+        </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/hakatashi/ac-library.cr/blob/2c5a994ea9f438cf0a5a00bb1623acf98bfca974/src/min_cost_flow.cr#L187" target="_blank">View source</a>]
+          [<a href="https://github.com/hakatashi/ac-library.cr/blob/9ffbd035146df9c3bce606c437b0dfc6729c7938/src/min_cost_flow.cr#L46" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -556,14 +599,13 @@ flow.flow(<span class="n">0</span>, <span class="n">4</span>, <span class="n">70
       
         <div class="doc">
           
-          <p>Implements atcoder::mcf_graph.slope(start, target, flow_limit).
-ameba:disable Metrics/CyclomaticComplexity</p>
+          <p>Implements atcoder::mcf_graph.slope(start, target, flow_limit).</p>
         </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/hakatashi/ac-library.cr/blob/2c5a994ea9f438cf0a5a00bb1623acf98bfca974/src/min_cost_flow.cr#L96" target="_blank">View source</a>]
+          [<a href="https://github.com/hakatashi/ac-library.cr/blob/9ffbd035146df9c3bce606c437b0dfc6729c7938/src/min_cost_flow.cr#L83" target="_blank">View source</a>]
         
       </div>
     </div>
