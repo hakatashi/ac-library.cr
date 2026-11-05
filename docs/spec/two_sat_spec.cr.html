@@ -102,7 +102,7 @@ h1 a:focus {
 
 <ul>
     <li><a href="/blob/master/spec/two_sat_spec.cr">View this file on GitHub</a></li>
-    <li>Last update: 2026-11-05 16:35:56+09:00</li>
+    <li>Last update: 2026-11-05 16:47:47+09:00</li>
     
     
     
@@ -179,8 +179,57 @@ h1 a:focus {
 
 <span class="n">alias</span> <span class="n">TwoSat</span> <span class="o">=</span> <span class="n">AtCoder</span><span class="o">::</span><span class="n">TwoSat</span>
 
+<span class="k">private</span> <span class="n">def</span> <span class="n">satisfies</span><span class="o">?</span><span class="p">(</span><span class="n">assignment</span><span class="p">,</span> <span class="n">clauses</span><span class="p">)</span>
+  <span class="n">clauses</span><span class="p">.</span><span class="n">all</span><span class="o">?</span> <span class="p">{</span> <span class="o">|</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">g</span><span class="p">)</span><span class="o">|</span> <span class="n">assignment</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">f</span> <span class="o">||</span> <span class="n">assignment</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="n">g</span> <span class="p">}</span>
+<span class="n">end</span>
+
+<span class="k">private</span> <span class="n">def</span> <span class="n">naive_satisfiable</span><span class="o">?</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">clauses</span><span class="p">)</span>
+  <span class="p">(</span><span class="mf">0.</span><span class="p">..(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">n</span><span class="p">)).</span><span class="n">any</span><span class="o">?</span> <span class="k">do</span> <span class="o">|</span><span class="n">mask</span><span class="o">|</span>
+    <span class="n">satisfies</span><span class="o">?</span><span class="p">(</span><span class="n">Array</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="p">{</span> <span class="o">|</span><span class="n">i</span><span class="o">|</span> <span class="n">mask</span><span class="p">.</span><span class="n">bit</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span> <span class="p">},</span> <span class="n">clauses</span><span class="p">)</span>
+  <span class="n">end</span>
+<span class="n">end</span>
+
 <span class="n">describe</span> <span class="s">"TwoSat"</span> <span class="k">do</span>
+  <span class="n">describe</span> <span class="s">"#satisfiable?"</span> <span class="k">do</span>
+    <span class="n">it</span> <span class="s">"returns true for a formula without clauses"</span> <span class="k">do</span>
+      <span class="n">TwoSat</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="mi">3</span><span class="n">_i64</span><span class="p">).</span><span class="n">satisfiable</span><span class="o">?</span><span class="p">.</span><span class="n">should</span> <span class="n">be_true</span>
+      <span class="n">TwoSat</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="mi">0</span><span class="n">_i64</span><span class="p">).</span><span class="n">satisfiable</span><span class="o">?</span><span class="p">.</span><span class="n">should</span> <span class="n">be_true</span>
+    <span class="n">end</span>
+
+    <span class="n">it</span> <span class="s">"returns false for contradicting unit clauses"</span> <span class="k">do</span>
+      <span class="n">twosat</span> <span class="o">=</span> <span class="n">TwoSat</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="mi">2</span><span class="n">_i64</span><span class="p">)</span>
+      <span class="n">twosat</span><span class="p">.</span><span class="n">add_clause</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">true</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">true</span><span class="p">)</span>
+      <span class="n">twosat</span><span class="p">.</span><span class="n">add_clause</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">false</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">true</span><span class="p">)</span>
+      <span class="n">twosat</span><span class="p">.</span><span class="n">add_clause</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">false</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">false</span><span class="p">)</span>
+      <span class="n">twosat</span><span class="p">.</span><span class="n">satisfiable</span><span class="o">?</span><span class="p">.</span><span class="n">should</span> <span class="n">be_false</span>
+    <span class="n">end</span>
+
+    <span class="n">it</span> <span class="s">"matches a naive implementation on random small formulas"</span> <span class="k">do</span>
+      <span class="n">rng</span> <span class="o">=</span> <span class="n">Random</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="mi">36</span><span class="p">)</span>
+      <span class="mf">500.</span><span class="n">times</span> <span class="k">do</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="n">rng</span><span class="p">.</span><span class="n">rand</span><span class="p">(</span><span class="mf">1..6</span><span class="p">)</span>
+        <span class="n">clauses</span> <span class="o">=</span> <span class="n">Array</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="n">rng</span><span class="p">.</span><span class="n">rand</span><span class="p">(</span><span class="mf">0..12</span><span class="p">))</span> <span class="k">do</span>
+          <span class="p">{</span><span class="n">rng</span><span class="p">.</span><span class="n">rand</span><span class="p">(</span><span class="n">n</span><span class="p">),</span> <span class="n">rng</span><span class="p">.</span><span class="n">rand</span> <span class="o">&lt;</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">rng</span><span class="p">.</span><span class="n">rand</span><span class="p">(</span><span class="n">n</span><span class="p">),</span> <span class="n">rng</span><span class="p">.</span><span class="n">rand</span> <span class="o">&lt;</span> <span class="mf">0.5</span><span class="p">}</span>
+        <span class="n">end</span>
+
+        <span class="n">twosat</span> <span class="o">=</span> <span class="n">TwoSat</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="n">n</span><span class="p">.</span><span class="n">to_i64</span><span class="p">)</span>
+        <span class="n">clauses</span><span class="p">.</span><span class="n">each</span> <span class="p">{</span> <span class="o">|</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">g</span><span class="p">)</span><span class="o">|</span> <span class="n">twosat</span><span class="p">.</span><span class="n">add_clause</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">g</span><span class="p">)</span> <span class="p">}</span>
+        <span class="n">expected</span> <span class="o">=</span> <span class="n">naive_satisfiable</span><span class="o">?</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">clauses</span><span class="p">)</span>
+        <span class="n">twosat</span><span class="p">.</span><span class="n">satisfiable</span><span class="o">?</span><span class="p">.</span><span class="n">should</span> <span class="n">eq</span> <span class="n">expected</span>
+        <span class="k">if</span> <span class="n">expected</span>
+          <span class="n">answer</span> <span class="o">=</span> <span class="n">twosat</span><span class="p">.</span><span class="n">answer</span>
+          <span class="n">answer</span><span class="p">.</span><span class="n">size</span><span class="p">.</span><span class="n">should</span> <span class="n">eq</span> <span class="n">n</span>
+          <span class="n">satisfies</span><span class="o">?</span><span class="p">(</span><span class="n">answer</span><span class="p">,</span> <span class="n">clauses</span><span class="p">).</span><span class="n">should</span> <span class="n">be_true</span>
+        <span class="n">end</span>
+      <span class="n">end</span>
+    <span class="n">end</span>
+  <span class="n">end</span>
+
   <span class="n">describe</span> <span class="s">"#answer"</span> <span class="k">do</span>
+    <span class="n">it</span> <span class="s">"returns an empty array for zero variables"</span> <span class="k">do</span>
+      <span class="n">TwoSat</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="mi">0</span><span class="n">_i64</span><span class="p">).</span><span class="n">answer</span><span class="p">.</span><span class="n">should</span> <span class="n">eq</span> <span class="p">[]</span> <span class="n">of</span> <span class="n">Bool</span>
+    <span class="n">end</span>
+
     <span class="n">it</span> <span class="s">"returns an assignment after #satisfiable?"</span> <span class="k">do</span>
       <span class="n">twosat</span> <span class="o">=</span> <span class="n">TwoSat</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="mi">2</span><span class="n">_i64</span><span class="p">)</span>
       <span class="n">twosat</span><span class="p">.</span><span class="n">add_clause</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">true</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">false</span><span class="p">)</span>
@@ -466,8 +515,57 @@ h1 a:focus {
 
 <span class="n">alias</span> <span class="n">TwoSat</span> <span class="o">=</span> <span class="n">AtCoder</span><span class="o">::</span><span class="n">TwoSat</span>
 
+<span class="k">private</span> <span class="n">def</span> <span class="n">satisfies</span><span class="o">?</span><span class="p">(</span><span class="n">assignment</span><span class="p">,</span> <span class="n">clauses</span><span class="p">)</span>
+  <span class="n">clauses</span><span class="p">.</span><span class="n">all</span><span class="o">?</span> <span class="p">{</span> <span class="o">|</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">g</span><span class="p">)</span><span class="o">|</span> <span class="n">assignment</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">f</span> <span class="o">||</span> <span class="n">assignment</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="n">g</span> <span class="p">}</span>
+<span class="n">end</span>
+
+<span class="k">private</span> <span class="n">def</span> <span class="n">naive_satisfiable</span><span class="o">?</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">clauses</span><span class="p">)</span>
+  <span class="p">(</span><span class="mf">0.</span><span class="p">..(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">n</span><span class="p">)).</span><span class="n">any</span><span class="o">?</span> <span class="k">do</span> <span class="o">|</span><span class="n">mask</span><span class="o">|</span>
+    <span class="n">satisfies</span><span class="o">?</span><span class="p">(</span><span class="n">Array</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="p">{</span> <span class="o">|</span><span class="n">i</span><span class="o">|</span> <span class="n">mask</span><span class="p">.</span><span class="n">bit</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span> <span class="p">},</span> <span class="n">clauses</span><span class="p">)</span>
+  <span class="n">end</span>
+<span class="n">end</span>
+
 <span class="n">describe</span> <span class="s">"TwoSat"</span> <span class="k">do</span>
+  <span class="n">describe</span> <span class="s">"#satisfiable?"</span> <span class="k">do</span>
+    <span class="n">it</span> <span class="s">"returns true for a formula without clauses"</span> <span class="k">do</span>
+      <span class="n">TwoSat</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="mi">3</span><span class="n">_i64</span><span class="p">).</span><span class="n">satisfiable</span><span class="o">?</span><span class="p">.</span><span class="n">should</span> <span class="n">be_true</span>
+      <span class="n">TwoSat</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="mi">0</span><span class="n">_i64</span><span class="p">).</span><span class="n">satisfiable</span><span class="o">?</span><span class="p">.</span><span class="n">should</span> <span class="n">be_true</span>
+    <span class="n">end</span>
+
+    <span class="n">it</span> <span class="s">"returns false for contradicting unit clauses"</span> <span class="k">do</span>
+      <span class="n">twosat</span> <span class="o">=</span> <span class="n">TwoSat</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="mi">2</span><span class="n">_i64</span><span class="p">)</span>
+      <span class="n">twosat</span><span class="p">.</span><span class="n">add_clause</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">true</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">true</span><span class="p">)</span>
+      <span class="n">twosat</span><span class="p">.</span><span class="n">add_clause</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">false</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">true</span><span class="p">)</span>
+      <span class="n">twosat</span><span class="p">.</span><span class="n">add_clause</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">false</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">false</span><span class="p">)</span>
+      <span class="n">twosat</span><span class="p">.</span><span class="n">satisfiable</span><span class="o">?</span><span class="p">.</span><span class="n">should</span> <span class="n">be_false</span>
+    <span class="n">end</span>
+
+    <span class="n">it</span> <span class="s">"matches a naive implementation on random small formulas"</span> <span class="k">do</span>
+      <span class="n">rng</span> <span class="o">=</span> <span class="n">Random</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="mi">36</span><span class="p">)</span>
+      <span class="mf">500.</span><span class="n">times</span> <span class="k">do</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="n">rng</span><span class="p">.</span><span class="n">rand</span><span class="p">(</span><span class="mf">1..6</span><span class="p">)</span>
+        <span class="n">clauses</span> <span class="o">=</span> <span class="n">Array</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="n">rng</span><span class="p">.</span><span class="n">rand</span><span class="p">(</span><span class="mf">0..12</span><span class="p">))</span> <span class="k">do</span>
+          <span class="p">{</span><span class="n">rng</span><span class="p">.</span><span class="n">rand</span><span class="p">(</span><span class="n">n</span><span class="p">),</span> <span class="n">rng</span><span class="p">.</span><span class="n">rand</span> <span class="o">&lt;</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">rng</span><span class="p">.</span><span class="n">rand</span><span class="p">(</span><span class="n">n</span><span class="p">),</span> <span class="n">rng</span><span class="p">.</span><span class="n">rand</span> <span class="o">&lt;</span> <span class="mf">0.5</span><span class="p">}</span>
+        <span class="n">end</span>
+
+        <span class="n">twosat</span> <span class="o">=</span> <span class="n">TwoSat</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="n">n</span><span class="p">.</span><span class="n">to_i64</span><span class="p">)</span>
+        <span class="n">clauses</span><span class="p">.</span><span class="n">each</span> <span class="p">{</span> <span class="o">|</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">g</span><span class="p">)</span><span class="o">|</span> <span class="n">twosat</span><span class="p">.</span><span class="n">add_clause</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">g</span><span class="p">)</span> <span class="p">}</span>
+        <span class="n">expected</span> <span class="o">=</span> <span class="n">naive_satisfiable</span><span class="o">?</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">clauses</span><span class="p">)</span>
+        <span class="n">twosat</span><span class="p">.</span><span class="n">satisfiable</span><span class="o">?</span><span class="p">.</span><span class="n">should</span> <span class="n">eq</span> <span class="n">expected</span>
+        <span class="k">if</span> <span class="n">expected</span>
+          <span class="n">answer</span> <span class="o">=</span> <span class="n">twosat</span><span class="p">.</span><span class="n">answer</span>
+          <span class="n">answer</span><span class="p">.</span><span class="n">size</span><span class="p">.</span><span class="n">should</span> <span class="n">eq</span> <span class="n">n</span>
+          <span class="n">satisfies</span><span class="o">?</span><span class="p">(</span><span class="n">answer</span><span class="p">,</span> <span class="n">clauses</span><span class="p">).</span><span class="n">should</span> <span class="n">be_true</span>
+        <span class="n">end</span>
+      <span class="n">end</span>
+    <span class="n">end</span>
+  <span class="n">end</span>
+
   <span class="n">describe</span> <span class="s">"#answer"</span> <span class="k">do</span>
+    <span class="n">it</span> <span class="s">"returns an empty array for zero variables"</span> <span class="k">do</span>
+      <span class="n">TwoSat</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="mi">0</span><span class="n">_i64</span><span class="p">).</span><span class="n">answer</span><span class="p">.</span><span class="n">should</span> <span class="n">eq</span> <span class="p">[]</span> <span class="n">of</span> <span class="n">Bool</span>
+    <span class="n">end</span>
+
     <span class="n">it</span> <span class="s">"returns an assignment after #satisfiable?"</span> <span class="k">do</span>
       <span class="n">twosat</span> <span class="o">=</span> <span class="n">TwoSat</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="mi">2</span><span class="n">_i64</span><span class="p">)</span>
       <span class="n">twosat</span><span class="p">.</span><span class="n">add_clause</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">true</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">false</span><span class="p">)</span>
