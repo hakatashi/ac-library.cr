@@ -72,9 +72,14 @@ require "atcoder/fenwick_tree" # load FenwickTree
 
   The identity element will be implicitly defined as nil, so you don't have to manually define it. In the other words, you cannot include nil into an element of the monoid.
 
+  If `op` is omitted, it defaults to the maximum (`{|a, b| a > b ? a : b}`).
+
   ```cr
   tree = AtCoder::SegTree.new((0...100).to_a) {|a, b| [a, b].min}
   tree[10...50] #=> 10
+
+  tree = AtCoder::SegTree.new((0...100).to_a)
+  tree[10...50] #=> 49
   ```
 
   * `.set(p, x)` => `#[]=(p, x)`

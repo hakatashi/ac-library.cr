@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Documentation
+
+- README: Document that `SegTree` uses the maximum as the default operation.
+
 ### Changed
 
 - CI: Run tests on Crystal 1.17.0 (the version on the AtCoder judge) and the latest Crystal.

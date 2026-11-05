@@ -336,8 +336,12 @@ tree[<span class="n">3</span>...<span class="n">5</span>] <span class="c">#=&gt;
 <li>
 <p><code>segtree&lt;S, op, e&gt; seg(v)</code> =&gt; <code><a href="AtCoder/SegTree.html">AtCoder::SegTree</a>(S).new(v, &amp;op?)</code></p>
 <p>The identity element will be implicitly defined as nil, so you don't have to manually define it. In the other words, you cannot include nil into an element of the monoid.</p>
+<p>If <code>op</code> is omitted, it defaults to the maximum (<code>{|a, b| a &gt; b ? a : b}</code>).</p>
 <pre><code class="language-crystal">tree <span class="o">=</span> <span class="t">AtCoder</span><span class="t">::</span><span class="t">SegTree</span>.new((<span class="n">0</span>...<span class="n">100</span>).to_a) {<span class="o">|</span>a, b<span class="o">|</span> [a, b].min}
-tree[<span class="n">10</span>...<span class="n">50</span>] <span class="c">#=&gt; 10</span></code></pre>
+tree[<span class="n">10</span>...<span class="n">50</span>] <span class="c">#=&gt; 10</span>
+
+tree <span class="o">=</span> <span class="t">AtCoder</span><span class="t">::</span><span class="t">SegTree</span>.new((<span class="n">0</span>...<span class="n">100</span>).to_a)
+tree[<span class="n">10</span>...<span class="n">50</span>] <span class="c">#=&gt; 49</span></code></pre>
 <ul>
 <li><code>.set(p, x)</code> =&gt; <code>#[]=(p, x)</code></li>
 <li><code>.get(p)</code> =&gt; <code>#[](p)</code></li>
