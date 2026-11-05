@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- `MaxFlow#flow` no longer overflows the stack on graphs with very long augmenting paths (e.g. a path graph of 200,000 vertices) ([#26](https://github.com/hakatashi/ac-library.cr/issues/26)). The DFS that finds augmenting paths is now iterative instead of recursive. The resulting flow is unchanged.
 - `Graph#dfs` is now iterative (using an explicit stack), so `Tree#diameter`, `Tree#lca`, `Tree#dist` and `Tree#on_path?` no longer overflow the stack on deep trees such as a path of 200,000 nodes ([#27](https://github.com/hakatashi/ac-library.cr/issues/27)).
 - `Tree#diameter` no longer returns `-1` as the endpoints for a single-node tree or a tree whose edge weights are all zero ([#41](https://github.com/hakatashi/ac-library.cr/issues/41)). The farthest node now starts from the start node of each search, so a single-node tree returns `{0, 0, 0, [-1]}`.
 - `MinCostFlow` no longer returns wrong answers when the graph has parallel edges or an edge in the opposite direction of another edge ([#25](https://github.com/hakatashi/ac-library.cr/issues/25)). It is rewritten in the same way as ACL (primal-dual with an adjacency list of edges holding their reverse-edge indices), instead of using `DirectedGraph`, whose adjacency list is a `Hash` keyed by the destination.
