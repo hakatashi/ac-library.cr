@@ -112,12 +112,12 @@ module AtCoder
       self.[](left...right)
     end
 
-    # Implements atcoder::segtree.all_prod(l, r)
+    # Implements atcoder::segtree.all_prod().
     def all_prod
       @segments[1].not_nil!
     end
 
-    # Implements atcoder::lazy_segtree.max_right(left, g).
+    # Implements atcoder::segtree.max_right(left, f).
     def max_right(left, e : T | Nil = nil, & : T -> Bool)
       unless 0 <= left && left <= @values.size
         raise IndexError.new("{left: #{left}} must greater than or equal to 0 and less than or equal to {n: #{@values.size}}")
@@ -159,7 +159,7 @@ module AtCoder
       @values.size
     end
 
-    # Implements atcoder::lazy_segtree.min_left(right, g).
+    # Implements atcoder::segtree.min_left(right, f).
     def min_left(right, e : T | Nil = nil, & : T -> Bool)
       unless 0 <= right && right <= @values.size
         raise IndexError.new("{right: #{right}} must greater than or equal to 0 and less than or equal to {n: #{@values.size}}")
@@ -211,11 +211,6 @@ module AtCoder
     @[AlwaysInline]
     private def ancestor(node, n_gens_ago)
       node >> n_gens_ago
-    end
-
-    @[AlwaysInline]
-    private def log2_ceil(n : Int32) : Int32
-      sizeof(Int32)*8 - (n - 1).leading_zeros_count
     end
 
     @[AlwaysInline]

@@ -145,6 +145,14 @@ describe "ModInt1000000007" do
       (n ** -3).should eq ModInt1000000007.new(1_i64) // 125
       (n ** 100_000).should eq 754_573_817
     end
+
+    it "returns zero for zero base and non-zero exponent" do
+      zero = ModInt1000000007.new(0_i64)
+      (zero ** 0).should eq 1
+      (zero ** 5).should eq 0
+      (zero ** 1_000_000_000_000).should eq 0
+      (ModInt7.new(0_i64) ** 3).should eq 0
+    end
   end
 
   describe "#sqrt" do

@@ -54,6 +54,7 @@ module AtCoder
 
     # Implements atcoder::two_sat.add_clause(i, f, j, g).
     def add_clause(i, f, j, g)
+      @solved = false
       @scc.add_edge(var(i, !f), var(j, g))
       @scc.add_edge(var(j, !g), var(i, f))
     end
@@ -70,6 +71,8 @@ module AtCoder
         end
       end
 
+      @solved = true
+
       @size.times do |i|
         if @group_list[i] == @group_list[i + @size]
           return false
@@ -81,8 +84,11 @@ module AtCoder
 
     # Implements atcoder::two_sat.answer().
     #
+    # Unlike ACL, `#satisfiable?` does not have to be called beforehand.
     # This method will raise `NotSatisfiableError` if it's not satisfiable.
     def answer
+      satisfiable? unless @solved
+
       unless @satisfiable
         raise NotSatisfiableError.new
       end
