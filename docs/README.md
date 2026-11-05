@@ -167,7 +167,7 @@ require "atcoder/fenwick_tree" # load FenwickTree
   * `.edges()` => Unimplemented
   * `.change_edge(i, new_cap, new_flow)` => Unimplemented
 
-## [`atcoder/scc`](https://hakatashi.github.io/ac-library.cr/docs/src/scc.cr) (Impements [<atcoder/scc>](https://atcoder.github.io/ac-library/document_en/scc.html))
+## [`atcoder/scc`](https://hakatashi.github.io/ac-library.cr/docs/src/scc.cr) (Implements [<atcoder/scc>](https://atcoder.github.io/ac-library/document_en/scc.html))
 
 * `scc_graph graph(n)` => `AtCoder::SCC.new(n)`
 
@@ -184,7 +184,7 @@ require "atcoder/fenwick_tree" # load FenwickTree
 
 ## [`atcoder/two_sat`](https://hakatashi.github.io/ac-library.cr/docs/src/two_sat.cr) (Implements [<atcoder/twosat>](https://atcoder.github.io/ac-library/document_en/twosat.html))
 
-* `two_sat graph(n)` => `AtCoder::SCC.new(n)`
+* `two_sat graph(n)` => `AtCoder::TwoSat.new(n)`
 
   ```cr
   twosat = AtCoder::TwoSat.new(2_i64)

@@ -102,7 +102,7 @@ h1 a:focus {
 
 <ul>
     <li><a href="/blob/master/benchmarks/SegTree.cr">View this file on GitHub</a></li>
-    <li>Last update: 2026-11-05 07:20:03+00:00</li>
+    <li>Last update: 2026-11-05 16:35:56+09:00</li>
     
     
     
@@ -316,12 +316,12 @@ h1 a:focus {
       <span class="n">self</span><span class="p">.[](</span><span class="n">left</span><span class="p">...</span><span class="n">right</span><span class="p">)</span>
     <span class="n">end</span>
 
-    <span class="cp"># Implements atcoder::segtree.all_prod(l, r)
+    <span class="cp"># Implements atcoder::segtree.all_prod().
 </span>    <span class="n">def</span> <span class="n">all_prod</span>
       <span class="err">@</span><span class="n">segments</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="n">not_nil</span><span class="o">!</span>
     <span class="n">end</span>
 
-    <span class="cp"># Implements atcoder::lazy_segtree.max_right(left, g).
+    <span class="cp"># Implements atcoder::segtree.max_right(left, f).
 </span>    <span class="n">def</span> <span class="n">max_right</span><span class="p">(</span><span class="n">left</span><span class="p">,</span> <span class="n">e</span> <span class="o">:</span> <span class="n">T</span> <span class="o">|</span> <span class="n">Nil</span> <span class="o">=</span> <span class="n">nil</span><span class="p">,</span> <span class="o">&amp;</span> <span class="o">:</span> <span class="n">T</span> <span class="o">-&gt;</span> <span class="n">Bool</span><span class="p">)</span>
       <span class="n">unless</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">left</span> <span class="o">&amp;&amp;</span> <span class="n">left</span> <span class="o">&lt;=</span> <span class="err">@</span><span class="n">values</span><span class="p">.</span><span class="n">size</span>
         <span class="n">raise</span> <span class="n">IndexError</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="s">"{left: #{left}} must greater than or equal to 0 and less than or equal to {n: #{@values.size}}"</span><span class="p">)</span>
@@ -363,7 +363,7 @@ h1 a:focus {
       <span class="err">@</span><span class="n">values</span><span class="p">.</span><span class="n">size</span>
     <span class="n">end</span>
 
-    <span class="cp"># Implements atcoder::lazy_segtree.min_left(right, g).
+    <span class="cp"># Implements atcoder::segtree.min_left(right, f).
 </span>    <span class="n">def</span> <span class="n">min_left</span><span class="p">(</span><span class="n">right</span><span class="p">,</span> <span class="n">e</span> <span class="o">:</span> <span class="n">T</span> <span class="o">|</span> <span class="n">Nil</span> <span class="o">=</span> <span class="n">nil</span><span class="p">,</span> <span class="o">&amp;</span> <span class="o">:</span> <span class="n">T</span> <span class="o">-&gt;</span> <span class="n">Bool</span><span class="p">)</span>
       <span class="n">unless</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">right</span> <span class="o">&amp;&amp;</span> <span class="n">right</span> <span class="o">&lt;=</span> <span class="err">@</span><span class="n">values</span><span class="p">.</span><span class="n">size</span>
         <span class="n">raise</span> <span class="n">IndexError</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="s">"{right: #{right}} must greater than or equal to 0 and less than or equal to {n: #{@values.size}}"</span><span class="p">)</span>
@@ -415,11 +415,6 @@ h1 a:focus {
     <span class="err">@</span><span class="p">[</span><span class="n">AlwaysInline</span><span class="p">]</span>
     <span class="k">private</span> <span class="n">def</span> <span class="n">ancestor</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">n_gens_ago</span><span class="p">)</span>
       <span class="n">node</span> <span class="o">&gt;&gt;</span> <span class="n">n_gens_ago</span>
-    <span class="n">end</span>
-
-    <span class="err">@</span><span class="p">[</span><span class="n">AlwaysInline</span><span class="p">]</span>
-    <span class="k">private</span> <span class="n">def</span> <span class="n">log2_ceil</span><span class="p">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">Int32</span><span class="p">)</span> <span class="o">:</span> <span class="n">Int32</span>
-      <span class="k">sizeof</span><span class="p">(</span><span class="n">Int32</span><span class="p">)</span><span class="o">*</span><span class="mi">8</span> <span class="o">-</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">).</span><span class="n">leading_zeros_count</span>
     <span class="n">end</span>
 
     <span class="err">@</span><span class="p">[</span><span class="n">AlwaysInline</span><span class="p">]</span>

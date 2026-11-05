@@ -102,7 +102,7 @@ h1 a:focus {
 
 <ul>
     <li><a href="/blob/master/spec/mod_int_spec.cr">View this file on GitHub</a></li>
-    <li>Last update: 2026-11-05 07:20:03+00:00</li>
+    <li>Last update: 2026-11-05 16:35:56+09:00</li>
     
     
     
@@ -312,6 +312,14 @@ h1 a:focus {
       <span class="p">(</span><span class="n">n</span> <span class="o">**</span> <span class="mi">5</span><span class="p">).</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">3125</span>
       <span class="p">(</span><span class="n">n</span> <span class="o">**</span> <span class="o">-</span><span class="mi">3</span><span class="p">).</span><span class="n">should</span> <span class="n">eq</span> <span class="n">ModInt1000000007</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="mi">1</span><span class="n">_i64</span><span class="p">)</span> <span class="c1">// 125</span>
       <span class="p">(</span><span class="n">n</span> <span class="o">**</span> <span class="mi">100</span><span class="n">_000</span><span class="p">).</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">754</span><span class="n">_573_817</span>
+    <span class="n">end</span>
+
+    <span class="n">it</span> <span class="s">"returns zero for zero base and non-zero exponent"</span> <span class="k">do</span>
+      <span class="n">zero</span> <span class="o">=</span> <span class="n">ModInt1000000007</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="mi">0</span><span class="n">_i64</span><span class="p">)</span>
+      <span class="p">(</span><span class="n">zero</span> <span class="o">**</span> <span class="mi">0</span><span class="p">).</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">1</span>
+      <span class="p">(</span><span class="n">zero</span> <span class="o">**</span> <span class="mi">5</span><span class="p">).</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">0</span>
+      <span class="p">(</span><span class="n">zero</span> <span class="o">**</span> <span class="mi">1</span><span class="n">_000_000_000_000</span><span class="p">).</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">0</span>
+      <span class="p">(</span><span class="n">ModInt7</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="mi">0</span><span class="n">_i64</span><span class="p">)</span> <span class="o">**</span> <span class="mi">3</span><span class="p">).</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">0</span>
     <span class="n">end</span>
   <span class="n">end</span>
 
@@ -948,7 +956,7 @@ h1 a:focus {
 </span>  <span class="cp"># ```
 </span>  <span class="n">macro</span> <span class="n">static_modint</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">modulo</span><span class="p">)</span>
     <span class="n">module</span> <span class="n">AtCoder</span>
-      <span class="cp"># Implements atcoder::modint{{modulo}}.
+      <span class="cp"># Implements atcoder::static_modint&lt;{{modulo}}&gt;.
 </span>      <span class="cp">#
 </span>      <span class="cp"># ```
 </span>      <span class="cp"># alias Mint = AtCoder::{{name}}
@@ -1176,7 +1184,7 @@ h1 a:focus {
             <span class="n">end</span>
 
             <span class="k">if</span> <span class="n">self</span><span class="p">.</span><span class="n">zero</span><span class="o">?</span>
-              <span class="n">self</span>
+              <span class="k">return</span> <span class="n">self</span>
             <span class="n">end</span>
 
             <span class="n">b</span> <span class="o">=</span> <span class="n">value</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">?</span> <span class="n">self</span> <span class="o">:</span> <span class="n">inv</span>
@@ -1430,6 +1438,14 @@ h1 a:focus {
       <span class="p">(</span><span class="n">n</span> <span class="o">**</span> <span class="mi">5</span><span class="p">).</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">3125</span>
       <span class="p">(</span><span class="n">n</span> <span class="o">**</span> <span class="o">-</span><span class="mi">3</span><span class="p">).</span><span class="n">should</span> <span class="n">eq</span> <span class="n">ModInt1000000007</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="mi">1</span><span class="n">_i64</span><span class="p">)</span> <span class="c1">// 125</span>
       <span class="p">(</span><span class="n">n</span> <span class="o">**</span> <span class="mi">100</span><span class="n">_000</span><span class="p">).</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">754</span><span class="n">_573_817</span>
+    <span class="n">end</span>
+
+    <span class="n">it</span> <span class="s">"returns zero for zero base and non-zero exponent"</span> <span class="k">do</span>
+      <span class="n">zero</span> <span class="o">=</span> <span class="n">ModInt1000000007</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="mi">0</span><span class="n">_i64</span><span class="p">)</span>
+      <span class="p">(</span><span class="n">zero</span> <span class="o">**</span> <span class="mi">0</span><span class="p">).</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">1</span>
+      <span class="p">(</span><span class="n">zero</span> <span class="o">**</span> <span class="mi">5</span><span class="p">).</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">0</span>
+      <span class="p">(</span><span class="n">zero</span> <span class="o">**</span> <span class="mi">1</span><span class="n">_000_000_000_000</span><span class="p">).</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">0</span>
+      <span class="p">(</span><span class="n">ModInt7</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="mi">0</span><span class="n">_i64</span><span class="p">)</span> <span class="o">**</span> <span class="mi">3</span><span class="p">).</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">0</span>
     <span class="n">end</span>
   <span class="n">end</span>
 

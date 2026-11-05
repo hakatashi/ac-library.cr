@@ -102,7 +102,7 @@ h1 a:focus {
 
 <ul>
     <li><a href="/blob/master/verify/range_affine_range_sum.test.cr">View this file on GitHub</a></li>
-    <li>Last update: 2026-11-05 07:20:03+00:00</li>
+    <li>Last update: 2026-11-05 16:35:56+09:00</li>
     
     <li>Problem: <a href="https://judge.yosupo.jp/problem/range_affine_range_sum">https://judge.yosupo.jp/problem/range_affine_range_sum</a>
 </li>
@@ -289,7 +289,7 @@ h1 a:focus {
       <span class="p">(</span><span class="err">@</span><span class="n">n_leaves</span> <span class="o">-</span> <span class="mi">1</span><span class="p">).</span><span class="n">downto</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span> <span class="o">|</span><span class="n">i</span><span class="o">|</span> <span class="n">refresh</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="p">}</span>
     <span class="n">end</span>
 
-    <span class="cp"># Implements atcoder::lazy_segtree.set(index, applicator).
+    <span class="cp"># Implements atcoder::lazy_segtree.set(index, value).
 </span>    <span class="n">def</span> <span class="n">set</span><span class="p">(</span><span class="n">index</span> <span class="o">:</span> <span class="n">Int</span><span class="p">,</span> <span class="n">value</span> <span class="o">:</span> <span class="n">S</span><span class="p">)</span>
       <span class="n">index</span> <span class="o">+=</span> <span class="err">@</span><span class="n">n_leaves</span>
       <span class="err">@</span><span class="n">height</span><span class="p">.</span><span class="n">downto</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span> <span class="o">|</span><span class="n">j</span><span class="o">|</span> <span class="n">propagate</span><span class="p">(</span><span class="n">ancestor</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">j</span><span class="p">))</span> <span class="p">}</span>
@@ -1068,7 +1068,7 @@ h1 a:focus {
 </span>  <span class="cp"># ```
 </span>  <span class="n">macro</span> <span class="n">static_modint</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">modulo</span><span class="p">)</span>
     <span class="n">module</span> <span class="n">AtCoder</span>
-      <span class="cp"># Implements atcoder::modint{{modulo}}.
+      <span class="cp"># Implements atcoder::static_modint&lt;{{modulo}}&gt;.
 </span>      <span class="cp">#
 </span>      <span class="cp"># ```
 </span>      <span class="cp"># alias Mint = AtCoder::{{name}}
@@ -1296,7 +1296,7 @@ h1 a:focus {
             <span class="n">end</span>
 
             <span class="k">if</span> <span class="n">self</span><span class="p">.</span><span class="n">zero</span><span class="o">?</span>
-              <span class="n">self</span>
+              <span class="k">return</span> <span class="n">self</span>
             <span class="n">end</span>
 
             <span class="n">b</span> <span class="o">=</span> <span class="n">value</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">?</span> <span class="n">self</span> <span class="o">:</span> <span class="n">inv</span>

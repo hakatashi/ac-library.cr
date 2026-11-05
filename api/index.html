@@ -466,11 +466,11 @@ mf.flow(<span class="n">0</span>, <span class="n">2</span>) <span class="c">#=&g
 </ul>
 </li>
 </ul>
-<h2><a id="atcoderscc-impements-atcoderscc" class="anchor" href="#atcoderscc-impements-atcoderscc">
+<h2><a id="atcoderscc-implements-atcoderscc" class="anchor" href="#atcoderscc-implements-atcoderscc">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
-</a><a href="https://hakatashi.github.io/ac-library.cr/docs/src/scc.cr"><code>atcoder/scc</code></a> (Impements <a href="https://atcoder.github.io/ac-library/document_en/scc.html">&lt;atcoder/scc&gt;</a>)</h2>
+</a><a href="https://hakatashi.github.io/ac-library.cr/docs/src/scc.cr"><code>atcoder/scc</code></a> (Implements <a href="https://atcoder.github.io/ac-library/document_en/scc.html">&lt;atcoder/scc&gt;</a>)</h2>
 <ul>
 <li>
 <p><code>scc_graph graph(n)</code> =&gt; <code>AtCoder::SCC.new(n)</code></p>
@@ -492,7 +492,7 @@ scc.scc <span class="c">#=&gt; [Set{2}, Set{0, 1}]</span></code></pre>
 </a><a href="https://hakatashi.github.io/ac-library.cr/docs/src/two_sat.cr"><code>atcoder/two_sat</code></a> (Implements <a href="https://atcoder.github.io/ac-library/document_en/twosat.html">&lt;atcoder/twosat&gt;</a>)</h2>
 <ul>
 <li>
-<p><code>two_sat graph(n)</code> =&gt; <code>AtCoder::SCC.new(n)</code></p>
+<p><code>two_sat graph(n)</code> =&gt; <code>AtCoder::TwoSat.new(n)</code></p>
 <pre><code class="language-crystal">twosat <span class="o">=</span> <span class="t">AtCoder</span><span class="t">::</span><span class="t">TwoSat</span>.new(<span class="n">2_i64</span>)
 twosat.add_clause(<span class="n">0</span>, <span class="n">true</span>, <span class="n">1</span>, <span class="n">false</span>)
 twosat.add_clause(<span class="n">1</span>, <span class="n">true</span>, <span class="n">0</span>, <span class="n">false</span>)
