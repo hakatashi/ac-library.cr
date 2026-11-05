@@ -125,4 +125,26 @@ describe "SCC" do
       end
     end
   end
+
+  describe "#add_edge" do
+    it "raises IndexError for an out-of-range vertex" do
+      scc = SCC.new(2_i64)
+      expect_raises(IndexError) { scc.add_edge(0, 2) }
+      expect_raises(IndexError) { scc.add_edge(-1, 0) }
+    end
+  end
+
+  describe "#adjacencies" do
+    it "returns in/out adjacency lists" do
+      scc = SCC.new(3_i64)
+      scc.add_edge(0, 1)
+      scc.add_edge(2, 1)
+      scc.add_edge(0, 2)
+      scc.adjacencies.should eq [
+        {in: [] of Int64, out: [1_i64, 2_i64]},
+        {in: [0_i64, 2_i64], out: [] of Int64},
+        {in: [0_i64], out: [1_i64]},
+      ]
+    end
+  end
 end

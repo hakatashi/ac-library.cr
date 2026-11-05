@@ -63,13 +63,8 @@ module AtCoder
     def satisfiable?
       @satisfiable = false
 
-      groups = @scc.scc
-      @group_list = Array(Int64).new(@size * 2, 0_i64)
-      groups.each_with_index do |group, i|
-        group.each do |item|
-          @group_list[item] = i.to_i64
-        end
-      end
+      _, ids = @scc.scc_ids
+      @group_list = ids.map(&.to_i64)
 
       @solved = true
 
