@@ -130,8 +130,7 @@ relevant `verify/` file(s).
 - `RedBlackTree`, `SkewHeap` and `Graph` / `DirectedGraph` / `UndirectedGraph` / `Tree` are
   **experimental**: they are intentionally not documented in README because their quality was
   not confirmed. `Graph`/`Tree` were meant to be general-purpose graph/tree helpers unique to this
-  library; they may be documented after they are verified and polished. Note that `MinCostFlow`
-  currently depends on `Graph` internally.
+  library; they may be documented after they are verified and polished.
 
 ## Documentation conventions
 
