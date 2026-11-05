@@ -31,7 +31,21 @@ require "atcoder/fenwick_tree" # load FenwickTree
 
 ## [`atcoder/mod_int`](https://hakatashi.github.io/ac-library.cr/docs/src/mod_int.cr) (Implements [<atcoder/modint>](https://atcoder.github.io/ac-library/document_en/modint.html))
 
-* `modint` => Unimplemented
+* `modint` => `AtCoder::DynamicModInt`
+
+  ```cr
+  alias Mint = AtCoder::DynamicModInt
+  Mint.set_mod(11)
+  Mint.new(3) // Mint.new(7) #=> 2
+  ```
+
+  * `.set_mod(m)` => `.set_mod(m)`
+    * Raises `ArgumentError` unless `1 <= m <= Int32::MAX`. The default modulus is 998244353, as in ACL.
+  * `.mod()` => `.mod`
+  * `.raw(x)` => `.raw(x)`
+  * `.inv()` => `#inv`
+    * Raises `ArgumentError` if the value and the modulus are not coprime.
+
 * `modint998244353` => `AtCoder::ModInt998244353`
 * `modint1000000007` => `AtCoder::ModInt1000000007`
 
@@ -45,10 +59,21 @@ require "atcoder/fenwick_tree" # load FenwickTree
   ```cr
   AtCoder.static_modint(ModInt101, 101_i64)
   alias Mint = AtCoder::ModInt101
-  Mint.new(80_i64) + Mint.new(90_i64) #=> 89
+  Mint.new(80_i64) + Mint.new(90_i64) #=> 69
   ```
 
-* `dynamic_modint` => Unimplemented
+* `dynamic_modint` => `AtCoder.dynamic_modint`
+
+  ```cr
+  AtCoder.dynamic_modint(DynamicModInt2)
+  alias Mint = AtCoder::DynamicModInt2
+  Mint.set_mod(101)
+  Mint.new(80) + Mint.new(90) #=> 69
+  ```
+
+  * Each type defined by `AtCoder.dynamic_modint` has its own modulus (corresponds to `dynamic_modint<id>` of ACL).
+  * The same operations as the static ModInts are available (`+`, `-`, `*`, `/`, `//`, `**`, `#inv`, `#val`, `#pow`, `.factorial`, `.combination`, etc.). Multiplication uses Barrett reduction.
+  * `.set_mod` clears the cache of `.factorial`.
 
 ## [`atcoder/fenwick_tree`](https://hakatashi.github.io/ac-library.cr/docs/src/fenwick_tree.cr) (Implements [<atcoder/fenwicktree>](https://atcoder.github.io/ac-library/document_en/fenwicktree.html))
 

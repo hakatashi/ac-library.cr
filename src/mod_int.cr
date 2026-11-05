@@ -22,7 +22,7 @@ module AtCoder
   # ```
   # AtCoder.static_modint(ModInt101, 101_i64)
   # alias Mint = AtCoder::ModInt101
-  # Mint.new(80_i64) + Mint.new(90_i64) # => 89
+  # Mint.new(80_i64) + Mint.new(90_i64) # => 69
   # ```
   macro static_modint(name, modulo)
     module AtCoder
@@ -48,6 +48,11 @@ module AtCoder
         {% else %}
           MOD = {{modulo}}
         {% end %}
+
+        # Implements atcoder::static_modint.mod().
+        def self.mod
+          MOD
+        end
 
         def self.zero
           new
@@ -365,6 +370,330 @@ module AtCoder
       end
     end
   end
+
+  # Implements [atcoder::dynamic_modint](https://atcoder.github.io/ac-library/master/document_en/modint.html).
+  #
+  # Defines a ModInt type whose modulus is set at runtime with `.set_mod`.
+  # The default modulus is 998244353, as in ACL.
+  # Multiplication is done with Barrett reduction.
+  #
+  # ```
+  # AtCoder.dynamic_modint(DynamicModInt2)
+  # alias Mint = AtCoder::DynamicModInt2
+  # Mint.set_mod(101)
+  # Mint.new(80) + Mint.new(90) # => 69
+  # ```
+  macro dynamic_modint(name)
+    module AtCoder
+      # Implements atcoder::dynamic_modint.
+      #
+      # ```
+      # alias Mint = AtCoder::{{name}}
+      # Mint.set_mod(11)
+      # Mint.new(3) // Mint.new(7) # => 2
+      # ```
+      struct {{name}}
+        # The modulus. Must be in `1..Int32::MAX` (as in ACL).
+        @@mod : UInt32 = 998_244_353_u32
+
+        # Barrett reduction constant: ceil(2^64 / mod) (wrapping to 0 when mod == 1).
+        @@im : UInt64 = 18_479_187_003_u64
+
+        @@factorials = Array(self).new
+
+        # Implements atcoder::dynamic_modint.set_mod(m).
+        #
+        # Raises `ArgumentError` unless `1 <= mod <= Int32::MAX`.
+        # The cache of `.factorial` is cleared.
+        def self.set_mod(mod)
+          unless 1 <= mod <= Int32::MAX
+            raise ArgumentError.new("modulo must be in 1..#{Int32::MAX} (given #{mod})")
+          end
+          @@mod = mod.to_u32
+          @@im = UInt64::MAX // @@mod &+ 1
+          @@factorials = Array(self).new
+        end
+
+        # Implements atcoder::dynamic_modint.mod().
+        def self.mod : Int64
+          @@mod.to_i64
+        end
+
+        # Implements atcoder::dynamic_modint.raw(x).
+        #
+        # Constructs a ModInt from *value* without taking the modulo.
+        # *value* must be in `0...mod`.
+        def self.raw(value : Int)
+          new(raw_value: value.to_u32!)
+        end
+
+        def self.zero
+          new
+        end
+
+        def self.factorial(n)
+          if @@factorials.empty?
+            @@factorials = Array(self).new(100_000_i64)
+            @@factorials << self.new(1)
+          end
+          @@factorials.size.upto(n) do |i|
+            @@factorials << @@factorials.last * i
+          end
+          @@factorials[n]
+        end
+
+        def self.permutation(n, k)
+          raise ArgumentError.new("k cannot be greater than n") unless n >= k
+          factorial(n) // factorial(n - k)
+        end
+
+        def self.combination(n, k)
+          raise ArgumentError.new("k cannot be greater than n") unless n >= k
+          permutation(n, k) // @@factorials[k]
+        end
+
+        def self.repeated_combination(n, k)
+          combination(n + k - 1, k)
+        end
+
+        # Computes `a * b % mod` by Barrett reduction (the improved version in ACL v1.5.1).
+        @[AlwaysInline]
+        protected def self.mul_mod(a : UInt32, b : UInt32) : UInt32
+          z = a.to_u64 &* b
+          x = ((z.to_u128 &* @@im) >> 64).to_u64!
+          y = x &* @@mod
+          (z &- y &+ (z < y ? @@mod.to_u64 : 0_u64)).to_u32!
+        end
+
+        @value : UInt32
+
+        def initialize
+          @value = 0_u32
+        end
+
+        def initialize(value : UInt64 | Int128 | UInt128)
+          @value = (value % @@mod).to_u32!
+        end
+
+        def initialize(value : Int)
+          @value = (value.to_i64 % @@mod).to_u32!
+        end
+
+        # :nodoc:
+        def initialize(*, raw_value : UInt32)
+          @value = raw_value
+        end
+
+        def value : Int64
+          @value.to_i64
+        end
+
+        def clone
+          self.class.new(raw_value: @value)
+        end
+
+        def -
+          self.class.new(0) - self
+        end
+
+        def +
+          self
+        end
+
+        def +(value : self)
+          v = @value &+ value.@value
+          v &-= @@mod if v >= @@mod
+          self.class.new(raw_value: v)
+        end
+
+        def -(value : self)
+          v = @value &- value.@value
+          v &+= @@mod if @value < value.@value
+          self.class.new(raw_value: v)
+        end
+
+        def *(value : self)
+          self.class.new(raw_value: self.class.mul_mod(@value, value.@value))
+        end
+
+        def +(value)
+          self + self.class.new(value)
+        end
+
+        def -(value)
+          self - self.class.new(value)
+        end
+
+        def *(value)
+          self * self.class.new(value)
+        end
+
+        def /(value)
+          raise DivisionByZeroError.new if value == 0
+          self / self.class.new(value)
+        end
+
+        def /(value : self)
+          raise DivisionByZeroError.new if value == 0
+          self * value.inv
+        end
+
+        def //(value)
+          self / value
+        end
+
+        def **(value)
+          if value == 0
+            return self.class.new(1)
+          end
+
+          if self.zero?
+            return self
+          end
+
+          b = value > 0 ? self : inv
+          e = value.abs
+          ret = self.class.new(1)
+          while e > 0
+            if e.odd?
+              ret *= b
+            end
+            b *= b
+            e >>= 1
+          end
+          ret
+        end
+
+        # Implements atcoder::dynamic_modint.inv().
+        #
+        # Raises `ArgumentError` if the value and the modulus are not coprime.
+        def inv
+          self.class.new(AtCoder::Math.inv_mod(@value.to_i64, @@mod.to_i64))
+        end
+
+        def <<(value)
+          self * self.class.new(2) ** value
+        end
+
+        def abs
+          value
+        end
+
+        def pred
+          self - 1
+        end
+
+        def succ
+          self + 1
+        end
+
+        def zero?
+          @value == 0
+        end
+
+        def to_i64
+          value
+        end
+
+        def ==(other : self)
+          @value == other.@value
+        end
+
+        def ==(other)
+          value == other
+        end
+
+        def sqrt
+          mod = self.class.mod
+          z = self.class.new(1_i64)
+          until z ** ((mod - 1) // 2) == mod - 1
+            z += 1
+          end
+          q = mod - 1
+          m = 0
+          while q.even?
+            q //= 2
+            m += 1
+          end
+          c = z ** q
+          t = self ** q
+          r = self ** ((q + 1) // 2)
+          m.downto(2) do |i|
+            tmp = t ** (2 ** (i - 2))
+            if tmp != 1
+              r *= c
+              t *= c ** 2
+            end
+            c *= c
+          end
+          if r * r == self
+            r.to_i64 * 2 <= mod ? r : -r
+          else
+            nil
+          end
+        end
+
+        def to_s(io : IO)
+          io << @value
+        end
+
+        def inspect(io : IO)
+          to_s(io)
+        end
+
+        # ac-library compatibility
+
+        def pow(value)
+          self ** value
+        end
+
+        def val
+          self.to_i64
+        end
+
+        # ModInt shouldn't be compared
+
+        def <(value)
+          raise NotImplementedError.new("<")
+        end
+        def <=(value)
+          raise NotImplementedError.new("<=")
+        end
+        def >(value)
+          raise NotImplementedError.new(">")
+        end
+        def >=(value)
+          raise NotImplementedError.new(">=")
+        end
+      end
+    end
+
+    struct Int
+      def +(value : AtCoder::{{name}})
+        value + self
+      end
+
+      def -(value : AtCoder::{{name}})
+        -value + self
+      end
+
+      def *(value : AtCoder::{{name}})
+        value * self
+      end
+
+      def //(value : AtCoder::{{name}})
+        value.inv * self
+      end
+
+      def /(value : AtCoder::{{name}})
+        self // value
+      end
+
+      def ==(value : AtCoder::{{name}})
+        value == self
+      end
+    end
+  end
 end
 
 AtCoder.static_modint(ModInt1000000007, 1_000_000_007_i64)
@@ -372,3 +701,4 @@ AtCoder.static_modint(ModInt998244353, 998_244_353_i64)
 AtCoder.static_modint(ModInt754974721, 754_974_721_i64)
 AtCoder.static_modint(ModInt167772161, 167_772_161_i64)
 AtCoder.static_modint(ModInt469762049, 469_762_049_i64)
+AtCoder.dynamic_modint(DynamicModInt)

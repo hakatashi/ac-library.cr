@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- `AtCoder.dynamic_modint` macro and `AtCoder::DynamicModInt`, which implement ACL's `dynamic_modint` / `modint` (ModInt with a modulus set at runtime by `.set_mod`). Multiplication uses Barrett reduction, in the same way as ACL v1.5.1 ([#34](https://github.com/hakatashi/ac-library.cr/issues/34)).
+- `.mod` class method of static ModInts (`ModInt998244353.mod`, etc.), which returns the modulus as in ACL's `mint::mod()`.
+
 ### Fixed
 
 - `MinCostFlow` no longer returns wrong answers when the graph has parallel edges or an edge in the opposite direction of another edge ([#25](https://github.com/hakatashi/ac-library.cr/issues/25)). It is rewritten in the same way as ACL (primal-dual with an adjacency list of edges holding their reverse-edge indices), instead of using `DirectedGraph`, whose adjacency list is a `Hash` keyed by the destination.
@@ -18,6 +23,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Documentation
 
 - README: Fix the Crystal counterpart of `two_sat` (`AtCoder::TwoSat.new(n)`) and a typo in the `atcoder/scc` heading.
+- Fix the result of the `static_modint` example in README and the doc comment (`80 + 90` is `69` modulo 101, not `89`).
 - Fix doc comments of `SegTree#all_prod`, `SegTree#max_right`, `SegTree#min_left`, `LazySegTree#set` and `static_modint`.
 
 - README: Document that `SegTree` uses the maximum as the default operation.

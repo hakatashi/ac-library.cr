@@ -37,6 +37,14 @@ describe "ModInt1000000007" do
     end
   end
 
+  describe ".mod" do
+    it "returns the modulus" do
+      ModInt1000000007.mod.should eq 1_000_000_007
+      AtCoder::ModInt998244353.mod.should eq 998_244_353
+      ModInt7.mod.should eq 7
+    end
+  end
+
   describe ".new" do
     it "constructs ModInt1000000007 from Int64" do
       n = ModInt1000000007.new(100_i64)
