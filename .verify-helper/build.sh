@@ -1,23 +1,14 @@
+#!/usr/bin/env bash
+# Build script used by online-judge-verify-helper (see .verify-helper/config.toml).
+# Usage: build.sh <source> <output> [crystal build options...]
+set -euo pipefail
+
 filename="$1"; shift
 output="$1"; shift
 
-if [ "$filename" -nt "${output}" ]; then
-  echo "Building Crystal project ${filename}..."
-  if [ -d /usr/local/share/crystal-0.33.0-1 ]; then
-    /usr/local/share/crystal-0.33.0-1/bin/crystal build "$filename" -o "${output}" --error-trace $@ || exit 1
-  elif [ -d /tmp/crystal-0.33.0-1 ]; then
-    /tmp/crystal-0.33.0-1/bin/crystal build "$filename" -o "${output}" --error-trace $@ || exit 1
-  elif [[ "`crystal version`" == *"0.33.0"* ]]; then
-    crystal build "$filename" -o "${output}" --error-trace $@ || exit 1
-  elif [ -d /usr/local/share/crystal-1.9.1 ]; then
-    /usr/local/share/crystal-1.9.1/bin/crystal build "$filename" -o "${output}" --error-trace $@ || exit 1
-  elif [ -d /tmp/crystal-1.9.1 ]; then
-    /tmp/crystal-1.9.1-1/bin/crystal build "$filename" -o "${output}" --error-trace $@ || exit 1
-  elif [[ "`crystal version`" == *"1.9.1"* ]]; then
-    crystal build "$filename" -o "${output}" --error-trace $@ || exit 1
-  else
-    docker run -v "$PWD":/mnt crystallang/crystal:0.33.0 crystal build "/mnt/$filename" -o "/mnt/${output}" --error-trace $@ || exit 1
-  fi
+if [ "$filename" -nt "$output" ]; then
+  echo "Building Crystal project ${filename} with $(crystal --version | head -n 1)..."
+  crystal build "$filename" -o "$output" --error-trace "$@"
 fi
 
 echo "Build completed."

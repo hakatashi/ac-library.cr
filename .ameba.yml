@@ -7,3 +7,29 @@ Lint/NotNil:
 
 Lint/DebugCalls:
   Enabled: false
+
+# Short block parameter names (a, b, i, x, ...) are idiomatic in competitive programming.
+Naming/BlockParameterName:
+  Enabled: false
+
+# Method names such as `get_edge` intentionally mirror the ACL API.
+Naming/AccessorMethodName:
+  Enabled: false
+
+# Operator parameters are named after the domain (e.g. `edge`), not `other`.
+Naming/BinaryOperatorParameterName:
+  Enabled: false
+
+# Benchmark files are named after the class they measure (e.g. benchmarks/SegTree.cr).
+Naming/Filename:
+  Excluded:
+    - 'benchmarks/*.cr'
+
+# spec/test_runner.cr is the entry point for coverage builds, not a spec file.
+Lint/SpecFilename:
+  Excluded:
+    - 'spec/test_runner.cr'
+
+# Unimplemented features are tracked with TODO/FIXME comments and GitHub issues.
+Documentation/DocumentationAdmonition:
+  Enabled: false
