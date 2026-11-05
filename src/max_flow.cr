@@ -80,22 +80,22 @@ module AtCoder
 
     # FIXME: Unimplemented
     def min_cut
-      raise NotImplementedError.new
+      raise NotImplementedError.new("AtCoder::MaxFlow#min_cut")
     end
 
     # FIXME: Unimplemented
     def get_edge
-      raise NotImplementedError.new
+      raise NotImplementedError.new("AtCoder::MaxFlow#get_edge")
     end
 
     # FIXME: Unimplemented
     def edges
-      raise NotImplementedError.new
+      raise NotImplementedError.new("AtCoder::MaxFlow#edges")
     end
 
     # FIXME: Unimplemented
     def change_edge
-      raise NotImplementedError.new
+      raise NotImplementedError.new("AtCoder::MaxFlow#change_edge")
     end
 
     private def bfs(start)
