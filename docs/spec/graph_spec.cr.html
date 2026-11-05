@@ -102,7 +102,7 @@ h1 a:focus {
 
 <ul>
     <li><a href="/blob/master/spec/graph_spec.cr">View this file on GitHub</a></li>
-    <li>Last update: 2026-11-05 16:49:14+09:00</li>
+    <li>Last update: 2026-11-05 18:03:14+09:00</li>
     
     
     
@@ -375,6 +375,59 @@ h1 a:focus {
       <span class="n">end</span>
       <span class="n">visited</span><span class="p">.</span><span class="n">should</span> <span class="n">eq</span> <span class="p">[{</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">nil</span><span class="p">,</span> <span class="n">nil</span><span class="p">},</span> <span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">},</span> <span class="p">{</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">}]</span>
     <span class="n">end</span>
+
+    <span class="n">it</span> <span class="s">"visits nodes in depth-first order"</span> <span class="k">do</span>
+      <span class="cp">#   0
+</span>      <span class="cp">#  / \
+      # 1   4
+</span>      <span class="cp"># |\
+      # 2 3
+</span>      <span class="n">graph</span> <span class="o">=</span> <span class="n">UndirectedGraph</span><span class="p">(</span><span class="n">Nil</span><span class="p">,</span> <span class="n">Int64</span><span class="p">).</span><span class="k">new</span><span class="p">(</span><span class="mi">5</span><span class="n">_i64</span><span class="p">)</span>
+      <span class="n">graph</span><span class="p">.</span><span class="n">add_edge</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+      <span class="n">graph</span><span class="p">.</span><span class="n">add_edge</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+      <span class="n">graph</span><span class="p">.</span><span class="n">add_edge</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+      <span class="n">graph</span><span class="p">.</span><span class="n">add_edge</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+
+      <span class="n">visited</span> <span class="o">=</span> <span class="p">[]</span> <span class="n">of</span> <span class="p">{</span><span class="n">Int64</span><span class="p">,</span> <span class="n">Int64</span><span class="p">}</span>
+      <span class="n">graph</span><span class="p">.</span><span class="n">dfs</span><span class="p">(</span><span class="mi">0</span><span class="n">_i64</span><span class="p">,</span> <span class="mi">0</span><span class="n">_i64</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">node</span><span class="p">,</span> <span class="n">depth</span><span class="p">,</span> <span class="n">_info</span><span class="p">,</span> <span class="n">callback</span><span class="o">|</span>
+        <span class="n">visited</span> <span class="o">&lt;&lt;</span> <span class="p">{</span><span class="n">node</span><span class="p">,</span> <span class="n">depth</span><span class="p">}</span>
+        <span class="n">callback</span><span class="p">.</span><span class="n">call</span><span class="p">(</span><span class="n">depth</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+      <span class="n">end</span>
+      <span class="n">visited</span><span class="p">.</span><span class="n">should</span> <span class="n">eq</span> <span class="p">[{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">},</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">},</span> <span class="p">{</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">},</span> <span class="p">{</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">},</span> <span class="p">{</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">}]</span>
+    <span class="n">end</span>
+
+    <span class="n">it</span> <span class="s">"does not visit the children if the callback is not called"</span> <span class="k">do</span>
+      <span class="n">graph</span> <span class="o">=</span> <span class="n">UndirectedGraph</span><span class="p">(</span><span class="n">Nil</span><span class="p">,</span> <span class="n">Int64</span><span class="p">).</span><span class="k">new</span><span class="p">(</span><span class="mi">4</span><span class="n">_i64</span><span class="p">)</span>
+      <span class="n">graph</span><span class="p">.</span><span class="n">add_edge</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+      <span class="n">graph</span><span class="p">.</span><span class="n">add_edge</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+      <span class="n">graph</span><span class="p">.</span><span class="n">add_edge</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+
+      <span class="n">visited</span> <span class="o">=</span> <span class="p">[]</span> <span class="n">of</span> <span class="n">Int64</span>
+      <span class="n">graph</span><span class="p">.</span><span class="n">dfs</span><span class="p">(</span><span class="mi">0</span><span class="n">_i64</span><span class="p">,</span> <span class="n">nil</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">node</span><span class="p">,</span> <span class="n">_value</span><span class="p">,</span> <span class="n">_info</span><span class="p">,</span> <span class="n">callback</span><span class="o">|</span>
+        <span class="n">visited</span> <span class="o">&lt;&lt;</span> <span class="n">node</span>
+        <span class="n">callback</span><span class="p">.</span><span class="n">call</span><span class="p">(</span><span class="n">nil</span><span class="p">)</span> <span class="n">unless</span> <span class="n">node</span> <span class="o">==</span> <span class="mi">1</span>
+      <span class="n">end</span>
+      <span class="n">visited</span><span class="p">.</span><span class="n">should</span> <span class="n">eq</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+    <span class="n">end</span>
+
+    <span class="n">it</span> <span class="s">"visits each node once on a graph with cycles"</span> <span class="k">do</span>
+      <span class="cp"># 0 - 1
+</span>      <span class="cp"># | \ |
+</span>      <span class="cp"># 3 - 2
+</span>      <span class="n">graph</span> <span class="o">=</span> <span class="n">UndirectedGraph</span><span class="p">(</span><span class="n">Nil</span><span class="p">,</span> <span class="n">Int64</span><span class="p">).</span><span class="k">new</span><span class="p">(</span><span class="mi">4</span><span class="n">_i64</span><span class="p">)</span>
+      <span class="n">graph</span><span class="p">.</span><span class="n">add_edge</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+      <span class="n">graph</span><span class="p">.</span><span class="n">add_edge</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+      <span class="n">graph</span><span class="p">.</span><span class="n">add_edge</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+      <span class="n">graph</span><span class="p">.</span><span class="n">add_edge</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+      <span class="n">graph</span><span class="p">.</span><span class="n">add_edge</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+
+      <span class="n">visited</span> <span class="o">=</span> <span class="p">[]</span> <span class="n">of</span> <span class="p">{</span><span class="n">Int64</span><span class="p">,</span> <span class="n">Int64</span><span class="p">}</span>
+      <span class="n">graph</span><span class="p">.</span><span class="n">dfs</span><span class="p">(</span><span class="mi">0</span><span class="n">_i64</span><span class="p">,</span> <span class="n">nil</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">node</span><span class="p">,</span> <span class="n">_value</span><span class="p">,</span> <span class="n">info</span><span class="p">,</span> <span class="n">callback</span><span class="o">|</span>
+        <span class="n">visited</span> <span class="o">&lt;&lt;</span> <span class="p">{</span><span class="n">node</span><span class="p">,</span> <span class="n">info</span><span class="p">[</span><span class="o">:</span><span class="n">parent</span><span class="p">]}</span>
+        <span class="n">callback</span><span class="p">.</span><span class="n">call</span><span class="p">(</span><span class="n">nil</span><span class="p">)</span>
+      <span class="n">end</span>
+      <span class="n">visited</span><span class="p">.</span><span class="n">should</span> <span class="n">eq</span> <span class="p">[{</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">},</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">},</span> <span class="p">{</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">},</span> <span class="p">{</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">}]</span>
+    <span class="n">end</span>
   <span class="n">end</span>
 <span class="n">end</span>
 
@@ -407,8 +460,25 @@ h1 a:focus {
       <span class="n">tree</span><span class="p">.</span><span class="n">diameter</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">2</span>
     <span class="n">end</span>
 
-    <span class="n">pending</span> <span class="s">"returns the only node as both endpoints for a single-node tree"</span> <span class="k">do</span>
+    <span class="n">it</span> <span class="s">"returns the only node as both endpoints for a single-node tree"</span> <span class="k">do</span>
       <span class="n">Tree</span><span class="p">(</span><span class="n">Nil</span><span class="p">,</span> <span class="n">Int64</span><span class="p">).</span><span class="k">new</span><span class="p">(</span><span class="mi">1</span><span class="n">_i64</span><span class="p">).</span><span class="n">diameter</span><span class="p">.</span><span class="n">should</span> <span class="n">eq</span><span class="p">({</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]})</span>
+    <span class="n">end</span>
+
+    <span class="n">it</span> <span class="s">"returns existing nodes as endpoints when all edge weights are zero"</span> <span class="k">do</span>
+      <span class="n">tree</span> <span class="o">=</span> <span class="n">Tree</span><span class="p">(</span><span class="n">Nil</span><span class="p">,</span> <span class="n">Int64</span><span class="p">).</span><span class="k">new</span><span class="p">(</span><span class="mi">3</span><span class="n">_i64</span><span class="p">)</span>
+      <span class="n">tree</span><span class="p">.</span><span class="n">add_edge</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="n">_i64</span><span class="p">)</span>
+      <span class="n">tree</span><span class="p">.</span><span class="n">add_edge</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="n">_i64</span><span class="p">)</span>
+      <span class="n">tree</span><span class="p">.</span><span class="n">diameter</span><span class="p">.</span><span class="n">should</span> <span class="n">eq</span><span class="p">({</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]})</span>
+    <span class="n">end</span>
+
+    <span class="n">it</span> <span class="s">"does not overflow the stack on a long path"</span> <span class="k">do</span>
+      <span class="n">n</span> <span class="o">=</span> <span class="mi">1</span><span class="n">_000_000_i64</span>
+      <span class="n">tree</span> <span class="o">=</span> <span class="n">Tree</span><span class="p">(</span><span class="n">Nil</span><span class="p">,</span> <span class="n">Int64</span><span class="p">).</span><span class="k">new</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+      <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">).</span><span class="n">times</span> <span class="p">{</span> <span class="o">|</span><span class="n">i</span><span class="o">|</span> <span class="n">tree</span><span class="p">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="n">_i64</span><span class="p">)</span> <span class="p">}</span>
+      <span class="n">diameter</span><span class="p">,</span> <span class="n">start_node</span><span class="p">,</span> <span class="n">target_node</span><span class="p">,</span> <span class="n">parents</span> <span class="o">=</span> <span class="n">tree</span><span class="p">.</span><span class="n">diameter</span>
+      <span class="n">diameter</span><span class="p">.</span><span class="n">should</span> <span class="n">eq</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span>
+      <span class="p">{</span><span class="n">start_node</span><span class="p">,</span> <span class="n">target_node</span><span class="p">}.</span><span class="n">should</span> <span class="n">eq</span><span class="p">({</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">})</span>
+      <span class="n">parents</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">1</span>
     <span class="n">end</span>
 
     <span class="n">it</span> <span class="s">"matches a naive implementation on random small trees"</span> <span class="k">do</span>
@@ -465,6 +535,14 @@ h1 a:focus {
       <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">).</span><span class="n">times</span> <span class="p">{</span> <span class="o">|</span><span class="n">i</span><span class="o">|</span> <span class="n">tree</span><span class="p">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="p">}</span>
       <span class="n">tree</span><span class="p">.</span><span class="n">lca</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">500</span><span class="p">).</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">500</span>
       <span class="n">tree</span><span class="p">.</span><span class="n">lca</span><span class="p">(</span><span class="mi">999</span><span class="p">,</span> <span class="mi">998</span><span class="p">).</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">998</span>
+    <span class="n">end</span>
+
+    <span class="n">it</span> <span class="s">"does not overflow the stack on a long path"</span> <span class="k">do</span>
+      <span class="n">n</span> <span class="o">=</span> <span class="mi">1</span><span class="n">_000_000_i64</span>
+      <span class="n">tree</span> <span class="o">=</span> <span class="n">Tree</span><span class="p">(</span><span class="n">Nil</span><span class="p">,</span> <span class="n">Int64</span><span class="p">).</span><span class="k">new</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+      <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">).</span><span class="n">times</span> <span class="p">{</span> <span class="o">|</span><span class="n">i</span><span class="o">|</span> <span class="n">tree</span><span class="p">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="p">}</span>
+      <span class="n">tree</span><span class="p">.</span><span class="n">lca</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">500</span><span class="n">_000</span><span class="p">).</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">500</span><span class="n">_000</span>
+      <span class="n">tree</span><span class="p">.</span><span class="n">dist</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">).</span><span class="n">should</span> <span class="n">eq</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span>
     <span class="n">end</span>
 
     <span class="n">it</span> <span class="s">"matches a naive implementation on random small trees"</span> <span class="k">do</span>
@@ -815,7 +893,19 @@ h1 a:focus {
       <span class="n">end</span>
     <span class="n">end</span>
 
-    <span class="n">def</span> <span class="n">dfs</span><span class="p">(</span><span class="n">node</span> <span class="o">:</span> <span class="n">Int64</span><span class="p">,</span> <span class="n">initial_value</span> <span class="o">:</span> <span class="n">T</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">block</span> <span class="o">:</span> <span class="n">Int64</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">NamedTuple</span><span class="p">(</span>
+    <span class="cp"># Performs a depth-first search from `node`.
+</span>    <span class="cp">#
+</span>    <span class="cp"># The block is called for each visited node with `(node, value, info, callback)`, where `value`
+</span>    <span class="cp"># is the value passed from the parent (`initial_value` for `node` itself) and `info` holds the
+</span>    <span class="cp"># node, its `NodeInfo`, the edge from the parent and its `EdgeInfo`, and the parent (`-1` for
+</span>    <span class="cp"># `node` itself). Calling `callback.call(new_value)` visits the children of the node with
+</span>    <span class="cp"># `new_value`; if the block does not call it, the children are not visited from this node.
+</span>    <span class="cp">#
+</span>    <span class="cp"># The search uses an explicit stack, so it does not overflow the call stack on deep graphs.
+</span>    <span class="cp"># Nodes are visited in the same order as a recursive DFS, but the children are visited
+</span>    <span class="cp"># *after* the block returns, not inside `callback.call`. If `callback` is called more than
+</span>    <span class="cp"># once, the last value is used.
+</span>    <span class="n">def</span> <span class="n">dfs</span><span class="p">(</span><span class="n">node</span> <span class="o">:</span> <span class="n">Int64</span><span class="p">,</span> <span class="n">initial_value</span> <span class="o">:</span> <span class="n">T</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">block</span> <span class="o">:</span> <span class="n">Int64</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">NamedTuple</span><span class="p">(</span>
               <span class="nl">node:</span> <span class="n">Int64</span><span class="p">,</span>
               <span class="nl">node_info:</span> <span class="n">NodeInfo</span> <span class="o">|</span> <span class="n">Nil</span><span class="p">,</span>
               <span class="nl">edge:</span> <span class="n">Int64</span> <span class="o">|</span> <span class="n">Nil</span><span class="p">,</span>
@@ -823,6 +913,19 @@ h1 a:focus {
               <span class="nl">parent:</span> <span class="n">Int64</span><span class="p">,</span>
             <span class="p">),</span> <span class="p">(</span><span class="n">T</span> <span class="o">-&gt;</span><span class="p">)</span> <span class="o">-&gt;</span><span class="p">)</span> <span class="n">forall</span> <span class="n">T</span>
       <span class="err">@</span><span class="n">visited</span> <span class="o">=</span> <span class="n">Set</span><span class="p">(</span><span class="n">Int64</span><span class="p">).</span><span class="k">new</span>
+
+      <span class="n">called</span> <span class="o">=</span> <span class="nb">false</span>
+      <span class="n">next_value</span> <span class="o">=</span> <span class="n">initial_value</span>
+      <span class="n">callback</span> <span class="o">=</span> <span class="o">-&gt;</span><span class="p">(</span><span class="n">new_value</span> <span class="o">:</span> <span class="n">T</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">called</span> <span class="o">=</span> <span class="nb">true</span>
+        <span class="n">next_value</span> <span class="o">=</span> <span class="n">new_value</span>
+        <span class="n">nil</span>
+      <span class="p">}</span>
+
+      <span class="cp"># Each frame holds a node whose children are being visited, the value passed to them,
+</span>      <span class="cp"># and the iterator over its adjacencies.
+</span>      <span class="n">stack</span> <span class="o">=</span> <span class="p">[]</span> <span class="n">of</span> <span class="n">typeof</span><span class="p">({</span><span class="n">node</span><span class="p">,</span> <span class="n">initial_value</span><span class="p">,</span> <span class="err">@</span><span class="n">adjacencies</span><span class="p">[</span><span class="n">node</span><span class="p">].</span><span class="n">each</span><span class="p">})</span>
+
       <span class="n">info</span> <span class="o">=</span> <span class="p">{</span>
         <span class="nl">node:</span>      <span class="n">node</span><span class="p">,</span>
         <span class="nl">node_info:</span> <span class="err">@</span><span class="n">nodes</span><span class="p">[</span><span class="n">node</span><span class="p">].</span><span class="n">as</span><span class="p">(</span><span class="n">NodeInfo</span> <span class="o">|</span> <span class="n">Nil</span><span class="p">),</span>
@@ -830,31 +933,36 @@ h1 a:focus {
         <span class="nl">edge_info:</span> <span class="n">nil</span><span class="p">.</span><span class="n">as</span><span class="p">(</span><span class="n">EdgeInfo</span> <span class="o">|</span> <span class="n">Nil</span><span class="p">),</span>
         <span class="nl">parent:</span>    <span class="o">-</span><span class="mi">1</span><span class="n">_i64</span><span class="p">,</span>
       <span class="p">}</span>
-      <span class="n">block</span><span class="p">.</span><span class="n">call</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">initial_value</span><span class="p">,</span> <span class="n">info</span><span class="p">,</span> <span class="o">-&gt;</span><span class="p">(</span><span class="n">new_value</span> <span class="o">:</span> <span class="n">T</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">dfs</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="n">_i64</span><span class="p">,</span> <span class="n">new_value</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">block</span><span class="p">)</span>
-      <span class="p">})</span>
-    <span class="n">end</span>
+      <span class="n">block</span><span class="p">.</span><span class="n">call</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">initial_value</span><span class="p">,</span> <span class="n">info</span><span class="p">,</span> <span class="n">callback</span><span class="p">)</span>
+      <span class="k">if</span> <span class="n">called</span>
+        <span class="err">@</span><span class="n">visited</span> <span class="o">&lt;&lt;</span> <span class="n">node</span>
+        <span class="n">stack</span> <span class="o">&lt;&lt;</span> <span class="p">{</span><span class="n">node</span><span class="p">,</span> <span class="n">next_value</span><span class="p">,</span> <span class="err">@</span><span class="n">adjacencies</span><span class="p">[</span><span class="n">node</span><span class="p">].</span><span class="n">each</span><span class="p">}</span>
+      <span class="n">end</span>
 
-    <span class="k">private</span> <span class="n">def</span> <span class="n">dfs</span><span class="p">(</span><span class="n">node</span> <span class="o">:</span> <span class="n">Int64</span><span class="p">,</span> <span class="n">parent</span> <span class="o">:</span> <span class="n">Int64</span><span class="p">,</span> <span class="n">value</span> <span class="o">:</span> <span class="n">T</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">block</span> <span class="o">:</span> <span class="n">Int64</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">NamedTuple</span><span class="p">(</span>
-                      <span class="nl">node:</span> <span class="n">Int64</span><span class="p">,</span>
-                      <span class="nl">node_info:</span> <span class="n">NodeInfo</span> <span class="o">|</span> <span class="n">Nil</span><span class="p">,</span>
-                      <span class="nl">edge:</span> <span class="n">Int64</span> <span class="o">|</span> <span class="n">Nil</span><span class="p">,</span>
-                      <span class="nl">edge_info:</span> <span class="n">EdgeInfo</span> <span class="o">|</span> <span class="n">Nil</span><span class="p">,</span>
-                      <span class="nl">parent:</span> <span class="n">Int64</span><span class="p">,</span>
-                    <span class="p">),</span> <span class="p">(</span><span class="n">T</span> <span class="o">-&gt;</span><span class="p">)</span> <span class="o">-&gt;</span><span class="p">)</span> <span class="n">forall</span> <span class="n">T</span>
-      <span class="err">@</span><span class="n">visited</span> <span class="o">&lt;&lt;</span> <span class="n">node</span>
-      <span class="err">@</span><span class="n">adjacencies</span><span class="p">[</span><span class="n">node</span><span class="p">].</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="p">(</span><span class="n">child</span><span class="p">,</span> <span class="n">edge</span><span class="p">)</span><span class="o">|</span>
+      <span class="n">until</span> <span class="n">stack</span><span class="p">.</span><span class="n">empty</span><span class="o">?</span>
+        <span class="n">parent</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">iterator</span> <span class="o">=</span> <span class="n">stack</span><span class="p">.</span><span class="n">last</span>
+        <span class="n">entry</span> <span class="o">=</span> <span class="n">iterator</span><span class="p">.</span><span class="n">next</span>
+        <span class="k">if</span> <span class="n">entry</span><span class="p">.</span><span class="n">is_a</span><span class="o">?</span><span class="p">(</span><span class="n">Iterator</span><span class="o">::</span><span class="n">Stop</span><span class="p">)</span>
+          <span class="n">stack</span><span class="p">.</span><span class="n">pop</span>
+          <span class="n">next</span>
+        <span class="n">end</span>
+
+        <span class="n">child</span><span class="p">,</span> <span class="n">edge</span> <span class="o">=</span> <span class="n">entry</span>
         <span class="n">next</span> <span class="k">if</span> <span class="err">@</span><span class="n">visited</span><span class="p">.</span><span class="n">includes</span><span class="o">?</span><span class="p">(</span><span class="n">child</span><span class="p">)</span>
+
         <span class="n">info</span> <span class="o">=</span> <span class="p">{</span>
           <span class="nl">node:</span>      <span class="n">child</span><span class="p">,</span>
           <span class="nl">node_info:</span> <span class="err">@</span><span class="n">nodes</span><span class="p">[</span><span class="n">child</span><span class="p">].</span><span class="n">as</span><span class="p">(</span><span class="n">NodeInfo</span> <span class="o">|</span> <span class="n">Nil</span><span class="p">),</span>
           <span class="nl">edge:</span>      <span class="n">edge</span><span class="p">.</span><span class="n">as</span><span class="p">(</span><span class="n">Int64</span> <span class="o">|</span> <span class="n">Nil</span><span class="p">),</span>
           <span class="nl">edge_info:</span> <span class="err">@</span><span class="n">edges</span><span class="p">[</span><span class="n">edge</span><span class="p">].</span><span class="n">as</span><span class="p">(</span><span class="n">EdgeInfo</span> <span class="o">|</span> <span class="n">Nil</span><span class="p">),</span>
-          <span class="nl">parent:</span>    <span class="n">node</span><span class="p">,</span>
+          <span class="nl">parent:</span>    <span class="n">parent</span><span class="p">,</span>
         <span class="p">}</span>
-        <span class="n">block</span><span class="p">.</span><span class="n">call</span><span class="p">(</span><span class="n">child</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">info</span><span class="p">,</span> <span class="o">-&gt;</span><span class="p">(</span><span class="n">new_value</span> <span class="o">:</span> <span class="n">T</span><span class="p">)</span> <span class="p">{</span>
-          <span class="n">dfs</span><span class="p">(</span><span class="n">child</span><span class="p">,</span> <span class="n">node</span><span class="p">,</span> <span class="n">new_value</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">block</span><span class="p">)</span>
-        <span class="p">})</span>
+        <span class="n">called</span> <span class="o">=</span> <span class="nb">false</span>
+        <span class="n">block</span><span class="p">.</span><span class="n">call</span><span class="p">(</span><span class="n">child</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">info</span><span class="p">,</span> <span class="n">callback</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">called</span>
+          <span class="err">@</span><span class="n">visited</span> <span class="o">&lt;&lt;</span> <span class="n">child</span>
+          <span class="n">stack</span> <span class="o">&lt;&lt;</span> <span class="p">{</span><span class="n">child</span><span class="p">,</span> <span class="n">next_value</span><span class="p">,</span> <span class="err">@</span><span class="n">adjacencies</span><span class="p">[</span><span class="n">child</span><span class="p">].</span><span class="n">each</span><span class="p">}</span>
+        <span class="n">end</span>
       <span class="n">end</span>
     <span class="n">end</span>
   <span class="n">end</span>
@@ -906,7 +1014,7 @@ h1 a:focus {
     <span class="err">@</span><span class="n">lca_depths</span> <span class="o">:</span> <span class="n">Array</span><span class="p">(</span><span class="n">Int64</span><span class="p">)</span> <span class="o">|</span> <span class="n">Nil</span>
 
     <span class="n">def</span> <span class="n">diameter</span>
-      <span class="err">@</span><span class="n">farthest_node</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="n">_i64</span>
+      <span class="err">@</span><span class="n">farthest_node</span> <span class="o">=</span> <span class="mi">0</span><span class="n">_i64</span>
       <span class="err">@</span><span class="n">farthest_depth</span> <span class="o">=</span> <span class="mi">0</span><span class="n">_i64</span>
       <span class="n">dfs</span><span class="p">(</span><span class="mi">0</span><span class="n">_i64</span><span class="p">,</span> <span class="mi">0</span><span class="n">_i64</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">node</span><span class="p">,</span> <span class="n">depth</span><span class="p">,</span> <span class="n">info</span><span class="p">,</span> <span class="n">callback</span><span class="o">|</span>
         <span class="n">weight</span> <span class="o">=</span> <span class="n">info</span><span class="p">[</span><span class="o">:</span><span class="n">edge_info</span><span class="p">]</span>
@@ -919,7 +1027,7 @@ h1 a:focus {
       <span class="n">end</span>
 
       <span class="n">start_node</span> <span class="o">=</span> <span class="err">@</span><span class="n">farthest_node</span><span class="p">.</span><span class="n">not_nil</span><span class="o">!</span>
-      <span class="err">@</span><span class="n">farthest_node</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="n">_i64</span>
+      <span class="err">@</span><span class="n">farthest_node</span> <span class="o">=</span> <span class="n">start_node</span>
       <span class="err">@</span><span class="n">farthest_depth</span> <span class="o">=</span> <span class="mi">0</span><span class="n">_i64</span>
       <span class="err">@</span><span class="n">parents</span> <span class="o">=</span> <span class="n">Array</span><span class="p">(</span><span class="n">Int64</span><span class="p">).</span><span class="k">new</span><span class="p">(</span><span class="err">@</span><span class="n">size</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="n">_i64</span><span class="p">)</span>
       <span class="n">dfs</span><span class="p">(</span><span class="n">start_node</span><span class="p">,</span> <span class="mi">0</span><span class="n">_i64</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">node</span><span class="p">,</span> <span class="n">depth</span><span class="p">,</span> <span class="n">info</span><span class="p">,</span> <span class="n">callback</span><span class="o">|</span>
@@ -1238,6 +1346,59 @@ h1 a:focus {
       <span class="n">end</span>
       <span class="n">visited</span><span class="p">.</span><span class="n">should</span> <span class="n">eq</span> <span class="p">[{</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">nil</span><span class="p">,</span> <span class="n">nil</span><span class="p">},</span> <span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">},</span> <span class="p">{</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">}]</span>
     <span class="n">end</span>
+
+    <span class="n">it</span> <span class="s">"visits nodes in depth-first order"</span> <span class="k">do</span>
+      <span class="cp">#   0
+</span>      <span class="cp">#  / \
+      # 1   4
+</span>      <span class="cp"># |\
+      # 2 3
+</span>      <span class="n">graph</span> <span class="o">=</span> <span class="n">UndirectedGraph</span><span class="p">(</span><span class="n">Nil</span><span class="p">,</span> <span class="n">Int64</span><span class="p">).</span><span class="k">new</span><span class="p">(</span><span class="mi">5</span><span class="n">_i64</span><span class="p">)</span>
+      <span class="n">graph</span><span class="p">.</span><span class="n">add_edge</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+      <span class="n">graph</span><span class="p">.</span><span class="n">add_edge</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+      <span class="n">graph</span><span class="p">.</span><span class="n">add_edge</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+      <span class="n">graph</span><span class="p">.</span><span class="n">add_edge</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+
+      <span class="n">visited</span> <span class="o">=</span> <span class="p">[]</span> <span class="n">of</span> <span class="p">{</span><span class="n">Int64</span><span class="p">,</span> <span class="n">Int64</span><span class="p">}</span>
+      <span class="n">graph</span><span class="p">.</span><span class="n">dfs</span><span class="p">(</span><span class="mi">0</span><span class="n">_i64</span><span class="p">,</span> <span class="mi">0</span><span class="n">_i64</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">node</span><span class="p">,</span> <span class="n">depth</span><span class="p">,</span> <span class="n">_info</span><span class="p">,</span> <span class="n">callback</span><span class="o">|</span>
+        <span class="n">visited</span> <span class="o">&lt;&lt;</span> <span class="p">{</span><span class="n">node</span><span class="p">,</span> <span class="n">depth</span><span class="p">}</span>
+        <span class="n">callback</span><span class="p">.</span><span class="n">call</span><span class="p">(</span><span class="n">depth</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+      <span class="n">end</span>
+      <span class="n">visited</span><span class="p">.</span><span class="n">should</span> <span class="n">eq</span> <span class="p">[{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">},</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">},</span> <span class="p">{</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">},</span> <span class="p">{</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">},</span> <span class="p">{</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">}]</span>
+    <span class="n">end</span>
+
+    <span class="n">it</span> <span class="s">"does not visit the children if the callback is not called"</span> <span class="k">do</span>
+      <span class="n">graph</span> <span class="o">=</span> <span class="n">UndirectedGraph</span><span class="p">(</span><span class="n">Nil</span><span class="p">,</span> <span class="n">Int64</span><span class="p">).</span><span class="k">new</span><span class="p">(</span><span class="mi">4</span><span class="n">_i64</span><span class="p">)</span>
+      <span class="n">graph</span><span class="p">.</span><span class="n">add_edge</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+      <span class="n">graph</span><span class="p">.</span><span class="n">add_edge</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+      <span class="n">graph</span><span class="p">.</span><span class="n">add_edge</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+
+      <span class="n">visited</span> <span class="o">=</span> <span class="p">[]</span> <span class="n">of</span> <span class="n">Int64</span>
+      <span class="n">graph</span><span class="p">.</span><span class="n">dfs</span><span class="p">(</span><span class="mi">0</span><span class="n">_i64</span><span class="p">,</span> <span class="n">nil</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">node</span><span class="p">,</span> <span class="n">_value</span><span class="p">,</span> <span class="n">_info</span><span class="p">,</span> <span class="n">callback</span><span class="o">|</span>
+        <span class="n">visited</span> <span class="o">&lt;&lt;</span> <span class="n">node</span>
+        <span class="n">callback</span><span class="p">.</span><span class="n">call</span><span class="p">(</span><span class="n">nil</span><span class="p">)</span> <span class="n">unless</span> <span class="n">node</span> <span class="o">==</span> <span class="mi">1</span>
+      <span class="n">end</span>
+      <span class="n">visited</span><span class="p">.</span><span class="n">should</span> <span class="n">eq</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+    <span class="n">end</span>
+
+    <span class="n">it</span> <span class="s">"visits each node once on a graph with cycles"</span> <span class="k">do</span>
+      <span class="cp"># 0 - 1
+</span>      <span class="cp"># | \ |
+</span>      <span class="cp"># 3 - 2
+</span>      <span class="n">graph</span> <span class="o">=</span> <span class="n">UndirectedGraph</span><span class="p">(</span><span class="n">Nil</span><span class="p">,</span> <span class="n">Int64</span><span class="p">).</span><span class="k">new</span><span class="p">(</span><span class="mi">4</span><span class="n">_i64</span><span class="p">)</span>
+      <span class="n">graph</span><span class="p">.</span><span class="n">add_edge</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+      <span class="n">graph</span><span class="p">.</span><span class="n">add_edge</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+      <span class="n">graph</span><span class="p">.</span><span class="n">add_edge</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+      <span class="n">graph</span><span class="p">.</span><span class="n">add_edge</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+      <span class="n">graph</span><span class="p">.</span><span class="n">add_edge</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+
+      <span class="n">visited</span> <span class="o">=</span> <span class="p">[]</span> <span class="n">of</span> <span class="p">{</span><span class="n">Int64</span><span class="p">,</span> <span class="n">Int64</span><span class="p">}</span>
+      <span class="n">graph</span><span class="p">.</span><span class="n">dfs</span><span class="p">(</span><span class="mi">0</span><span class="n">_i64</span><span class="p">,</span> <span class="n">nil</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">node</span><span class="p">,</span> <span class="n">_value</span><span class="p">,</span> <span class="n">info</span><span class="p">,</span> <span class="n">callback</span><span class="o">|</span>
+        <span class="n">visited</span> <span class="o">&lt;&lt;</span> <span class="p">{</span><span class="n">node</span><span class="p">,</span> <span class="n">info</span><span class="p">[</span><span class="o">:</span><span class="n">parent</span><span class="p">]}</span>
+        <span class="n">callback</span><span class="p">.</span><span class="n">call</span><span class="p">(</span><span class="n">nil</span><span class="p">)</span>
+      <span class="n">end</span>
+      <span class="n">visited</span><span class="p">.</span><span class="n">should</span> <span class="n">eq</span> <span class="p">[{</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">},</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">},</span> <span class="p">{</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">},</span> <span class="p">{</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">}]</span>
+    <span class="n">end</span>
   <span class="n">end</span>
 <span class="n">end</span>
 
@@ -1270,8 +1431,25 @@ h1 a:focus {
       <span class="n">tree</span><span class="p">.</span><span class="n">diameter</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">2</span>
     <span class="n">end</span>
 
-    <span class="n">pending</span> <span class="s">"returns the only node as both endpoints for a single-node tree"</span> <span class="k">do</span>
+    <span class="n">it</span> <span class="s">"returns the only node as both endpoints for a single-node tree"</span> <span class="k">do</span>
       <span class="n">Tree</span><span class="p">(</span><span class="n">Nil</span><span class="p">,</span> <span class="n">Int64</span><span class="p">).</span><span class="k">new</span><span class="p">(</span><span class="mi">1</span><span class="n">_i64</span><span class="p">).</span><span class="n">diameter</span><span class="p">.</span><span class="n">should</span> <span class="n">eq</span><span class="p">({</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]})</span>
+    <span class="n">end</span>
+
+    <span class="n">it</span> <span class="s">"returns existing nodes as endpoints when all edge weights are zero"</span> <span class="k">do</span>
+      <span class="n">tree</span> <span class="o">=</span> <span class="n">Tree</span><span class="p">(</span><span class="n">Nil</span><span class="p">,</span> <span class="n">Int64</span><span class="p">).</span><span class="k">new</span><span class="p">(</span><span class="mi">3</span><span class="n">_i64</span><span class="p">)</span>
+      <span class="n">tree</span><span class="p">.</span><span class="n">add_edge</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="n">_i64</span><span class="p">)</span>
+      <span class="n">tree</span><span class="p">.</span><span class="n">add_edge</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="n">_i64</span><span class="p">)</span>
+      <span class="n">tree</span><span class="p">.</span><span class="n">diameter</span><span class="p">.</span><span class="n">should</span> <span class="n">eq</span><span class="p">({</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]})</span>
+    <span class="n">end</span>
+
+    <span class="n">it</span> <span class="s">"does not overflow the stack on a long path"</span> <span class="k">do</span>
+      <span class="n">n</span> <span class="o">=</span> <span class="mi">1</span><span class="n">_000_000_i64</span>
+      <span class="n">tree</span> <span class="o">=</span> <span class="n">Tree</span><span class="p">(</span><span class="n">Nil</span><span class="p">,</span> <span class="n">Int64</span><span class="p">).</span><span class="k">new</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+      <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">).</span><span class="n">times</span> <span class="p">{</span> <span class="o">|</span><span class="n">i</span><span class="o">|</span> <span class="n">tree</span><span class="p">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="n">_i64</span><span class="p">)</span> <span class="p">}</span>
+      <span class="n">diameter</span><span class="p">,</span> <span class="n">start_node</span><span class="p">,</span> <span class="n">target_node</span><span class="p">,</span> <span class="n">parents</span> <span class="o">=</span> <span class="n">tree</span><span class="p">.</span><span class="n">diameter</span>
+      <span class="n">diameter</span><span class="p">.</span><span class="n">should</span> <span class="n">eq</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span>
+      <span class="p">{</span><span class="n">start_node</span><span class="p">,</span> <span class="n">target_node</span><span class="p">}.</span><span class="n">should</span> <span class="n">eq</span><span class="p">({</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">})</span>
+      <span class="n">parents</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">1</span>
     <span class="n">end</span>
 
     <span class="n">it</span> <span class="s">"matches a naive implementation on random small trees"</span> <span class="k">do</span>
@@ -1328,6 +1506,14 @@ h1 a:focus {
       <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">).</span><span class="n">times</span> <span class="p">{</span> <span class="o">|</span><span class="n">i</span><span class="o">|</span> <span class="n">tree</span><span class="p">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="p">}</span>
       <span class="n">tree</span><span class="p">.</span><span class="n">lca</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">500</span><span class="p">).</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">500</span>
       <span class="n">tree</span><span class="p">.</span><span class="n">lca</span><span class="p">(</span><span class="mi">999</span><span class="p">,</span> <span class="mi">998</span><span class="p">).</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">998</span>
+    <span class="n">end</span>
+
+    <span class="n">it</span> <span class="s">"does not overflow the stack on a long path"</span> <span class="k">do</span>
+      <span class="n">n</span> <span class="o">=</span> <span class="mi">1</span><span class="n">_000_000_i64</span>
+      <span class="n">tree</span> <span class="o">=</span> <span class="n">Tree</span><span class="p">(</span><span class="n">Nil</span><span class="p">,</span> <span class="n">Int64</span><span class="p">).</span><span class="k">new</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+      <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">).</span><span class="n">times</span> <span class="p">{</span> <span class="o">|</span><span class="n">i</span><span class="o">|</span> <span class="n">tree</span><span class="p">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="p">}</span>
+      <span class="n">tree</span><span class="p">.</span><span class="n">lca</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">500</span><span class="n">_000</span><span class="p">).</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">500</span><span class="n">_000</span>
+      <span class="n">tree</span><span class="p">.</span><span class="n">dist</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">).</span><span class="n">should</span> <span class="n">eq</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span>
     <span class="n">end</span>
 
     <span class="n">it</span> <span class="s">"matches a naive implementation on random small trees"</span> <span class="k">do</span>
