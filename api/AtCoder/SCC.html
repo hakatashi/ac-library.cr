@@ -309,7 +309,7 @@ scc.scc <span class="c"># =&gt; [Set{2}, Set{0, 1}]</span></code></pre>
   </h2>
   
     
-      <a href="https://github.com/hakatashi/ac-library.cr/blob/797c5dbfa8c3bf26b8a1497fb78b6116ba4dcf9f/src/scc.cr#L27" target="_blank">
+      <a href="https://github.com/hakatashi/ac-library.cr/blob/1d3226bb8ab77904b5b8f683d225b0277fb4414c/src/scc.cr#L27" target="_blank">
         scc.cr
       </a>
     
@@ -332,7 +332,7 @@ scc.scc <span class="c"># =&gt; [Set{2}, Set{0, 1}]</span></code></pre>
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#new%28size%3AInt64%29-class-method" class="signature"><strong>.new</strong>(size : Int64)</a>
+        <a href="#new%28size%29-class-method" class="signature"><strong>.new</strong>(size)</a>
         
       </li>
     
@@ -363,6 +363,8 @@ scc.scc <span class="c"># =&gt; [Set{2}, Set{0, 1}]</span></code></pre>
     
       <li class="entry-summary">
         <a href="#adjacencies%3AArray%28Adjacency%29-instance-method" class="signature"><strong>#adjacencies</strong> : Array(Adjacency)</a>
+        
+          <div class="summary"><p>Returns the in/out adjacency lists of each vertex.</p></div>
         
       </li>
     
@@ -422,18 +424,18 @@ scc.scc <span class="c"># =&gt; [Set{2}, Set{0, 1}]</span></code></pre>
     Constructor Detail
   </h2>
   
-    <div class="entry-detail" id="new(size:Int64)-class-method">
+    <div class="entry-detail" id="new(size)-class-method">
       <div class="signature">
         
-        def self.<strong>new</strong>(size : Int64)
+        def self.<strong>new</strong>(size)
 
-        <a class="method-permalink" href="#new%28size%3AInt64%29-class-method">#</a>
+        <a class="method-permalink" href="#new%28size%29-class-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/hakatashi/ac-library.cr/blob/797c5dbfa8c3bf26b8a1497fb78b6116ba4dcf9f/src/scc.cr#L33" target="_blank">View source</a>]
+          [<a href="https://github.com/hakatashi/ac-library.cr/blob/1d3226bb8ab77904b5b8f683d225b0277fb4414c/src/scc.cr#L37" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -470,7 +472,7 @@ scc.scc <span class="c"># =&gt; [Set{2}, Set{0, 1}]</span></code></pre>
       <br/>
       <div>
         
-          [<a href="https://github.com/hakatashi/ac-library.cr/blob/797c5dbfa8c3bf26b8a1497fb78b6116ba4dcf9f/src/scc.cr#L44" target="_blank">View source</a>]
+          [<a href="https://github.com/hakatashi/ac-library.cr/blob/1d3226bb8ab77904b5b8f683d225b0277fb4414c/src/scc.cr#L45" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -483,10 +485,16 @@ scc.scc <span class="c"># =&gt; [Set{2}, Set{0, 1}]</span></code></pre>
         <a class="method-permalink" href="#adjacencies%3AArray%28Adjacency%29-instance-method">#</a>
       </div>
       
+        <div class="doc">
+          
+          <p>Returns the in/out adjacency lists of each vertex.</p>
+<p>Kept for compatibility. It is built on every call, so avoid calling it in hot paths.</p>
+        </div>
+      
       <br/>
       <div>
         
-          [<a href="https://github.com/hakatashi/ac-library.cr/blob/797c5dbfa8c3bf26b8a1497fb78b6116ba4dcf9f/src/scc.cr#L31" target="_blank">View source</a>]
+          [<a href="https://github.com/hakatashi/ac-library.cr/blob/1d3226bb8ab77904b5b8f683d225b0277fb4414c/src/scc.cr#L56" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -502,12 +510,13 @@ scc.scc <span class="c"># =&gt; [Set{2}, Set{0, 1}]</span></code></pre>
         <div class="doc">
           
           <p>Implements atcoder::scc_graph.scc().</p>
+<p>Unlike ACL, each group is a <code>Set</code> instead of an array.</p>
         </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/hakatashi/ac-library.cr/blob/797c5dbfa8c3bf26b8a1497fb78b6116ba4dcf9f/src/scc.cr#L94" target="_blank">View source</a>]
+          [<a href="https://github.com/hakatashi/ac-library.cr/blob/1d3226bb8ab77904b5b8f683d225b0277fb4414c/src/scc.cr#L144" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -523,7 +532,7 @@ scc.scc <span class="c"># =&gt; [Set{2}, Set{0, 1}]</span></code></pre>
       <br/>
       <div>
         
-          [<a href="https://github.com/hakatashi/ac-library.cr/blob/797c5dbfa8c3bf26b8a1497fb78b6116ba4dcf9f/src/scc.cr#L30" target="_blank">View source</a>]
+          [<a href="https://github.com/hakatashi/ac-library.cr/blob/1d3226bb8ab77904b5b8f683d225b0277fb4414c/src/scc.cr#L30" target="_blank">View source</a>]
         
       </div>
     </div>
