@@ -27,6 +27,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- `SCC` is rewritten in the same way as ACL (CSR adjacency and Tarjan's algorithm), and `TwoSat` uses it without building `Set`s ([#28](https://github.com/hakatashi/ac-library.cr/issues/28)). On a random graph with 5×10^5 vertices and edges, `SCC#scc` is about 4 times faster and `TwoSat#satisfiable?` about 10 times faster. The return type of `SCC#scc` (`Array(Set(Int64))`) is unchanged, but the order of vertices inside each `Set` may differ from before.
+- `SCC#adjacencies` is now built on every call instead of being stored. `SCC#add_edge` raises `IndexError` for an out-of-range vertex at the time of the call.
 - `Graph#dfs`: The block passed to `#dfs` keeps the same arguments, but the children of a node are now visited *after* the block returns, instead of inside `callback.call`. Code placed after `callback.call` in the block therefore runs before the subtree is visited. The visiting order of nodes is unchanged. If `callback` is called more than once, the last value is used.
 - `MinCostFlow#add_edge` now returns the index of the added edge (as in ACL), instead of the internal edge list.
 - `require "atcoder/min_cost_flow"` no longer loads `atcoder/graph` (it loads `atcoder/priority_queue` instead).
