@@ -111,7 +111,7 @@ relevant `verify/` file(s).
 - Invalid arguments: `ArgumentError`. Out-of-range in `max_right`/`min_left`: `IndexError`.
   Unsatisfiable 2-SAT: `TwoSat::NotSatisfiableError`. Division by zero: `DivisionByZeroError`.
 - Unimplemented ACL features are stubbed as `# FIXME: Unimplemented` +
-  `raise NotImplementedError.new`, and listed as "Unimplemented" in README.
+  `raise NotImplementedError.new("AtCoder::Xxx#method")` (the argument is required), and listed as "Unimplemented" in README.
 - Bounds checks are generally left to `Array` (`IndexError`), except where ACL asserts.
 
 ### Class design

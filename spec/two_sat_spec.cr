@@ -19,8 +19,57 @@ require "spec"
 
 alias TwoSat = AtCoder::TwoSat
 
+private def satisfies?(assignment, clauses)
+  clauses.all? { |(i, f, j, g)| assignment[i] == f || assignment[j] == g }
+end
+
+private def naive_satisfiable?(n, clauses)
+  (0...(1 << n)).any? do |mask|
+    satisfies?(Array.new(n) { |i| mask.bit(i) == 1 }, clauses)
+  end
+end
+
 describe "TwoSat" do
+  describe "#satisfiable?" do
+    it "returns true for a formula without clauses" do
+      TwoSat.new(3_i64).satisfiable?.should be_true
+      TwoSat.new(0_i64).satisfiable?.should be_true
+    end
+
+    it "returns false for contradicting unit clauses" do
+      twosat = TwoSat.new(2_i64)
+      twosat.add_clause(0, true, 0, true)
+      twosat.add_clause(0, false, 1, true)
+      twosat.add_clause(1, false, 1, false)
+      twosat.satisfiable?.should be_false
+    end
+
+    it "matches a naive implementation on random small formulas" do
+      rng = Random.new(36)
+      500.times do
+        n = rng.rand(1..6)
+        clauses = Array.new(rng.rand(0..12)) do
+          {rng.rand(n), rng.rand < 0.5, rng.rand(n), rng.rand < 0.5}
+        end
+
+        twosat = TwoSat.new(n.to_i64)
+        clauses.each { |(i, f, j, g)| twosat.add_clause(i, f, j, g) }
+        expected = naive_satisfiable?(n, clauses)
+        twosat.satisfiable?.should eq expected
+        if expected
+          answer = twosat.answer
+          answer.size.should eq n
+          satisfies?(answer, clauses).should be_true
+        end
+      end
+    end
+  end
+
   describe "#answer" do
+    it "returns an empty array for zero variables" do
+      TwoSat.new(0_i64).answer.should eq [] of Bool
+    end
+
     it "returns an assignment after #satisfiable?" do
       twosat = TwoSat.new(2_i64)
       twosat.add_clause(0, true, 1, false)
