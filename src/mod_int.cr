@@ -26,7 +26,7 @@ module AtCoder
   # ```
   macro static_modint(name, modulo)
     module AtCoder
-      # Implements atcoder::modint{{modulo}}.
+      # Implements atcoder::static_modint<{{modulo}}>.
       #
       # ```
       # alias Mint = AtCoder::{{name}}
@@ -254,7 +254,7 @@ module AtCoder
             end
 
             if self.zero?
-              self
+              return self
             end
 
             b = value > 0 ? self : inv

@@ -53,7 +53,7 @@ module AtCoder
       (@n_leaves - 1).downto(1) { |i| refresh(i) }
     end
 
-    # Implements atcoder::lazy_segtree.set(index, applicator).
+    # Implements atcoder::lazy_segtree.set(index, value).
     def set(index : Int, value : S)
       index += @n_leaves
       @height.downto(1) { |j| propagate(ancestor(index, j)) }
