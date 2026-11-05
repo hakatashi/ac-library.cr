@@ -134,12 +134,12 @@ module AtCoder
 
     # FIXME: Unimplemented
     def get_edge(i)
-      raise NotImplementedError.new
+      raise NotImplementedError.new("AtCoder::MinCostFlow#get_edge")
     end
 
     # FIXME: Unimplemented
     def edges
-      raise NotImplementedError.new
+      raise NotImplementedError.new("AtCoder::MinCostFlow#edges")
     end
 
     # Runs Dijkstra's algorithm on the residual graph with reduced costs and

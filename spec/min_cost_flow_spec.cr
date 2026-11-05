@@ -268,4 +268,13 @@ describe "MinCostFlow" do
       ]
     end
   end
+
+  describe "unimplemented methods" do
+    it "raises NotImplementedError" do
+      flow = MinCostFlow.new(2)
+      flow.add_edge(0, 1, 1, 1)
+      expect_raises(NotImplementedError) { flow.get_edge(0) }
+      expect_raises(NotImplementedError) { flow.edges }
+    end
+  end
 end
