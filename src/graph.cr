@@ -69,6 +69,18 @@ module AtCoder
       end
     end
 
+    # Performs a depth-first search from `node`.
+    #
+    # The block is called for each visited node with `(node, value, info, callback)`, where `value`
+    # is the value passed from the parent (`initial_value` for `node` itself) and `info` holds the
+    # node, its `NodeInfo`, the edge from the parent and its `EdgeInfo`, and the parent (`-1` for
+    # `node` itself). Calling `callback.call(new_value)` visits the children of the node with
+    # `new_value`; if the block does not call it, the children are not visited from this node.
+    #
+    # The search uses an explicit stack, so it does not overflow the call stack on deep graphs.
+    # Nodes are visited in the same order as a recursive DFS, but the children are visited
+    # *after* the block returns, not inside `callback.call`. If `callback` is called more than
+    # once, the last value is used.
     def dfs(node : Int64, initial_value : T, &block : Int64, T, NamedTuple(
               node: Int64,
               node_info: NodeInfo | Nil,
@@ -77,6 +89,19 @@ module AtCoder
               parent: Int64,
             ), (T ->) ->) forall T
       @visited = Set(Int64).new
+
+      called = false
+      next_value = initial_value
+      callback = ->(new_value : T) {
+        called = true
+        next_value = new_value
+        nil
+      }
+
+      # Each frame holds a node whose children are being visited, the value passed to them,
+      # and the iterator over its adjacencies.
+      stack = [] of typeof({node, initial_value, @adjacencies[node].each})
+
       info = {
         node:      node,
         node_info: @nodes[node].as(NodeInfo | Nil),
@@ -84,31 +109,36 @@ module AtCoder
         edge_info: nil.as(EdgeInfo | Nil),
         parent:    -1_i64,
       }
-      block.call(node, initial_value, info, ->(new_value : T) {
-        dfs(node, -1_i64, new_value, &block)
-      })
-    end
+      block.call(node, initial_value, info, callback)
+      if called
+        @visited << node
+        stack << {node, next_value, @adjacencies[node].each}
+      end
 
-    private def dfs(node : Int64, parent : Int64, value : T, &block : Int64, T, NamedTuple(
-                      node: Int64,
-                      node_info: NodeInfo | Nil,
-                      edge: Int64 | Nil,
-                      edge_info: EdgeInfo | Nil,
-                      parent: Int64,
-                    ), (T ->) ->) forall T
-      @visited << node
-      @adjacencies[node].each do |(child, edge)|
+      until stack.empty?
+        parent, value, iterator = stack.last
+        entry = iterator.next
+        if entry.is_a?(Iterator::Stop)
+          stack.pop
+          next
+        end
+
+        child, edge = entry
         next if @visited.includes?(child)
+
         info = {
           node:      child,
           node_info: @nodes[child].as(NodeInfo | Nil),
           edge:      edge.as(Int64 | Nil),
           edge_info: @edges[edge].as(EdgeInfo | Nil),
-          parent:    node,
+          parent:    parent,
         }
-        block.call(child, value, info, ->(new_value : T) {
-          dfs(child, node, new_value, &block)
-        })
+        called = false
+        block.call(child, value, info, callback)
+        if called
+          @visited << child
+          stack << {child, next_value, @adjacencies[child].each}
+        end
       end
     end
   end
@@ -160,7 +190,7 @@ module AtCoder
     @lca_depths : Array(Int64) | Nil
 
     def diameter
-      @farthest_node = -1_i64
+      @farthest_node = 0_i64
       @farthest_depth = 0_i64
       dfs(0_i64, 0_i64) do |node, depth, info, callback|
         weight = info[:edge_info]
@@ -173,7 +203,7 @@ module AtCoder
       end
 
       start_node = @farthest_node.not_nil!
-      @farthest_node = -1_i64
+      @farthest_node = start_node
       @farthest_depth = 0_i64
       @parents = Array(Int64).new(@size, -1_i64)
       dfs(start_node, 0_i64) do |node, depth, info, callback|
