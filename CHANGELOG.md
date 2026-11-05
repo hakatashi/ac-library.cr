@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `TwoSat#answer` no longer requires calling `#satisfiable?` beforehand. It solves the formula on demand, and re-solves it if clauses were added after the last solve.
 - `ModInt#**` (Montgomery implementation for 998244353 / 1000000007) now returns early for a zero base, as originally intended. The result is unchanged.
 - Remove a duplicated private `log2_ceil` definition in `SegTree`.
+- The unimplemented `MaxFlow#min_cut`, `#get_edge`, `#edges` and `#change_edge` now raise `NotImplementedError` as intended. Previously, calling them failed to compile.
 
 ### Documentation
 
@@ -22,6 +23,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Add unit specs for `MaxFlow`, `SCC`, `TwoSat` and `Graph` / `Tree`.
 - CI: Run tests on Crystal 1.17.0 (the version on the AtCoder judge) and the latest Crystal.
 - CI: Replace container-based jobs with `crystal-lang/install-crystal`, and update deprecated actions (`actions/cache@v2`, Codecov bash uploader, etc.).
 - Development dependencies: Update ameba to 1.6.4 and cr-bundle to the latest commit.
