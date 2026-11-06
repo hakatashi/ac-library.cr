@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- `AtCoder.dynamic_modint` macro and `AtCoder::DynamicModInt`, which implement ACL's `dynamic_modint` / `modint` (ModInt with a modulus set at runtime by `.set_mod`). Multiplication uses Barrett reduction, in the same way as ACL v1.5.1 ([#34](https://github.com/hakatashi/ac-library.cr/issues/34)).
+- `AtCoder::DynamicModInt`, which implements ACL's `modint` (`dynamic_modint`), a ModInt whose modulus is set at runtime by `.set_mod`. Multiplication uses Barrett reduction, in the same way as ACL v1.5.1 ([#34](https://github.com/hakatashi/ac-library.cr/issues/34)).
 - `.mod` class method of static ModInts (`ModInt998244353.mod`, etc.), which returns the modulus as in ACL's `mint::mod()`.
 
 ### Fixed
