@@ -19,7 +19,6 @@ require "./spec_helper.cr"
 require "spec"
 
 alias ModInt1000000007 = AtCoder::ModInt1000000007
-alias ModInt7 = AtCoder::ModInt7
 
 describe "ModInt1000000007" do
   describe "#==" do

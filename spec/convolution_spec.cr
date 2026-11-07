@@ -15,7 +15,6 @@
 # limitations under the License.
 
 require "../src/convolution.cr"
-require "../src/mod_int.cr"
 require "spec"
 
 alias Convolution = AtCoder::Convolution
