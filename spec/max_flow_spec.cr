@@ -62,6 +62,18 @@ describe "MaxFlow" do
       MaxFlow.new(2).flow(0, 1).should eq 0
     end
 
+    it "returns zero when start and target are the same node" do
+      mf = MaxFlow.new(3)
+      mf.add_edge(0, 1, 10)
+      mf.flow(0, 0).should eq 0
+    end
+
+    it "raises IndexError when start or target is out of bounds" do
+      mf = MaxFlow.new(3)
+      expect_raises(IndexError) { mf.flow(-1, 2) }
+      expect_raises(IndexError) { mf.flow(0, 3) }
+    end
+
     it "does not use edges in the reverse direction" do
       mf = MaxFlow.new(2)
       mf.add_edge(1, 0, 10)
