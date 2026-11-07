@@ -9,11 +9,11 @@ description: |
 
 crystal: 1.9.1
 
-repository: https://github.com/google/ac-library.cr.git
+repository: https://github.com/hakatashi/ac-library.cr.git
 
-homepage: https://github.com/google/ac-library.cr
+homepage: https://github.com/hakatashi/ac-library.cr
 
-documentation: https://google.github.io/ac-library.cr/
+documentation: https://hakatashi.github.io/ac-library.cr/
 
 license: Apache-2.0
 
