@@ -102,7 +102,7 @@ h1 a:focus {
 
 <ul>
     <li><a href="/blob/master/verify/convolution_mod.test.cr">View this file on GitHub</a></li>
-    <li>Last update: 2026-11-07 09:36:20+09:00</li>
+    <li>Last update: 2026-11-07 21:37:04+09:00</li>
     
     <li>Problem: <a href="https://judge.yosupo.jp/problem/convolution_mod">https://judge.yosupo.jp/problem/convolution_mod</a>
 </li>
@@ -232,149 +232,6 @@ h1 a:focus {
 # See the License for the specific language governing permissions and
 # limitations under the License.
 </span>
-<span class="n">module</span> <span class="n">AtCoder</span>
-  <span class="cp"># Implements [atcoder::convolution](https://atcoder.github.io/ac-library/master/document_en/convolution.html).
-</span>  <span class="cp">#
-</span>  <span class="cp"># ```
-</span>  <span class="cp"># a = [AtCoder::ModInt998244353.new(1_i64)] * 3
-</span>  <span class="cp"># AtCoder::Convolution.convolution(a, a) # =&gt; [1, 2, 3, 2, 1]
-</span>  <span class="cp"># ```
-</span>  <span class="n">module</span> <span class="n">Convolution</span>
-    <span class="k">private</span> <span class="n">def</span> <span class="n">self</span><span class="p">.</span><span class="n">bit_reverse</span><span class="p">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">Int</span><span class="p">,</span> <span class="n">bit_length</span> <span class="o">:</span> <span class="n">Int</span><span class="p">)</span>
-      <span class="n">ret</span> <span class="o">=</span> <span class="n">n</span><span class="p">.</span><span class="k">class</span><span class="p">.</span><span class="n">zero</span>
-      <span class="n">bit_length</span><span class="p">.</span><span class="n">times</span> <span class="k">do</span> <span class="o">|</span><span class="n">i</span><span class="o">|</span>
-        <span class="n">ret</span> <span class="o">|=</span> <span class="p">((</span><span class="n">n</span> <span class="o">&gt;&gt;</span> <span class="n">i</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="n">bit_length</span> <span class="o">-</span> <span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
-      <span class="n">end</span>
-      <span class="n">ret</span>
-    <span class="n">end</span>
-
-    <span class="cp"># In-place execution of FFT operation.
-</span>    <span class="cp"># `T` must implement ModInt operations.
-</span>    <span class="cp"># Length of `a` must be power of 2.
-</span>    <span class="k">private</span> <span class="n">def</span> <span class="n">self</span><span class="p">.</span><span class="n">fft</span><span class="p">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">Array</span><span class="p">(</span><span class="n">T</span><span class="p">),</span> <span class="n">g</span> <span class="o">:</span> <span class="n">T</span><span class="p">)</span> <span class="n">forall</span> <span class="n">T</span>
-      <span class="n">size</span> <span class="o">=</span> <span class="n">a</span><span class="p">.</span><span class="n">size</span>
-      <span class="n">bit_length</span> <span class="o">=</span> <span class="n">size</span><span class="p">.</span><span class="n">trailing_zeros_count</span>
-
-      <span class="n">size</span><span class="p">.</span><span class="n">times</span> <span class="k">do</span> <span class="o">|</span><span class="n">i</span><span class="o">|</span>
-        <span class="n">j</span> <span class="o">=</span> <span class="n">bit_reverse</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">bit_length</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">j</span>
-          <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">a</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-        <span class="n">end</span>
-      <span class="n">end</span>
-
-      <span class="n">bit_length</span><span class="p">.</span><span class="n">times</span> <span class="k">do</span> <span class="o">|</span><span class="n">bit</span><span class="o">|</span>
-        <span class="n">block_size</span> <span class="o">=</span> <span class="mi">1</span><span class="n">_i64</span> <span class="o">&lt;&lt;</span> <span class="n">bit</span>
-
-        <span class="cp"># Butterfly operation
-</span>        <span class="n">block_size</span><span class="p">.</span><span class="n">times</span> <span class="k">do</span> <span class="o">|</span><span class="n">i</span><span class="o">|</span>
-          <span class="n">w</span> <span class="o">=</span> <span class="p">(</span><span class="n">g</span> <span class="o">**</span> <span class="p">(</span><span class="n">size</span> <span class="c1">// block_size // 2)) ** i</span>
-          <span class="p">(</span><span class="n">size</span> <span class="c1">// (block_size * 2)).times do |j|</span>
-            <span class="n">index1</span> <span class="o">=</span> <span class="n">j</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">block_size</span> <span class="o">+</span> <span class="n">i</span>
-            <span class="n">index2</span> <span class="o">=</span> <span class="p">(</span><span class="n">j</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">block_size</span> <span class="o">+</span> <span class="n">i</span>
-            <span class="n">a</span><span class="p">[</span><span class="n">index1</span><span class="p">],</span> <span class="n">a</span><span class="p">[</span><span class="n">index2</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-              <span class="n">a</span><span class="p">[</span><span class="n">index1</span><span class="p">]</span> <span class="o">+</span> <span class="n">a</span><span class="p">[</span><span class="n">index2</span><span class="p">]</span> <span class="o">*</span> <span class="n">w</span><span class="p">,</span>
-              <span class="n">a</span><span class="p">[</span><span class="n">index1</span><span class="p">]</span> <span class="o">-</span> <span class="n">a</span><span class="p">[</span><span class="n">index2</span><span class="p">]</span> <span class="o">*</span> <span class="n">w</span><span class="p">,</span>
-            <span class="p">}</span>
-          <span class="n">end</span>
-        <span class="n">end</span>
-      <span class="n">end</span>
-    <span class="n">end</span>
-
-    <span class="k">private</span> <span class="n">def</span> <span class="n">self</span><span class="p">.</span><span class="n">ifft</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">g</span><span class="p">)</span>
-      <span class="n">fft</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">g</span><span class="p">.</span><span class="n">inv</span><span class="p">)</span>
-      <span class="n">a</span><span class="p">.</span><span class="n">size</span><span class="p">.</span><span class="n">times</span> <span class="k">do</span> <span class="o">|</span><span class="n">i</span><span class="o">|</span>
-        <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="c1">//= a.size</span>
-      <span class="n">end</span>
-    <span class="n">end</span>
-
-    <span class="cp"># Implements atcoder::convolution.convolution.
-</span>    <span class="cp"># TODO: Support for int
-</span>    <span class="n">def</span> <span class="n">self</span><span class="p">.</span><span class="n">convolution</span><span class="p">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">Array</span><span class="p">(</span><span class="n">T</span><span class="p">),</span> <span class="n">b</span> <span class="o">:</span> <span class="n">Array</span><span class="p">(</span><span class="n">T</span><span class="p">))</span> <span class="n">forall</span> <span class="n">T</span>
-      <span class="k">return</span> <span class="p">[]</span> <span class="n">of</span> <span class="n">T</span> <span class="k">if</span> <span class="n">a</span><span class="p">.</span><span class="n">empty</span><span class="o">?</span> <span class="o">||</span> <span class="n">b</span><span class="p">.</span><span class="n">empty</span><span class="o">?</span>
-
-      <span class="n">modulo</span> <span class="o">=</span> <span class="n">T</span><span class="o">::</span><span class="n">MOD</span>
-      <span class="n">n</span> <span class="o">=</span> <span class="n">modulo</span> <span class="o">-</span> <span class="mi">1</span>
-      <span class="n">result_size</span> <span class="o">=</span> <span class="n">a</span><span class="p">.</span><span class="n">size</span> <span class="o">+</span> <span class="n">b</span><span class="p">.</span><span class="n">size</span> <span class="o">-</span> <span class="mi">1</span>
-
-      <span class="n">c</span> <span class="o">=</span> <span class="mi">1</span><span class="n">_i64</span> <span class="o">&lt;&lt;</span> <span class="n">n</span><span class="p">.</span><span class="n">trailing_zeros_count</span>
-
-      <span class="k">if</span> <span class="n">result_size</span> <span class="o">&gt;</span> <span class="n">c</span>
-        <span class="n">raise</span> <span class="n">ArgumentError</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="s">"With modulo #{modulo}, total array length must be less than or equal to #{c}"</span><span class="p">)</span>
-      <span class="n">end</span>
-
-      <span class="n">fft_size</span> <span class="o">=</span> <span class="mi">1</span><span class="n">_i64</span>
-      <span class="n">until</span> <span class="n">fft_size</span> <span class="o">&gt;=</span> <span class="n">result_size</span>
-        <span class="n">fft_size</span> <span class="o">&lt;&lt;=</span> <span class="mi">1</span>
-      <span class="n">end</span>
-
-      <span class="n">input_a</span> <span class="o">=</span> <span class="n">Array</span><span class="p">(</span><span class="n">T</span><span class="p">).</span><span class="k">new</span><span class="p">(</span><span class="n">fft_size</span><span class="p">)</span> <span class="p">{</span> <span class="o">|</span><span class="n">i</span><span class="o">|</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">a</span><span class="p">.</span><span class="n">size</span> <span class="o">?</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">:</span> <span class="n">T</span><span class="p">.</span><span class="n">zero</span> <span class="p">}</span>
-      <span class="n">input_b</span> <span class="o">=</span> <span class="n">Array</span><span class="p">(</span><span class="n">T</span><span class="p">).</span><span class="k">new</span><span class="p">(</span><span class="n">fft_size</span><span class="p">)</span> <span class="p">{</span> <span class="o">|</span><span class="n">i</span><span class="o">|</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">b</span><span class="p">.</span><span class="n">size</span> <span class="o">?</span> <span class="n">b</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">:</span> <span class="n">T</span><span class="p">.</span><span class="n">zero</span> <span class="p">}</span>
-
-      <span class="n">primitive_root</span> <span class="o">=</span> <span class="n">AtCoder</span><span class="o">::</span><span class="n">Math</span><span class="p">.</span><span class="n">get_primitive_root</span><span class="p">(</span><span class="n">modulo</span><span class="p">)</span>
-      <span class="n">g</span> <span class="o">=</span> <span class="n">T</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="n">primitive_root</span><span class="p">)</span> <span class="o">**</span> <span class="p">(</span><span class="n">n</span> <span class="c1">// fft_size)</span>
-
-      <span class="n">fft</span><span class="p">(</span><span class="n">input_a</span><span class="p">,</span> <span class="n">g</span><span class="p">)</span>
-      <span class="n">fft</span><span class="p">(</span><span class="n">input_b</span><span class="p">,</span> <span class="n">g</span><span class="p">)</span>
-
-      <span class="n">fft_size</span><span class="p">.</span><span class="n">times</span> <span class="k">do</span> <span class="o">|</span><span class="n">i</span><span class="o">|</span>
-        <span class="n">input_a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*=</span> <span class="n">input_b</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-      <span class="n">end</span>
-
-      <span class="n">ifft</span><span class="p">(</span><span class="n">input_a</span><span class="p">,</span> <span class="n">g</span><span class="p">)</span>
-
-      <span class="n">input_a</span><span class="p">[</span><span class="mf">0.</span><span class="p">..</span><span class="n">result_size</span><span class="p">]</span>
-    <span class="n">end</span>
-
-    <span class="cp"># Implements atcoder::convolution.convolution_ll.
-</span>    <span class="n">def</span> <span class="n">self</span><span class="p">.</span><span class="n">convolution_ll</span><span class="p">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">Array</span><span class="p">(</span><span class="n">Int64</span><span class="p">),</span> <span class="n">b</span> <span class="o">:</span> <span class="n">Array</span><span class="p">(</span><span class="n">Int64</span><span class="p">))</span>
-      <span class="k">return</span> <span class="p">[]</span> <span class="n">of</span> <span class="n">Int64</span> <span class="k">if</span> <span class="n">a</span><span class="p">.</span><span class="n">empty</span><span class="o">?</span> <span class="o">||</span> <span class="n">b</span><span class="p">.</span><span class="n">empty</span><span class="o">?</span>
-
-      <span class="n">a1</span> <span class="o">=</span> <span class="n">a</span><span class="p">.</span><span class="n">map</span> <span class="p">{</span> <span class="o">|</span><span class="n">n</span><span class="o">|</span> <span class="n">AtCoder</span><span class="o">::</span><span class="n">ModInt754974721</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="p">}</span>
-      <span class="n">a2</span> <span class="o">=</span> <span class="n">a</span><span class="p">.</span><span class="n">map</span> <span class="p">{</span> <span class="o">|</span><span class="n">n</span><span class="o">|</span> <span class="n">AtCoder</span><span class="o">::</span><span class="n">ModInt167772161</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="p">}</span>
-      <span class="n">a3</span> <span class="o">=</span> <span class="n">a</span><span class="p">.</span><span class="n">map</span> <span class="p">{</span> <span class="o">|</span><span class="n">n</span><span class="o">|</span> <span class="n">AtCoder</span><span class="o">::</span><span class="n">ModInt469762049</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="p">}</span>
-
-      <span class="n">b1</span> <span class="o">=</span> <span class="n">b</span><span class="p">.</span><span class="n">map</span> <span class="p">{</span> <span class="o">|</span><span class="n">n</span><span class="o">|</span> <span class="n">AtCoder</span><span class="o">::</span><span class="n">ModInt754974721</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="p">}</span>
-      <span class="n">b2</span> <span class="o">=</span> <span class="n">b</span><span class="p">.</span><span class="n">map</span> <span class="p">{</span> <span class="o">|</span><span class="n">n</span><span class="o">|</span> <span class="n">AtCoder</span><span class="o">::</span><span class="n">ModInt167772161</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="p">}</span>
-      <span class="n">b3</span> <span class="o">=</span> <span class="n">b</span><span class="p">.</span><span class="n">map</span> <span class="p">{</span> <span class="o">|</span><span class="n">n</span><span class="o">|</span> <span class="n">AtCoder</span><span class="o">::</span><span class="n">ModInt469762049</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="p">}</span>
-
-      <span class="n">c1</span> <span class="o">=</span> <span class="n">convolution</span><span class="p">(</span><span class="n">a1</span><span class="p">,</span> <span class="n">b1</span><span class="p">)</span>
-      <span class="n">c2</span> <span class="o">=</span> <span class="n">convolution</span><span class="p">(</span><span class="n">a2</span><span class="p">,</span> <span class="n">b2</span><span class="p">)</span>
-      <span class="n">c3</span> <span class="o">=</span> <span class="n">convolution</span><span class="p">(</span><span class="n">a3</span><span class="p">,</span> <span class="n">b3</span><span class="p">)</span>
-
-      <span class="n">m1</span> <span class="o">=</span> <span class="mi">754</span><span class="n">_974_721_i64</span>
-      <span class="n">m2</span> <span class="o">=</span> <span class="mi">167</span><span class="n">_772_161_i64</span>
-      <span class="n">m3</span> <span class="o">=</span> <span class="mi">469</span><span class="n">_762_049_i64</span>
-
-      <span class="n">c1</span><span class="p">.</span><span class="n">zip</span><span class="p">(</span><span class="n">c2</span><span class="p">,</span> <span class="n">c3</span><span class="p">).</span><span class="n">map</span> <span class="k">do</span> <span class="o">|</span><span class="n">n1</span><span class="p">,</span> <span class="n">n2</span><span class="p">,</span> <span class="n">n3</span><span class="o">|</span>
-        <span class="n">p</span> <span class="o">=</span> <span class="n">AtCoder</span><span class="o">::</span><span class="n">Math</span><span class="p">.</span><span class="n">inv_mod</span><span class="p">(</span><span class="n">m1</span><span class="p">,</span> <span class="n">m2</span><span class="p">)</span>
-        <span class="n">tmp</span> <span class="o">=</span> <span class="p">(</span><span class="n">n2</span><span class="p">.</span><span class="n">val</span> <span class="o">-</span> <span class="n">n1</span><span class="p">.</span><span class="n">val</span><span class="p">)</span> <span class="o">*</span> <span class="n">p</span> <span class="o">%</span> <span class="n">m2</span>
-        <span class="n">answer</span> <span class="o">=</span> <span class="n">n1</span><span class="p">.</span><span class="n">val</span> <span class="o">+</span> <span class="n">m1</span> <span class="o">*</span> <span class="n">tmp</span>
-
-        <span class="n">p</span> <span class="o">=</span> <span class="n">AtCoder</span><span class="o">::</span><span class="n">Math</span><span class="p">.</span><span class="n">inv_mod</span><span class="p">(</span><span class="n">m1</span> <span class="o">*</span> <span class="n">m2</span><span class="p">,</span> <span class="n">m3</span><span class="p">)</span>
-        <span class="n">tmp</span> <span class="o">=</span> <span class="p">(((</span><span class="n">n3</span><span class="p">.</span><span class="n">val</span> <span class="o">-</span> <span class="n">answer</span><span class="p">)</span> <span class="o">%</span> <span class="n">m3</span><span class="p">)</span> <span class="o">*</span> <span class="n">p</span><span class="p">)</span> <span class="o">%</span> <span class="n">m3</span>
-        <span class="n">answer</span> <span class="o">+</span> <span class="n">m1</span> <span class="o">*</span> <span class="n">m2</span> <span class="o">*</span> <span class="n">tmp</span>
-      <span class="n">end</span>
-    <span class="n">end</span>
-  <span class="n">end</span>
-<span class="n">end</span>
-
-<span class="cp"># require "../src/mod_int.cr"
-# ac-library.cr by hakatashi https://github.com/google/ac-library.cr
-#
-# Copyright 2023 Google LLC
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#      https://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-</span>
 <span class="cp"># require "./math.cr"
 # ac-library.cr by hakatashi https://github.com/google/ac-library.cr
 #
@@ -419,7 +276,7 @@ h1 a:focus {
 </span>  <span class="cp"># ```
 </span>  <span class="n">module</span> <span class="n">Prime</span>
     <span class="n">extend</span> <span class="n">self</span>
-    <span class="n">include</span> <span class="n">Enumerable</span><span class="p">(</span><span class="n">Int64</span><span class="p">)</span>
+    <span class="n">include</span> <span class="nf">Enumerable</span><span class="p">(</span><span class="n">Int64</span><span class="p">)</span>
 
     <span class="err">@@</span><span class="n">primes</span> <span class="o">=</span> <span class="p">[</span>
       <span class="mi">2</span><span class="n">_i64</span><span class="p">,</span> <span class="mi">3</span><span class="n">_i64</span><span class="p">,</span> <span class="mi">5</span><span class="n">_i64</span><span class="p">,</span> <span class="mi">7</span><span class="n">_i64</span><span class="p">,</span> <span class="mi">11</span><span class="n">_i64</span><span class="p">,</span> <span class="mi">13</span><span class="n">_i64</span><span class="p">,</span> <span class="mi">17</span><span class="n">_i64</span><span class="p">,</span> <span class="mi">19</span><span class="n">_i64</span><span class="p">,</span>
@@ -870,6 +727,25 @@ h1 a:focus {
   <span class="n">end</span>
 <span class="n">end</span>
 
+<span class="cp"># require "./mod_int.cr"
+# ac-library.cr by hakatashi https://github.com/google/ac-library.cr
+#
+# Copyright 2023 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+</span>
+<span class="cp"># require "./math.cr"
+</span>
 <span class="n">module</span> <span class="n">AtCoder</span>
   <span class="cp"># Implements [atcoder::static_modint](https://atcoder.github.io/ac-library/master/document_en/modint.html).
 </span>  <span class="cp">#
@@ -1579,6 +1455,134 @@ h1 a:focus {
 <span class="n">AtCoder</span><span class="p">.</span><span class="n">static_modint</span><span class="p">(</span><span class="n">ModInt167772161</span><span class="p">,</span> <span class="mi">167</span><span class="n">_772_161_i64</span><span class="p">)</span>
 <span class="n">AtCoder</span><span class="p">.</span><span class="n">static_modint</span><span class="p">(</span><span class="n">ModInt469762049</span><span class="p">,</span> <span class="mi">469</span><span class="n">_762_049_i64</span><span class="p">)</span>
 
+<span class="n">module</span> <span class="n">AtCoder</span>
+  <span class="cp"># Implements [atcoder::convolution](https://atcoder.github.io/ac-library/master/document_en/convolution.html).
+</span>  <span class="cp">#
+</span>  <span class="cp"># ```
+</span>  <span class="cp"># a = [AtCoder::ModInt998244353.new(1_i64)] * 3
+</span>  <span class="cp"># AtCoder::Convolution.convolution(a, a) # =&gt; [1, 2, 3, 2, 1]
+</span>  <span class="cp"># ```
+</span>  <span class="n">module</span> <span class="n">Convolution</span>
+    <span class="k">private</span> <span class="n">def</span> <span class="n">self</span><span class="p">.</span><span class="n">bit_reverse</span><span class="p">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">Int</span><span class="p">,</span> <span class="n">bit_length</span> <span class="o">:</span> <span class="n">Int</span><span class="p">)</span>
+      <span class="n">ret</span> <span class="o">=</span> <span class="n">n</span><span class="p">.</span><span class="k">class</span><span class="p">.</span><span class="n">zero</span>
+      <span class="n">bit_length</span><span class="p">.</span><span class="n">times</span> <span class="k">do</span> <span class="o">|</span><span class="n">i</span><span class="o">|</span>
+        <span class="n">ret</span> <span class="o">|=</span> <span class="p">((</span><span class="n">n</span> <span class="o">&gt;&gt;</span> <span class="n">i</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="n">bit_length</span> <span class="o">-</span> <span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+      <span class="n">end</span>
+      <span class="n">ret</span>
+    <span class="n">end</span>
+
+    <span class="cp"># In-place execution of FFT operation.
+</span>    <span class="cp"># `T` must implement ModInt operations.
+</span>    <span class="cp"># Length of `a` must be power of 2.
+</span>    <span class="k">private</span> <span class="n">def</span> <span class="n">self</span><span class="p">.</span><span class="n">fft</span><span class="p">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">Array</span><span class="p">(</span><span class="n">T</span><span class="p">),</span> <span class="n">g</span> <span class="o">:</span> <span class="n">T</span><span class="p">)</span> <span class="n">forall</span> <span class="n">T</span>
+      <span class="n">size</span> <span class="o">=</span> <span class="n">a</span><span class="p">.</span><span class="n">size</span>
+      <span class="n">bit_length</span> <span class="o">=</span> <span class="n">size</span><span class="p">.</span><span class="n">trailing_zeros_count</span>
+
+      <span class="n">size</span><span class="p">.</span><span class="n">times</span> <span class="k">do</span> <span class="o">|</span><span class="n">i</span><span class="o">|</span>
+        <span class="n">j</span> <span class="o">=</span> <span class="n">bit_reverse</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">bit_length</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">j</span>
+          <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">a</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">end</span>
+      <span class="n">end</span>
+
+      <span class="n">bit_length</span><span class="p">.</span><span class="n">times</span> <span class="k">do</span> <span class="o">|</span><span class="n">bit</span><span class="o">|</span>
+        <span class="n">block_size</span> <span class="o">=</span> <span class="mi">1</span><span class="n">_i64</span> <span class="o">&lt;&lt;</span> <span class="n">bit</span>
+
+        <span class="cp"># Butterfly operation
+</span>        <span class="n">block_size</span><span class="p">.</span><span class="n">times</span> <span class="k">do</span> <span class="o">|</span><span class="n">i</span><span class="o">|</span>
+          <span class="n">w</span> <span class="o">=</span> <span class="p">(</span><span class="n">g</span> <span class="o">**</span> <span class="p">(</span><span class="n">size</span> <span class="c1">// block_size // 2)) ** i</span>
+          <span class="p">(</span><span class="n">size</span> <span class="c1">// (block_size * 2)).times do |j|</span>
+            <span class="n">index1</span> <span class="o">=</span> <span class="n">j</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">block_size</span> <span class="o">+</span> <span class="n">i</span>
+            <span class="n">index2</span> <span class="o">=</span> <span class="p">(</span><span class="n">j</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">block_size</span> <span class="o">+</span> <span class="n">i</span>
+            <span class="n">a</span><span class="p">[</span><span class="n">index1</span><span class="p">],</span> <span class="n">a</span><span class="p">[</span><span class="n">index2</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+              <span class="n">a</span><span class="p">[</span><span class="n">index1</span><span class="p">]</span> <span class="o">+</span> <span class="n">a</span><span class="p">[</span><span class="n">index2</span><span class="p">]</span> <span class="o">*</span> <span class="n">w</span><span class="p">,</span>
+              <span class="n">a</span><span class="p">[</span><span class="n">index1</span><span class="p">]</span> <span class="o">-</span> <span class="n">a</span><span class="p">[</span><span class="n">index2</span><span class="p">]</span> <span class="o">*</span> <span class="n">w</span><span class="p">,</span>
+            <span class="p">}</span>
+          <span class="n">end</span>
+        <span class="n">end</span>
+      <span class="n">end</span>
+    <span class="n">end</span>
+
+    <span class="k">private</span> <span class="n">def</span> <span class="n">self</span><span class="p">.</span><span class="n">ifft</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">g</span><span class="p">)</span>
+      <span class="n">fft</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">g</span><span class="p">.</span><span class="n">inv</span><span class="p">)</span>
+      <span class="n">a</span><span class="p">.</span><span class="n">size</span><span class="p">.</span><span class="n">times</span> <span class="k">do</span> <span class="o">|</span><span class="n">i</span><span class="o">|</span>
+        <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="c1">//= a.size</span>
+      <span class="n">end</span>
+    <span class="n">end</span>
+
+    <span class="cp"># Implements atcoder::convolution.convolution.
+</span>    <span class="cp"># TODO: Support for int
+</span>    <span class="n">def</span> <span class="n">self</span><span class="p">.</span><span class="n">convolution</span><span class="p">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">Array</span><span class="p">(</span><span class="n">T</span><span class="p">),</span> <span class="n">b</span> <span class="o">:</span> <span class="n">Array</span><span class="p">(</span><span class="n">T</span><span class="p">))</span> <span class="n">forall</span> <span class="n">T</span>
+      <span class="k">return</span> <span class="p">[]</span> <span class="n">of</span> <span class="n">T</span> <span class="k">if</span> <span class="n">a</span><span class="p">.</span><span class="n">empty</span><span class="o">?</span> <span class="o">||</span> <span class="n">b</span><span class="p">.</span><span class="n">empty</span><span class="o">?</span>
+
+      <span class="n">modulo</span> <span class="o">=</span> <span class="n">T</span><span class="o">::</span><span class="n">MOD</span>
+      <span class="n">n</span> <span class="o">=</span> <span class="n">modulo</span> <span class="o">-</span> <span class="mi">1</span>
+      <span class="n">result_size</span> <span class="o">=</span> <span class="n">a</span><span class="p">.</span><span class="n">size</span> <span class="o">+</span> <span class="n">b</span><span class="p">.</span><span class="n">size</span> <span class="o">-</span> <span class="mi">1</span>
+
+      <span class="n">c</span> <span class="o">=</span> <span class="mi">1</span><span class="n">_i64</span> <span class="o">&lt;&lt;</span> <span class="n">n</span><span class="p">.</span><span class="n">trailing_zeros_count</span>
+
+      <span class="k">if</span> <span class="n">result_size</span> <span class="o">&gt;</span> <span class="n">c</span>
+        <span class="n">raise</span> <span class="n">ArgumentError</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="s">"With modulo #{modulo}, total array length must be less than or equal to #{c}"</span><span class="p">)</span>
+      <span class="n">end</span>
+
+      <span class="n">fft_size</span> <span class="o">=</span> <span class="mi">1</span><span class="n">_i64</span>
+      <span class="n">until</span> <span class="n">fft_size</span> <span class="o">&gt;=</span> <span class="n">result_size</span>
+        <span class="n">fft_size</span> <span class="o">&lt;&lt;=</span> <span class="mi">1</span>
+      <span class="n">end</span>
+
+      <span class="n">input_a</span> <span class="o">=</span> <span class="n">Array</span><span class="p">(</span><span class="n">T</span><span class="p">).</span><span class="k">new</span><span class="p">(</span><span class="n">fft_size</span><span class="p">)</span> <span class="p">{</span> <span class="o">|</span><span class="n">i</span><span class="o">|</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">a</span><span class="p">.</span><span class="n">size</span> <span class="o">?</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">:</span> <span class="n">T</span><span class="p">.</span><span class="n">zero</span> <span class="p">}</span>
+      <span class="n">input_b</span> <span class="o">=</span> <span class="n">Array</span><span class="p">(</span><span class="n">T</span><span class="p">).</span><span class="k">new</span><span class="p">(</span><span class="n">fft_size</span><span class="p">)</span> <span class="p">{</span> <span class="o">|</span><span class="n">i</span><span class="o">|</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">b</span><span class="p">.</span><span class="n">size</span> <span class="o">?</span> <span class="n">b</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">:</span> <span class="n">T</span><span class="p">.</span><span class="n">zero</span> <span class="p">}</span>
+
+      <span class="n">primitive_root</span> <span class="o">=</span> <span class="n">AtCoder</span><span class="o">::</span><span class="n">Math</span><span class="p">.</span><span class="n">get_primitive_root</span><span class="p">(</span><span class="n">modulo</span><span class="p">)</span>
+      <span class="n">g</span> <span class="o">=</span> <span class="n">T</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="n">primitive_root</span><span class="p">)</span> <span class="o">**</span> <span class="p">(</span><span class="n">n</span> <span class="c1">// fft_size)</span>
+
+      <span class="n">fft</span><span class="p">(</span><span class="n">input_a</span><span class="p">,</span> <span class="n">g</span><span class="p">)</span>
+      <span class="n">fft</span><span class="p">(</span><span class="n">input_b</span><span class="p">,</span> <span class="n">g</span><span class="p">)</span>
+
+      <span class="n">fft_size</span><span class="p">.</span><span class="n">times</span> <span class="k">do</span> <span class="o">|</span><span class="n">i</span><span class="o">|</span>
+        <span class="n">input_a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*=</span> <span class="n">input_b</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+      <span class="n">end</span>
+
+      <span class="n">ifft</span><span class="p">(</span><span class="n">input_a</span><span class="p">,</span> <span class="n">g</span><span class="p">)</span>
+
+      <span class="n">input_a</span><span class="p">[</span><span class="mf">0.</span><span class="p">..</span><span class="n">result_size</span><span class="p">]</span>
+    <span class="n">end</span>
+
+    <span class="cp"># Implements atcoder::convolution.convolution_ll.
+</span>    <span class="n">def</span> <span class="n">self</span><span class="p">.</span><span class="n">convolution_ll</span><span class="p">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">Array</span><span class="p">(</span><span class="n">Int64</span><span class="p">),</span> <span class="n">b</span> <span class="o">:</span> <span class="n">Array</span><span class="p">(</span><span class="n">Int64</span><span class="p">))</span>
+      <span class="k">return</span> <span class="p">[]</span> <span class="n">of</span> <span class="n">Int64</span> <span class="k">if</span> <span class="n">a</span><span class="p">.</span><span class="n">empty</span><span class="o">?</span> <span class="o">||</span> <span class="n">b</span><span class="p">.</span><span class="n">empty</span><span class="o">?</span>
+
+      <span class="n">a1</span> <span class="o">=</span> <span class="n">a</span><span class="p">.</span><span class="n">map</span> <span class="p">{</span> <span class="o">|</span><span class="n">n</span><span class="o">|</span> <span class="n">AtCoder</span><span class="o">::</span><span class="n">ModInt754974721</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="p">}</span>
+      <span class="n">a2</span> <span class="o">=</span> <span class="n">a</span><span class="p">.</span><span class="n">map</span> <span class="p">{</span> <span class="o">|</span><span class="n">n</span><span class="o">|</span> <span class="n">AtCoder</span><span class="o">::</span><span class="n">ModInt167772161</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="p">}</span>
+      <span class="n">a3</span> <span class="o">=</span> <span class="n">a</span><span class="p">.</span><span class="n">map</span> <span class="p">{</span> <span class="o">|</span><span class="n">n</span><span class="o">|</span> <span class="n">AtCoder</span><span class="o">::</span><span class="n">ModInt469762049</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="p">}</span>
+
+      <span class="n">b1</span> <span class="o">=</span> <span class="n">b</span><span class="p">.</span><span class="n">map</span> <span class="p">{</span> <span class="o">|</span><span class="n">n</span><span class="o">|</span> <span class="n">AtCoder</span><span class="o">::</span><span class="n">ModInt754974721</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="p">}</span>
+      <span class="n">b2</span> <span class="o">=</span> <span class="n">b</span><span class="p">.</span><span class="n">map</span> <span class="p">{</span> <span class="o">|</span><span class="n">n</span><span class="o">|</span> <span class="n">AtCoder</span><span class="o">::</span><span class="n">ModInt167772161</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="p">}</span>
+      <span class="n">b3</span> <span class="o">=</span> <span class="n">b</span><span class="p">.</span><span class="n">map</span> <span class="p">{</span> <span class="o">|</span><span class="n">n</span><span class="o">|</span> <span class="n">AtCoder</span><span class="o">::</span><span class="n">ModInt469762049</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="p">}</span>
+
+      <span class="n">c1</span> <span class="o">=</span> <span class="n">convolution</span><span class="p">(</span><span class="n">a1</span><span class="p">,</span> <span class="n">b1</span><span class="p">)</span>
+      <span class="n">c2</span> <span class="o">=</span> <span class="n">convolution</span><span class="p">(</span><span class="n">a2</span><span class="p">,</span> <span class="n">b2</span><span class="p">)</span>
+      <span class="n">c3</span> <span class="o">=</span> <span class="n">convolution</span><span class="p">(</span><span class="n">a3</span><span class="p">,</span> <span class="n">b3</span><span class="p">)</span>
+
+      <span class="n">m1</span> <span class="o">=</span> <span class="mi">754</span><span class="n">_974_721_i64</span>
+      <span class="n">m2</span> <span class="o">=</span> <span class="mi">167</span><span class="n">_772_161_i64</span>
+      <span class="n">m3</span> <span class="o">=</span> <span class="mi">469</span><span class="n">_762_049_i64</span>
+
+      <span class="n">c1</span><span class="p">.</span><span class="n">zip</span><span class="p">(</span><span class="n">c2</span><span class="p">,</span> <span class="n">c3</span><span class="p">).</span><span class="n">map</span> <span class="k">do</span> <span class="o">|</span><span class="n">n1</span><span class="p">,</span> <span class="n">n2</span><span class="p">,</span> <span class="n">n3</span><span class="o">|</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">AtCoder</span><span class="o">::</span><span class="n">Math</span><span class="p">.</span><span class="n">inv_mod</span><span class="p">(</span><span class="n">m1</span><span class="p">,</span> <span class="n">m2</span><span class="p">)</span>
+        <span class="n">tmp</span> <span class="o">=</span> <span class="p">(</span><span class="n">n2</span><span class="p">.</span><span class="n">val</span> <span class="o">-</span> <span class="n">n1</span><span class="p">.</span><span class="n">val</span><span class="p">)</span> <span class="o">*</span> <span class="n">p</span> <span class="o">%</span> <span class="n">m2</span>
+        <span class="n">answer</span> <span class="o">=</span> <span class="n">n1</span><span class="p">.</span><span class="n">val</span> <span class="o">+</span> <span class="n">m1</span> <span class="o">*</span> <span class="n">tmp</span>
+
+        <span class="n">p</span> <span class="o">=</span> <span class="n">AtCoder</span><span class="o">::</span><span class="n">Math</span><span class="p">.</span><span class="n">inv_mod</span><span class="p">(</span><span class="n">m1</span> <span class="o">*</span> <span class="n">m2</span><span class="p">,</span> <span class="n">m3</span><span class="p">)</span>
+        <span class="n">tmp</span> <span class="o">=</span> <span class="p">(((</span><span class="n">n3</span><span class="p">.</span><span class="n">val</span> <span class="o">-</span> <span class="n">answer</span><span class="p">)</span> <span class="o">%</span> <span class="n">m3</span><span class="p">)</span> <span class="o">*</span> <span class="n">p</span><span class="p">)</span> <span class="o">%</span> <span class="n">m3</span>
+        <span class="n">answer</span> <span class="o">+</span> <span class="n">m1</span> <span class="o">*</span> <span class="n">m2</span> <span class="o">*</span> <span class="n">tmp</span>
+      <span class="n">end</span>
+    <span class="n">end</span>
+  <span class="n">end</span>
+<span class="n">end</span>
+
+<span class="cp"># require "../src/mod_int.cr"
+</span>
 <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">read_line</span><span class="p">.</span><span class="n">split</span><span class="p">.</span><span class="n">map</span><span class="p">(</span><span class="o">&amp;</span><span class="p">.</span><span class="n">to_i64</span><span class="p">)</span>
 <span class="n">ais</span> <span class="o">=</span> <span class="n">read_line</span><span class="p">.</span><span class="n">split</span><span class="p">.</span><span class="n">map</span> <span class="p">{</span> <span class="o">|</span><span class="n">i</span><span class="o">|</span> <span class="n">AtCoder</span><span class="o">::</span><span class="n">ModInt998244353</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="n">i</span><span class="p">.</span><span class="n">to_i64</span><span class="p">)</span> <span class="p">}</span>
 <span class="n">bs</span> <span class="o">=</span> <span class="n">read_line</span><span class="p">.</span><span class="n">split</span><span class="p">.</span><span class="n">map</span> <span class="p">{</span> <span class="o">|</span><span class="n">i</span><span class="o">|</span> <span class="n">AtCoder</span><span class="o">::</span><span class="n">ModInt998244353</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="n">i</span><span class="p">.</span><span class="n">to_i64</span><span class="p">)</span> <span class="p">}</span>
