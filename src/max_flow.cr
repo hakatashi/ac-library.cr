@@ -46,11 +46,15 @@ module AtCoder
     # Number of visited adjacencies for each nodes
     getter visit_counts : Array(Int64)
 
+    @path : Array(Int64)
+    @queue : Array(Int64)
+
     def initialize(@size)
       @adjacencies = Array(Array(Edge)).new(@size) { [] of Edge }
       @depths = Array(Int64).new(@size, -1_i64)
       @visit_counts = Array(Int64).new(@size, 0_i64)
       @path = Array(Int64).new
+      @queue = Array(Int64).new(@size, 0_i64)
     end
 
     # Implements atcoder::mf_graph.add_edge(from, to, capacity).
@@ -64,19 +68,27 @@ module AtCoder
 
     # Implements atcoder::mf_graph.flow(start, target).
     def flow(start, target)
+      start_i64 = start.to_i64
+      target_i64 = target.to_i64
+
+      raise IndexError.new unless 0 <= start_i64 < @size && 0 <= target_i64 < @size
+      return 0_i64 if start_i64 == target_i64
+
       flow = 0_i64
 
       loop do
-        bfs(start)
-        if @depths[target] < 0
+        bfs(start_i64, target_i64)
+        if @depths[target_i64] < 0
           return flow
         end
 
         @visit_counts.fill(0_i64)
-        while (flowed = dfs(start, target)) > 0
-          flow += flowed
-        end
+        pushed = dfs(target_i64, start_i64)
+        break if pushed == 0
+        flow += pushed
       end
+
+      flow
     end
 
     # FIXME: Unimplemented
@@ -99,76 +111,130 @@ module AtCoder
       raise NotImplementedError.new("AtCoder::MaxFlow#change_edge")
     end
 
-    private def bfs(start)
+    private def bfs(start : Int64, target : Int64)
       @depths.fill(-1_i64)
-      queue = Deque(Int64).new
+      depths_ptr = @depths.to_unsafe
+      q_ptr = @queue.to_unsafe
 
-      @depths[start] = 0_i64
-      queue << start.to_i64
-      until queue.empty?
-        node = queue.shift
+      qh = 0
+      qt = 0
 
-        @adjacencies[node].each do |edge|
-          if edge.capacity > 0 && @depths[edge.to] < 0
-            @depths[edge.to] = @depths[node] + 1
-            queue << edge.to
+      depths_ptr[start] = 0_i64
+      q_ptr[qt] = start
+      qt += 1
+
+      while qh < qt
+        node = q_ptr[qh]
+        qh += 1
+
+        d_next = depths_ptr[node] + 1_i64
+        edges = @adjacencies.unsafe_fetch(node)
+        edges_ptr = edges.to_unsafe
+        count = edges.size
+
+        count.times do |i|
+          edge = edges_ptr[i]
+          to = edge.to
+          if edge.capacity > 0 && depths_ptr[to] < 0
+            depths_ptr[to] = d_next
+            if to == target
+              return
+            end
+            q_ptr[qt] = to
+            qt += 1
           end
         end
       end
     end
 
-    # Finds one augmenting path from `start` to `target` on the level graph and pushes
-    # the bottleneck flow along it. Returns the pushed flow, or 0 if there is no path.
+    # Pushes blocking flow along augmenting paths on the level graph from `target`
+    # back to `start`.
     #
-    # This is an iterative version of the recursive DFS used in ACL, so that long
-    # augmenting paths (e.g. a path graph of 10^5+ vertices) do not overflow the stack.
-    # `@path` holds the vertices of the current path, and the edge used to leave
-    # `@path[i]` is always `@adjacencies[@path[i]][@visit_counts[@path[i]]]`.
-    private def dfs(start, target)
+    # Following ACL's Dinic implementation, searching in reverse from `target`
+    # to `start` drastically prunes the search space on bipartite matching networks,
+    # where the sink `target` only connects to unmatched vertices in the residual
+    # network.
+    #
+    # To prevent stack overflow on deep paths (e.g. 200,000+ vertices), this is
+    # implemented iteratively with an explicit path stack `@path`. When a path
+    # to `start` is found, the bottleneck flow is pushed and `@path` is retracted
+    # only up to the first saturated edge, continuing the search without restarting
+    # from scratch.
+    private def dfs(target : Int64, start : Int64) : Int64
+      total_flow = 0_i64
       path = @path
       path.clear
-      path << start.to_i64
+      path << target
 
       until path.empty?
         node = path.last
 
-        if node == target
+        if node == start
           flow = Int64::MAX
           (path.size - 1).times do |i|
             v = path[i]
-            flow = min(flow, @adjacencies[v][@visit_counts[v]].capacity)
+            edge = @adjacencies[v][@visit_counts[v]]
+            u = edge.to
+            rev_edge = @adjacencies[u][edge.reverse_index]
+            flow = min(flow, rev_edge.capacity)
           end
 
           (path.size - 1).times do |i|
             v = path[i]
             edge = @adjacencies[v][@visit_counts[v]]
-            edge.capacity -= flow
-            @adjacencies[edge.to][edge.reverse_index].capacity += flow
+            u = edge.to
+            rev_edge = @adjacencies[u][edge.reverse_index]
+            rev_edge.capacity -= flow
+            edge.capacity += flow
           end
 
-          return flow
+          total_flow += flow
+
+          bottleneck_idx = -1
+          (path.size - 1).times do |i|
+            v = path[i]
+            edge = @adjacencies[v][@visit_counts[v]]
+            u = edge.to
+            rev_edge = @adjacencies[u][edge.reverse_index]
+            if rev_edge.capacity == 0
+              bottleneck_idx = i
+              break
+            end
+          end
+
+          pop_count = path.size - 1 - bottleneck_idx
+          pop_count.times { path.pop }
+
+          @visit_counts[path.last] += 1
+          next
         end
 
         edges = @adjacencies[node]
         advanced = false
+        d_node = @depths[node]
+
         while @visit_counts[node] < edges.size
           edge = edges[@visit_counts[node]]
-          if edge.capacity > 0 && @depths[node] < @depths[edge.to]
-            path << edge.to
-            advanced = true
-            break
+          u = edge.to
+          if @depths[u] >= 0 && d_node > @depths[u]
+            rev_edge = @adjacencies[u][edge.reverse_index]
+            if rev_edge.capacity > 0
+              path << u
+              advanced = true
+              break
+            end
           end
           @visit_counts[node] += 1
         end
 
         unless advanced
-          # Dead end: retreat and skip the edge that led here.
+          @depths[node] = @size
           path.pop
           @visit_counts[path.last] += 1 unless path.empty?
         end
       end
 
-      0_i64
+      total_flow
     end
 
     @[AlwaysInline]
