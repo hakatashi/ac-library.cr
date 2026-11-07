@@ -77,6 +77,11 @@
       
     </li>
   
+  <li class=" " data-id="atcoder/AtCoder/DynamicModInt" data-name="atcoder::dynamicmodint">
+      <a href="AtCoder/DynamicModInt.html">DynamicModInt</a>
+      
+    </li>
+  
   <li class=" " data-id="atcoder/AtCoder/FenwickTree" data-name="atcoder::fenwicktree(t)">
       <a href="AtCoder/FenwickTree.html">FenwickTree</a>
       
@@ -285,7 +290,26 @@
 </a><a href="https://hakatashi.github.io/ac-library.cr/docs/src/mod_int.cr"><code>atcoder/mod_int</code></a> (Implements <a href="https://atcoder.github.io/ac-library/document_en/modint.html">&lt;atcoder/modint&gt;</a>)</h2>
 <ul>
 <li>
-<p><code>modint</code> =&gt; Unimplemented</p>
+<p><code>modint</code> =&gt; <code><a href="AtCoder/DynamicModInt.html">AtCoder::DynamicModInt</a></code></p>
+<pre><code class="language-crystal"><span class="k">alias</span> <span class="t">Mint</span> <span class="o">=</span> <span class="t">AtCoder</span><span class="t">::</span><span class="t">DynamicModInt</span>
+<span class="t">Mint</span>.set_mod(<span class="n">11</span>)
+<span class="t">Mint</span>.new(<span class="n">3</span>) <span class="o">//</span> <span class="t">Mint</span>.new(<span class="n">7</span>) <span class="c">#=&gt; 2</span></code></pre>
+<ul>
+<li><code>.set_mod(m)</code> =&gt; <code>.set_mod(m)</code>
+<ul>
+<li>Raises <code>ArgumentError</code> unless <code>1 &lt;= m &lt;= Int32::MAX</code>. The default modulus is 998244353, as in ACL.</li>
+</ul>
+</li>
+<li><code>.mod()</code> =&gt; <code>.mod</code></li>
+<li><code>.raw(x)</code> =&gt; <code>.raw(x)</code></li>
+<li><code>.inv()</code> =&gt; <code>#inv</code>
+<ul>
+<li>Raises <code>ArgumentError</code> if the value and the modulus are not coprime.</li>
+</ul>
+</li>
+<li>The same operations as the static ModInts are available (<code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, <code>//</code>, <code>**</code>, <code>#val</code>, <code>#pow</code>, <code>.factorial</code>, <code>.combination</code>, etc.). Multiplication uses Barrett reduction.</li>
+<li><code>.set_mod</code> clears the cache of <code>.factorial</code>.</li>
+</ul>
 </li>
 <li>
 <p><code>modint998244353</code> =&gt; <code><a href="AtCoder/ModInt998244353.html">AtCoder::ModInt998244353</a></code></p>
@@ -294,15 +318,21 @@
 <p><code>modint1000000007</code> =&gt; <code><a href="AtCoder/ModInt1000000007.html">AtCoder::ModInt1000000007</a></code></p>
 <pre><code class="language-crystal"><span class="k">alias</span> <span class="t">Mint</span> <span class="o">=</span> <span class="t">AtCoder</span><span class="t">::</span><span class="t">ModInt1000000007</span>
 <span class="t">Mint</span>.new(<span class="n">30_i64</span>) <span class="o">//</span> <span class="t">Mint</span>.new(<span class="n">7_i64</span>) <span class="c">#=&gt; 285714292</span></code></pre>
+<ul>
+<li><code>.factorial(n)</code>, <code>.permutation(n, k)</code>, <code>.combination(n, k)</code> and <code>.repeated_combination(n, k)</code> are also available (not in ACL). They return 0 when <code>k &lt; 0</code> or <code>k &gt; n</code>, and raise <code>ArgumentError</code> when <code>n &lt; 0</code>.</li>
+</ul>
 </li>
 <li>
 <p><code>static_modint</code> =&gt; <code>AtCoder.static_modint</code></p>
 <pre><code class="language-crystal"><span class="t">AtCoder</span>.static_modint(<span class="t">ModInt101</span>, <span class="n">101_i64</span>)
 <span class="k">alias</span> <span class="t">Mint</span> <span class="o">=</span> <span class="t">AtCoder</span><span class="t">::</span><span class="t">ModInt101</span>
-<span class="t">Mint</span>.new(<span class="n">80_i64</span>) <span class="o">+</span> <span class="t">Mint</span>.new(<span class="n">90_i64</span>) <span class="c">#=&gt; 89</span></code></pre>
+<span class="t">Mint</span>.new(<span class="n">80_i64</span>) <span class="o">+</span> <span class="t">Mint</span>.new(<span class="n">90_i64</span>) <span class="c">#=&gt; 69</span></code></pre>
 </li>
 <li>
-<p><code>dynamic_modint</code> =&gt; Unimplemented</p>
+<p><code>dynamic_modint&lt;id&gt;</code> =&gt; <code><a href="AtCoder/DynamicModInt.html">AtCoder::DynamicModInt</a></code></p>
+<ul>
+<li>Only one dynamic ModInt type (corresponds to <code>modint</code> = <code>dynamic_modint&lt;-1&gt;</code>) is provided, so only one modulus can be used at a time.</li>
+</ul>
 </li>
 </ul>
 <h2><a id="atcoderfenwick-tree-implements-atcoderfenwicktree" class="anchor" href="#atcoderfenwick-tree-implements-atcoderfenwicktree">

@@ -1,0 +1,1476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Crystal Docs 1.16.3">
+<meta name="crystal_docs.project_version" content="master">
+<meta name="crystal_docs.project_name" content="atcoder">
+
+
+
+<link href="../css/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="../js/doc.js"></script>
+
+  <meta name="repository-name" content="atcoder">
+  <title>AtCoder::DynamicModInt - atcoder master</title>
+  <script type="text/javascript">
+    CrystalDocs.base_path = "../";
+  </script>
+</head>
+<body>
+
+<svg class="hidden">
+  <symbol id="octicon-link" viewBox="0 0 16 16">
+    <path fill="currentColor" fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+  </symbol>
+</svg>
+<input type="checkbox" id="sidebar-btn">
+<label for="sidebar-btn" id="sidebar-btn-label">
+  <svg class="open" xmlns="http://www.w3.org/2000/svg" height="2em" width="2em" viewBox="0 0 512 512"><title>Open Sidebar</title><path fill="currentColor" d="M80 96v64h352V96H80zm0 112v64h352v-64H80zm0 112v64h352v-64H80z"></path></svg>
+  <svg class="close" xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 512 512"><title>Close Sidebar</title><path fill="currentColor" d="m118.6 73.4-45.2 45.2L210.7 256 73.4 393.4l45.2 45.2L256 301.3l137.4 137.3 45.2-45.2L301.3 256l137.3-137.4-45.2-45.2L256 210.7Z"></path></svg>
+</label>
+<div class="sidebar">
+  <div class="sidebar-header">
+    <div class="search-box">
+      <input type="search" class="search-input" placeholder="Search..." spellcheck="false" aria-label="Search">
+    </div>
+
+    <div class="project-summary">
+      <h1 class="project-name">
+        <a href="../index.html">
+          atcoder
+        </a>
+      </h1>
+
+      <span class="project-version">
+        master
+      </span>
+    </div>
+  </div>
+
+  <div class="search-results hidden">
+    <ul class="search-list"></ul>
+  </div>
+
+  <div class="types-list">
+    <ul>
+  
+  <li class="parent open current" data-id="atcoder/AtCoder" data-name="atcoder">
+      <a href="../AtCoder.html">AtCoder</a>
+      
+        <ul>
+  
+  <li class=" " data-id="atcoder/AtCoder/Convolution" data-name="atcoder::convolution">
+      <a href="../AtCoder/Convolution.html">Convolution</a>
+      
+    </li>
+  
+  <li class=" " data-id="atcoder/AtCoder/DirectedGraph" data-name="atcoder::directedgraph(nodeinfo, edgeinfo)">
+      <a href="../AtCoder/DirectedGraph.html">DirectedGraph</a>
+      
+    </li>
+  
+  <li class=" " data-id="atcoder/AtCoder/DSU" data-name="atcoder::dsu">
+      <a href="../AtCoder/DSU.html">DSU</a>
+      
+    </li>
+  
+  <li class=" current" data-id="atcoder/AtCoder/DynamicModInt" data-name="atcoder::dynamicmodint">
+      <a href="../AtCoder/DynamicModInt.html">DynamicModInt</a>
+      
+    </li>
+  
+  <li class=" " data-id="atcoder/AtCoder/FenwickTree" data-name="atcoder::fenwicktree(t)">
+      <a href="../AtCoder/FenwickTree.html">FenwickTree</a>
+      
+    </li>
+  
+  <li class=" " data-id="atcoder/AtCoder/Graph" data-name="atcoder::graph(nodeinfo, edgeinfo)">
+      <a href="../AtCoder/Graph.html">Graph</a>
+      
+    </li>
+  
+  <li class=" " data-id="atcoder/AtCoder/LazySegTree" data-name="atcoder::lazysegtree(s, f)">
+      <a href="../AtCoder/LazySegTree.html">LazySegTree</a>
+      
+    </li>
+  
+  <li class=" " data-id="atcoder/AtCoder/Math" data-name="atcoder::math">
+      <a href="../AtCoder/Math.html">Math</a>
+      
+    </li>
+  
+  <li class="parent " data-id="atcoder/AtCoder/MaxFlow" data-name="atcoder::maxflow">
+      <a href="../AtCoder/MaxFlow.html">MaxFlow</a>
+      
+        <ul>
+  
+  <li class=" " data-id="atcoder/AtCoder/MaxFlow/Edge" data-name="atcoder::maxflow::edge">
+      <a href="../AtCoder/MaxFlow/Edge.html">Edge</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="atcoder/AtCoder/MinCostFlow" data-name="atcoder::mincostflow">
+      <a href="../AtCoder/MinCostFlow.html">MinCostFlow</a>
+      
+    </li>
+  
+  <li class=" " data-id="atcoder/AtCoder/ModInt1000000007" data-name="atcoder::modint1000000007">
+      <a href="../AtCoder/ModInt1000000007.html">ModInt1000000007</a>
+      
+    </li>
+  
+  <li class=" " data-id="atcoder/AtCoder/ModInt167772161" data-name="atcoder::modint167772161">
+      <a href="../AtCoder/ModInt167772161.html">ModInt167772161</a>
+      
+    </li>
+  
+  <li class=" " data-id="atcoder/AtCoder/ModInt469762049" data-name="atcoder::modint469762049">
+      <a href="../AtCoder/ModInt469762049.html">ModInt469762049</a>
+      
+    </li>
+  
+  <li class=" " data-id="atcoder/AtCoder/ModInt754974721" data-name="atcoder::modint754974721">
+      <a href="../AtCoder/ModInt754974721.html">ModInt754974721</a>
+      
+    </li>
+  
+  <li class=" " data-id="atcoder/AtCoder/ModInt998244353" data-name="atcoder::modint998244353">
+      <a href="../AtCoder/ModInt998244353.html">ModInt998244353</a>
+      
+    </li>
+  
+  <li class=" " data-id="atcoder/AtCoder/Prime" data-name="atcoder::prime">
+      <a href="../AtCoder/Prime.html">Prime</a>
+      
+    </li>
+  
+  <li class=" " data-id="atcoder/AtCoder/PriorityQueue" data-name="atcoder::priorityqueue(t)">
+      <a href="../AtCoder/PriorityQueue.html">PriorityQueue</a>
+      
+    </li>
+  
+  <li class="parent " data-id="atcoder/AtCoder/RedBlackTree" data-name="atcoder::redblacktree">
+      <a href="../AtCoder/RedBlackTree.html">RedBlackTree</a>
+      
+        <ul>
+  
+  <li class=" " data-id="atcoder/AtCoder/RedBlackTree/NilNode" data-name="atcoder::redblacktree::nilnode">
+      <a href="../AtCoder/RedBlackTree/NilNode.html">NilNode</a>
+      
+    </li>
+  
+  <li class=" " data-id="atcoder/AtCoder/RedBlackTree/Node" data-name="atcoder::redblacktree::node">
+      <a href="../AtCoder/RedBlackTree/Node.html">Node</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class="parent " data-id="atcoder/AtCoder/SCC" data-name="atcoder::scc">
+      <a href="../AtCoder/SCC.html">SCC</a>
+      
+        <ul>
+  
+  <li class=" " data-id="atcoder/AtCoder/SCC/Adjacency" data-name="atcoder::scc::adjacency">
+      <a href="../AtCoder/SCC/Adjacency.html">Adjacency</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="atcoder/AtCoder/SegTree" data-name="atcoder::segtree(t)">
+      <a href="../AtCoder/SegTree.html">SegTree</a>
+      
+    </li>
+  
+  <li class="parent " data-id="atcoder/AtCoder/SkewHeap" data-name="atcoder::skewheap(t)">
+      <a href="../AtCoder/SkewHeap.html">SkewHeap</a>
+      
+        <ul>
+  
+  <li class=" " data-id="atcoder/AtCoder/SkewHeap/Node" data-name="atcoder::skewheap::node(t)">
+      <a href="../AtCoder/SkewHeap/Node.html">Node</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="atcoder/AtCoder/String" data-name="atcoder::string">
+      <a href="../AtCoder/String.html">String</a>
+      
+    </li>
+  
+  <li class=" " data-id="atcoder/AtCoder/Tree" data-name="atcoder::tree(nodeinfo, edgeinfo)">
+      <a href="../AtCoder/Tree.html">Tree</a>
+      
+    </li>
+  
+  <li class="parent " data-id="atcoder/AtCoder/TwoSat" data-name="atcoder::twosat">
+      <a href="../AtCoder/TwoSat.html">TwoSat</a>
+      
+        <ul>
+  
+  <li class=" " data-id="atcoder/AtCoder/TwoSat/NotSatisfiableError" data-name="atcoder::twosat::notsatisfiableerror">
+      <a href="../AtCoder/TwoSat/NotSatisfiableError.html">NotSatisfiableError</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="atcoder/AtCoder/UndirectedGraph" data-name="atcoder::undirectedgraph(nodeinfo, edgeinfo)">
+      <a href="../AtCoder/UndirectedGraph.html">UndirectedGraph</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="atcoder/Int" data-name="int">
+      <a href="../Int.html">Int</a>
+      
+    </li>
+  
+</ul>
+
+  </div>
+</div>
+
+
+<div class="main-content">
+<h1 class="type-name">
+
+  <span class="kind">
+    struct
+  </span> AtCoder::<wbr>DynamicModInt
+
+</h1>
+
+
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../AtCoder/DynamicModInt.html">AtCoder::DynamicModInt</a></li><li class="superclass">Struct</li><li class="superclass">Value</li><li class="superclass">Object</li></ul>
+
+
+
+
+  <h2>
+    <a id="overview" class="anchor" href="#overview">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Overview
+  </h2>
+
+  <p>Implements <a href="https://atcoder.github.io/ac-library/master/document_en/modint.html">atcoder::dynamic_modint / atcoder::modint</a>.</p>
+<p>A ModInt whose modulus is set at runtime with <code><a href="../AtCoder/DynamicModInt.html#set_mod%28mod%29-class-method">.set_mod</a></code>.
+The default modulus is 998244353, as in ACL.
+Multiplication is done with Barrett reduction.</p>
+<pre><code class="language-crystal"><span class="k">alias</span> <span class="t">Mint</span> <span class="o">=</span> <span class="t">AtCoder</span><span class="t">::</span><span class="t">DynamicModInt</span>
+<span class="t">Mint</span>.set_mod(<span class="n">11</span>)
+<span class="t">Mint</span>.new(<span class="n">3</span>) <span class="o">//</span> <span class="t">Mint</span>.new(<span class="n">7</span>) <span class="c"># =&gt; 2</span></code></pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2>
+    <a id="defined-in" class="anchor" href="#defined-in">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Defined in:
+  </h2>
+  
+    
+      <a href="https://github.com/hakatashi/ac-library.cr/blob/ef28056890c053b77baeaabac6640bdd7278acf7/src/mod_int.cr#L401" target="_blank">
+        mod_int.cr
+      </a>
+    
+    <br/>
+  
+
+
+
+
+
+  
+  <h2>
+    <a id="constructors" class="anchor" href="#constructors">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Constructors
+  </h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#new%28value%3AUInt64%7CInt128%7CUInt128%29-class-method" class="signature"><strong>.new</strong>(value : UInt64 | Int128 | UInt128)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#new%28value%3AInt%29-class-method" class="signature"><strong>.new</strong>(value : Int)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#new-class-method" class="signature"><strong>.new</strong></a>
+        
+      </li>
+    
+  </ul>
+
+
+  
+  <h2>
+    <a id="class-method-summary" class="anchor" href="#class-method-summary">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Class Method Summary
+  </h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#combination%28n%2Ck%29-class-method" class="signature"><strong>.combination</strong>(n, k)</a>
+        
+          <div class="summary"><p>Returns the binomial coefficient <code>n! / (k! (n - k)!)</code>.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#factorial%28n%29-class-method" class="signature"><strong>.factorial</strong>(n)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#mod%3AInt64-class-method" class="signature"><strong>.mod</strong> : Int64</a>
+        
+          <div class="summary"><p>Implements atcoder::modint.mod().</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#permutation%28n%2Ck%29-class-method" class="signature"><strong>.permutation</strong>(n, k)</a>
+        
+          <div class="summary"><p>Returns the number of k-permutations of n, <code>n! / (n - k)!</code>.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#raw%28value%3AInt%29-class-method" class="signature"><strong>.raw</strong>(value : Int)</a>
+        
+          <div class="summary"><p>Implements atcoder::modint.raw(x).</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#repeated_combination%28n%2Ck%29-class-method" class="signature"><strong>.repeated_combination</strong>(n, k)</a>
+        
+          <div class="summary"><p>Returns the number of k-combinations of n with repetitions, <code><a href="../AtCoder/DynamicModInt.html#combination%28n%2Ck%29-class-method">.combination(n + k - 1, k)</a></code>.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#set_mod%28mod%29-class-method" class="signature"><strong>.set_mod</strong>(mod)</a>
+        
+          <div class="summary"><p>Implements atcoder::modint.set_mod(m).</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#zero-class-method" class="signature"><strong>.zero</strong></a>
+        
+      </li>
+    
+  </ul>
+
+
+  
+
+  
+  <h2>
+    <a id="instance-method-summary" class="anchor" href="#instance-method-summary">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Instance Method Summary
+  </h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#%2A%28value%3Aself%29-instance-method" class="signature"><strong>#*</strong>(value : <span class="k">self</span>)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#%2A%28value%29-instance-method" class="signature"><strong>#*</strong>(value)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#%2A%2A%28value%29-instance-method" class="signature"><strong>#**</strong>(value)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#%2B%28value%3Aself%29-instance-method" class="signature"><strong>#+</strong>(value : <span class="k">self</span>)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#%2B%28value%29-instance-method" class="signature"><strong>#+</strong>(value)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#%2B-instance-method" class="signature"><strong>#+</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#-%28value%3Aself%29-instance-method" class="signature"><strong>#-</strong>(value : <span class="k">self</span>)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#-%28value%29-instance-method" class="signature"><strong>#-</strong>(value)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#--instance-method" class="signature"><strong>#-</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#/%28value%3Aself%29-instance-method" class="signature"><strong>#/</strong>(value : <span class="k">self</span>)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#/%28value%29-instance-method" class="signature"><strong>#/</strong>(value)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#//%28value%29-instance-method" class="signature"><strong>#//</strong>(value)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#%3C%28value%29-instance-method" class="signature"><strong>#<</strong>(value)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#%3C%3C%28value%29-instance-method" class="signature"><strong>#<<</strong>(value)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#%3C%3D%28value%29-instance-method" class="signature"><strong>#<=</strong>(value)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#%3D%3D%28other%3Aself%29-instance-method" class="signature"><strong>#==</strong>(other : <span class="k">self</span>)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#%3D%3D%28other%29-instance-method" class="signature"><strong>#==</strong>(other)</a>
+        
+          <div class="summary"><p>Returns <code>true</code> if this struct is equal to <em>other</em>.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#%3E%28value%29-instance-method" class="signature"><strong>#></strong>(value)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#%3E%3D%28value%29-instance-method" class="signature"><strong>#>=</strong>(value)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#abs-instance-method" class="signature"><strong>#abs</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#clone-instance-method" class="signature"><strong>#clone</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#inspect%28io%3AIO%29-instance-method" class="signature"><strong>#inspect</strong>(io : IO)</a>
+        
+          <div class="summary"><p>Appends this struct's name and instance variables names and values to the given IO.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#inv-instance-method" class="signature"><strong>#inv</strong></a>
+        
+          <div class="summary"><p>Implements atcoder::modint.inv().</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#pow%28value%29-instance-method" class="signature"><strong>#pow</strong>(value)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#pred-instance-method" class="signature"><strong>#pred</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#sqrt-instance-method" class="signature"><strong>#sqrt</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#succ-instance-method" class="signature"><strong>#succ</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#to_i64-instance-method" class="signature"><strong>#to_i64</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#to_s%28io%3AIO%29-instance-method" class="signature"><strong>#to_s</strong>(io : IO)</a>
+        
+          <div class="summary"><p>Same as <code><a href="../AtCoder/DynamicModInt.html#inspect%28io%3AIO%29-instance-method">#inspect(io)</a></code>.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#val-instance-method" class="signature"><strong>#val</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#value%3AInt64-instance-method" class="signature"><strong>#value</strong> : Int64</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#zero%3F-instance-method" class="signature"><strong>#zero?</strong></a>
+        
+      </li>
+    
+  </ul>
+
+
+
+  <div class="methods-inherited">
+    
+      
+
+
+      
+
+
+      
+
+
+      
+
+
+    
+      
+
+
+      
+
+
+      
+
+
+      
+
+
+    
+      
+
+
+      
+
+
+      
+
+
+      
+
+
+    
+  </div>
+
+  
+  <h2>
+    <a id="constructor-detail" class="anchor" href="#constructor-detail">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Constructor Detail
+  </h2>
+  
+    <div class="entry-detail" id="new(value:UInt64|Int128|UInt128)-class-method">
+      <div class="signature">
+        
+        def self.<strong>new</strong>(value : UInt64 | Int128 | UInt128)
+
+        <a class="method-permalink" href="#new%28value%3AUInt64%7CInt128%7CUInt128%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hakatashi/ac-library.cr/blob/ef28056890c053b77baeaabac6640bdd7278acf7/src/mod_int.cr#L496" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="new(value:Int)-class-method">
+      <div class="signature">
+        
+        def self.<strong>new</strong>(value : <a href="../Int.html">Int</a>)
+
+        <a class="method-permalink" href="#new%28value%3AInt%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hakatashi/ac-library.cr/blob/ef28056890c053b77baeaabac6640bdd7278acf7/src/mod_int.cr#L500" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="new-class-method">
+      <div class="signature">
+        
+        def self.<strong>new</strong>
+
+        <a class="method-permalink" href="#new-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hakatashi/ac-library.cr/blob/ef28056890c053b77baeaabac6640bdd7278acf7/src/mod_int.cr#L492" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+
+
+  
+  <h2>
+    <a id="class-method-detail" class="anchor" href="#class-method-detail">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Class Method Detail
+  </h2>
+  
+    <div class="entry-detail" id="combination(n,k)-class-method">
+      <div class="signature">
+        
+        def self.<strong>combination</strong>(n, k)
+
+        <a class="method-permalink" href="#combination%28n%2Ck%29-class-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Returns the binomial coefficient <code>n! / (k! (n - k)!)</code>.</p>
+<p>Returns 0 if <code>k &lt; 0</code> or <code>k &gt; n</code>. Raises <code>ArgumentError</code> if <code>n &lt; 0</code>.</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hakatashi/ac-library.cr/blob/ef28056890c053b77baeaabac6640bdd7278acf7/src/mod_int.cr#L463" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="factorial(n)-class-method">
+      <div class="signature">
+        
+        def self.<strong>factorial</strong>(n)
+
+        <a class="method-permalink" href="#factorial%28n%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hakatashi/ac-library.cr/blob/ef28056890c053b77baeaabac6640bdd7278acf7/src/mod_int.cr#L440" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="mod:Int64-class-method">
+      <div class="signature">
+        
+        def self.<strong>mod</strong> : Int64
+
+        <a class="method-permalink" href="#mod%3AInt64-class-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Implements atcoder::modint.mod().</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hakatashi/ac-library.cr/blob/ef28056890c053b77baeaabac6640bdd7278acf7/src/mod_int.cr#L424" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="permutation(n,k)-class-method">
+      <div class="signature">
+        
+        def self.<strong>permutation</strong>(n, k)
+
+        <a class="method-permalink" href="#permutation%28n%2Ck%29-class-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Returns the number of k-permutations of n, <code>n! / (n - k)!</code>.</p>
+<p>Returns 0 if <code>k &lt; 0</code> or <code>k &gt; n</code>. Raises <code>ArgumentError</code> if <code>n &lt; 0</code>.</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hakatashi/ac-library.cr/blob/ef28056890c053b77baeaabac6640bdd7278acf7/src/mod_int.cr#L454" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="raw(value:Int)-class-method">
+      <div class="signature">
+        
+        def self.<strong>raw</strong>(value : <a href="../Int.html">Int</a>)
+
+        <a class="method-permalink" href="#raw%28value%3AInt%29-class-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Implements atcoder::modint.raw(x).</p>
+<p>Constructs a ModInt from <em>value</em> without taking the modulo.
+<em>value</em> must be in <code>0...mod</code>.</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hakatashi/ac-library.cr/blob/ef28056890c053b77baeaabac6640bdd7278acf7/src/mod_int.cr#L432" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="repeated_combination(n,k)-class-method">
+      <div class="signature">
+        
+        def self.<strong>repeated_combination</strong>(n, k)
+
+        <a class="method-permalink" href="#repeated_combination%28n%2Ck%29-class-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Returns the number of k-combinations of n with repetitions, <code><a href="../AtCoder/DynamicModInt.html#combination%28n%2Ck%29-class-method">.combination(n + k - 1, k)</a></code>.</p>
+<p>Returns 0 if <code>k &lt; 0</code>, and 1 if <code>n == 0</code> and <code>k == 0</code>. Raises <code>ArgumentError</code> if <code>n &lt; 0</code>.</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hakatashi/ac-library.cr/blob/ef28056890c053b77baeaabac6640bdd7278acf7/src/mod_int.cr#L472" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="set_mod(mod)-class-method">
+      <div class="signature">
+        
+        def self.<strong>set_mod</strong>(mod)
+
+        <a class="method-permalink" href="#set_mod%28mod%29-class-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Implements atcoder::modint.set_mod(m).</p>
+<p>Raises <code>ArgumentError</code> unless <code>1 &lt;= mod &lt;= Int32::MAX</code>.
+The cache of <code><a href="../AtCoder/DynamicModInt.html#factorial%28n%29-class-method">.factorial</a></code> is cleared.</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hakatashi/ac-library.cr/blob/ef28056890c053b77baeaabac6640bdd7278acf7/src/mod_int.cr#L414" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="zero-class-method">
+      <div class="signature">
+        
+        def self.<strong>zero</strong>
+
+        <a class="method-permalink" href="#zero-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hakatashi/ac-library.cr/blob/ef28056890c053b77baeaabac6640bdd7278acf7/src/mod_int.cr#L436" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+
+
+  
+
+  
+  <h2>
+    <a id="instance-method-detail" class="anchor" href="#instance-method-detail">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Instance Method Detail
+  </h2>
+  
+    <div class="entry-detail" id="*(value:self)-instance-method">
+      <div class="signature">
+        
+        def <strong>*</strong>(value : <span class="k">self</span>)
+
+        <a class="method-permalink" href="#%2A%28value%3Aself%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hakatashi/ac-library.cr/blob/ef28056890c053b77baeaabac6640bdd7278acf7/src/mod_int.cr#L537" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="*(value)-instance-method">
+      <div class="signature">
+        
+        def <strong>*</strong>(value)
+
+        <a class="method-permalink" href="#%2A%28value%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hakatashi/ac-library.cr/blob/ef28056890c053b77baeaabac6640bdd7278acf7/src/mod_int.cr#L549" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="**(value)-instance-method">
+      <div class="signature">
+        
+        def <strong>**</strong>(value)
+
+        <a class="method-permalink" href="#%2A%2A%28value%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hakatashi/ac-library.cr/blob/ef28056890c053b77baeaabac6640bdd7278acf7/src/mod_int.cr#L567" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="+(value:self)-instance-method">
+      <div class="signature">
+        
+        def <strong>+</strong>(value : <span class="k">self</span>)
+
+        <a class="method-permalink" href="#%2B%28value%3Aself%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hakatashi/ac-library.cr/blob/ef28056890c053b77baeaabac6640bdd7278acf7/src/mod_int.cr#L525" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="+(value)-instance-method">
+      <div class="signature">
+        
+        def <strong>+</strong>(value)
+
+        <a class="method-permalink" href="#%2B%28value%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hakatashi/ac-library.cr/blob/ef28056890c053b77baeaabac6640bdd7278acf7/src/mod_int.cr#L541" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="+-instance-method">
+      <div class="signature">
+        
+        def <strong>+</strong>
+
+        <a class="method-permalink" href="#%2B-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hakatashi/ac-library.cr/blob/ef28056890c053b77baeaabac6640bdd7278acf7/src/mod_int.cr#L521" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="-(value:self)-instance-method">
+      <div class="signature">
+        
+        def <strong>-</strong>(value : <span class="k">self</span>)
+
+        <a class="method-permalink" href="#-%28value%3Aself%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hakatashi/ac-library.cr/blob/ef28056890c053b77baeaabac6640bdd7278acf7/src/mod_int.cr#L531" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="-(value)-instance-method">
+      <div class="signature">
+        
+        def <strong>-</strong>(value)
+
+        <a class="method-permalink" href="#-%28value%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hakatashi/ac-library.cr/blob/ef28056890c053b77baeaabac6640bdd7278acf7/src/mod_int.cr#L545" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="--instance-method">
+      <div class="signature">
+        
+        def <strong>-</strong>
+
+        <a class="method-permalink" href="#--instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hakatashi/ac-library.cr/blob/ef28056890c053b77baeaabac6640bdd7278acf7/src/mod_int.cr#L517" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="/(value:self)-instance-method">
+      <div class="signature">
+        
+        def <strong>/</strong>(value : <span class="k">self</span>)
+
+        <a class="method-permalink" href="#/%28value%3Aself%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hakatashi/ac-library.cr/blob/ef28056890c053b77baeaabac6640bdd7278acf7/src/mod_int.cr#L558" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="/(value)-instance-method">
+      <div class="signature">
+        
+        def <strong>/</strong>(value)
+
+        <a class="method-permalink" href="#/%28value%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hakatashi/ac-library.cr/blob/ef28056890c053b77baeaabac6640bdd7278acf7/src/mod_int.cr#L553" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="//(value)-instance-method">
+      <div class="signature">
+        
+        def <strong>//</strong>(value)
+
+        <a class="method-permalink" href="#//%28value%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hakatashi/ac-library.cr/blob/ef28056890c053b77baeaabac6640bdd7278acf7/src/mod_int.cr#L563" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="&lt;(value)-instance-method">
+      <div class="signature">
+        
+        def <strong><</strong>(value)
+
+        <a class="method-permalink" href="#%3C%28value%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hakatashi/ac-library.cr/blob/ef28056890c053b77baeaabac6640bdd7278acf7/src/mod_int.cr#L678" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="&lt;&lt;(value)-instance-method">
+      <div class="signature">
+        
+        def <strong><<</strong>(value)
+
+        <a class="method-permalink" href="#%3C%3C%28value%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hakatashi/ac-library.cr/blob/ef28056890c053b77baeaabac6640bdd7278acf7/src/mod_int.cr#L596" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="&lt;=(value)-instance-method">
+      <div class="signature">
+        
+        def <strong><=</strong>(value)
+
+        <a class="method-permalink" href="#%3C%3D%28value%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hakatashi/ac-library.cr/blob/ef28056890c053b77baeaabac6640bdd7278acf7/src/mod_int.cr#L682" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="==(other:self)-instance-method">
+      <div class="signature">
+        
+        def <strong>==</strong>(other : <span class="k">self</span>)
+
+        <a class="method-permalink" href="#%3D%3D%28other%3Aself%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hakatashi/ac-library.cr/blob/ef28056890c053b77baeaabac6640bdd7278acf7/src/mod_int.cr#L620" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="==(other)-instance-method">
+      <div class="signature">
+        
+        def <strong>==</strong>(other)
+
+        <a class="method-permalink" href="#%3D%3D%28other%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+            <div class="doc-inherited">
+              Description copied from struct Struct
+            </div>
+          
+          <p>Returns <code>true</code> if this struct is equal to <em>other</em>.</p>
+<p>Both structs' instance vars are compared to each other. Thus, two
+structs are considered equal if each of their instance variables are
+equal. Subclasses should override this method to provide specific
+equality semantics.</p>
+<pre><code class="language-crystal"><span class="k">struct</span> <span class="t">Point</span>
+  <span class="k">def</span> <span class="m">initialize</span>(@x : <span class="t">Int32</span>, @y : <span class="t">Int32</span>)
+  <span class="k">end</span>
+<span class="k">end</span>
+
+p1 <span class="o">=</span> <span class="t">Point</span>.new <span class="n">1</span>, <span class="n">2</span>
+p2 <span class="o">=</span> <span class="t">Point</span>.new <span class="n">1</span>, <span class="n">2</span>
+p3 <span class="o">=</span> <span class="t">Point</span>.new <span class="n">3</span>, <span class="n">4</span>
+
+p1 <span class="o">==</span> p2 <span class="c"># =&gt; true</span>
+p1 <span class="o">==</span> p3 <span class="c"># =&gt; false</span></code></pre>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hakatashi/ac-library.cr/blob/ef28056890c053b77baeaabac6640bdd7278acf7/src/mod_int.cr#L624" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="&gt;(value)-instance-method">
+      <div class="signature">
+        
+        def <strong>></strong>(value)
+
+        <a class="method-permalink" href="#%3E%28value%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hakatashi/ac-library.cr/blob/ef28056890c053b77baeaabac6640bdd7278acf7/src/mod_int.cr#L686" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="&gt;=(value)-instance-method">
+      <div class="signature">
+        
+        def <strong>>=</strong>(value)
+
+        <a class="method-permalink" href="#%3E%3D%28value%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hakatashi/ac-library.cr/blob/ef28056890c053b77baeaabac6640bdd7278acf7/src/mod_int.cr#L690" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="abs-instance-method">
+      <div class="signature">
+        
+        def <strong>abs</strong>
+
+        <a class="method-permalink" href="#abs-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hakatashi/ac-library.cr/blob/ef28056890c053b77baeaabac6640bdd7278acf7/src/mod_int.cr#L600" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="clone-instance-method">
+      <div class="signature">
+        
+        def <strong>clone</strong>
+
+        <a class="method-permalink" href="#clone-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hakatashi/ac-library.cr/blob/ef28056890c053b77baeaabac6640bdd7278acf7/src/mod_int.cr#L513" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="inspect(io:IO)-instance-method">
+      <div class="signature">
+        
+        def <strong>inspect</strong>(io : IO)
+
+        <a class="method-permalink" href="#inspect%28io%3AIO%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+            <div class="doc-inherited">
+              Description copied from struct Struct
+            </div>
+          
+          <p>Appends this struct's name and instance variables names and values
+to the given IO.</p>
+<pre><code class="language-crystal"><span class="k">struct</span> <span class="t">Point</span>
+  <span class="k">def</span> <span class="m">initialize</span>(@x : <span class="t">Int32</span>, @y : <span class="t">Int32</span>)
+  <span class="k">end</span>
+<span class="k">end</span>
+
+p1 <span class="o">=</span> <span class="t">Point</span>.new <span class="n">1</span>, <span class="n">2</span>
+p1.to_s    <span class="c"># &quot;Point(@x=1, @y=2)&quot;</span>
+p1.inspect <span class="c"># &quot;Point(@x=1, @y=2)&quot;</span></code></pre>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hakatashi/ac-library.cr/blob/ef28056890c053b77baeaabac6640bdd7278acf7/src/mod_int.cr#L662" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="inv-instance-method">
+      <div class="signature">
+        
+        def <strong>inv</strong>
+
+        <a class="method-permalink" href="#inv-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Implements atcoder::modint.inv().</p>
+<p>Raises <code>ArgumentError</code> if the value and the modulus are not coprime.</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hakatashi/ac-library.cr/blob/ef28056890c053b77baeaabac6640bdd7278acf7/src/mod_int.cr#L592" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="pow(value)-instance-method">
+      <div class="signature">
+        
+        def <strong>pow</strong>(value)
+
+        <a class="method-permalink" href="#pow%28value%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hakatashi/ac-library.cr/blob/ef28056890c053b77baeaabac6640bdd7278acf7/src/mod_int.cr#L668" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="pred-instance-method">
+      <div class="signature">
+        
+        def <strong>pred</strong>
+
+        <a class="method-permalink" href="#pred-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hakatashi/ac-library.cr/blob/ef28056890c053b77baeaabac6640bdd7278acf7/src/mod_int.cr#L604" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="sqrt-instance-method">
+      <div class="signature">
+        
+        def <strong>sqrt</strong>
+
+        <a class="method-permalink" href="#sqrt-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hakatashi/ac-library.cr/blob/ef28056890c053b77baeaabac6640bdd7278acf7/src/mod_int.cr#L628" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="succ-instance-method">
+      <div class="signature">
+        
+        def <strong>succ</strong>
+
+        <a class="method-permalink" href="#succ-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hakatashi/ac-library.cr/blob/ef28056890c053b77baeaabac6640bdd7278acf7/src/mod_int.cr#L608" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="to_i64-instance-method">
+      <div class="signature">
+        
+        def <strong>to_i64</strong>
+
+        <a class="method-permalink" href="#to_i64-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hakatashi/ac-library.cr/blob/ef28056890c053b77baeaabac6640bdd7278acf7/src/mod_int.cr#L616" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="to_s(io:IO)-instance-method">
+      <div class="signature">
+        
+        def <strong>to_s</strong>(io : IO)
+
+        <a class="method-permalink" href="#to_s%28io%3AIO%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+            <div class="doc-inherited">
+              Description copied from struct Struct
+            </div>
+          
+          <p>Same as <code><a href="../AtCoder/DynamicModInt.html#inspect%28io%3AIO%29-instance-method">#inspect(io)</a></code>.</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hakatashi/ac-library.cr/blob/ef28056890c053b77baeaabac6640bdd7278acf7/src/mod_int.cr#L658" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="val-instance-method">
+      <div class="signature">
+        
+        def <strong>val</strong>
+
+        <a class="method-permalink" href="#val-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hakatashi/ac-library.cr/blob/ef28056890c053b77baeaabac6640bdd7278acf7/src/mod_int.cr#L672" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="value:Int64-instance-method">
+      <div class="signature">
+        
+        def <strong>value</strong> : Int64
+
+        <a class="method-permalink" href="#value%3AInt64-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hakatashi/ac-library.cr/blob/ef28056890c053b77baeaabac6640bdd7278acf7/src/mod_int.cr#L509" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="zero?-instance-method">
+      <div class="signature">
+        
+        def <strong>zero?</strong>
+
+        <a class="method-permalink" href="#zero%3F-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hakatashi/ac-library.cr/blob/ef28056890c053b77baeaabac6640bdd7278acf7/src/mod_int.cr#L612" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+
+
+
+</div>
+
+</body>
+</html>

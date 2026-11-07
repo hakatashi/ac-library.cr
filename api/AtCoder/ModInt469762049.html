@@ -77,6 +77,11 @@
       
     </li>
   
+  <li class=" " data-id="atcoder/AtCoder/DynamicModInt" data-name="atcoder::dynamicmodint">
+      <a href="../AtCoder/DynamicModInt.html">DynamicModInt</a>
+      
+    </li>
+  
   <li class=" " data-id="atcoder/AtCoder/FenwickTree" data-name="atcoder::fenwicktree(t)">
       <a href="../AtCoder/FenwickTree.html">FenwickTree</a>
       
@@ -306,7 +311,7 @@
   </h2>
   
     
-      <a href="https://github.com/hakatashi/ac-library.cr/blob/1d3226bb8ab77904b5b8f683d225b0277fb4414c/src/mod_int.cr#L374" target="_blank">
+      <a href="https://github.com/hakatashi/ac-library.cr/blob/ef28056890c053b77baeaabac6640bdd7278acf7/src/mod_int.cr#L726" target="_blank">
         mod_int.cr
       </a>
     
@@ -374,6 +379,8 @@
       <li class="entry-summary">
         <a href="#combination%28n%2Ck%29-class-method" class="signature"><strong>.combination</strong>(n, k)</a>
         
+          <div class="summary"><p>Returns the binomial coefficient <code>n! / (k! (n - k)!)</code>.</p></div>
+        
       </li>
     
       <li class="entry-summary">
@@ -382,12 +389,23 @@
       </li>
     
       <li class="entry-summary">
+        <a href="#mod-class-method" class="signature"><strong>.mod</strong></a>
+        
+          <div class="summary"><p>Implements atcoder::static_modint.mod().</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
         <a href="#permutation%28n%2Ck%29-class-method" class="signature"><strong>.permutation</strong>(n, k)</a>
+        
+          <div class="summary"><p>Returns the number of k-permutations of n, <code>n! / (n - k)!</code>.</p></div>
         
       </li>
     
       <li class="entry-summary">
         <a href="#repeated_combination%28n%2Ck%29-class-method" class="signature"><strong>.repeated_combination</strong>(n, k)</a>
+        
+          <div class="summary"><p>Returns the number of k-combinations of n with repetitions, <code><a href="../AtCoder/ModInt469762049.html#combination%28n%2Ck%29-class-method">.combination(n + k - 1, k)</a></code>.</p></div>
         
       </li>
     
@@ -652,7 +670,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/hakatashi/ac-library.cr/blob/1d3226bb8ab77904b5b8f683d225b0277fb4414c/src/mod_int.cr#L374" target="_blank">View source</a>]
+          [<a href="https://github.com/hakatashi/ac-library.cr/blob/ef28056890c053b77baeaabac6640bdd7278acf7/src/mod_int.cr#L726" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -668,7 +686,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/hakatashi/ac-library.cr/blob/1d3226bb8ab77904b5b8f683d225b0277fb4414c/src/mod_int.cr#L374" target="_blank">View source</a>]
+          [<a href="https://github.com/hakatashi/ac-library.cr/blob/ef28056890c053b77baeaabac6640bdd7278acf7/src/mod_int.cr#L726" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -693,10 +711,16 @@
         <a class="method-permalink" href="#combination%28n%2Ck%29-class-method">#</a>
       </div>
       
+        <div class="doc">
+          
+          <p>Returns the binomial coefficient <code>n! / (k! (n - k)!)</code>.</p>
+<p>Returns 0 if <code>k &lt; 0</code> or <code>k &gt; n</code>. Raises <code>ArgumentError</code> if <code>n &lt; 0</code>.</p>
+        </div>
+      
       <br/>
       <div>
         
-          [<a href="https://github.com/hakatashi/ac-library.cr/blob/1d3226bb8ab77904b5b8f683d225b0277fb4414c/src/mod_int.cr#L374" target="_blank">View source</a>]
+          [<a href="https://github.com/hakatashi/ac-library.cr/blob/ef28056890c053b77baeaabac6640bdd7278acf7/src/mod_int.cr#L726" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -712,7 +736,28 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/hakatashi/ac-library.cr/blob/1d3226bb8ab77904b5b8f683d225b0277fb4414c/src/mod_int.cr#L374" target="_blank">View source</a>]
+          [<a href="https://github.com/hakatashi/ac-library.cr/blob/ef28056890c053b77baeaabac6640bdd7278acf7/src/mod_int.cr#L726" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="mod-class-method">
+      <div class="signature">
+        
+        def self.<strong>mod</strong>
+
+        <a class="method-permalink" href="#mod-class-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Implements atcoder::static_modint.mod().</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/hakatashi/ac-library.cr/blob/ef28056890c053b77baeaabac6640bdd7278acf7/src/mod_int.cr#L726" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -725,10 +770,16 @@
         <a class="method-permalink" href="#permutation%28n%2Ck%29-class-method">#</a>
       </div>
       
+        <div class="doc">
+          
+          <p>Returns the number of k-permutations of n, <code>n! / (n - k)!</code>.</p>
+<p>Returns 0 if <code>k &lt; 0</code> or <code>k &gt; n</code>. Raises <code>ArgumentError</code> if <code>n &lt; 0</code>.</p>
+        </div>
+      
       <br/>
       <div>
         
-          [<a href="https://github.com/hakatashi/ac-library.cr/blob/1d3226bb8ab77904b5b8f683d225b0277fb4414c/src/mod_int.cr#L374" target="_blank">View source</a>]
+          [<a href="https://github.com/hakatashi/ac-library.cr/blob/ef28056890c053b77baeaabac6640bdd7278acf7/src/mod_int.cr#L726" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -741,10 +792,16 @@
         <a class="method-permalink" href="#repeated_combination%28n%2Ck%29-class-method">#</a>
       </div>
       
+        <div class="doc">
+          
+          <p>Returns the number of k-combinations of n with repetitions, <code><a href="../AtCoder/ModInt469762049.html#combination%28n%2Ck%29-class-method">.combination(n + k - 1, k)</a></code>.</p>
+<p>Returns 0 if <code>k &lt; 0</code>, and 1 if <code>n == 0</code> and <code>k == 0</code>. Raises <code>ArgumentError</code> if <code>n &lt; 0</code>.</p>
+        </div>
+      
       <br/>
       <div>
         
-          [<a href="https://github.com/hakatashi/ac-library.cr/blob/1d3226bb8ab77904b5b8f683d225b0277fb4414c/src/mod_int.cr#L374" target="_blank">View source</a>]
+          [<a href="https://github.com/hakatashi/ac-library.cr/blob/ef28056890c053b77baeaabac6640bdd7278acf7/src/mod_int.cr#L726" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -760,7 +817,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/hakatashi/ac-library.cr/blob/1d3226bb8ab77904b5b8f683d225b0277fb4414c/src/mod_int.cr#L374" target="_blank">View source</a>]
+          [<a href="https://github.com/hakatashi/ac-library.cr/blob/ef28056890c053b77baeaabac6640bdd7278acf7/src/mod_int.cr#L726" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -790,7 +847,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/hakatashi/ac-library.cr/blob/1d3226bb8ab77904b5b8f683d225b0277fb4414c/src/mod_int.cr#L374" target="_blank">View source</a>]
+          [<a href="https://github.com/hakatashi/ac-library.cr/blob/ef28056890c053b77baeaabac6640bdd7278acf7/src/mod_int.cr#L726" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -806,7 +863,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/hakatashi/ac-library.cr/blob/1d3226bb8ab77904b5b8f683d225b0277fb4414c/src/mod_int.cr#L374" target="_blank">View source</a>]
+          [<a href="https://github.com/hakatashi/ac-library.cr/blob/ef28056890c053b77baeaabac6640bdd7278acf7/src/mod_int.cr#L726" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -822,7 +879,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/hakatashi/ac-library.cr/blob/1d3226bb8ab77904b5b8f683d225b0277fb4414c/src/mod_int.cr#L374" target="_blank">View source</a>]
+          [<a href="https://github.com/hakatashi/ac-library.cr/blob/ef28056890c053b77baeaabac6640bdd7278acf7/src/mod_int.cr#L726" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -838,7 +895,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/hakatashi/ac-library.cr/blob/1d3226bb8ab77904b5b8f683d225b0277fb4414c/src/mod_int.cr#L374" target="_blank">View source</a>]
+          [<a href="https://github.com/hakatashi/ac-library.cr/blob/ef28056890c053b77baeaabac6640bdd7278acf7/src/mod_int.cr#L726" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -854,7 +911,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/hakatashi/ac-library.cr/blob/1d3226bb8ab77904b5b8f683d225b0277fb4414c/src/mod_int.cr#L374" target="_blank">View source</a>]
+          [<a href="https://github.com/hakatashi/ac-library.cr/blob/ef28056890c053b77baeaabac6640bdd7278acf7/src/mod_int.cr#L726" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -870,7 +927,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/hakatashi/ac-library.cr/blob/1d3226bb8ab77904b5b8f683d225b0277fb4414c/src/mod_int.cr#L374" target="_blank">View source</a>]
+          [<a href="https://github.com/hakatashi/ac-library.cr/blob/ef28056890c053b77baeaabac6640bdd7278acf7/src/mod_int.cr#L726" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -886,7 +943,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/hakatashi/ac-library.cr/blob/1d3226bb8ab77904b5b8f683d225b0277fb4414c/src/mod_int.cr#L374" target="_blank">View source</a>]
+          [<a href="https://github.com/hakatashi/ac-library.cr/blob/ef28056890c053b77baeaabac6640bdd7278acf7/src/mod_int.cr#L726" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -902,7 +959,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/hakatashi/ac-library.cr/blob/1d3226bb8ab77904b5b8f683d225b0277fb4414c/src/mod_int.cr#L374" target="_blank">View source</a>]
+          [<a href="https://github.com/hakatashi/ac-library.cr/blob/ef28056890c053b77baeaabac6640bdd7278acf7/src/mod_int.cr#L726" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -918,7 +975,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/hakatashi/ac-library.cr/blob/1d3226bb8ab77904b5b8f683d225b0277fb4414c/src/mod_int.cr#L374" target="_blank">View source</a>]
+          [<a href="https://github.com/hakatashi/ac-library.cr/blob/ef28056890c053b77baeaabac6640bdd7278acf7/src/mod_int.cr#L726" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -934,7 +991,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/hakatashi/ac-library.cr/blob/1d3226bb8ab77904b5b8f683d225b0277fb4414c/src/mod_int.cr#L374" target="_blank">View source</a>]
+          [<a href="https://github.com/hakatashi/ac-library.cr/blob/ef28056890c053b77baeaabac6640bdd7278acf7/src/mod_int.cr#L726" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -950,7 +1007,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/hakatashi/ac-library.cr/blob/1d3226bb8ab77904b5b8f683d225b0277fb4414c/src/mod_int.cr#L374" target="_blank">View source</a>]
+          [<a href="https://github.com/hakatashi/ac-library.cr/blob/ef28056890c053b77baeaabac6640bdd7278acf7/src/mod_int.cr#L726" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -966,7 +1023,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/hakatashi/ac-library.cr/blob/1d3226bb8ab77904b5b8f683d225b0277fb4414c/src/mod_int.cr#L374" target="_blank">View source</a>]
+          [<a href="https://github.com/hakatashi/ac-library.cr/blob/ef28056890c053b77baeaabac6640bdd7278acf7/src/mod_int.cr#L726" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -982,7 +1039,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/hakatashi/ac-library.cr/blob/1d3226bb8ab77904b5b8f683d225b0277fb4414c/src/mod_int.cr#L374" target="_blank">View source</a>]
+          [<a href="https://github.com/hakatashi/ac-library.cr/blob/ef28056890c053b77baeaabac6640bdd7278acf7/src/mod_int.cr#L726" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -998,7 +1055,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/hakatashi/ac-library.cr/blob/1d3226bb8ab77904b5b8f683d225b0277fb4414c/src/mod_int.cr#L374" target="_blank">View source</a>]
+          [<a href="https://github.com/hakatashi/ac-library.cr/blob/ef28056890c053b77baeaabac6640bdd7278acf7/src/mod_int.cr#L726" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1014,7 +1071,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/hakatashi/ac-library.cr/blob/1d3226bb8ab77904b5b8f683d225b0277fb4414c/src/mod_int.cr#L374" target="_blank">View source</a>]
+          [<a href="https://github.com/hakatashi/ac-library.cr/blob/ef28056890c053b77baeaabac6640bdd7278acf7/src/mod_int.cr#L726" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1030,7 +1087,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/hakatashi/ac-library.cr/blob/1d3226bb8ab77904b5b8f683d225b0277fb4414c/src/mod_int.cr#L374" target="_blank">View source</a>]
+          [<a href="https://github.com/hakatashi/ac-library.cr/blob/ef28056890c053b77baeaabac6640bdd7278acf7/src/mod_int.cr#L726" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1070,7 +1127,7 @@ p1 <span class="o">==</span> p3 <span class="c"># =&gt; false</span></code></pre
       <br/>
       <div>
         
-          [<a href="https://github.com/hakatashi/ac-library.cr/blob/1d3226bb8ab77904b5b8f683d225b0277fb4414c/src/mod_int.cr#L374" target="_blank">View source</a>]
+          [<a href="https://github.com/hakatashi/ac-library.cr/blob/ef28056890c053b77baeaabac6640bdd7278acf7/src/mod_int.cr#L726" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1086,7 +1143,7 @@ p1 <span class="o">==</span> p3 <span class="c"># =&gt; false</span></code></pre
       <br/>
       <div>
         
-          [<a href="https://github.com/hakatashi/ac-library.cr/blob/1d3226bb8ab77904b5b8f683d225b0277fb4414c/src/mod_int.cr#L374" target="_blank">View source</a>]
+          [<a href="https://github.com/hakatashi/ac-library.cr/blob/ef28056890c053b77baeaabac6640bdd7278acf7/src/mod_int.cr#L726" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1102,7 +1159,7 @@ p1 <span class="o">==</span> p3 <span class="c"># =&gt; false</span></code></pre
       <br/>
       <div>
         
-          [<a href="https://github.com/hakatashi/ac-library.cr/blob/1d3226bb8ab77904b5b8f683d225b0277fb4414c/src/mod_int.cr#L374" target="_blank">View source</a>]
+          [<a href="https://github.com/hakatashi/ac-library.cr/blob/ef28056890c053b77baeaabac6640bdd7278acf7/src/mod_int.cr#L726" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1118,7 +1175,7 @@ p1 <span class="o">==</span> p3 <span class="c"># =&gt; false</span></code></pre
       <br/>
       <div>
         
-          [<a href="https://github.com/hakatashi/ac-library.cr/blob/1d3226bb8ab77904b5b8f683d225b0277fb4414c/src/mod_int.cr#L374" target="_blank">View source</a>]
+          [<a href="https://github.com/hakatashi/ac-library.cr/blob/ef28056890c053b77baeaabac6640bdd7278acf7/src/mod_int.cr#L726" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1134,7 +1191,7 @@ p1 <span class="o">==</span> p3 <span class="c"># =&gt; false</span></code></pre
       <br/>
       <div>
         
-          [<a href="https://github.com/hakatashi/ac-library.cr/blob/1d3226bb8ab77904b5b8f683d225b0277fb4414c/src/mod_int.cr#L374" target="_blank">View source</a>]
+          [<a href="https://github.com/hakatashi/ac-library.cr/blob/ef28056890c053b77baeaabac6640bdd7278acf7/src/mod_int.cr#L726" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1178,7 +1235,7 @@ p1 <span class="o">==</span> p3 <span class="c"># =&gt; false</span></code></pre
       <br/>
       <div>
         
-          [<a href="https://github.com/hakatashi/ac-library.cr/blob/1d3226bb8ab77904b5b8f683d225b0277fb4414c/src/mod_int.cr#L374" target="_blank">View source</a>]
+          [<a href="https://github.com/hakatashi/ac-library.cr/blob/ef28056890c053b77baeaabac6640bdd7278acf7/src/mod_int.cr#L726" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1194,7 +1251,7 @@ p1 <span class="o">==</span> p3 <span class="c"># =&gt; false</span></code></pre
       <br/>
       <div>
         
-          [<a href="https://github.com/hakatashi/ac-library.cr/blob/1d3226bb8ab77904b5b8f683d225b0277fb4414c/src/mod_int.cr#L374" target="_blank">View source</a>]
+          [<a href="https://github.com/hakatashi/ac-library.cr/blob/ef28056890c053b77baeaabac6640bdd7278acf7/src/mod_int.cr#L726" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1210,7 +1267,7 @@ p1 <span class="o">==</span> p3 <span class="c"># =&gt; false</span></code></pre
       <br/>
       <div>
         
-          [<a href="https://github.com/hakatashi/ac-library.cr/blob/1d3226bb8ab77904b5b8f683d225b0277fb4414c/src/mod_int.cr#L374" target="_blank">View source</a>]
+          [<a href="https://github.com/hakatashi/ac-library.cr/blob/ef28056890c053b77baeaabac6640bdd7278acf7/src/mod_int.cr#L726" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1226,7 +1283,7 @@ p1 <span class="o">==</span> p3 <span class="c"># =&gt; false</span></code></pre
       <br/>
       <div>
         
-          [<a href="https://github.com/hakatashi/ac-library.cr/blob/1d3226bb8ab77904b5b8f683d225b0277fb4414c/src/mod_int.cr#L374" target="_blank">View source</a>]
+          [<a href="https://github.com/hakatashi/ac-library.cr/blob/ef28056890c053b77baeaabac6640bdd7278acf7/src/mod_int.cr#L726" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1242,7 +1299,7 @@ p1 <span class="o">==</span> p3 <span class="c"># =&gt; false</span></code></pre
       <br/>
       <div>
         
-          [<a href="https://github.com/hakatashi/ac-library.cr/blob/1d3226bb8ab77904b5b8f683d225b0277fb4414c/src/mod_int.cr#L374" target="_blank">View source</a>]
+          [<a href="https://github.com/hakatashi/ac-library.cr/blob/ef28056890c053b77baeaabac6640bdd7278acf7/src/mod_int.cr#L726" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1258,7 +1315,7 @@ p1 <span class="o">==</span> p3 <span class="c"># =&gt; false</span></code></pre
       <br/>
       <div>
         
-          [<a href="https://github.com/hakatashi/ac-library.cr/blob/1d3226bb8ab77904b5b8f683d225b0277fb4414c/src/mod_int.cr#L374" target="_blank">View source</a>]
+          [<a href="https://github.com/hakatashi/ac-library.cr/blob/ef28056890c053b77baeaabac6640bdd7278acf7/src/mod_int.cr#L726" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1302,7 +1359,7 @@ p1 <span class="o">==</span> p3 <span class="c"># =&gt; false</span></code></pre
       <br/>
       <div>
         
-          [<a href="https://github.com/hakatashi/ac-library.cr/blob/1d3226bb8ab77904b5b8f683d225b0277fb4414c/src/mod_int.cr#L374" target="_blank">View source</a>]
+          [<a href="https://github.com/hakatashi/ac-library.cr/blob/ef28056890c053b77baeaabac6640bdd7278acf7/src/mod_int.cr#L726" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1332,7 +1389,7 @@ p1 <span class="o">==</span> p3 <span class="c"># =&gt; false</span></code></pre
       <br/>
       <div>
         
-          [<a href="https://github.com/hakatashi/ac-library.cr/blob/1d3226bb8ab77904b5b8f683d225b0277fb4414c/src/mod_int.cr#L374" target="_blank">View source</a>]
+          [<a href="https://github.com/hakatashi/ac-library.cr/blob/ef28056890c053b77baeaabac6640bdd7278acf7/src/mod_int.cr#L726" target="_blank">View source</a>]
         
       </div>
     </div>

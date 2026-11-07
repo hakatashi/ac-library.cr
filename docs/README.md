@@ -31,7 +31,23 @@ require "atcoder/fenwick_tree" # load FenwickTree
 
 ## [`atcoder/mod_int`](https://hakatashi.github.io/ac-library.cr/docs/src/mod_int.cr) (Implements [<atcoder/modint>](https://atcoder.github.io/ac-library/document_en/modint.html))
 
-* `modint` => Unimplemented
+* `modint` => `AtCoder::DynamicModInt`
+
+  ```cr
+  alias Mint = AtCoder::DynamicModInt
+  Mint.set_mod(11)
+  Mint.new(3) // Mint.new(7) #=> 2
+  ```
+
+  * `.set_mod(m)` => `.set_mod(m)`
+    * Raises `ArgumentError` unless `1 <= m <= Int32::MAX`. The default modulus is 998244353, as in ACL.
+  * `.mod()` => `.mod`
+  * `.raw(x)` => `.raw(x)`
+  * `.inv()` => `#inv`
+    * Raises `ArgumentError` if the value and the modulus are not coprime.
+  * The same operations as the static ModInts are available (`+`, `-`, `*`, `/`, `//`, `**`, `#val`, `#pow`, `.factorial`, `.combination`, etc.). Multiplication uses Barrett reduction.
+  * `.set_mod` clears the cache of `.factorial`.
+
 * `modint998244353` => `AtCoder::ModInt998244353`
 * `modint1000000007` => `AtCoder::ModInt1000000007`
 
@@ -40,15 +56,18 @@ require "atcoder/fenwick_tree" # load FenwickTree
   Mint.new(30_i64) // Mint.new(7_i64) #=> 285714292
   ```
 
+  * `.factorial(n)`, `.permutation(n, k)`, `.combination(n, k)` and `.repeated_combination(n, k)` are also available (not in ACL). They return 0 when `k < 0` or `k > n`, and raise `ArgumentError` when `n < 0`.
+
 * `static_modint` => `AtCoder.static_modint`
 
   ```cr
   AtCoder.static_modint(ModInt101, 101_i64)
   alias Mint = AtCoder::ModInt101
-  Mint.new(80_i64) + Mint.new(90_i64) #=> 89
+  Mint.new(80_i64) + Mint.new(90_i64) #=> 69
   ```
 
-* `dynamic_modint` => Unimplemented
+* `dynamic_modint<id>` => `AtCoder::DynamicModInt`
+  * Only one dynamic ModInt type (corresponds to `modint` = `dynamic_modint<-1>`) is provided, so only one modulus can be used at a time.
 
 ## [`atcoder/fenwick_tree`](https://hakatashi.github.io/ac-library.cr/docs/src/fenwick_tree.cr) (Implements [<atcoder/fenwicktree>](https://atcoder.github.io/ac-library/document_en/fenwicktree.html))
 

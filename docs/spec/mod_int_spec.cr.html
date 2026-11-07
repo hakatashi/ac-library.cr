@@ -102,7 +102,7 @@ h1 a:focus {
 
 <ul>
     <li><a href="/blob/master/spec/mod_int_spec.cr">View this file on GitHub</a></li>
-    <li>Last update: 2026-11-05 22:42:52+09:00</li>
+    <li>Last update: 2026-11-07 09:36:20+09:00</li>
     
     
     
@@ -198,10 +198,18 @@ h1 a:focus {
       <span class="n">ModInt1000000007</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="mi">100</span><span class="n">_i64</span><span class="p">).</span><span class="n">should_not</span> <span class="n">eq</span> <span class="mi">101</span><span class="n">_i64</span>
       <span class="n">ModInt1000000007</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="mi">100</span><span class="n">_i64</span><span class="p">).</span><span class="n">should</span> <span class="n">eq</span> <span class="n">ModInt1000000007</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="mi">100</span><span class="n">_i64</span><span class="p">)</span>
       <span class="n">ModInt1000000007</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="mi">100</span><span class="n">_i64</span><span class="p">).</span><span class="n">should_not</span> <span class="n">eq</span> <span class="n">ModInt1000000007</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="mi">101</span><span class="n">_i64</span><span class="p">)</span>
-      <span class="p">(</span><span class="n">ModInt1000000007</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="mi">100</span><span class="n">_i64</span><span class="p">)</span> <span class="o">==</span> <span class="mi">100</span><span class="p">).</span><span class="n">should</span> <span class="n">eq</span> <span class="nb">true</span>
+      <span class="p">(</span><span class="n">ModInt1000000007</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="mi">100</span><span class="n">_i64</span><span class="p">)</span> <span class="o">==</span> <span class="mi">100</span><span class="p">).</span><span class="n">should</span> <span class="n">eq</span> <span class="nf">true</span>
       <span class="p">(</span><span class="n">ModInt1000000007</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="mi">100</span><span class="n">_i64</span><span class="p">)</span> <span class="o">==</span> <span class="mi">101</span><span class="p">).</span><span class="n">should</span> <span class="n">eq</span> <span class="nb">false</span>
       <span class="p">(</span><span class="n">ModInt1000000007</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="mi">100</span><span class="n">_i64</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">100</span><span class="p">).</span><span class="n">should</span> <span class="n">eq</span> <span class="nb">false</span>
       <span class="p">(</span><span class="n">ModInt1000000007</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="mi">100</span><span class="n">_i64</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">101</span><span class="p">).</span><span class="n">should</span> <span class="n">eq</span> <span class="nb">true</span>
+    <span class="n">end</span>
+  <span class="n">end</span>
+
+  <span class="n">describe</span> <span class="s">".mod"</span> <span class="k">do</span>
+    <span class="n">it</span> <span class="s">"returns the modulus"</span> <span class="k">do</span>
+      <span class="n">ModInt1000000007</span><span class="p">.</span><span class="n">mod</span><span class="p">.</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">1</span><span class="n">_000_000_007</span>
+      <span class="n">AtCoder</span><span class="o">::</span><span class="n">ModInt998244353</span><span class="p">.</span><span class="n">mod</span><span class="p">.</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">998</span><span class="n">_244_353</span>
+      <span class="n">ModInt7</span><span class="p">.</span><span class="n">mod</span><span class="p">.</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">7</span>
     <span class="n">end</span>
   <span class="n">end</span>
 
@@ -356,6 +364,18 @@ h1 a:focus {
     <span class="n">it</span> <span class="s">"calculates permutation fast"</span> <span class="k">do</span>
       <span class="n">ModInt1000000007</span><span class="p">.</span><span class="n">permutation</span><span class="p">(</span><span class="mi">4</span><span class="n">_i64</span><span class="p">,</span> <span class="mi">2</span><span class="n">_i64</span><span class="p">).</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">12</span>
       <span class="n">ModInt1000000007</span><span class="p">.</span><span class="n">permutation</span><span class="p">(</span><span class="mi">10</span><span class="n">_i64</span><span class="p">,</span> <span class="mi">3</span><span class="n">_i64</span><span class="p">).</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">720</span>
+      <span class="n">ModInt1000000007</span><span class="p">.</span><span class="n">permutation</span><span class="p">(</span><span class="mi">10</span><span class="n">_i64</span><span class="p">,</span> <span class="mi">0</span><span class="n">_i64</span><span class="p">).</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">1</span>
+      <span class="n">ModInt1000000007</span><span class="p">.</span><span class="n">permutation</span><span class="p">(</span><span class="mi">10</span><span class="n">_i64</span><span class="p">,</span> <span class="mi">10</span><span class="n">_i64</span><span class="p">).</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">3</span><span class="n">_628_800</span>
+    <span class="n">end</span>
+
+    <span class="n">it</span> <span class="s">"returns 0 when k &lt; 0 or k &gt; n"</span> <span class="k">do</span>
+      <span class="n">ModInt1000000007</span><span class="p">.</span><span class="n">permutation</span><span class="p">(</span><span class="mi">3</span><span class="n">_i64</span><span class="p">,</span> <span class="mi">4</span><span class="n">_i64</span><span class="p">).</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">0</span>
+      <span class="n">ModInt1000000007</span><span class="p">.</span><span class="n">permutation</span><span class="p">(</span><span class="mi">0</span><span class="n">_i64</span><span class="p">,</span> <span class="mi">1</span><span class="n">_i64</span><span class="p">).</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">0</span>
+      <span class="n">ModInt1000000007</span><span class="p">.</span><span class="n">permutation</span><span class="p">(</span><span class="mi">3</span><span class="n">_i64</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="n">_i64</span><span class="p">).</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">0</span>
+    <span class="n">end</span>
+
+    <span class="n">it</span> <span class="s">"raises ArgumentError when n &lt; 0"</span> <span class="k">do</span>
+      <span class="n">expect_raises</span><span class="p">(</span><span class="n">ArgumentError</span><span class="p">)</span> <span class="p">{</span> <span class="n">ModInt1000000007</span><span class="p">.</span><span class="n">permutation</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="n">_i64</span><span class="p">,</span> <span class="mi">0</span><span class="n">_i64</span><span class="p">)</span> <span class="p">}</span>
     <span class="n">end</span>
   <span class="n">end</span>
 
@@ -363,6 +383,40 @@ h1 a:focus {
     <span class="n">it</span> <span class="s">"calculates combination fast"</span> <span class="k">do</span>
       <span class="n">ModInt1000000007</span><span class="p">.</span><span class="n">combination</span><span class="p">(</span><span class="mi">4</span><span class="n">_i64</span><span class="p">,</span> <span class="mi">2</span><span class="n">_i64</span><span class="p">).</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">6</span>
       <span class="n">ModInt1000000007</span><span class="p">.</span><span class="n">combination</span><span class="p">(</span><span class="mi">10</span><span class="n">_i64</span><span class="p">,</span> <span class="mi">3</span><span class="n">_i64</span><span class="p">).</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">120</span>
+      <span class="n">ModInt1000000007</span><span class="p">.</span><span class="n">combination</span><span class="p">(</span><span class="mi">0</span><span class="n">_i64</span><span class="p">,</span> <span class="mi">0</span><span class="n">_i64</span><span class="p">).</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">1</span>
+      <span class="n">ModInt1000000007</span><span class="p">.</span><span class="n">combination</span><span class="p">(</span><span class="mi">10</span><span class="n">_i64</span><span class="p">,</span> <span class="mi">10</span><span class="n">_i64</span><span class="p">).</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">1</span>
+      <span class="n">ModInt1000000007</span><span class="p">.</span><span class="n">combination</span><span class="p">(</span><span class="mi">100</span><span class="n">_000_i64</span><span class="p">,</span> <span class="mi">50</span><span class="n">_000_i64</span><span class="p">).</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">149</span><span class="n">_033_233</span>
+    <span class="n">end</span>
+
+    <span class="n">it</span> <span class="s">"matches Pascal's triangle"</span> <span class="k">do</span>
+      <span class="n">row</span> <span class="o">=</span> <span class="p">[</span><span class="n">ModInt1000000007</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="mi">1</span><span class="p">)]</span>
+      <span class="mf">0.</span><span class="n">upto</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">n</span><span class="o">|</span>
+        <span class="mf">0.</span><span class="n">upto</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="p">{</span> <span class="o">|</span><span class="n">k</span><span class="o">|</span> <span class="n">ModInt1000000007</span><span class="p">.</span><span class="n">combination</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">).</span><span class="n">should</span> <span class="n">eq</span> <span class="n">row</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="p">}</span>
+        <span class="n">ModInt1000000007</span><span class="p">.</span><span class="n">combination</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">).</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">0</span>
+        <span class="n">row</span> <span class="o">=</span> <span class="p">[</span><span class="n">ModInt1000000007</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="mi">1</span><span class="p">)]</span> <span class="o">+</span> <span class="p">(</span><span class="mf">1.</span><span class="p">.</span><span class="n">n</span><span class="p">).</span><span class="n">map</span> <span class="p">{</span> <span class="o">|</span><span class="n">k</span><span class="o">|</span> <span class="n">row</span><span class="p">[</span><span class="n">k</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">row</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="p">}</span> <span class="o">+</span> <span class="p">[</span><span class="n">ModInt1000000007</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="mi">1</span><span class="p">)]</span>
+      <span class="n">end</span>
+    <span class="n">end</span>
+
+    <span class="n">it</span> <span class="s">"returns 0 when k &lt; 0 or k &gt; n"</span> <span class="k">do</span>
+      <span class="n">ModInt1000000007</span><span class="p">.</span><span class="n">combination</span><span class="p">(</span><span class="mi">3</span><span class="n">_i64</span><span class="p">,</span> <span class="mi">4</span><span class="n">_i64</span><span class="p">).</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">0</span>
+      <span class="n">ModInt1000000007</span><span class="p">.</span><span class="n">combination</span><span class="p">(</span><span class="mi">0</span><span class="n">_i64</span><span class="p">,</span> <span class="mi">1</span><span class="n">_i64</span><span class="p">).</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">0</span>
+      <span class="n">ModInt1000000007</span><span class="p">.</span><span class="n">combination</span><span class="p">(</span><span class="mi">3</span><span class="n">_i64</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="n">_i64</span><span class="p">).</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">0</span>
+    <span class="n">end</span>
+
+    <span class="n">it</span> <span class="s">"raises ArgumentError when n &lt; 0"</span> <span class="k">do</span>
+      <span class="n">expect_raises</span><span class="p">(</span><span class="n">ArgumentError</span><span class="p">)</span> <span class="p">{</span> <span class="n">ModInt1000000007</span><span class="p">.</span><span class="n">combination</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="n">_i64</span><span class="p">,</span> <span class="mi">0</span><span class="n">_i64</span><span class="p">)</span> <span class="p">}</span>
+    <span class="n">end</span>
+  <span class="n">end</span>
+
+  <span class="n">describe</span> <span class="s">".repeated_combination"</span> <span class="k">do</span>
+    <span class="n">it</span> <span class="s">"calculates combination with repetitions"</span> <span class="k">do</span>
+      <span class="n">ModInt1000000007</span><span class="p">.</span><span class="n">repeated_combination</span><span class="p">(</span><span class="mi">3</span><span class="n">_i64</span><span class="p">,</span> <span class="mi">2</span><span class="n">_i64</span><span class="p">).</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">6</span>
+      <span class="n">ModInt1000000007</span><span class="p">.</span><span class="n">repeated_combination</span><span class="p">(</span><span class="mi">1</span><span class="n">_i64</span><span class="p">,</span> <span class="mi">5</span><span class="n">_i64</span><span class="p">).</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">1</span>
+      <span class="n">ModInt1000000007</span><span class="p">.</span><span class="n">repeated_combination</span><span class="p">(</span><span class="mi">5</span><span class="n">_i64</span><span class="p">,</span> <span class="mi">0</span><span class="n">_i64</span><span class="p">).</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">1</span>
+      <span class="n">ModInt1000000007</span><span class="p">.</span><span class="n">repeated_combination</span><span class="p">(</span><span class="mi">0</span><span class="n">_i64</span><span class="p">,</span> <span class="mi">0</span><span class="n">_i64</span><span class="p">).</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">1</span>
+      <span class="n">ModInt1000000007</span><span class="p">.</span><span class="n">repeated_combination</span><span class="p">(</span><span class="mi">0</span><span class="n">_i64</span><span class="p">,</span> <span class="mi">3</span><span class="n">_i64</span><span class="p">).</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">0</span>
+      <span class="n">ModInt1000000007</span><span class="p">.</span><span class="n">repeated_combination</span><span class="p">(</span><span class="mi">3</span><span class="n">_i64</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="n">_i64</span><span class="p">).</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">0</span>
+      <span class="n">expect_raises</span><span class="p">(</span><span class="n">ArgumentError</span><span class="p">)</span> <span class="p">{</span> <span class="n">ModInt1000000007</span><span class="p">.</span><span class="n">repeated_combination</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="n">_i64</span><span class="p">,</span> <span class="mi">1</span><span class="n">_i64</span><span class="p">)</span> <span class="p">}</span>
     <span class="n">end</span>
   <span class="n">end</span>
 
@@ -952,7 +1006,7 @@ h1 a:focus {
 </span>  <span class="cp"># ```
 </span>  <span class="cp"># AtCoder.static_modint(ModInt101, 101_i64)
 </span>  <span class="cp"># alias Mint = AtCoder::ModInt101
-</span>  <span class="cp"># Mint.new(80_i64) + Mint.new(90_i64) # =&gt; 89
+</span>  <span class="cp"># Mint.new(80_i64) + Mint.new(90_i64) # =&gt; 69
 </span>  <span class="cp"># ```
 </span>  <span class="n">macro</span> <span class="n">static_modint</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">modulo</span><span class="p">)</span>
     <span class="n">module</span> <span class="n">AtCoder</span>
@@ -979,6 +1033,11 @@ h1 a:focus {
           <span class="n">MOD</span> <span class="o">=</span> <span class="p">{{</span><span class="n">modulo</span><span class="p">}}</span>
         <span class="p">{</span><span class="o">%</span> <span class="n">end</span> <span class="o">%</span><span class="p">}</span>
 
+        <span class="cp"># Implements atcoder::static_modint.mod().
+</span>        <span class="n">def</span> <span class="n">self</span><span class="p">.</span><span class="n">mod</span>
+          <span class="n">MOD</span>
+        <span class="n">end</span>
+
         <span class="n">def</span> <span class="n">self</span><span class="p">.</span><span class="n">zero</span>
           <span class="k">new</span>
         <span class="n">end</span>
@@ -996,17 +1055,33 @@ h1 a:focus {
           <span class="err">@@</span><span class="n">factorials</span><span class="p">[</span><span class="n">n</span><span class="p">]</span>
         <span class="n">end</span>
 
-        <span class="n">def</span> <span class="n">self</span><span class="p">.</span><span class="n">permutation</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
-          <span class="n">raise</span> <span class="n">ArgumentError</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="s">"k cannot be greater than n"</span><span class="p">)</span> <span class="n">unless</span> <span class="n">n</span> <span class="o">&gt;=</span> <span class="n">k</span>
+        <span class="cp"># Returns the number of k-permutations of n, `n! / (n - k)!`.
+</span>        <span class="cp">#
+</span>        <span class="cp"># Returns 0 if `k &lt; 0` or `k &gt; n`. Raises `ArgumentError` if `n &lt; 0`.
+</span>        <span class="n">def</span> <span class="n">self</span><span class="p">.</span><span class="n">permutation</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
+          <span class="n">raise</span> <span class="n">ArgumentError</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="s">"n must be non-negative"</span><span class="p">)</span> <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">0</span>
+          <span class="k">return</span> <span class="n">zero</span> <span class="k">if</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">k</span> <span class="o">&gt;</span> <span class="n">n</span>
           <span class="n">factorial</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="c1">// factorial(n - k)</span>
         <span class="n">end</span>
 
-        <span class="n">def</span> <span class="n">self</span><span class="p">.</span><span class="n">combination</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
-          <span class="n">raise</span> <span class="n">ArgumentError</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="s">"k cannot be greater than n"</span><span class="p">)</span> <span class="n">unless</span> <span class="n">n</span> <span class="o">&gt;=</span> <span class="n">k</span>
-          <span class="n">permutation</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span> <span class="c1">// @@factorials[k]</span>
+        <span class="cp"># Returns the binomial coefficient `n! / (k! (n - k)!)`.
+</span>        <span class="cp">#
+</span>        <span class="cp"># Returns 0 if `k &lt; 0` or `k &gt; n`. Raises `ArgumentError` if `n &lt; 0`.
+</span>        <span class="n">def</span> <span class="n">self</span><span class="p">.</span><span class="n">combination</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
+          <span class="n">raise</span> <span class="n">ArgumentError</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="s">"n must be non-negative"</span><span class="p">)</span> <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">0</span>
+          <span class="k">return</span> <span class="n">zero</span> <span class="k">if</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">k</span> <span class="o">&gt;</span> <span class="n">n</span>
+          <span class="n">factorial</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="c1">// (factorial(k) * factorial(n - k))</span>
         <span class="n">end</span>
 
-        <span class="n">def</span> <span class="n">self</span><span class="p">.</span><span class="n">repeated_combination</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
+        <span class="cp"># Returns the number of k-combinations of n with repetitions, `combination(n + k - 1, k)`.
+</span>        <span class="cp">#
+</span>        <span class="cp"># Returns 0 if `k &lt; 0`, and 1 if `n == 0` and `k == 0`. Raises `ArgumentError` if `n &lt; 0`.
+</span>        <span class="n">def</span> <span class="n">self</span><span class="p">.</span><span class="n">repeated_combination</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
+          <span class="n">raise</span> <span class="n">ArgumentError</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="s">"n must be non-negative"</span><span class="p">)</span> <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">0</span>
+          <span class="k">return</span> <span class="n">zero</span> <span class="k">if</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="mi">0</span>
+          <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span>
+            <span class="k">return</span> <span class="n">k</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">?</span> <span class="k">new</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">:</span> <span class="n">zero</span>
+          <span class="n">end</span>
           <span class="n">combination</span><span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="n">k</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
         <span class="n">end</span>
 
@@ -1295,6 +1370,337 @@ h1 a:focus {
       <span class="n">end</span>
     <span class="n">end</span>
   <span class="n">end</span>
+
+  <span class="cp"># Implements [atcoder::dynamic_modint / atcoder::modint](https://atcoder.github.io/ac-library/master/document_en/modint.html).
+</span>  <span class="cp">#
+</span>  <span class="cp"># A ModInt whose modulus is set at runtime with `.set_mod`.
+</span>  <span class="cp"># The default modulus is 998244353, as in ACL.
+</span>  <span class="cp"># Multiplication is done with Barrett reduction.
+</span>  <span class="cp">#
+</span>  <span class="cp"># ```
+</span>  <span class="cp"># alias Mint = AtCoder::DynamicModInt
+</span>  <span class="cp"># Mint.set_mod(11)
+</span>  <span class="cp"># Mint.new(3) // Mint.new(7) # =&gt; 2
+</span>  <span class="cp"># ```
+</span>  <span class="k">struct</span> <span class="nc">DynamicModInt</span>
+    <span class="cp"># The modulus. Must be in `1..Int32::MAX` (as in ACL).
+</span>    <span class="err">@@</span><span class="n">mod</span> <span class="o">:</span> <span class="n">UInt32</span> <span class="o">=</span> <span class="mi">998</span><span class="n">_244_353_u32</span>
+
+    <span class="cp"># Barrett reduction constant: ceil(2^64 / mod) (wrapping to 0 when mod == 1).
+</span>    <span class="err">@@</span><span class="n">im</span> <span class="o">:</span> <span class="n">UInt64</span> <span class="o">=</span> <span class="mi">18</span><span class="n">_479_187_003_u64</span>
+
+    <span class="err">@@</span><span class="n">factorials</span> <span class="o">=</span> <span class="n">Array</span><span class="p">(</span><span class="n">self</span><span class="p">).</span><span class="k">new</span>
+
+    <span class="cp"># Implements atcoder::modint.set_mod(m).
+</span>    <span class="cp">#
+</span>    <span class="cp"># Raises `ArgumentError` unless `1 &lt;= mod &lt;= Int32::MAX`.
+</span>    <span class="cp"># The cache of `.factorial` is cleared.
+</span>    <span class="n">def</span> <span class="n">self</span><span class="p">.</span><span class="n">set_mod</span><span class="p">(</span><span class="n">mod</span><span class="p">)</span>
+      <span class="n">unless</span> <span class="mi">1</span> <span class="o">&lt;=</span> <span class="n">mod</span> <span class="o">&lt;=</span> <span class="n">Int32</span><span class="o">::</span><span class="n">MAX</span>
+        <span class="n">raise</span> <span class="n">ArgumentError</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="s">"modulo must be in 1..#{Int32::MAX} (given #{mod})"</span><span class="p">)</span>
+      <span class="n">end</span>
+      <span class="err">@@</span><span class="n">mod</span> <span class="o">=</span> <span class="n">mod</span><span class="p">.</span><span class="n">to_u32</span>
+      <span class="err">@@</span><span class="n">im</span> <span class="o">=</span> <span class="n">UInt64</span><span class="o">::</span><span class="n">MAX</span> <span class="c1">// @@mod &amp;+ 1</span>
+      <span class="err">@@</span><span class="n">factorials</span> <span class="o">=</span> <span class="n">Array</span><span class="p">(</span><span class="n">self</span><span class="p">).</span><span class="k">new</span>
+    <span class="n">end</span>
+
+    <span class="cp"># Implements atcoder::modint.mod().
+</span>    <span class="n">def</span> <span class="n">self</span><span class="p">.</span><span class="n">mod</span> <span class="o">:</span> <span class="n">Int64</span>
+      <span class="err">@@</span><span class="n">mod</span><span class="p">.</span><span class="n">to_i64</span>
+    <span class="n">end</span>
+
+    <span class="cp"># Implements atcoder::modint.raw(x).
+</span>    <span class="cp">#
+</span>    <span class="cp"># Constructs a ModInt from *value* without taking the modulo.
+</span>    <span class="cp"># *value* must be in `0...mod`.
+</span>    <span class="n">def</span> <span class="n">self</span><span class="p">.</span><span class="n">raw</span><span class="p">(</span><span class="n">value</span> <span class="o">:</span> <span class="n">Int</span><span class="p">)</span>
+      <span class="k">new</span><span class="p">(</span><span class="n">raw_value</span><span class="o">:</span> <span class="n">value</span><span class="p">.</span><span class="n">to_u32</span><span class="o">!</span><span class="p">)</span>
+    <span class="n">end</span>
+
+    <span class="n">def</span> <span class="n">self</span><span class="p">.</span><span class="n">zero</span>
+      <span class="k">new</span>
+    <span class="n">end</span>
+
+    <span class="n">def</span> <span class="n">self</span><span class="p">.</span><span class="n">factorial</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+      <span class="k">if</span> <span class="err">@@</span><span class="n">factorials</span><span class="p">.</span><span class="n">empty</span><span class="o">?</span>
+        <span class="err">@@</span><span class="n">factorials</span> <span class="o">=</span> <span class="n">Array</span><span class="p">(</span><span class="n">self</span><span class="p">).</span><span class="k">new</span><span class="p">(</span><span class="mi">100</span><span class="n">_000_i64</span><span class="p">)</span>
+        <span class="err">@@</span><span class="n">factorials</span> <span class="o">&lt;&lt;</span> <span class="n">self</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+      <span class="n">end</span>
+      <span class="err">@@</span><span class="n">factorials</span><span class="p">.</span><span class="n">size</span><span class="p">.</span><span class="n">upto</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">i</span><span class="o">|</span>
+        <span class="err">@@</span><span class="n">factorials</span> <span class="o">&lt;&lt;</span> <span class="err">@@</span><span class="n">factorials</span><span class="p">.</span><span class="n">last</span> <span class="o">*</span> <span class="n">i</span>
+      <span class="n">end</span>
+      <span class="err">@@</span><span class="n">factorials</span><span class="p">[</span><span class="n">n</span><span class="p">]</span>
+    <span class="n">end</span>
+
+    <span class="cp"># Returns the number of k-permutations of n, `n! / (n - k)!`.
+</span>    <span class="cp">#
+</span>    <span class="cp"># Returns 0 if `k &lt; 0` or `k &gt; n`. Raises `ArgumentError` if `n &lt; 0`.
+</span>    <span class="n">def</span> <span class="n">self</span><span class="p">.</span><span class="n">permutation</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
+      <span class="n">raise</span> <span class="n">ArgumentError</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="s">"n must be non-negative"</span><span class="p">)</span> <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">0</span>
+      <span class="k">return</span> <span class="n">zero</span> <span class="k">if</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">k</span> <span class="o">&gt;</span> <span class="n">n</span>
+      <span class="n">factorial</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="c1">// factorial(n - k)</span>
+    <span class="n">end</span>
+
+    <span class="cp"># Returns the binomial coefficient `n! / (k! (n - k)!)`.
+</span>    <span class="cp">#
+</span>    <span class="cp"># Returns 0 if `k &lt; 0` or `k &gt; n`. Raises `ArgumentError` if `n &lt; 0`.
+</span>    <span class="n">def</span> <span class="n">self</span><span class="p">.</span><span class="n">combination</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
+      <span class="n">raise</span> <span class="n">ArgumentError</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="s">"n must be non-negative"</span><span class="p">)</span> <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">0</span>
+      <span class="k">return</span> <span class="n">zero</span> <span class="k">if</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">k</span> <span class="o">&gt;</span> <span class="n">n</span>
+      <span class="n">factorial</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="c1">// (factorial(k) * factorial(n - k))</span>
+    <span class="n">end</span>
+
+    <span class="cp"># Returns the number of k-combinations of n with repetitions, `combination(n + k - 1, k)`.
+</span>    <span class="cp">#
+</span>    <span class="cp"># Returns 0 if `k &lt; 0`, and 1 if `n == 0` and `k == 0`. Raises `ArgumentError` if `n &lt; 0`.
+</span>    <span class="n">def</span> <span class="n">self</span><span class="p">.</span><span class="n">repeated_combination</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
+      <span class="n">raise</span> <span class="n">ArgumentError</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="s">"n must be non-negative"</span><span class="p">)</span> <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">0</span>
+      <span class="k">return</span> <span class="n">zero</span> <span class="k">if</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="mi">0</span>
+      <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span>
+        <span class="k">return</span> <span class="n">k</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">?</span> <span class="k">new</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">:</span> <span class="n">zero</span>
+      <span class="n">end</span>
+      <span class="n">combination</span><span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="n">k</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
+    <span class="n">end</span>
+
+    <span class="cp"># Computes `a * b % mod` by Barrett reduction (the improved version in ACL v1.5.1).
+</span>    <span class="err">@</span><span class="p">[</span><span class="n">AlwaysInline</span><span class="p">]</span>
+    <span class="k">protected</span> <span class="n">def</span> <span class="n">self</span><span class="p">.</span><span class="n">mul_mod</span><span class="p">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">UInt32</span><span class="p">,</span> <span class="n">b</span> <span class="o">:</span> <span class="n">UInt32</span><span class="p">)</span> <span class="o">:</span> <span class="n">UInt32</span>
+      <span class="n">z</span> <span class="o">=</span> <span class="n">a</span><span class="p">.</span><span class="n">to_u64</span> <span class="o">&amp;*</span> <span class="n">b</span>
+      <span class="n">x</span> <span class="o">=</span> <span class="p">((</span><span class="n">z</span><span class="p">.</span><span class="n">to_u128</span> <span class="o">&amp;*</span> <span class="err">@@</span><span class="n">im</span><span class="p">)</span> <span class="o">&gt;&gt;</span> <span class="mi">64</span><span class="p">).</span><span class="n">to_u64</span><span class="o">!</span>
+      <span class="n">y</span> <span class="o">=</span> <span class="n">x</span> <span class="o">&amp;*</span> <span class="err">@@</span><span class="n">mod</span>
+      <span class="p">(</span><span class="n">z</span> <span class="o">&amp;-</span> <span class="n">y</span> <span class="o">&amp;+</span> <span class="p">(</span><span class="n">z</span> <span class="o">&lt;</span> <span class="n">y</span> <span class="o">?</span> <span class="err">@@</span><span class="n">mod</span><span class="p">.</span><span class="n">to_u64</span> <span class="o">:</span> <span class="mi">0</span><span class="n">_u64</span><span class="p">)).</span><span class="n">to_u32</span><span class="o">!</span>
+    <span class="n">end</span>
+
+    <span class="err">@</span><span class="n">value</span> <span class="o">:</span> <span class="n">UInt32</span>
+
+    <span class="n">def</span> <span class="n">initialize</span>
+      <span class="err">@</span><span class="n">value</span> <span class="o">=</span> <span class="mi">0</span><span class="n">_u32</span>
+    <span class="n">end</span>
+
+    <span class="n">def</span> <span class="n">initialize</span><span class="p">(</span><span class="n">value</span> <span class="o">:</span> <span class="n">UInt64</span> <span class="o">|</span> <span class="n">Int128</span> <span class="o">|</span> <span class="n">UInt128</span><span class="p">)</span>
+      <span class="err">@</span><span class="n">value</span> <span class="o">=</span> <span class="p">(</span><span class="n">value</span> <span class="o">%</span> <span class="err">@@</span><span class="n">mod</span><span class="p">).</span><span class="n">to_u32</span><span class="o">!</span>
+    <span class="n">end</span>
+
+    <span class="n">def</span> <span class="n">initialize</span><span class="p">(</span><span class="n">value</span> <span class="o">:</span> <span class="n">Int</span><span class="p">)</span>
+      <span class="err">@</span><span class="n">value</span> <span class="o">=</span> <span class="p">(</span><span class="n">value</span><span class="p">.</span><span class="n">to_i64</span> <span class="o">%</span> <span class="err">@@</span><span class="n">mod</span><span class="p">).</span><span class="n">to_u32</span><span class="o">!</span>
+    <span class="n">end</span>
+
+    <span class="cp"># :nodoc:
+</span>    <span class="n">def</span> <span class="n">initialize</span><span class="p">(</span><span class="o">*</span><span class="p">,</span> <span class="n">raw_value</span> <span class="o">:</span> <span class="n">UInt32</span><span class="p">)</span>
+      <span class="err">@</span><span class="n">value</span> <span class="o">=</span> <span class="n">raw_value</span>
+    <span class="n">end</span>
+
+    <span class="n">def</span> <span class="n">value</span> <span class="o">:</span> <span class="n">Int64</span>
+      <span class="err">@</span><span class="n">value</span><span class="p">.</span><span class="n">to_i64</span>
+    <span class="n">end</span>
+
+    <span class="n">def</span> <span class="n">clone</span>
+      <span class="n">self</span><span class="p">.</span><span class="k">class</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="n">raw_value</span><span class="o">:</span> <span class="err">@</span><span class="n">value</span><span class="p">)</span>
+    <span class="n">end</span>
+
+    <span class="n">def</span> <span class="o">-</span>
+      <span class="n">self</span><span class="p">.</span><span class="k">class</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">-</span> <span class="n">self</span>
+    <span class="n">end</span>
+
+    <span class="n">def</span> <span class="o">+</span>
+      <span class="n">self</span>
+    <span class="n">end</span>
+
+    <span class="n">def</span> <span class="o">+</span><span class="p">(</span><span class="n">value</span> <span class="o">:</span> <span class="n">self</span><span class="p">)</span>
+      <span class="n">v</span> <span class="o">=</span> <span class="err">@</span><span class="n">value</span> <span class="o">&amp;+</span> <span class="n">value</span><span class="p">.</span><span class="err">@</span><span class="n">value</span>
+      <span class="n">v</span> <span class="o">&amp;-=</span> <span class="err">@@</span><span class="n">mod</span> <span class="k">if</span> <span class="n">v</span> <span class="o">&gt;=</span> <span class="err">@@</span><span class="n">mod</span>
+      <span class="n">self</span><span class="p">.</span><span class="k">class</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="n">raw_value</span><span class="o">:</span> <span class="n">v</span><span class="p">)</span>
+    <span class="n">end</span>
+
+    <span class="n">def</span> <span class="o">-</span><span class="p">(</span><span class="n">value</span> <span class="o">:</span> <span class="n">self</span><span class="p">)</span>
+      <span class="n">v</span> <span class="o">=</span> <span class="err">@</span><span class="n">value</span> <span class="o">&amp;-</span> <span class="n">value</span><span class="p">.</span><span class="err">@</span><span class="n">value</span>
+      <span class="n">v</span> <span class="o">&amp;+=</span> <span class="err">@@</span><span class="n">mod</span> <span class="k">if</span> <span class="err">@</span><span class="n">value</span> <span class="o">&lt;</span> <span class="n">value</span><span class="p">.</span><span class="err">@</span><span class="n">value</span>
+      <span class="n">self</span><span class="p">.</span><span class="k">class</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="n">raw_value</span><span class="o">:</span> <span class="n">v</span><span class="p">)</span>
+    <span class="n">end</span>
+
+    <span class="n">def</span> <span class="o">*</span><span class="p">(</span><span class="n">value</span> <span class="o">:</span> <span class="n">self</span><span class="p">)</span>
+      <span class="n">self</span><span class="p">.</span><span class="k">class</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="n">raw_value</span><span class="o">:</span> <span class="n">self</span><span class="p">.</span><span class="k">class</span><span class="p">.</span><span class="n">mul_mod</span><span class="p">(</span><span class="err">@</span><span class="n">value</span><span class="p">,</span> <span class="n">value</span><span class="p">.</span><span class="err">@</span><span class="n">value</span><span class="p">))</span>
+    <span class="n">end</span>
+
+    <span class="n">def</span> <span class="o">+</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+      <span class="n">self</span> <span class="o">+</span> <span class="n">self</span><span class="p">.</span><span class="k">class</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    <span class="n">end</span>
+
+    <span class="n">def</span> <span class="o">-</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+      <span class="n">self</span> <span class="o">-</span> <span class="n">self</span><span class="p">.</span><span class="k">class</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    <span class="n">end</span>
+
+    <span class="n">def</span> <span class="o">*</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+      <span class="n">self</span> <span class="o">*</span> <span class="n">self</span><span class="p">.</span><span class="k">class</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    <span class="n">end</span>
+
+    <span class="n">def</span> <span class="o">/</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+      <span class="n">raise</span> <span class="n">DivisionByZeroError</span><span class="p">.</span><span class="k">new</span> <span class="k">if</span> <span class="n">value</span> <span class="o">==</span> <span class="mi">0</span>
+      <span class="n">self</span> <span class="o">/</span> <span class="n">self</span><span class="p">.</span><span class="k">class</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    <span class="n">end</span>
+
+    <span class="n">def</span> <span class="o">/</span><span class="p">(</span><span class="n">value</span> <span class="o">:</span> <span class="n">self</span><span class="p">)</span>
+      <span class="n">raise</span> <span class="n">DivisionByZeroError</span><span class="p">.</span><span class="k">new</span> <span class="k">if</span> <span class="n">value</span> <span class="o">==</span> <span class="mi">0</span>
+      <span class="n">self</span> <span class="o">*</span> <span class="n">value</span><span class="p">.</span><span class="n">inv</span>
+    <span class="n">end</span>
+
+    <span class="n">def</span> <span class="c1">//(value)</span>
+      <span class="n">self</span> <span class="o">/</span> <span class="n">value</span>
+    <span class="n">end</span>
+
+    <span class="n">def</span> <span class="o">**</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+      <span class="k">if</span> <span class="n">value</span> <span class="o">==</span> <span class="mi">0</span>
+        <span class="k">return</span> <span class="n">self</span><span class="p">.</span><span class="k">class</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+      <span class="n">end</span>
+
+      <span class="k">if</span> <span class="n">self</span><span class="p">.</span><span class="n">zero</span><span class="o">?</span>
+        <span class="k">return</span> <span class="n">self</span>
+      <span class="n">end</span>
+
+      <span class="n">b</span> <span class="o">=</span> <span class="n">value</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">?</span> <span class="n">self</span> <span class="o">:</span> <span class="n">inv</span>
+      <span class="n">e</span> <span class="o">=</span> <span class="n">value</span><span class="p">.</span><span class="n">abs</span>
+      <span class="n">ret</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="k">class</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+      <span class="k">while</span> <span class="n">e</span> <span class="o">&gt;</span> <span class="mi">0</span>
+        <span class="k">if</span> <span class="n">e</span><span class="p">.</span><span class="n">odd</span><span class="o">?</span>
+          <span class="n">ret</span> <span class="o">*=</span> <span class="n">b</span>
+        <span class="n">end</span>
+        <span class="n">b</span> <span class="o">*=</span> <span class="n">b</span>
+        <span class="n">e</span> <span class="o">&gt;&gt;=</span> <span class="mi">1</span>
+      <span class="n">end</span>
+      <span class="n">ret</span>
+    <span class="n">end</span>
+
+    <span class="cp"># Implements atcoder::modint.inv().
+</span>    <span class="cp">#
+</span>    <span class="cp"># Raises `ArgumentError` if the value and the modulus are not coprime.
+</span>    <span class="n">def</span> <span class="n">inv</span>
+      <span class="n">self</span><span class="p">.</span><span class="k">class</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="n">AtCoder</span><span class="o">::</span><span class="n">Math</span><span class="p">.</span><span class="n">inv_mod</span><span class="p">(</span><span class="err">@</span><span class="n">value</span><span class="p">.</span><span class="n">to_i64</span><span class="p">,</span> <span class="err">@@</span><span class="n">mod</span><span class="p">.</span><span class="n">to_i64</span><span class="p">))</span>
+    <span class="n">end</span>
+
+    <span class="n">def</span> <span class="o">&lt;&lt;</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+      <span class="n">self</span> <span class="o">*</span> <span class="n">self</span><span class="p">.</span><span class="k">class</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">**</span> <span class="n">value</span>
+    <span class="n">end</span>
+
+    <span class="n">def</span> <span class="n">abs</span>
+      <span class="n">value</span>
+    <span class="n">end</span>
+
+    <span class="n">def</span> <span class="n">pred</span>
+      <span class="n">self</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="n">end</span>
+
+    <span class="n">def</span> <span class="n">succ</span>
+      <span class="n">self</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="n">end</span>
+
+    <span class="n">def</span> <span class="n">zero</span><span class="o">?</span>
+      <span class="err">@</span><span class="n">value</span> <span class="o">==</span> <span class="mi">0</span>
+    <span class="n">end</span>
+
+    <span class="n">def</span> <span class="n">to_i64</span>
+      <span class="n">value</span>
+    <span class="n">end</span>
+
+    <span class="n">def</span> <span class="o">==</span><span class="p">(</span><span class="n">other</span> <span class="o">:</span> <span class="n">self</span><span class="p">)</span>
+      <span class="err">@</span><span class="n">value</span> <span class="o">==</span> <span class="n">other</span><span class="p">.</span><span class="err">@</span><span class="n">value</span>
+    <span class="n">end</span>
+
+    <span class="n">def</span> <span class="o">==</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
+      <span class="n">value</span> <span class="o">==</span> <span class="n">other</span>
+    <span class="n">end</span>
+
+    <span class="n">def</span> <span class="n">sqrt</span>
+      <span class="n">mod</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="k">class</span><span class="p">.</span><span class="n">mod</span>
+      <span class="n">z</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="k">class</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="mi">1</span><span class="n">_i64</span><span class="p">)</span>
+      <span class="n">until</span> <span class="n">z</span> <span class="o">**</span> <span class="p">((</span><span class="n">mod</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="c1">// 2) == mod - 1</span>
+        <span class="n">z</span> <span class="o">+=</span> <span class="mi">1</span>
+      <span class="n">end</span>
+      <span class="n">q</span> <span class="o">=</span> <span class="n">mod</span> <span class="o">-</span> <span class="mi">1</span>
+      <span class="n">m</span> <span class="o">=</span> <span class="mi">0</span>
+      <span class="k">while</span> <span class="n">q</span><span class="p">.</span><span class="n">even</span><span class="o">?</span>
+        <span class="n">q</span> <span class="c1">//= 2</span>
+        <span class="n">m</span> <span class="o">+=</span> <span class="mi">1</span>
+      <span class="n">end</span>
+      <span class="n">c</span> <span class="o">=</span> <span class="n">z</span> <span class="o">**</span> <span class="n">q</span>
+      <span class="n">t</span> <span class="o">=</span> <span class="n">self</span> <span class="o">**</span> <span class="n">q</span>
+      <span class="n">r</span> <span class="o">=</span> <span class="n">self</span> <span class="o">**</span> <span class="p">((</span><span class="n">q</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="c1">// 2)</span>
+      <span class="n">m</span><span class="p">.</span><span class="n">downto</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">i</span><span class="o">|</span>
+        <span class="n">tmp</span> <span class="o">=</span> <span class="n">t</span> <span class="o">**</span> <span class="p">(</span><span class="mi">2</span> <span class="o">**</span> <span class="p">(</span><span class="n">i</span> <span class="o">-</span> <span class="mi">2</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">tmp</span> <span class="o">!=</span> <span class="mi">1</span>
+          <span class="n">r</span> <span class="o">*=</span> <span class="n">c</span>
+          <span class="n">t</span> <span class="o">*=</span> <span class="n">c</span> <span class="o">**</span> <span class="mi">2</span>
+        <span class="n">end</span>
+        <span class="n">c</span> <span class="o">*=</span> <span class="n">c</span>
+      <span class="n">end</span>
+      <span class="k">if</span> <span class="n">r</span> <span class="o">*</span> <span class="n">r</span> <span class="o">==</span> <span class="n">self</span>
+        <span class="n">r</span><span class="p">.</span><span class="n">to_i64</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">&lt;=</span> <span class="n">mod</span> <span class="o">?</span> <span class="n">r</span> <span class="o">:</span> <span class="o">-</span><span class="n">r</span>
+      <span class="k">else</span>
+        <span class="n">nil</span>
+      <span class="n">end</span>
+    <span class="n">end</span>
+
+    <span class="n">def</span> <span class="n">to_s</span><span class="p">(</span><span class="n">io</span> <span class="o">:</span> <span class="n">IO</span><span class="p">)</span>
+      <span class="n">io</span> <span class="o">&lt;&lt;</span> <span class="err">@</span><span class="n">value</span>
+    <span class="n">end</span>
+
+    <span class="n">def</span> <span class="n">inspect</span><span class="p">(</span><span class="n">io</span> <span class="o">:</span> <span class="n">IO</span><span class="p">)</span>
+      <span class="n">to_s</span><span class="p">(</span><span class="n">io</span><span class="p">)</span>
+    <span class="n">end</span>
+
+    <span class="cp"># ac-library compatibility
+</span>
+    <span class="n">def</span> <span class="n">pow</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+      <span class="n">self</span> <span class="o">**</span> <span class="n">value</span>
+    <span class="n">end</span>
+
+    <span class="n">def</span> <span class="n">val</span>
+      <span class="n">self</span><span class="p">.</span><span class="n">to_i64</span>
+    <span class="n">end</span>
+
+    <span class="cp"># ModInt shouldn't be compared
+</span>
+    <span class="n">def</span> <span class="o">&lt;</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+      <span class="n">raise</span> <span class="n">NotImplementedError</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="s">"&lt;"</span><span class="p">)</span>
+    <span class="n">end</span>
+
+    <span class="n">def</span> <span class="o">&lt;=</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+      <span class="n">raise</span> <span class="n">NotImplementedError</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="s">"&lt;="</span><span class="p">)</span>
+    <span class="n">end</span>
+
+    <span class="n">def</span> <span class="o">&gt;</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+      <span class="n">raise</span> <span class="n">NotImplementedError</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="s">"&gt;"</span><span class="p">)</span>
+    <span class="n">end</span>
+
+    <span class="n">def</span> <span class="o">&gt;=</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+      <span class="n">raise</span> <span class="n">NotImplementedError</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="s">"&gt;="</span><span class="p">)</span>
+    <span class="n">end</span>
+  <span class="n">end</span>
+<span class="n">end</span>
+
+<span class="k">struct</span> <span class="nc">Int</span>
+  <span class="n">def</span> <span class="o">+</span><span class="p">(</span><span class="n">value</span> <span class="o">:</span> <span class="n">AtCoder</span><span class="o">::</span><span class="n">DynamicModInt</span><span class="p">)</span>
+    <span class="n">value</span> <span class="o">+</span> <span class="n">self</span>
+  <span class="n">end</span>
+
+  <span class="n">def</span> <span class="o">-</span><span class="p">(</span><span class="n">value</span> <span class="o">:</span> <span class="n">AtCoder</span><span class="o">::</span><span class="n">DynamicModInt</span><span class="p">)</span>
+    <span class="o">-</span><span class="n">value</span> <span class="o">+</span> <span class="n">self</span>
+  <span class="n">end</span>
+
+  <span class="n">def</span> <span class="o">*</span><span class="p">(</span><span class="n">value</span> <span class="o">:</span> <span class="n">AtCoder</span><span class="o">::</span><span class="n">DynamicModInt</span><span class="p">)</span>
+    <span class="n">value</span> <span class="o">*</span> <span class="n">self</span>
+  <span class="n">end</span>
+
+  <span class="n">def</span> <span class="c1">//(value : AtCoder::DynamicModInt)</span>
+    <span class="n">value</span><span class="p">.</span><span class="n">inv</span> <span class="o">*</span> <span class="n">self</span>
+  <span class="n">end</span>
+
+  <span class="n">def</span> <span class="o">/</span><span class="p">(</span><span class="n">value</span> <span class="o">:</span> <span class="n">AtCoder</span><span class="o">::</span><span class="n">DynamicModInt</span><span class="p">)</span>
+    <span class="n">self</span> <span class="c1">// value</span>
+  <span class="n">end</span>
+
+  <span class="n">def</span> <span class="o">==</span><span class="p">(</span><span class="n">value</span> <span class="o">:</span> <span class="n">AtCoder</span><span class="o">::</span><span class="n">DynamicModInt</span><span class="p">)</span>
+    <span class="n">value</span> <span class="o">==</span> <span class="n">self</span>
+  <span class="n">end</span>
 <span class="n">end</span>
 
 <span class="n">AtCoder</span><span class="p">.</span><span class="n">static_modint</span><span class="p">(</span><span class="n">ModInt1000000007</span><span class="p">,</span> <span class="mi">1</span><span class="n">_000_000_007_i64</span><span class="p">)</span>
@@ -1328,6 +1734,14 @@ h1 a:focus {
       <span class="p">(</span><span class="n">ModInt1000000007</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="mi">100</span><span class="n">_i64</span><span class="p">)</span> <span class="o">==</span> <span class="mi">101</span><span class="p">).</span><span class="n">should</span> <span class="n">eq</span> <span class="nb">false</span>
       <span class="p">(</span><span class="n">ModInt1000000007</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="mi">100</span><span class="n">_i64</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">100</span><span class="p">).</span><span class="n">should</span> <span class="n">eq</span> <span class="nb">false</span>
       <span class="p">(</span><span class="n">ModInt1000000007</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="mi">100</span><span class="n">_i64</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">101</span><span class="p">).</span><span class="n">should</span> <span class="n">eq</span> <span class="nb">true</span>
+    <span class="n">end</span>
+  <span class="n">end</span>
+
+  <span class="n">describe</span> <span class="s">".mod"</span> <span class="k">do</span>
+    <span class="n">it</span> <span class="s">"returns the modulus"</span> <span class="k">do</span>
+      <span class="n">ModInt1000000007</span><span class="p">.</span><span class="n">mod</span><span class="p">.</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">1</span><span class="n">_000_000_007</span>
+      <span class="n">AtCoder</span><span class="o">::</span><span class="n">ModInt998244353</span><span class="p">.</span><span class="n">mod</span><span class="p">.</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">998</span><span class="n">_244_353</span>
+      <span class="n">ModInt7</span><span class="p">.</span><span class="n">mod</span><span class="p">.</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">7</span>
     <span class="n">end</span>
   <span class="n">end</span>
 
@@ -1482,6 +1896,18 @@ h1 a:focus {
     <span class="n">it</span> <span class="s">"calculates permutation fast"</span> <span class="k">do</span>
       <span class="n">ModInt1000000007</span><span class="p">.</span><span class="n">permutation</span><span class="p">(</span><span class="mi">4</span><span class="n">_i64</span><span class="p">,</span> <span class="mi">2</span><span class="n">_i64</span><span class="p">).</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">12</span>
       <span class="n">ModInt1000000007</span><span class="p">.</span><span class="n">permutation</span><span class="p">(</span><span class="mi">10</span><span class="n">_i64</span><span class="p">,</span> <span class="mi">3</span><span class="n">_i64</span><span class="p">).</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">720</span>
+      <span class="n">ModInt1000000007</span><span class="p">.</span><span class="n">permutation</span><span class="p">(</span><span class="mi">10</span><span class="n">_i64</span><span class="p">,</span> <span class="mi">0</span><span class="n">_i64</span><span class="p">).</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">1</span>
+      <span class="n">ModInt1000000007</span><span class="p">.</span><span class="n">permutation</span><span class="p">(</span><span class="mi">10</span><span class="n">_i64</span><span class="p">,</span> <span class="mi">10</span><span class="n">_i64</span><span class="p">).</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">3</span><span class="n">_628_800</span>
+    <span class="n">end</span>
+
+    <span class="n">it</span> <span class="s">"returns 0 when k &lt; 0 or k &gt; n"</span> <span class="k">do</span>
+      <span class="n">ModInt1000000007</span><span class="p">.</span><span class="n">permutation</span><span class="p">(</span><span class="mi">3</span><span class="n">_i64</span><span class="p">,</span> <span class="mi">4</span><span class="n">_i64</span><span class="p">).</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">0</span>
+      <span class="n">ModInt1000000007</span><span class="p">.</span><span class="n">permutation</span><span class="p">(</span><span class="mi">0</span><span class="n">_i64</span><span class="p">,</span> <span class="mi">1</span><span class="n">_i64</span><span class="p">).</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">0</span>
+      <span class="n">ModInt1000000007</span><span class="p">.</span><span class="n">permutation</span><span class="p">(</span><span class="mi">3</span><span class="n">_i64</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="n">_i64</span><span class="p">).</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">0</span>
+    <span class="n">end</span>
+
+    <span class="n">it</span> <span class="s">"raises ArgumentError when n &lt; 0"</span> <span class="k">do</span>
+      <span class="n">expect_raises</span><span class="p">(</span><span class="n">ArgumentError</span><span class="p">)</span> <span class="p">{</span> <span class="n">ModInt1000000007</span><span class="p">.</span><span class="n">permutation</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="n">_i64</span><span class="p">,</span> <span class="mi">0</span><span class="n">_i64</span><span class="p">)</span> <span class="p">}</span>
     <span class="n">end</span>
   <span class="n">end</span>
 
@@ -1489,6 +1915,40 @@ h1 a:focus {
     <span class="n">it</span> <span class="s">"calculates combination fast"</span> <span class="k">do</span>
       <span class="n">ModInt1000000007</span><span class="p">.</span><span class="n">combination</span><span class="p">(</span><span class="mi">4</span><span class="n">_i64</span><span class="p">,</span> <span class="mi">2</span><span class="n">_i64</span><span class="p">).</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">6</span>
       <span class="n">ModInt1000000007</span><span class="p">.</span><span class="n">combination</span><span class="p">(</span><span class="mi">10</span><span class="n">_i64</span><span class="p">,</span> <span class="mi">3</span><span class="n">_i64</span><span class="p">).</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">120</span>
+      <span class="n">ModInt1000000007</span><span class="p">.</span><span class="n">combination</span><span class="p">(</span><span class="mi">0</span><span class="n">_i64</span><span class="p">,</span> <span class="mi">0</span><span class="n">_i64</span><span class="p">).</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">1</span>
+      <span class="n">ModInt1000000007</span><span class="p">.</span><span class="n">combination</span><span class="p">(</span><span class="mi">10</span><span class="n">_i64</span><span class="p">,</span> <span class="mi">10</span><span class="n">_i64</span><span class="p">).</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">1</span>
+      <span class="n">ModInt1000000007</span><span class="p">.</span><span class="n">combination</span><span class="p">(</span><span class="mi">100</span><span class="n">_000_i64</span><span class="p">,</span> <span class="mi">50</span><span class="n">_000_i64</span><span class="p">).</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">149</span><span class="n">_033_233</span>
+    <span class="n">end</span>
+
+    <span class="n">it</span> <span class="s">"matches Pascal's triangle"</span> <span class="k">do</span>
+      <span class="n">row</span> <span class="o">=</span> <span class="p">[</span><span class="n">ModInt1000000007</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="mi">1</span><span class="p">)]</span>
+      <span class="mf">0.</span><span class="n">upto</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">n</span><span class="o">|</span>
+        <span class="mf">0.</span><span class="n">upto</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="p">{</span> <span class="o">|</span><span class="n">k</span><span class="o">|</span> <span class="n">ModInt1000000007</span><span class="p">.</span><span class="n">combination</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">).</span><span class="n">should</span> <span class="n">eq</span> <span class="n">row</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="p">}</span>
+        <span class="n">ModInt1000000007</span><span class="p">.</span><span class="n">combination</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">).</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">0</span>
+        <span class="n">row</span> <span class="o">=</span> <span class="p">[</span><span class="n">ModInt1000000007</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="mi">1</span><span class="p">)]</span> <span class="o">+</span> <span class="p">(</span><span class="mf">1.</span><span class="p">.</span><span class="n">n</span><span class="p">).</span><span class="n">map</span> <span class="p">{</span> <span class="o">|</span><span class="n">k</span><span class="o">|</span> <span class="n">row</span><span class="p">[</span><span class="n">k</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">row</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="p">}</span> <span class="o">+</span> <span class="p">[</span><span class="n">ModInt1000000007</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="mi">1</span><span class="p">)]</span>
+      <span class="n">end</span>
+    <span class="n">end</span>
+
+    <span class="n">it</span> <span class="s">"returns 0 when k &lt; 0 or k &gt; n"</span> <span class="k">do</span>
+      <span class="n">ModInt1000000007</span><span class="p">.</span><span class="n">combination</span><span class="p">(</span><span class="mi">3</span><span class="n">_i64</span><span class="p">,</span> <span class="mi">4</span><span class="n">_i64</span><span class="p">).</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">0</span>
+      <span class="n">ModInt1000000007</span><span class="p">.</span><span class="n">combination</span><span class="p">(</span><span class="mi">0</span><span class="n">_i64</span><span class="p">,</span> <span class="mi">1</span><span class="n">_i64</span><span class="p">).</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">0</span>
+      <span class="n">ModInt1000000007</span><span class="p">.</span><span class="n">combination</span><span class="p">(</span><span class="mi">3</span><span class="n">_i64</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="n">_i64</span><span class="p">).</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">0</span>
+    <span class="n">end</span>
+
+    <span class="n">it</span> <span class="s">"raises ArgumentError when n &lt; 0"</span> <span class="k">do</span>
+      <span class="n">expect_raises</span><span class="p">(</span><span class="n">ArgumentError</span><span class="p">)</span> <span class="p">{</span> <span class="n">ModInt1000000007</span><span class="p">.</span><span class="n">combination</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="n">_i64</span><span class="p">,</span> <span class="mi">0</span><span class="n">_i64</span><span class="p">)</span> <span class="p">}</span>
+    <span class="n">end</span>
+  <span class="n">end</span>
+
+  <span class="n">describe</span> <span class="s">".repeated_combination"</span> <span class="k">do</span>
+    <span class="n">it</span> <span class="s">"calculates combination with repetitions"</span> <span class="k">do</span>
+      <span class="n">ModInt1000000007</span><span class="p">.</span><span class="n">repeated_combination</span><span class="p">(</span><span class="mi">3</span><span class="n">_i64</span><span class="p">,</span> <span class="mi">2</span><span class="n">_i64</span><span class="p">).</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">6</span>
+      <span class="n">ModInt1000000007</span><span class="p">.</span><span class="n">repeated_combination</span><span class="p">(</span><span class="mi">1</span><span class="n">_i64</span><span class="p">,</span> <span class="mi">5</span><span class="n">_i64</span><span class="p">).</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">1</span>
+      <span class="n">ModInt1000000007</span><span class="p">.</span><span class="n">repeated_combination</span><span class="p">(</span><span class="mi">5</span><span class="n">_i64</span><span class="p">,</span> <span class="mi">0</span><span class="n">_i64</span><span class="p">).</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">1</span>
+      <span class="n">ModInt1000000007</span><span class="p">.</span><span class="n">repeated_combination</span><span class="p">(</span><span class="mi">0</span><span class="n">_i64</span><span class="p">,</span> <span class="mi">0</span><span class="n">_i64</span><span class="p">).</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">1</span>
+      <span class="n">ModInt1000000007</span><span class="p">.</span><span class="n">repeated_combination</span><span class="p">(</span><span class="mi">0</span><span class="n">_i64</span><span class="p">,</span> <span class="mi">3</span><span class="n">_i64</span><span class="p">).</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">0</span>
+      <span class="n">ModInt1000000007</span><span class="p">.</span><span class="n">repeated_combination</span><span class="p">(</span><span class="mi">3</span><span class="n">_i64</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="n">_i64</span><span class="p">).</span><span class="n">should</span> <span class="n">eq</span> <span class="mi">0</span>
+      <span class="n">expect_raises</span><span class="p">(</span><span class="n">ArgumentError</span><span class="p">)</span> <span class="p">{</span> <span class="n">ModInt1000000007</span><span class="p">.</span><span class="n">repeated_combination</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="n">_i64</span><span class="p">,</span> <span class="mi">1</span><span class="n">_i64</span><span class="p">)</span> <span class="p">}</span>
     <span class="n">end</span>
   <span class="n">end</span>
 
