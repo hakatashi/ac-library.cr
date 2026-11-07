@@ -47,6 +47,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - CI: Run tests on Crystal 1.17.0 (the version on the AtCoder judge) and the latest Crystal.
 - CI: Replace container-based jobs with `crystal-lang/install-crystal`, and update deprecated actions (`actions/cache@v2`, Codecov bash uploader, etc.).
 - Development dependencies: Update ameba to 1.6.4 and cr-bundle to the latest commit.
+- Update repository URLs in shard.yml, README, and source file headers from google/ac-library.cr to hakatashi/ac-library.cr ([#37](https://github.com/hakatashi/ac-library.cr/issues/37)).
 
 ## [0.1.0] - 2023-11-28
 
