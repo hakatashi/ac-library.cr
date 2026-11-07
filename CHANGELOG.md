@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- `AtCoder::DynamicModInt`, which implements ACL's `modint` (`dynamic_modint`), a ModInt whose modulus is set at runtime by `.set_mod`. Multiplication uses Barrett reduction, in the same way as ACL v1.5.1 ([#34](https://github.com/hakatashi/ac-library.cr/issues/34)).
+- `.mod` class method of static ModInts (`ModInt998244353.mod`, etc.), which returns the modulus as in ACL's `mint::mod()`.
+
 ### Fixed
 
 - `MaxFlow#flow` no longer overflows the stack on graphs with very long augmenting paths (e.g. a path graph of 200,000 vertices) ([#26](https://github.com/hakatashi/ac-library.cr/issues/26)). The DFS that finds augmenting paths is now iterative instead of recursive. The resulting flow is unchanged.
@@ -21,6 +26,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Documentation
 
 - README: Fix the Crystal counterpart of `two_sat` (`AtCoder::TwoSat.new(n)`) and a typo in the `atcoder/scc` heading.
+- Fix the result of the `static_modint` example in README and the doc comment (`80 + 90` is `69` modulo 101, not `89`).
 - Fix doc comments of `SegTree#all_prod`, `SegTree#max_right`, `SegTree#min_left`, `LazySegTree#set` and `static_modint`.
 
 - README: Document that `SegTree` uses the maximum as the default operation.
@@ -30,6 +36,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `SCC` is rewritten in the same way as ACL (CSR adjacency and Tarjan's algorithm), and `TwoSat` uses it without building `Set`s ([#28](https://github.com/hakatashi/ac-library.cr/issues/28)). On a random graph with 5×10^5 vertices and edges, `SCC#scc` is about 4 times faster and `TwoSat#satisfiable?` about 10 times faster. The return type of `SCC#scc` (`Array(Set(Int64))`) is unchanged, but the order of vertices inside each `Set` may differ from before.
 - `SCC#adjacencies` is now built on every call instead of being stored. `SCC#add_edge` raises `IndexError` for an out-of-range vertex at the time of the call.
 - `Graph#dfs`: The block passed to `#dfs` keeps the same arguments, but the children of a node are now visited *after* the block returns, instead of inside `callback.call`. Code placed after `callback.call` in the block therefore runs before the subtree is visited. The visiting order of nodes is unchanged. If `callback` is called more than once, the last value is used.
+- **(Behavior change)** `.permutation`, `.combination` and `.repeated_combination` of ModInts now return 0 when `k < 0` or `k > n`, instead of raising `ArgumentError` (`k > n`) or returning a wrong value (`k < 0`). They raise `ArgumentError` when `n < 0`. `.repeated_combination(0, 0)` now returns 1 instead of raising.
+- `.combination` of ModInts computes one modular inverse instead of two.
 - `MinCostFlow#add_edge` now returns the index of the added edge (as in ACL), instead of the internal edge list.
 - `require "atcoder/min_cost_flow"` no longer loads `atcoder/graph` (it loads `atcoder/priority_queue` instead).
 - `MinCostFlow#get_edge` and `MinCostFlow#edges` are added as stubs raising `NotImplementedError`, like the other unimplemented ACL methods.
