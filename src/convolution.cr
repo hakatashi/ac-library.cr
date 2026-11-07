@@ -14,6 +14,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+require "./math.cr"
+require "./mod_int.cr"
+
 module AtCoder
   # Implements [atcoder::convolution](https://atcoder.github.io/ac-library/master/document_en/convolution.html).
   #

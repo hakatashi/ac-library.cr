@@ -27,6 +27,12 @@ jobs:
         crystal: ${{ matrix.crystal }}
     - name: Run tests
       run: crystal spec --verbose
+    - name: Check standalone requires
+      run: |
+        for file in src/*.cr; do
+          echo "Checking $file"
+          crystal eval "require \"./$file\""
+        done
     - name: Run benchmarks
       run: crystal run --release benchmarks/*
 
