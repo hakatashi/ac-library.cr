@@ -23,25 +23,10 @@ alias Mint = AtCoder::DynamicModInt
 t, m = read_line.split.map(&.to_i64)
 Mint.set_mod(m)
 
-queries = Array.new(t) do
-  n, k = read_line.split.map(&.to_i64)
-  {n, k}
-end
-
-max_n = queries.max_of { |(n, _)| n }
-factorials = Array.new(max_n + 1, Mint.new(1))
-1.upto(max_n) { |i| factorials[i] = factorials[i - 1] * i }
-inv_factorials = Array.new(max_n + 1, Mint.new(1))
-inv_factorials[max_n] = factorials[max_n].inv
-max_n.downto(1) { |i| inv_factorials[i - 1] = inv_factorials[i] * i }
-
 output = String.build do |io|
-  queries.each do |(n, k)|
-    if k > n
-      io << 0 << '\n'
-    else
-      io << factorials[n] * inv_factorials[k] * inv_factorials[n - k] << '\n'
-    end
+  t.times do
+    n, k = read_line.split.map(&.to_i64)
+    io << Mint.combination(n, k) << '\n'
   end
 end
 print output

@@ -56,6 +56,8 @@ require "atcoder/fenwick_tree" # load FenwickTree
   Mint.new(30_i64) // Mint.new(7_i64) #=> 285714292
   ```
 
+  * `.factorial(n)`, `.permutation(n, k)`, `.combination(n, k)` and `.repeated_combination(n, k)` are also available (not in ACL). They return 0 when `k < 0` or `k > n`, and raise `ArgumentError` when `n < 0`.
+
 * `static_modint` => `AtCoder.static_modint`
 
   ```cr

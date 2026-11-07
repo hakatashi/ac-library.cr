@@ -196,6 +196,18 @@ describe "ModInt1000000007" do
     it "calculates permutation fast" do
       ModInt1000000007.permutation(4_i64, 2_i64).should eq 12
       ModInt1000000007.permutation(10_i64, 3_i64).should eq 720
+      ModInt1000000007.permutation(10_i64, 0_i64).should eq 1
+      ModInt1000000007.permutation(10_i64, 10_i64).should eq 3_628_800
+    end
+
+    it "returns 0 when k < 0 or k > n" do
+      ModInt1000000007.permutation(3_i64, 4_i64).should eq 0
+      ModInt1000000007.permutation(0_i64, 1_i64).should eq 0
+      ModInt1000000007.permutation(3_i64, -1_i64).should eq 0
+    end
+
+    it "raises ArgumentError when n < 0" do
+      expect_raises(ArgumentError) { ModInt1000000007.permutation(-1_i64, 0_i64) }
     end
   end
 
@@ -203,6 +215,40 @@ describe "ModInt1000000007" do
     it "calculates combination fast" do
       ModInt1000000007.combination(4_i64, 2_i64).should eq 6
       ModInt1000000007.combination(10_i64, 3_i64).should eq 120
+      ModInt1000000007.combination(0_i64, 0_i64).should eq 1
+      ModInt1000000007.combination(10_i64, 10_i64).should eq 1
+      ModInt1000000007.combination(100_000_i64, 50_000_i64).should eq 149_033_233
+    end
+
+    it "matches Pascal's triangle" do
+      row = [ModInt1000000007.new(1)]
+      0.upto(100) do |n|
+        0.upto(n) { |k| ModInt1000000007.combination(n, k).should eq row[k] }
+        ModInt1000000007.combination(n, n + 1).should eq 0
+        row = [ModInt1000000007.new(1)] + (1..n).map { |k| row[k - 1] + row[k] } + [ModInt1000000007.new(1)]
+      end
+    end
+
+    it "returns 0 when k < 0 or k > n" do
+      ModInt1000000007.combination(3_i64, 4_i64).should eq 0
+      ModInt1000000007.combination(0_i64, 1_i64).should eq 0
+      ModInt1000000007.combination(3_i64, -1_i64).should eq 0
+    end
+
+    it "raises ArgumentError when n < 0" do
+      expect_raises(ArgumentError) { ModInt1000000007.combination(-1_i64, 0_i64) }
+    end
+  end
+
+  describe ".repeated_combination" do
+    it "calculates combination with repetitions" do
+      ModInt1000000007.repeated_combination(3_i64, 2_i64).should eq 6
+      ModInt1000000007.repeated_combination(1_i64, 5_i64).should eq 1
+      ModInt1000000007.repeated_combination(5_i64, 0_i64).should eq 1
+      ModInt1000000007.repeated_combination(0_i64, 0_i64).should eq 1
+      ModInt1000000007.repeated_combination(0_i64, 3_i64).should eq 0
+      ModInt1000000007.repeated_combination(3_i64, -1_i64).should eq 0
+      expect_raises(ArgumentError) { ModInt1000000007.repeated_combination(-1_i64, 1_i64) }
     end
   end
 

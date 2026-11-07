@@ -71,17 +71,33 @@ module AtCoder
           @@factorials[n]
         end
 
+        # Returns the number of k-permutations of n, `n! / (n - k)!`.
+        #
+        # Returns 0 if `k < 0` or `k > n`. Raises `ArgumentError` if `n < 0`.
         def self.permutation(n, k)
-          raise ArgumentError.new("k cannot be greater than n") unless n >= k
+          raise ArgumentError.new("n must be non-negative") if n < 0
+          return zero if k < 0 || k > n
           factorial(n) // factorial(n - k)
         end
 
+        # Returns the binomial coefficient `n! / (k! (n - k)!)`.
+        #
+        # Returns 0 if `k < 0` or `k > n`. Raises `ArgumentError` if `n < 0`.
         def self.combination(n, k)
-          raise ArgumentError.new("k cannot be greater than n") unless n >= k
-          permutation(n, k) // @@factorials[k]
+          raise ArgumentError.new("n must be non-negative") if n < 0
+          return zero if k < 0 || k > n
+          factorial(n) // (factorial(k) * factorial(n - k))
         end
 
+        # Returns the number of k-combinations of n with repetitions, `combination(n + k - 1, k)`.
+        #
+        # Returns 0 if `k < 0`, and 1 if `n == 0` and `k == 0`. Raises `ArgumentError` if `n < 0`.
         def self.repeated_combination(n, k)
+          raise ArgumentError.new("n must be non-negative") if n < 0
+          return zero if k < 0
+          if n == 0
+            return k == 0 ? new(1) : zero
+          end
           combination(n + k - 1, k)
         end
 
@@ -432,17 +448,33 @@ module AtCoder
       @@factorials[n]
     end
 
+    # Returns the number of k-permutations of n, `n! / (n - k)!`.
+    #
+    # Returns 0 if `k < 0` or `k > n`. Raises `ArgumentError` if `n < 0`.
     def self.permutation(n, k)
-      raise ArgumentError.new("k cannot be greater than n") unless n >= k
+      raise ArgumentError.new("n must be non-negative") if n < 0
+      return zero if k < 0 || k > n
       factorial(n) // factorial(n - k)
     end
 
+    # Returns the binomial coefficient `n! / (k! (n - k)!)`.
+    #
+    # Returns 0 if `k < 0` or `k > n`. Raises `ArgumentError` if `n < 0`.
     def self.combination(n, k)
-      raise ArgumentError.new("k cannot be greater than n") unless n >= k
-      permutation(n, k) // @@factorials[k]
+      raise ArgumentError.new("n must be non-negative") if n < 0
+      return zero if k < 0 || k > n
+      factorial(n) // (factorial(k) * factorial(n - k))
     end
 
+    # Returns the number of k-combinations of n with repetitions, `combination(n + k - 1, k)`.
+    #
+    # Returns 0 if `k < 0`, and 1 if `n == 0` and `k == 0`. Raises `ArgumentError` if `n < 0`.
     def self.repeated_combination(n, k)
+      raise ArgumentError.new("n must be non-negative") if n < 0
+      return zero if k < 0
+      if n == 0
+        return k == 0 ? new(1) : zero
+      end
       combination(n + k - 1, k)
     end
 

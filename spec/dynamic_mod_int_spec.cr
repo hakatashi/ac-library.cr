@@ -206,6 +206,16 @@ describe "DynamicModInt" do
       DynamicModInt.set_mod(7)
       DynamicModInt.combination(6, 3).should eq 20 % 7
     end
+
+    it "returns 0 when k < 0 or k > n" do
+      DynamicModInt.set_mod(1_000_000_007)
+      DynamicModInt.combination(3, 4).should eq 0
+      DynamicModInt.combination(3, -1).should eq 0
+      DynamicModInt.permutation(3, 4).should eq 0
+      DynamicModInt.repeated_combination(0, 0).should eq 1
+      DynamicModInt.repeated_combination(0, 2).should eq 0
+      expect_raises(ArgumentError) { DynamicModInt.combination(-1, 0) }
+    end
   end
 
   describe "Int" do

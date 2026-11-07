@@ -30,6 +30,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- **(Behavior change)** `.permutation`, `.combination` and `.repeated_combination` of ModInts now return 0 when `k < 0` or `k > n`, instead of raising `ArgumentError` (`k > n`) or returning a wrong value (`k < 0`). They raise `ArgumentError` when `n < 0`. `.repeated_combination(0, 0)` now returns 1 instead of raising.
+- `.combination` of ModInts computes one modular inverse instead of two.
 - `MinCostFlow#add_edge` now returns the index of the added edge (as in ACL), instead of the internal edge list.
 - `require "atcoder/min_cost_flow"` no longer loads `atcoder/graph` (it loads `atcoder/priority_queue` instead).
 - `MinCostFlow#get_edge` and `MinCostFlow#edges` are added as stubs raising `NotImplementedError`, like the other unimplemented ACL methods.
