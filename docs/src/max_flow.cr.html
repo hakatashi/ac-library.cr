@@ -102,7 +102,7 @@ h1 a:focus {
 
 <ul>
     <li><a href="/blob/master/src/max_flow.cr">View this file on GitHub</a></li>
-    <li>Last update: 2026-11-07 22:05:58+09:00</li>
+    <li>Last update: 2026-11-08 02:10:21+09:00</li>
     
     
     <li>Link: <a href="/actions"><img class="emoji" title=":x:" alt=":x:" src="https://github.githubassets.com/images/icons/emoji/unicode/274c.png" height="20" width="20"> View error logs on GitHub Actions</a>
@@ -122,6 +122,10 @@ h1 a:focus {
 
     <h2>Required by</h2>
     <ul>
+    
+        <li><a href="/ac-library.cr/docs/benchmarks/MaxFlow.cr"><img class="emoji" title=":warning:" alt=":warning:" src="https://github.githubassets.com/images/icons/emoji/unicode/26a0.png" height="20" width="20"> benchmarks/MaxFlow.cr
+            
+        </a></li>
     
         <li><a href="/ac-library.cr/docs/spec/max_flow_spec.cr"><img class="emoji" title=":warning:" alt=":warning:" src="https://github.githubassets.com/images/icons/emoji/unicode/26a0.png" height="20" width="20"> spec/max_flow_spec.cr
             
@@ -215,11 +219,15 @@ h1 a:focus {
     <span class="cp"># Number of visited adjacencies for each nodes
 </span>    <span class="n">getter</span> <span class="n">visit_counts</span> <span class="o">:</span> <span class="n">Array</span><span class="p">(</span><span class="n">Int64</span><span class="p">)</span>
 
+    <span class="err">@</span><span class="n">path</span> <span class="o">:</span> <span class="n">Array</span><span class="p">(</span><span class="n">Int64</span><span class="p">)</span>
+    <span class="err">@</span><span class="n">queue</span> <span class="o">:</span> <span class="n">Array</span><span class="p">(</span><span class="n">Int64</span><span class="p">)</span>
+
     <span class="n">def</span> <span class="n">initialize</span><span class="p">(</span><span class="err">@</span><span class="n">size</span><span class="p">)</span>
       <span class="err">@</span><span class="n">adjacencies</span> <span class="o">=</span> <span class="n">Array</span><span class="p">(</span><span class="n">Array</span><span class="p">(</span><span class="n">Edge</span><span class="p">)).</span><span class="k">new</span><span class="p">(</span><span class="err">@</span><span class="n">size</span><span class="p">)</span> <span class="p">{</span> <span class="p">[]</span> <span class="n">of</span> <span class="n">Edge</span> <span class="p">}</span>
       <span class="err">@</span><span class="n">depths</span> <span class="o">=</span> <span class="n">Array</span><span class="p">(</span><span class="n">Int64</span><span class="p">).</span><span class="k">new</span><span class="p">(</span><span class="err">@</span><span class="n">size</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="n">_i64</span><span class="p">)</span>
       <span class="err">@</span><span class="n">visit_counts</span> <span class="o">=</span> <span class="n">Array</span><span class="p">(</span><span class="n">Int64</span><span class="p">).</span><span class="k">new</span><span class="p">(</span><span class="err">@</span><span class="n">size</span><span class="p">,</span> <span class="mi">0</span><span class="n">_i64</span><span class="p">)</span>
       <span class="err">@</span><span class="n">path</span> <span class="o">=</span> <span class="n">Array</span><span class="p">(</span><span class="n">Int64</span><span class="p">).</span><span class="k">new</span>
+      <span class="err">@</span><span class="n">queue</span> <span class="o">=</span> <span class="n">Array</span><span class="p">(</span><span class="n">Int64</span><span class="p">).</span><span class="k">new</span><span class="p">(</span><span class="err">@</span><span class="n">size</span><span class="p">,</span> <span class="mi">0</span><span class="n">_i64</span><span class="p">)</span>
     <span class="n">end</span>
 
     <span class="cp"># Implements atcoder::mf_graph.add_edge(from, to, capacity).
@@ -233,19 +241,27 @@ h1 a:focus {
 
     <span class="cp"># Implements atcoder::mf_graph.flow(start, target).
 </span>    <span class="n">def</span> <span class="n">flow</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>
+      <span class="n">start_i64</span> <span class="o">=</span> <span class="n">start</span><span class="p">.</span><span class="n">to_i64</span>
+      <span class="n">target_i64</span> <span class="o">=</span> <span class="n">target</span><span class="p">.</span><span class="n">to_i64</span>
+
+      <span class="n">raise</span> <span class="n">IndexError</span><span class="p">.</span><span class="k">new</span> <span class="n">unless</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">start_i64</span> <span class="o">&lt;</span> <span class="err">@</span><span class="n">size</span> <span class="o">&amp;&amp;</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">target_i64</span> <span class="o">&lt;</span> <span class="err">@</span><span class="n">size</span>
+      <span class="k">return</span> <span class="mi">0</span><span class="n">_i64</span> <span class="k">if</span> <span class="n">start_i64</span> <span class="o">==</span> <span class="n">target_i64</span>
+
       <span class="n">flow</span> <span class="o">=</span> <span class="mi">0</span><span class="n">_i64</span>
 
       <span class="n">loop</span> <span class="k">do</span>
-        <span class="n">bfs</span><span class="p">(</span><span class="n">start</span><span class="p">)</span>
-        <span class="k">if</span> <span class="err">@</span><span class="n">depths</span><span class="p">[</span><span class="n">target</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span>
+        <span class="n">bfs</span><span class="p">(</span><span class="n">start_i64</span><span class="p">,</span> <span class="n">target_i64</span><span class="p">)</span>
+        <span class="k">if</span> <span class="err">@</span><span class="n">depths</span><span class="p">[</span><span class="n">target_i64</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span>
           <span class="k">return</span> <span class="n">flow</span>
         <span class="n">end</span>
 
         <span class="err">@</span><span class="n">visit_counts</span><span class="p">.</span><span class="n">fill</span><span class="p">(</span><span class="mi">0</span><span class="n">_i64</span><span class="p">)</span>
-        <span class="k">while</span> <span class="p">(</span><span class="n">flowed</span> <span class="o">=</span> <span class="n">dfs</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">target</span><span class="p">))</span> <span class="o">&gt;</span> <span class="mi">0</span>
-          <span class="n">flow</span> <span class="o">+=</span> <span class="n">flowed</span>
-        <span class="n">end</span>
+        <span class="n">pushed</span> <span class="o">=</span> <span class="n">dfs</span><span class="p">(</span><span class="n">target_i64</span><span class="p">,</span> <span class="n">start_i64</span><span class="p">)</span>
+        <span class="k">break</span> <span class="k">if</span> <span class="n">pushed</span> <span class="o">==</span> <span class="mi">0</span>
+        <span class="n">flow</span> <span class="o">+=</span> <span class="n">pushed</span>
       <span class="n">end</span>
+
+      <span class="n">flow</span>
     <span class="n">end</span>
 
     <span class="cp"># FIXME: Unimplemented
@@ -268,76 +284,130 @@ h1 a:focus {
       <span class="n">raise</span> <span class="n">NotImplementedError</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="s">"AtCoder::MaxFlow#change_edge"</span><span class="p">)</span>
     <span class="n">end</span>
 
-    <span class="k">private</span> <span class="n">def</span> <span class="n">bfs</span><span class="p">(</span><span class="n">start</span><span class="p">)</span>
+    <span class="k">private</span> <span class="n">def</span> <span class="n">bfs</span><span class="p">(</span><span class="n">start</span> <span class="o">:</span> <span class="n">Int64</span><span class="p">,</span> <span class="n">target</span> <span class="o">:</span> <span class="n">Int64</span><span class="p">)</span>
       <span class="err">@</span><span class="n">depths</span><span class="p">.</span><span class="n">fill</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="n">_i64</span><span class="p">)</span>
-      <span class="n">queue</span> <span class="o">=</span> <span class="n">Deque</span><span class="p">(</span><span class="n">Int64</span><span class="p">).</span><span class="k">new</span>
+      <span class="n">depths_ptr</span> <span class="o">=</span> <span class="err">@</span><span class="n">depths</span><span class="p">.</span><span class="n">to_unsafe</span>
+      <span class="n">q_ptr</span> <span class="o">=</span> <span class="err">@</span><span class="n">queue</span><span class="p">.</span><span class="n">to_unsafe</span>
 
-      <span class="err">@</span><span class="n">depths</span><span class="p">[</span><span class="n">start</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="n">_i64</span>
-      <span class="n">queue</span> <span class="o">&lt;&lt;</span> <span class="n">start</span><span class="p">.</span><span class="n">to_i64</span>
-      <span class="n">until</span> <span class="n">queue</span><span class="p">.</span><span class="n">empty</span><span class="o">?</span>
-        <span class="n">node</span> <span class="o">=</span> <span class="n">queue</span><span class="p">.</span><span class="n">shift</span>
+      <span class="n">qh</span> <span class="o">=</span> <span class="mi">0</span>
+      <span class="n">qt</span> <span class="o">=</span> <span class="mi">0</span>
 
-        <span class="err">@</span><span class="n">adjacencies</span><span class="p">[</span><span class="n">node</span><span class="p">].</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">edge</span><span class="o">|</span>
-          <span class="k">if</span> <span class="n">edge</span><span class="p">.</span><span class="n">capacity</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="err">@</span><span class="n">depths</span><span class="p">[</span><span class="n">edge</span><span class="p">.</span><span class="n">to</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span>
-            <span class="err">@</span><span class="n">depths</span><span class="p">[</span><span class="n">edge</span><span class="p">.</span><span class="n">to</span><span class="p">]</span> <span class="o">=</span> <span class="err">@</span><span class="n">depths</span><span class="p">[</span><span class="n">node</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
-            <span class="n">queue</span> <span class="o">&lt;&lt;</span> <span class="n">edge</span><span class="p">.</span><span class="n">to</span>
+      <span class="n">depths_ptr</span><span class="p">[</span><span class="n">start</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="n">_i64</span>
+      <span class="n">q_ptr</span><span class="p">[</span><span class="n">qt</span><span class="p">]</span> <span class="o">=</span> <span class="n">start</span>
+      <span class="n">qt</span> <span class="o">+=</span> <span class="mi">1</span>
+
+      <span class="k">while</span> <span class="n">qh</span> <span class="o">&lt;</span> <span class="n">qt</span>
+        <span class="n">node</span> <span class="o">=</span> <span class="n">q_ptr</span><span class="p">[</span><span class="n">qh</span><span class="p">]</span>
+        <span class="n">qh</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="n">d_next</span> <span class="o">=</span> <span class="n">depths_ptr</span><span class="p">[</span><span class="n">node</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="n">_i64</span>
+        <span class="n">edges</span> <span class="o">=</span> <span class="err">@</span><span class="n">adjacencies</span><span class="p">.</span><span class="n">unsafe_fetch</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+        <span class="n">edges_ptr</span> <span class="o">=</span> <span class="n">edges</span><span class="p">.</span><span class="n">to_unsafe</span>
+        <span class="n">count</span> <span class="o">=</span> <span class="n">edges</span><span class="p">.</span><span class="n">size</span>
+
+        <span class="n">count</span><span class="p">.</span><span class="n">times</span> <span class="k">do</span> <span class="o">|</span><span class="n">i</span><span class="o">|</span>
+          <span class="n">edge</span> <span class="o">=</span> <span class="n">edges_ptr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+          <span class="n">to</span> <span class="o">=</span> <span class="n">edge</span><span class="p">.</span><span class="n">to</span>
+          <span class="k">if</span> <span class="n">edge</span><span class="p">.</span><span class="n">capacity</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">depths_ptr</span><span class="p">[</span><span class="n">to</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span>
+            <span class="n">depths_ptr</span><span class="p">[</span><span class="n">to</span><span class="p">]</span> <span class="o">=</span> <span class="n">d_next</span>
+            <span class="k">if</span> <span class="n">to</span> <span class="o">==</span> <span class="n">target</span>
+              <span class="k">return</span>
+            <span class="n">end</span>
+            <span class="n">q_ptr</span><span class="p">[</span><span class="n">qt</span><span class="p">]</span> <span class="o">=</span> <span class="n">to</span>
+            <span class="n">qt</span> <span class="o">+=</span> <span class="mi">1</span>
           <span class="n">end</span>
         <span class="n">end</span>
       <span class="n">end</span>
     <span class="n">end</span>
 
-    <span class="cp"># Finds one augmenting path from `start` to `target` on the level graph and pushes
-</span>    <span class="cp"># the bottleneck flow along it. Returns the pushed flow, or 0 if there is no path.
+    <span class="cp"># Pushes blocking flow along augmenting paths on the level graph from `target`
+</span>    <span class="cp"># back to `start`.
 </span>    <span class="cp">#
-</span>    <span class="cp"># This is an iterative version of the recursive DFS used in ACL, so that long
-</span>    <span class="cp"># augmenting paths (e.g. a path graph of 10^5+ vertices) do not overflow the stack.
-</span>    <span class="cp"># `@path` holds the vertices of the current path, and the edge used to leave
-</span>    <span class="cp"># `@path[i]` is always `@adjacencies[@path[i]][@visit_counts[@path[i]]]`.
-</span>    <span class="k">private</span> <span class="n">def</span> <span class="n">dfs</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>
+</span>    <span class="cp"># Following ACL's Dinic implementation, searching in reverse from `target`
+</span>    <span class="cp"># to `start` drastically prunes the search space on bipartite matching networks,
+</span>    <span class="cp"># where the sink `target` only connects to unmatched vertices in the residual
+</span>    <span class="cp"># network.
+</span>    <span class="cp">#
+</span>    <span class="cp"># To prevent stack overflow on deep paths (e.g. 200,000+ vertices), this is
+</span>    <span class="cp"># implemented iteratively with an explicit path stack `@path`. When a path
+</span>    <span class="cp"># to `start` is found, the bottleneck flow is pushed and `@path` is retracted
+</span>    <span class="cp"># only up to the first saturated edge, continuing the search without restarting
+</span>    <span class="cp"># from scratch.
+</span>    <span class="k">private</span> <span class="n">def</span> <span class="n">dfs</span><span class="p">(</span><span class="n">target</span> <span class="o">:</span> <span class="n">Int64</span><span class="p">,</span> <span class="n">start</span> <span class="o">:</span> <span class="n">Int64</span><span class="p">)</span> <span class="o">:</span> <span class="n">Int64</span>
+      <span class="n">total_flow</span> <span class="o">=</span> <span class="mi">0</span><span class="n">_i64</span>
       <span class="n">path</span> <span class="o">=</span> <span class="err">@</span><span class="n">path</span>
       <span class="n">path</span><span class="p">.</span><span class="n">clear</span>
-      <span class="n">path</span> <span class="o">&lt;&lt;</span> <span class="n">start</span><span class="p">.</span><span class="n">to_i64</span>
+      <span class="n">path</span> <span class="o">&lt;&lt;</span> <span class="n">target</span>
 
       <span class="n">until</span> <span class="n">path</span><span class="p">.</span><span class="n">empty</span><span class="o">?</span>
         <span class="n">node</span> <span class="o">=</span> <span class="n">path</span><span class="p">.</span><span class="n">last</span>
 
-        <span class="k">if</span> <span class="n">node</span> <span class="o">==</span> <span class="n">target</span>
+        <span class="k">if</span> <span class="n">node</span> <span class="o">==</span> <span class="n">start</span>
           <span class="n">flow</span> <span class="o">=</span> <span class="n">Int64</span><span class="o">::</span><span class="n">MAX</span>
           <span class="p">(</span><span class="n">path</span><span class="p">.</span><span class="n">size</span> <span class="o">-</span> <span class="mi">1</span><span class="p">).</span><span class="n">times</span> <span class="k">do</span> <span class="o">|</span><span class="n">i</span><span class="o">|</span>
             <span class="n">v</span> <span class="o">=</span> <span class="n">path</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-            <span class="n">flow</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">flow</span><span class="p">,</span> <span class="err">@</span><span class="n">adjacencies</span><span class="p">[</span><span class="n">v</span><span class="p">][</span><span class="err">@</span><span class="n">visit_counts</span><span class="p">[</span><span class="n">v</span><span class="p">]].</span><span class="n">capacity</span><span class="p">)</span>
+            <span class="n">edge</span> <span class="o">=</span> <span class="err">@</span><span class="n">adjacencies</span><span class="p">[</span><span class="n">v</span><span class="p">][</span><span class="err">@</span><span class="n">visit_counts</span><span class="p">[</span><span class="n">v</span><span class="p">]]</span>
+            <span class="n">u</span> <span class="o">=</span> <span class="n">edge</span><span class="p">.</span><span class="n">to</span>
+            <span class="n">rev_edge</span> <span class="o">=</span> <span class="err">@</span><span class="n">adjacencies</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="n">edge</span><span class="p">.</span><span class="n">reverse_index</span><span class="p">]</span>
+            <span class="n">flow</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">flow</span><span class="p">,</span> <span class="n">rev_edge</span><span class="p">.</span><span class="n">capacity</span><span class="p">)</span>
           <span class="n">end</span>
 
           <span class="p">(</span><span class="n">path</span><span class="p">.</span><span class="n">size</span> <span class="o">-</span> <span class="mi">1</span><span class="p">).</span><span class="n">times</span> <span class="k">do</span> <span class="o">|</span><span class="n">i</span><span class="o">|</span>
             <span class="n">v</span> <span class="o">=</span> <span class="n">path</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
             <span class="n">edge</span> <span class="o">=</span> <span class="err">@</span><span class="n">adjacencies</span><span class="p">[</span><span class="n">v</span><span class="p">][</span><span class="err">@</span><span class="n">visit_counts</span><span class="p">[</span><span class="n">v</span><span class="p">]]</span>
-            <span class="n">edge</span><span class="p">.</span><span class="n">capacity</span> <span class="o">-=</span> <span class="n">flow</span>
-            <span class="err">@</span><span class="n">adjacencies</span><span class="p">[</span><span class="n">edge</span><span class="p">.</span><span class="n">to</span><span class="p">][</span><span class="n">edge</span><span class="p">.</span><span class="n">reverse_index</span><span class="p">].</span><span class="n">capacity</span> <span class="o">+=</span> <span class="n">flow</span>
+            <span class="n">u</span> <span class="o">=</span> <span class="n">edge</span><span class="p">.</span><span class="n">to</span>
+            <span class="n">rev_edge</span> <span class="o">=</span> <span class="err">@</span><span class="n">adjacencies</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="n">edge</span><span class="p">.</span><span class="n">reverse_index</span><span class="p">]</span>
+            <span class="n">rev_edge</span><span class="p">.</span><span class="n">capacity</span> <span class="o">-=</span> <span class="n">flow</span>
+            <span class="n">edge</span><span class="p">.</span><span class="n">capacity</span> <span class="o">+=</span> <span class="n">flow</span>
           <span class="n">end</span>
 
-          <span class="k">return</span> <span class="n">flow</span>
+          <span class="n">total_flow</span> <span class="o">+=</span> <span class="n">flow</span>
+
+          <span class="n">bottleneck_idx</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+          <span class="p">(</span><span class="n">path</span><span class="p">.</span><span class="n">size</span> <span class="o">-</span> <span class="mi">1</span><span class="p">).</span><span class="n">times</span> <span class="k">do</span> <span class="o">|</span><span class="n">i</span><span class="o">|</span>
+            <span class="n">v</span> <span class="o">=</span> <span class="n">path</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="n">edge</span> <span class="o">=</span> <span class="err">@</span><span class="n">adjacencies</span><span class="p">[</span><span class="n">v</span><span class="p">][</span><span class="err">@</span><span class="n">visit_counts</span><span class="p">[</span><span class="n">v</span><span class="p">]]</span>
+            <span class="n">u</span> <span class="o">=</span> <span class="n">edge</span><span class="p">.</span><span class="n">to</span>
+            <span class="n">rev_edge</span> <span class="o">=</span> <span class="err">@</span><span class="n">adjacencies</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="n">edge</span><span class="p">.</span><span class="n">reverse_index</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">rev_edge</span><span class="p">.</span><span class="n">capacity</span> <span class="o">==</span> <span class="mi">0</span>
+              <span class="n">bottleneck_idx</span> <span class="o">=</span> <span class="n">i</span>
+              <span class="k">break</span>
+            <span class="n">end</span>
+          <span class="n">end</span>
+
+          <span class="n">pop_count</span> <span class="o">=</span> <span class="n">path</span><span class="p">.</span><span class="n">size</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">bottleneck_idx</span>
+          <span class="n">pop_count</span><span class="p">.</span><span class="n">times</span> <span class="p">{</span> <span class="n">path</span><span class="p">.</span><span class="n">pop</span> <span class="p">}</span>
+
+          <span class="err">@</span><span class="n">visit_counts</span><span class="p">[</span><span class="n">path</span><span class="p">.</span><span class="n">last</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+          <span class="n">next</span>
         <span class="n">end</span>
 
         <span class="n">edges</span> <span class="o">=</span> <span class="err">@</span><span class="n">adjacencies</span><span class="p">[</span><span class="n">node</span><span class="p">]</span>
         <span class="n">advanced</span> <span class="o">=</span> <span class="nb">false</span>
+        <span class="n">d_node</span> <span class="o">=</span> <span class="err">@</span><span class="n">depths</span><span class="p">[</span><span class="n">node</span><span class="p">]</span>
+
         <span class="k">while</span> <span class="err">@</span><span class="n">visit_counts</span><span class="p">[</span><span class="n">node</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">edges</span><span class="p">.</span><span class="n">size</span>
           <span class="n">edge</span> <span class="o">=</span> <span class="n">edges</span><span class="p">[</span><span class="err">@</span><span class="n">visit_counts</span><span class="p">[</span><span class="n">node</span><span class="p">]]</span>
-          <span class="k">if</span> <span class="n">edge</span><span class="p">.</span><span class="n">capacity</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="err">@</span><span class="n">depths</span><span class="p">[</span><span class="n">node</span><span class="p">]</span> <span class="o">&lt;</span> <span class="err">@</span><span class="n">depths</span><span class="p">[</span><span class="n">edge</span><span class="p">.</span><span class="n">to</span><span class="p">]</span>
-            <span class="n">path</span> <span class="o">&lt;&lt;</span> <span class="n">edge</span><span class="p">.</span><span class="n">to</span>
-            <span class="n">advanced</span> <span class="o">=</span> <span class="nb">true</span>
-            <span class="k">break</span>
+          <span class="n">u</span> <span class="o">=</span> <span class="n">edge</span><span class="p">.</span><span class="n">to</span>
+          <span class="k">if</span> <span class="err">@</span><span class="n">depths</span><span class="p">[</span><span class="n">u</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">d_node</span> <span class="o">&gt;</span> <span class="err">@</span><span class="n">depths</span><span class="p">[</span><span class="n">u</span><span class="p">]</span>
+            <span class="n">rev_edge</span> <span class="o">=</span> <span class="err">@</span><span class="n">adjacencies</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="n">edge</span><span class="p">.</span><span class="n">reverse_index</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">rev_edge</span><span class="p">.</span><span class="n">capacity</span> <span class="o">&gt;</span> <span class="mi">0</span>
+              <span class="n">path</span> <span class="o">&lt;&lt;</span> <span class="n">u</span>
+              <span class="n">advanced</span> <span class="o">=</span> <span class="nb">true</span>
+              <span class="k">break</span>
+            <span class="n">end</span>
           <span class="n">end</span>
           <span class="err">@</span><span class="n">visit_counts</span><span class="p">[</span><span class="n">node</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
         <span class="n">end</span>
 
         <span class="n">unless</span> <span class="n">advanced</span>
-          <span class="cp"># Dead end: retreat and skip the edge that led here.
-</span>          <span class="n">path</span><span class="p">.</span><span class="n">pop</span>
+          <span class="err">@</span><span class="n">depths</span><span class="p">[</span><span class="n">node</span><span class="p">]</span> <span class="o">=</span> <span class="err">@</span><span class="n">size</span>
+          <span class="n">path</span><span class="p">.</span><span class="n">pop</span>
           <span class="err">@</span><span class="n">visit_counts</span><span class="p">[</span><span class="n">path</span><span class="p">.</span><span class="n">last</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span> <span class="n">unless</span> <span class="n">path</span><span class="p">.</span><span class="n">empty</span><span class="o">?</span>
         <span class="n">end</span>
       <span class="n">end</span>
 
-      <span class="mi">0</span><span class="n">_i64</span>
+      <span class="n">total_flow</span>
     <span class="n">end</span>
 
     <span class="err">@</span><span class="p">[</span><span class="n">AlwaysInline</span><span class="p">]</span>
@@ -404,11 +474,15 @@ h1 a:focus {
     <span class="cp"># Number of visited adjacencies for each nodes
 </span>    <span class="n">getter</span> <span class="n">visit_counts</span> <span class="o">:</span> <span class="n">Array</span><span class="p">(</span><span class="n">Int64</span><span class="p">)</span>
 
+    <span class="err">@</span><span class="n">path</span> <span class="o">:</span> <span class="n">Array</span><span class="p">(</span><span class="n">Int64</span><span class="p">)</span>
+    <span class="err">@</span><span class="n">queue</span> <span class="o">:</span> <span class="n">Array</span><span class="p">(</span><span class="n">Int64</span><span class="p">)</span>
+
     <span class="n">def</span> <span class="n">initialize</span><span class="p">(</span><span class="err">@</span><span class="n">size</span><span class="p">)</span>
       <span class="err">@</span><span class="n">adjacencies</span> <span class="o">=</span> <span class="n">Array</span><span class="p">(</span><span class="n">Array</span><span class="p">(</span><span class="n">Edge</span><span class="p">)).</span><span class="k">new</span><span class="p">(</span><span class="err">@</span><span class="n">size</span><span class="p">)</span> <span class="p">{</span> <span class="p">[]</span> <span class="n">of</span> <span class="n">Edge</span> <span class="p">}</span>
       <span class="err">@</span><span class="n">depths</span> <span class="o">=</span> <span class="n">Array</span><span class="p">(</span><span class="n">Int64</span><span class="p">).</span><span class="k">new</span><span class="p">(</span><span class="err">@</span><span class="n">size</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="n">_i64</span><span class="p">)</span>
       <span class="err">@</span><span class="n">visit_counts</span> <span class="o">=</span> <span class="n">Array</span><span class="p">(</span><span class="n">Int64</span><span class="p">).</span><span class="k">new</span><span class="p">(</span><span class="err">@</span><span class="n">size</span><span class="p">,</span> <span class="mi">0</span><span class="n">_i64</span><span class="p">)</span>
       <span class="err">@</span><span class="n">path</span> <span class="o">=</span> <span class="n">Array</span><span class="p">(</span><span class="n">Int64</span><span class="p">).</span><span class="k">new</span>
+      <span class="err">@</span><span class="n">queue</span> <span class="o">=</span> <span class="n">Array</span><span class="p">(</span><span class="n">Int64</span><span class="p">).</span><span class="k">new</span><span class="p">(</span><span class="err">@</span><span class="n">size</span><span class="p">,</span> <span class="mi">0</span><span class="n">_i64</span><span class="p">)</span>
     <span class="n">end</span>
 
     <span class="cp"># Implements atcoder::mf_graph.add_edge(from, to, capacity).
@@ -422,19 +496,27 @@ h1 a:focus {
 
     <span class="cp"># Implements atcoder::mf_graph.flow(start, target).
 </span>    <span class="n">def</span> <span class="n">flow</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>
+      <span class="n">start_i64</span> <span class="o">=</span> <span class="n">start</span><span class="p">.</span><span class="n">to_i64</span>
+      <span class="n">target_i64</span> <span class="o">=</span> <span class="n">target</span><span class="p">.</span><span class="n">to_i64</span>
+
+      <span class="n">raise</span> <span class="n">IndexError</span><span class="p">.</span><span class="k">new</span> <span class="n">unless</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">start_i64</span> <span class="o">&lt;</span> <span class="err">@</span><span class="n">size</span> <span class="o">&amp;&amp;</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">target_i64</span> <span class="o">&lt;</span> <span class="err">@</span><span class="n">size</span>
+      <span class="k">return</span> <span class="mi">0</span><span class="n">_i64</span> <span class="k">if</span> <span class="n">start_i64</span> <span class="o">==</span> <span class="n">target_i64</span>
+
       <span class="n">flow</span> <span class="o">=</span> <span class="mi">0</span><span class="n">_i64</span>
 
       <span class="n">loop</span> <span class="k">do</span>
-        <span class="n">bfs</span><span class="p">(</span><span class="n">start</span><span class="p">)</span>
-        <span class="k">if</span> <span class="err">@</span><span class="n">depths</span><span class="p">[</span><span class="n">target</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span>
+        <span class="n">bfs</span><span class="p">(</span><span class="n">start_i64</span><span class="p">,</span> <span class="n">target_i64</span><span class="p">)</span>
+        <span class="k">if</span> <span class="err">@</span><span class="n">depths</span><span class="p">[</span><span class="n">target_i64</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span>
           <span class="k">return</span> <span class="n">flow</span>
         <span class="n">end</span>
 
         <span class="err">@</span><span class="n">visit_counts</span><span class="p">.</span><span class="n">fill</span><span class="p">(</span><span class="mi">0</span><span class="n">_i64</span><span class="p">)</span>
-        <span class="k">while</span> <span class="p">(</span><span class="n">flowed</span> <span class="o">=</span> <span class="n">dfs</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">target</span><span class="p">))</span> <span class="o">&gt;</span> <span class="mi">0</span>
-          <span class="n">flow</span> <span class="o">+=</span> <span class="n">flowed</span>
-        <span class="n">end</span>
+        <span class="n">pushed</span> <span class="o">=</span> <span class="n">dfs</span><span class="p">(</span><span class="n">target_i64</span><span class="p">,</span> <span class="n">start_i64</span><span class="p">)</span>
+        <span class="k">break</span> <span class="k">if</span> <span class="n">pushed</span> <span class="o">==</span> <span class="mi">0</span>
+        <span class="n">flow</span> <span class="o">+=</span> <span class="n">pushed</span>
       <span class="n">end</span>
+
+      <span class="n">flow</span>
     <span class="n">end</span>
 
     <span class="cp"># FIXME: Unimplemented
@@ -457,76 +539,130 @@ h1 a:focus {
       <span class="n">raise</span> <span class="n">NotImplementedError</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="s">"AtCoder::MaxFlow#change_edge"</span><span class="p">)</span>
     <span class="n">end</span>
 
-    <span class="k">private</span> <span class="n">def</span> <span class="n">bfs</span><span class="p">(</span><span class="n">start</span><span class="p">)</span>
+    <span class="k">private</span> <span class="n">def</span> <span class="n">bfs</span><span class="p">(</span><span class="n">start</span> <span class="o">:</span> <span class="n">Int64</span><span class="p">,</span> <span class="n">target</span> <span class="o">:</span> <span class="n">Int64</span><span class="p">)</span>
       <span class="err">@</span><span class="n">depths</span><span class="p">.</span><span class="n">fill</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="n">_i64</span><span class="p">)</span>
-      <span class="n">queue</span> <span class="o">=</span> <span class="n">Deque</span><span class="p">(</span><span class="n">Int64</span><span class="p">).</span><span class="k">new</span>
+      <span class="n">depths_ptr</span> <span class="o">=</span> <span class="err">@</span><span class="n">depths</span><span class="p">.</span><span class="n">to_unsafe</span>
+      <span class="n">q_ptr</span> <span class="o">=</span> <span class="err">@</span><span class="n">queue</span><span class="p">.</span><span class="n">to_unsafe</span>
 
-      <span class="err">@</span><span class="n">depths</span><span class="p">[</span><span class="n">start</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="n">_i64</span>
-      <span class="n">queue</span> <span class="o">&lt;&lt;</span> <span class="n">start</span><span class="p">.</span><span class="n">to_i64</span>
-      <span class="n">until</span> <span class="n">queue</span><span class="p">.</span><span class="n">empty</span><span class="o">?</span>
-        <span class="n">node</span> <span class="o">=</span> <span class="n">queue</span><span class="p">.</span><span class="n">shift</span>
+      <span class="n">qh</span> <span class="o">=</span> <span class="mi">0</span>
+      <span class="n">qt</span> <span class="o">=</span> <span class="mi">0</span>
 
-        <span class="err">@</span><span class="n">adjacencies</span><span class="p">[</span><span class="n">node</span><span class="p">].</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">edge</span><span class="o">|</span>
-          <span class="k">if</span> <span class="n">edge</span><span class="p">.</span><span class="n">capacity</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="err">@</span><span class="n">depths</span><span class="p">[</span><span class="n">edge</span><span class="p">.</span><span class="n">to</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span>
-            <span class="err">@</span><span class="n">depths</span><span class="p">[</span><span class="n">edge</span><span class="p">.</span><span class="n">to</span><span class="p">]</span> <span class="o">=</span> <span class="err">@</span><span class="n">depths</span><span class="p">[</span><span class="n">node</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
-            <span class="n">queue</span> <span class="o">&lt;&lt;</span> <span class="n">edge</span><span class="p">.</span><span class="n">to</span>
+      <span class="n">depths_ptr</span><span class="p">[</span><span class="n">start</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="n">_i64</span>
+      <span class="n">q_ptr</span><span class="p">[</span><span class="n">qt</span><span class="p">]</span> <span class="o">=</span> <span class="n">start</span>
+      <span class="n">qt</span> <span class="o">+=</span> <span class="mi">1</span>
+
+      <span class="k">while</span> <span class="n">qh</span> <span class="o">&lt;</span> <span class="n">qt</span>
+        <span class="n">node</span> <span class="o">=</span> <span class="n">q_ptr</span><span class="p">[</span><span class="n">qh</span><span class="p">]</span>
+        <span class="n">qh</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="n">d_next</span> <span class="o">=</span> <span class="n">depths_ptr</span><span class="p">[</span><span class="n">node</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="n">_i64</span>
+        <span class="n">edges</span> <span class="o">=</span> <span class="err">@</span><span class="n">adjacencies</span><span class="p">.</span><span class="n">unsafe_fetch</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+        <span class="n">edges_ptr</span> <span class="o">=</span> <span class="n">edges</span><span class="p">.</span><span class="n">to_unsafe</span>
+        <span class="n">count</span> <span class="o">=</span> <span class="n">edges</span><span class="p">.</span><span class="n">size</span>
+
+        <span class="n">count</span><span class="p">.</span><span class="n">times</span> <span class="k">do</span> <span class="o">|</span><span class="n">i</span><span class="o">|</span>
+          <span class="n">edge</span> <span class="o">=</span> <span class="n">edges_ptr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+          <span class="n">to</span> <span class="o">=</span> <span class="n">edge</span><span class="p">.</span><span class="n">to</span>
+          <span class="k">if</span> <span class="n">edge</span><span class="p">.</span><span class="n">capacity</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">depths_ptr</span><span class="p">[</span><span class="n">to</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span>
+            <span class="n">depths_ptr</span><span class="p">[</span><span class="n">to</span><span class="p">]</span> <span class="o">=</span> <span class="n">d_next</span>
+            <span class="k">if</span> <span class="n">to</span> <span class="o">==</span> <span class="n">target</span>
+              <span class="k">return</span>
+            <span class="n">end</span>
+            <span class="n">q_ptr</span><span class="p">[</span><span class="n">qt</span><span class="p">]</span> <span class="o">=</span> <span class="n">to</span>
+            <span class="n">qt</span> <span class="o">+=</span> <span class="mi">1</span>
           <span class="n">end</span>
         <span class="n">end</span>
       <span class="n">end</span>
     <span class="n">end</span>
 
-    <span class="cp"># Finds one augmenting path from `start` to `target` on the level graph and pushes
-</span>    <span class="cp"># the bottleneck flow along it. Returns the pushed flow, or 0 if there is no path.
+    <span class="cp"># Pushes blocking flow along augmenting paths on the level graph from `target`
+</span>    <span class="cp"># back to `start`.
 </span>    <span class="cp">#
-</span>    <span class="cp"># This is an iterative version of the recursive DFS used in ACL, so that long
-</span>    <span class="cp"># augmenting paths (e.g. a path graph of 10^5+ vertices) do not overflow the stack.
-</span>    <span class="cp"># `@path` holds the vertices of the current path, and the edge used to leave
-</span>    <span class="cp"># `@path[i]` is always `@adjacencies[@path[i]][@visit_counts[@path[i]]]`.
-</span>    <span class="k">private</span> <span class="n">def</span> <span class="n">dfs</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>
+</span>    <span class="cp"># Following ACL's Dinic implementation, searching in reverse from `target`
+</span>    <span class="cp"># to `start` drastically prunes the search space on bipartite matching networks,
+</span>    <span class="cp"># where the sink `target` only connects to unmatched vertices in the residual
+</span>    <span class="cp"># network.
+</span>    <span class="cp">#
+</span>    <span class="cp"># To prevent stack overflow on deep paths (e.g. 200,000+ vertices), this is
+</span>    <span class="cp"># implemented iteratively with an explicit path stack `@path`. When a path
+</span>    <span class="cp"># to `start` is found, the bottleneck flow is pushed and `@path` is retracted
+</span>    <span class="cp"># only up to the first saturated edge, continuing the search without restarting
+</span>    <span class="cp"># from scratch.
+</span>    <span class="k">private</span> <span class="n">def</span> <span class="n">dfs</span><span class="p">(</span><span class="n">target</span> <span class="o">:</span> <span class="n">Int64</span><span class="p">,</span> <span class="n">start</span> <span class="o">:</span> <span class="n">Int64</span><span class="p">)</span> <span class="o">:</span> <span class="n">Int64</span>
+      <span class="n">total_flow</span> <span class="o">=</span> <span class="mi">0</span><span class="n">_i64</span>
       <span class="n">path</span> <span class="o">=</span> <span class="err">@</span><span class="n">path</span>
       <span class="n">path</span><span class="p">.</span><span class="n">clear</span>
-      <span class="n">path</span> <span class="o">&lt;&lt;</span> <span class="n">start</span><span class="p">.</span><span class="n">to_i64</span>
+      <span class="n">path</span> <span class="o">&lt;&lt;</span> <span class="n">target</span>
 
       <span class="n">until</span> <span class="n">path</span><span class="p">.</span><span class="n">empty</span><span class="o">?</span>
         <span class="n">node</span> <span class="o">=</span> <span class="n">path</span><span class="p">.</span><span class="n">last</span>
 
-        <span class="k">if</span> <span class="n">node</span> <span class="o">==</span> <span class="n">target</span>
+        <span class="k">if</span> <span class="n">node</span> <span class="o">==</span> <span class="n">start</span>
           <span class="n">flow</span> <span class="o">=</span> <span class="n">Int64</span><span class="o">::</span><span class="n">MAX</span>
           <span class="p">(</span><span class="n">path</span><span class="p">.</span><span class="n">size</span> <span class="o">-</span> <span class="mi">1</span><span class="p">).</span><span class="n">times</span> <span class="k">do</span> <span class="o">|</span><span class="n">i</span><span class="o">|</span>
             <span class="n">v</span> <span class="o">=</span> <span class="n">path</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-            <span class="n">flow</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">flow</span><span class="p">,</span> <span class="err">@</span><span class="n">adjacencies</span><span class="p">[</span><span class="n">v</span><span class="p">][</span><span class="err">@</span><span class="n">visit_counts</span><span class="p">[</span><span class="n">v</span><span class="p">]].</span><span class="n">capacity</span><span class="p">)</span>
+            <span class="n">edge</span> <span class="o">=</span> <span class="err">@</span><span class="n">adjacencies</span><span class="p">[</span><span class="n">v</span><span class="p">][</span><span class="err">@</span><span class="n">visit_counts</span><span class="p">[</span><span class="n">v</span><span class="p">]]</span>
+            <span class="n">u</span> <span class="o">=</span> <span class="n">edge</span><span class="p">.</span><span class="n">to</span>
+            <span class="n">rev_edge</span> <span class="o">=</span> <span class="err">@</span><span class="n">adjacencies</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="n">edge</span><span class="p">.</span><span class="n">reverse_index</span><span class="p">]</span>
+            <span class="n">flow</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">flow</span><span class="p">,</span> <span class="n">rev_edge</span><span class="p">.</span><span class="n">capacity</span><span class="p">)</span>
           <span class="n">end</span>
 
           <span class="p">(</span><span class="n">path</span><span class="p">.</span><span class="n">size</span> <span class="o">-</span> <span class="mi">1</span><span class="p">).</span><span class="n">times</span> <span class="k">do</span> <span class="o">|</span><span class="n">i</span><span class="o">|</span>
             <span class="n">v</span> <span class="o">=</span> <span class="n">path</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
             <span class="n">edge</span> <span class="o">=</span> <span class="err">@</span><span class="n">adjacencies</span><span class="p">[</span><span class="n">v</span><span class="p">][</span><span class="err">@</span><span class="n">visit_counts</span><span class="p">[</span><span class="n">v</span><span class="p">]]</span>
-            <span class="n">edge</span><span class="p">.</span><span class="n">capacity</span> <span class="o">-=</span> <span class="n">flow</span>
-            <span class="err">@</span><span class="n">adjacencies</span><span class="p">[</span><span class="n">edge</span><span class="p">.</span><span class="n">to</span><span class="p">][</span><span class="n">edge</span><span class="p">.</span><span class="n">reverse_index</span><span class="p">].</span><span class="n">capacity</span> <span class="o">+=</span> <span class="n">flow</span>
+            <span class="n">u</span> <span class="o">=</span> <span class="n">edge</span><span class="p">.</span><span class="n">to</span>
+            <span class="n">rev_edge</span> <span class="o">=</span> <span class="err">@</span><span class="n">adjacencies</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="n">edge</span><span class="p">.</span><span class="n">reverse_index</span><span class="p">]</span>
+            <span class="n">rev_edge</span><span class="p">.</span><span class="n">capacity</span> <span class="o">-=</span> <span class="n">flow</span>
+            <span class="n">edge</span><span class="p">.</span><span class="n">capacity</span> <span class="o">+=</span> <span class="n">flow</span>
           <span class="n">end</span>
 
-          <span class="k">return</span> <span class="n">flow</span>
+          <span class="n">total_flow</span> <span class="o">+=</span> <span class="n">flow</span>
+
+          <span class="n">bottleneck_idx</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+          <span class="p">(</span><span class="n">path</span><span class="p">.</span><span class="n">size</span> <span class="o">-</span> <span class="mi">1</span><span class="p">).</span><span class="n">times</span> <span class="k">do</span> <span class="o">|</span><span class="n">i</span><span class="o">|</span>
+            <span class="n">v</span> <span class="o">=</span> <span class="n">path</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="n">edge</span> <span class="o">=</span> <span class="err">@</span><span class="n">adjacencies</span><span class="p">[</span><span class="n">v</span><span class="p">][</span><span class="err">@</span><span class="n">visit_counts</span><span class="p">[</span><span class="n">v</span><span class="p">]]</span>
+            <span class="n">u</span> <span class="o">=</span> <span class="n">edge</span><span class="p">.</span><span class="n">to</span>
+            <span class="n">rev_edge</span> <span class="o">=</span> <span class="err">@</span><span class="n">adjacencies</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="n">edge</span><span class="p">.</span><span class="n">reverse_index</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">rev_edge</span><span class="p">.</span><span class="n">capacity</span> <span class="o">==</span> <span class="mi">0</span>
+              <span class="n">bottleneck_idx</span> <span class="o">=</span> <span class="n">i</span>
+              <span class="k">break</span>
+            <span class="n">end</span>
+          <span class="n">end</span>
+
+          <span class="n">pop_count</span> <span class="o">=</span> <span class="n">path</span><span class="p">.</span><span class="n">size</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">bottleneck_idx</span>
+          <span class="n">pop_count</span><span class="p">.</span><span class="n">times</span> <span class="p">{</span> <span class="n">path</span><span class="p">.</span><span class="n">pop</span> <span class="p">}</span>
+
+          <span class="err">@</span><span class="n">visit_counts</span><span class="p">[</span><span class="n">path</span><span class="p">.</span><span class="n">last</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+          <span class="n">next</span>
         <span class="n">end</span>
 
         <span class="n">edges</span> <span class="o">=</span> <span class="err">@</span><span class="n">adjacencies</span><span class="p">[</span><span class="n">node</span><span class="p">]</span>
         <span class="n">advanced</span> <span class="o">=</span> <span class="nb">false</span>
+        <span class="n">d_node</span> <span class="o">=</span> <span class="err">@</span><span class="n">depths</span><span class="p">[</span><span class="n">node</span><span class="p">]</span>
+
         <span class="k">while</span> <span class="err">@</span><span class="n">visit_counts</span><span class="p">[</span><span class="n">node</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">edges</span><span class="p">.</span><span class="n">size</span>
           <span class="n">edge</span> <span class="o">=</span> <span class="n">edges</span><span class="p">[</span><span class="err">@</span><span class="n">visit_counts</span><span class="p">[</span><span class="n">node</span><span class="p">]]</span>
-          <span class="k">if</span> <span class="n">edge</span><span class="p">.</span><span class="n">capacity</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="err">@</span><span class="n">depths</span><span class="p">[</span><span class="n">node</span><span class="p">]</span> <span class="o">&lt;</span> <span class="err">@</span><span class="n">depths</span><span class="p">[</span><span class="n">edge</span><span class="p">.</span><span class="n">to</span><span class="p">]</span>
-            <span class="n">path</span> <span class="o">&lt;&lt;</span> <span class="n">edge</span><span class="p">.</span><span class="n">to</span>
-            <span class="n">advanced</span> <span class="o">=</span> <span class="nb">true</span>
-            <span class="k">break</span>
+          <span class="n">u</span> <span class="o">=</span> <span class="n">edge</span><span class="p">.</span><span class="n">to</span>
+          <span class="k">if</span> <span class="err">@</span><span class="n">depths</span><span class="p">[</span><span class="n">u</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">d_node</span> <span class="o">&gt;</span> <span class="err">@</span><span class="n">depths</span><span class="p">[</span><span class="n">u</span><span class="p">]</span>
+            <span class="n">rev_edge</span> <span class="o">=</span> <span class="err">@</span><span class="n">adjacencies</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="n">edge</span><span class="p">.</span><span class="n">reverse_index</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">rev_edge</span><span class="p">.</span><span class="n">capacity</span> <span class="o">&gt;</span> <span class="mi">0</span>
+              <span class="n">path</span> <span class="o">&lt;&lt;</span> <span class="n">u</span>
+              <span class="n">advanced</span> <span class="o">=</span> <span class="nb">true</span>
+              <span class="k">break</span>
+            <span class="n">end</span>
           <span class="n">end</span>
           <span class="err">@</span><span class="n">visit_counts</span><span class="p">[</span><span class="n">node</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
         <span class="n">end</span>
 
         <span class="n">unless</span> <span class="n">advanced</span>
-          <span class="cp"># Dead end: retreat and skip the edge that led here.
-</span>          <span class="n">path</span><span class="p">.</span><span class="n">pop</span>
+          <span class="err">@</span><span class="n">depths</span><span class="p">[</span><span class="n">node</span><span class="p">]</span> <span class="o">=</span> <span class="err">@</span><span class="n">size</span>
+          <span class="n">path</span><span class="p">.</span><span class="n">pop</span>
           <span class="err">@</span><span class="n">visit_counts</span><span class="p">[</span><span class="n">path</span><span class="p">.</span><span class="n">last</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span> <span class="n">unless</span> <span class="n">path</span><span class="p">.</span><span class="n">empty</span><span class="o">?</span>
         <span class="n">end</span>
       <span class="n">end</span>
 
-      <span class="mi">0</span><span class="n">_i64</span>
+      <span class="n">total_flow</span>
     <span class="n">end</span>
 
     <span class="err">@</span><span class="p">[</span><span class="n">AlwaysInline</span><span class="p">]</span>
