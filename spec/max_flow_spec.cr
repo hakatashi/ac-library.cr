@@ -132,6 +132,14 @@ describe "MaxFlow" do
       mf.flow(0, n - 1).should eq 2
     end
 
+    it "does not overflow the stack on a very long augmenting path" do
+      # https://github.com/hakatashi/ac-library.cr/issues/26
+      n = 200_000
+      mf = MaxFlow.new(n)
+      (n - 1).times { |i| mf.add_edge(i, i + 1, 1) }
+      mf.flow(0, n - 1).should eq 1
+    end
+
     it "matches a naive minimum cut on random small graphs" do
       rng = Random.new(36)
       300.times do

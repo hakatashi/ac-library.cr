@@ -50,6 +50,7 @@ module AtCoder
       @adjacencies = Array(Array(Edge)).new(@size) { [] of Edge }
       @depths = Array(Int64).new(@size, -1_i64)
       @visit_counts = Array(Int64).new(@size, 0_i64)
+      @path = Array(Int64).new
     end
 
     # Implements atcoder::mf_graph.add_edge(from, to, capacity).
@@ -72,7 +73,7 @@ module AtCoder
         end
 
         @visit_counts.fill(0_i64)
-        while (flowed = dfs(start, target, Int64::MAX)) > 0
+        while (flowed = dfs(start, target)) > 0
           flow += flowed
         end
       end
@@ -116,23 +117,55 @@ module AtCoder
       end
     end
 
-    private def dfs(node, target, flow)
-      return flow if node == target
+    # Finds one augmenting path from `start` to `target` on the level graph and pushes
+    # the bottleneck flow along it. Returns the pushed flow, or 0 if there is no path.
+    #
+    # This is an iterative version of the recursive DFS used in ACL, so that long
+    # augmenting paths (e.g. a path graph of 10^5+ vertices) do not overflow the stack.
+    # `@path` holds the vertices of the current path, and the edge used to leave
+    # `@path[i]` is always `@adjacencies[@path[i]][@visit_counts[@path[i]]]`.
+    private def dfs(start, target)
+      path = @path
+      path.clear
+      path << start.to_i64
 
-      edges = @adjacencies[node]
-      while @visit_counts[node] < edges.size
-        edge = edges[@visit_counts[node]]
-        if edge.capacity > 0 && @depths[node] < @depths[edge.to]
-          flowed = dfs(edge.to, target, min(flow, edge.capacity))
+      until path.empty?
+        node = path.last
 
-          if flowed > 0
-            edge.capacity -= flowed
-            @adjacencies[edge.to][edge.reverse_index].capacity += flowed
-            return flowed
+        if node == target
+          flow = Int64::MAX
+          (path.size - 1).times do |i|
+            v = path[i]
+            flow = min(flow, @adjacencies[v][@visit_counts[v]].capacity)
           end
+
+          (path.size - 1).times do |i|
+            v = path[i]
+            edge = @adjacencies[v][@visit_counts[v]]
+            edge.capacity -= flow
+            @adjacencies[edge.to][edge.reverse_index].capacity += flow
+          end
+
+          return flow
         end
 
-        @visit_counts[node] += 1
+        edges = @adjacencies[node]
+        advanced = false
+        while @visit_counts[node] < edges.size
+          edge = edges[@visit_counts[node]]
+          if edge.capacity > 0 && @depths[node] < @depths[edge.to]
+            path << edge.to
+            advanced = true
+            break
+          end
+          @visit_counts[node] += 1
+        end
+
+        unless advanced
+          # Dead end: retreat and skip the edge that led here.
+          path.pop
+          @visit_counts[path.last] += 1 unless path.empty?
+        end
       end
 
       0_i64

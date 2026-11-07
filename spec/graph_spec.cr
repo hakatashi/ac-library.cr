@@ -215,6 +215,59 @@ describe "UndirectedGraph" do
       end
       visited.should eq [{1, -1, nil, nil}, {0, 1, 0, 5}, {2, 1, 1, 7}]
     end
+
+    it "visits nodes in depth-first order" do
+      #   0
+      #  / \
+      # 1   4
+      # |\
+      # 2 3
+      graph = UndirectedGraph(Nil, Int64).new(5_i64)
+      graph.add_edge(0, 1)
+      graph.add_edge(1, 2)
+      graph.add_edge(1, 3)
+      graph.add_edge(0, 4)
+
+      visited = [] of {Int64, Int64}
+      graph.dfs(0_i64, 0_i64) do |node, depth, _info, callback|
+        visited << {node, depth}
+        callback.call(depth + 1)
+      end
+      visited.should eq [{0, 0}, {1, 1}, {2, 2}, {3, 2}, {4, 1}]
+    end
+
+    it "does not visit the children if the callback is not called" do
+      graph = UndirectedGraph(Nil, Int64).new(4_i64)
+      graph.add_edge(0, 1)
+      graph.add_edge(1, 2)
+      graph.add_edge(0, 3)
+
+      visited = [] of Int64
+      graph.dfs(0_i64, nil) do |node, _value, _info, callback|
+        visited << node
+        callback.call(nil) unless node == 1
+      end
+      visited.should eq [0, 1, 3]
+    end
+
+    it "visits each node once on a graph with cycles" do
+      # 0 - 1
+      # | \ |
+      # 3 - 2
+      graph = UndirectedGraph(Nil, Int64).new(4_i64)
+      graph.add_edge(0, 1)
+      graph.add_edge(1, 2)
+      graph.add_edge(2, 3)
+      graph.add_edge(3, 0)
+      graph.add_edge(0, 2)
+
+      visited = [] of {Int64, Int64}
+      graph.dfs(0_i64, nil) do |node, _value, info, callback|
+        visited << {node, info[:parent]}
+        callback.call(nil)
+      end
+      visited.should eq [{0, -1}, {1, 0}, {2, 1}, {3, 2}]
+    end
   end
 end
 
@@ -247,8 +300,25 @@ describe "Tree" do
       tree.diameter[0].should eq 2
     end
 
-    pending "returns the only node as both endpoints for a single-node tree" do
+    it "returns the only node as both endpoints for a single-node tree" do
       Tree(Nil, Int64).new(1_i64).diameter.should eq({0, 0, 0, [-1]})
+    end
+
+    it "returns existing nodes as endpoints when all edge weights are zero" do
+      tree = Tree(Nil, Int64).new(3_i64)
+      tree.add_edge(0, 1, 0_i64)
+      tree.add_edge(1, 2, 0_i64)
+      tree.diameter.should eq({0, 0, 0, [-1, 0, 1]})
+    end
+
+    it "does not overflow the stack on a long path" do
+      n = 1_000_000_i64
+      tree = Tree(Nil, Int64).new(n)
+      (n - 1).times { |i| tree.add_edge(i, i + 1, 1_i64) }
+      diameter, start_node, target_node, parents = tree.diameter
+      diameter.should eq n - 1
+      {start_node, target_node}.should eq({n - 1, 0})
+      parents[0].should eq 1
     end
 
     it "matches a naive implementation on random small trees" do
@@ -305,6 +375,14 @@ describe "Tree" do
       (n - 1).times { |i| tree.add_edge(i, i + 1) }
       tree.lca(n - 1, 500).should eq 500
       tree.lca(999, 998).should eq 998
+    end
+
+    it "does not overflow the stack on a long path" do
+      n = 1_000_000_i64
+      tree = Tree(Nil, Int64).new(n)
+      (n - 1).times { |i| tree.add_edge(i, i + 1) }
+      tree.lca(n - 1, 500_000).should eq 500_000
+      tree.dist(0, n - 1).should eq n - 1
     end
 
     it "matches a naive implementation on random small trees" do
