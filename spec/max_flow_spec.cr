@@ -169,10 +169,134 @@ describe "MaxFlow" do
     end
   end
 
+  describe "#min_cut" do
+    it "calculates the README example" do
+      mf = MaxFlow.new(3)
+      mf.add_edge(0, 1, 3)
+      mf.add_edge(1, 2, 1)
+      mf.add_edge(0, 2, 2)
+      mf.flow(0, 2).should eq 3
+      mf.min_cut(0).should eq [true, true, false]
+    end
+
+    it "returns an Array(Bool)" do
+      mf = MaxFlow.new(2)
+      mf.add_edge(0, 1, 3)
+      mf.flow(0, 1)
+      mf.min_cut(0).should be_a Array(Bool)
+    end
+
+    it "returns only the start node when there are no edges" do
+      mf = MaxFlow.new(3)
+      mf.min_cut(1).should eq [false, true, false]
+    end
+
+    it "handles a single-node graph with self-loops" do
+      mf = MaxFlow.new(1)
+      mf.add_edge(0, 0, 5)
+      mf.add_edge(0, 0, 3)
+      mf.min_cut(0).should eq [true]
+    end
+
+    it "ignores zero-capacity edges and reaches nodes before flow is called" do
+      mf = MaxFlow.new(4)
+      mf.add_edge(0, 1, 2)
+      mf.add_edge(1, 2, 0)
+      mf.add_edge(2, 3, 5)
+      mf.min_cut(0).should eq [true, true, false, false]
+    end
+
+    it "traverses reverse residual edges created by pushed flow" do
+      mf = MaxFlow.new(4)
+      mf.add_edge(0, 1, 1)
+      mf.add_edge(1, 2, 1)
+      mf.add_edge(2, 3, 1)
+      mf.flow(0, 3).should eq 1
+      mf.min_cut(0).should eq [true, false, false, false]
+
+      mf.add_edge(0, 2, 1)
+      mf.flow(0, 3).should eq 0
+      mf.min_cut(0).should eq [true, true, true, false]
+    end
+
+    it "accepts Int64 start and supports repeated calls from different starts" do
+      mf = MaxFlow.new(4)
+      mf.add_edge(0, 1, 1)
+      mf.add_edge(2, 3, 1)
+      mf.flow(0, 1).should eq 1
+      mf.min_cut(0_i64).should eq [true, false, false, false]
+      mf.min_cut(2_i64).should eq [false, false, true, true]
+      mf.min_cut(3_i64).should eq [false, false, false, true]
+    end
+
+    it "raises IndexError when start is out of bounds" do
+      mf = MaxFlow.new(3)
+      expect_raises(IndexError) { mf.min_cut(-1) }
+      expect_raises(IndexError) { mf.min_cut(3) }
+
+      empty_mf = MaxFlow.new(0)
+      expect_raises(IndexError) { empty_mf.min_cut(0) }
+    end
+
+    it "does not overflow the stack on a very long graph" do
+      n = 200_000
+      mf = MaxFlow.new(n)
+      (n - 1).times do |i|
+        cap = i == 100_000 ? 1_i64 : 2_i64
+        mf.add_edge(i, i + 1, cap)
+      end
+      mf.flow(0, n - 1).should eq 1
+
+      cut = mf.min_cut(0)
+      cut.size.should eq n
+      cut[0..100_000].all?.should be_true
+      cut[100_001..].none?.should be_true
+    end
+
+    it "matches naive residual reachability and minimum cut capacity on random small graphs" do
+      rng = Random.new(42)
+      300.times do
+        n = rng.rand(2..6)
+        edges = Array.new(rng.rand(0..12)) do
+          {rng.rand(n), rng.rand(n), rng.rand(0_i64..10_i64)}
+        end
+        s = rng.rand(n)
+        t = (s + rng.rand(1...n)) % n
+
+        mf = MaxFlow.new(n)
+        edges.each { |(from, to, cap)| mf.add_edge(from, to, cap) }
+        max_flow = mf.flow(s, t)
+        cut = mf.min_cut(s)
+
+        cut.size.should eq n
+        cut[s].should be_true
+        cut[t].should be_false
+
+        cut_cap = edges.sum(0_i64) do |(from, to, cap)|
+          cut[from] && !cut[to] ? cap : 0_i64
+        end
+        cut_cap.should eq max_flow
+        cut_cap.should eq naive_max_flow(n, edges, s, t)
+
+        # Independently verify exact reachability in the residual graph via relaxation.
+        expected = Array.new(n, false)
+        expected[s] = true
+        n.times do
+          n.times do |u|
+            next unless expected[u]
+            mf.adjacencies[u].each do |edge|
+              expected[edge.to] = true if edge.capacity > 0
+            end
+          end
+        end
+        cut.should eq expected
+      end
+    end
+  end
+
   describe "unimplemented methods" do
     it "raises NotImplementedError" do
       mf = MaxFlow.new(2)
-      expect_raises(NotImplementedError) { mf.min_cut }
       expect_raises(NotImplementedError) { mf.get_edge }
       expect_raises(NotImplementedError) { mf.edges }
       expect_raises(NotImplementedError) { mf.change_edge }
