@@ -485,11 +485,12 @@ dsu.size(<span class="n">4</span>) <span class="c">#=&gt; 3</span></code></pre>
 mf.add_edge(<span class="n">0</span>, <span class="n">1</span>, <span class="n">3</span>)
 mf.add_edge(<span class="n">1</span>, <span class="n">2</span>, <span class="n">1</span>)
 mf.add_edge(<span class="n">0</span>, <span class="n">2</span>, <span class="n">2</span>)
-mf.flow(<span class="n">0</span>, <span class="n">2</span>) <span class="c">#=&gt; 3</span></code></pre>
+mf.flow(<span class="n">0</span>, <span class="n">2</span>) <span class="c">#=&gt; 3</span>
+mf.min_cut(<span class="n">0</span>) <span class="c">#=&gt; [true, true, false]</span></code></pre>
 <ul>
 <li><code>.add_edge(from, to, cap)</code> =&gt; <code>#add_edge(from, to, cap)</code></li>
 <li><code>.flow(s, t)</code> =&gt; <code>#flow(s, t)</code></li>
-<li><code>.min_cut(s)</code> =&gt; Unimplemented</li>
+<li><code>.min_cut(s)</code> =&gt; <code>#min_cut(s)</code></li>
 <li><code>.get_edge(i)</code> =&gt; Unimplemented</li>
 <li><code>.edges()</code> =&gt; Unimplemented</li>
 <li><code>.change_edge(i, new_cap, new_flow)</code> =&gt; Unimplemented</li>

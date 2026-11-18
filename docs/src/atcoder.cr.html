@@ -102,7 +102,7 @@ h1 a:focus {
 
 <ul>
     <li><a href="/blob/master/src/atcoder.cr">View this file on GitHub</a></li>
-    <li>Last update: 2026-11-08 02:10:21+09:00</li>
+    <li>Last update: 2026-11-18 18:46:31+09:00</li>
     
     
     
@@ -2633,6 +2633,7 @@ h1 a:focus {
 </span>  <span class="cp"># mf.add_edge(1, 2, 1)
 </span>  <span class="cp"># mf.add_edge(0, 2, 2)
 </span>  <span class="cp"># mf.flow(0, 2) # =&gt; 3
+</span>  <span class="cp"># mf.min_cut(0) # =&gt; [true, true, false]
 </span>  <span class="cp"># ```
 </span>  <span class="k">class</span> <span class="nc">MaxFlow</span>
     <span class="k">class</span> <span class="nc">Edge</span>
@@ -2700,9 +2701,34 @@ h1 a:focus {
       <span class="n">flow</span>
     <span class="n">end</span>
 
-    <span class="cp"># FIXME: Unimplemented
-</span>    <span class="n">def</span> <span class="n">min_cut</span>
-      <span class="n">raise</span> <span class="n">NotImplementedError</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="s">"AtCoder::MaxFlow#min_cut"</span><span class="p">)</span>
+    <span class="cp"># Implements atcoder::mf_graph.min_cut(start).
+</span>    <span class="n">def</span> <span class="n">min_cut</span><span class="p">(</span><span class="n">start</span><span class="p">)</span> <span class="o">:</span> <span class="n">Array</span><span class="p">(</span><span class="n">Bool</span><span class="p">)</span>
+      <span class="n">start_i64</span> <span class="o">=</span> <span class="n">start</span><span class="p">.</span><span class="n">to_i64</span>
+      <span class="n">raise</span> <span class="n">IndexError</span><span class="p">.</span><span class="k">new</span> <span class="n">unless</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">start_i64</span> <span class="o">&lt;</span> <span class="err">@</span><span class="n">size</span>
+
+      <span class="n">visited</span> <span class="o">=</span> <span class="n">Array</span><span class="p">(</span><span class="n">Bool</span><span class="p">).</span><span class="k">new</span><span class="p">(</span><span class="err">@</span><span class="n">size</span><span class="p">,</span> <span class="nb">false</span><span class="p">)</span>
+      <span class="n">qh</span> <span class="o">=</span> <span class="mi">0</span>
+      <span class="n">qt</span> <span class="o">=</span> <span class="mi">0</span>
+
+      <span class="n">visited</span><span class="p">[</span><span class="n">start_i64</span><span class="p">]</span> <span class="o">=</span> <span class="nb">true</span>
+      <span class="err">@</span><span class="n">queue</span><span class="p">[</span><span class="n">qt</span><span class="p">]</span> <span class="o">=</span> <span class="n">start_i64</span>
+      <span class="n">qt</span> <span class="o">+=</span> <span class="mi">1</span>
+
+      <span class="k">while</span> <span class="n">qh</span> <span class="o">&lt;</span> <span class="n">qt</span>
+        <span class="n">node</span> <span class="o">=</span> <span class="err">@</span><span class="n">queue</span><span class="p">[</span><span class="n">qh</span><span class="p">]</span>
+        <span class="n">qh</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="err">@</span><span class="n">adjacencies</span><span class="p">[</span><span class="n">node</span><span class="p">].</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">edge</span><span class="o">|</span>
+          <span class="n">to</span> <span class="o">=</span> <span class="n">edge</span><span class="p">.</span><span class="n">to</span>
+          <span class="k">if</span> <span class="n">edge</span><span class="p">.</span><span class="n">capacity</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">visited</span><span class="p">[</span><span class="n">to</span><span class="p">]</span>
+            <span class="n">visited</span><span class="p">[</span><span class="n">to</span><span class="p">]</span> <span class="o">=</span> <span class="nb">true</span>
+            <span class="err">@</span><span class="n">queue</span><span class="p">[</span><span class="n">qt</span><span class="p">]</span> <span class="o">=</span> <span class="n">to</span>
+            <span class="n">qt</span> <span class="o">+=</span> <span class="mi">1</span>
+          <span class="n">end</span>
+        <span class="n">end</span>
+      <span class="n">end</span>
+
+      <span class="n">visited</span>
     <span class="n">end</span>
 
     <span class="cp"># FIXME: Unimplemented

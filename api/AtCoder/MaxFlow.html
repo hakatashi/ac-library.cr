@@ -288,7 +288,8 @@
 mf.add_edge(<span class="n">0</span>, <span class="n">1</span>, <span class="n">3</span>)
 mf.add_edge(<span class="n">1</span>, <span class="n">2</span>, <span class="n">1</span>)
 mf.add_edge(<span class="n">0</span>, <span class="n">2</span>, <span class="n">2</span>)
-mf.flow(<span class="n">0</span>, <span class="n">2</span>) <span class="c"># =&gt; 3</span></code></pre>
+mf.flow(<span class="n">0</span>, <span class="n">2</span>) <span class="c"># =&gt; 3</span>
+mf.min_cut(<span class="n">0</span>) <span class="c"># =&gt; [true, true, false]</span></code></pre>
 
 
 
@@ -315,7 +316,7 @@ mf.flow(<span class="n">0</span>, <span class="n">2</span>) <span class="c"># =&
   </h2>
   
     
-      <a href="https://github.com/hakatashi/ac-library.cr/blob/ce40c62fd4b5b7e551252eede80487ac65e10dcc/src/max_flow.cr#L28" target="_blank">
+      <a href="https://github.com/hakatashi/ac-library.cr/blob/4083682af5b0645c5bf98dfa328ccd210969c0a6/src/max_flow.cr#L29" target="_blank">
         max_flow.cr
       </a>
     
@@ -408,9 +409,9 @@ mf.flow(<span class="n">0</span>, <span class="n">2</span>) <span class="c"># =&
       </li>
     
       <li class="entry-summary">
-        <a href="#min_cut-instance-method" class="signature"><strong>#min_cut</strong></a>
+        <a href="#min_cut%28start%29%3AArray%28Bool%29-instance-method" class="signature"><strong>#min_cut</strong>(start) : Array(Bool)</a>
         
-          <div class="summary"><p><span class="flag yellow">FIXME</span>  Unimplemented</p></div>
+          <div class="summary"><p>Implements atcoder::mf_graph.min_cut(start).</p></div>
         
       </li>
     
@@ -483,7 +484,7 @@ mf.flow(<span class="n">0</span>, <span class="n">2</span>) <span class="c"># =&
       <br/>
       <div>
         
-          [<a href="https://github.com/hakatashi/ac-library.cr/blob/ce40c62fd4b5b7e551252eede80487ac65e10dcc/src/max_flow.cr#L52" target="_blank">View source</a>]
+          [<a href="https://github.com/hakatashi/ac-library.cr/blob/4083682af5b0645c5bf98dfa328ccd210969c0a6/src/max_flow.cr#L53" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -520,7 +521,7 @@ mf.flow(<span class="n">0</span>, <span class="n">2</span>) <span class="c"># =&
       <br/>
       <div>
         
-          [<a href="https://github.com/hakatashi/ac-library.cr/blob/ce40c62fd4b5b7e551252eede80487ac65e10dcc/src/max_flow.cr#L61" target="_blank">View source</a>]
+          [<a href="https://github.com/hakatashi/ac-library.cr/blob/4083682af5b0645c5bf98dfa328ccd210969c0a6/src/max_flow.cr#L62" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -541,7 +542,7 @@ mf.flow(<span class="n">0</span>, <span class="n">2</span>) <span class="c"># =&
       <br/>
       <div>
         
-          [<a href="https://github.com/hakatashi/ac-library.cr/blob/ce40c62fd4b5b7e551252eede80487ac65e10dcc/src/max_flow.cr#L42" target="_blank">View source</a>]
+          [<a href="https://github.com/hakatashi/ac-library.cr/blob/4083682af5b0645c5bf98dfa328ccd210969c0a6/src/max_flow.cr#L43" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -562,7 +563,7 @@ mf.flow(<span class="n">0</span>, <span class="n">2</span>) <span class="c"># =&
       <br/>
       <div>
         
-          [<a href="https://github.com/hakatashi/ac-library.cr/blob/ce40c62fd4b5b7e551252eede80487ac65e10dcc/src/max_flow.cr#L110" target="_blank">View source</a>]
+          [<a href="https://github.com/hakatashi/ac-library.cr/blob/4083682af5b0645c5bf98dfa328ccd210969c0a6/src/max_flow.cr#L136" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -578,7 +579,7 @@ mf.flow(<span class="n">0</span>, <span class="n">2</span>) <span class="c"># =&
       <br/>
       <div>
         
-          [<a href="https://github.com/hakatashi/ac-library.cr/blob/ce40c62fd4b5b7e551252eede80487ac65e10dcc/src/max_flow.cr#L44" target="_blank">View source</a>]
+          [<a href="https://github.com/hakatashi/ac-library.cr/blob/4083682af5b0645c5bf98dfa328ccd210969c0a6/src/max_flow.cr#L45" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -599,7 +600,7 @@ mf.flow(<span class="n">0</span>, <span class="n">2</span>) <span class="c"># =&
       <br/>
       <div>
         
-          [<a href="https://github.com/hakatashi/ac-library.cr/blob/ce40c62fd4b5b7e551252eede80487ac65e10dcc/src/max_flow.cr#L105" target="_blank">View source</a>]
+          [<a href="https://github.com/hakatashi/ac-library.cr/blob/4083682af5b0645c5bf98dfa328ccd210969c0a6/src/max_flow.cr#L131" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -620,7 +621,7 @@ mf.flow(<span class="n">0</span>, <span class="n">2</span>) <span class="c"># =&
       <br/>
       <div>
         
-          [<a href="https://github.com/hakatashi/ac-library.cr/blob/ce40c62fd4b5b7e551252eede80487ac65e10dcc/src/max_flow.cr#L70" target="_blank">View source</a>]
+          [<a href="https://github.com/hakatashi/ac-library.cr/blob/4083682af5b0645c5bf98dfa328ccd210969c0a6/src/max_flow.cr#L71" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -641,28 +642,28 @@ mf.flow(<span class="n">0</span>, <span class="n">2</span>) <span class="c"># =&
       <br/>
       <div>
         
-          [<a href="https://github.com/hakatashi/ac-library.cr/blob/ce40c62fd4b5b7e551252eede80487ac65e10dcc/src/max_flow.cr#L100" target="_blank">View source</a>]
+          [<a href="https://github.com/hakatashi/ac-library.cr/blob/4083682af5b0645c5bf98dfa328ccd210969c0a6/src/max_flow.cr#L126" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="min_cut-instance-method">
+    <div class="entry-detail" id="min_cut(start):Array(Bool)-instance-method">
       <div class="signature">
         
-        def <strong>min_cut</strong>
+        def <strong>min_cut</strong>(start) : Array(Bool)
 
-        <a class="method-permalink" href="#min_cut-instance-method">#</a>
+        <a class="method-permalink" href="#min_cut%28start%29%3AArray%28Bool%29-instance-method">#</a>
       </div>
       
         <div class="doc">
           
-          <p><span class="flag yellow">FIXME</span>  Unimplemented</p>
+          <p>Implements atcoder::mf_graph.min_cut(start).</p>
         </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/hakatashi/ac-library.cr/blob/ce40c62fd4b5b7e551252eede80487ac65e10dcc/src/max_flow.cr#L95" target="_blank">View source</a>]
+          [<a href="https://github.com/hakatashi/ac-library.cr/blob/4083682af5b0645c5bf98dfa328ccd210969c0a6/src/max_flow.cr#L96" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -683,7 +684,7 @@ mf.flow(<span class="n">0</span>, <span class="n">2</span>) <span class="c"># =&
       <br/>
       <div>
         
-          [<a href="https://github.com/hakatashi/ac-library.cr/blob/ce40c62fd4b5b7e551252eede80487ac65e10dcc/src/max_flow.cr#L39" target="_blank">View source</a>]
+          [<a href="https://github.com/hakatashi/ac-library.cr/blob/4083682af5b0645c5bf98dfa328ccd210969c0a6/src/max_flow.cr#L40" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -704,7 +705,7 @@ mf.flow(<span class="n">0</span>, <span class="n">2</span>) <span class="c"># =&
       <br/>
       <div>
         
-          [<a href="https://github.com/hakatashi/ac-library.cr/blob/ce40c62fd4b5b7e551252eede80487ac65e10dcc/src/max_flow.cr#L47" target="_blank">View source</a>]
+          [<a href="https://github.com/hakatashi/ac-library.cr/blob/4083682af5b0645c5bf98dfa328ccd210969c0a6/src/max_flow.cr#L48" target="_blank">View source</a>]
         
       </div>
     </div>
