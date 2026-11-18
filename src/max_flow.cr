@@ -24,6 +24,7 @@ module AtCoder
   # mf.add_edge(1, 2, 1)
   # mf.add_edge(0, 2, 2)
   # mf.flow(0, 2) # => 3
+  # mf.min_cut(0) # => [true, true, false]
   # ```
   class MaxFlow
     class Edge
@@ -91,9 +92,34 @@ module AtCoder
       flow
     end
 
-    # FIXME: Unimplemented
-    def min_cut
-      raise NotImplementedError.new("AtCoder::MaxFlow#min_cut")
+    # Implements atcoder::mf_graph.min_cut(start).
+    def min_cut(start) : Array(Bool)
+      start_i64 = start.to_i64
+      raise IndexError.new unless 0 <= start_i64 < @size
+
+      visited = Array(Bool).new(@size, false)
+      qh = 0
+      qt = 0
+
+      visited[start_i64] = true
+      @queue[qt] = start_i64
+      qt += 1
+
+      while qh < qt
+        node = @queue[qh]
+        qh += 1
+
+        @adjacencies[node].each do |edge|
+          to = edge.to
+          if edge.capacity > 0 && !visited[to]
+            visited[to] = true
+            @queue[qt] = to
+            qt += 1
+          end
+        end
+      end
+
+      visited
     end
 
     # FIXME: Unimplemented

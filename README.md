@@ -177,11 +177,12 @@ require "atcoder/fenwick_tree" # load FenwickTree
   mf.add_edge(1, 2, 1)
   mf.add_edge(0, 2, 2)
   mf.flow(0, 2) #=> 3
+  mf.min_cut(0) #=> [true, true, false]
   ```
 
   * `.add_edge(from, to, cap)` => `#add_edge(from, to, cap)`
   * `.flow(s, t)` => `#flow(s, t)`
-  * `.min_cut(s)` => Unimplemented
+  * `.min_cut(s)` => `#min_cut(s)`
   * `.get_edge(i)` => Unimplemented
   * `.edges()` => Unimplemented
   * `.change_edge(i, new_cap, new_flow)` => Unimplemented
