@@ -294,12 +294,162 @@ describe "MaxFlow" do
     end
   end
 
-  describe "unimplemented methods" do
-    it "raises NotImplementedError" do
+  describe "#add_edge" do
+    it "returns the index of the added edge" do
+      mf = MaxFlow.new(3)
+      mf.add_edge(0, 1, 3).should eq 0
+      mf.add_edge(1, 2, 1).should eq 1
+      mf.add_edge(0, 0, 5).should eq 2
+      mf.add_edge(0, 1, 3).should be_a Int64
+    end
+
+    it "raises IndexError when a node is out of bounds" do
+      mf = MaxFlow.new(3)
+      expect_raises(IndexError) { mf.add_edge(-1, 2, 1) }
+      expect_raises(IndexError) { mf.add_edge(0, 3, 1) }
+    end
+
+    it "raises ArgumentError when the capacity is negative" do
+      expect_raises(ArgumentError) { MaxFlow.new(2).add_edge(0, 1, -1) }
+    end
+  end
+
+  describe "#get_edge" do
+    it "returns the original capacity and the flow" do
+      mf = MaxFlow.new(3)
+      mf.add_edge(0, 1, 3)
+      mf.add_edge(1, 2, 1)
+      mf.add_edge(0, 2, 2)
+      mf.get_edge(0).should eq MaxFlow::EdgeInfo.new(0, 1, 3, 0)
+      mf.flow(0, 2).should eq 3
+      mf.get_edge(0).should eq MaxFlow::EdgeInfo.new(0, 1, 3, 1)
+      mf.get_edge(1).should eq MaxFlow::EdgeInfo.new(1, 2, 1, 1)
+      mf.get_edge(2).should eq MaxFlow::EdgeInfo.new(0, 2, 2, 2)
+    end
+
+    it "supports field access" do
       mf = MaxFlow.new(2)
-      expect_raises(NotImplementedError) { mf.get_edge }
-      expect_raises(NotImplementedError) { mf.edges }
-      expect_raises(NotImplementedError) { mf.change_edge }
+      mf.add_edge(1, 0, 7)
+      edge = mf.get_edge(0)
+      {edge.from, edge.to, edge.cap, edge.flow}.should eq({1, 0, 7, 0})
+    end
+
+    it "distinguishes parallel edges, opposite edges and self-loops" do
+      mf = MaxFlow.new(3)
+      mf.add_edge(0, 1, 2)
+      mf.add_edge(0, 1, 3)
+      mf.add_edge(1, 0, 4)
+      mf.add_edge(1, 1, 5)
+      mf.add_edge(1, 2, 4)
+      mf.flow(0, 2).should eq 4
+      mf.get_edge(0).flow.should eq 2
+      mf.get_edge(1).flow.should eq 2
+      mf.get_edge(2).should eq MaxFlow::EdgeInfo.new(1, 0, 4, 0)
+      mf.get_edge(3).should eq MaxFlow::EdgeInfo.new(1, 1, 5, 0)
+      mf.get_edge(4).flow.should eq 4
+    end
+
+    it "raises IndexError when the index is out of bounds" do
+      mf = MaxFlow.new(2)
+      mf.add_edge(0, 1, 1)
+      expect_raises(IndexError) { mf.get_edge(-1) }
+      expect_raises(IndexError) { mf.get_edge(1) }
+    end
+  end
+
+  describe "#edges" do
+    it "returns all edges in order of addition" do
+      mf = MaxFlow.new(3)
+      mf.add_edge(0, 1, 3)
+      mf.add_edge(1, 2, 1)
+      mf.add_edge(0, 2, 2)
+      mf.flow(0, 2)
+      mf.edges.should eq [
+        MaxFlow::EdgeInfo.new(0, 1, 3, 1),
+        MaxFlow::EdgeInfo.new(1, 2, 1, 1),
+        MaxFlow::EdgeInfo.new(0, 2, 2, 2),
+      ]
+    end
+
+    it "returns an empty array when there are no edges" do
+      MaxFlow.new(2).edges.should be_empty
+    end
+
+    it "satisfies flow conservation on random graphs" do
+      rng = Random.new(32)
+      200.times do
+        n = rng.rand(2..8)
+        mf = MaxFlow.new(n)
+        caps = Array.new(rng.rand(0..20)) do
+          {rng.rand(n), rng.rand(n), rng.rand(0_i64..10_i64)}
+        end
+        caps.each { |(from, to, cap)| mf.add_edge(from, to, cap) }
+        s = rng.rand(n)
+        t = (s + rng.rand(1...n)) % n
+        total = mf.flow(s, t)
+
+        edges = mf.edges
+        edges.size.should eq caps.size
+        net = Array.new(n, 0_i64)
+        edges.each_with_index do |edge, i|
+          {edge.from, edge.to, edge.cap}.should eq caps[i]
+          (0 <= edge.flow <= edge.cap).should be_true
+          net[edge.from] += edge.flow
+          net[edge.to] -= edge.flow
+        end
+        n.times do |v|
+          expected = v == s ? total : (v == t ? -total : 0_i64)
+          net[v].should eq expected
+        end
+      end
+    end
+  end
+
+  describe "#change_edge" do
+    it "changes the capacity and the flow of an edge" do
+      mf = MaxFlow.new(2)
+      mf.add_edge(0, 1, 3)
+      mf.change_edge(0, 5, 2)
+      mf.get_edge(0).should eq MaxFlow::EdgeInfo.new(0, 1, 5, 2)
+      mf.flow(0, 1).should eq 3
+      mf.get_edge(0).should eq MaxFlow::EdgeInfo.new(0, 1, 5, 5)
+    end
+
+    it "matches ACL's documented behavior of rerunning flow" do
+      mf = MaxFlow.new(3)
+      mf.add_edge(0, 1, 1)
+      mf.add_edge(1, 2, 1)
+      mf.flow(0, 2).should eq 1
+      mf.change_edge(0, 2, 0)
+      mf.change_edge(1, 2, 0)
+      mf.flow(0, 2).should eq 2
+    end
+
+    it "returns nil" do
+      mf = MaxFlow.new(2)
+      mf.add_edge(0, 1, 1)
+      mf.change_edge(0, 1, 1).should be_nil
+    end
+
+    it "works on self-loops" do
+      mf = MaxFlow.new(1)
+      mf.add_edge(0, 0, 3)
+      mf.change_edge(0, 4, 1)
+      mf.get_edge(0).should eq MaxFlow::EdgeInfo.new(0, 0, 4, 1)
+    end
+
+    it "raises ArgumentError unless 0 <= flow <= capacity" do
+      mf = MaxFlow.new(2)
+      mf.add_edge(0, 1, 3)
+      expect_raises(ArgumentError) { mf.change_edge(0, 3, 4) }
+      expect_raises(ArgumentError) { mf.change_edge(0, 3, -1) }
+      expect_raises(ArgumentError) { mf.change_edge(0, -1, 0) }
+      mf.get_edge(0).should eq MaxFlow::EdgeInfo.new(0, 1, 3, 0)
+    end
+
+    it "raises IndexError when the index is out of bounds" do
+      mf = MaxFlow.new(2)
+      expect_raises(IndexError) { mf.change_edge(0, 1, 0) }
     end
   end
 end

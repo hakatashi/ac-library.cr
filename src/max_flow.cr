@@ -23,8 +23,9 @@ module AtCoder
   # mf.add_edge(0, 1, 3)
   # mf.add_edge(1, 2, 1)
   # mf.add_edge(0, 2, 2)
-  # mf.flow(0, 2) # => 3
-  # mf.min_cut(0) # => [true, true, false]
+  # mf.flow(0, 2)  # => 3
+  # mf.min_cut(0)  # => [true, true, false]
+  # mf.get_edge(0) # => AtCoder::MaxFlow::EdgeInfo(@from=0, @to=1, @cap=3, @flow=1)
   # ```
   class MaxFlow
     class Edge
@@ -35,6 +36,11 @@ module AtCoder
       def initialize(@to, @capacity, @reverse_index)
       end
     end
+
+    # An edge as seen by the user: the original capacity `cap` and the current `flow`.
+    #
+    # Returned by `#get_edge` and `#edges`, in the same way as ACL's `mf_graph::edge`.
+    record EdgeInfo, from : Int64, to : Int64, cap : Int64, flow : Int64
 
     # Number of nodes
     getter size : Int64
@@ -47,6 +53,9 @@ module AtCoder
     # Number of visited adjacencies for each nodes
     getter visit_counts : Array(Int64)
 
+    # `{from, index in @adjacencies[from]}` of each edge, in order of addition
+    @positions : Array({Int64, Int64})
+
     @path : Array(Int64)
     @queue : Array(Int64)
 
@@ -54,17 +63,31 @@ module AtCoder
       @adjacencies = Array(Array(Edge)).new(@size) { [] of Edge }
       @depths = Array(Int64).new(@size, -1_i64)
       @visit_counts = Array(Int64).new(@size, 0_i64)
+      @positions = Array({Int64, Int64}).new
       @path = Array(Int64).new
       @queue = Array(Int64).new(@size, 0_i64)
     end
 
     # Implements atcoder::mf_graph.add_edge(from, to, capacity).
+    #
+    # Returns the index of the added edge (0-indexed, in order of addition).
     def add_edge(from, to, capacity)
+      from = from.to_i64
+      to = to.to_i64
+      capacity = capacity.to_i64
+      raise IndexError.new unless 0 <= from < @size && 0 <= to < @size
+      raise ArgumentError.new("capacity must be non-negative") if capacity < 0
+
       from_index = @adjacencies[from].size.to_i64
       to_index = @adjacencies[to].size.to_i64
+      # Self-loop: the reverse edge is pushed right after the forward edge.
+      to_index += 1 if from == to
 
-      @adjacencies[from] << Edge.new(to.to_i64, capacity.to_i64, to_index)
-      @adjacencies[to] << Edge.new(from.to_i64, 0_i64, from_index)
+      @adjacencies[from] << Edge.new(to, capacity, to_index)
+      @adjacencies[to] << Edge.new(from, 0_i64, from_index)
+
+      @positions << {from, from_index}
+      @positions.size.to_i64 - 1
     end
 
     # Implements atcoder::mf_graph.flow(start, target).
@@ -122,19 +145,46 @@ module AtCoder
       visited
     end
 
-    # FIXME: Unimplemented
-    def get_edge
-      raise NotImplementedError.new("AtCoder::MaxFlow#get_edge")
+    # Implements atcoder::mf_graph.get_edge(i).
+    #
+    # Returns an `EdgeInfo` with the original capacity `cap` and the current `flow`.
+    # Raises `IndexError` if `i` is not a valid edge index.
+    def get_edge(i) : EdgeInfo
+      from, index = @positions[check_edge_index(i)]
+      edge = @adjacencies[from][index]
+      rev_edge = @adjacencies[edge.to][edge.reverse_index]
+      EdgeInfo.new(from, edge.to, edge.capacity + rev_edge.capacity, rev_edge.capacity)
     end
 
-    # FIXME: Unimplemented
-    def edges
-      raise NotImplementedError.new("AtCoder::MaxFlow#edges")
+    # Implements atcoder::mf_graph.edges().
+    #
+    # Returns all edges in order of addition, in the same form as `#get_edge`.
+    def edges : Array(EdgeInfo)
+      Array(EdgeInfo).new(@positions.size) { |i| get_edge(i) }
     end
 
-    # FIXME: Unimplemented
-    def change_edge
-      raise NotImplementedError.new("AtCoder::MaxFlow#change_edge")
+    # Implements atcoder::mf_graph.change_edge(i, new_cap, new_flow).
+    #
+    # Changes the capacity and the flow of the edge `i`. This does not change the flow
+    # of the other edges, so the result may not be a valid flow until `#flow` is called.
+    # Raises `ArgumentError` unless `0 <= new_flow <= new_cap`.
+    def change_edge(i, new_capacity, new_flow) : Nil
+      position = @positions[check_edge_index(i)]
+      new_capacity = new_capacity.to_i64
+      new_flow = new_flow.to_i64
+      raise ArgumentError.new("flow must satisfy 0 <= flow <= capacity") unless 0 <= new_flow <= new_capacity
+
+      from, index = position
+      edge = @adjacencies[from][index]
+      rev_edge = @adjacencies[edge.to][edge.reverse_index]
+      edge.capacity = new_capacity - new_flow
+      rev_edge.capacity = new_flow
+    end
+
+    private def check_edge_index(i) : Int32
+      i = i.to_i64
+      raise IndexError.new unless 0 <= i < @positions.size
+      i.to_i32
     end
 
     private def bfs(start : Int64, target : Int64)
