@@ -22,16 +22,12 @@ l, r, m = read_line.split.map(&.to_i64)
 flow = AtCoder::MaxFlow.new(l + r + 2)
 l.times { |i| flow.add_edge(0, i + 1, 1) }
 r.times { |i| flow.add_edge(l + i + 1, l + r + 1, 1) }
-m.times do
+match_edges = Array.new(m) do
   a, b = read_line.split.map(&.to_i64)
   flow.add_edge(a + 1, l + b + 1, 1)
 end
 p flow.flow(0, l + r + 1)
-l.times do |i|
-  flow.adjacencies[i + 1].each do |edge|
-    if edge.to != 0 && edge.capacity == 0
-      puts "#{i} #{edge.to - l - 1}"
-      break
-    end
-  end
+match_edges.each do |edge_index|
+  edge = flow.get_edge(edge_index)
+  puts "#{edge.from - 1} #{edge.to - l - 1}" if edge.flow > 0
 end

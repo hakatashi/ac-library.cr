@@ -178,14 +178,19 @@ require "atcoder/fenwick_tree" # load FenwickTree
   mf.add_edge(0, 2, 2)
   mf.flow(0, 2) #=> 3
   mf.min_cut(0) #=> [true, true, false]
+  mf.get_edge(0) #=> AtCoder::MaxFlow::EdgeInfo(@from=0, @to=1, @cap=3, @flow=1)
   ```
 
   * `.add_edge(from, to, cap)` => `#add_edge(from, to, cap)`
+    * Returns the index of the added edge (0-indexed). Raises `IndexError` if a node is out of range and `ArgumentError` if `cap` is negative.
   * `.flow(s, t)` => `#flow(s, t)`
   * `.min_cut(s)` => `#min_cut(s)`
-  * `.get_edge(i)` => Unimplemented
-  * `.edges()` => Unimplemented
-  * `.change_edge(i, new_cap, new_flow)` => Unimplemented
+  * `.get_edge(i)` => `#get_edge(i)`
+    * Returns an `AtCoder::MaxFlow::EdgeInfo` record with `from`, `to`, `cap` and `flow` (all `Int64`) instead of ACL's `edge` struct.
+  * `.edges()` => `#edges`
+    * Returns an `Array(AtCoder::MaxFlow::EdgeInfo)` in order of addition.
+  * `.change_edge(i, new_cap, new_flow)` => `#change_edge(i, new_cap, new_flow)`
+    * Raises `ArgumentError` unless `0 <= new_flow <= new_cap`.
 
 ## [`atcoder/scc`](https://hakatashi.github.io/ac-library.cr/docs/src/scc.cr) (Implements [<atcoder/scc>](https://atcoder.github.io/ac-library/document_en/scc.html))
 

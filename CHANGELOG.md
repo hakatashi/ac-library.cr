@@ -9,9 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- `AtCoder::MaxFlow#get_edge(i)`, `#edges` and `#change_edge(i, new_cap, new_flow)`, matching ACL's `mf_graph::get_edge`, `edges` and `change_edge` ([#32](https://github.com/hakatashi/ac-library.cr/issues/32)). The edges are returned as `AtCoder::MaxFlow::EdgeInfo` records with `from`, `to`, `cap` and `flow`.
 - `AtCoder::MaxFlow#min_cut(start)`, which returns an `Array(Bool)` indicating vertices reachable from `start` in the residual graph, matching ACL's `mf_graph::min_cut(s)` ([#31](https://github.com/hakatashi/ac-library.cr/issues/31)).
 - `AtCoder::DynamicModInt`, which implements ACL's `modint` (`dynamic_modint`), a ModInt whose modulus is set at runtime by `.set_mod`. Multiplication uses Barrett reduction, in the same way as ACL v1.5.1 ([#34](https://github.com/hakatashi/ac-library.cr/issues/34)).
 - `.mod` class method of static ModInts (`ModInt998244353.mod`, etc.), which returns the modulus as in ACL's `mint::mod()`.
+
+### Changed
+
+- `AtCoder::MaxFlow#add_edge` now returns the index of the added edge (previously it returned the internal adjacency list of `to`), and raises `IndexError` for a node out of range and `ArgumentError` for a negative capacity ([#32](https://github.com/hakatashi/ac-library.cr/issues/32)). Code relying on the old return value or on negative capacities is not expected to exist.
 
 ### Fixed
 
